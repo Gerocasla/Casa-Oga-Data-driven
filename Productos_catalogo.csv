@@ -1,0 +1,816 @@
+id_producto,categoria,subcategoria,proveedor,costo_unitario,precio_lista,fecha_alta_catalogo,fecha_baja_catalogo,estado
+SKU00001,Baño,Alfombras de baño,Proveedor H,8120.0,17900.0,2023-08-01,,Activo
+SKU00002,Iluminacion,Lamparas de mesa,Proveedor C,25470.0,42800.0,2023-12-16,,Activo
+SKU00003,Baño,Alfombras de baño,Proveedor C,,39000.0,2025-03-25,2025-08-02,Discontinuado
+SKU00004,Iluminacion,Guirnaldas,Proveedor A,1700.0,3100.0,2023-10-11,,Activo
+SKU00005,Organizacion,Percheros,Proveedor J,52650.0,84900.0,2024-01-20,,Activo
+SKU00006,Decoracion,Cuadros,Proveedor D,31230.0,66200.0,2022-08-24,,Activo
+SKU00007,Iluminacion,Apliques,Proveedor H,50150.0,80700.0,2023-10-16,,Activo
+SKU00008,Cocina y mesa,Cristaleria,Proveedor E,9510.0,16500.0,2024-03-14,,Activo
+SKU00009,Decoracion,Plantas artificiales,Proveedor G,1800.0,3800.0,2024-10-08,,Activo
+SKU00010,Muebles,Sillas,Proveedor E,14350.0,29800.0,2022-05-01,,Activo
+SKU00011,Cocina y mesa,Cubiertos,Proveedor A,42220.0,68800.0,2023-01-23,2023-04-30,Discontinuado
+SKU00012,Organizacion,Percheros,Proveedor G,16590.0,32300.0,2024-10-30,2025-08-22,Discontinuado
+SKU00013,Decoracion,Velas,Proveedor A,5510.0,11800.0,2022-02-23,,Activo
+SKU00014,Muebles,Racks,Proveedor G,36870.0,64700.0,2025-06-07,2025-12-23,Discontinuado
+SKU00015,Cocina y mesa,Vajilla,Proveedor E,3770.0,6900.0,2024-04-14,,Activo
+SKU00016,Muebles,Sillas,Proveedor C,23110.0,37300.0,2024-02-25,,Activo
+SKU00017,Textil hogar,Sabanas,Proveedor H,37190.0,65200.0,2022-07-20,2022-08-07,Discontinuado
+SKU00018,Baño,Accesorios de baño,Proveedor C,32370.0,50600.0,2023-11-06,,Activo
+SKU00019,Organizacion,Percheros,Proveedor G,45960.0,88800.0,2022-03-17,,Activo
+SKU00020,Textil hogar,Cortinas,Proveedor A,14070.0,23100.0,2022-08-31,2023-06-21,Discontinuado
+SKU00021,Iluminacion,Guirnaldas,Proveedor J,3970.0,7600.0,2022-02-08,2023-11-29,Discontinuado
+SKU00022,Cocina y mesa,Cubiertos,Proveedor A,4210.0,8200.0,2023-07-17,,Activo
+SKU00023,Organizacion,Percheros,Proveedor G,4170.0,8200.0,2024-12-10,2025-06-28,Discontinuado
+SKU00024,Decoración,Velas,Proveedor F,45120.0,71500.0,2024-03-28,,Activo
+SKU00025,Textil hogar,Acolchados,Proveedor C,40380.0,71800.0,2023-09-30,,Activo
+SKU00026,Cocina y mesa,Cristaleria,Proveedor E,29350.0,56200.0,2024-04-25,,Activo
+SKU00027,Iluminacion,Lamparas de mesa,Proveedor D,9080.0,16900.0,2023-08-07,2024-04-06,Discontinuado
+SKU00028,Decoracion,Plantas artificiales,Proveedor J,,66500.0,2025-06-27,2025-12-30,Discontinuado
+SKU00029,Baño,Cortinas de baño,Proveedor D,2300.0,3800.0,2024-12-08,,Activo
+SKU00030,Organizacion,Percheros,Proveedor J,16760.0,28400.0,2024-06-22,,Activo
+SKU00031,Baño,Alfombras de baño,Proveedor B,42460.0,66700.0,2023-02-07,2023-10-07,Discontinuado
+SKU00032,Decoracion,Cuadros,Proveedor D,19410.0,37200.0,2023-01-04,,Activo
+SKU00033,Textil hogar,Acolchados,Proveedor A,44010.0,73000.0,2022-03-31,2025-02-13,Discontinuado
+SKU00034,Baño,Accesorios de baño,Proveedor B,36360.0,59400.0,2023-05-26,,Activo
+SKU00035,Muebles,Estanterias,Proveedor I,37530.0,58500.0,2024-12-16,,Activo
+SKU00036,Textil hogar,Sabanas,Proveedor H,18770.0,31400.0,2023-05-09,,Activo
+SKU00037,DECO,Cuadros,Proveedor B,44240.0,85600.0,2025-05-07,,Activo
+SKU00038,Cocina y mesa,Vajilla,Proveedor B,29190.0,55800.0,2024-12-17,,Activo
+SKU00039,Organizacion,Cajas,Proveedor C,19810.0,42600.0,2022-01-01,,Activo
+SKU00040,Muebles,Estanterias,Proveedor B,2230.0,3700.0,2022-09-25,,Activo
+SKU00041,Muebles,Racks,Proveedor A,24020.0,41800.0,2025-03-07,,Activo
+SKU00042,Decoracion,Plantas artificiales,Proveedor A,35810.0,67100.0,2023-08-23,,Activo
+SKU00043,Textil hogar,Sabanas,Proveedor G,16640.0,34400.0,2025-06-04,,Activo
+SKU00044,Decoracion,Plantas artificiales,Proveedor I,44330.0,71900.0,2023-05-23,2023-07-31,Discontinuado
+SKU00045,Textil hogar,Sabanas,Proveedor D,41630.0,66600.0,2024-03-14,,Activo
+SKU00046,Textil hogar,Acolchados,Proveedor A,34760.0,59000.0,2024-09-20,,Activo
+SKU00047,Textil hogar,Toallas,Proveedor F,11470.0,19000.0,2022-12-11,,Activo
+SKU00048,Baño,Accesorios de baño,Proveedor F,16880.0,31400.0,2022-04-22,,Activo
+SKU00049,Cocina y mesa,Manteleria,Proveedor D,16970.0,30100.0,2023-03-01,,Activo
+SKU00050,Organizacion,Contenedores,Proveedor F,33910.0,60000.0,2025-05-15,2025-11-05,Discontinuado
+SKU00051,Muebles,Sillas,Proveedor B,14810.0,30000.0,2022-05-31,,Activo
+SKU00052,Cocina y mesa,Cristaleria,Proveedor B,39000.0,76400.0,2022-11-11,,Activo
+SKU00053,Cocina y mesa,Cristaleria,Proveedor G,19010.0,40600.0,2022-05-09,,Activo
+SKU00054,Baño,Alfombras de baño,Proveedor F,13310.0,28500.0,2022-03-18,,Activo
+SKU00055,Iluminacion,Guirnaldas,Proveedor H,19060.0,32200.0,2024-10-13,,Activo
+SKU00056,Iluminacion,Apliques,Proveedor J,50430.0,87700.0,2022-08-15,2024-07-05,Discontinuado
+SKU00057,Decoracion,Espejos,Proveedor J,14940.0,25700.0,2023-07-25,2024-01-10,Discontinuado
+SKU00058,Baño,Accesorios de baño,Proveedor E,35190.0,57200.0,2024-07-22,,Activo
+SKU00059,Textil hogar,Sabanas,Proveedor B,30980.0,49000.0,2022-06-17,,Activo
+SKU00060,Decoracion,Espejos,Proveedor D,19580.0,38600.0,2024-04-01,2024-06-14,Discontinuado
+SKU00061,Cocina y mesa,Vajilla,Proveedor H,30270.0,47700.0,2023-06-21,,Activo
+SKU00062,Textil hogar,Toallas,Proveedor F,36060.0,65700.0,2022-09-29,,Activo
+SKU00063,Muebles,Mesas auxiliares,Proveedor G,26550.0,45800.0,2022-12-11,,Activo
+SKU00064,DECO,Velas,Proveedor G,23190.0,41400.0,2025-05-23,2025-11-17,Discontinuado
+SKU00065,Muebles,Racks,Proveedor I,55690.0,87500.0,2023-01-24,,Activo
+SKU00066,Muebles,Estanterias,Proveedor H,36130.0,76000.0,2025-02-03,,Activo
+SKU00067,Textil hogar,Sabanas,Proveedor G,26690.0,51000.0,2022-09-26,,Activo
+SKU00068,Muebles,Estanterias,Proveedor E,42150.0,82200.0,2023-05-19,,Activo
+SKU00069,Iluminacion,Apliques,Proveedor I,41750.0,83900.0,2024-12-26,2025-08-20,Discontinuado
+SKU00070,Decoracion,Espejos,Proveedor A,25040.0,39000.0,2022-05-09,2025-12-16,Discontinuado
+SKU00071,Organizacion,Cajas,Proveedor C,34620.0,54400.0,2022-09-30,,Activo
+SKU00072,Decoracion,Velas,Proveedor I,24480.0,49400.0,2022-11-26,,Activo
+SKU00073,Baño,Alfombras de baño,Proveedor H,35860.0,64700.0,2024-09-12,,Activo
+SKU00074,Baño,Alfombras de baño,Proveedor B,22190.0,46500.0,2023-02-24,,Activo
+SKU00075,Organizacion,Contenedores,Proveedor E,9410.0,14800.0,2023-01-14,,Activo
+SKU00076,Decoracion,Velas,Proveedor I,55380.0,86100.0,2022-04-04,,Activo
+SKU00077,Decoracion,Velas,Proveedor C,15380.0,33500.0,2022-04-25,,Activo
+SKU00078,Baño,Alfombras de baño,Proveedor H,30280.0,50700.0,2024-01-14,2024-07-06,Discontinuado
+SKU00079,Baño,Alfombras de baño,Proveedor G,27170.0,59000.0,2024-02-07,2024-10-21,Discontinuado
+SKU00080,Baño,Cortinas de baño,Proveedor I,13300.0,22500.0,2023-08-02,,Activo
+SKU00081,Decoracion,Plantas artificiales,Proveedor B,4210.0,6800.0,2025-05-08,,Activo
+SKU00082,Muebles,Racks,Proveedor E,44460.0,89000.0,2023-09-10,,Activo
+SKU00083,Baño,Cortinas de baño,Proveedor G,4390.0,6800.0,2024-01-04,,Activo
+SKU00084,Muebles,Racks,Proveedor I,37590.0,69500.0,2025-01-10,,Activo
+SKU00085,Decoracion,Espejos,Proveedor A,27920.0,44100.0,2022-08-22,2023-02-27,Discontinuado
+SKU00086,Textil hogar,Cortinas,Proveedor F,15340.0,33300.0,2025-03-05,,Activo
+SKU00087,Baño,Alfombras de baño,Proveedor B,28700.0,56000.0,2024-11-09,,Activo
+SKU00088,Decoracion,Velas,Proveedor G,39650.0,62000.0,2022-11-15,2023-06-19,Discontinuado
+SKU00089,Iluminacion,Guirnaldas,Proveedor C,16830.0,33700.0,2024-08-01,,Activo
+SKU00090,Muebles,Mesas auxiliares,Proveedor I,4130.0,6700.0,2025-04-14,2025-06-04,Discontinuado
+SKU00091,Textil hogar,Cortinas,Proveedor F,5700.0,8900.0,2025-04-27,,Activo
+SKU00092,Cocina y mesa,Cristaleria,Proveedor B,40530.0,64100.0,2025-01-30,2025-08-20,Discontinuado
+SKU00093,Cocina y mesa,Vajilla,Proveedor G,35980.0,73700.0,2023-06-22,,Activo
+SKU00094,Organizacion,Contenedores,Proveedor C,11240.0,17500.0,2022-05-13,2022-07-03,Discontinuado
+SKU00095,Iluminacion,Lamparas de mesa,Proveedor D,16780.0,27600.0,2025-05-13,,Activo
+SKU00096,Iluminacion,Apliques,Proveedor B,8670.0,17000.0,2022-11-01,,Activo
+SKU00097,Decoracion,Espejos,Proveedor D,30630.0,61300.0,2024-06-18,,Activo
+SKU00098,Baño,Accesorios de baño,Proveedor A,42680.0,68200.0,2022-11-24,,Activo
+SKU00099,Decoracion,Plantas artificiales,Proveedor C,15390.0,30200.0,2024-11-17,2025-07-18,Discontinuado
+SKU00100,Textil hogar,Cortinas,Proveedor B,2350.0,4400.0,2023-01-10,,Activo
+SKU00101,Textil hogar,Acolchados,Proveedor F,4410.0,7800.0,2022-08-12,,Activo
+SKU00102,Organizacion,Percheros,Proveedor G,35230.0,62500.0,2024-07-08,2024-08-14,Discontinuado
+SKU00103,Decoracion,Cuadros,Proveedor C,31400.0,55100.0,2022-10-19,,Activo
+SKU00104,Organizacion,Percheros,Proveedor G,45280.0,81400.0,2023-12-15,,Activo
+SKU00105,Decoracion,Cuadros,Proveedor A,40490.0,77800.0,2024-12-23,,Activo
+SKU00106,Textil hogar,Acolchados,Proveedor D,7120.0,14400.0,2024-02-23,,Activo
+SKU00107,Muebles,Estanterias,Proveedor E,35610.0,71800.0,2022-12-24,,Activo
+SKU00108,Iluminacion,Lamparas de mesa,Proveedor G,44140.0,70000.0,2025-03-16,2025-05-14,Discontinuado
+SKU00109,Organizacion,Percheros,Proveedor C,23880.0,49900.0,2022-01-22,,Activo
+SKU00110,Decoracion,Cuadros,Proveedor E,29920.0,56900.0,2022-12-10,,Activo
+SKU00111,Textil hogar,Cortinas,Proveedor J,40520.0,81900.0,2023-07-23,2023-09-14,Discontinuado
+SKU00112,Muebles,Estanterias,Proveedor F,12350.0,22600.0,2022-08-13,2023-11-11,Discontinuado
+SKU00113,Cocina y mesa,Vajilla,Proveedor G,22130.0,45400.0,2024-01-01,,Activo
+SKU00114,Baño,Accesorios de baño,Proveedor B,20370.0,34900.0,2022-06-17,,Activo
+SKU00115,Muebles,Sillas,Proveedor B,20050.0,43400.0,2023-04-08,,Activo
+SKU00116,Decoracion,Espejos,Proveedor I,20530.0,38500.0,2025-02-10,2025-12-24,Discontinuado
+SKU00117,Textil hogar,Cortinas,Proveedor F,18830.0,41400.0,2024-04-18,,Activo
+SKU00118,Baño,Alfombras de baño,Proveedor J,16710.0,26100.0,2024-05-31,,Activo
+SKU00119,Textil hogar,Acolchados,Proveedor B,50860.0,79700.0,2024-01-16,,Activo
+SKU00120,Decoracion,Cuadros,Proveedor C,36930.0,68800.0,2022-06-29,,Activo
+SKU00121,Muebles,Racks,Proveedor I,43110.0,84500.0,2022-02-14,,Activo
+SKU00122,Textil hogar,Acolchados,Proveedor I,30760.0,54200.0,2022-01-23,,Activo
+SKU00123,Cocina y mesa,Cubiertos,Proveedor H,20400.0,40800.0,2025-03-07,,Activo
+SKU00124,Cocina y mesa,Cubiertos,Proveedor A,17990.0,31100.0,2024-06-13,2025-12-09,Discontinuado
+SKU00125,Textil hogar,Toallas,Proveedor G,14020.0,27000.0,2022-01-28,2024-07-27,Discontinuado
+SKU00126,Organizacion,Contenedores,Proveedor F,17100.0,33200.0,2023-09-08,2025-05-17,Discontinuado
+SKU00127,Organizacion,Percheros,Proveedor E,41880.0,74900.0,2023-02-11,,Activo
+SKU00128,Cocina y mesa,Vajilla,Proveedor H,2150.0,3600.0,2025-06-29,2025-07-12,Discontinuado
+SKU00129,Decoracion,Cuadros,Proveedor H,27990.0,46200.0,2023-11-28,2025-06-13,Discontinuado
+SKU00130,Organizacion,Cajas,Proveedor B,,45500.0,2025-02-22,,Activo
+SKU00131,Organizacion,Contenedores,Proveedor E,36790.0,75900.0,2024-07-29,,Activo
+SKU00132,Decoracion,Espejos,Proveedor I,14490.0,26500.0,2024-06-16,,Activo
+SKU00133,Textil hogar,Cortinas,Proveedor D,36760.0,77700.0,2024-10-09,,Activo
+SKU00134,Baño,Cortinas de baño,Proveedor I,17700.0,31800.0,2025-03-13,,Activo
+SKU00135,Cocina y mesa,Cristaleria,Proveedor E,29060.0,61700.0,2023-03-25,,Activo
+SKU00136,Cocina y mesa,Cristaleria,Proveedor I,38450.0,68500.0,2024-05-24,,Activo
+SKU00137,Muebles,Sillas,Proveedor A,,47500.0,2025-02-23,2025-11-20,Discontinuado
+SKU00138,Textil hogar,Toallas,Proveedor B,18650.0,29700.0,2023-06-17,,Activo
+SKU00139,Muebles,Mesas auxiliares,Proveedor I,43410.0,89500.0,2024-10-05,,Activo
+SKU00140,Muebles,Racks,Proveedor H,12020.0,20600.0,2025-01-06,,Activo
+SKU00141,Baño,Accesorios de baño,Proveedor B,42590.0,69300.0,2024-01-01,,Activo
+SKU00142,Baño,Alfombras de baño,Proveedor D,14070.0,28600.0,2024-03-08,,Activo
+SKU00143,Iluminacion,Apliques,Proveedor C,4410.0,8400.0,2023-05-03,,Activo
+SKU00144,Decoracion,Espejos,Proveedor C,32160.0,51500.0,2024-01-14,,Activo
+SKU00145,Organizacion,Cajas,Proveedor H,2290.0,4900.0,2024-02-16,,Activo
+SKU00146,Textil hogar,Sabanas,Proveedor J,34760.0,59500.0,2022-04-13,,Activo
+SKU00147,Decoracion,Espejos,Proveedor A,6050.0,12900.0,2024-03-26,2025-12-26,Discontinuado
+SKU00148,Decoracion,Cuadros,Proveedor H,2610.0,4500.0,2025-01-27,,Activo
+SKU00149,Cocina y mesa,Cristaleria,Proveedor D,13250.0,26600.0,2024-07-18,,Activo
+SKU00150,Decoracion,Espejos,Proveedor F,28690.0,60500.0,2023-05-11,,Activo
+SKU00151,Decoracion,Espejos,Proveedor E,23030.0,49200.0,2024-07-26,,Activo
+SKU00152,Cocina y mesa,Cristaleria,Proveedor B,4550.0,7800.0,2024-01-12,,Activo
+SKU00153,Organizacion,Percheros,Proveedor G,38900.0,71700.0,2023-07-17,,Activo
+SKU00154,Iluminacion,Guirnaldas,Proveedor J,22080.0,37400.0,2024-12-05,,Activo
+SKU00155,Organizacion,Cajas,Proveedor J,4400.0,8700.0,2022-04-17,,Activo
+SKU00156,Cocina y mesa,Manteleria,Proveedor E,52270.0,81700.0,2024-08-15,,Activo
+SKU00157,Cocina y mesa,Vajilla,Proveedor I,2430.0,5400.0,2022-02-08,2024-06-12,Discontinuado
+SKU00158,TEXTIL_HOGAR,Acolchados,Proveedor E,37610.0,69600.0,2023-09-06,,Activo
+SKU00159,Textil hogar,Sabanas,Proveedor B,39980.0,69100.0,2022-10-21,,Activo
+SKU00160,TEXTIL_HOGAR,Toallas,Proveedor G,24510.0,41400.0,2024-06-10,,Activo
+SKU00161,Cocina y mesa,Cubiertos,Proveedor H,25010.0,55200.0,2023-09-27,,Activo
+SKU00162,Organizacion,Percheros,Proveedor C,26940.0,43000.0,2024-02-24,,Activo
+SKU00163,Baño,Alfombras de baño,Proveedor B,41080.0,70700.0,2025-03-20,,Activo
+SKU00164,Organizacion,Contenedores,Proveedor F,34780.0,56700.0,2022-11-23,,Activo
+SKU00165,Iluminacion,Lamparas de mesa,Proveedor H,14600.0,27600.0,2022-01-15,,Activo
+SKU00166,Decoracion,Espejos,Proveedor B,35320.0,57500.0,2023-01-20,,Activo
+SKU00167,Organizacion,Cajas,Proveedor D,14660.0,30300.0,2024-05-15,,Activo
+SKU00168,Muebles,Racks,Proveedor C,13980.0,26000.0,2022-09-16,,Activo
+SKU00169,Organizacion,Contenedores,Proveedor E,6160.0,10700.0,2022-08-05,,Activo
+SKU00170,Muebles,Racks,Proveedor E,41940.0,80900.0,2025-03-01,,Activo
+SKU00171,Textil hogar,Toallas,Proveedor H,46020.0,86200.0,2024-04-22,2025-01-20,Discontinuado
+SKU00172,Iluminacion,Apliques,Proveedor B,31690.0,49100.0,2025-02-11,2025-05-27,Discontinuado
+SKU00173,Decoracion,Plantas artificiales,Proveedor D,35550.0,64500.0,2024-04-29,,Activo
+SKU00174,Muebles,Racks,Proveedor C,37250.0,68400.0,2022-09-11,,Activo
+SKU00175,Muebles,Racks,Proveedor E,32390.0,65500.0,2023-07-04,,Activo
+SKU00176,Organizacion,Percheros,Proveedor I,5010.0,8800.0,2024-10-25,,Activo
+SKU00177,Textil hogar,Toallas,Proveedor D,26080.0,48100.0,2025-03-12,,Activo
+SKU00178,Organizacion,Contenedores,Proveedor I,7830.0,12300.0,2025-01-28,,Activo
+SKU00179,Textil hogar,Toallas,Proveedor H,7590.0,11800.0,2023-05-06,,Activo
+SKU00180,Baño,Accesorios de baño,Proveedor G,15190.0,30000.0,2024-01-15,,Activo
+SKU00181,Textil hogar,Toallas,Proveedor C,54390.0,84700.0,2023-02-08,,Activo
+SKU00182,Muebles,Mesas auxiliares,Proveedor J,40830.0,63700.0,2022-06-23,,Activo
+SKU00183,Baño,Accesorios de baño,Proveedor J,10810.0,17400.0,2023-09-26,,Activo
+SKU00184,Textil hogar,Toallas,Proveedor B,28710.0,56400.0,2024-12-04,,Activo
+SKU00185,Decoracion,Cuadros,Proveedor H,25720.0,54500.0,2024-12-18,2025-09-12,Discontinuado
+SKU00186,Decoracion,Espejos,Proveedor G,41470.0,71700.0,2025-04-27,2025-07-04,Discontinuado
+SKU00187,Baño,Accesorios de baño,Proveedor I,5630.0,11400.0,2022-08-04,,Activo
+SKU00188,Baño,Cortinas de baño,Proveedor F,15090.0,27700.0,2023-07-30,,Activo
+SKU00189,Textil hogar,Cortinas,Proveedor B,11360.0,22300.0,2022-12-18,,Activo
+SKU00190,Decoracion,Cuadros,Proveedor H,24210.0,50500.0,2022-10-01,,Activo
+SKU00191,Iluminacion,Lamparas de mesa,Proveedor H,36890.0,68300.0,2023-06-13,2025-01-16,Discontinuado
+SKU00192,Decoracion,Velas,Proveedor B,21350.0,37800.0,2023-09-23,,Activo
+SKU00193,Textil hogar,Toallas,Proveedor C,9990.0,15900.0,2023-02-07,,Activo
+SKU00194,Organizacion,Contenedores,Proveedor E,6770.0,12100.0,2024-12-06,,Activo
+SKU00195,Iluminacion,Guirnaldas,Proveedor B,41520.0,86900.0,2025-06-07,,Activo
+SKU00196,Decoracion,Espejos,Proveedor E,40960.0,63500.0,2023-08-01,,Activo
+SKU00197,Decoracion,Espejos,Proveedor G,46550.0,89600.0,2022-04-06,2022-05-18,Discontinuado
+SKU00198,Textil hogar,Toallas,Proveedor G,36460.0,57100.0,2025-01-18,2025-02-01,Discontinuado
+SKU00199,Textil hogar,Sabanas,Proveedor B,35600.0,57000.0,2024-06-23,,Activo
+SKU00200,Iluminacion,Apliques,Proveedor G,29000.0,63400.0,2023-12-30,,Activo
+SKU00201,Textil hogar,Toallas,Proveedor G,20370.0,32400.0,2023-01-30,,Activo
+SKU00202,Muebles,Sillas,Proveedor G,23240.0,43300.0,2024-10-06,,Activo
+SKU00203,Cocina y mesa,Cristaleria,Proveedor J,13880.0,28800.0,2022-01-25,,Activo
+SKU00204,Cocina y mesa,Cristaleria,Proveedor F,32220.0,60900.0,2022-06-23,,Activo
+SKU00205,Baño,Alfombras de baño,Proveedor G,36510.0,79600.0,2023-08-04,2023-08-25,Discontinuado
+SKU00206,Cocina y mesa,Vajilla,Proveedor J,36960.0,78900.0,2024-11-24,,Activo
+SKU00207,Cocina y mesa,Cubiertos,Proveedor I,40350.0,74500.0,2022-10-30,,Activo
+SKU00208,Decoracion,Velas,Proveedor D,36250.0,67100.0,2022-06-29,,Activo
+SKU00209,Baño,Alfombras de baño,Proveedor D,10230.0,16000.0,2022-03-01,,Activo
+SKU00210,Textil hogar,Toallas,Proveedor C,28840.0,58500.0,2024-03-13,,Activo
+SKU00211,Decoracion,Espejos,Proveedor F,26810.0,54500.0,2023-07-24,,Activo
+SKU00212,Muebles,Racks,Proveedor C,21280.0,37400.0,2024-03-14,,Activo
+SKU00213,Decoracion,Cuadros,Proveedor E,26270.0,55700.0,2024-04-15,2025-09-01,Discontinuado
+SKU00214,Muebles,Estanterias,Proveedor J,,18900.0,2025-05-07,2025-10-16,Discontinuado
+SKU00215,Decoracion,Espejos,Proveedor J,29460.0,47400.0,2022-09-12,,Activo
+SKU00216,Cocina y mesa,Vajilla,Proveedor H,32330.0,52800.0,2023-08-30,2024-01-29,Discontinuado
+SKU00217,Muebles,Mesas auxiliares,Proveedor E,16820.0,34500.0,2022-01-14,,Activo
+SKU00218,Iluminacion,Apliques,Proveedor J,12100.0,26600.0,2023-08-26,,Activo
+SKU00219,Iluminacion,Lamparas de mesa,Proveedor C,19620.0,34000.0,2024-06-30,2024-10-06,Discontinuado
+SKU00220,Textil Hogar,Acolchados,Proveedor C,37820.0,76100.0,2022-12-14,,Activo
+SKU00221,Textil hogar,Toallas,Proveedor F,38490.0,64100.0,2023-03-18,2025-02-25,Discontinuado
+SKU00222,Decoracion,Velas,Proveedor H,40360.0,62800.0,2023-10-27,,Activo
+SKU00223,Baño,Cortinas de baño,Proveedor J,28550.0,53000.0,2024-02-24,,Activo
+SKU00224,Decoracion,Plantas artificiales,Proveedor H,22190.0,49200.0,2024-08-22,,Activo
+SKU00225,Baño,Alfombras de baño,Proveedor G,1430.0,2600.0,2023-05-18,,Activo
+SKU00226,Textil hogar,Sabanas,Proveedor I,16740.0,35100.0,2024-10-07,,Activo
+SKU00227,Baño,Cortinas de baño,Proveedor A,,33200.0,2025-03-02,,Activo
+SKU00228,Decoracion,Plantas artificiales,Proveedor J,25410.0,48000.0,2022-04-22,,Activo
+SKU00229,Iluminacion,Guirnaldas,Proveedor B,32150.0,69800.0,2025-04-05,,Activo
+SKU00230,Cocina y mesa,Manteleria,Proveedor A,46870.0,80000.0,2024-07-10,,Activo
+SKU00231,Textil hogar,Toallas,Proveedor G,22890.0,38900.0,2022-06-15,,Activo
+SKU00232,Muebles,Estanterias,Proveedor I,49210.0,84700.0,2023-08-02,,Activo
+SKU00233,Iluminacion,Lamparas de mesa,Proveedor G,35900.0,60800.0,2024-03-09,,Activo
+SKU00234,Muebles,Sillas,Proveedor I,,82600.0,2025-03-07,,Activo
+SKU00235,Baño,Cortinas de baño,Proveedor A,12090.0,26600.0,2023-04-26,,Activo
+SKU00236,Decoracion,Cuadros,Proveedor B,13800.0,26400.0,2023-12-27,,Activo
+SKU00237,Baño,Alfombras de baño,Proveedor G,12890.0,23800.0,2025-01-27,2025-10-23,Discontinuado
+SKU00238,Cocina y mesa,Manteleria,Proveedor F,41230.0,84500.0,2025-04-19,,Activo
+SKU00239,Muebles,Racks,Proveedor D,21950.0,35600.0,2023-08-15,2025-03-02,Discontinuado
+SKU00240,Decoracion,Cuadros,Proveedor F,7030.0,13500.0,2022-09-19,,Activo
+SKU00241,Textil hogar,Toallas,Proveedor D,30500.0,50500.0,2024-07-10,2025-09-24,Discontinuado
+SKU00242,Textil hogar,Sabanas,Proveedor F,38990.0,77800.0,2024-03-29,,Activo
+SKU00243,Cocina y mesa,Manteleria,Proveedor C,46070.0,85800.0,2024-07-04,,Activo
+SKU00244,Muebles,Racks,Proveedor G,6500.0,13500.0,2022-09-30,2025-09-03,Discontinuado
+SKU00245,Cocina y mesa,Cristaleria,Proveedor E,24800.0,40500.0,2025-06-05,2025-12-26,Discontinuado
+SKU00246,Iluminacion,Apliques,Proveedor I,4000.0,8100.0,2023-11-17,,Activo
+SKU00247,Decoracion,Velas,Proveedor C,44630.0,72600.0,2024-10-06,,Activo
+SKU00248,Cocina y mesa,Vajilla,Proveedor H,9040.0,19600.0,2023-02-13,,Activo
+SKU00249,Baño,Alfombras de baño,Proveedor B,,59600.0,2025-03-07,,Activo
+SKU00250,Decoracion,Espejos,Proveedor G,3550.0,6400.0,2024-12-27,,Activo
+SKU00251,Textil hogar,Cortinas,Proveedor D,8270.0,14500.0,2023-03-21,,Activo
+SKU00252,Cocina y mesa,Vajilla,Proveedor C,5670.0,11900.0,2022-04-16,,Activo
+SKU00253,Textil hogar,Sabanas,Proveedor J,31710.0,49600.0,2023-07-17,,Activo
+SKU00254,Muebles,Racks,Proveedor A,2110.0,4500.0,2023-12-04,2025-07-08,Discontinuado
+SKU00255,Decoracion,Espejos,Proveedor H,12140.0,19800.0,2023-09-14,,Activo
+SKU00256,Baño,Alfombras de baño,Proveedor I,11650.0,23100.0,2022-02-06,,Activo
+SKU00257,Baño,Alfombras de baño,Proveedor C,24730.0,39800.0,2024-10-29,2024-11-25,Discontinuado
+SKU00258,Decoracion,Espejos,Proveedor D,14530.0,26700.0,2024-10-17,,Activo
+SKU00259,Decoracion,Plantas artificiales,Proveedor D,24090.0,43800.0,2022-08-09,,Activo
+SKU00260,Decoracion,Plantas artificiales,Proveedor C,25170.0,41200.0,2023-03-04,,Activo
+SKU00261,Decoracion,Plantas artificiales,Proveedor I,10800.0,19600.0,2024-10-02,,Activo
+SKU00262,Cocina y mesa,Vajilla,Proveedor B,8430.0,13500.0,2022-06-29,2023-01-05,Discontinuado
+SKU00263,Decoracion,Velas,Proveedor A,25590.0,39400.0,2023-10-22,,Activo
+SKU00264,Textil hogar,Cortinas,Proveedor I,29650.0,60400.0,2024-07-12,,Activo
+SKU00265,Iluminacion,Apliques,Proveedor B,42430.0,83400.0,2024-12-07,,Activo
+SKU00266,Baño,Cortinas de baño,Proveedor E,35100.0,58200.0,2024-05-29,,Activo
+SKU00267,Baño,Alfombras de baño,Proveedor J,,11100.0,2025-04-21,,Activo
+SKU00268,Organizacion,Percheros,Proveedor D,20610.0,39500.0,2023-09-21,,Activo
+SKU00269,Muebles,Mesas auxiliares,Proveedor H,15020.0,29800.0,2025-04-26,,Activo
+SKU00270,Textil hogar,Acolchados,Proveedor A,21780.0,33700.0,2022-04-20,2023-02-13,Discontinuado
+SKU00271,Baño,Accesorios de baño,Proveedor G,22910.0,42300.0,2023-11-04,,Activo
+SKU00272,Baño,Accesorios de baño,Proveedor A,11710.0,24000.0,2023-01-06,,Activo
+SKU00273,Decoracion,Velas,Proveedor B,15490.0,24700.0,2024-07-19,,Activo
+SKU00274,Cocina y mesa,Manteleria,Proveedor B,38730.0,80000.0,2024-03-26,,Activo
+SKU00275,Organizacion,Percheros,Proveedor J,20890.0,36900.0,2023-10-30,2025-08-28,Discontinuado
+SKU00276,Decoracion,Cuadros,Proveedor J,24860.0,50700.0,2023-12-16,,Activo
+SKU00277,Muebles,Mesas auxiliares,Proveedor H,4510.0,7400.0,2023-02-02,,Activo
+SKU00278,Muebles,Mesas auxiliares,Proveedor G,7100.0,13400.0,2023-05-02,,Activo
+SKU00279,Textil hogar,Acolchados,Proveedor C,40570.0,69100.0,2024-12-14,,Activo
+SKU00280,Iluminacion,Apliques,Proveedor D,23110.0,37900.0,2025-02-23,,Activo
+SKU00281,Iluminacion,Apliques,Proveedor H,48810.0,89400.0,2022-09-23,,Activo
+SKU00282,Decoracion,Velas,Proveedor D,44280.0,79900.0,2024-12-21,,Activo
+SKU00283,Organizacion,Cajas,Proveedor E,23450.0,36200.0,2025-05-20,,Activo
+SKU00284,Textil hogar,Toallas,Proveedor I,33350.0,69900.0,2023-10-31,,Activo
+SKU00285,Muebles,Mesas auxiliares,Proveedor E,26080.0,49600.0,2024-01-02,2024-05-27,Discontinuado
+SKU00286,Decoracion,Espejos,Proveedor D,27410.0,45600.0,2023-11-15,,Activo
+SKU00287,Muebles,Sillas,Proveedor F,18080.0,31700.0,2023-10-05,,Activo
+SKU00288,Baño,Cortinas de baño,Proveedor F,12390.0,23000.0,2024-02-12,,Activo
+SKU00289,Muebles,Sillas,Proveedor E,47970.0,80300.0,2022-02-05,,Activo
+SKU00290,Cocina y mesa,Vajilla,Proveedor D,,33900.0,2025-05-21,2025-09-13,Discontinuado
+SKU00291,Cocina y mesa,Manteleria,Proveedor H,30030.0,55100.0,2023-05-27,,Activo
+SKU00292,Textil hogar,Cortinas,Proveedor H,45270.0,88900.0,2024-10-19,,Activo
+SKU00293,Textil hogar,Toallas,Proveedor I,41240.0,83000.0,2023-12-20,,Activo
+SKU00294,Organizacion,Percheros,Proveedor I,45170.0,72500.0,2023-09-19,,Activo
+SKU00295,Cocina y mesa,Cubiertos,Proveedor F,10020.0,18600.0,2024-05-31,,Activo
+SKU00296,Cocina y mesa,Vajilla,Proveedor A,34390.0,64600.0,2022-03-26,,Activo
+SKU00297,Baño,Accesorios de baño,Proveedor E,6940.0,11500.0,2023-11-19,,Activo
+SKU00298,Textil hogar,Toallas,Proveedor F,21810.0,44800.0,2023-06-12,,Activo
+SKU00299,Muebles,Estanterias,Proveedor D,3600.0,6500.0,2025-05-05,,Activo
+SKU00300,Iluminacion,Lamparas de mesa,Proveedor G,16970.0,27700.0,2025-03-24,,Activo
+SKU00301,Muebles,Estanterias,Proveedor H,7210.0,15900.0,2022-12-10,,Activo
+SKU00302,Cocina y mesa,Manteleria,Proveedor D,43700.0,81900.0,2023-08-27,,Activo
+SKU00303,Cocina y mesa,Cristaleria,Proveedor I,43490.0,77100.0,2022-06-12,2023-12-26,Discontinuado
+SKU00304,Organizacion,Cajas,Proveedor H,50690.0,79500.0,2024-11-06,,Activo
+SKU00305,Decoracion,Espejos,Proveedor A,,9400.0,2025-02-23,,Activo
+SKU00306,Muebles,Racks,Proveedor E,11610.0,18100.0,2023-09-01,2024-05-28,Discontinuado
+SKU00307,Decoracion,Plantas artificiales,Proveedor E,40080.0,63100.0,2022-09-02,2024-09-22,Discontinuado
+SKU00308,Organizacion,Percheros,Proveedor J,53960.0,88700.0,2025-03-26,,Activo
+SKU00309,Muebles,Racks,Proveedor G,50350.0,78900.0,2022-06-15,,Activo
+SKU00310,Muebles,Estanterias,Proveedor A,34130.0,55600.0,2024-09-21,,Activo
+SKU00311,Muebles,Sillas,Proveedor A,47790.0,87800.0,2022-01-30,,Activo
+SKU00312,Organizacion,Percheros,Proveedor B,12300.0,21100.0,2022-09-05,,Activo
+SKU00313,Iluminacion,Apliques,Proveedor G,3530.0,6900.0,2022-10-17,,Activo
+SKU00314,Organizacion,Cajas,Proveedor I,21510.0,35200.0,2024-05-26,,Activo
+SKU00315,Baño,Cortinas de baño,Proveedor A,2110.0,4100.0,2023-02-15,2024-02-23,Discontinuado
+SKU00316,Cocina y mesa,Cristaleria,Proveedor D,16890.0,29000.0,2024-03-01,,Activo
+SKU00317,Muebles,Racks,Proveedor A,43140.0,79000.0,2022-05-14,,Activo
+SKU00318,Baño,Alfombras de baño,Proveedor I,40780.0,76300.0,2024-07-21,2024-09-23,Discontinuado
+SKU00319,Muebles,Estanterias,Proveedor E,23760.0,46200.0,2023-10-14,,Activo
+SKU00320,Muebles,Estanterias,Proveedor D,12120.0,19300.0,2022-11-16,,Activo
+SKU00321,Decoracion,Velas,Proveedor C,27700.0,55000.0,2022-09-10,,Activo
+SKU00322,Decoracion,Espejos,Proveedor E,26230.0,49400.0,2023-11-08,,Activo
+SKU00323,Decoracion,Plantas artificiales,Proveedor D,3060.0,5200.0,2023-07-12,,Activo
+SKU00324,Decoracion,Velas,Proveedor B,44820.0,78400.0,2023-04-25,,Activo
+SKU00325,Muebles,Estanterias,Proveedor B,8010.0,15000.0,2023-06-12,,Activo
+SKU00326,Baño,Alfombras de baño,Proveedor H,9630.0,19900.0,2023-11-07,2024-03-11,Discontinuado
+SKU00327,Organizacion,Percheros,Proveedor A,17550.0,27900.0,2022-09-18,,Activo
+SKU00328,Organizacion,Contenedores,Proveedor G,46380.0,76200.0,2024-03-16,,Activo
+SKU00329,Decoracion,Espejos,Proveedor F,39470.0,83700.0,2024-03-25,2025-03-02,Discontinuado
+SKU00330,Cocina y mesa,Cristaleria,Proveedor J,9770.0,21300.0,2024-12-22,,Activo
+SKU00331,Decoracion,Velas,Proveedor E,1390.0,2400.0,2024-02-20,,Activo
+SKU00332,Textil hogar,Acolchados,Proveedor E,21400.0,38000.0,2024-12-29,,Activo
+SKU00333,Cocina y mesa,Vajilla,Proveedor H,39820.0,78500.0,2022-10-24,,Activo
+SKU00334,Muebles,Mesas auxiliares,Proveedor E,14440.0,23500.0,2024-08-03,,Activo
+SKU00335,Organizacion,Contenedores,Proveedor G,2670.0,4200.0,2024-10-31,,Activo
+SKU00336,DECO,Velas,Proveedor B,14840.0,32500.0,2025-02-25,,Activo
+SKU00337,Organizacion,Contenedores,Proveedor B,9840.0,21100.0,2023-02-08,,Activo
+SKU00338,Muebles,Racks,Proveedor C,35180.0,76300.0,2023-02-06,,Activo
+SKU00339,Cocina y mesa,Cubiertos,Proveedor D,3840.0,6700.0,2025-03-23,,Activo
+SKU00340,Iluminacion,Guirnaldas,Proveedor G,10600.0,20500.0,2022-10-06,,Activo
+SKU00341,Cocina y mesa,Cubiertos,Proveedor C,38100.0,71200.0,2025-06-27,,Activo
+SKU00342,Decoracion,Espejos,Proveedor G,,66200.0,2025-02-06,2025-03-21,Discontinuado
+SKU00343,Decoracion,Velas,Proveedor G,6260.0,13500.0,2022-11-02,,Activo
+SKU00344,Cocina y mesa,Manteleria,Proveedor D,35960.0,75800.0,2024-07-16,,Activo
+SKU00345,Cocina y mesa,Vajilla,Proveedor C,4280.0,8900.0,2022-11-28,2023-03-17,Discontinuado
+SKU00346,Cocina y mesa,Vajilla,Proveedor A,28150.0,47900.0,2024-11-27,2025-05-14,Discontinuado
+SKU00347,Muebles,Mesas auxiliares,Proveedor G,26120.0,45500.0,2024-10-04,,Activo
+SKU00348,Organizacion,Contenedores,Proveedor G,27430.0,45800.0,2022-06-10,,Activo
+SKU00349,Cocina y mesa,Cubiertos,Proveedor E,26730.0,55100.0,2023-05-29,2025-03-07,Discontinuado
+SKU00350,Cocina y mesa,Manteleria,Proveedor J,20500.0,31600.0,2022-01-23,,Activo
+SKU00351,Decoracion,Velas,Proveedor C,24300.0,41500.0,2022-09-14,,Activo
+SKU00352,Decoracion,Espejos,Proveedor I,10060.0,17200.0,2024-05-20,,Activo
+SKU00353,Baño,Accesorios de baño,Proveedor D,30560.0,63400.0,2025-03-08,2025-12-21,Discontinuado
+SKU00354,Cocina y mesa,Cristaleria,Proveedor H,44850.0,84800.0,2022-05-28,,Activo
+SKU00355,Iluminacion,Guirnaldas,Proveedor B,19030.0,32500.0,2023-10-08,,Activo
+SKU00356,Baño,Alfombras de baño,Proveedor G,51260.0,83000.0,2024-08-25,,Activo
+SKU00357,Muebles,Sillas,Proveedor A,23730.0,51500.0,2023-10-04,,Activo
+SKU00358,Cocina y mesa,Manteleria,Proveedor F,25720.0,44800.0,2024-05-24,,Activo
+SKU00359,Cocina y mesa,Cubiertos,Proveedor H,37080.0,75600.0,2022-08-30,,Activo
+SKU00360,Cocina y mesa,Cubiertos,Proveedor J,24860.0,43000.0,2022-04-01,2022-08-24,Discontinuado
+SKU00361,Iluminacion,Lamparas de mesa,Proveedor A,28750.0,62600.0,2022-02-17,,Activo
+SKU00362,Decoracion,Velas,Proveedor B,37390.0,79100.0,2023-12-05,2024-12-28,Discontinuado
+SKU00363,Cocina y mesa,Vajilla,Proveedor A,48080.0,77200.0,2023-12-27,,Activo
+SKU00364,Textil hogar,Sabanas,Proveedor I,31200.0,55900.0,2022-07-07,,Activo
+SKU00365,Iluminacion,Lamparas de mesa,Proveedor C,17310.0,32800.0,2022-08-24,,Activo
+SKU00366,Iluminacion,Lamparas de mesa,Proveedor J,48330.0,83100.0,2022-09-18,,Activo
+SKU00367,Organizacion,Cajas,Proveedor H,22380.0,42900.0,2024-12-08,,Activo
+SKU00368,Decoracion,Velas,Proveedor B,57090.0,89600.0,2025-06-17,,Activo
+SKU00369,Organizacion,Cajas,Proveedor F,,83300.0,2025-03-28,,Activo
+SKU00370,Decoracion,Plantas artificiales,Proveedor A,20600.0,33400.0,2022-05-02,2022-07-23,Discontinuado
+SKU00371,Muebles,Racks,Proveedor I,39600.0,62600.0,2025-04-29,,Activo
+SKU00372,Textil hogar,Acolchados,Proveedor H,41130.0,66700.0,2023-08-13,,Activo
+SKU00373,Organizacion,Cajas,Proveedor G,40960.0,72400.0,2024-09-02,,Activo
+SKU00374,Decoracion,Cuadros,Proveedor H,29440.0,63300.0,2023-02-22,,Activo
+SKU00375,Decoracion,Cuadros,Proveedor C,21870.0,35800.0,2023-08-19,,Activo
+SKU00376,Organizacion,Percheros,Proveedor J,5260.0,10200.0,2023-10-20,,Activo
+SKU00377,Decoracion,Plantas artificiales,Proveedor H,30840.0,57100.0,2023-07-03,2025-01-01,Discontinuado
+SKU00378,Muebles,Mesas auxiliares,Proveedor B,4070.0,8400.0,2022-01-17,,Activo
+SKU00379,Baño,Cortinas de baño,Proveedor B,33910.0,60600.0,2024-06-13,2025-10-03,Discontinuado
+SKU00380,Organizacion,Contenedores,Proveedor F,33970.0,53800.0,2022-08-20,,Activo
+SKU00381,Baño,Cortinas de baño,Proveedor D,42790.0,84100.0,2023-08-03,,Activo
+SKU00382,Muebles,Mesas auxiliares,Proveedor B,44320.0,79900.0,2024-08-01,2025-02-26,Discontinuado
+SKU00383,Iluminacion,Lamparas de mesa,Proveedor B,27550.0,58600.0,2022-09-06,,Activo
+SKU00384,Iluminacion,Guirnaldas,Proveedor B,23860.0,37300.0,2022-07-30,,Activo
+SKU00385,Textil hogar,Cortinas,Proveedor F,45150.0,84700.0,2023-10-17,2023-10-29,Discontinuado
+SKU00386,Muebles,Estanterias,Proveedor B,15220.0,23700.0,2025-02-13,,Activo
+SKU00387,Textil hogar,Acolchados,Proveedor B,29480.0,46100.0,2024-10-19,2025-08-23,Discontinuado
+SKU00388,Baño,Cortinas de baño,Proveedor D,2900.0,5100.0,2025-01-03,,Activo
+SKU00389,Organizacion,Percheros,Proveedor F,12080.0,26800.0,2024-03-14,,Activo
+SKU00390,Muebles,Mesas auxiliares,Proveedor D,28780.0,45000.0,2023-06-01,2024-12-18,Discontinuado
+SKU00391,Decoración,Plantas artificiales,Proveedor B,20890.0,42400.0,2023-10-06,,Activo
+SKU00392,Organizacion,Contenedores,Proveedor F,,63500.0,2025-06-07,,Activo
+SKU00393,Textil hogar,Toallas,Proveedor F,34450.0,68900.0,2024-10-23,,Activo
+SKU00394,Iluminacion,Lamparas de mesa,Proveedor C,42690.0,70500.0,2022-11-26,2025-09-21,Discontinuado
+SKU00395,Organizacion,Contenedores,Proveedor G,25540.0,42500.0,2024-08-07,,Activo
+SKU00396,Textil hogar,Sabanas,Proveedor F,2550.0,5200.0,2024-09-19,,Activo
+SKU00397,Organizacion,Percheros,Proveedor J,22940.0,36100.0,2024-11-05,2025-04-24,Discontinuado
+SKU00398,Muebles,Sillas,Proveedor H,36890.0,63200.0,2025-02-17,,Activo
+SKU00399,Cocina y mesa,Manteleria,Proveedor J,44230.0,74400.0,2025-01-27,,Activo
+SKU00400,Organizacion,Percheros,Proveedor E,4710.0,7500.0,2024-06-05,,Activo
+SKU00401,Decoracion,Espejos,Proveedor A,34070.0,69100.0,2024-09-06,,Activo
+SKU00402,Cocina y mesa,Manteleria,Proveedor F,29340.0,54300.0,2024-09-03,2025-03-18,Discontinuado
+SKU00403,Cocina y mesa,Manteleria,Proveedor E,2810.0,4600.0,2024-07-11,,Activo
+SKU00404,Iluminacion,Guirnaldas,Proveedor B,18590.0,32300.0,2022-04-01,,Activo
+SKU00405,Textil Hogar,Toallas,Proveedor A,47200.0,74200.0,2023-03-13,,Activo
+SKU00406,Decoracion,Espejos,Proveedor A,26070.0,48300.0,2023-08-22,,Activo
+SKU00407,Textil hogar,Sabanas,Proveedor H,1370.0,2900.0,2022-01-14,,Activo
+SKU00408,Baño,Alfombras de baño,Proveedor J,32070.0,65900.0,2023-03-30,2025-01-01,Discontinuado
+SKU00409,Textil hogar,Acolchados,Proveedor D,23390.0,48400.0,2024-03-07,,Activo
+SKU00410,Decoración,Cuadros,Proveedor G,35330.0,71800.0,2022-10-24,,Activo
+SKU00411,Muebles,Mesas auxiliares,Proveedor H,,69800.0,2025-04-20,,Activo
+SKU00412,Organizacion,Contenedores,Proveedor B,35430.0,67900.0,2024-04-29,2024-11-21,Discontinuado
+SKU00413,Decoracion,Espejos,Proveedor H,47840.0,86900.0,2024-04-21,,Activo
+SKU00414,Textil hogar,Acolchados,Proveedor F,20090.0,37700.0,2023-12-28,,Activo
+SKU00415,Muebles,Sillas,Proveedor B,16830.0,28800.0,2023-11-12,,Activo
+SKU00416,Baño,Alfombras de baño,Proveedor B,8320.0,17300.0,2023-05-13,,Activo
+SKU00417,Textil hogar,Sabanas,Proveedor C,42700.0,86800.0,2025-06-29,,Activo
+SKU00418,Cocina y mesa,Cubiertos,Proveedor D,34200.0,73300.0,2024-03-30,,Activo
+SKU00419,Organizacion,Cajas,Proveedor D,25580.0,54300.0,2024-06-13,,Activo
+SKU00420,Cocina y mesa,Vajilla,Proveedor H,17420.0,33700.0,2024-08-29,2025-12-21,Discontinuado
+SKU00421,Iluminacion,Guirnaldas,Proveedor C,25200.0,55900.0,2022-01-30,2024-06-28,Discontinuado
+SKU00422,Cocina y mesa,Vajilla,Proveedor G,15900.0,26400.0,2024-07-31,,Activo
+SKU00423,Cocina y mesa,Vajilla,Proveedor G,41830.0,68800.0,2022-11-24,2024-02-21,Discontinuado
+SKU00424,Textil hogar,Sabanas,Proveedor I,31720.0,52800.0,2022-03-06,,Activo
+SKU00425,Iluminacion,Lamparas de mesa,Proveedor G,20680.0,40300.0,2022-09-07,,Activo
+SKU00426,Textil hogar,Cortinas,Proveedor G,38860.0,73400.0,2023-04-25,,Activo
+SKU00427,Baño,Alfombras de baño,Proveedor I,8780.0,13700.0,2022-05-06,,Activo
+SKU00428,Decoracion,Cuadros,Proveedor E,8020.0,13300.0,2022-11-17,,Activo
+SKU00429,Decoracion,Velas,Proveedor G,12680.0,20400.0,2025-03-01,,Activo
+SKU00430,Decoracion,Espejos,Proveedor A,36350.0,56900.0,2023-12-03,,Activo
+SKU00431,Baño,Accesorios de baño,Proveedor I,34080.0,55100.0,2023-10-10,,Activo
+SKU00432,Organizacion,Cajas,Proveedor B,,45600.0,2025-05-19,,Activo
+SKU00433,Organizacion,Cajas,Proveedor I,24160.0,38000.0,2023-12-26,,Activo
+SKU00434,Baño,Accesorios de baño,Proveedor F,37350.0,58900.0,2025-06-23,,Activo
+SKU00435,Textil hogar,Cortinas,Proveedor F,3030.0,5800.0,2024-03-25,,Activo
+SKU00436,Decoracion,Espejos,Proveedor J,40940.0,81300.0,2024-10-29,2024-11-30,Discontinuado
+SKU00437,Textil hogar,Cortinas,Proveedor D,26590.0,49800.0,2024-02-02,,Activo
+SKU00438,Cocina y mesa,Manteleria,Proveedor F,1330.0,2900.0,2024-08-26,,Activo
+SKU00439,Cocina y mesa,Vajilla,Proveedor B,23710.0,45100.0,2022-02-27,,Activo
+SKU00440,Cocina y mesa,Cubiertos,Proveedor F,41290.0,80100.0,2025-04-01,2025-05-14,Discontinuado
+SKU00441,Cocina y mesa,Cubiertos,Proveedor A,7540.0,15900.0,2023-08-25,,Activo
+SKU00442,Baño,Cortinas de baño,Proveedor J,24710.0,38200.0,2022-08-04,2024-04-11,Discontinuado
+SKU00443,Organizacion,Contenedores,Proveedor A,45120.0,81000.0,2024-02-19,,Activo
+SKU00444,Decoracion,Velas,Proveedor A,27390.0,47700.0,2022-03-16,,Activo
+SKU00445,Baño,Cortinas de baño,Proveedor B,31090.0,67400.0,2025-04-21,2025-08-05,Discontinuado
+SKU00446,Textil hogar,Acolchados,Proveedor B,52880.0,84600.0,2023-11-04,,Activo
+SKU00447,Muebles,Sillas,Proveedor B,22300.0,43100.0,2024-02-02,,Activo
+SKU00448,Organizacion,Contenedores,Proveedor B,26820.0,48700.0,2023-04-12,,Activo
+SKU00449,Organizacion,Contenedores,Proveedor I,14200.0,29900.0,2022-12-31,2024-12-18,Discontinuado
+SKU00450,Textil hogar,Cortinas,Proveedor B,41320.0,65800.0,2023-12-17,2024-07-15,Discontinuado
+SKU00451,Organizacion,Percheros,Proveedor G,30080.0,59200.0,2024-07-03,2024-12-11,Discontinuado
+SKU00452,Baño,Cortinas de baño,Proveedor G,19700.0,40400.0,2022-01-18,,Activo
+SKU00453,Baño,Alfombras de baño,Proveedor C,42260.0,84500.0,2022-11-09,,Activo
+SKU00454,Organizacion,Cajas,Proveedor F,19130.0,33000.0,2022-02-24,,Activo
+SKU00455,Decoracion,Plantas artificiales,Proveedor I,36090.0,66800.0,2022-07-19,,Activo
+SKU00456,Baño,Alfombras de baño,Proveedor H,7500.0,14100.0,2024-08-20,,Activo
+SKU00457,Decoracion,Plantas artificiales,Proveedor G,37390.0,73900.0,2023-05-13,,Activo
+SKU00458,Decoracion,Velas,Proveedor F,19130.0,37900.0,2025-02-19,,Activo
+SKU00459,Cocina y mesa,Vajilla,Proveedor E,17840.0,34500.0,2024-08-12,,Activo
+SKU00460,Decoracion,Plantas artificiales,Proveedor B,27160.0,44100.0,2022-03-06,,Activo
+SKU00461,Muebles,Racks,Proveedor G,35810.0,73900.0,2025-06-15,,Activo
+SKU00462,Iluminacion,Lamparas de mesa,Proveedor E,11880.0,22900.0,2025-04-20,,Activo
+SKU00463,Muebles,Estanterias,Proveedor J,36960.0,61900.0,2022-04-04,2025-08-23,Discontinuado
+SKU00464,Baño,Cortinas de baño,Proveedor F,32900.0,66700.0,2023-07-03,,Activo
+SKU00465,Textil hogar,Toallas,Proveedor D,13990.0,21600.0,2023-09-02,,Activo
+SKU00466,Decoracion,Espejos,Proveedor D,32350.0,53700.0,2025-05-26,,Activo
+SKU00467,Muebles,Estanterias,Proveedor F,11480.0,20000.0,2022-11-07,2024-06-30,Discontinuado
+SKU00468,Iluminacion,Guirnaldas,Proveedor E,15260.0,27900.0,2025-04-10,2025-10-18,Discontinuado
+SKU00469,Muebles,Estanterias,Proveedor E,25500.0,41000.0,2023-08-21,,Activo
+SKU00470,Textil hogar,Acolchados,Proveedor E,20140.0,33700.0,2025-06-02,,Activo
+SKU00471,Textil hogar,Acolchados,Proveedor I,16620.0,29100.0,2024-11-08,,Activo
+SKU00472,Decoracion,Velas,Proveedor J,38390.0,77300.0,2024-02-10,,Activo
+SKU00473,Cocina y mesa,Vajilla,Proveedor G,25040.0,38800.0,2022-05-27,,Activo
+SKU00474,Organizacion,Contenedores,Proveedor D,46880.0,74800.0,2024-03-07,,Activo
+SKU00475,Decoracion,Espejos,Proveedor I,28810.0,54900.0,2023-08-05,,Activo
+SKU00476,DECO,Velas,Proveedor B,9030.0,14500.0,2022-09-17,,Activo
+SKU00477,Muebles,Sillas,Proveedor E,7700.0,12100.0,2022-03-08,,Activo
+SKU00478,Textil hogar,Sabanas,Proveedor F,53620.0,83800.0,2023-11-05,,Activo
+SKU00479,Muebles,Sillas,Proveedor B,41110.0,70600.0,2022-06-08,2024-01-05,Discontinuado
+SKU00480,Textil hogar,Sabanas,Proveedor C,22310.0,36200.0,2024-05-02,2025-02-02,Discontinuado
+SKU00481,Decoracion,Velas,Proveedor B,29330.0,53100.0,2022-12-01,,Activo
+SKU00482,Baño,Accesorios de baño,Proveedor H,6590.0,13900.0,2024-01-13,2024-11-09,Discontinuado
+SKU00483,Muebles,Sillas,Proveedor C,29330.0,61400.0,2024-09-19,,Activo
+SKU00484,Cocina y mesa,Cristaleria,Proveedor E,34260.0,63800.0,2023-11-09,,Activo
+SKU00485,Muebles,Mesas auxiliares,Proveedor G,,13300.0,2025-06-26,,Activo
+SKU00486,Baño,Alfombras de baño,Proveedor J,46390.0,71600.0,2025-04-30,,Activo
+SKU00487,Muebles,Sillas,Proveedor I,12570.0,23800.0,2024-07-25,2024-11-26,Discontinuado
+SKU00488,Textil hogar,Cortinas,Proveedor A,24410.0,44600.0,2022-05-26,,Activo
+SKU00489,Textil hogar,Toallas,Proveedor I,11710.0,22700.0,2025-02-13,,Activo
+SKU00490,Decoracion,Cuadros,Proveedor D,5590.0,9900.0,2024-09-27,,Activo
+SKU00491,Iluminacion,Apliques,Proveedor F,42590.0,89700.0,2024-03-08,,Activo
+SKU00492,Organizacion,Cajas,Proveedor D,36330.0,65400.0,2023-04-04,,Activo
+SKU00493,Decoracion,Espejos,Proveedor F,15910.0,30800.0,2022-12-13,,Activo
+SKU00494,Cocina y mesa,Manteleria,Proveedor C,41890.0,88800.0,2024-05-24,2025-04-20,Discontinuado
+SKU00495,Baño,Accesorios de baño,Proveedor F,29990.0,53800.0,2024-01-25,2025-04-15,Discontinuado
+SKU00496,Decoracion,Espejos,Proveedor A,41710.0,85000.0,2024-08-19,2024-11-21,Discontinuado
+SKU00497,Cocina y mesa,Cubiertos,Proveedor D,2890.0,4600.0,2022-11-14,,Activo
+SKU00498,Iluminacion,Guirnaldas,Proveedor B,16280.0,30600.0,2025-06-04,2025-12-13,Discontinuado
+SKU00499,Cocina y mesa,Manteleria,Proveedor I,6190.0,12500.0,2025-01-26,,Activo
+SKU00500,Organizacion,Cajas,Proveedor G,12840.0,21900.0,2022-02-20,,Activo
+SKU00501,Organizacion,Contenedores,Proveedor D,6790.0,13900.0,2022-03-19,,Activo
+SKU00502,Iluminacion,Apliques,Proveedor E,19830.0,37400.0,2022-12-12,,Activo
+SKU00503,Muebles,Sillas,Proveedor H,4090.0,6300.0,2023-06-27,,Activo
+SKU00504,Muebles,Sillas,Proveedor H,46100.0,76100.0,2024-03-06,2024-05-13,Discontinuado
+SKU00505,Organizacion,Cajas,Proveedor C,33770.0,63800.0,2023-11-23,2024-01-17,Discontinuado
+SKU00506,Baño,Accesorios de baño,Proveedor F,37570.0,60800.0,2022-04-21,,Activo
+SKU00507,Muebles,Mesas auxiliares,Proveedor F,40860.0,65200.0,2024-05-12,,Activo
+SKU00508,Cocina y mesa,Cristaleria,Proveedor D,42040.0,70500.0,2023-12-04,,Activo
+SKU00509,Decoracion,Plantas artificiales,Proveedor B,50050.0,82200.0,2024-03-16,,Activo
+SKU00510,Textil hogar,Sabanas,Proveedor F,17190.0,31200.0,2023-04-22,,Activo
+SKU00511,Textil hogar,Cortinas,Proveedor B,5500.0,10300.0,2023-09-03,,Activo
+SKU00512,Baño,Alfombras de baño,Proveedor H,28760.0,58300.0,2022-09-26,,Activo
+SKU00513,Baño,Accesorios de baño,Proveedor B,27280.0,52800.0,2023-03-15,,Activo
+SKU00514,Textil hogar,Cortinas,Proveedor I,11690.0,22400.0,2024-08-08,2025-10-09,Discontinuado
+SKU00515,Decoracion,Cuadros,Proveedor J,29480.0,54300.0,2022-04-05,,Activo
+SKU00516,Decoracion,Plantas artificiales,Proveedor D,24930.0,41200.0,2022-06-02,2025-04-25,Discontinuado
+SKU00517,Decoracion,Plantas artificiales,Proveedor G,33170.0,58500.0,2024-03-06,,Activo
+SKU00518,Cocina y mesa,Vajilla,Proveedor C,5490.0,12100.0,2024-09-07,,Activo
+SKU00519,Iluminacion,Lamparas de mesa,Proveedor A,16500.0,34800.0,2022-09-29,2024-02-15,Discontinuado
+SKU00520,Baño,Alfombras de baño,Proveedor B,36960.0,59500.0,2022-11-26,,Activo
+SKU00521,Cocina y mesa,Vajilla,Proveedor C,36050.0,66900.0,2024-10-30,,Activo
+SKU00522,Textil hogar,Cortinas,Proveedor I,44830.0,75600.0,2023-04-16,,Activo
+SKU00523,Baño,Alfombras de baño,Proveedor F,27350.0,47900.0,2024-04-14,2025-12-24,Discontinuado
+SKU00524,Decoracion,Plantas artificiales,Proveedor J,8170.0,18000.0,2023-02-20,,Activo
+SKU00525,Organizacion,Percheros,Proveedor D,53330.0,82900.0,2023-12-02,,Activo
+SKU00526,Decoracion,Velas,Proveedor I,26480.0,46800.0,2024-08-10,,Activo
+SKU00527,Cocina y mesa,Cristaleria,Proveedor F,33600.0,71500.0,2025-03-20,,Activo
+SKU00528,Textil hogar,Cortinas,Proveedor B,39830.0,65400.0,2023-06-30,,Activo
+SKU00529,Textil hogar,Acolchados,Proveedor H,12890.0,22900.0,2023-04-17,,Activo
+SKU00530,Iluminacion,Guirnaldas,Proveedor G,46560.0,72800.0,2022-05-04,,Activo
+SKU00531,Decoracion,Plantas artificiales,Proveedor J,18400.0,38300.0,2025-01-21,,Activo
+SKU00532,Textil hogar,Cortinas,Proveedor H,37860.0,66100.0,2022-04-11,2022-08-01,Discontinuado
+SKU00533,Textil Hogar,Acolchados,Proveedor A,23980.0,45400.0,2023-12-21,,Activo
+SKU00534,Iluminacion,Lamparas de mesa,Proveedor E,2850.0,4500.0,2023-09-11,2025-04-10,Discontinuado
+SKU00535,Textil hogar,Cortinas,Proveedor B,16340.0,35600.0,2023-01-17,,Activo
+SKU00536,Baño,Cortinas de baño,Proveedor F,6300.0,11100.0,2024-09-16,,Activo
+SKU00537,Baño,Cortinas de baño,Proveedor D,3070.0,5100.0,2022-04-08,,Activo
+SKU00538,Decoracion,Plantas artificiales,Proveedor C,30350.0,67300.0,2022-09-30,,Activo
+SKU00539,Iluminacion,Guirnaldas,Proveedor E,30010.0,58700.0,2024-04-24,,Activo
+SKU00540,Iluminacion,Lamparas de mesa,Proveedor B,17150.0,27600.0,2022-04-15,,Activo
+SKU00541,Cocina y mesa,Cristaleria,Proveedor A,4430.0,8300.0,2023-01-23,,Activo
+SKU00542,Textil hogar,Cortinas,Proveedor J,40190.0,86000.0,2024-07-14,,Activo
+SKU00543,Organizacion,Contenedores,Proveedor B,27840.0,55500.0,2024-06-04,,Activo
+SKU00544,Textil hogar,Cortinas,Proveedor G,11490.0,22200.0,2022-12-27,,Activo
+SKU00545,Cocina y mesa,Cubiertos,Proveedor J,34530.0,64700.0,2022-07-02,,Activo
+SKU00546,Iluminacion,Guirnaldas,Proveedor A,41140.0,64900.0,2023-04-02,,Activo
+SKU00547,Organizacion,Percheros,Proveedor A,45850.0,82300.0,2024-07-15,,Activo
+SKU00548,Muebles,Racks,Proveedor D,14180.0,24600.0,2023-04-13,,Activo
+SKU00549,Organizacion,Cajas,Proveedor C,5240.0,10100.0,2022-05-30,,Activo
+SKU00550,Muebles,Mesas auxiliares,Proveedor J,18390.0,28700.0,2024-06-24,,Activo
+SKU00551,Decoracion,Plantas artificiales,Proveedor E,27110.0,51300.0,2023-12-28,,Activo
+SKU00552,Textil hogar,Cortinas,Proveedor B,14950.0,26900.0,2025-03-18,,Activo
+SKU00553,Muebles,Estanterias,Proveedor I,30280.0,48700.0,2025-04-14,,Activo
+SKU00554,Muebles,Sillas,Proveedor F,29610.0,45900.0,2025-03-11,2025-07-18,Discontinuado
+SKU00555,Textil hogar,Sabanas,Proveedor I,3710.0,6500.0,2024-10-21,2025-03-02,Discontinuado
+SKU00556,Baño,Cortinas de baño,Proveedor D,20070.0,39300.0,2023-02-10,,Activo
+SKU00557,Organizacion,Percheros,Proveedor F,29160.0,44900.0,2023-05-25,,Activo
+SKU00558,Organizacion,Percheros,Proveedor E,23610.0,37000.0,2025-04-07,,Activo
+SKU00559,Decoracion,Plantas artificiales,Proveedor D,25790.0,48800.0,2025-02-15,,Activo
+SKU00560,Textil hogar,Acolchados,Proveedor G,3930.0,8400.0,2022-11-13,,Activo
+SKU00561,Decoracion,Espejos,Proveedor G,37230.0,78100.0,2023-04-07,,Activo
+SKU00562,Baño,Accesorios de baño,Proveedor C,14360.0,27400.0,2023-04-12,,Activo
+SKU00563,Textil hogar,Toallas,Proveedor E,4030.0,8200.0,2023-04-09,,Activo
+SKU00564,Decoracion,Espejos,Proveedor A,11670.0,21800.0,2023-05-20,,Activo
+SKU00565,Baño,Cortinas de baño,Proveedor B,8060.0,14100.0,2023-05-10,,Activo
+SKU00566,Cocina y mesa,Cubiertos,Proveedor A,25360.0,43100.0,2022-09-06,,Activo
+SKU00567,Textil hogar,Acolchados,Proveedor H,9820.0,19700.0,2023-12-21,,Activo
+SKU00568,Muebles,Racks,Proveedor J,22410.0,42300.0,2024-10-14,,Activo
+SKU00569,Cocina y mesa,Cristaleria,Proveedor J,14620.0,30600.0,2023-11-21,,Activo
+SKU00570,Textil hogar,Toallas,Proveedor J,24020.0,45800.0,2024-12-03,,Activo
+SKU00571,Textil hogar,Sabanas,Proveedor H,21560.0,35400.0,2023-12-20,,Activo
+SKU00572,Cocina y mesa,Cristaleria,Proveedor H,3270.0,6700.0,2022-08-14,,Activo
+SKU00573,Muebles,Sillas,Proveedor F,44770.0,86200.0,2024-08-26,,Activo
+SKU00574,Cocina y mesa,Manteleria,Proveedor G,3720.0,7500.0,2025-01-29,,Activo
+SKU00575,Textil hogar,Sabanas,Proveedor H,5550.0,8600.0,2022-12-26,2023-01-19,Discontinuado
+SKU00576,Cocina y mesa,Manteleria,Proveedor F,14010.0,29000.0,2023-10-20,2024-12-29,Discontinuado
+SKU00577,Muebles,Sillas,Proveedor H,6700.0,10900.0,2023-12-26,,Activo
+SKU00578,Decoracion,Plantas artificiales,Proveedor I,32260.0,51200.0,2025-05-18,,Activo
+SKU00579,Organizacion,Contenedores,Proveedor B,19350.0,36200.0,2024-04-10,,Activo
+SKU00580,Cocina y mesa,Manteleria,Proveedor G,27640.0,48000.0,2024-10-23,2024-11-19,Discontinuado
+SKU00581,Decoracion,Cuadros,Proveedor F,23760.0,47500.0,2023-11-29,,Activo
+SKU00582,Organizacion,Percheros,Proveedor F,32590.0,51000.0,2024-10-02,,Activo
+SKU00583,Cocina y mesa,Manteleria,Proveedor D,27470.0,51100.0,2022-04-18,,Activo
+SKU00584,Cocina y mesa,Cristaleria,Proveedor G,5430.0,8400.0,2022-04-15,2025-01-08,Discontinuado
+SKU00585,Iluminacion,Guirnaldas,Proveedor G,1760.0,3900.0,2025-02-21,2025-03-19,Discontinuado
+SKU00586,Organizacion,Percheros,Proveedor J,19920.0,31400.0,2024-03-20,,Activo
+SKU00587,Cocina y mesa,Manteleria,Proveedor I,20490.0,32400.0,2022-07-03,2025-02-09,Discontinuado
+SKU00588,Iluminacion,Guirnaldas,Proveedor F,40760.0,78400.0,2024-04-08,,Activo
+SKU00589,Baño,Accesorios de baño,Proveedor E,27000.0,51400.0,2022-11-10,,Activo
+SKU00590,Organizacion,Percheros,Proveedor F,46220.0,78600.0,2022-10-09,2025-03-29,Discontinuado
+SKU00591,Muebles,Racks,Proveedor E,35740.0,62500.0,2023-10-28,,Activo
+SKU00592,Muebles,Mesas auxiliares,Proveedor B,33670.0,57000.0,2024-09-02,,Activo
+SKU00593,Baño,Alfombras de baño,Proveedor I,40040.0,78700.0,2023-05-19,,Activo
+SKU00594,Decoracion,Espejos,Proveedor A,8520.0,16500.0,2023-03-08,2025-11-28,Discontinuado
+SKU00595,Decoracion,Espejos,Proveedor G,44110.0,71000.0,2024-05-07,,Activo
+SKU00596,Textil hogar,Sabanas,Proveedor G,21190.0,37800.0,2023-09-22,,Activo
+SKU00597,Textil hogar,Cortinas,Proveedor J,43610.0,72300.0,2023-11-17,,Activo
+SKU00598,Cocina y mesa,Vajilla,Proveedor B,38960.0,70200.0,2024-07-08,,Activo
+SKU00599,Textil hogar,Toallas,Proveedor H,28630.0,60100.0,2024-06-22,2025-11-13,Discontinuado
+SKU00600,Decoracion,Espejos,Proveedor D,21840.0,48200.0,2023-06-08,,Activo
+SKU00601,Organizacion,Percheros,Proveedor F,19830.0,42100.0,2024-11-20,,Activo
+SKU00602,Muebles,Racks,Proveedor F,49160.0,79600.0,2024-04-30,2025-10-02,Discontinuado
+SKU00603,Iluminacion,Apliques,Proveedor J,34490.0,54300.0,2024-10-25,,Activo
+SKU00604,Organizacion,Contenedores,Proveedor D,7830.0,13300.0,2024-11-29,,Activo
+SKU00605,Cocina y mesa,Cubiertos,Proveedor H,22790.0,38500.0,2025-02-07,,Activo
+SKU00606,Cocina y mesa,Cristaleria,Proveedor H,44440.0,69800.0,2025-05-07,,Activo
+SKU00607,Cocina y mesa,Cubiertos,Proveedor D,47740.0,85500.0,2024-03-27,,Activo
+SKU00608,Textil hogar,Acolchados,Proveedor A,44200.0,82600.0,2023-10-31,,Activo
+SKU00609,Iluminacion,Guirnaldas,Proveedor I,36470.0,65600.0,2024-06-25,,Activo
+SKU00610,Textil Hogar,Cortinas,Proveedor H,37470.0,77900.0,2024-10-20,,Activo
+SKU00611,Muebles,Sillas,Proveedor B,42640.0,68800.0,2023-06-22,,Activo
+SKU00612,Muebles,Mesas auxiliares,Proveedor I,31570.0,65400.0,2023-06-21,,Activo
+SKU00613,Decoración,Espejos,Proveedor D,36070.0,58600.0,2022-07-06,,Activo
+SKU00614,Organizacion,Percheros,Proveedor A,11230.0,17400.0,2024-08-03,,Activo
+SKU00615,Cocina y mesa,Cubiertos,Proveedor A,14220.0,29400.0,2025-06-18,2025-08-30,Discontinuado
+SKU00616,Cocina y mesa,Vajilla,Proveedor C,26380.0,58000.0,2022-08-02,,Activo
+SKU00617,Baño,Alfombras de baño,Proveedor D,29360.0,54800.0,2022-09-18,,Activo
+SKU00618,Muebles,Racks,Proveedor I,43580.0,85700.0,2023-06-27,,Activo
+SKU00619,Iluminacion,Apliques,Proveedor I,20310.0,44700.0,2023-01-08,,Activo
+SKU00620,Baño,Alfombras de baño,Proveedor I,23270.0,40300.0,2025-05-22,,Activo
+SKU00621,Iluminacion,Apliques,Proveedor A,9020.0,17400.0,2022-03-17,,Activo
+SKU00622,Organizacion,Contenedores,Proveedor A,35770.0,67000.0,2023-01-29,,Activo
+SKU00623,Cocina y mesa,Cristaleria,Proveedor F,11410.0,23800.0,2022-05-27,,Activo
+SKU00624,Iluminacion,Guirnaldas,Proveedor H,2180.0,3600.0,2024-04-06,,Activo
+SKU00625,Iluminacion,Apliques,Proveedor B,21590.0,42500.0,2024-09-17,,Activo
+SKU00626,Decoracion,Velas,Proveedor I,5750.0,9700.0,2022-08-17,,Activo
+SKU00627,Decoración,Espejos,Proveedor I,40440.0,78400.0,2022-03-21,,Activo
+SKU00628,Muebles,Sillas,Proveedor A,25530.0,39800.0,2023-08-09,,Activo
+SKU00629,Iluminacion,Guirnaldas,Proveedor B,14140.0,26800.0,2024-01-16,,Activo
+SKU00630,Muebles,Racks,Proveedor J,21760.0,38200.0,2025-03-06,,Activo
+SKU00631,DECO,Velas,Proveedor D,22880.0,36000.0,2022-02-16,,Activo
+SKU00632,Cocina y mesa,Manteleria,Proveedor I,35760.0,70700.0,2022-05-19,,Activo
+SKU00633,Muebles,Sillas,Proveedor A,5850.0,9300.0,2022-08-24,,Activo
+SKU00634,Decoracion,Velas,Proveedor D,35580.0,68200.0,2022-10-05,,Activo
+SKU00635,Organizacion,Contenedores,Proveedor I,29380.0,60500.0,2022-10-28,2025-02-06,Discontinuado
+SKU00636,Cocina y mesa,Cristaleria,Proveedor C,19240.0,32500.0,2024-01-29,2024-07-04,Discontinuado
+SKU00637,Iluminacion,Lamparas de mesa,Proveedor D,28940.0,50400.0,2022-08-25,,Activo
+SKU00638,Iluminacion,Apliques,Proveedor F,26910.0,50300.0,2022-12-25,,Activo
+SKU00639,Muebles,Mesas auxiliares,Proveedor F,25810.0,43900.0,2022-08-09,,Activo
+SKU00640,Decoracion,Cuadros,Proveedor E,44010.0,88900.0,2024-08-24,,Activo
+SKU00641,Iluminacion,Apliques,Proveedor G,43340.0,84600.0,2023-02-02,,Activo
+SKU00642,Cocina y mesa,Manteleria,Proveedor A,24300.0,47700.0,2023-12-01,,Activo
+SKU00643,Cocina y mesa,Cristaleria,Proveedor B,51100.0,86900.0,2024-11-08,2025-05-27,Discontinuado
+SKU00644,Cocina y mesa,Cubiertos,Proveedor B,18630.0,30300.0,2022-11-29,,Activo
+SKU00645,Decoracion,Plantas artificiales,Proveedor F,,54000.0,2025-02-06,,Activo
+SKU00646,Baño,Cortinas de baño,Proveedor B,,40900.0,2025-03-12,,Activo
+SKU00647,Textil hogar,Cortinas,Proveedor G,34570.0,70200.0,2023-03-13,2024-09-23,Discontinuado
+SKU00648,Muebles,Mesas auxiliares,Proveedor D,8500.0,14600.0,2025-05-06,,Activo
+SKU00649,Iluminacion,Guirnaldas,Proveedor D,15270.0,30800.0,2023-09-08,,Activo
+SKU00650,Baño,Accesorios de baño,Proveedor B,9430.0,20200.0,2022-10-10,,Activo
+SKU00651,Muebles,Mesas auxiliares,Proveedor D,22170.0,38000.0,2022-03-05,,Activo
+SKU00652,Cocina y mesa,Manteleria,Proveedor J,37860.0,73700.0,2025-04-24,,Activo
+SKU00653,Organizacion,Cajas,Proveedor F,3510.0,7100.0,2024-10-19,,Activo
+SKU00654,Textil hogar,Toallas,Proveedor A,6900.0,13000.0,2023-05-07,,Activo
+SKU00655,Decoracion,Velas,Proveedor C,2820.0,4700.0,2023-11-05,,Activo
+SKU00656,Decoracion,Cuadros,Proveedor D,31410.0,51900.0,2023-10-21,,Activo
+SKU00657,Cocina y mesa,Vajilla,Proveedor G,51720.0,82400.0,2022-12-17,2025-12-20,Discontinuado
+SKU00658,Cocina y mesa,Cristaleria,Proveedor I,13180.0,27800.0,2024-04-19,,Activo
+SKU00659,Organizacion,Percheros,Proveedor J,21610.0,34700.0,2022-10-31,,Activo
+SKU00660,Textil hogar,Sabanas,Proveedor A,45420.0,79200.0,2022-01-14,,Activo
+SKU00661,Textil hogar,Cortinas,Proveedor G,18810.0,33200.0,2023-08-27,,Activo
+SKU00662,Decoracion,Plantas artificiales,Proveedor E,11150.0,23600.0,2023-04-20,,Activo
+SKU00663,Textil hogar,Acolchados,Proveedor F,1830.0,4000.0,2024-10-13,,Activo
+SKU00664,Textil hogar,Sabanas,Proveedor E,46610.0,82600.0,2024-06-29,,Activo
+SKU00665,Iluminacion,Lamparas de mesa,Proveedor C,22420.0,36600.0,2024-02-13,,Activo
+SKU00666,Muebles,Estanterias,Proveedor E,25370.0,53100.0,2022-07-20,2023-02-02,Discontinuado
+SKU00667,Iluminacion,Guirnaldas,Proveedor F,34140.0,63500.0,2023-02-15,,Activo
+SKU00668,Decoracion,Espejos,Proveedor H,36370.0,56600.0,2022-11-28,,Activo
+SKU00669,Muebles,Mesas auxiliares,Proveedor E,4140.0,6500.0,2025-01-14,,Activo
+SKU00670,Textil hogar,Sabanas,Proveedor J,8470.0,18000.0,2023-10-21,,Activo
+SKU00671,Organizacion,Contenedores,Proveedor G,18780.0,30800.0,2024-03-23,2025-12-26,Discontinuado
+SKU00672,Iluminacion,Lamparas de mesa,Proveedor E,13480.0,29300.0,2022-12-07,2024-07-27,Discontinuado
+SKU00673,Decoracion,Espejos,Proveedor I,38910.0,67600.0,2022-07-12,,Activo
+SKU00674,Decoracion,Cuadros,Proveedor F,40620.0,67600.0,2024-09-10,,Activo
+SKU00675,Baño,Alfombras de baño,Proveedor A,43720.0,84800.0,2022-01-02,2025-04-14,Discontinuado
+SKU00676,Cocina y mesa,Manteleria,Proveedor C,40950.0,75800.0,2024-12-15,,Activo
+SKU00677,Iluminacion,Guirnaldas,Proveedor G,20560.0,44900.0,2024-11-14,,Activo
+SKU00678,Decoracion,Velas,Proveedor H,46120.0,79900.0,2022-04-16,,Activo
+SKU00679,Decoracion,Velas,Proveedor J,16800.0,36200.0,2022-12-11,2025-02-17,Discontinuado
+SKU00680,Organizacion,Cajas,Proveedor I,12760.0,24500.0,2022-05-04,,Activo
+SKU00681,Decoracion,Espejos,Proveedor A,35580.0,58200.0,2023-09-05,,Activo
+SKU00682,Muebles,Mesas auxiliares,Proveedor H,17690.0,34700.0,2023-08-22,,Activo
+SKU00683,Cocina y mesa,Cubiertos,Proveedor I,3990.0,6400.0,2025-05-04,,Activo
+SKU00684,Muebles,Sillas,Proveedor A,12920.0,21100.0,2024-01-19,,Activo
+SKU00685,Textil hogar,Toallas,Proveedor C,33070.0,63700.0,2024-12-29,,Activo
+SKU00686,Textil hogar,Cortinas,Proveedor F,10310.0,21700.0,2023-01-23,,Activo
+SKU00687,Decoracion,Plantas artificiales,Proveedor J,11860.0,19600.0,2024-10-04,,Activo
+SKU00688,Textil hogar,Cortinas,Proveedor E,50700.0,87300.0,2023-06-17,,Activo
+SKU00689,Baño,Accesorios de baño,Proveedor H,14560.0,24000.0,2025-03-15,,Activo
+SKU00690,Decoracion,Velas,Proveedor A,34450.0,55900.0,2022-04-27,,Activo
+SKU00691,Organizacion,Percheros,Proveedor B,28760.0,48600.0,2024-11-20,,Activo
+SKU00692,Iluminacion,Apliques,Proveedor B,8970.0,18400.0,2022-09-23,,Activo
+SKU00693,Baño,Cortinas de baño,Proveedor G,5870.0,9400.0,2023-11-25,,Activo
+SKU00694,Decoracion,Plantas artificiales,Proveedor F,22330.0,46900.0,2023-11-02,2024-03-05,Discontinuado
+SKU00695,Decoracion,Cuadros,Proveedor C,44550.0,81400.0,2024-11-27,,Activo
+SKU00696,Decoracion,Cuadros,Proveedor C,7920.0,17100.0,2023-02-02,,Activo
+SKU00697,Cocina y mesa,Cubiertos,Proveedor G,5220.0,9300.0,2023-02-01,,Activo
+SKU00698,Cocina y mesa,Vajilla,Proveedor A,21310.0,34500.0,2022-04-08,,Activo
+SKU00699,Baño,Accesorios de baño,Proveedor C,39430.0,70300.0,2023-01-26,2024-06-08,Discontinuado
+SKU00700,Iluminacion,Lamparas de mesa,Proveedor J,20300.0,33800.0,2024-07-01,,Activo
+SKU00701,Cocina y mesa,Manteleria,Proveedor C,40110.0,73500.0,2023-04-04,,Activo
+SKU00702,Textil hogar,Sabanas,Proveedor C,37610.0,61400.0,2024-05-26,,Activo
+SKU00703,Textil hogar,Sabanas,Proveedor F,19990.0,35700.0,2022-05-15,,Activo
+SKU00704,Muebles,Mesas auxiliares,Proveedor A,11150.0,20700.0,2023-05-19,,Activo
+SKU00705,Cocina y mesa,Manteleria,Proveedor E,12450.0,26200.0,2023-08-13,,Activo
+SKU00706,Organizacion,Contenedores,Proveedor B,42150.0,73300.0,2025-05-18,,Activo
+SKU00707,Baño,Accesorios de baño,Proveedor F,36470.0,57900.0,2024-11-24,2025-08-13,Discontinuado
+SKU00708,Muebles,Sillas,Proveedor I,38980.0,73300.0,2022-01-16,,Activo
+SKU00709,Iluminacion,Guirnaldas,Proveedor I,15010.0,27000.0,2023-04-27,,Activo
+SKU00710,Cocina y mesa,Cubiertos,Proveedor C,50760.0,79100.0,2024-06-24,,Activo
+SKU00711,Cocina y mesa,Cristaleria,Proveedor F,46080.0,86700.0,2022-10-31,,Activo
+SKU00712,Muebles,Mesas auxiliares,Proveedor H,24700.0,52100.0,2023-12-21,2024-11-24,Discontinuado
+SKU00713,Cocina y mesa,Cristaleria,Proveedor G,24880.0,41100.0,2022-01-14,,Activo
+SKU00714,Decoracion,Espejos,Proveedor B,7860.0,16500.0,2025-06-19,2025-11-21,Discontinuado
+SKU00715,Textil hogar,Acolchados,Proveedor F,15380.0,31600.0,2022-09-21,,Activo
+SKU00716,Iluminacion,Lamparas de mesa,Proveedor E,8010.0,17100.0,2024-02-26,,Activo
+SKU00717,Organizacion,Percheros,Proveedor C,17270.0,35900.0,2023-01-06,,Activo
+SKU00718,Organizacion,Contenedores,Proveedor A,37660.0,82900.0,2023-04-25,,Activo
+SKU00719,Cocina y mesa,Vajilla,Proveedor C,2260.0,4500.0,2023-11-20,,Activo
+SKU00720,Cocina y mesa,Manteleria,Proveedor B,48900.0,78700.0,2023-01-16,,Activo
+SKU00721,Muebles,Sillas,Proveedor I,11700.0,25400.0,2023-03-07,,Activo
+SKU00722,Iluminacion,Lamparas de mesa,Proveedor B,33860.0,67300.0,2023-05-16,,Activo
+SKU00723,Organizacion,Percheros,Proveedor D,43720.0,82400.0,2024-04-30,,Activo
+SKU00724,Muebles,Estanterias,Proveedor E,21460.0,44100.0,2022-11-24,,Activo
+SKU00725,Textil hogar,Cortinas,Proveedor A,46340.0,73200.0,2022-09-13,2025-02-10,Discontinuado
+SKU00726,Iluminacion,Guirnaldas,Proveedor I,45320.0,75100.0,2023-02-25,2025-11-03,Discontinuado
+SKU00727,Decoracion,Espejos,Proveedor I,16930.0,36400.0,2023-12-20,,Activo
+SKU00728,Organizacion,Cajas,Proveedor F,2290.0,4100.0,2024-07-12,,Activo
+SKU00729,Iluminacion,Guirnaldas,Proveedor J,35090.0,72500.0,2023-02-28,2025-07-04,Discontinuado
+SKU00730,Decoracion,Velas,Proveedor B,19310.0,36100.0,2022-04-28,,Activo
+SKU00731,Cocina y mesa,Cristaleria,Proveedor E,27970.0,60200.0,2022-06-29,,Activo
+SKU00732,Decoracion,Espejos,Proveedor H,3150.0,6500.0,2022-05-01,,Activo
+SKU00733,Baño,Cortinas de baño,Proveedor B,26480.0,49400.0,2024-05-14,2025-07-10,Discontinuado
+SKU00734,Organizacion,Contenedores,Proveedor J,48310.0,87100.0,2022-08-18,,Activo
+SKU00735,Iluminacion,Apliques,Proveedor B,39130.0,80300.0,2023-05-29,,Activo
+SKU00736,Iluminacion,Lamparas de mesa,Proveedor E,2360.0,3800.0,2024-12-03,2025-07-23,Discontinuado
+SKU00737,Cocina y mesa,Cubiertos,Proveedor J,19590.0,41700.0,2022-04-25,,Activo
+SKU00738,Iluminacion,Apliques,Proveedor A,29500.0,52300.0,2022-10-17,,Activo
+SKU00739,Organizacion,Cajas,Proveedor B,16110.0,25700.0,2022-07-20,,Activo
+SKU00740,Decoracion,Velas,Proveedor I,40530.0,74900.0,2022-06-08,,Activo
+SKU00741,Organizacion,Cajas,Proveedor E,11610.0,22800.0,2023-06-04,2023-08-11,Discontinuado
+SKU00742,Decoracion,Velas,Proveedor I,,81300.0,2025-03-20,,Activo
+SKU00743,Muebles,Racks,Proveedor C,25770.0,53500.0,2023-06-29,,Activo
+SKU00744,Decoracion,Plantas artificiales,Proveedor H,35130.0,54400.0,2023-10-15,,Activo
+SKU00745,Cocina y mesa,Vajilla,Proveedor F,42790.0,80900.0,2024-04-05,2025-08-04,Discontinuado
+SKU00746,Muebles,Sillas,Proveedor H,13860.0,24500.0,2024-11-13,,Activo
+SKU00747,Muebles,Sillas,Proveedor D,31060.0,51600.0,2023-05-08,,Activo
+SKU00748,Iluminacion,Guirnaldas,Proveedor F,5450.0,9200.0,2023-02-27,,Activo
+SKU00749,Baño,Cortinas de baño,Proveedor F,43130.0,89000.0,2023-06-10,,Activo
+SKU00750,Baño,Alfombras de baño,Proveedor F,21190.0,38700.0,2022-01-20,,Activo
+SKU00751,Decoración,Velas,Proveedor J,37680.0,78800.0,2023-05-27,,Activo
+SKU00752,Textil hogar,Sabanas,Proveedor D,1910.0,3700.0,2024-06-12,,Activo
+SKU00753,Textil hogar,Cortinas,Proveedor B,,79200.0,2025-06-06,,Activo
+SKU00754,Decoracion,Plantas artificiales,Proveedor C,9730.0,16400.0,2024-10-04,2025-07-30,Discontinuado
+SKU00755,Iluminacion,Lamparas de mesa,Proveedor C,3000.0,5100.0,2024-02-16,,Activo
+SKU00756,Iluminacion,Lamparas de mesa,Proveedor D,23220.0,43200.0,2022-01-24,2023-05-14,Discontinuado
+SKU00757,Iluminacion,Guirnaldas,Proveedor E,38930.0,73900.0,2023-03-13,2025-01-07,Discontinuado
+SKU00758,Textil hogar,Sabanas,Proveedor E,22570.0,44800.0,2022-05-16,,Activo
+SKU00759,Textil hogar,Cortinas,Proveedor I,45420.0,74400.0,2023-04-27,,Activo
+SKU00760,Cocina y mesa,Cubiertos,Proveedor D,31570.0,68700.0,2023-10-12,,Activo
+SKU00761,Cocina y mesa,Manteleria,Proveedor E,22460.0,40900.0,2024-10-03,,Activo
+SKU00762,Textil hogar,Cortinas,Proveedor G,30400.0,47200.0,2024-11-18,,Activo
+SKU00763,Baño,Accesorios de baño,Proveedor E,9630.0,16700.0,2024-02-20,,Activo
+SKU00764,Cocina y mesa,Manteleria,Proveedor G,36200.0,68500.0,2022-07-22,,Activo
+SKU00765,Decoracion,Plantas artificiales,Proveedor G,11630.0,25100.0,2024-09-05,,Activo
+SKU00766,Organizacion,Cajas,Proveedor H,34810.0,67500.0,2025-02-26,2025-08-13,Discontinuado
+SKU00767,Decoracion,Plantas artificiales,Proveedor I,20360.0,39900.0,2023-03-26,,Activo
+SKU00768,Textil hogar,Sabanas,Proveedor H,20190.0,31500.0,2023-10-01,,Activo
+SKU00769,Textil Hogar,Sabanas,Proveedor C,37730.0,60300.0,2022-06-30,2024-12-29,Discontinuado
+SKU00770,Baño,Accesorios de baño,Proveedor A,24550.0,40300.0,2025-06-13,,Activo
+SKU00771,Baño,Accesorios de baño,Proveedor G,37320.0,77300.0,2023-10-21,2025-05-16,Discontinuado
+SKU00772,Decoración,Plantas artificiales,Proveedor E,40570.0,86000.0,2024-12-02,,Activo
+SKU00773,Iluminacion,Guirnaldas,Proveedor C,27930.0,52800.0,2022-09-09,,Activo
+SKU00774,Baño,Alfombras de baño,Proveedor J,33270.0,65100.0,2025-04-20,,Activo
+SKU00775,Muebles,Sillas,Proveedor J,34190.0,58000.0,2024-03-11,,Activo
+SKU00776,Decoracion,Cuadros,Proveedor C,4610.0,8100.0,2022-09-10,,Activo
+SKU00777,Muebles,Mesas auxiliares,Proveedor J,25570.0,48900.0,2022-04-17,,Activo
+SKU00778,Muebles,Racks,Proveedor B,7090.0,15000.0,2022-11-09,,Activo
+SKU00779,Cocina y mesa,Manteleria,Proveedor A,36120.0,66600.0,2024-01-06,,Activo
+SKU00780,Muebles,Racks,Proveedor E,40650.0,80200.0,2024-06-08,,Activo
+SKU00781,Organizacion,Percheros,Proveedor A,35260.0,73100.0,2023-02-25,,Activo
+SKU00782,Decoración,Cuadros,Proveedor D,,26300.0,2025-03-31,,Activo
+SKU00783,Muebles,Racks,Proveedor B,47460.0,75900.0,2023-04-06,,Activo
+SKU00784,Textil hogar,Sabanas,Proveedor G,21050.0,40600.0,2023-08-14,,Activo
+SKU00785,Baño,Cortinas de baño,Proveedor C,40520.0,75000.0,2022-06-08,,Activo
+SKU00786,Muebles,Mesas auxiliares,Proveedor D,9900.0,17600.0,2025-05-27,2025-06-25,Discontinuado
+SKU00787,Decoracion,Espejos,Proveedor A,30480.0,50700.0,2025-02-27,2025-08-12,Discontinuado
+SKU00788,Muebles,Sillas,Proveedor D,43720.0,67300.0,2023-12-17,2025-02-06,Discontinuado
+SKU00789,Textil hogar,Cortinas,Proveedor H,14090.0,22000.0,2022-12-04,,Activo
+SKU00790,Muebles,Racks,Proveedor C,17300.0,29100.0,2025-03-06,,Activo
+SKU00791,Baño,Cortinas de baño,Proveedor I,24800.0,45500.0,2025-06-19,,Activo
+SKU00792,Iluminacion,Lamparas de mesa,Proveedor C,2890.0,5700.0,2024-11-09,,Activo
+SKU00793,Muebles,Mesas auxiliares,Proveedor D,25370.0,53100.0,2024-02-07,,Activo
+SKU00794,Textil hogar,Sabanas,Proveedor G,18740.0,36500.0,2022-06-06,,Activo
+SKU00795,Iluminacion,Guirnaldas,Proveedor B,23510.0,48000.0,2024-11-18,,Activo
+SKU00796,Muebles,Sillas,Proveedor A,33270.0,63800.0,2023-01-04,,Activo
+SKU00797,Baño,Cortinas de baño,Proveedor A,4380.0,6800.0,2025-02-18,,Activo
+SKU00798,Baño,Alfombras de baño,Proveedor D,41470.0,69200.0,2022-11-04,,Activo
+SKU00799,Decoracion,Espejos,Proveedor G,36130.0,75400.0,2024-01-02,,Activo
+SKU00800,Iluminacion,Apliques,Proveedor D,6660.0,14500.0,2024-11-26,2025-02-08,Discontinuado
+SKU00453,Baño,Alfombras de baño,Proveedor J,42260.0,84500.0,2022-11-09,,Activo
+SKU00058,Baño,Accesorios de baño,Proveedor B,35190.0,57200.0,2024-07-22,,Activo
+SKU00112,Muebles,Estanterias,Proveedor C,12350.0,22600.0,2022-08-13,2023-11-11,Discontinuado
+SKU00016,Muebles,Sillas,Proveedor A,23110.0,37300.0,2024-02-25,,Activo
+SKU00430,Decoracion,Espejos,Proveedor H,36350.0,56900.0,2023-12-03,,Activo
+SKU00433,Organizacion,Cajas,Proveedor D,24160.0,38000.0,2023-12-26,,Activo
+SKU00370,Decoracion,Plantas artificiales,Proveedor E,20600.0,33400.0,2022-05-02,2022-07-23,Discontinuado
+SKU00533,Textil Hogar,Acolchados,Proveedor D,23980.0,45400.0,2023-12-21,,Activo
+SKU00330,Cocina y mesa,Cristaleria,Proveedor D,9770.0,21300.0,2024-12-22,,Activo
+SKU00552,Textil hogar,Cortinas,Proveedor H,14950.0,26900.0,2025-03-18,,Activo
+SKU00785,Baño,Cortinas de baño,Proveedor D,40520.0,75000.0,2022-06-08,,Activo
+SKU00566,Cocina y mesa,Cubiertos,Proveedor B,25360.0,43100.0,2022-09-06,,Activo
+SKU00333,Cocina y mesa,Vajilla,Proveedor C,39820.0,78500.0,2022-10-24,,Activo
+SKU00737,Cocina y mesa,Cubiertos,Proveedor E,19590.0,41700.0,2022-04-25,,Activo
+SKU00311,Muebles,Sillas,Proveedor D,47790.0,87800.0,2022-01-30,,Activo

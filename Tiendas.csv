@@ -1,0 +1,29 @@
+id_tienda,nombre_tienda,provincia,region,formato,m2_venta,fecha_apertura
+T01,Casa Óga Mendoza 1,Mendoza,Cuyo,Grande,800,2021-08-14
+T02,Casa Óga Buenos Aires 2,Buenos Aires,AMBA,Grande,450,2014-11-11
+T03,Casa Óga Mendoza 3,Mendoza,Cuyo,Chico,450,2017-08-11
+T04,Casa Óga Santa Fe 4,Santa Fe,Centro,Grande,450,2017-01-15
+T05,Casa Óga Buenos Aires 5,Buenos Aires,AMBA,Mediano,450,2022-09-08
+T06,Casa Óga Santa Fe 6,Santa Fe,Centro,Mediano,1500,2022-01-11
+T07,Casa Óga Cordoba 7,Cordoba,Centro,Mediano,800,2024-05-25
+T08,Casa Óga Neuquen 8,Neuquen,Patagonia,Grande,600,2015-07-18
+T09,Casa Óga Tucuman 9,Tucuman,NOA,Mediano,600,2019-03-24
+T10,Casa Óga Buenos Aires 10,Buenos Aires,AMBA,Mediano,450,2014-11-30
+T11,Casa Óga CABA 11,CABA,AMBA,Grande,800,2016-12-28
+T12,Casa Óga Mendoza 12,Mendoza,Cuyo,Chico,1200,2020-02-23
+T13,Casa Óga Santa Fe 13,Santa Fe,Centro,Chico,1200,2014-11-17
+T14,Casa Óga CABA 14,CABA,AMBA,Grande,1500,2016-10-09
+T15,Casa Óga Salta 15,Salta,NOA,Mediano,600,2021-09-25
+T16,Casa Óga Tucuman 16,Tucuman,NOA,Grande,600,2020-07-31
+T17,Casa Óga Entre Rios 17,Entre Rios,Centro,Chico,600,2017-01-04
+T18,Casa Óga Salta 18,Salta,NOA,Mediano,1200,2021-01-25
+T19,Casa Óga Mendoza 19,Mendoza,Cuyo,Mediano,800,2023-06-28
+T20,Casa Óga Buenos Aires 20,Buenos Aires,AMBA,Mediano,450,2014-08-29
+T21,Casa Óga Mendoza 21,Mendoza,Cuyo,Grande,600,2023-06-13
+T22,Casa Óga CABA 22,CABA,AMBA,Mediano,1500,2022-04-07
+T23,Casa Óga Buenos Aires 23,Buenos Aires,AMBA,Mediano,450,2018-04-30
+T24,Casa Óga Buenos Aires 24,Buenos Aires,AMBA,Grande,800,2016-04-18
+T25,Casa Óga Cordoba 25,Cordoba,Centro,Grande,1500,2025-02-11
+T26,Casa Óga Salta 26,Salta,NOA,Mediano,1200,2018-04-16
+T27,Casa Óga Buenos Aires 27,Buenos Aires,AMBA,Chico,1200,2015-08-10
+T28,Casa Óga CABA 28,CABA,AMBA,Grande,1500,2015-08-26
