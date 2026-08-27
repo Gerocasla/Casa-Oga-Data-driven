@@ -16,15 +16,6 @@ casa-oga-data-driven/
 └── entregables/           → completar con los .docx de cada Entregable (ver nota abajo)
 ```
 
-## Falta agregar (archivos originales tuyos)
-
-Estos ya los tenés en tu computadora / Drive — no hace falta recrearlos, solo arrastralos a las carpetas correspondientes antes de subir:
-
-- `Entregable 1 - Parte A (Clase 1) - Contexto Organizacional.docx` → carpeta `entregables/`
-- `Entregable 1 - Parte B (Clase 2) - Objetivos Stakeholders y Restricciones.docx` → carpeta `entregables/`
-- `Casa ÓGA_Proyecto Data Driven 2Q 2026 Clientes y Fidelizacion.pdf` → carpeta `materials/`
-- `Casa ÓGA_Proyecto Data Driven 2Q 2026 Mix Productos.pdf` → carpeta `materials/`
-- `Clase 3 - De la idea al producto analítico.pdf` → carpeta `materials/`
 
 ## Resumen del proyecto
 
