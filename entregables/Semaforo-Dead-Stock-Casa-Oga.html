@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Definicion calibrada del semaforo de dead stock y revision de los KPIs del dashboard de Casa Oga.">
+<title>Semáforo de Dead Stock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<style>
+:root{
+  --ground:#F6F6F9;
+  --surface:#FFFFFF;
+  --surface-2:#EFEFF4;
+  --ink:#1A1B23;
+  --ink-2:#43455A;
+  --muted:#6E7086;
+  --line:#DEDEE7;
+  --line-strong:#C3C3D2;
+  --accent:#2B5C7A;
+  --accent-soft:#E4EEF4;
+  --rojo:#B8332A;
+  --rojo-bg:#FAE7E5;
+  --ambar:#9A6B06;
+  --ambar-bg:#FBF0DA;
+  --verde:#276E48;
+  --verde-bg:#E1F1E7;
+  --gris:#5D6072;
+  --gris-bg:#E9E9EF;
+  --shadow:0 1px 2px rgba(26,27,35,.05), 0 8px 24px -16px rgba(26,27,35,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#131419;
+    --surface:#1B1D24;
+    --surface-2:#23262F;
+    --ink:#E9E9F0;
+    --ink-2:#B7B9C8;
+    --muted:#8E90A2;
+    --line:#2D3039;
+    --line-strong:#3C404C;
+    --accent:#77ADCB;
+    --accent-soft:#1E2C36;
+    --rojo:#EE8378;
+    --rojo-bg:#33201E;
+    --ambar:#E0AC42;
+    --ambar-bg:#332818;
+    --verde:#6EBE8D;
+    --verde-bg:#182C21;
+    --gris:#A2A5B5;
+    --gris-bg:#262932;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#131419;
+  --surface:#1B1D24;
+  --surface-2:#23262F;
+  --ink:#E9E9F0;
+  --ink-2:#B7B9C8;
+  --muted:#8E90A2;
+  --line:#2D3039;
+  --line-strong:#3C404C;
+  --accent:#77ADCB;
+  --accent-soft:#1E2C36;
+  --rojo:#EE8378;
+  --rojo-bg:#33201E;
+  --ambar:#E0AC42;
+  --ambar-bg:#332818;
+  --verde:#6EBE8D;
+  --verde-bg:#182C21;
+  --gris:#A2A5B5;
+  --gris-bg:#262932;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 96px}
+.col{max-width:70ch}
+
+h1,h2,h3,.disp{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;text-wrap:balance;}
+code,.mono,.num{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+
+/* ---- header ---- */
+header{padding:72px 0 40px;border-bottom:1px solid var(--line)}
+.eyebrow{
+  font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 20px
+}
+h1{font-size:clamp(38px,6.2vw,62px);line-height:1.02;font-weight:800;letter-spacing:-.024em;margin:0 0 20px}
+.standfirst{font-size:20px;line-height:1.5;color:var(--ink-2);margin:0;max-width:64ch}
+.meta{
+  display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px;
+  font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)
+}
+.meta b{color:var(--ink-2);font-weight:600}
+
+/* ---- sections ---- */
+section{padding-top:64px}
+h2{font-size:30px;font-weight:700;letter-spacing:-.016em;margin:0 0 6px;line-height:1.15}
+.sec-note{color:var(--muted);font-size:15px;margin:0 0 30px}
+h3{font-size:19px;font-weight:700;letter-spacing:-.008em;margin:36px 0 10px}
+p{margin:0 0 16px}
+.lede{font-size:18.5px;color:var(--ink-2)}
+strong{font-weight:600}
+a{color:var(--accent)}
+
+/* ---- verdict callouts ---- */
+.finding{
+  display:grid;grid-template-columns:auto 1fr;gap:0 18px;
+  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--rojo);
+  border-radius:3px;padding:20px 24px;margin:0 0 14px;box-shadow:var(--shadow)
+}
+.finding .fnum{
+  font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600;
+  color:var(--rojo);padding-top:3px
+}
+.finding h4{
+  font-family:"Bricolage Grotesque",sans-serif;font-size:17px;font-weight:700;
+  margin:0 0 6px;letter-spacing:-.008em;color:var(--ink)
+}
+.finding p{margin:0;font-size:15.5px;color:var(--ink-2)}
+.finding.ok{border-left-color:var(--verde)}
+.finding.ok .fnum{color:var(--verde)}
+
+/* ---- stat row ---- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:28px 0}
+.stat{background:var(--surface);padding:18px 20px}
+.stat .k{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.stat .v{font-family:"Bricolage Grotesque",sans-serif;font-size:27px;font-weight:700;letter-spacing:-.02em;line-height:1;margin:0 0 5px;font-variant-numeric:tabular-nums}
+.stat .s{font-size:13.5px;color:var(--muted);margin:0;line-height:1.35}
+
+/* ---- tables ---- */
+.tw{overflow-x:auto;margin:22px 0;border:1px solid var(--line);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{padding:11px 15px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{
+  font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;background:var(--surface-2);white-space:nowrap;border-bottom:1px solid var(--line-strong)
+}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:var(--surface-2)}
+caption{caption-side:bottom;text-align:left;padding:11px 15px;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+
+/* ---- chips ---- */
+.chip{
+  display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;
+  letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap
+}
+.c-rojo{background:var(--rojo-bg);color:var(--rojo)}
+.c-ambar{background:var(--ambar-bg);color:var(--ambar)}
+.c-verde{background:var(--verde-bg);color:var(--verde)}
+.c-gris{background:var(--gris-bg);color:var(--gris)}
+.c-acc{background:var(--accent-soft);color:var(--accent)}
+
+/* ---- rule cards ---- */
+.rules{display:grid;gap:12px;margin:26px 0}
+.rule{
+  display:grid;grid-template-columns:104px 1fr;gap:20px;align-items:start;
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:18px 22px;box-shadow:var(--shadow)
+}
+.rule .lbl{display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+.rule .cond{
+  font-family:"JetBrains Mono",monospace;font-size:13.5px;color:var(--ink);
+  line-height:1.55;margin:0 0 7px
+}
+.rule .why{font-size:14.5px;color:var(--muted);margin:0;line-height:1.5}
+.swatch{width:100%;height:4px;border-radius:2px}
+.s-rojo{background:var(--rojo)} .s-ambar{background:var(--ambar)}
+.s-verde{background:var(--verde)} .s-gris{background:var(--gris)}
+
+/* ---- gate list ---- */
+.gates{list-style:none;padding:0;margin:20px 0;display:grid;gap:10px}
+.gates li{
+  display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:baseline;
+  padding:14px 18px;background:var(--surface-2);border-radius:3px;font-size:15.5px;color:var(--ink-2)
+}
+.gates .g{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.06em}
+.gates b{color:var(--ink)}
+
+/* ---- distribution bar ---- */
+.dist{margin:24px 0}
+.dist-bar{display:flex;height:34px;border-radius:3px;overflow:hidden;border:1px solid var(--line)}
+.dist-bar span{display:block}
+.dist-key{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:12px;font-size:13.5px;color:var(--muted)}
+.dist-key i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:7px;vertical-align:baseline}
+
+/* ---- kpi verdict ---- */
+.kpi{
+  background:var(--surface);border:1px solid var(--line);border-radius:3px;
+  padding:20px 24px;margin-bottom:12px;box-shadow:var(--shadow)
+}
+.kpi-head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:10px}
+.kpi-head h4{font-family:"Bricolage Grotesque",sans-serif;font-size:17.5px;font-weight:700;margin:0;letter-spacing:-.01em;flex:1;min-width:220px}
+.kpi p{margin:0 0 9px;font-size:15.5px;color:var(--ink-2)}
+.kpi p:last-child{margin-bottom:0}
+.kpi .lab{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
+.formula{
+  font-family:"JetBrains Mono",monospace;font-size:13.5px;background:var(--surface-2);
+  padding:9px 13px;border-radius:3px;display:block;margin:4px 0 12px;color:var(--ink);overflow-x:auto;white-space:nowrap
+}
+.strike{text-decoration:line-through;text-decoration-color:var(--rojo);text-decoration-thickness:1.5px;color:var(--muted)}
+
+hr.div{border:none;border-top:1px solid var(--line);margin:56px 0 0}
+.foot{margin-top:56px;padding-top:26px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+.foot p{margin:0 0 8px}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 18px 64px}
+  .rule{grid-template-columns:1fr;gap:12px}
+  .rule .lbl{flex-direction:row;align-items:center;gap:12px}
+  .swatch{width:40px}
+  .finding{grid-template-columns:1fr;gap:8px}
+}
+</style>
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Casa Óga · Entregable 1 Parte D · Revisión técnica</p>
+  <h1>Semáforo de Dead Stock</h1>
+  <p class="standfirst">Definición calibrada sobre los datos reales, revisión de los cinco KPIs propuestos y los ajustes que el dashboard necesita antes del martes.</p>
+  <div class="meta">
+    <span><b>Corte de análisis</b> dic-2025</span>
+    <span><b>Universo</b> 8.535 pares SKU–tienda con stock</span>
+    <span><b>Capital a costo</b> $3.719 M</span>
+    <span><b>Horizonte</b> 3 meses</span>
+  </div>
+</header>
+
+<section>
+  <h2>Lo que hay que corregir</h2>
+  <p class="sec-note">Cuatro hallazgos que cambian el diseño, ordenados por impacto.</p>
+
+  <div class="finding">
+    <span class="fnum">01</span>
+    <div>
+      <h4>El corte 30/70 aprobado marcaría el 86% del catálogo en rojo</h4>
+      <p>El semáforo propuesto en la pregunta 46 mide venta mensual sobre stock. En los datos, ese <em>sell-through</em> tiene mediana <b>15,3%</b> y su percentil 99 es <b>66,7%</b>. Con el corte «verde &gt;70%», el verde es literalmente el 1% superior de la operación: <b>85,8% rojo, 13,3% amarillo, 0,9% verde</b>. Un semáforo así no prioriza nada.</p>
+    </div>
+  </div>
+
+  <div class="finding">
+    <span class="fnum">02</span>
+    <div>
+      <h4>El dashboard asume datos diarios que no existen</h4>
+      <p>La Sección 5 declara granularidad de «transacción diaria» y actualización «diaria o en tiempo real». Los datasets son <b>mensuales por SKU–tienda</b>, y en la pregunta 27 el cliente aclaró que la extracción diaria no está automatizada y se evaluaría solo si el modelo la necesita. La V1 tiene que ser mensual.</p>
+    </div>
+  </div>
+
+  <div class="finding">
+    <span class="fnum">03</span>
+    <div>
+      <h4>La estacionalidad por categoría no existe en los datos</h4>
+      <p>El cliente pidió cortes distintos por categoría porque «Regalos y Textil hogar son estacionales». Las siete categorías tienen <b>el mismo patrón</b> —bajo en enero-febrero, alto en noviembre-diciembre— con amplitudes de 31 a 44 puntos. La más marcada es <b>Organización (44)</b>, que el cliente considera estable; Textil hogar queda en 38. Un ajuste estacional único alcanza.</p>
+    </div>
+  </div>
+
+  <div class="finding">
+    <span class="fnum">04</span>
+    <div>
+      <h4>Falta el KPI del propio proyecto</h4>
+      <p>Los cinco indicadores actuales miden margen, facturación, liquidaciones, días de inventario y costo de almacenamiento. <b>Ninguno mide dead stock</b>, que es el objeto del proyecto. Tres de los cinco además tienen la fórmula o los umbrales mal.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<section>
+  <h2>Definición propuesta</h2>
+  <p class="sec-note">Dos ejes y tres compuertas de exclusión. Sigue la definición del caso: rotación nula o muy baja <em>más</em> cobertura excesiva.</p>
+
+  <div class="col">
+    <p class="lede">El documento del caso ya define dead stock con dos condiciones simultáneas: ventas por debajo de la rotación esperada durante 60–90 días <strong>y</strong> stock que implique varios meses de cobertura. La propuesta respeta esa estructura en lugar de reducirlo a un solo ratio.</p>
+  </div>
+
+  <h3>Los dos ejes miden cosas distintas</h3>
+  <p>Un criterio de <strong>inactividad</strong> (meses sin venta) encuentra los productos que <em>dejaron</em> de venderse. Un criterio de <strong>stock excedente</strong> —velocidad de venta contra volumen en góndola— encuentra los que se venden pero están comprados de más. Aplicados por separado sobre el mismo corte dan totales parecidos y, sin embargo, señalan productos casi distintos:</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Criterio</th><th class="n">Pares</th><th class="n">Capital</th><th>Qué encuentra</th></tr></thead>
+    <tbody>
+      <tr><td>Inactividad — <span class="mono">≥3 meses sin venta</span></td><td class="n">443</td><td class="n">$46,5 M</td><td>Productos que se apagaron</td></tr>
+      <tr><td>Excedente — <span class="mono">stock &gt; run rate × 12</span></td><td class="n">407</td><td class="n">$39,6 M</td><td>Productos sobre-comprados</td></tr>
+      <tr style="background:var(--ambar-bg)"><td colspan="2"><b>Pares que ambos marcan</b></td><td class="n"><b>94</b></td><td><b>Solo el 21% coincide</b> — son problemas diferentes</td></tr>
+    </tbody>
+    <caption>349 pares los ve solo la inactividad; 313 los ve solo el excedente. Un criterio único deja la mitad del problema afuera.</caption>
+  </table>
+  </div>
+
+  <p>Por eso el semáforo usa <strong>los dos ejes</strong>, y el excedente aporta algo que la inactividad no puede dar: <strong>cuántas unidades sobran</strong>. Eso es lo que se liquida y lo que ordena el ranking de acción.</p>
+
+  <h3>Las dos métricas de volumen</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Métrica</th><th>Fórmula</th><th class="n">Hoy</th><th>Para qué sirve</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>Stock Excedente</b></td>
+        <td class="mono">máx(0, stock − run_rate × 6)</td>
+        <td class="n">22.664 u<br>$568,9 M</td>
+        <td>Sobrestock operativo. Alimenta decisiones de compra y transferencia.</td>
+      </tr>
+      <tr>
+        <td><b>Stock Muerto Proyectado</b></td>
+        <td class="mono">máx(0, stock − run_rate × 12)</td>
+        <td class="n">1.669 u<br>$39,6 M</td>
+        <td>Unidades que no se venderían ni en un año. Alimenta la liquidación.</td>
+      </tr>
+    </tbody>
+    <caption>run_rate = unidades vendidas en 12 meses ÷ 12. El excedente queda bien definido incluso con venta cero, donde la cobertura en meses se indefine.</caption>
+  </table>
+  </div>
+
+  <p><strong>La elección de la cobertura objetivo domina el resultado</strong>, así que conviene fijarla explícitamente con el cliente: con objetivo de 3 meses el excedente trepa a $1.867 M (la mitad del stock de la cadena); con 6 meses queda en $569 M; con 12 meses, en $39,6 M.</p>
+
+  <h3>Compuertas — qué no se evalúa</h3>
+  <ul class="gates">
+    <li><span class="g">G1</span><div><b>Sin stock disponible → Gris.</b> Un SKU sin ventas porque no hay stock es un quiebre, no dead stock. En los datos hay <span class="mono">707</span> filas de venta cero con stock cero que hoy se contarían mal.</div></li>
+    <li><span class="g">G2</span><div><b>Stock en tránsito excluido del stock disponible.</b> Son unidades despachadas y no recibidas: no están en la tienda ni se pueden vender. Afecta a <span class="mono">186.431</span> filas, <span class="mono">684.228</span> unidades.</div></li>
+    <li><span class="g">G3</span><div><b>Menos de 6 meses de historia en esa tienda → Gris «en observación».</b> No hay base para juzgar la rotación de un producto recién incorporado.</div></li>
+  </ul>
+
+  <h3>Reglas</h3>
+  <div class="rules">
+    <div class="rule">
+      <div class="lbl"><span class="swatch s-rojo"></span><span class="chip c-rojo">Rojo</span></div>
+      <div>
+        <p class="cond">meses_sin_venta ≥ 3<br><span style="color:var(--muted)">— o —</span><br>stock muerto proyectado ≥ 50% del stock</p>
+        <p class="why">Cero ventas en el horizonte completo de 90 días, o más de la mitad del stock no se vendería ni en un año. Acción: liquidar, transferir o discontinuar.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="lbl"><span class="swatch s-ambar"></span><span class="chip c-ambar">Amarillo</span></div>
+      <div>
+        <p class="cond">meses_sin_venta = 2<br><span style="color:var(--muted)">— o —</span><br>stock muerto proyectado &gt; 0<br><span style="color:var(--muted)">— o —</span><br>stock excedente ≥ 50% del stock</p>
+        <p class="why">Señal temprana. Acá caen los sobre-comprados que todavía rotan: hay margen para frenar la reposición o transferir antes de tener que liquidar con descuento.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="lbl"><span class="swatch s-verde"></span><span class="chip c-verde">Verde</span></div>
+      <div>
+        <p class="cond">resto de los casos evaluables</p>
+        <p class="why">Rotación dentro de lo normal para el negocio. No requiere intervención.</p>
+      </div>
+    </div>
+    <div class="rule">
+      <div class="lbl"><span class="swatch s-gris"></span><span class="chip c-gris">Gris</span></div>
+      <div>
+        <p class="cond">no evaluable — ver compuertas G1 a G3</p>
+        <p class="why">Cuarto estado imprescindible. Sin él, los quiebres de stock y los productos nuevos entran al ranking como falsos positivos.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Cómo se calculan las dos variables</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Variable</th><th>Cálculo</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td><b>meses_sin_venta</b></td><td class="mono">meses consecutivos con unidades_vendidas = 0, contados hacia atrás desde el corte</td><td>Sobre grilla mensual completa, no sobre las filas presentes.</td></tr>
+      <tr><td><b>run_rate</b></td><td class="mono">unidades_12m ÷ 12</td><td>Velocidad de venta mensual. Mediana del negocio: 1,83 u/mes.</td></tr>
+      <tr><td><b>stock excedente</b></td><td class="mono">máx(0, stock_disponible − run_rate × 6)</td><td>Unidades por encima de 6 meses de cobertura.</td></tr>
+      <tr><td><b>stock muerto proyectado</b></td><td class="mono">máx(0, stock_disponible − run_rate × 12)</td><td>Unidades que no rotarían en un año.</td></tr>
+      <tr><td><b>cobertura</b></td><td class="mono">stock_disponible ÷ run_rate</td><td>Solo se muestra si unidades_12m ≥ 4; por debajo es ruido.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>Detalle que cambia los números:</strong> el panel es disperso. Solo el <b>36%</b> de los pares SKU–tienda tiene serie continua; el resto tiene meses sin fila, y apenas <b>8.073 de 10.615</b> pares llegan con registro a diciembre 2025. Si <code>meses_sin_venta</code> se cuenta sobre las filas existentes, un hueco de carga se lee como venta. Hay que reindexar a grilla completa antes de contar.</p>
+</section>
+
+<hr class="div">
+
+<section>
+  <h2>Cómo queda calibrado</h2>
+  <p class="sec-note">El umbral rojo no se eligió por estética: se ajustó a la capacidad operativa que el cliente declaró.</p>
+
+  <div class="col">
+    <p class="lede">En la pregunta 22 el cliente dijo que cada responsable de tienda puede gestionar <strong>15 a 25 intervenciones por mes</strong>. Con 28 tiendas, el rojo tiene que caer entre 420 y 700 pares. Ese es el ancla de calibración, y la regla propuesta cae justo adentro.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><p class="k">Rojo</p><p class="v" style="color:var(--rojo)">466</p><p class="s">5,5% de los pares · $49,0 M a costo</p></div>
+    <div class="stat"><p class="k">Por tienda</p><p class="v">16,6</p><p class="s">mediana 16 · mín 10 · máx 29</p></div>
+    <div class="stat"><p class="k">Amarillo</p><p class="v" style="color:var(--ambar)">797</p><p class="s">9,3% · $267,3 M a costo</p></div>
+    <div class="stat"><p class="k">Costo mensual del rojo</p><p class="v">$4,5 M</p><p class="s">rango $3,6–5,4 M según tasa 4–6%</p></div>
+  </div>
+
+  <div class="dist">
+    <div class="dist-bar" role="img" aria-label="Distribución: 5,5% rojo, 9,3% amarillo, 85,2% verde">
+      <span style="width:5.5%;background:var(--rojo)"></span>
+      <span style="width:9.3%;background:var(--ambar)"></span>
+      <span style="width:85.2%;background:var(--verde)"></span>
+    </div>
+    <div class="dist-key">
+      <span><i style="background:var(--rojo)"></i>Rojo 5,5%</span>
+      <span><i style="background:var(--ambar)"></i>Amarillo 9,3%</span>
+      <span><i style="background:var(--verde)"></i>Verde 85,2%</span>
+      <span style="margin-left:auto">Con el corte 30/70 original: 85,8% / 13,3% / 0,9%</span>
+    </div>
+  </div>
+
+  <h3>El ranking se ordena por unidades excedentes, no por color</h3>
+  <p>Los diez pares con mayor valor excedente están casi todos en <span class="chip c-ambar">Amarillo</span>: venden bien —5 a 7 unidades por mes— pero tienen comprado de más. Un criterio binario de dead stock los ignoraría, y son la mayor oportunidad de liberar capital sin resignar margen.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Tienda</th><th>SKU</th><th>Categoría</th><th class="n">Stock</th><th class="n">u/mes</th><th class="n">Exced.</th><th class="n">Valor</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>T14</td><td class="mono">SKU00050</td><td>Organización</td><td class="n">111</td><td class="n">5,33</td><td class="n">47</td><td class="n">$1,59 M</td><td><span class="chip c-ambar">Amarillo</span></td></tr>
+      <tr><td>T11</td><td class="mono">SKU00417</td><td>Textil hogar</td><td class="n">94</td><td class="n">4,75</td><td class="n">37</td><td class="n">$1,58 M</td><td><span class="chip c-ambar">Amarillo</span></td></tr>
+      <tr><td>T17</td><td class="mono">SKU00341</td><td>Cocina y mesa</td><td class="n">70</td><td class="n">2,83</td><td class="n">36</td><td class="n">$1,37 M</td><td><span class="chip c-rojo">Rojo</span></td></tr>
+      <tr><td>T27</td><td class="mono">SKU00050</td><td>Organización</td><td class="n">114</td><td class="n">6,42</td><td class="n">37</td><td class="n">$1,26 M</td><td><span class="chip c-ambar">Amarillo</span></td></tr>
+      <tr><td>T04</td><td class="mono">SKU00050</td><td>Organización</td><td class="n">123</td><td class="n">7,75</td><td class="n">30</td><td class="n">$1,02 M</td><td><span class="chip c-ambar">Amarillo</span></td></tr>
+    </tbody>
+    <caption>Excedente calculado con cobertura objetivo de 6 meses. SKU00050 aparece tres veces en el top 5.</caption>
+  </table>
+  </div>
+
+  <h3>Un hallazgo que solo aparece con el eje de volumen</h3>
+  <p>Al agregar el excedente <strong>por SKU en lugar de por par SKU–tienda</strong>, el patrón cambia de naturaleza: <span class="mono">SKU00417</span> tiene excedente en <b>17 de las 28 tiendas</b> ($25,9 M), y <span class="mono">SKU00050</span> en 12 ($19,4 M). Cuando un producto sobra en media cadena, el error no está en la tienda sino en <strong>la cantidad comprada y en cómo se asignó</strong>.</p>
+  <p>Los <strong>20 SKUs peores concentran $158 M de los $569 M de excedente — el 28%</strong>. Es la lista corta que Compras puede accionar de inmediato, y justifica una vista del dashboard agregada por SKU además de la vista por tienda.</p>
+
+  <h3>Variantes evaluadas</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Regla para Rojo</th><th class="n">Pares</th><th class="n">% del universo</th><th class="n">Capital</th><th>Veredicto</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">≥3 meses sin venta (sola)</td><td class="n">416</td><td class="n">4,9%</td><td class="n">$38,7 M</td><td>Ciega al sobrestock que rota</td></tr>
+      <tr><td class="mono">≥2 meses sin venta</td><td class="n">830</td><td class="n">9,7%</td><td class="n">$104,1 M</td><td>Excede la capacidad operativa</td></tr>
+      <tr><td class="mono">excedente a 12m &gt; 0 (sola)</td><td class="n">407</td><td class="n">4,8%</td><td class="n">$39,6 M</td><td>Ciega a la muerte reciente</td></tr>
+      <tr style="background:var(--accent-soft)"><td class="mono"><b>≥3m sin venta · o · muerto ≥50% del stock</b></td><td class="n"><b>466</b></td><td class="n"><b>5,5%</b></td><td class="n"><b>$49,0 M</b></td><td><span class="chip c-acc">Propuesta</span> combina los dos ejes</td></tr>
+      <tr><td class="mono">≥3m · o · cobertura&gt;12</td><td class="n">756</td><td class="n">8,9%</td><td class="n">$228,8 M</td><td>Excede capacidad</td></tr>
+    </tbody>
+    <caption>Percentiles de cobertura en el universo evaluable: p50 5,8 · p75 7,8 · p90 10,2 · p95 12,0 meses.</caption>
+  </table>
+  </div>
+
+  <h3>Dónde se concentra el rojo</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Categoría</th><th class="n">Pares en rojo</th><th class="n">Capital</th><th class="n">% de su categoría</th></tr></thead>
+    <tbody>
+      <tr><td>Textil hogar</td><td class="n">86</td><td class="n">$10,3 M</td><td class="n">6,4%</td></tr>
+      <tr><td>Cocina y mesa</td><td class="n">77</td><td class="n">$7,0 M</td><td class="n">5,5%</td></tr>
+      <tr><td>Decoración</td><td class="n">69</td><td class="n">$7,7 M</td><td class="n">4,0%</td></tr>
+      <tr><td>Baño</td><td class="n">61</td><td class="n">$6,2 M</td><td class="n">6,2%</td></tr>
+      <tr><td>Muebles</td><td class="n">56</td><td class="n">$5,4 M</td><td class="n">4,5%</td></tr>
+      <tr><td>Iluminación</td><td class="n">53</td><td class="n">$4,4 M</td><td class="n">6,2%</td></tr>
+      <tr><td>Organización</td><td class="n">41</td><td class="n">$5,5 M</td><td class="n">4,0%</td></tr>
+    </tbody>
+    <caption>Textil hogar, Baño e Iluminación lideran en incidencia relativa — no Decoración, que es la categoría más vendedora.</caption>
+  </table>
+  </div>
+</section>
+
+<hr class="div">
+
+<section>
+  <h2>Revisión de los KPIs</h2>
+  <p class="sec-note">Los cinco actuales, uno por uno, y los cinco que propongo en su lugar.</p>
+
+  <h3>Los cinco actuales</h3>
+
+  <div class="kpi">
+    <div class="kpi-head"><h4>Margen bruto %</h4><span class="chip c-ambar">Mover a contexto</span></div>
+    <span class="lab">Fórmula actual</span>
+    <code class="formula">(venta_neta − costo) / venta_neta</code>
+    <p>La fórmula está bien, pero <code>venta_neta</code> no es confiable todavía: en la pregunta 5 el cliente admitió que probablemente <strong>no incorpore el descuento de liquidación</strong> y que no descuenta devoluciones. La meta de ≥35% tampoco cierra: el margen sobre lista es ~44,9% y con liquidación aplicada cae a ~21,7%, así que el umbral no discrimina nada. Además, el margen es el KPI del <em>otro</em> proyecto (riesgo de margen bajo por tienda), no de éste.</p>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-head"><h4>Facturación</h4><span class="chip c-rojo">Eliminar como KPI</span></div>
+    <span class="lab">Umbrales actuales</span>
+    <code class="formula">Verde ≥ $100 M · Amarillo ≥ $70 M · Rojo &lt; $70 M</code>
+    <p>Los umbrales están desconectados de la escala real: la facturación mensual promedio de la cadena es <strong>~$674 M</strong>, y por tienda ronda los <strong>$24 M</strong>. Según cómo se agregue, el semáforo queda siempre verde o siempre rojo. Y la facturación total no dice nada sobre dead stock: es contexto, no indicador de gestión. Va como cifra de encabezado, sin semáforo.</p>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-head"><h4>% de productos vendidos con liquidaciones</h4><span class="chip c-ambar">Corregir fórmula</span></div>
+    <span class="lab">Fórmula actual — está invertida</span>
+    <code class="formula strike">ventas totales / ventas con promoción</code>
+    <span class="lab">Debería ser</span>
+    <code class="formula">ventas con liquidación / ventas totales</code>
+    <p>Tal como está da un número mayor a 1, no un porcentaje, y los umbrales de 10% y 20% no se pueden aplicar. El indicador en sí es útil —mide cuánta venta depende del descuento— pero conviene reformularlo como <strong>margen sacrificado en liquidaciones</strong>, que es lo que le importa a Finanzas: hoy el 14,3% de las liquidaciones vende por debajo del costo.</p>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-head"><h4>Promedio de días en inventario</h4><span class="chip c-rojo">Fórmula y umbrales mal</span></div>
+    <span class="lab">Fórmula actual — no es una fórmula de DSI válida</span>
+    <code class="formula strike">días en stock / ventas totales</code>
+    <span class="lab">Umbrales actuales — los tres usan «menor que»</span>
+    <code class="formula strike">Verde &lt; 7 días · Amarillo &lt; 14 días · Rojo &lt; 1 mes</code>
+    <p>Dos problemas. Primero, los tres cortes son «&lt;», así que no son excluyentes: todo lo verde también cumple amarillo y rojo. Segundo, la escala es irreal para este rubro: la cobertura mediana del negocio es de <strong>5,8 meses</strong> (~175 días). Un verde de 7 días describiría una cadena en quiebre permanente de stock. Reemplazar por <strong>cobertura en meses</strong>, calibrada sobre los percentiles reales.</p>
+  </div>
+
+  <div class="kpi">
+    <div class="kpi-head"><h4>Costo de almacenamiento</h4><span class="chip c-verde">Conservar, completar</span></div>
+    <span class="lab">Definición actual</span>
+    <code class="formula">costo de producto * día</code>
+    <p>Es el indicador más valioso de los cinco y está sin terminar: sin umbrales, sin dueño, sin frecuencia. En la pregunta 49 el cliente ya validó el supuesto: <strong>5% mensual (3% oportunidad + 2% almacenamiento)</strong>, a tratar como rango <strong>4–6%</strong>. Con eso el costo del stock en rojo es de $3,6 a 5,4 M por mes.</p>
+  </div>
+
+  <h3>Los cinco que propongo</h3>
+  <p>Cuatro miden dead stock desde ángulos distintos —incidencia, capital, sangrado y anticipación— y el quinto conecta con la decisión de liquidar. Margen y facturación pasan a una franja de contexto sin semáforo.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>KPI</th><th>Cálculo</th><th>Umbrales</th><th>Dueño</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>1 · Incidencia de dead stock</b><br><span style="color:var(--muted);font-size:13.5px">Responde: ¿cuánto del catálogo está en riesgo?</span></td>
+        <td class="mono">pares en Rojo ÷ pares evaluables</td>
+        <td><span class="chip c-verde">&lt;4%</span> <span class="chip c-ambar">4–7%</span> <span class="chip c-rojo">&gt;7%</span><br><span style="font-size:13px;color:var(--muted)">hoy: 5,2%</span></td>
+        <td>Dir. Comercial<br><span style="color:var(--muted);font-size:13px">Mensual</span></td>
+      </tr>
+      <tr>
+        <td><b>2 · Stock excedente</b><br><span style="color:var(--muted);font-size:13.5px">Responde: ¿cuántas unidades sobran y cuánto valen?</span></td>
+        <td class="mono">Σ máx(0, stock − run_rate × 6)<br>× costo_unitario · y su % del stock</td>
+        <td><span class="chip c-verde">&lt;10%</span> <span class="chip c-ambar">10–18%</span> <span class="chip c-rojo">&gt;18%</span><br><span style="font-size:13px;color:var(--muted)">hoy: 22.664 u · $568,9 M · 15,3%</span></td>
+        <td>Compras<br><span style="color:var(--muted);font-size:13px">Mensual</span></td>
+      </tr>
+      <tr>
+        <td><b>3 · Costo mensual del stock parado</b><br><span style="color:var(--muted);font-size:13.5px">Responde: ¿cuánto cuesta no hacer nada?</span></td>
+        <td class="mono">Σ (stock × precio_lista) en Rojo × tasa<br>tasa = 4% a 6% mensual</td>
+        <td>Se reporta como rango, sin semáforo propio. Tendencia mes a mes.<br><span style="font-size:13px;color:var(--muted)">hoy: $3,6–5,4 M/mes</span></td>
+        <td>Dir. Financiera<br><span style="color:var(--muted);font-size:13px">Mensual</span></td>
+      </tr>
+      <tr>
+        <td><b>4 · Stock muerto proyectado</b><br><span style="color:var(--muted);font-size:13.5px">Responde: ¿cuánto no se vende ni en un año?</span></td>
+        <td class="mono">Σ máx(0, stock − run_rate × 12)<br>× costo_unitario</td>
+        <td><span class="chip c-verde">&lt;0,8%</span> <span class="chip c-ambar">0,8–1,5%</span> <span class="chip c-rojo">&gt;1,5%</span><br><span style="font-size:13px;color:var(--muted)">hoy: 1.669 u · $39,6 M · 1,1%</span></td>
+        <td>Dir. Financiera<br><span style="color:var(--muted);font-size:13px">Mensual</span></td>
+      </tr>
+      <tr>
+        <td><b>5 · Margen sacrificado en liquidación</b><br><span style="color:var(--muted);font-size:13.5px">Responde: ¿llegamos tarde a liquidar?</span></td>
+        <td class="mono">margen lista − margen con descuento<br>+ % de liquidaciones bajo costo</td>
+        <td><span class="chip c-verde">&lt;20 pp</span> <span class="chip c-ambar">20–25 pp</span> <span class="chip c-rojo">&gt;25 pp</span><br><span style="font-size:13px;color:var(--muted)">hoy: 23,1 pp · 14,3% bajo costo</span></td>
+        <td>Dir. Comercial<br><span style="color:var(--muted);font-size:13px">Mensual</span></td>
+      </tr>
+    </tbody>
+    <caption>Los umbrales de los KPIs 1, 2 y 4 salen de los percentiles reales del corte dic-2025; los del 5, de la caída de margen observada en las 490 liquidaciones válidas.</caption>
+  </table>
+  </div>
+</section>
+
+<hr class="div">
+
+<section>
+  <h2>Ajustes al documento</h2>
+  <p class="sec-note">Lo que conviene cambiar en la Parte D antes de entregarla.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>Sección</th><th>Qué dice hoy</th><th>Qué convendría</th></tr></thead>
+    <tbody>
+      <tr><td><b>1.2</b> Preguntas de negocio</td><td>Nueve preguntas, varias sobre margen por tienda, una vacía («¿?»)</td><td>Reducir a 4–5 y centrarlas en dead stock. El margen por tienda es el alcance del otro proyecto.</td></tr>
+      <tr><td><b>2.1</b> Indicadores</td><td>Cinco KPIs; cuatro sin dueño ni frecuencia</td><td>Reemplazar por los cinco propuestos, con dueño y frecuencia completos en los cinco.</td></tr>
+      <tr><td><b>4.1</b> Wireframe</td><td>Mayormente texto de plantilla sin completar</td><td>Franja de contexto arriba, luego 5 tarjetas KPI, ranking de rojos por tienda y evolución del semáforo. Adjuntar boceto.</td></tr>
+      <tr><td><b>5.1</b> Granularidad</td><td>«Transacción diaria», actualización «diaria o en tiempo real»</td><td>Mensual por SKU–tienda. Es lo que hay y lo que el cliente confirmó en la pregunta 27.</td></tr>
+      <tr><td><b>5.1</b> Calidad conocida</td><td>Texto de ejemplo sin reemplazar</td><td>Citar los hallazgos reales: duplicados, negativos, categorías, panel disperso.</td></tr>
+      <tr><td><b>6.1</b> Plan V2</td><td>«Incorporar alertas y las 28 tiendas»</td><td>El piloto se acotó por categoría, no por tienda. Las 28 tiendas ya están en V1.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Dos cosas para confirmar con el cliente</h3>
+  <p><strong>Regalos no existe en el catálogo.</strong> El cliente la nombró como categoría estacional y propuso pilotear sobre «Decoración y Regalos». Las siete categorías reales son Decoración, Textil hogar, Cocina y mesa, Muebles, Baño, Organización e Iluminación. Además, Decoración es la categoría <em>más</em> vendedora (21,7%), así que no encaja con el criterio de «baja contribución» con el que la eligieron.</p>
+  <p><strong>Las filas negativas.</strong> El cliente confirmó que son devoluciones y que entregará un dataset aparte. La limpieza actual las lleva a cero, que es la decisión opuesta. Conviene esperar ese archivo o dejar el criterio marcado como provisorio.</p>
+</section>
+
+<div class="foot">
+  <p>Cifras calculadas sobre los datasets del repositorio, corte diciembre 2025, aplicando la regla de consolidación de duplicados acordada en la pregunta 4 y la exclusión de stock en tránsito de la pregunta 50.</p>
+  <p>Casa Óga es una empresa ficticia; el caso se usa con fines académicos.</p>
+</div>
+
+</div>
+</body>
+</html>
