@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de Dead Stock — Casa Óga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --page:        #f2f4f7;
+    --card:        #ffffff;
+    --card-2:      #f8f9fb;
+    --text-1:      #12141a;
+    --text-2:      #4c5163;
+    --text-3:      #868b99;
+    --line:        #dfe2e9;
+    --line-strong: #c6cbd6;
+    --accent:      #2a78d6;
+    --accent-wash: rgba(42,120,214,0.10);
+    --accent-700:  #0d366b;
+    --muted-line:  #b7bbc7;
+    --good:        #0ca30c;
+    --warning:     #fab219;
+    --serious:     #ec835a;
+    --critical:    #d03b3b;
+    --shadow: 0 1px 2px rgba(18,20,26,0.04), 0 8px 24px -12px rgba(18,20,26,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:        #101216; --card: #181b21; --card-2: #1e222a;
+      --text-1: #f4f5f8; --text-2: #c1c5d1; --text-3: #868b99;
+      --line: #2a2e38; --line-strong: #383d49;
+      --accent: #3987e5; --accent-wash: rgba(57,135,229,0.14); --accent-700: #cde2fb;
+      --muted-line: #4a4f5c;
+      --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #e66767;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page: #101216; --card: #181b21; --card-2: #1e222a;
+    --text-1: #f4f5f8; --text-2: #c1c5d1; --text-3: #868b99;
+    --line: #2a2e38; --line-strong: #383d49;
+    --accent: #3987e5; --accent-wash: rgba(57,135,229,0.14); --accent-700: #cde2fb;
+    --muted-line: #4a4f5c;
+    --good: #0ca30c; --warning: #fab219; --serious: #ec835a; --critical: #e66767;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--text-1);
+    font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 24px 80px; display: flex; flex-direction: column; gap: 22px; }
+  h1, h2, h3 { font-family: "Archivo", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+
+  .header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .header-left { display: flex; flex-direction: column; gap: 6px; }
+  .eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  .header h1 { font-size: clamp(24px, 3.2vw, 30px); font-weight: 800; letter-spacing: -0.01em; }
+  .cutoff { font-size: 13px; color: var(--text-3); font-variant-numeric: tabular-nums; }
+
+  /* ---------- Tabs ---------- */
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+  .tab-btn {
+    appearance: none; border: none; background: transparent; cursor: pointer;
+    padding: 9px 16px; border-radius: 9px; font-family: "Public Sans", sans-serif;
+    font-size: 13.5px; font-weight: 600; color: var(--text-2);
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  .tab-btn:hover { background: var(--card); color: var(--text-1); }
+  .tab-btn[aria-selected="true"] { background: var(--accent); color: #fff; }
+  .tab-panel { display: flex; flex-direction: column; gap: 18px; }
+  .tab-panel[hidden] { display: none; }
+
+  /* ---------- KPI ---------- */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .kpi-label { font-size: 12.5px; color: var(--text-2); font-weight: 500; line-height: 1.3; }
+  .kpi-value { font-family: "Archivo", sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+  .kpi-value.flag { color: var(--serious); }
+  .kpi-value.good { color: var(--good); }
+  .kpi-sub { font-size: 12px; color: var(--text-3); }
+
+  /* ---------- Cards ---------- */
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; box-shadow: var(--shadow); }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }
+  .card-title { font-size: 16px; font-weight: 700; }
+  .card-note { font-size: 12.5px; color: var(--text-3); max-width: 40ch; text-align: right; }
+  .grid-2 { display: grid; grid-template-columns: 1.35fr 1fr; gap: 16px; align-items: stretch; }
+
+  .methodology { background: var(--accent-wash); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 16px 20px; display: flex; flex-direction: column; gap: 6px; }
+  .methodology.serious { background: color-mix(in srgb, var(--serious) 10%, transparent); border-left-color: var(--serious); }
+  .methodology h3 { font-size: 14px; font-weight: 700; color: var(--text-1); }
+  .methodology p { margin: 0; font-size: 13.5px; color: var(--text-2); line-height: 1.6; }
+  .methodology code { font-family: "Public Sans", sans-serif; font-weight: 600; background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; font-size: 12.5px; }
+  .methodology ul { margin: 4px 0 0; padding-left: 18px; }
+  .methodology li { font-size: 13.5px; color: var(--text-2); line-height: 1.6; margin-bottom: 4px; }
+
+  /* ---------- Bar ranking ---------- */
+  .bar-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; }
+  .bar-cat { width: 120px; flex-shrink: 0; font-size: 13px; color: var(--text-1); font-weight: 600; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar-track { position: relative; flex: 1; height: 22px; background: var(--card-2); border-radius: 4px; }
+  .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--accent); transition: filter 0.15s ease; }
+  .bar-fill.priority { background: var(--serious); }
+  .bar-fill:hover { filter: brightness(1.08); }
+  .bar-value { position: absolute; top: 50%; transform: translateY(-50%); font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--text-1); white-space: nowrap; }
+  .bar-flag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--serious); width: 58px; flex-shrink: 0; }
+  .bar-chart-area { position: relative; margin-top: 6px; }
+  .bar-axis { display: flex; margin-left: 132px; position: relative; height: 16px; margin-top: 2px; }
+  .bar-axis span { position: absolute; font-size: 10.5px; color: var(--text-3); transform: translateX(-50%); font-variant-numeric: tabular-nums; }
+  .legend-row { display: flex; gap: 18px; margin-top: 14px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--text-2); }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+  .legend-key { width: 16px; height: 2px; border-radius: 2px; flex-shrink: 0; }
+
+  /* ---------- Line charts ---------- */
+  .chart-wrap { position: relative; height: 220px; margin-top: 8px; }
+  .trend-svg-wrap { flex: 1; min-height: 180px; position: relative; }
+  .callout { margin-top: 14px; font-size: 13.5px; color: var(--text-2); line-height: 1.6; padding-top: 14px; border-top: 1px solid var(--line); }
+  /* barra de error e indicador de promedio, para separar señal de ruido */
+  .bar-err { position: absolute; top: 50%; transform: translateY(-50%); height: 10px; pointer-events: none; }
+  .bar-err::before, .bar-err::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1.5px; background: var(--text-3); }
+  .bar-err::before { left: 0; } .bar-err::after { right: 0; }
+  .bar-err span { position: absolute; top: 50%; left: 0; right: 0; height: 1.5px; background: var(--text-3); transform: translateY(-50%); }
+  .bar-ref { position: absolute; top: -3px; bottom: -3px; width: 1.5px; background: var(--text-2); pointer-events: none; }
+  /* composición del capital: tres bloques, uno por condición */
+  .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .comp-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; background: var(--card-2); }
+  .comp-card.accionable { border-color: var(--serious); background: color-mix(in srgb, var(--serious) 8%, transparent); }
+  .comp-label { font-size: 13px; font-weight: 700; color: var(--text-1); }
+  .comp-value { font-size: 26px; font-weight: 700; color: var(--text-1); letter-spacing: -0.02em; }
+  .comp-sub { font-size: 12.5px; color: var(--text-3); }
+  .comp-detalle { font-size: 12.5px; color: var(--text-2); line-height: 1.55; }
+  .comp-accion { font-size: 12.5px; line-height: 1.5; font-weight: 600; color: var(--text-2); padding-top: 8px; border-top: 1px solid var(--line); margin-top: auto; }
+  .comp-card.accionable .comp-accion { color: var(--serious); }
+  @media (max-width: 860px) { .comp-grid { grid-template-columns: 1fr; } }
+  .callout strong { color: var(--text-1); }
+  .callout .good-text { color: var(--good); font-weight: 700; }
+  .tooltip { position: absolute; pointer-events: none; background: var(--text-1); color: var(--page); font-size: 12px; padding: 8px 11px; border-radius: 8px; line-height: 1.5; transform: translate(-50%, calc(-100% - 12px)); white-space: nowrap; opacity: 0; transition: opacity 0.1s ease; z-index: 5; }
+  :root:not([data-theme="light"]) .tooltip { background: #f4f5f8; color: #101216; }
+  :root[data-theme="dark"] .tooltip { background: #f4f5f8; color: #101216; }
+  .tooltip.show { opacity: 1; }
+  .tooltip-row { display: flex; align-items: center; gap: 6px; }
+  .tooltip-key { width: 10px; height: 2px; border-radius: 2px; flex-shrink: 0; }
+  .tooltip b { font-variant-numeric: tabular-nums; }
+  .tooltip .t-date { font-weight: 700; margin-bottom: 3px; }
+
+  /* ---------- Table ---------- */
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 640px; }
+  thead th { text-align: right; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-3); font-weight: 700; padding: 0 10px 10px; border-bottom: 1px solid var(--line-strong); }
+  thead th:first-child, tbody td:first-child { text-align: left; }
+  tbody td { padding: 11px 10px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--card-2); }
+  tbody td:first-child { font-weight: 600; font-variant-numeric: normal; }
+  tbody tr.selected { background: var(--accent-wash); }
+  .cat-cell { display: flex; align-items: center; gap: 9px; font-weight: 600; }
+  .cat-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .cat-dot.priority { background: var(--serious); }
+  .priority-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--serious); background: color-mix(in srgb, var(--serious) 14%, transparent); padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
+
+  /* ---------- Filter row ---------- */
+  .filter-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .filter-label { font-size: 13px; font-weight: 600; color: var(--text-2); }
+  select.filter-select {
+    appearance: none; font-family: "Public Sans", sans-serif; font-size: 13.5px; font-weight: 600;
+    color: var(--text-1); background: var(--card) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%23868b99'/></svg>") no-repeat right 12px center;
+    border: 1px solid var(--line-strong); border-radius: 9px; padding: 8px 34px 8px 14px; cursor: pointer;
+  }
+  select.filter-select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--text-3); }
+
+  @media (max-width: 880px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .bar-cat { width: 92px; font-size: 12px; }
+  }
+  @media (max-width: 520px) {
+    .kpi-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">Casa Óga · Mix de productos</div>
+      <h1>Panel de Dead Stock</h1>
+    </div>
+    <span class="cutoff">Corte de datos: diciembre 2025</span>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="Secciones del panel">
+    <button class="tab-btn" role="tab" data-tab="contexto" aria-selected="true">Contexto del negocio</button>
+    <button class="tab-btn" role="tab" data-tab="resumen" aria-selected="false">Dead stock — resumen</button>
+    <button class="tab-btn" role="tab" data-tab="semaforo" aria-selected="false">Semáforo propuesto</button>
+    <button class="tab-btn" role="tab" data-tab="evolucion" aria-selected="false">Evolución</button>
+    <button class="tab-btn" role="tab" data-tab="tiendas" aria-selected="false">Explorador por tienda</button>
+  </nav>
+
+  <!-- ================= TAB 1: CONTEXTO ================= -->
+  <section class="tab-panel" id="panel-contexto" role="tabpanel">
+    <div class="kpi-row" id="kpiContexto"></div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Venta neta mensual — 2022 a 2025</div>
+        <div class="card-note">El negocio viene creciendo de forma sostenida</div>
+      </div>
+      <div class="chart-wrap" id="chartVentaMensual"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">¿Hay categorías con mucha variedad y poca venta?</div>
+          <div class="card-note">Barra de arriba: % de la venta · barra de abajo: % de los SKUs</div>
+        </div>
+        <div id="chartMixCategoria"></div>
+        <div class="legend-row">
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>% de venta</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--muted-line)"></span>% de variedad (SKUs)</div>
+        </div>
+        <div class="callout">Cada categoría tiene dos barras. Si la barra gris (cuántos productos distintos tiene) es <strong>más larga</strong> que la azul (cuánto factura), esa categoría ocupa más catálogo del que su venta justifica — que es justamente lo que el documento de contexto describe como "alta variedad y baja contribución". <strong>Acá no aparece ningún caso extremo:</strong> las dos barras se acompañan bastante en las 7 categorías. Baño es la más despareja (8,4% de la venta con 12,1% de los SKUs) pero la diferencia es moderada.</div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Estacionalidad</div>
+          <div class="card-note">Índice promedio por mes (100 = promedio anual)</div>
+        </div>
+        <div id="chartEstacionalidad"></div>
+        <div class="callout">Todas las categorías comparten el mismo patrón: pico en noviembre-diciembre, piso en enero-febrero — parece un efecto de "temporada de regalos/fin de año" más que estacionalidades propias de cada categoría.</div>
+      </div>
+    </div>
+
+    <div class="methodology serious">
+      <h3>El hallazgo principal: la percepción y los datos no coinciden</h3>
+      <p>El documento de contexto del proyecto dice que, "durante el último año calendario", la dirección detectó que <strong>"una proporción creciente de SKUs muestra muy baja rotación"</strong> y que el capital inmovilizado aumentó. Buscamos ese deterioro por cuatro caminos independientes. <strong>Tres de los cuatro indicadores mejoraron; el único que empeoró es el monto en pesos, que crece junto con el negocio.</strong></p>
+      <div class="table-scroll" style="margin-top:10px">
+        <table id="verificacionTable">
+          <thead><tr><th>Indicador</th><th class="num">2023</th><th class="num">2025</th><th class="num">Dirección</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p id="notaCrecimiento" style="margin-top:10px"></p>
+      <p><strong>Cómo leerlo, sin contradecir a la dirección:</strong> el inventario de Casa Óga rota hoy más rápido que hace dos años y compra en línea con lo que vende. Lo que sí creció es el monto absoluto — y ese es el número que la dirección ve, porque su propio documento aclara que el seguimiento "continúa siendo reactivo" y que la baja rotación "se detecta recién en el conteo de inventario de fin de año". Es esperable percibir un deterioro mirando pesos acumulados una vez por año, sin una métrica normalizada contra un catálogo que se duplicó.</p>
+      <p><strong>Por eso el proyecto tiene sentido igual:</strong> no para frenar un deterioro que los datos no muestran, sino porque hoy no hay forma de saber cuál de las dos lecturas es la correcta. Esa es la capacidad que falta.</p>
+    </div>
+  </section>
+
+  <!-- ================= TAB 2: RESUMEN ================= -->
+  <section class="tab-panel" id="panel-resumen" role="tabpanel" hidden>
+    <div class="methodology">
+      <h3>Qué estamos llamando "dead stock"</h3>
+      <p>La unidad de medida es la <strong>combinación <code>SKU–tienda</code></strong>: un mismo producto puede estar sano en una tienda y frenado en otra, así que cada producto cuenta una vez por cada tienda donde tiene stock. Hoy hay <strong>7.993 combinaciones con stock</strong> (634 SKUs activos repartidos en 28 tiendas). Una combinación se marca como <strong>dead stock</strong> si, al mes de corte, tiene <code>stock_disponible &gt; 0</code> y cumple <strong>cualquiera</strong> de estas tres condiciones:</p>
+      <ul>
+        <li><strong>(1) Sin venta reciente</strong> — 0 unidades vendidas en los últimos 3 meses.</li>
+        <li><strong>(2) Excedente estructural</strong> — el stock supera lo que se vendería en los próximos 12 meses al ritmo de venta reciente.</li>
+        <li><strong>(3) Discontinuado con stock</strong> — el producto ya fue dado de baja del catálogo pero todavía queda mercadería.</li>
+      </ul>
+      <p>Los <strong>661 casos (8,27%)</strong> son la unión de las tres, sin duplicar los que cumplen más de una. La misma definición se aplica a las 7 categorías.</p>
+      <p id="notaC1"></p>
+      <p id="notaCosto"></p>
+    </div>
+
+    <div class="kpi-row" id="kpiRow"></div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">De qué está hecho el capital inmovilizado</div>
+        <div class="card-note">Las tres condiciones no valen lo mismo ni piden la misma acción</div>
+      </div>
+      <div class="comp-grid" id="compGrid"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Acción inmediata: discontinuados con stock</div>
+        <div class="card-note">No requiere modelo predictivo — el negocio ya decidió no reponerlos</div>
+      </div>
+      <div class="callout" id="calloutDiscontinuados"></div>
+      <div class="table-scroll">
+        <table id="discTable">
+          <thead>
+            <tr>
+              <th>SKU</th><th>Categoría</th>
+              <th class="num">Tiendas con stock</th>
+              <th class="num">Unidades</th><th class="num">Capital ($)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">% de dead stock por categoría</div>
+        <div class="card-note">Qué proporción de las posiciones de cada categoría está marcada como dead stock</div>
+      </div>
+      <div class="bar-chart-area" id="barChartCategoria"></div>
+      <div class="legend-row">
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--serious)"></span>Las 2 categorías con mayor % de dead stock</div>
+        <div class="legend-item"><span class="legend-swatch" style="background:var(--accent)"></span>Resto de categorías</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Detalle por categoría</div>
+        <div class="card-note">Mismo orden que el gráfico: % de posiciones en dead stock</div>
+      </div>
+      <div class="table-scroll">
+        <table id="detailTable">
+          <thead>
+            <tr>
+              <th>Categoría</th>
+              <th class="num">% capital inmov.</th>
+              <th class="num">Capital inmov. ($)</th>
+              <th class="num">% posiciones dead stock</th>
+              <th class="num">Meses sin venta (prom.)</th>
+              <th class="num">Costo mensual ($)</th>
+              <th class="num">Liquidaciones</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB 3: EVOLUCION ================= -->
+  <section class="tab-panel" id="panel-evolucion" role="tabpanel" hidden>
+    <div class="kpi-row" id="kpiEvolucion"></div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">% de combinaciones en dead stock — ene-2023 a dic-2025</div>
+        <div class="card-note">Sobre el universo de combinaciones con stock cada mes</div>
+      </div>
+      <div class="chart-wrap" id="chartPctEvolucion"></div>
+      <div class="callout" id="calloutPctEvolucion"></div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Capital inmovilizado — ene-2023 a dic-2025</div>
+        <div class="card-note">En pesos, mismo período</div>
+      </div>
+      <div class="chart-wrap" id="chartCapitalEvolucion"></div>
+      <div class="callout" id="calloutCapitalEvolucion"></div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Cobertura del inventario total — ene-2023 a dic-2025</div>
+        <div class="card-note">Meses de venta que hay parados en stock, a ritmo de los últimos 12 meses</div>
+      </div>
+      <div class="chart-wrap" id="chartCobertura"></div>
+      <div class="callout" id="calloutCobertura"></div>
+    </div>
+  </section>
+
+
+  <!-- ================= TAB: SEMAFORO PROPUESTO ================= -->
+  <section class="tab-panel" id="panel-semaforo" role="tabpanel" hidden>
+    <div class="methodology">
+      <h3>Por qué hace falta una banda intermedia</h3>
+      <p>La definición de dead stock es <strong>binaria</strong>: una posición está marcada o no lo está. Eso deja afuera la zona gris — una combinación con <strong>9 o 10 meses de stock encima hoy figura como sana</strong>, aunque claramente esté rotando lento. El semáforo agrega esa gradación sin reemplazar la definición: el <strong>rojo</strong> es un subconjunto de lo que ya llamábamos dead stock, y el <strong>amarillo</strong> es la capa de visibilidad nueva.</p>
+      <p id="notaSemaforoCalibracion"></p>
+      <p id="notaSemaforoBase"></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Las tres bandas</div>
+        <div class="card-note">Sobre las 7.993 combinaciones SKU–tienda con stock, corte dic-2025</div>
+      </div>
+      <div class="comp-grid" id="semaforoGrid"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Cómo se eligieron los cortes</div>
+          <div class="card-note">Cuánto stock y cuánta plata por mes quedan alcanzados según dónde se ponga el límite</div>
+        </div>
+        <div class="table-scroll">
+          <table id="calibracionTable">
+            <thead><tr><th>Corte de cobertura</th><th class="num">Posiciones</th><th class="num">Stock alcanzado (a costo)</th><th class="num">Costo mensual (5% de ese stock)</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="callout" id="calloutCalibracion"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">Dónde se concentra</div>
+          <div class="card-note">% de posiciones en rojo y en amarillo, por categoría</div>
+        </div>
+        <div class="bar-chart-area" id="barSemaforoCategoria"></div>
+        <div class="legend-row">
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--critical)"></span>Rojo</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--warning)"></span>Amarillo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB 5: EXPLORADOR POR TIENDA ================= -->
+  <section class="tab-panel" id="panel-tiendas" role="tabpanel" hidden>
+    <div class="filter-row">
+      <span class="filter-label">Tienda:</span>
+      <select class="filter-select" id="selectTienda"></select>
+    </div>
+    <div class="kpi-row" id="kpiTienda"></div>
+    <div class="methodology serious" id="avisoTiendas">
+      <h3>Antes de leer este ranking</h3>
+      <p id="textoAvisoTiendas"></p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title" id="tituloBarTienda">Comparación entre tiendas</div>
+          <div class="card-note">% de posiciones en dead stock, con el margen de error de cada tienda</div>
+        </div>
+        <div class="bar-chart-area" id="barChartTienda"></div>
+        <div class="legend-row">
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--muted-line)"></span>Rango compatible con el promedio de la cadena</div>
+          <div class="legend-item"><span class="legend-swatch" style="background:var(--serious)"></span>Diferencia estadísticamente significativa</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title" id="tituloCategoriaTienda">Por categoría</div>
+          <div class="card-note" id="notaCategoriaTienda">Desglose de la tienda seleccionada</div>
+        </div>
+        <div class="bar-chart-area" id="barChartTiendaCategoria"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">Detalle de tiendas</div>
+        <div class="card-note">Mismo orden que el gráfico: % de posiciones en dead stock</div>
+      </div>
+      <div class="table-scroll">
+        <table id="tiendaTable">
+          <thead>
+            <tr>
+              <th>Tienda</th>
+              <th>Región</th>
+              <th class="num">% capital inmov.</th>
+              <th class="num">Capital inmov. ($)</th>
+              <th class="num">% posiciones dead</th>
+              <th class="num">Costo mensual ($)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Fuente: Ventas_SKU_tienda_mensual, Stock_SKU_tienda_mensual, Productos_catalogo, Liquidaciones y Tiendas (2022–2025), limpios y recalculados con <code>calculo_dead_stock.py</code>.</span>
+    <span>Casa Óga · Proyecto Data Driven</span>
+  </footer>
+
+</div>
+
+<script id="dashboard-data" type="application/json">{"corte": "2025-12", "contexto": {"venta_trimestre": 3401079448.36, "unidades_trimestre": 77954, "var_trimestre_yoy": 8.9, "n_skus_activos": 634, "n_skus_historicos": 800, "n_categorias": 7, "n_subcategorias": 25, "venta_total_4a": 32538423301.55, "unidades_total": 750538, "ticket_medio": 43353.46551613642, "venta_por_anio": [{"anio": 2022, "venta": 1812376015.98}, {"anio": 2023, "venta": 6323009407.48}, {"anio": 2024, "venta": 10669109837.15}, {"anio": 2025, "venta": 13733928040.94}], "venta_mensual": [{"mes": "2022-01", "venta": 462032.89}, {"mes": "2022-02", "venta": 21523152.19}, {"mes": "2022-03", "venta": 31660031.24}, {"mes": "2022-04", "venta": 56805165.25}, {"mes": "2022-05", "venta": 97968497.64}, {"mes": "2022-06", "venta": 137236530.98}, {"mes": "2022-07", "venta": 172654756.46}, {"mes": "2022-08", "venta": 195025750.73}, {"mes": "2022-09", "venta": 206541354.81}, {"mes": "2022-10", "venta": 266756830.73}, {"mes": "2022-11", "venta": 293401735.26}, {"mes": "2022-12", "venta": 332340177.8}, {"mes": "2023-01", "venta": 348264965.93}, {"mes": "2023-02", "venta": 395509251.76}, {"mes": "2023-03", "venta": 433522266.98}, {"mes": "2023-04", "venta": 454160256.7}, {"mes": "2023-05", "venta": 480870864.43}, {"mes": "2023-06", "venta": 518542469.79}, {"mes": "2023-07", "venta": 553972397.21}, {"mes": "2023-08", "venta": 562893384.81}, {"mes": "2023-09", "venta": 606681952.04}, {"mes": "2023-10", "venta": 618325810.98}, {"mes": "2023-11", "venta": 649220203.0}, {"mes": "2023-12", "venta": 701045583.85}, {"mes": "2024-01", "venta": 726048717.08}, {"mes": "2024-02", "venta": 723279021.64}, {"mes": "2024-03", "venta": 754344186.87}, {"mes": "2024-04", "venta": 790419318.68}, {"mes": "2024-05", "venta": 829724000.09}, {"mes": "2024-06", "venta": 879317816.46}, {"mes": "2024-07", "venta": 901111641.32}, {"mes": "2024-08", "venta": 953685277.36}, {"mes": "2024-09", "venta": 986666701.68}, {"mes": "2024-10", "venta": 1017200346.72}, {"mes": "2024-11", "venta": 1044708847.0}, {"mes": "2024-12", "venta": 1062603962.25}, {"mes": "2025-01", "venta": 1102914718.97}, {"mes": "2025-02", "venta": 1110729000.61}, {"mes": "2025-03", "venta": 1119743779.85}, {"mes": "2025-04", "venta": 1149929435.33}, {"mes": "2025-05", "venta": 1149036134.7}, {"mes": "2025-06", "venta": 1166463715.87}, {"mes": "2025-07", "venta": 1195770344.69}, {"mes": "2025-08", "venta": 1179252183.53}, {"mes": "2025-09", "venta": 1159009279.03}, {"mes": "2025-10", "venta": 1141830578.43}, {"mes": "2025-11", "venta": 1132358474.89}, {"mes": "2025-12", "venta": 1126890395.04}], "mix_categoria": [{"categoria": "Decoracion", "pct_venta": 22.75, "pct_catalogo": 19.62}, {"categoria": "Cocina y mesa", "pct_venta": 19.13, "pct_catalogo": 15.25}, {"categoria": "Iluminacion", "pct_venta": 14.21, "pct_catalogo": 10.75}, {"categoria": "Textil hogar", "pct_venta": 12.67, "pct_catalogo": 15.88}, {"categoria": "Muebles", "pct_venta": 11.76, "pct_catalogo": 14.62}, {"categoria": "Organizacion", "pct_venta": 11.09, "pct_catalogo": 11.75}, {"categoria": "Ba\u00f1o", "pct_venta": 8.39, "pct_catalogo": 12.12}], "mix_region": [{"region": "AMBA", "pct_venta": 39.28}, {"region": "Centro", "pct_venta": 21.91}, {"region": "NOA", "pct_venta": 17.93}, {"region": "Cuyo", "pct_venta": 17.16}, {"region": "Patagonia", "pct_venta": 3.72}], "estacionalidad": [{"mes_num": 1, "indice": 61.1}, {"mes_num": 2, "indice": 66.9}, {"mes_num": 3, "indice": 71.5}, {"mes_num": 4, "indice": 78.3}, {"mes_num": 5, "indice": 87.5}, {"mes_num": 6, "indice": 97.5}, {"mes_num": 7, "indice": 106.3}, {"mes_num": 8, "indice": 111.6}, {"mes_num": 9, "indice": 116.0}, {"mes_num": 10, "indice": 127.0}, {"mes_num": 11, "indice": 133.5}, {"mes_num": 12, "indice": 142.8}], "pareto": {"skus_top": 248, "skus_total": 798, "pct_facturacion": 80}}, "dead_stock_resumen": {"totales": {"posiciones_con_stock": 7993, "posiciones_dead": 661, "pct_dead": 8.27, "capital_inmovilizado": 83947522.26839827, "valor_total_stock_costo": 3528145070.0, "pct_capital_inmovilizado": 2.38, "costo_mensual": 7683419.331168831}, "por_categoria": [{"categoria": "Ba\u00f1o", "posiciones_totales": 912, "posiciones_dead": 85, "capital_inmovilizado": 7429454.0, "meses_parado_prom": 2.3, "pct_posiciones_dead": 9.32, "pct_capital_inmovilizado": 2.68, "costo_mensual": 670122.1666666666, "liquidaciones": 62}, {"categoria": "Cocina y mesa", "posiciones_totales": 1338, "posiciones_dead": 132, "capital_inmovilizado": 27397299.714285716, "meses_parado_prom": 2.1, "pct_posiciones_dead": 9.87, "pct_capital_inmovilizado": 3.73, "costo_mensual": 2382790.7142857146, "liquidaciones": 77}, {"categoria": "Decoracion", "posiciones_totales": 1573, "posiciones_dead": 133, "capital_inmovilizado": 22007138.90909091, "meses_parado_prom": 1.9, "pct_posiciones_dead": 8.46, "pct_capital_inmovilizado": 2.94, "costo_mensual": 2139689.5064935065, "liquidaciones": 97}, {"categoria": "Iluminacion", "posiciones_totales": 799, "posiciones_dead": 67, "capital_inmovilizado": 5487820.0, "meses_parado_prom": 2.8, "pct_posiciones_dead": 8.39, "pct_capital_inmovilizado": 1.41, "costo_mensual": 510755.0, "liquidaciones": 53}, {"categoria": "Muebles", "posiciones_totales": 1170, "posiciones_dead": 76, "capital_inmovilizado": 6858808.787878789, "meses_parado_prom": 2.5, "pct_posiciones_dead": 6.5, "pct_capital_inmovilizado": 1.52, "costo_mensual": 637139.0151515151, "liquidaciones": 77}, {"categoria": "Organizacion", "posiciones_totales": 952, "posiciones_dead": 66, "capital_inmovilizado": 6554761.142857143, "meses_parado_prom": 2.0, "pct_posiciones_dead": 6.93, "pct_capital_inmovilizado": 1.48, "costo_mensual": 585845.0, "liquidaciones": 63}, {"categoria": "Textil hogar", "posiciones_totales": 1249, "posiciones_dead": 102, "capital_inmovilizado": 8212239.714285715, "meses_parado_prom": 3.3, "pct_posiciones_dead": 8.17, "pct_capital_inmovilizado": 1.69, "costo_mensual": 757077.9285714286, "liquidaciones": 79}]}, "evolucion_mensual": [{"mes": "2023-01-01", "n": 2776, "dead": 295, "pct": 10.626801152737752, "capital_inmovilizado": 34288194.04329004, "costo_mensual": 3013742.883116883}, {"mes": "2023-02-01", "n": 2953, "dead": 311, "pct": 10.531662715882154, "capital_inmovilizado": 37848257.883116886, "costo_mensual": 3332396.8484848486}, {"mes": "2023-03-01", "n": 3169, "dead": 322, "pct": 10.160934048595772, "capital_inmovilizado": 26949953.13852814, "costo_mensual": 2469491.833333333}, {"mes": "2023-04-01", "n": 3305, "dead": 299, "pct": 9.046898638426626, "capital_inmovilizado": 69965764.8051948, "costo_mensual": 5981669.287878789}, {"mes": "2023-05-01", "n": 3554, "dead": 320, "pct": 9.003939223410242, "capital_inmovilizado": 41185736.696969695, "costo_mensual": 3722715.0995671}, {"mes": "2023-06-01", "n": 3807, "dead": 344, "pct": 9.03598634095088, "capital_inmovilizado": 39226572.98701298, "costo_mensual": 3594593.3636363638}, {"mes": "2023-07-01", "n": 3990, "dead": 326, "pct": 8.170426065162907, "capital_inmovilizado": 36687793.26406926, "costo_mensual": 3316178.722943723}, {"mes": "2023-08-01", "n": 4141, "dead": 323, "pct": 7.800048297512678, "capital_inmovilizado": 35840019.36363636, "costo_mensual": 3291811.666666667}, {"mes": "2023-09-01", "n": 4414, "dead": 351, "pct": 7.951971001359311, "capital_inmovilizado": 46607623.2034632, "costo_mensual": 4406429.274891775}, {"mes": "2023-10-01", "n": 4560, "dead": 332, "pct": 7.280701754385965, "capital_inmovilizado": 42602746.82251082, "costo_mensual": 3755913.9632034632}, {"mes": "2023-11-01", "n": 4779, "dead": 410, "pct": 8.57920066959615, "capital_inmovilizado": 40316806.07359307, "costo_mensual": 3705330.716450216}, {"mes": "2023-12-01", "n": 4998, "dead": 404, "pct": 8.083233293317328, "capital_inmovilizado": 44960747.68831169, "costo_mensual": 4075451.257575758}, {"mes": "2024-01-01", "n": 5288, "dead": 415, "pct": 7.847957639939485, "capital_inmovilizado": 48811865.75757575, "costo_mensual": 4435664.30952381}, {"mes": "2024-02-01", "n": 5436, "dead": 435, "pct": 8.002207505518763, "capital_inmovilizado": 44023489.0, "costo_mensual": 3935202.854978355}, {"mes": "2024-03-01", "n": 5664, "dead": 447, "pct": 7.891949152542373, "capital_inmovilizado": 43468646.9047619, "costo_mensual": 4068019.015151514}, {"mes": "2024-04-01", "n": 5961, "dead": 463, "pct": 7.767153162221104, "capital_inmovilizado": 53160360.0, "costo_mensual": 4850079.487012987}, {"mes": "2024-05-01", "n": 6104, "dead": 453, "pct": 7.421363040629096, "capital_inmovilizado": 57563034.6017316, "costo_mensual": 5169616.770562771}, {"mes": "2024-06-01", "n": 6285, "dead": 532, "pct": 8.464598249801114, "capital_inmovilizado": 67077150.66666667, "costo_mensual": 6305173.5}, {"mes": "2024-07-01", "n": 6457, "dead": 539, "pct": 8.347529812606474, "capital_inmovilizado": 71612019.6969697, "costo_mensual": 6476718.751082251}, {"mes": "2024-08-01", "n": 6643, "dead": 464, "pct": 6.984796025891916, "capital_inmovilizado": 60864570.220779225, "costo_mensual": 5596281.168831169}, {"mes": "2024-09-01", "n": 6847, "dead": 465, "pct": 6.791295457864758, "capital_inmovilizado": 58820852.93939394, "costo_mensual": 5338254.03030303}, {"mes": "2024-10-01", "n": 6984, "dead": 483, "pct": 6.915807560137457, "capital_inmovilizado": 52861452.02597402, "costo_mensual": 4824213.086580087}, {"mes": "2024-11-01", "n": 7312, "dead": 591, "pct": 8.082603938730854, "capital_inmovilizado": 94545015.35930736, "costo_mensual": 8744224.532467533}, {"mes": "2024-12-01", "n": 7446, "dead": 593, "pct": 7.964007520816546, "capital_inmovilizado": 77273808.14718616, "costo_mensual": 7226482.906926407}, {"mes": "2025-01-01", "n": 7665, "dead": 588, "pct": 7.671232876712328, "capital_inmovilizado": 70409702.37229437, "costo_mensual": 6518481.523809524}, {"mes": "2025-02-01", "n": 7772, "dead": 650, "pct": 8.363355635615028, "capital_inmovilizado": 126730573.50649352, "costo_mensual": 11350965.508658009}, {"mes": "2025-03-01", "n": 7864, "dead": 603, "pct": 7.667853509664293, "capital_inmovilizado": 97904681.43722944, "costo_mensual": 9206402.57142857}, {"mes": "2025-04-01", "n": 8064, "dead": 667, "pct": 8.271329365079366, "capital_inmovilizado": 87300274.008658, "costo_mensual": 8071996.292207792}, {"mes": "2025-05-01", "n": 8142, "dead": 679, "pct": 8.339474330631294, "capital_inmovilizado": 116517841.6017316, "costo_mensual": 10469277.26190476}, {"mes": "2025-06-01", "n": 8282, "dead": 633, "pct": 7.643081381308862, "capital_inmovilizado": 63573062.71861472, "costo_mensual": 5644060.216450216}, {"mes": "2025-07-01", "n": 8479, "dead": 749, "pct": 8.83358886661163, "capital_inmovilizado": 83376530.05627705, "costo_mensual": 7736654.45021645}, {"mes": "2025-08-01", "n": 8383, "dead": 746, "pct": 8.898962185375163, "capital_inmovilizado": 149084513.7012987, "costo_mensual": 13699201.44155844}, {"mes": "2025-09-01", "n": 8199, "dead": 598, "pct": 7.293572386876448, "capital_inmovilizado": 72766191.26406927, "costo_mensual": 6752414.863636363}, {"mes": "2025-10-01", "n": 8082, "dead": 559, "pct": 6.916604800791883, "capital_inmovilizado": 47092942.96103896, "costo_mensual": 4245954.41991342}, {"mes": "2025-11-01", "n": 8071, "dead": 566, "pct": 7.012761739561393, "capital_inmovilizado": 118168214.65800866, "costo_mensual": 10657413.054112554}, {"mes": "2025-12-01", "n": 7993, "dead": 661, "pct": 8.269736019016639, "capital_inmovilizado": 83947522.26839827, "costo_mensual": 7683419.331168831}], "almacenaje_evolucion": [{"mes": "2023-01-01", "n_total": 2776, "n_aged": 185, "pct_posiciones_aged": 6.664265129682997, "almacenaje_total_mensual": 40428032.0, "almacenaje_aged_mensual": 755694.0, "pct_almacenaje_aged": 1.8692327145679517}, {"mes": "2023-02-01", "n_total": 2953, "n_aged": 176, "pct_posiciones_aged": 5.960040636640704, "almacenaje_total_mensual": 44537750.0, "almacenaje_aged_mensual": 654326.0, "pct_almacenaje_aged": 1.4691492048879882}, {"mes": "2023-03-01", "n_total": 3169, "n_aged": 184, "pct_posiciones_aged": 5.806248027769012, "almacenaje_total_mensual": 50012538.0, "almacenaje_aged_mensual": 540032.0, "pct_almacenaje_aged": 1.079793231049382}, {"mes": "2023-04-01", "n_total": 3305, "n_aged": 176, "pct_posiciones_aged": 5.325264750378215, "almacenaje_total_mensual": 50588682.0, "almacenaje_aged_mensual": 610826.0, "pct_almacenaje_aged": 1.2074360822446413}, {"mes": "2023-05-01", "n_total": 3554, "n_aged": 185, "pct_posiciones_aged": 5.205402363534046, "almacenaje_total_mensual": 53847110.0, "almacenaje_aged_mensual": 701960.0, "pct_almacenaje_aged": 1.3036168514893371}, {"mes": "2023-06-01", "n_total": 3807, "n_aged": 191, "pct_posiciones_aged": 5.017073811400053, "almacenaje_total_mensual": 58219582.0, "almacenaje_aged_mensual": 917886.0, "pct_almacenaje_aged": 1.5765932500168072}, {"mes": "2023-07-01", "n_total": 3990, "n_aged": 185, "pct_posiciones_aged": 4.636591478696742, "almacenaje_total_mensual": 63019160.0, "almacenaje_aged_mensual": 722314.0, "pct_almacenaje_aged": 1.146181573984801}, {"mes": "2023-08-01", "n_total": 4141, "n_aged": 196, "pct_posiciones_aged": 4.733156242453513, "almacenaje_total_mensual": 65211072.0, "almacenaje_aged_mensual": 711390.0, "pct_almacenaje_aged": 1.090903704205323}, {"mes": "2023-09-01", "n_total": 4414, "n_aged": 219, "pct_posiciones_aged": 4.961486180335297, "almacenaje_total_mensual": 69606326.0, "almacenaje_aged_mensual": 880940.0, "pct_almacenaje_aged": 1.2656033590969875}, {"mes": "2023-10-01", "n_total": 4560, "n_aged": 215, "pct_posiciones_aged": 4.714912280701754, "almacenaje_total_mensual": 70956098.0, "almacenaje_aged_mensual": 802696.0, "pct_almacenaje_aged": 1.1312572458536263}, {"mes": "2023-11-01", "n_total": 4779, "n_aged": 257, "pct_posiciones_aged": 5.37769407825905, "almacenaje_total_mensual": 74705190.0, "almacenaje_aged_mensual": 913346.0, "pct_almacenaje_aged": 1.2226004645728097}, {"mes": "2023-12-01", "n_total": 4998, "n_aged": 237, "pct_posiciones_aged": 4.741896758703481, "almacenaje_total_mensual": 77984698.0, "almacenaje_aged_mensual": 790240.0, "pct_almacenaje_aged": 1.0133269990992335}, {"mes": "2024-01-01", "n_total": 5288, "n_aged": 260, "pct_posiciones_aged": 4.9167927382753405, "almacenaje_total_mensual": 81476508.0, "almacenaje_aged_mensual": 966640.0, "pct_almacenaje_aged": 1.1864033249927697}, {"mes": "2024-02-01", "n_total": 5436, "n_aged": 242, "pct_posiciones_aged": 4.4518027961736575, "almacenaje_total_mensual": 83225178.0, "almacenaje_aged_mensual": 949276.0, "pct_almacenaje_aged": 1.1406115586799948}, {"mes": "2024-03-01", "n_total": 5664, "n_aged": 281, "pct_posiciones_aged": 4.961158192090395, "almacenaje_total_mensual": 86067892.0, "almacenaje_aged_mensual": 934522.0, "pct_almacenaje_aged": 1.0857963153088497}, {"mes": "2024-04-01", "n_total": 5961, "n_aged": 292, "pct_posiciones_aged": 4.898506961919141, "almacenaje_total_mensual": 90934730.0, "almacenaje_aged_mensual": 1269966.0, "pct_almacenaje_aged": 1.3965687257222843}, {"mes": "2024-05-01", "n_total": 6104, "n_aged": 259, "pct_posiciones_aged": 4.243119266055046, "almacenaje_total_mensual": 94583198.0, "almacenaje_aged_mensual": 982840.0, "pct_almacenaje_aged": 1.0391274780114752}, {"mes": "2024-06-01", "n_total": 6285, "n_aged": 309, "pct_posiciones_aged": 4.916467780429595, "almacenaje_total_mensual": 99411812.0, "almacenaje_aged_mensual": 1219396.0, "pct_almacenaje_aged": 1.2266107773993695}, {"mes": "2024-07-01", "n_total": 6457, "n_aged": 308, "pct_posiciones_aged": 4.770017035775128, "almacenaje_total_mensual": 102546148.0, "almacenaje_aged_mensual": 1293364.0, "pct_almacenaje_aged": 1.2612506907621728}, {"mes": "2024-08-01", "n_total": 6643, "n_aged": 297, "pct_posiciones_aged": 4.470871594159266, "almacenaje_total_mensual": 108651952.0, "almacenaje_aged_mensual": 1531820.0, "pct_almacenaje_aged": 1.4098412148177513}, {"mes": "2024-09-01", "n_total": 6847, "n_aged": 263, "pct_posiciones_aged": 3.8410982912224334, "almacenaje_total_mensual": 114464622.0, "almacenaje_aged_mensual": 1046378.0, "pct_almacenaje_aged": 0.9141497012063692}, {"mes": "2024-10-01", "n_total": 6984, "n_aged": 297, "pct_posiciones_aged": 4.252577319587629, "almacenaje_total_mensual": 116181836.0, "almacenaje_aged_mensual": 1207028.0, "pct_almacenaje_aged": 1.038912829712899}, {"mes": "2024-11-01", "n_total": 7312, "n_aged": 346, "pct_posiciones_aged": 4.7319474835886215, "almacenaje_total_mensual": 120431036.0, "almacenaje_aged_mensual": 1356594.0, "pct_almacenaje_aged": 1.1264488333389409}, {"mes": "2024-12-01", "n_total": 7446, "n_aged": 376, "pct_posiciones_aged": 5.049691109320441, "almacenaje_total_mensual": 119327316.0, "almacenaje_aged_mensual": 1451914.0, "pct_almacenaje_aged": 1.2167490635589255}, {"mes": "2025-01-01", "n_total": 7665, "n_aged": 344, "pct_posiciones_aged": 4.487932159165036, "almacenaje_total_mensual": 127154806.0, "almacenaje_aged_mensual": 1291998.0, "pct_almacenaje_aged": 1.0160827110223425}, {"mes": "2025-02-01", "n_total": 7772, "n_aged": 334, "pct_posiciones_aged": 4.297478126608338, "almacenaje_total_mensual": 126137002.0, "almacenaje_aged_mensual": 1120914.0, "pct_almacenaje_aged": 0.8886480431808582}, {"mes": "2025-03-01", "n_total": 7864, "n_aged": 335, "pct_posiciones_aged": 4.259918616480163, "almacenaje_total_mensual": 129912076.0, "almacenaje_aged_mensual": 1159150.0, "pct_almacenaje_aged": 0.8922573140929563}, {"mes": "2025-04-01", "n_total": 8064, "n_aged": 407, "pct_posiciones_aged": 5.047123015873016, "almacenaje_total_mensual": 131515350.0, "almacenaje_aged_mensual": 1472950.0, "pct_almacenaje_aged": 1.1199833327440485}, {"mes": "2025-05-01", "n_total": 8142, "n_aged": 425, "pct_posiciones_aged": 5.2198477032670105, "almacenaje_total_mensual": 133613312.0, "almacenaje_aged_mensual": 1475116.0, "pct_almacenaje_aged": 1.104018737294679}, {"mes": "2025-06-01", "n_total": 8282, "n_aged": 413, "pct_posiciones_aged": 4.986718184013523, "almacenaje_total_mensual": 132901294.0, "almacenaje_aged_mensual": 1421634.0, "pct_almacenaje_aged": 1.0696916163961503}, {"mes": "2025-07-01", "n_total": 8479, "n_aged": 433, "pct_posiciones_aged": 5.106734284703385, "almacenaje_total_mensual": 137320522.0, "almacenaje_aged_mensual": 1507140.0, "pct_almacenaje_aged": 1.0975344238787557}, {"mes": "2025-08-01", "n_total": 8383, "n_aged": 403, "pct_posiciones_aged": 4.807348204699988, "almacenaje_total_mensual": 134450980.0, "almacenaje_aged_mensual": 1413290.0, "pct_almacenaje_aged": 1.0511563396562822}, {"mes": "2025-09-01", "n_total": 8199, "n_aged": 357, "pct_posiciones_aged": 4.354189535309184, "almacenaje_total_mensual": 132414696.0, "almacenaje_aged_mensual": 1205196.0, "pct_almacenaje_aged": 0.91016785629293}, {"mes": "2025-10-01", "n_total": 8082, "n_aged": 350, "pct_posiciones_aged": 4.330611234842861, "almacenaje_total_mensual": 130185480.0, "almacenaje_aged_mensual": 1134306.0, "pct_almacenaje_aged": 0.8712999329879184}, {"mes": "2025-11-01", "n_total": 8071, "n_aged": 326, "pct_posiciones_aged": 4.0391525213728166, "almacenaje_total_mensual": 130699838.0, "almacenaje_aged_mensual": 1129548.0, "pct_almacenaje_aged": 0.8642306044786375}, {"mes": "2025-12-01", "n_total": 7993, "n_aged": 368, "pct_posiciones_aged": 4.60402852495934, "almacenaje_total_mensual": 128389462.0, "almacenaje_aged_mensual": 1282616.0, "pct_almacenaje_aged": 0.9990041082966764}], "por_tienda": [{"id_tienda": "T08", "nombre": "Casa \u00d3ga Neuquen 8", "provincia": "Neuquen", "region": "Patagonia", "formato": "Grande", "m2_venta": 600, "n": 271, "dead": 20, "pct_dead": 7.38, "capital_inmovilizado": 4584810.0, "costo_mensual": 425660.0, "pct_capital_inmovilizado": 3.59, "pct_dead_ic": 3.28, "fuera_de_rango": false}, {"id_tienda": "T09", "nombre": "Casa \u00d3ga Tucuman 9", "provincia": "Tucuman", "region": "NOA", "formato": "Mediano", "m2_venta": 600, "n": 300, "dead": 35, "pct_dead": 11.67, "capital_inmovilizado": 4538040.0, "costo_mensual": 425970.0, "pct_capital_inmovilizado": 3.37, "pct_dead_ic": 3.12, "fuera_de_rango": true}, {"id_tienda": "T12", "nombre": "Casa \u00d3ga Mendoza 12", "provincia": "Mendoza", "region": "Cuyo", "formato": "Chico", "m2_venta": 1200, "n": 271, "dead": 25, "pct_dead": 9.23, "capital_inmovilizado": 3441434.2857142854, "costo_mensual": 294658.14285714284, "pct_capital_inmovilizado": 3.32, "pct_dead_ic": 3.28, "fuera_de_rango": false}, {"id_tienda": "T13", "nombre": "Casa \u00d3ga Santa Fe 13", "provincia": "Santa Fe", "region": "Centro", "formato": "Chico", "m2_venta": 1200, "n": 298, "dead": 25, "pct_dead": 8.39, "capital_inmovilizado": 4236100.0, "costo_mensual": 376056.6666666666, "pct_capital_inmovilizado": 3.27, "pct_dead_ic": 3.13, "fuera_de_rango": false}, {"id_tienda": "T15", "nombre": "Casa \u00d3ga Salta 15", "provincia": "Salta", "region": "NOA", "formato": "Mediano", "m2_venta": 600, "n": 301, "dead": 31, "pct_dead": 10.3, "capital_inmovilizado": 3944192.0, "costo_mensual": 346556.0, "pct_capital_inmovilizado": 2.87, "pct_dead_ic": 3.11, "fuera_de_rango": false}, {"id_tienda": "T23", "nombre": "Casa \u00d3ga Buenos Aires 23", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Mediano", "m2_venta": 450, "n": 288, "dead": 23, "pct_dead": 7.99, "capital_inmovilizado": 3367848.2857142854, "costo_mensual": 307124.7142857143, "pct_capital_inmovilizado": 2.84, "pct_dead_ic": 3.18, "fuera_de_rango": false}, {"id_tienda": "T07", "nombre": "Casa \u00d3ga Cordoba 7", "provincia": "Cordoba", "region": "Centro", "formato": "Mediano", "m2_venta": 800, "n": 282, "dead": 18, "pct_dead": 6.38, "capital_inmovilizado": 3072840.0, "costo_mensual": 268793.5714285714, "pct_capital_inmovilizado": 2.67, "pct_dead_ic": 3.21, "fuera_de_rango": false}, {"id_tienda": "T05", "nombre": "Casa \u00d3ga Buenos Aires 5", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Mediano", "m2_venta": 450, "n": 288, "dead": 25, "pct_dead": 8.68, "capital_inmovilizado": 3535838.5714285714, "costo_mensual": 352447.14285714284, "pct_capital_inmovilizado": 2.63, "pct_dead_ic": 3.18, "fuera_de_rango": false}, {"id_tienda": "T14", "nombre": "Casa \u00d3ga CABA 14", "provincia": "CABA", "region": "AMBA", "formato": "Grande", "m2_venta": 1500, "n": 269, "dead": 22, "pct_dead": 8.18, "capital_inmovilizado": 2648480.0, "costo_mensual": 260220.0, "pct_capital_inmovilizado": 2.63, "pct_dead_ic": 3.29, "fuera_de_rango": false}, {"id_tienda": "T03", "nombre": "Casa \u00d3ga Mendoza 3", "provincia": "Mendoza", "region": "Cuyo", "formato": "Chico", "m2_venta": 450, "n": 264, "dead": 18, "pct_dead": 6.82, "capital_inmovilizado": 3191060.0, "costo_mensual": 301384.2857142857, "pct_capital_inmovilizado": 2.62, "pct_dead_ic": 3.32, "fuera_de_rango": false}, {"id_tienda": "T20", "nombre": "Casa \u00d3ga Buenos Aires 20", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Mediano", "m2_venta": 450, "n": 293, "dead": 28, "pct_dead": 9.56, "capital_inmovilizado": 3315275.7142857146, "costo_mensual": 306600.7142857143, "pct_capital_inmovilizado": 2.56, "pct_dead_ic": 3.15, "fuera_de_rango": false}, {"id_tienda": "T18", "nombre": "Casa \u00d3ga Salta 18", "provincia": "Salta", "region": "NOA", "formato": "Mediano", "m2_venta": 1200, "n": 301, "dead": 25, "pct_dead": 8.31, "capital_inmovilizado": 3143473.333333333, "costo_mensual": 302333.3333333333, "pct_capital_inmovilizado": 2.39, "pct_dead_ic": 3.11, "fuera_de_rango": false}, {"id_tienda": "T24", "nombre": "Casa \u00d3ga Buenos Aires 24", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Grande", "m2_venta": 800, "n": 303, "dead": 28, "pct_dead": 9.24, "capital_inmovilizado": 3654990.0, "costo_mensual": 314615.0, "pct_capital_inmovilizado": 2.37, "pct_dead_ic": 3.1, "fuera_de_rango": false}, {"id_tienda": "T26", "nombre": "Casa \u00d3ga Salta 26", "provincia": "Salta", "region": "NOA", "formato": "Mediano", "m2_venta": 1200, "n": 294, "dead": 19, "pct_dead": 6.46, "capital_inmovilizado": 3281990.0, "costo_mensual": 280175.0, "pct_capital_inmovilizado": 2.36, "pct_dead_ic": 3.15, "fuera_de_rango": false}, {"id_tienda": "T02", "nombre": "Casa \u00d3ga Buenos Aires 2", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Grande", "m2_venta": 450, "n": 277, "dead": 26, "pct_dead": 9.39, "capital_inmovilizado": 3077470.0, "costo_mensual": 268295.0, "pct_capital_inmovilizado": 2.33, "pct_dead_ic": 3.24, "fuera_de_rango": false}, {"id_tienda": "T22", "nombre": "Casa \u00d3ga CABA 22", "provincia": "CABA", "region": "AMBA", "formato": "Mediano", "m2_venta": 1500, "n": 299, "dead": 25, "pct_dead": 8.36, "capital_inmovilizado": 3037870.0, "costo_mensual": 261152.5, "pct_capital_inmovilizado": 2.31, "pct_dead_ic": 3.12, "fuera_de_rango": false}, {"id_tienda": "T11", "nombre": "Casa \u00d3ga CABA 11", "provincia": "CABA", "region": "AMBA", "formato": "Grande", "m2_venta": 800, "n": 288, "dead": 27, "pct_dead": 9.38, "capital_inmovilizado": 3032220.0, "costo_mensual": 280817.5, "pct_capital_inmovilizado": 2.28, "pct_dead_ic": 3.18, "fuera_de_rango": false}, {"id_tienda": "T28", "nombre": "Casa \u00d3ga CABA 28", "provincia": "CABA", "region": "AMBA", "formato": "Grande", "m2_venta": 1500, "n": 290, "dead": 24, "pct_dead": 8.28, "capital_inmovilizado": 2746720.0, "costo_mensual": 243185.0, "pct_capital_inmovilizado": 2.13, "pct_dead_ic": 3.17, "fuera_de_rango": false}, {"id_tienda": "T27", "nombre": "Casa \u00d3ga Buenos Aires 27", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Chico", "m2_venta": 1200, "n": 283, "dead": 22, "pct_dead": 7.77, "capital_inmovilizado": 2535868.0, "costo_mensual": 252234.5, "pct_capital_inmovilizado": 2.06, "pct_dead_ic": 3.21, "fuera_de_rango": false}, {"id_tienda": "T04", "nombre": "Casa \u00d3ga Santa Fe 4", "provincia": "Santa Fe", "region": "Centro", "formato": "Grande", "m2_venta": 450, "n": 308, "dead": 25, "pct_dead": 8.12, "capital_inmovilizado": 2515860.909090909, "costo_mensual": 219606.36363636365, "pct_capital_inmovilizado": 1.99, "pct_dead_ic": 3.08, "fuera_de_rango": false}, {"id_tienda": "T17", "nombre": "Casa \u00d3ga Entre Rios 17", "provincia": "Entre Rios", "region": "Centro", "formato": "Chico", "m2_venta": 600, "n": 280, "dead": 22, "pct_dead": 7.86, "capital_inmovilizado": 2627901.4285714286, "costo_mensual": 258163.57142857142, "pct_capital_inmovilizado": 1.97, "pct_dead_ic": 3.23, "fuera_de_rango": false}, {"id_tienda": "T25", "nombre": "Casa \u00d3ga Cordoba 25", "provincia": "Cordoba", "region": "Centro", "formato": "Grande", "m2_venta": 1500, "n": 276, "dead": 18, "pct_dead": 6.52, "capital_inmovilizado": 2454255.4545454546, "costo_mensual": 208823.18181818182, "pct_capital_inmovilizado": 1.95, "pct_dead_ic": 3.25, "fuera_de_rango": false}, {"id_tienda": "T10", "nombre": "Casa \u00d3ga Buenos Aires 10", "provincia": "Buenos Aires", "region": "AMBA", "formato": "Mediano", "m2_venta": 450, "n": 278, "dead": 19, "pct_dead": 6.83, "capital_inmovilizado": 2197580.0, "costo_mensual": 193395.0, "pct_capital_inmovilizado": 1.92, "pct_dead_ic": 3.24, "fuera_de_rango": false}, {"id_tienda": "T06", "nombre": "Casa \u00d3ga Santa Fe 6", "provincia": "Santa Fe", "region": "Centro", "formato": "Mediano", "m2_venta": 1500, "n": 267, "dead": 21, "pct_dead": 7.87, "capital_inmovilizado": 1990410.0, "costo_mensual": 204425.0, "pct_capital_inmovilizado": 1.87, "pct_dead_ic": 3.3, "fuera_de_rango": false}, {"id_tienda": "T21", "nombre": "Casa \u00d3ga Mendoza 21", "provincia": "Mendoza", "region": "Cuyo", "formato": "Grande", "m2_venta": 600, "n": 291, "dead": 24, "pct_dead": 8.25, "capital_inmovilizado": 2243870.0, "costo_mensual": 209420.0, "pct_capital_inmovilizado": 1.74, "pct_dead_ic": 3.16, "fuera_de_rango": false}, {"id_tienda": "T19", "nombre": "Casa \u00d3ga Mendoza 19", "provincia": "Mendoza", "region": "Cuyo", "formato": "Mediano", "m2_venta": 800, "n": 296, "dead": 26, "pct_dead": 8.78, "capital_inmovilizado": 2157480.0, "costo_mensual": 194285.7142857143, "pct_capital_inmovilizado": 1.71, "pct_dead_ic": 3.14, "fuera_de_rango": false}, {"id_tienda": "T16", "nombre": "Casa \u00d3ga Tucuman 16", "provincia": "Tucuman", "region": "NOA", "formato": "Grande", "m2_venta": 600, "n": 266, "dead": 17, "pct_dead": 6.39, "capital_inmovilizado": 1623390.0, "costo_mensual": 165485.0, "pct_capital_inmovilizado": 1.46, "pct_dead_ic": 3.31, "fuera_de_rango": false}, {"id_tienda": "T01", "nombre": "Casa \u00d3ga Mendoza 1", "provincia": "Mendoza", "region": "Cuyo", "formato": "Grande", "m2_venta": 800, "n": 271, "dead": 23, "pct_dead": 8.49, "capital_inmovilizado": 1750254.2857142857, "costo_mensual": 161536.42857142858, "pct_capital_inmovilizado": 1.36, "pct_dead_ic": 3.28, "fuera_de_rango": false}], "por_tienda_categoria": [{"id_tienda": "T01", "categoria": "Ba\u00f1o", "n": 26, "dead": 1, "pct_dead": 3.85, "capital_inmovilizado": 15090.0, "costo_mensual": 1385.0}, {"id_tienda": "T01", "categoria": "Cocina y mesa", "n": 42, "dead": 3, "pct_dead": 7.14, "capital_inmovilizado": 273680.0, "costo_mensual": 26335.0}, {"id_tienda": "T01", "categoria": "Decoracion", "n": 51, "dead": 4, "pct_dead": 7.84, "capital_inmovilizado": 344530.0, "costo_mensual": 35680.0}, {"id_tienda": "T01", "categoria": "Iluminacion", "n": 30, "dead": 2, "pct_dead": 6.67, "capital_inmovilizado": 90570.0, "costo_mensual": 7895.0}, {"id_tienda": "T01", "categoria": "Muebles", "n": 46, "dead": 5, "pct_dead": 10.87, "capital_inmovilizado": 457440.0, "costo_mensual": 40600.0}, {"id_tienda": "T01", "categoria": "Organizacion", "n": 30, "dead": 3, "pct_dead": 10.0, "capital_inmovilizado": 322427.14285714284, "costo_mensual": 25707.142857142855}, {"id_tienda": "T01", "categoria": "Textil hogar", "n": 46, "dead": 5, "pct_dead": 10.87, "capital_inmovilizado": 246517.14285714287, "costo_mensual": 23934.285714285714}, {"id_tienda": "T02", "categoria": "Ba\u00f1o", "n": 26, "dead": 4, "pct_dead": 15.38, "capital_inmovilizado": 750470.0, "costo_mensual": 61865.0}, {"id_tienda": "T02", "categoria": "Cocina y mesa", "n": 48, "dead": 7, "pct_dead": 14.58, "capital_inmovilizado": 1219850.0, "costo_mensual": 99495.0}, {"id_tienda": "T02", "categoria": "Decoracion", "n": 53, "dead": 2, "pct_dead": 3.77, "capital_inmovilizado": 235440.0, "costo_mensual": 24855.0}, {"id_tienda": "T02", "categoria": "Iluminacion", "n": 27, "dead": 4, "pct_dead": 14.81, "capital_inmovilizado": 239340.0, "costo_mensual": 23160.0}, {"id_tienda": "T02", "categoria": "Muebles", "n": 45, "dead": 2, "pct_dead": 4.44, "capital_inmovilizado": 168180.0, "costo_mensual": 16790.0}, {"id_tienda": "T02", "categoria": "Organizacion", "n": 32, "dead": 3, "pct_dead": 9.38, "capital_inmovilizado": 198690.0, "costo_mensual": 17160.0}, {"id_tienda": "T02", "categoria": "Textil hogar", "n": 46, "dead": 4, "pct_dead": 8.7, "capital_inmovilizado": 265500.0, "costo_mensual": 24970.0}, {"id_tienda": "T03", "categoria": "Ba\u00f1o", "n": 31, "dead": 1, "pct_dead": 3.23, "capital_inmovilizado": 35130.0, "costo_mensual": 3600.0}, {"id_tienda": "T03", "categoria": "Cocina y mesa", "n": 53, "dead": 2, "pct_dead": 3.77, "capital_inmovilizado": 913920.0, "costo_mensual": 74740.0}, {"id_tienda": "T03", "categoria": "Decoracion", "n": 53, "dead": 7, "pct_dead": 13.21, "capital_inmovilizado": 1612765.7142857143, "costo_mensual": 162137.14285714284}, {"id_tienda": "T03", "categoria": "Iluminacion", "n": 19, "dead": 1, "pct_dead": 5.26, "capital_inmovilizado": 103860.0, "costo_mensual": 9840.0}, {"id_tienda": "T03", "categoria": "Muebles", "n": 41, "dead": 1, "pct_dead": 2.44, "capital_inmovilizado": 76110.0, "costo_mensual": 12390.0}, {"id_tienda": "T03", "categoria": "Organizacion", "n": 35, "dead": 3, "pct_dead": 8.57, "capital_inmovilizado": 218064.2857142857, "costo_mensual": 18697.14285714286}, {"id_tienda": "T03", "categoria": "Textil hogar", "n": 32, "dead": 3, "pct_dead": 9.38, "capital_inmovilizado": 231210.0, "costo_mensual": 19980.0}, {"id_tienda": "T04", "categoria": "Ba\u00f1o", "n": 36, "dead": 5, "pct_dead": 13.89, "capital_inmovilizado": 392640.0, "costo_mensual": 34055.0}, {"id_tienda": "T04", "categoria": "Cocina y mesa", "n": 57, "dead": 2, "pct_dead": 3.51, "capital_inmovilizado": 263040.0, "costo_mensual": 25695.0}, {"id_tienda": "T04", "categoria": "Decoracion", "n": 55, "dead": 3, "pct_dead": 5.45, "capital_inmovilizado": 436750.9090909092, "costo_mensual": 35606.36363636364}, {"id_tienda": "T04", "categoria": "Iluminacion", "n": 32, "dead": 3, "pct_dead": 9.38, "capital_inmovilizado": 261730.0, "costo_mensual": 24255.0}, {"id_tienda": "T04", "categoria": "Muebles", "n": 46, "dead": 4, "pct_dead": 8.7, "capital_inmovilizado": 587270.0, "costo_mensual": 51345.0}, {"id_tienda": "T04", "categoria": "Organizacion", "n": 30, "dead": 3, "pct_dead": 10.0, "capital_inmovilizado": 201300.0, "costo_mensual": 17120.0}, {"id_tienda": "T04", "categoria": "Textil hogar", "n": 52, "dead": 5, "pct_dead": 9.62, "capital_inmovilizado": 373130.0, "costo_mensual": 31530.0}, {"id_tienda": "T05", "categoria": "Ba\u00f1o", "n": 29, "dead": 5, "pct_dead": 17.24, "capital_inmovilizado": 465220.0, "costo_mensual": 44550.0}, {"id_tienda": "T05", "categoria": "Cocina y mesa", "n": 44, "dead": 4, "pct_dead": 9.09, "capital_inmovilizado": 452400.0, "costo_mensual": 41605.0}, {"id_tienda": "T05", "categoria": "Decoracion", "n": 54, "dead": 6, "pct_dead": 11.11, "capital_inmovilizado": 1657130.0, "costo_mensual": 177535.0}, {"id_tienda": "T05", "categoria": "Iluminacion", "n": 28, "dead": 2, "pct_dead": 7.14, "capital_inmovilizado": 176170.0, "costo_mensual": 15005.0}, {"id_tienda": "T05", "categoria": "Muebles", "n": 43, "dead": 2, "pct_dead": 4.65, "capital_inmovilizado": 27320.0, "costo_mensual": 2355.0}, {"id_tienda": "T05", "categoria": "Organizacion", "n": 41, "dead": 4, "pct_dead": 9.76, "capital_inmovilizado": 672310.0, "costo_mensual": 63055.0}, {"id_tienda": "T05", "categoria": "Textil hogar", "n": 49, "dead": 2, "pct_dead": 4.08, "capital_inmovilizado": 85288.57142857142, "costo_mensual": 8342.142857142857}, {"id_tienda": "T06", "categoria": "Ba\u00f1o", "n": 29, "dead": 3, "pct_dead": 10.34, "capital_inmovilizado": 141130.0, "costo_mensual": 13940.0}, {"id_tienda": "T06", "categoria": "Cocina y mesa", "n": 42, "dead": 4, "pct_dead": 9.52, "capital_inmovilizado": 275220.0, "costo_mensual": 28860.0}, {"id_tienda": "T06", "categoria": "Decoracion", "n": 52, "dead": 2, "pct_dead": 3.85, "capital_inmovilizado": 686190.0, "costo_mensual": 81375.0}, {"id_tienda": "T06", "categoria": "Iluminacion", "n": 33, "dead": 5, "pct_dead": 15.15, "capital_inmovilizado": 200600.0, "costo_mensual": 19805.0}, {"id_tienda": "T06", "categoria": "Muebles", "n": 39, "dead": 3, "pct_dead": 7.69, "capital_inmovilizado": 334310.0, "costo_mensual": 29395.0}, {"id_tienda": "T06", "categoria": "Organizacion", "n": 31, "dead": 1, "pct_dead": 3.23, "capital_inmovilizado": 206580.0, "costo_mensual": 16940.0}, {"id_tienda": "T06", "categoria": "Textil hogar", "n": 41, "dead": 3, "pct_dead": 7.32, "capital_inmovilizado": 146380.0, "costo_mensual": 14110.0}, {"id_tienda": "T07", "categoria": "Ba\u00f1o", "n": 33, "dead": 1, "pct_dead": 3.03, "capital_inmovilizado": 184800.0, "costo_mensual": 14875.0}, {"id_tienda": "T07", "categoria": "Cocina y mesa", "n": 52, "dead": 5, "pct_dead": 9.62, "capital_inmovilizado": 1379320.0, "costo_mensual": 119250.0}, {"id_tienda": "T07", "categoria": "Decoracion", "n": 52, "dead": 4, "pct_dead": 7.69, "capital_inmovilizado": 593930.0, "costo_mensual": 48303.57142857143}, {"id_tienda": "T07", "categoria": "Iluminacion", "n": 28, "dead": 1, "pct_dead": 3.57, "capital_inmovilizado": 50340.0, "costo_mensual": 4140.0}, {"id_tienda": "T07", "categoria": "Muebles", "n": 38, "dead": 1, "pct_dead": 2.63, "capital_inmovilizado": 258100.0, "costo_mensual": 21950.0}, {"id_tienda": "T07", "categoria": "Organizacion", "n": 30, "dead": 1, "pct_dead": 3.33, "capital_inmovilizado": 47060.0, "costo_mensual": 6350.0}, {"id_tienda": "T07", "categoria": "Textil hogar", "n": 49, "dead": 5, "pct_dead": 10.2, "capital_inmovilizado": 559290.0, "costo_mensual": 53925.0}, {"id_tienda": "T08", "categoria": "Ba\u00f1o", "n": 34, "dead": 5, "pct_dead": 14.71, "capital_inmovilizado": 416030.0, "costo_mensual": 40940.0}, {"id_tienda": "T08", "categoria": "Cocina y mesa", "n": 42, "dead": 2, "pct_dead": 4.76, "capital_inmovilizado": 1499320.0, "costo_mensual": 120200.0}, {"id_tienda": "T08", "categoria": "Decoracion", "n": 57, "dead": 5, "pct_dead": 8.77, "capital_inmovilizado": 1618120.0, "costo_mensual": 162325.0}, {"id_tienda": "T08", "categoria": "Iluminacion", "n": 28, "dead": 1, "pct_dead": 3.57, "capital_inmovilizado": 57090.0, "costo_mensual": 4875.0}, {"id_tienda": "T08", "categoria": "Muebles", "n": 32, "dead": 1, "pct_dead": 3.12, "capital_inmovilizado": 101010.0, "costo_mensual": 8550.0}, {"id_tienda": "T08", "categoria": "Organizacion", "n": 33, "dead": 3, "pct_dead": 9.09, "capital_inmovilizado": 195320.0, "costo_mensual": 17270.0}, {"id_tienda": "T08", "categoria": "Textil hogar", "n": 45, "dead": 3, "pct_dead": 6.67, "capital_inmovilizado": 697920.0, "costo_mensual": 71500.0}, {"id_tienda": "T09", "categoria": "Ba\u00f1o", "n": 33, "dead": 4, "pct_dead": 12.12, "capital_inmovilizado": 583520.0, "costo_mensual": 49865.0}, {"id_tienda": "T09", "categoria": "Cocina y mesa", "n": 54, "dead": 6, "pct_dead": 11.11, "capital_inmovilizado": 886700.0, "costo_mensual": 74195.0}, {"id_tienda": "T09", "categoria": "Decoracion", "n": 58, "dead": 8, "pct_dead": 13.79, "capital_inmovilizado": 1523790.0, "costo_mensual": 158165.0}, {"id_tienda": "T09", "categoria": "Iluminacion", "n": 30, "dead": 3, "pct_dead": 10.0, "capital_inmovilizado": 274500.0, "costo_mensual": 26140.0}, {"id_tienda": "T09", "categoria": "Muebles", "n": 47, "dead": 4, "pct_dead": 8.51, "capital_inmovilizado": 584760.0, "costo_mensual": 54660.0}, {"id_tienda": "T09", "categoria": "Organizacion", "n": 34, "dead": 3, "pct_dead": 8.82, "capital_inmovilizado": 268210.0, "costo_mensual": 23595.0}, {"id_tienda": "T09", "categoria": "Textil hogar", "n": 44, "dead": 7, "pct_dead": 15.91, "capital_inmovilizado": 416560.0, "costo_mensual": 39350.0}, {"id_tienda": "T10", "categoria": "Ba\u00f1o", "n": 29, "dead": 3, "pct_dead": 10.34, "capital_inmovilizado": 159150.0, "costo_mensual": 13645.0}, {"id_tienda": "T10", "categoria": "Cocina y mesa", "n": 48, "dead": 5, "pct_dead": 10.42, "capital_inmovilizado": 369920.0, "costo_mensual": 37405.0}, {"id_tienda": "T10", "categoria": "Decoracion", "n": 54, "dead": 3, "pct_dead": 5.56, "capital_inmovilizado": 775250.0, "costo_mensual": 64700.0}, {"id_tienda": "T10", "categoria": "Iluminacion", "n": 31, "dead": 1, "pct_dead": 3.23, "capital_inmovilizado": 62040.0, "costo_mensual": 6045.0}, {"id_tienda": "T10", "categoria": "Muebles", "n": 40, "dead": 4, "pct_dead": 10.0, "capital_inmovilizado": 455540.0, "costo_mensual": 38700.0}, {"id_tienda": "T10", "categoria": "Organizacion", "n": 33, "dead": 1, "pct_dead": 3.03, "capital_inmovilizado": 77400.0, "costo_mensual": 7240.0}, {"id_tienda": "T10", "categoria": "Textil hogar", "n": 43, "dead": 2, "pct_dead": 4.65, "capital_inmovilizado": 298280.0, "costo_mensual": 25660.0}, {"id_tienda": "T11", "categoria": "Ba\u00f1o", "n": 37, "dead": 5, "pct_dead": 13.51, "capital_inmovilizado": 533760.0, "costo_mensual": 51107.5}, {"id_tienda": "T11", "categoria": "Cocina y mesa", "n": 40, "dead": 4, "pct_dead": 10.0, "capital_inmovilizado": 1119130.0, "costo_mensual": 92040.0}, {"id_tienda": "T11", "categoria": "Decoracion", "n": 61, "dead": 3, "pct_dead": 4.92, "capital_inmovilizado": 237770.0, "costo_mensual": 22920.0}, {"id_tienda": "T11", "categoria": "Iluminacion", "n": 25, "dead": 6, "pct_dead": 24.0, "capital_inmovilizado": 425500.0, "costo_mensual": 40520.0}, {"id_tienda": "T11", "categoria": "Muebles", "n": 48, "dead": 6, "pct_dead": 12.5, "capital_inmovilizado": 474230.0, "costo_mensual": 53130.0}, {"id_tienda": "T11", "categoria": "Organizacion", "n": 37, "dead": 2, "pct_dead": 5.41, "capital_inmovilizado": 236730.0, "costo_mensual": 20580.0}, {"id_tienda": "T11", "categoria": "Textil hogar", "n": 40, "dead": 1, "pct_dead": 2.5, "capital_inmovilizado": 5100.0, "costo_mensual": 520.0}, {"id_tienda": "T12", "categoria": "Ba\u00f1o", "n": 34, "dead": 3, "pct_dead": 8.82, "capital_inmovilizado": 232680.0, "costo_mensual": 21021.0}, {"id_tienda": "T12", "categoria": "Cocina y mesa", "n": 42, "dead": 8, "pct_dead": 19.05, "capital_inmovilizado": 833290.0, "costo_mensual": 77615.0}, {"id_tienda": "T12", "categoria": "Decoracion", "n": 56, "dead": 5, "pct_dead": 8.93, "capital_inmovilizado": 1034110.0, "costo_mensual": 74575.0}, {"id_tienda": "T12", "categoria": "Iluminacion", "n": 24, "dead": 1, "pct_dead": 4.17, "capital_inmovilizado": 57880.0, "costo_mensual": 5040.0}, {"id_tienda": "T12", "categoria": "Muebles", "n": 43, "dead": 3, "pct_dead": 6.98, "capital_inmovilizado": 273870.0, "costo_mensual": 24425.0}, {"id_tienda": "T12", "categoria": "Organizacion", "n": 35, "dead": 2, "pct_dead": 5.71, "capital_inmovilizado": 263724.28571428574, "costo_mensual": 22477.14285714286}, {"id_tienda": "T12", "categoria": "Textil hogar", "n": 37, "dead": 3, "pct_dead": 8.11, "capital_inmovilizado": 745880.0, "costo_mensual": 69505.0}, {"id_tienda": "T13", "categoria": "Ba\u00f1o", "n": 35, "dead": 4, "pct_dead": 11.43, "capital_inmovilizado": 318450.0, "costo_mensual": 29201.666666666664}, {"id_tienda": "T13", "categoria": "Cocina y mesa", "n": 45, "dead": 5, "pct_dead": 11.11, "capital_inmovilizado": 1600510.0, "costo_mensual": 136775.0}, {"id_tienda": "T13", "categoria": "Decoracion", "n": 53, "dead": 6, "pct_dead": 11.32, "capital_inmovilizado": 998840.0, "costo_mensual": 87120.0}, {"id_tienda": "T13", "categoria": "Iluminacion", "n": 34, "dead": 2, "pct_dead": 5.88, "capital_inmovilizado": 183480.0, "costo_mensual": 17315.0}, {"id_tienda": "T13", "categoria": "Muebles", "n": 42, "dead": 6, "pct_dead": 14.29, "capital_inmovilizado": 440540.0, "costo_mensual": 41945.0}, {"id_tienda": "T13", "categoria": "Organizacion", "n": 41, "dead": 1, "pct_dead": 2.44, "capital_inmovilizado": 150240.0, "costo_mensual": 12320.0}, {"id_tienda": "T13", "categoria": "Textil hogar", "n": 48, "dead": 1, "pct_dead": 2.08, "capital_inmovilizado": 544040.0, "costo_mensual": 51380.0}, {"id_tienda": "T14", "categoria": "Ba\u00f1o", "n": 30, "dead": 2, "pct_dead": 6.67, "capital_inmovilizado": 87680.0, "costo_mensual": 7755.0}, {"id_tienda": "T14", "categoria": "Cocina y mesa", "n": 48, "dead": 3, "pct_dead": 6.25, "capital_inmovilizado": 488290.0, "costo_mensual": 46685.0}, {"id_tienda": "T14", "categoria": "Decoracion", "n": 53, "dead": 6, "pct_dead": 11.32, "capital_inmovilizado": 953550.0, "costo_mensual": 106300.0}, {"id_tienda": "T14", "categoria": "Iluminacion", "n": 22, "dead": 2, "pct_dead": 9.09, "capital_inmovilizado": 227250.0, "costo_mensual": 21315.0}, {"id_tienda": "T14", "categoria": "Muebles", "n": 41, "dead": 3, "pct_dead": 7.32, "capital_inmovilizado": 302060.0, "costo_mensual": 27295.0}, {"id_tienda": "T14", "categoria": "Organizacion", "n": 31, "dead": 3, "pct_dead": 9.68, "capital_inmovilizado": 280710.0, "costo_mensual": 23710.0}, {"id_tienda": "T14", "categoria": "Textil hogar", "n": 44, "dead": 3, "pct_dead": 6.82, "capital_inmovilizado": 308940.0, "costo_mensual": 27160.0}, {"id_tienda": "T15", "categoria": "Ba\u00f1o", "n": 32, "dead": 3, "pct_dead": 9.38, "capital_inmovilizado": 214660.0, "costo_mensual": 19620.0}, {"id_tienda": "T15", "categoria": "Cocina y mesa", "n": 52, "dead": 8, "pct_dead": 15.38, "capital_inmovilizado": 2181844.0, "costo_mensual": 186445.00000000003}, {"id_tienda": "T15", "categoria": "Decoracion", "n": 60, "dead": 6, "pct_dead": 10.0, "capital_inmovilizado": 325957.99999999994, "costo_mensual": 31040.999999999996}, {"id_tienda": "T15", "categoria": "Iluminacion", "n": 34, "dead": 4, "pct_dead": 11.76, "capital_inmovilizado": 430620.0, "costo_mensual": 37745.0}, {"id_tienda": "T15", "categoria": "Muebles", "n": 44, "dead": 4, "pct_dead": 9.09, "capital_inmovilizado": 393730.0, "costo_mensual": 35970.0}, {"id_tienda": "T15", "categoria": "Organizacion", "n": 40, "dead": 1, "pct_dead": 2.5, "capital_inmovilizado": 112680.0, "costo_mensual": 9240.0}, {"id_tienda": "T15", "categoria": "Textil hogar", "n": 39, "dead": 5, "pct_dead": 12.82, "capital_inmovilizado": 284700.0, "costo_mensual": 26495.0}, {"id_tienda": "T16", "categoria": "Ba\u00f1o", "n": 32, "dead": 3, "pct_dead": 9.38, "capital_inmovilizado": 244130.0, "costo_mensual": 20795.0}, {"id_tienda": "T16", "categoria": "Cocina y mesa", "n": 50, "dead": 4, "pct_dead": 8.0, "capital_inmovilizado": 598160.0, "costo_mensual": 57540.0}, {"id_tienda": "T16", "categoria": "Decoracion", "n": 44, "dead": 2, "pct_dead": 4.55, "capital_inmovilizado": 306490.0, "costo_mensual": 44515.0}, {"id_tienda": "T16", "categoria": "Iluminacion", "n": 31, "dead": 3, "pct_dead": 9.68, "capital_inmovilizado": 291880.0, "costo_mensual": 27440.0}, {"id_tienda": "T16", "categoria": "Muebles", "n": 40, "dead": 0, "pct_dead": 0.0, "capital_inmovilizado": 0.0, "costo_mensual": 0.0}, {"id_tienda": "T16", "categoria": "Organizacion", "n": 30, "dead": 2, "pct_dead": 6.67, "capital_inmovilizado": 83660.0, "costo_mensual": 6705.0}, {"id_tienda": "T16", "categoria": "Textil hogar", "n": 39, "dead": 3, "pct_dead": 7.69, "capital_inmovilizado": 99070.0, "costo_mensual": 8490.0}, {"id_tienda": "T17", "categoria": "Ba\u00f1o", "n": 32, "dead": 6, "pct_dead": 18.75, "capital_inmovilizado": 395040.0, "costo_mensual": 35640.0}, {"id_tienda": "T17", "categoria": "Cocina y mesa", "n": 45, "dead": 4, "pct_dead": 8.89, "capital_inmovilizado": 617560.0, "costo_mensual": 59920.0}, {"id_tienda": "T17", "categoria": "Decoracion", "n": 58, "dead": 3, "pct_dead": 5.17, "capital_inmovilizado": 561790.0, "costo_mensual": 67535.0}, {"id_tienda": "T17", "categoria": "Iluminacion", "n": 31, "dead": 1, "pct_dead": 3.23, "capital_inmovilizado": 94040.0, "costo_mensual": 9600.0}, {"id_tienda": "T17", "categoria": "Muebles", "n": 40, "dead": 2, "pct_dead": 5.0, "capital_inmovilizado": 75480.0, "costo_mensual": 7170.0}, {"id_tienda": "T17", "categoria": "Organizacion", "n": 34, "dead": 2, "pct_dead": 5.88, "capital_inmovilizado": 315801.4285714286, "costo_mensual": 28863.571428571428}, {"id_tienda": "T17", "categoria": "Textil hogar", "n": 40, "dead": 4, "pct_dead": 10.0, "capital_inmovilizado": 568190.0, "costo_mensual": 49435.0}, {"id_tienda": "T18", "categoria": "Ba\u00f1o", "n": 33, "dead": 3, "pct_dead": 9.09, "capital_inmovilizado": 414820.0, "costo_mensual": 41420.0}, {"id_tienda": "T18", "categoria": "Cocina y mesa", "n": 51, "dead": 5, "pct_dead": 9.8, "capital_inmovilizado": 615680.0, "costo_mensual": 57945.0}, {"id_tienda": "T18", "categoria": "Decoracion", "n": 54, "dead": 7, "pct_dead": 12.96, "capital_inmovilizado": 1308730.0, "costo_mensual": 123875.0}, {"id_tienda": "T18", "categoria": "Iluminacion", "n": 32, "dead": 1, "pct_dead": 3.12, "capital_inmovilizado": 162800.0, "costo_mensual": 15300.0}, {"id_tienda": "T18", "categoria": "Muebles", "n": 36, "dead": 3, "pct_dead": 8.33, "capital_inmovilizado": 61433.333333333336, "costo_mensual": 7693.333333333334}, {"id_tienda": "T18", "categoria": "Organizacion", "n": 40, "dead": 3, "pct_dead": 7.5, "capital_inmovilizado": 490560.0, "costo_mensual": 47880.0}, {"id_tienda": "T18", "categoria": "Textil hogar", "n": 55, "dead": 3, "pct_dead": 5.45, "capital_inmovilizado": 89450.0, "costo_mensual": 8220.0}, {"id_tienda": "T19", "categoria": "Ba\u00f1o", "n": 35, "dead": 3, "pct_dead": 8.57, "capital_inmovilizado": 219100.0, "costo_mensual": 17990.0}, {"id_tienda": "T19", "categoria": "Cocina y mesa", "n": 47, "dead": 5, "pct_dead": 10.64, "capital_inmovilizado": 558090.0, "costo_mensual": 52880.0}, {"id_tienda": "T19", "categoria": "Decoracion", "n": 64, "dead": 7, "pct_dead": 10.94, "capital_inmovilizado": 535520.0, "costo_mensual": 45820.71428571429}, {"id_tienda": "T19", "categoria": "Iluminacion", "n": 33, "dead": 5, "pct_dead": 15.15, "capital_inmovilizado": 441630.0, "costo_mensual": 40640.0}, {"id_tienda": "T19", "categoria": "Muebles", "n": 34, "dead": 1, "pct_dead": 2.94, "capital_inmovilizado": 186250.0, "costo_mensual": 17100.0}, {"id_tienda": "T19", "categoria": "Organizacion", "n": 34, "dead": 3, "pct_dead": 8.82, "capital_inmovilizado": 185980.0, "costo_mensual": 16640.0}, {"id_tienda": "T19", "categoria": "Textil hogar", "n": 49, "dead": 2, "pct_dead": 4.08, "capital_inmovilizado": 30910.0, "costo_mensual": 3215.0}, {"id_tienda": "T20", "categoria": "Ba\u00f1o", "n": 30, "dead": 2, "pct_dead": 6.67, "capital_inmovilizado": 143160.0, "costo_mensual": 12420.0}, {"id_tienda": "T20", "categoria": "Cocina y mesa", "n": 51, "dead": 7, "pct_dead": 13.73, "capital_inmovilizado": 1092195.7142857143, "costo_mensual": 99190.71428571429}, {"id_tienda": "T20", "categoria": "Decoracion", "n": 53, "dead": 4, "pct_dead": 7.55, "capital_inmovilizado": 671260.0, "costo_mensual": 62510.0}, {"id_tienda": "T20", "categoria": "Iluminacion", "n": 29, "dead": 4, "pct_dead": 13.79, "capital_inmovilizado": 487920.0, "costo_mensual": 46815.0}, {"id_tienda": "T20", "categoria": "Muebles", "n": 43, "dead": 3, "pct_dead": 6.98, "capital_inmovilizado": 299280.0, "costo_mensual": 28020.0}, {"id_tienda": "T20", "categoria": "Organizacion", "n": 38, "dead": 4, "pct_dead": 10.53, "capital_inmovilizado": 332730.0, "costo_mensual": 29930.0}, {"id_tienda": "T20", "categoria": "Textil hogar", "n": 49, "dead": 4, "pct_dead": 8.16, "capital_inmovilizado": 288730.0, "costo_mensual": 27715.0}, {"id_tienda": "T21", "categoria": "Ba\u00f1o", "n": 34, "dead": 3, "pct_dead": 8.82, "capital_inmovilizado": 342190.0, "costo_mensual": 34415.0}, {"id_tienda": "T21", "categoria": "Cocina y mesa", "n": 51, "dead": 3, "pct_dead": 5.88, "capital_inmovilizado": 447610.0, "costo_mensual": 43720.0}, {"id_tienda": "T21", "categoria": "Decoracion", "n": 65, "dead": 3, "pct_dead": 4.62, "capital_inmovilizado": 417870.0, "costo_mensual": 37795.0}, {"id_tienda": "T21", "categoria": "Iluminacion", "n": 27, "dead": 4, "pct_dead": 14.81, "capital_inmovilizado": 431900.0, "costo_mensual": 39580.0}, {"id_tienda": "T21", "categoria": "Muebles", "n": 43, "dead": 3, "pct_dead": 6.98, "capital_inmovilizado": 149280.0, "costo_mensual": 15210.0}, {"id_tienda": "T21", "categoria": "Organizacion", "n": 35, "dead": 5, "pct_dead": 14.29, "capital_inmovilizado": 372100.0, "costo_mensual": 31960.0}, {"id_tienda": "T21", "categoria": "Textil hogar", "n": 36, "dead": 3, "pct_dead": 8.33, "capital_inmovilizado": 82920.0, "costo_mensual": 6740.0}, {"id_tienda": "T22", "categoria": "Ba\u00f1o", "n": 34, "dead": 3, "pct_dead": 8.82, "capital_inmovilizado": 236570.0, "costo_mensual": 21135.0}, {"id_tienda": "T22", "categoria": "Cocina y mesa", "n": 52, "dead": 3, "pct_dead": 5.77, "capital_inmovilizado": 1129120.0, "costo_mensual": 91160.0}, {"id_tienda": "T22", "categoria": "Decoracion", "n": 63, "dead": 5, "pct_dead": 7.94, "capital_inmovilizado": 620450.0, "costo_mensual": 58640.0}, {"id_tienda": "T22", "categoria": "Iluminacion", "n": 27, "dead": 0, "pct_dead": 0.0, "capital_inmovilizado": 0.0, "costo_mensual": 0.0}, {"id_tienda": "T22", "categoria": "Muebles", "n": 44, "dead": 4, "pct_dead": 9.09, "capital_inmovilizado": 597790.0, "costo_mensual": 47302.5}, {"id_tienda": "T22", "categoria": "Organizacion", "n": 30, "dead": 2, "pct_dead": 6.67, "capital_inmovilizado": 126710.0, "costo_mensual": 15250.0}, {"id_tienda": "T22", "categoria": "Textil hogar", "n": 49, "dead": 8, "pct_dead": 16.33, "capital_inmovilizado": 327230.0, "costo_mensual": 27665.0}, {"id_tienda": "T23", "categoria": "Ba\u00f1o", "n": 27, "dead": 1, "pct_dead": 3.7, "capital_inmovilizado": 42210.0, "costo_mensual": 4290.0}, {"id_tienda": "T23", "categoria": "Cocina y mesa", "n": 47, "dead": 7, "pct_dead": 14.89, "capital_inmovilizado": 1418850.0, "costo_mensual": 125235.0}, {"id_tienda": "T23", "categoria": "Decoracion", "n": 67, "dead": 6, "pct_dead": 8.96, "capital_inmovilizado": 1406084.2857142857, "costo_mensual": 130680.71428571429}, {"id_tienda": "T23", "categoria": "Iluminacion", "n": 25, "dead": 1, "pct_dead": 4.0, "capital_inmovilizado": 79320.0, "costo_mensual": 7480.0}, {"id_tienda": "T23", "categoria": "Muebles", "n": 49, "dead": 2, "pct_dead": 4.08, "capital_inmovilizado": 137940.0, "costo_mensual": 12355.0}, {"id_tienda": "T23", "categoria": "Organizacion", "n": 22, "dead": 1, "pct_dead": 4.55, "capital_inmovilizado": 18780.0, "costo_mensual": 1540.0}, {"id_tienda": "T23", "categoria": "Textil hogar", "n": 51, "dead": 5, "pct_dead": 9.8, "capital_inmovilizado": 264664.0, "costo_mensual": 25544.0}, {"id_tienda": "T24", "categoria": "Ba\u00f1o", "n": 30, "dead": 2, "pct_dead": 6.67, "capital_inmovilizado": 198440.0, "costo_mensual": 16580.0}, {"id_tienda": "T24", "categoria": "Cocina y mesa", "n": 52, "dead": 10, "pct_dead": 19.23, "capital_inmovilizado": 2055470.0, "costo_mensual": 173855.0}, {"id_tienda": "T24", "categoria": "Decoracion", "n": 60, "dead": 6, "pct_dead": 10.0, "capital_inmovilizado": 804400.0, "costo_mensual": 69725.0}, {"id_tienda": "T24", "categoria": "Iluminacion", "n": 27, "dead": 1, "pct_dead": 3.7, "capital_inmovilizado": 16000.0, "costo_mensual": 1620.0}, {"id_tienda": "T24", "categoria": "Muebles", "n": 44, "dead": 5, "pct_dead": 11.36, "capital_inmovilizado": 258980.0, "costo_mensual": 23555.0}, {"id_tienda": "T24", "categoria": "Organizacion", "n": 38, "dead": 2, "pct_dead": 5.26, "capital_inmovilizado": 226980.0, "costo_mensual": 20465.0}, {"id_tienda": "T24", "categoria": "Textil hogar", "n": 52, "dead": 2, "pct_dead": 3.85, "capital_inmovilizado": 94720.0, "costo_mensual": 8815.0}, {"id_tienda": "T25", "categoria": "Ba\u00f1o", "n": 39, "dead": 1, "pct_dead": 2.56, "capital_inmovilizado": 145440.0, "costo_mensual": 11880.0}, {"id_tienda": "T25", "categoria": "Cocina y mesa", "n": 44, "dead": 6, "pct_dead": 13.64, "capital_inmovilizado": 1166350.0, "costo_mensual": 94615.0}, {"id_tienda": "T25", "categoria": "Decoracion", "n": 54, "dead": 4, "pct_dead": 7.41, "capital_inmovilizado": 648350.0, "costo_mensual": 60020.0}, {"id_tienda": "T25", "categoria": "Iluminacion", "n": 19, "dead": 0, "pct_dead": 0.0, "capital_inmovilizado": 0.0, "costo_mensual": 0.0}, {"id_tienda": "T25", "categoria": "Muebles", "n": 40, "dead": 1, "pct_dead": 2.5, "capital_inmovilizado": 9785.454545454544, "costo_mensual": 768.1818181818181}, {"id_tienda": "T25", "categoria": "Organizacion", "n": 32, "dead": 1, "pct_dead": 3.12, "capital_inmovilizado": 23490.0, "costo_mensual": 1995.0}, {"id_tienda": "T25", "categoria": "Textil hogar", "n": 48, "dead": 5, "pct_dead": 10.42, "capital_inmovilizado": 460840.0, "costo_mensual": 39545.0}, {"id_tienda": "T26", "categoria": "Ba\u00f1o", "n": 36, "dead": 2, "pct_dead": 5.56, "capital_inmovilizado": 95600.0, "costo_mensual": 8135.0}, {"id_tienda": "T26", "categoria": "Cocina y mesa", "n": 53, "dead": 2, "pct_dead": 3.77, "capital_inmovilizado": 1713000.0, "costo_mensual": 138500.0}, {"id_tienda": "T26", "categoria": "Decoracion", "n": 61, "dead": 6, "pct_dead": 9.84, "capital_inmovilizado": 460060.0, "costo_mensual": 40040.0}, {"id_tienda": "T26", "categoria": "Iluminacion", "n": 29, "dead": 1, "pct_dead": 3.45, "capital_inmovilizado": 145880.0, "costo_mensual": 13120.0}, {"id_tienda": "T26", "categoria": "Muebles", "n": 40, "dead": 1, "pct_dead": 2.5, "capital_inmovilizado": 76110.0, "costo_mensual": 12390.0}, {"id_tienda": "T26", "categoria": "Organizacion", "n": 31, "dead": 2, "pct_dead": 6.45, "capital_inmovilizado": 415980.0, "costo_mensual": 33190.0}, {"id_tienda": "T26", "categoria": "Textil hogar", "n": 44, "dead": 5, "pct_dead": 11.36, "capital_inmovilizado": 375360.0, "costo_mensual": 34800.0}, {"id_tienda": "T27", "categoria": "Ba\u00f1o", "n": 37, "dead": 7, "pct_dead": 18.92, "capital_inmovilizado": 422344.0, "costo_mensual": 37997.0}, {"id_tienda": "T27", "categoria": "Cocina y mesa", "n": 34, "dead": 1, "pct_dead": 2.94, "capital_inmovilizado": 755580.0, "costo_mensual": 77385.0}, {"id_tienda": "T27", "categoria": "Decoracion", "n": 57, "dead": 4, "pct_dead": 7.02, "capital_inmovilizado": 667310.0, "costo_mensual": 73005.0}, {"id_tienda": "T27", "categoria": "Iluminacion", "n": 37, "dead": 5, "pct_dead": 13.51, "capital_inmovilizado": 447010.0, "costo_mensual": 41420.0}, {"id_tienda": "T27", "categoria": "Muebles", "n": 36, "dead": 2, "pct_dead": 5.56, "capital_inmovilizado": 72010.0, "costo_mensual": 6075.0}, {"id_tienda": "T27", "categoria": "Organizacion", "n": 37, "dead": 1, "pct_dead": 2.7, "capital_inmovilizado": 136474.00000000003, "costo_mensual": 13195.000000000004}, {"id_tienda": "T27", "categoria": "Textil hogar", "n": 45, "dead": 2, "pct_dead": 4.44, "capital_inmovilizado": 35140.0, "costo_mensual": 3157.5}, {"id_tienda": "T28", "categoria": "Ba\u00f1o", "n": 39, "dead": 0, "pct_dead": 0.0, "capital_inmovilizado": 0.0, "costo_mensual": 0.0}, {"id_tienda": "T28", "categoria": "Cocina y mesa", "n": 52, "dead": 7, "pct_dead": 13.46, "capital_inmovilizado": 1473200.0, "costo_mensual": 123505.0}, {"id_tienda": "T28", "categoria": "Decoracion", "n": 51, "dead": 6, "pct_dead": 11.76, "capital_inmovilizado": 564700.0, "costo_mensual": 52890.0}, {"id_tienda": "T28", "categoria": "Iluminacion", "n": 27, "dead": 3, "pct_dead": 11.11, "capital_inmovilizado": 48470.0, "costo_mensual": 4645.0}, {"id_tienda": "T28", "categoria": "Muebles", "n": 46, "dead": 0, "pct_dead": 0.0, "capital_inmovilizado": 0.0, "costo_mensual": 0.0}, {"id_tienda": "T28", "categoria": "Organizacion", "n": 38, "dead": 4, "pct_dead": 10.53, "capital_inmovilizado": 374070.0, "costo_mensual": 36770.0}, {"id_tienda": "T28", "categoria": "Textil hogar", "n": 37, "dead": 4, "pct_dead": 10.81, "capital_inmovilizado": 286280.0, "costo_mensual": 25375.0}], "composicion": [{"clave": "c3", "label": "Discontinuado con stock", "detalle": "El negocio ya decidi\u00f3 no reponer. Ese stock no se va a mover solo.", "accion": "Accionable hoy, sin modelo: liquidar, transferir o dar de baja.", "n": 139, "capital": 39552200.0}, {"clave": "c1", "label": "Sin venta en los \u00faltimos 3 meses", "detalle": "Se\u00f1al de alerta temprana. En productos de muy bajo volumen, una racha de 3 meses en cero es frecuente por azar (ver nota de interpretaci\u00f3n abajo).", "accion": "Revisar antes de actuar. Es la lista a validar, no a liquidar.", "n": 365, "capital": 34572260.0}, {"clave": "c2", "label": "Excedente estructural proyectado", "detalle": "Vende, pero tiene m\u00e1s stock del que rota en 12 meses. Se val\u00faa solo el excedente, no el stock completo.", "accion": "Palanca de compras y de transferencias entre tiendas.", "n": 157, "capital": 9823062.26839827}], "top_discontinuados": [{"id_producto": "SKU00657", "categoria": "Cocina y mesa", "n_tiendas": 15, "unidades": 263, "capital": 13602360.0}, {"id_producto": "SKU00028", "categoria": "Decoracion", "n_tiendas": 11, "unidades": 183, "capital": 4906230.0}, {"id_producto": "SKU00070", "categoria": "Decoracion", "n_tiendas": 9, "unidades": 157, "capital": 3931280.0}, {"id_producto": "SKU00420", "categoria": "Cocina y mesa", "n_tiendas": 12, "unidades": 220, "capital": 3832400.0}, {"id_producto": "SKU00116", "categoria": "Decoracion", "n_tiendas": 9, "unidades": 118, "capital": 2422540.0}, {"id_producto": "SKU00124", "categoria": "Cocina y mesa", "n_tiendas": 10, "unidades": 103, "capital": 1852970.0}, {"id_producto": "SKU00147", "categoria": "Decoracion", "n_tiendas": 14, "unidades": 291, "capital": 1760550.0}, {"id_producto": "SKU00498", "categoria": "Iluminacion", "n_tiendas": 13, "unidades": 104, "capital": 1693120.0}, {"id_producto": "SKU00671", "categoria": "Organizacion", "n_tiendas": 10, "unidades": 80, "capital": 1502400.0}, {"id_producto": "SKU00353", "categoria": "Ba\u00f1o", "n_tiendas": 6, "unidades": 43, "capital": 1314080.0}, {"id_producto": "SKU00014", "categoria": "Muebles", "n_tiendas": 8, "unidades": 26, "capital": 958620.0}, {"id_producto": "SKU00523", "categoria": "Ba\u00f1o", "n_tiendas": 12, "unidades": 35, "capital": 957250.0}], "disc_n_skus": 13, "verificacion": [{"metrica": "% de posiciones en dead stock", "ini": "8.86%", "fin": "7.93%"}, {"metrica": "% del gasto de almacenaje en stock parado 3+ meses", "ini": "1.28%", "fin": "0.99%"}, {"metrica": "Cobertura total del inventario", "ini": "8.1 meses", "fin": "5.8 meses"}, {"metrica": "Capital inmovilizado, en pesos", "ini": "$41.4 M", "fin": "$93.1 M", "empeora": true}], "cobertura_mensual": [{"mes": "2023-01-01", "cobertura": 10.55}, {"mes": "2023-02-01", "cobertura": 9.63}, {"mes": "2023-03-01", "cobertura": 9.34}, {"mes": "2023-04-01", "cobertura": 8.37}, {"mes": "2023-05-01", "cobertura": 8.07}, {"mes": "2023-06-01", "cobertura": 7.88}, {"mes": "2023-07-01", "cobertura": 7.68}, {"mes": "2023-08-01", "cobertura": 7.31}, {"mes": "2023-09-01", "cobertura": 7.29}, {"mes": "2023-10-01", "cobertura": 7.08}, {"mes": "2023-11-01", "cobertura": 6.98}, {"mes": "2023-12-01", "cobertura": 6.96}, {"mes": "2024-01-01", "cobertura": 6.83}, {"mes": "2024-02-01", "cobertura": 6.69}, {"mes": "2024-03-01", "cobertura": 6.61}, {"mes": "2024-04-01", "cobertura": 6.6}, {"mes": "2024-05-01", "cobertura": 6.43}, {"mes": "2024-06-01", "cobertura": 6.49}, {"mes": "2024-07-01", "cobertura": 6.34}, {"mes": "2024-08-01", "cobertura": 6.39}, {"mes": "2024-09-01", "cobertura": 6.44}, {"mes": "2024-10-01", "cobertura": 6.32}, {"mes": "2024-11-01", "cobertura": 6.36}, {"mes": "2024-12-01", "cobertura": 6.19}, {"mes": "2025-01-01", "cobertura": 6.31}, {"mes": "2025-02-01", "cobertura": 6.16}, {"mes": "2025-03-01", "cobertura": 6.17}, {"mes": "2025-04-01", "cobertura": 6.08}, {"mes": "2025-05-01", "cobertura": 5.99}, {"mes": "2025-06-01", "cobertura": 5.83}, {"mes": "2025-07-01", "cobertura": 5.86}, {"mes": "2025-08-01", "cobertura": 5.63}, {"mes": "2025-09-01", "cobertura": 5.46}, {"mes": "2025-10-01", "cobertura": 5.32}, {"mes": "2025-11-01", "cobertura": 5.31}, {"mes": "2025-12-01", "cobertura": 5.16}], "crecimiento": {"ventas_x": 2.13, "stock_x": 2.14}, "c1_diagnostico": {"run_rate_mediano_c1": 0.5, "run_rate_mediano_todas": 1.92, "prob_azar_3_ceros": 22.3, "pct_posiciones_con_racha_3m": 64.5}, "tiendas_significancia": {"p_global": 8.27, "desvio_observado": 1.24, "desvio_esperado_azar": 1.63, "n_fuera_de_rango": 1, "n_tiendas": 28, "corr_m2": -0.054}, "costo_dual": {"sobre_lista": 7683419.331168831, "sobre_costo": 4197376.113419914, "anual_sobre_lista": 92201031.97402598, "anual_sobre_costo": 50368513.36103897}, "semaforo": {"corte_rojo": 12, "corte_amarillo": 9, "capacidad_min": 420, "capacidad_max": 700, "p90_cobertura": 9.3, "mediana_cobertura": 5.5, "bandas": [{"clave": "rojo", "label": "Rojo", "criterio": "M\u00e1s de 12 meses de cobertura, o producto discontinuado con stock", "accion": "Lista de acci\u00f3n del mes: liquidar, transferir o dar de baja.", "n": 345, "pct": 4.32, "valor": 109679280.0, "pct_valor": 3.11, "capital_inmov": 56400142.26839827}, {"clave": "amarillo", "label": "Amarillo", "criterio": "Entre 9 y 12 meses de cobertura", "accion": "Lista de vigilancia: frenar reposici\u00f3n y seguir de cerca. Todav\u00eda no requiere liquidar.", "n": 652, "pct": 8.16, "valor": 356304850.0, "pct_valor": 10.1, "capital_inmov": 5180350.0}, {"clave": "verde", "label": "Verde", "criterio": "Menos de 9 meses de cobertura", "accion": "Sin acci\u00f3n. Rotaci\u00f3n dentro de lo normal para el cat\u00e1logo.", "n": 6996, "pct": 87.53, "valor": 3062160940.0, "pct_valor": 86.79, "capital_inmov": 22367030.0}], "calibracion": [{"corte": 6, "n": 3189, "pct": 39.9, "valor": 1879261440.0, "costo_mensual": 93963072.0, "dentro_capacidad": false}, {"corte": 7, "n": 2275, "pct": 28.5, "valor": 1286509980.0, "costo_mensual": 64325499.0, "dentro_capacidad": false}, {"corte": 8, "n": 1382, "pct": 17.3, "valor": 763217065.0, "costo_mensual": 38160853.25, "dentro_capacidad": false}, {"corte": 9, "n": 874, "pct": 10.9, "valor": 434185980.0, "costo_mensual": 21709299.0, "dentro_capacidad": false}, {"corte": 10, "n": 544, "pct": 6.8, "valor": 231416535.0, "costo_mensual": 11570826.75, "dentro_capacidad": true}, {"corte": 11, "n": 401, "pct": 5.0, "valor": 135796285.0, "costo_mensual": 6789814.25, "dentro_capacidad": false}, {"corte": 12, "n": 210, "pct": 2.6, "valor": 70863850.0, "costo_mensual": 3543192.5, "dentro_capacidad": false}, {"corte": 14, "n": 147, "pct": 1.8, "valor": 33762710.0, "costo_mensual": 1688135.5, "dentro_capacidad": false}], "por_categoria": [{"categoria": "Decoracion", "n": 1573, "rojo": 81, "amarillo": 132, "pct_rojo": 5.15, "pct_amarillo": 8.39, "valor_rojo": 25806500.0, "valor_amarillo": 68170880.0}, {"categoria": "Iluminacion", "n": 799, "rojo": 30, "amarillo": 77, "pct_rojo": 3.75, "pct_amarillo": 9.64, "valor_rojo": 4622640.0, "valor_amarillo": 42138330.0}, {"categoria": "Cocina y mesa", "n": 1338, "rojo": 77, "amarillo": 102, "pct_rojo": 5.75, "pct_amarillo": 7.62, "valor_rojo": 35819670.0, "valor_amarillo": 86302260.0}, {"categoria": "Ba\u00f1o", "n": 912, "rojo": 42, "amarillo": 77, "pct_rojo": 4.61, "pct_amarillo": 8.44, "valor_rojo": 8776660.0, "valor_amarillo": 33941330.0}, {"categoria": "Muebles", "n": 1170, "rojo": 35, "amarillo": 108, "pct_rojo": 2.99, "pct_amarillo": 9.23, "valor_rojo": 9812320.0, "valor_amarillo": 52446400.0}, {"categoria": "Organizacion", "n": 952, "rojo": 37, "amarillo": 69, "pct_rojo": 3.89, "pct_amarillo": 7.25, "valor_rojo": 15347310.0, "valor_amarillo": 34471630.0}, {"categoria": "Textil hogar", "n": 1249, "rojo": 43, "amarillo": 87, "pct_rojo": 3.44, "pct_amarillo": 6.97, "valor_rojo": 9494180.0, "valor_amarillo": 38834020.0}], "dead_stock_actual": 661, "solapamiento_rojo_dead": 345, "amarillo_ya_marcado": 49, "amarillo_nuevo": 603}}</script>
+<script>
+const DATA = JSON.parse(document.getElementById("dashboard-data").textContent);
+
+/* ============ helpers ============ */
+const fmtMoney = (n) => "$" + Math.round(n).toLocaleString("es-AR");
+const fmtMoneyCompact = (n) => {
+  const sign = n < 0 ? "-" : "";
+  n = Math.abs(n);
+  if (n >= 1e6) return sign + "$" + (n/1e6).toLocaleString("es-AR", {maximumFractionDigits:1}) + " M";
+  if (n >= 1e3) return sign + "$" + (n/1e3).toLocaleString("es-AR", {maximumFractionDigits:0}) + " mil";
+  return sign + fmtMoney(n);
+};
+const fmtPct = (n, d=2) => n.toLocaleString("es-AR", {minimumFractionDigits:d, maximumFractionDigits:d}) + "%";
+const MESES = {1:"ene",2:"feb",3:"mar",4:"abr",5:"may",6:"jun",7:"jul",8:"ago",9:"sep",10:"oct",11:"nov",12:"dic"};
+const monthLabelFromYYYYMM = (s) => { const [y,m] = s.split("-"); return MESES[parseInt(m,10)] + " " + y.slice(2); };
+const monthLabelFromDate = (s) => { const [y,m] = s.split("-"); return MESES[parseInt(m,10)] + " " + y.slice(2); };
+const cssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+const tooltip = document.createElement("div");
+tooltip.className = "tooltip";
+document.body.appendChild(tooltip);
+
+/* ============ tabs ============ */
+const tabBtns = document.querySelectorAll(".tab-btn");
+const panels = { contexto: "panel-contexto", resumen: "panel-resumen", semaforo: "panel-semaforo", evolucion: "panel-evolucion", tiendas: "panel-tiendas" };
+let renderedTabs = new Set();
+tabBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.tab;
+    tabBtns.forEach(b => b.setAttribute("aria-selected", b === btn ? "true" : "false"));
+    Object.entries(panels).forEach(([key, id]) => {
+      document.getElementById(id).hidden = (key !== tab);
+    });
+    renderTabIfNeeded(tab);
+  });
+});
+
+function renderTabIfNeeded(tab) {
+  if (renderedTabs.has(tab)) return;
+  renderedTabs.add(tab);
+  if (tab === "contexto") renderContexto();
+  if (tab === "resumen") renderResumen();
+  if (tab === "evolucion") renderEvolucion();
+  if (tab === "semaforo") renderSemaforo();
+  if (tab === "tiendas") renderTiendas();
+}
+
+/* ============ generic KPI row ============ */
+function renderKpiRow(container, kpis) {
+  container.innerHTML = "";
+  kpis.forEach(k => {
+    const el = document.createElement("div");
+    el.className = "kpi";
+    const valueEl = document.createElement("div");
+    valueEl.className = "kpi-value" + (k.flag ? " flag" : "") + (k.good ? " good" : "");
+    valueEl.textContent = k.value;
+    const labelEl = document.createElement("div");
+    labelEl.className = "kpi-label";
+    labelEl.textContent = k.label;
+    const subEl = document.createElement("div");
+    subEl.className = "kpi-sub";
+    subEl.textContent = k.sub || "";
+    el.appendChild(labelEl); el.appendChild(valueEl); el.appendChild(subEl);
+    container.appendChild(el);
+  });
+}
+
+/* ============ generic horizontal bar ranking ============ */
+function renderBarRanking(container, items, opts) {
+  container.innerHTML = "";
+  const nPriority = opts.nPriority || 0;
+  const maxVal = Math.max(...items.map(i => i.value));
+  const axisMax = opts.axisMax || Math.ceil(maxVal / opts.step) * opts.step;
+  items.forEach((it, i) => {
+    const isPriority = i < nPriority;
+    const pctWidth = (it.value / axisMax) * 100;
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    const catEl = document.createElement("div");
+    catEl.className = "bar-cat";
+    catEl.textContent = it.label;
+    catEl.title = it.label;
+    const track = document.createElement("div");
+    track.className = "bar-track";
+    const tip = opts.tooltipFn ? opts.tooltipFn(it) : `${it.label}: ${opts.fmtValue(it.value)}`;
+    track.dataset.tip = tip;
+    const fill = document.createElement("div");
+    fill.className = "bar-fill" + (isPriority || it.significant ? " priority" : "");
+    fill.style.width = pctWidth + "%";
+    const valEl = document.createElement("div");
+    valEl.className = "bar-value";
+    valEl.textContent = opts.fmtValue(it.value);
+    track.appendChild(fill);
+    // barra de error opcional: sin esto, diferencias que son ruido se leen como ranking
+    if (it.ic != null) {
+      const lo = Math.max(0, it.value - it.ic), hi = Math.min(axisMax, it.value + it.ic);
+      const err = document.createElement("div");
+      err.className = "bar-err";
+      err.style.left = (lo / axisMax * 100) + "%";
+      err.style.width = ((hi - lo) / axisMax * 100) + "%";
+      err.appendChild(document.createElement("span"));
+      track.appendChild(err);
+      // la etiqueta va pegada al extremo de la barra, no al de la barra de error:
+      // si no, en los valores altos se corre fuera de la pista y pisa el flag.
+      // Lleva fondo del color de la superficie para leerse sobre el bigote.
+      valEl.style.left = `calc(${pctWidth}% + 8px)`;
+      valEl.style.background = "var(--card)";
+      valEl.style.padding = "0 4px";
+      valEl.style.borderRadius = "3px";
+    } else {
+      valEl.style.left = `calc(${pctWidth}% + 8px)`;
+    }
+    track.appendChild(valEl);
+    if (opts.refValue != null) {
+      const ref = document.createElement("div");
+      ref.className = "bar-ref";
+      ref.style.left = (opts.refValue / axisMax * 100) + "%";
+      ref.title = "Promedio de la cadena";
+      track.appendChild(ref);
+    }
+    const flagEl = document.createElement("div");
+    flagEl.className = "bar-flag";
+    flagEl.textContent = it.significant ? "Significativo" : (isPriority ? "Prioridad" : "");
+    row.appendChild(catEl); row.appendChild(track); row.appendChild(flagEl);
+    if (opts.onClick) { row.style.cursor = "pointer"; row.addEventListener("click", () => opts.onClick(it)); }
+    container.appendChild(row);
+  });
+  const axis = document.createElement("div");
+  axis.className = "bar-axis";
+  const steps = [0, axisMax*0.25, axisMax*0.5, axisMax*0.75, axisMax];
+  steps.forEach(s => {
+    const span = document.createElement("span");
+    span.style.left = (s/axisMax*100) + "%";
+    span.textContent = opts.fmtAxis ? opts.fmtAxis(s) : opts.fmtValue(s);
+    axis.appendChild(span);
+  });
+  container.appendChild(axis);
+
+  container.querySelectorAll(".bar-track").forEach(track => {
+    track.addEventListener("pointermove", (e) => {
+      tooltip.textContent = track.dataset.tip;
+      tooltip.style.left = e.clientX + "px";
+      tooltip.style.top = (e.clientY + window.scrollY) + "px";
+      tooltip.classList.add("show");
+    });
+    track.addEventListener("pointerleave", () => tooltip.classList.remove("show"));
+  });
+}
+
+/* ============ generic line chart (crosshair + tooltip) ============ */
+function renderLineChart(container, data, series, opts) {
+  container.innerHTML = "";
+  const w = container.clientWidth || 600;
+  const h = container.clientHeight || 220;
+  const pad = { top: 18, right: 14, bottom: 24, left: opts.leftPad || 56 };
+  const plotW = w - pad.left - pad.right;
+  const plotH = h - pad.top - pad.bottom;
+  const n = data.length;
+  const allVals = series.flatMap(s => data.map(d => d[s.key]));
+  const vMax = opts.vMax || (Math.ceil(Math.max(...allVals) / opts.step) * opts.step);
+  const vMin = 0;
+  const x = (i) => pad.left + (i / (n - 1)) * plotW;
+  const y = (v) => pad.top + plotH - ((v - vMin) / (vMax - vMin)) * plotH;
+
+  const svgNS = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(svgNS, "svg");
+  svg.setAttribute("width", "100%"); svg.setAttribute("height", "100%");
+  svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+
+  const gridSteps = 4;
+  for (let i = 0; i <= gridSteps; i++) {
+    const v = vMin + (vMax - vMin) * (i / gridSteps);
+    const gy = y(v);
+    const line = document.createElementNS(svgNS, "line");
+    line.setAttribute("x1", pad.left); line.setAttribute("x2", w - pad.right);
+    line.setAttribute("y1", gy); line.setAttribute("y2", gy);
+    line.setAttribute("stroke", "var(--line)"); line.setAttribute("stroke-width", "1");
+    svg.appendChild(line);
+    const label = document.createElementNS(svgNS, "text");
+    label.setAttribute("x", pad.left - 10); label.setAttribute("y", gy + 4);
+    label.setAttribute("text-anchor", "end"); label.setAttribute("font-size", "10.5"); label.setAttribute("fill", "var(--text-3)");
+    label.textContent = opts.fmtY(v);
+    svg.appendChild(label);
+  }
+
+  const xStepVal = opts.xStep || 3;
+  data.forEach((d, i) => {
+    const isRegularTick = i % xStepVal === 0;
+    const isLast = i === n - 1;
+    if (!isLast && (!isRegularTick || (n - 1 - i) < xStepVal)) return;
+    const label = document.createElementNS(svgNS, "text");
+    label.setAttribute("x", x(i)); label.setAttribute("y", h - 6);
+    label.setAttribute("text-anchor", "middle"); label.setAttribute("font-size", "10.5"); label.setAttribute("fill", "var(--text-3)");
+    label.textContent = opts.xLabel(d);
+    svg.appendChild(label);
+  });
+
+  const crosshair = document.createElementNS(svgNS, "line");
+  crosshair.setAttribute("y1", pad.top); crosshair.setAttribute("y2", pad.top + plotH);
+  crosshair.setAttribute("stroke", "var(--line-strong)"); crosshair.setAttribute("stroke-width", "1"); crosshair.setAttribute("opacity", "0");
+  svg.appendChild(crosshair);
+
+  series.forEach(s => {
+    let d = "";
+    data.forEach((row, i) => { d += (i === 0 ? "M " : "L ") + x(i) + " " + y(row[s.key]) + " "; });
+    const path = document.createElementNS(svgNS, "path");
+    path.setAttribute("d", d); path.setAttribute("fill", "none");
+    path.setAttribute("stroke", s.color); path.setAttribute("stroke-width", s.width || 2);
+    path.setAttribute("stroke-linecap", "round"); path.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(path);
+  });
+
+  series.forEach(s => {
+    const lastRow = data[n-1];
+    const dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("cx", x(n-1)); dot.setAttribute("cy", y(lastRow[s.key])); dot.setAttribute("r", 4);
+    dot.setAttribute("fill", s.color); dot.setAttribute("stroke", "var(--card)"); dot.setAttribute("stroke-width", "2");
+    svg.appendChild(dot);
+  });
+
+  const hoverDots = series.map(s => {
+    const dot = document.createElementNS(svgNS, "circle");
+    dot.setAttribute("r", 4.5); dot.setAttribute("fill", s.color);
+    dot.setAttribute("stroke", "var(--card)"); dot.setAttribute("stroke-width", "2"); dot.setAttribute("opacity", "0");
+    svg.appendChild(dot);
+    return dot;
+  });
+
+  const hit = document.createElementNS(svgNS, "rect");
+  hit.setAttribute("x", pad.left); hit.setAttribute("y", pad.top);
+  hit.setAttribute("width", plotW); hit.setAttribute("height", plotH); hit.setAttribute("fill", "transparent");
+  svg.appendChild(hit);
+
+  function showAt(i) {
+    const row = data[i];
+    crosshair.setAttribute("x1", x(i)); crosshair.setAttribute("x2", x(i)); crosshair.setAttribute("opacity", "1");
+    series.forEach((s, si) => {
+      hoverDots[si].setAttribute("cx", x(i)); hoverDots[si].setAttribute("cy", y(row[s.key])); hoverDots[si].setAttribute("opacity", "1");
+    });
+    let html = `<div class="t-date">${opts.xLabel(row)}</div>`;
+    series.forEach(s => {
+      html += `<div class="tooltip-row"><span class="tooltip-key" style="background:${s.color}"></span>${s.label}: <b>${opts.fmtTooltip(row[s.key])}</b></div>`;
+    });
+    tooltip.innerHTML = html;
+    const rect = container.getBoundingClientRect();
+    tooltip.style.left = (rect.left + x(i)) + "px";
+    tooltip.style.top = (window.scrollY + rect.top + Math.min(...series.map(s=>y(row[s.key])))) + "px";
+    tooltip.classList.add("show");
+  }
+  hit.addEventListener("pointermove", (e) => {
+    const rect = container.getBoundingClientRect();
+    const px = e.clientX - rect.left;
+    const i = Math.max(0, Math.min(n - 1, Math.round(((px - pad.left) / plotW) * (n - 1))));
+    showAt(i);
+  });
+  hit.addEventListener("pointerleave", () => { crosshair.setAttribute("opacity", "0"); hoverDots.forEach(d => d.setAttribute("opacity", "0")); tooltip.classList.remove("show"); });
+
+  container.appendChild(svg);
+}
+
+/* ============ generic table ============ */
+function renderTable(tbody, rows) { tbody.innerHTML = ""; rows.forEach(tr => tbody.appendChild(tr)); }
+
+/* ==================================================================
+   TAB 1: CONTEXTO
+   ================================================================== */
+function renderContexto() {
+  const c = DATA.contexto;
+  renderKpiRow(document.getElementById("kpiContexto"), [
+    { label: "Venta del último trimestre", value: fmtMoneyCompact(c.venta_trimestre), sub: "oct–dic 2025 · " + c.unidades_trimestre.toLocaleString("es-AR") + " unidades · " + (c.var_trimestre_yoy >= 0 ? "+" : "") + c.var_trimestre_yoy.toLocaleString("es-AR",{minimumFractionDigits:1}) + "% vs. mismo trimestre 2024" },
+    { label: "SKUs activos en catálogo", value: c.n_skus_activos.toLocaleString("es-AR"), sub: c.n_categorias + " categorías · " + c.n_subcategorias + " subcategorías · " + c.n_skus_historicos.toLocaleString("es-AR") + " SKUs históricos" },
+    { label: "Crecimiento (últimos 12m vs 12 previos)", value: "+28,7%", sub: "el negocio sigue en expansión" },
+    { label: "Concentración de la venta", value: c.pareto.skus_top + " de " + c.pareto.skus_total + " SKUs", sub: `explican el ${c.pareto.pct_facturacion}% de la facturación — los otros ${c.pareto.skus_total - c.pareto.skus_top} son cola larga` },
+  ]);
+
+  renderLineChart(document.getElementById("chartVentaMensual"), c.venta_mensual, [
+    { key: "venta", color: cssVar("--accent"), label: "Venta neta", width: 2.5 },
+  ], { step: 200e6, leftPad: 56, xStep: 4, fmtY: fmtMoneyCompact, fmtTooltip: fmtMoney, xLabel: (d) => monthLabelFromYYYYMM(d.mes) + " " + d.mes.slice(0,4) });
+
+  // mix categoria: dos barras por categoria (venta vs catalogo) -> usamos ranking simple con venta, y anotamos catalogo en tooltip
+  const mixSorted = [...c.mix_categoria].sort((a,b) => b.pct_venta - a.pct_venta);
+  const mixContainer = document.getElementById("chartMixCategoria");
+  mixContainer.innerHTML = "";
+  const maxMix = Math.max(...mixSorted.map(m => Math.max(m.pct_venta, m.pct_catalogo)));
+  const axisMaxMix = Math.ceil(maxMix / 5) * 5;
+  mixSorted.forEach(m => {
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    // Ojo: .bar-track trae flex:1, y dentro de un contenedor en columna eso le
+    // fija la altura en 0 (flex-basis:0) y las barras desaparecen. Por eso van
+    // con flex:none y altura explicita.
+    row.innerHTML = `
+      <div class="bar-cat">${m.categoria}</div>
+      <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+        <div class="bar-track" style="height:13px; flex:none;"><div class="bar-fill" style="width:${(m.pct_venta/axisMaxMix*100)}%; background:var(--accent);"></div></div>
+        <div class="bar-track" style="height:13px; flex:none;"><div class="bar-fill" style="width:${(m.pct_catalogo/axisMaxMix*100)}%; background:var(--muted-line);"></div></div>
+      </div>
+      <div style="width:96px; flex-shrink:0; display:flex; flex-direction:column; gap:4px; font-size:11.5px; font-variant-numeric:tabular-nums; line-height:13px;">
+        <div style="color:var(--text-1); font-weight:700;">${fmtPct(m.pct_venta,1)} venta</div>
+        <div style="color:var(--text-3);">${fmtPct(m.pct_catalogo,1)} SKUs</div>
+      </div>
+    `;
+    mixContainer.appendChild(row);
+  });
+
+  // estacionalidad: bar chart simple (12 barras)
+  const estContainer = document.getElementById("chartEstacionalidad");
+  estContainer.innerHTML = "";
+  const maxEst = Math.max(...c.estacionalidad.map(e => e.indice));
+  const wrap = document.createElement("div");
+  wrap.style.cssText = "display:flex; align-items:flex-end; gap:6px; height:160px; padding-top:10px;";
+  c.estacionalidad.forEach(e => {
+    const barWrap = document.createElement("div");
+    barWrap.style.cssText = "flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; height:100%; justify-content:flex-end;";
+    const val = document.createElement("div");
+    val.style.cssText = "font-size:10px; color:var(--text-3); font-variant-numeric:tabular-nums;";
+    val.textContent = Math.round(e.indice);
+    const bar = document.createElement("div");
+    const h = Math.max(4, (e.indice / maxEst) * 120);
+    bar.style.cssText = `width:100%; max-width:22px; height:${h}px; border-radius:4px 4px 0 0; background:${e.indice >= 100 ? "var(--accent)" : "var(--muted-line)"};`;
+    const lbl = document.createElement("div");
+    lbl.style.cssText = "font-size:10.5px; color:var(--text-3);";
+    lbl.textContent = MESES[e.mes_num];
+    barWrap.appendChild(val); barWrap.appendChild(bar); barWrap.appendChild(lbl);
+    wrap.appendChild(barWrap);
+  });
+  estContainer.appendChild(wrap);
+
+  // tabla de verificacion: los 4 caminos por los que se busco el deterioro
+  const vbody = document.querySelector("#verificacionTable tbody");
+  renderTable(vbody, DATA.verificacion.map(v => {
+    const tr = document.createElement("tr");
+    const td0 = document.createElement("td"); td0.textContent = v.metrica; tr.appendChild(td0);
+    [v.ini, v.fin].forEach(x => {
+      const td = document.createElement("td"); td.className = "num"; td.textContent = x; tr.appendChild(td);
+    });
+    const td3 = document.createElement("td");
+    td3.className = "num";
+    td3.style.fontWeight = "700";
+    td3.style.color = v.empeora ? "var(--serious)" : "var(--good)";
+    td3.textContent = v.empeora ? "Empeora" : "Mejora";
+    tr.appendChild(td3);
+    return tr;
+  }));
+
+  const cr = DATA.crecimiento;
+  document.getElementById("notaCrecimiento").innerHTML =
+    `Tampoco se sostiene la explicación de "están comprando de más": entre 2023 y 2025 las ventas se multiplicaron por <strong>${cr.ventas_x.toLocaleString("es-AR",{minimumFractionDigits:2})}</strong> y el stock por <strong>${cr.stock_x.toLocaleString("es-AR",{minimumFractionDigits:2})}</strong> — el inventario creció prácticamente al mismo ritmo que el negocio.`;
+}
+
+/* ==================================================================
+   TAB 2: RESUMEN
+   ================================================================== */
+function renderResumen() {
+  const d = DATA.dead_stock_resumen;
+  const topCat = [...d.por_categoria].sort((a,b) => b.pct_posiciones_dead - a.pct_posiciones_dead)[0];
+
+  renderKpiRow(document.getElementById("kpiRow"), [
+    { label: "Capital inmovilizado", value: fmtMoneyCompact(d.totales.capital_inmovilizado), sub: fmtPct(d.totales.pct_capital_inmovilizado) + " del stock a costo total" },
+    { label: "Costo de mantenerlo", value: fmtMoneyCompact(DATA.costo_dual.sobre_costo) + "/mes", sub: "5%/mes sobre valor a costo · " + fmtMoneyCompact(DATA.costo_dual.sobre_lista) + "/mes si se calcula sobre precio de lista" },
+    { label: "Posiciones en dead stock", value: d.totales.posiciones_dead.toLocaleString("es-AR"), sub: fmtPct(d.totales.pct_dead) + " de " + d.totales.posiciones_con_stock.toLocaleString("es-AR") + " combinaciones con stock" },
+    { label: "Categoría con mayor incidencia", value: topCat.categoria, sub: fmtPct(topCat.pct_posiciones_dead) + " de sus posiciones en dead stock — la más alta", flag: true },
+  ]);
+
+  // composicion: separa lo accionable hoy (discontinuados) de lo que es solo una alerta
+  const compGrid = document.getElementById("compGrid");
+  compGrid.innerHTML = "";
+  DATA.composicion.forEach(c => {
+    const el = document.createElement("div");
+    el.className = "comp-card" + (c.clave === "c3" ? " accionable" : "");
+    el.innerHTML = `
+      <div class="comp-label">${c.label}</div>
+      <div class="comp-value">${fmtMoneyCompact(c.capital)}</div>
+      <div class="comp-sub">${c.n} posiciones · ${fmtPct(c.capital / d.totales.capital_inmovilizado * 100, 0)} del capital inmovilizado</div>
+      <div class="comp-detalle">${c.detalle}</div>
+      <div class="comp-accion">${c.accion}</div>`;
+    compGrid.appendChild(el);
+  });
+
+  const c3 = DATA.composicion.find(x => x.clave === "c3");
+  document.getElementById("calloutDiscontinuados").innerHTML =
+    `<strong>${c3.n} posiciones concentran ${fmtMoneyCompact(c3.capital)}</strong> — el ${fmtPct(c3.capital / d.totales.capital_inmovilizado * 100, 0)} de todo el capital inmovilizado, en el ${fmtPct(c3.n / d.totales.posiciones_dead * 100, 0)} de los casos. Son productos que el negocio ya dio de baja del catálogo pero que siguen ocupando stock en tienda. Corresponden a <strong>${DATA.disc_n_skus} SKUs distintos</strong>: cada uno suele tener stock remanente en varias tiendas a la vez, así que la decisión se toma una vez por producto y se ejecuta en todas. Abajo, los 12 SKUs de mayor capital.`;
+
+  renderTable(document.querySelector("#discTable tbody"), DATA.top_discontinuados.map(r => {
+    const tr = document.createElement("tr");
+    [r.id_producto, r.categoria].forEach(v => {
+      const td = document.createElement("td"); td.textContent = v; tr.appendChild(td);
+    });
+    [r.n_tiendas.toLocaleString("es-AR"), r.unidades.toLocaleString("es-AR"), fmtMoney(r.capital)].forEach(v => {
+      const td = document.createElement("td"); td.className = "num"; td.textContent = v; tr.appendChild(td);
+    });
+    return tr;
+  }));
+
+  // advertencia metodologica sobre C1: es la condicion mas grande y la mas ruidosa
+  const c1d = DATA.c1_diagnostico;
+  document.getElementById("notaC1").innerHTML =
+    `<strong>Cómo interpretar la condición (1).</strong> Las posiciones que marca venden <strong>${c1d.run_rate_mediano_c1.toLocaleString("es-AR",{minimumFractionDigits:2})} unidades por mes</strong> en la mediana, contra ${c1d.run_rate_mediano_todas.toLocaleString("es-AR",{minimumFractionDigits:2})} del total. A ese ritmo, la probabilidad de tres meses seguidos en cero por puro azar es de <strong>${c1d.prob_azar_3_ceros.toLocaleString("es-AR",{minimumFractionDigits:1})}%</strong>, y el ${c1d.pct_posiciones_con_racha_3m.toLocaleString("es-AR",{minimumFractionDigits:1})}% de todas las posiciones tuvo alguna racha así en los últimos 24 meses. Es decir: esta condición detecta productos de bajo volumen comportándose de forma normal tanto como productos realmente frenados. <strong>Debe leerse como una lista a revisar, no como una lista a liquidar.</strong>`;
+
+  document.getElementById("notaCosto").innerHTML =
+    `<strong>Sobre el costo de mantenimiento.</strong> El 5% mensual (2% almacenaje + 3% oportunidad) lo confirmó el negocio, pero la base sobre la que se aplica es una decisión metodológica nuestra. Sobre <strong>valor a costo</strong> da ${fmtMoneyCompact(DATA.costo_dual.sobre_costo)}/mes (${fmtMoneyCompact(DATA.costo_dual.anual_sobre_costo)}/año); sobre <strong>precio de lista</strong> da ${fmtMoneyCompact(DATA.costo_dual.sobre_lista)}/mes (${fmtMoneyCompact(DATA.costo_dual.anual_sobre_lista)}/año, más que el valor del propio stock). Se muestra la base a costo por ser la convención habitual para capital inmovilizado; conviene validar cuál prefiere el negocio.`;
+
+  // el grafico muestra % de POSICIONES en dead stock (coincide con el titulo);
+  // el % de capital inmovilizado sigue disponible en la tabla de abajo.
+  const catsPorPct = [...d.por_categoria].sort((a,b) => b.pct_posiciones_dead - a.pct_posiciones_dead);
+  renderBarRanking(document.getElementById("barChartCategoria"), catsPorPct.map(c => ({ label: c.categoria, value: c.pct_posiciones_dead, raw: c })), {
+    // margen extra en el eje para que la etiqueta del valor mas alto no
+    // termine pisando la columna "Prioridad" de la derecha
+    nPriority: 2, step: 2,
+    axisMax: Math.ceil(Math.max(...catsPorPct.map(c => c.pct_posiciones_dead)) * 1.2 / 2) * 2,
+    fmtValue: (v) => fmtPct(v,1),
+    fmtAxis: (v) => fmtPct(v,0),
+    tooltipFn: (it) => `${it.label}: ${it.raw.posiciones_dead} de ${it.raw.posiciones_totales} posiciones en dead stock (${fmtPct(it.value)}) · ${fmtMoneyCompact(it.raw.capital_inmovilizado)} de capital`,
+  });
+
+  const tbody = document.querySelector("#detailTable tbody");
+  const rows = catsPorPct.map((c, i) => {
+    const isPriority = i < 2;
+    const tr = document.createElement("tr");
+    const cellCat = document.createElement("td");
+    cellCat.innerHTML = `<div class="cat-cell"><span class="cat-dot${isPriority ? ' priority' : ''}"></span>${c.categoria}${isPriority ? '<span class="priority-tag">Prioridad</span>' : ''}</div>`;
+    tr.appendChild(cellCat);
+    [fmtPct(c.pct_capital_inmovilizado), fmtMoney(c.capital_inmovilizado), fmtPct(c.pct_posiciones_dead), c.meses_parado_prom.toLocaleString("es-AR",{minimumFractionDigits:1,maximumFractionDigits:1}), fmtMoney(c.costo_mensual), c.liquidaciones].forEach(v => {
+      const td = document.createElement("td"); td.className = "num"; td.textContent = v; tr.appendChild(td);
+    });
+    return tr;
+  });
+  renderTable(tbody, rows);
+}
+
+/* ==================================================================
+   TAB 3: EVOLUCION
+   ================================================================== */
+function renderEvolucion() {
+  const ev = DATA.evolucion_mensual;
+  const first = ev[0], last = ev[ev.length-1];
+  const last12 = ev.slice(-12);
+  const avg = (arr, k) => arr.reduce((s,d)=>s+d[k],0)/arr.length;
+
+  renderKpiRow(document.getElementById("kpiEvolucion"), [
+    { label: "% dead stock, dic-2025", value: fmtPct(last.pct), sub: fmtPct(first.pct) + " en ene-2023" },
+    { label: "Promedio últimos 12 meses", value: fmtPct(avg(last12,"pct")), sub: "vs. " + fmtPct(avg(ev.filter(d=>d.mes.startsWith("2023")),"pct")) + " en 2023" },
+    { label: "Capital inmovilizado", value: fmtMoneyCompact(first.capital_inmovilizado) + " → " + fmtMoneyCompact(last.capital_inmovilizado), sub: "de ene-2023 a dic-2025 · en pesos se duplicó, junto con el negocio" },
+    { label: "Mes más alto de la serie", value: fmtMoneyCompact(Math.max(...ev.map(d=>d.capital_inmovilizado))), sub: "agosto 2025 — el pico de los 36 meses, 1,6x el promedio de ese año" },
+  ]);
+
+  renderLineChart(document.getElementById("chartPctEvolucion"), ev, [
+    { key: "pct", color: cssVar("--accent"), label: "% dead stock", width: 2.5 },
+  ], { step: 2, leftPad: 44, xStep: 3, fmtY: (v) => fmtPct(v,0), fmtTooltip: (v) => fmtPct(v), xLabel: (d) => monthLabelFromYYYYMM(d.mes.slice(0,7)) + " " + d.mes.slice(0,4) });
+
+  document.getElementById("calloutPctEvolucion").innerHTML =
+    `El % de combinaciones en dead stock bajó de <strong>${fmtPct(first.pct)}</strong> en ene-2023 a <strong>${fmtPct(last.pct)}</strong> en dic-2025 (promedio últimos 12 meses: ${fmtPct(avg(last12,"pct"))}), con bastante ruido mes a mes. No es una tendencia de deterioro sostenido — ver la pestaña "Contexto del negocio" para el contraste con lo que percibe la dirección.`;
+
+  renderLineChart(document.getElementById("chartCapitalEvolucion"), ev, [
+    { key: "capital_inmovilizado", color: cssVar("--serious"), label: "Capital inmovilizado", width: 2.5 },
+  ], { step: 20e6, leftPad: 56, xStep: 3, fmtY: fmtMoneyCompact, fmtTooltip: fmtMoney, xLabel: (d) => monthLabelFromYYYYMM(d.mes.slice(0,7)) + " " + d.mes.slice(0,4) });
+
+  document.getElementById("calloutCapitalEvolucion").innerHTML =
+    `En pesos el capital inmovilizado creció y es volátil: promedió $41,4 M en 2023 contra $93,1 M en los últimos 12 meses, con un pico de <strong>${fmtMoneyCompact(Math.max(...ev.map(d=>d.capital_inmovilizado)))}</strong>. El crecimiento en pesos es principalmente efecto de escala del negocio (ver pestaña "Contexto del negocio").`;
+
+  // cobertura total: el control de "compran de mas". Si esto baja, no hay sobrecompra.
+  const cob = DATA.cobertura_mensual;
+  renderLineChart(document.getElementById("chartCobertura"), cob, [
+    { key: "cobertura", color: cssVar("--accent"), label: "Meses de cobertura", width: 2.5 },
+  ], { step: 2, leftPad: 44, xStep: 3, fmtY: (v) => v.toLocaleString("es-AR",{maximumFractionDigits:0}) + "m",
+       fmtTooltip: (v) => v.toLocaleString("es-AR",{minimumFractionDigits:1,maximumFractionDigits:1}) + " meses",
+       xLabel: (d) => monthLabelFromYYYYMM(d.mes.slice(0,7)) + " " + d.mes.slice(0,4) });
+
+  document.getElementById("calloutCobertura").innerHTML =
+    `Es el control clave contra la hipótesis de sobrecompra: cuántos meses de venta hay parados en stock. Bajó de <strong>${cob[0].cobertura.toLocaleString("es-AR",{minimumFractionDigits:1})} meses</strong> en ene-2023 a <strong>${cob[cob.length-1].cobertura.toLocaleString("es-AR",{minimumFractionDigits:1})} meses</strong> en dic-2025, de forma sostenida. El inventario de Casa Óga rota hoy bastante más rápido que hace dos años — no hay señal de que estén comprando por encima de lo que venden.`;
+}
+
+
+/* ==================================================================
+   TAB: SEMAFORO PROPUESTO
+   ================================================================== */
+function renderSemaforo() {
+  const s = DATA.semaforo;
+  const COLORES = { rojo: "var(--critical)", amarillo: "var(--warning)", verde: "var(--good)" };
+
+  document.getElementById("notaSemaforoCalibracion").innerHTML =
+    `<strong>Los cortes no son arbitrarios.</strong> La mediana del catálogo rota en ${s.mediana_cobertura.toLocaleString("es-AR",{minimumFractionDigits:1})} meses, y el percentil 90 está en ${s.p90_cobertura.toLocaleString("es-AR",{minimumFractionDigits:1})} meses — por eso el amarillo arranca en <strong>${s.corte_amarillo} meses</strong>: marca al 10% que más tarda en rotar. El rojo queda en <strong>${s.corte_amarillo === 9 ? s.corte_rojo : s.corte_rojo} meses</strong> o producto discontinuado. El criterio de decisión fue la <strong>capacidad operativa que declaró el negocio: entre ${s.capacidad_min} y ${s.capacidad_max} combinaciones por mes</strong>. Un umbral que marque más que eso no es accionable, por razonable que suene.`;
+
+  // Aclaracion de base: sin esto, la banda roja (subconjunto de las 661) parece
+  // costar mas que el dead stock completo, solo porque se valua distinto.
+  const _rojoB = s.bandas[0];
+  document.getElementById("notaSemaforoBase").innerHTML =
+    `<strong>Sobre qué se calculan los pesos de esta pestaña.</strong> Acá se toma el <strong>stock completo</strong> de cada posición marcada, y el costo mensual es el 5% (2% almacenaje + 3% oportunidad) sobre ese valor a costo. Es una base más amplia que el "capital inmovilizado" de la pestaña anterior, que en las posiciones que sí venden descuenta la parte que va a rotar. <strong>Por eso los números no son comparables entre pestañas:</strong> la banda roja son ${fmtMoneyCompact(_rojoB.valor)} de stock acá, pero ${fmtMoneyCompact(_rojoB.capital_inmov)} medida con el criterio de capital inmovilizado (${fmtMoneyCompact(_rojoB.capital_inmov * 0.05)}/mes contra los ${fmtMoneyCompact(DATA.costo_dual.sobre_costo)}/mes del dead stock completo). Para decidir un umbral operativo interesa el stock completo — es lo que hay que mover de la góndola; para cuantificar la pérdida, el capital inmovilizado.`;
+
+  const grid = document.getElementById("semaforoGrid");
+  grid.innerHTML = "";
+  s.bandas.forEach(b => {
+    const el = document.createElement("div");
+    el.className = "comp-card";
+    el.style.borderColor = COLORES[b.clave];
+    if (b.clave !== "verde") el.style.background = `color-mix(in srgb, ${COLORES[b.clave]} 8%, transparent)`;
+    el.innerHTML = `
+      <div class="comp-label" style="display:flex; align-items:center; gap:7px;">
+        <span style="width:11px; height:11px; border-radius:50%; background:${COLORES[b.clave]}; flex-shrink:0;"></span>${b.label}
+      </div>
+      <div class="comp-value">${b.n.toLocaleString("es-AR")}</div>
+      <div class="comp-sub">${fmtPct(b.pct)} de las posiciones · ${fmtMoneyCompact(b.valor)} de stock (${fmtPct(b.pct_valor)} del total)</div>
+      <div class="comp-detalle">${b.criterio}</div>
+      <div class="comp-accion">${b.accion}</div>`;
+    grid.appendChild(el);
+  });
+
+  renderTable(document.querySelector("#calibracionTable tbody"), s.calibracion.map(c => {
+    const tr = document.createElement("tr");
+    if (c.corte === s.corte_amarillo || c.corte === s.corte_rojo) tr.style.fontWeight = "700";
+    const td0 = document.createElement("td");
+    td0.textContent = "más de " + c.corte + " meses";
+    tr.appendChild(td0);
+    // posiciones + % del catalogo como subtexto, para no gastar una columna
+    const td1 = document.createElement("td");
+    td1.className = "num";
+    td1.innerHTML = `${c.n.toLocaleString("es-AR")} <span style="color:var(--text-3); font-weight:400;">(${fmtPct(c.pct,1)})</span>`;
+    tr.appendChild(td1);
+    [fmtMoneyCompact(c.valor), fmtMoneyCompact(c.costo_mensual) + "/mes"].forEach(v => {
+      const td = document.createElement("td"); td.className = "num"; td.textContent = v; tr.appendChild(td);
+    });
+    return tr;
+  }));
+
+  const _c9 = s.calibracion.find(c => c.corte === s.corte_amarillo);
+  const _c6 = s.calibracion.find(c => c.corte === 6);
+  document.getElementById("calloutCalibracion").innerHTML =
+    `Bajar el corte suena prudente pero se vuelve inmanejable rápido: en ${_c6.corte} meses habría que revisar <strong>${_c6.n.toLocaleString("es-AR")} posiciones</strong> con ${fmtMoneyCompact(_c6.valor)} de stock detrás, contra las <strong>${s.capacidad_min}–${s.capacidad_max} por mes</strong> que el negocio dijo poder atender. Por eso el rojo queda en ${s.corte_rojo} meses <em>más</em> los discontinuados: <strong>${s.bandas[0].n} posiciones</strong>, ${fmtMoneyCompact(s.bandas[0].valor)} de stock, ${fmtMoneyCompact(s.bandas[0].valor * 0.05)}/mes de costo — entra en la capacidad. El amarillo desde los ${s.corte_amarillo} meses suma otras ${s.bandas[1].n} para vigilar (${fmtMoneyCompact(s.bandas[1].valor)}), y de esas <strong>${s.amarillo_nuevo} no aparecen hoy en ningún indicador</strong>: son la zona ciega que este semáforo viene a cubrir.`;
+
+  // barras apiladas rojo+amarillo por categoria
+  const cont = document.getElementById("barSemaforoCategoria");
+  cont.innerHTML = "";
+  const maxTot = Math.max(...s.por_categoria.map(c => c.pct_rojo + c.pct_amarillo));
+  const axisMax = Math.ceil(maxTot * 1.15 / 5) * 5;
+  s.por_categoria.forEach(c => {
+    const row = document.createElement("div");
+    row.className = "bar-row";
+    row.innerHTML = `
+      <div class="bar-cat">${c.categoria}</div>
+      <div class="bar-track">
+        <div class="bar-fill" style="width:${c.pct_rojo / axisMax * 100}%; background:var(--critical); border-radius:4px 0 0 4px;"></div>
+        <div class="bar-fill" style="left:calc(${c.pct_rojo / axisMax * 100}% + 2px); width:${c.pct_amarillo / axisMax * 100}%; background:var(--warning); border-radius:0 4px 4px 0;"></div>
+        <div class="bar-value" style="left:calc(${(c.pct_rojo + c.pct_amarillo) / axisMax * 100}% + 10px);">${fmtPct(c.pct_rojo + c.pct_amarillo, 1)}</div>
+      </div>
+      <div class="bar-flag" style="width:34px;"></div>`;
+    row.querySelector(".bar-track").dataset.tip =
+      `${c.categoria}: ${c.rojo} en rojo (${fmtPct(c.pct_rojo)}) y ${c.amarillo} en amarillo (${fmtPct(c.pct_amarillo)}) de ${c.n} posiciones`;
+    cont.appendChild(row);
+  });
+  const axis = document.createElement("div");
+  axis.className = "bar-axis";
+  [0, axisMax * 0.25, axisMax * 0.5, axisMax * 0.75, axisMax].forEach(v => {
+    const sp = document.createElement("span");
+    sp.style.left = (v / axisMax * 100) + "%";
+    sp.textContent = fmtPct(v, 0);
+    axis.appendChild(sp);
+  });
+  cont.appendChild(axis);
+  cont.querySelectorAll(".bar-track").forEach(track => {
+    track.addEventListener("pointermove", (e) => {
+      tooltip.textContent = track.dataset.tip;
+      tooltip.style.left = e.clientX + "px";
+      tooltip.style.top = (e.clientY + window.scrollY) + "px";
+      tooltip.classList.add("show");
+    });
+    track.addEventListener("pointerleave", () => tooltip.classList.remove("show"));
+  });
+}
+
+/* ==================================================================
+   TAB 5: EXPLORADOR POR TIENDA
+   ================================================================== */
+function renderTiendas() {
+  const tiendas = DATA.por_tienda;
+  const porTiendaCategoria = DATA.por_tienda_categoria;
+  const select = document.getElementById("selectTienda");
+  select.innerHTML = "";
+  const optTodas = document.createElement("option");
+  optTodas.value = ""; optTodas.textContent = "Todas las tiendas";
+  select.appendChild(optTodas);
+  [...tiendas].sort((a,b) => a.nombre.localeCompare(b.nombre)).forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t.id_tienda; opt.textContent = t.nombre + " (" + t.region + ")";
+    select.appendChild(opt);
+  });
+
+  function draw(selectedId) {
+    const t = selectedId ? tiendas.find(x => x.id_tienda === selectedId) : null;
+
+    if (t) {
+      renderKpiRow(document.getElementById("kpiTienda"), [
+        { label: "Tienda", value: t.nombre.replace("Casa Óga ",""), sub: t.provincia + " · " + t.formato + " · " + t.m2_venta + " m²" },
+        { label: "% capital inmovilizado", value: fmtPct(t.pct_capital_inmovilizado), sub: "sobre el stock a costo de esta tienda" },
+        { label: "Capital inmovilizado", value: fmtMoneyCompact(t.capital_inmovilizado), sub: fmtMoneyCompact(t.costo_mensual) + "/mes de mantenerlo" },
+        { label: "% posiciones en dead stock", value: fmtPct(t.pct_dead), sub: t.dead + " de " + t.n + " combinaciones con stock" },
+      ]);
+    } else {
+      const totales = DATA.dead_stock_resumen.totales;
+      renderKpiRow(document.getElementById("kpiTienda"), [
+        { label: "Tiendas", value: "28", sub: "todas incluidas en este resumen" },
+        { label: "% capital inmovilizado (global)", value: fmtPct(totales.pct_capital_inmovilizado), sub: "sobre el stock a costo total" },
+        { label: "Capital inmovilizado (global)", value: fmtMoneyCompact(totales.capital_inmovilizado), sub: fmtMoneyCompact(totales.costo_mensual) + "/mes de mantenerlo" },
+        { label: "% posiciones en dead stock (global)", value: fmtPct(totales.pct_dead), sub: totales.posiciones_dead + " de " + totales.posiciones_con_stock + " combinaciones" },
+      ]);
+    }
+
+    // Se rankea por % de posiciones en dead stock (no por capital) porque es la
+    // unica de las dos que tiene un margen de error calculable, y sin ese margen
+    // el grafico presentaba diferencias de puro azar como si fueran gestion.
+    const sig = DATA.tiendas_significancia;
+    const ranking = [...tiendas].sort((a,b) => b.pct_dead - a.pct_dead);
+    document.getElementById("tituloBarTienda").textContent = "Comparación entre tiendas";
+    renderBarRanking(document.getElementById("barChartTienda"), ranking.map(x => ({
+      label: x.nombre.replace("Casa Óga ",""), value: x.pct_dead, ic: x.pct_dead_ic,
+      significant: x.fuera_de_rango, raw: x,
+    })), {
+      // el eje debe dar lugar a la barra de error completa, si no la etiqueta
+      // del valor se corre hasta pisar la columna de la derecha
+      nPriority: 0, step: 2, refValue: sig.p_global,
+      axisMax: Math.ceil(Math.max(...ranking.map(x => x.pct_dead + x.pct_dead_ic)) / 2) * 2,
+      fmtValue: (v) => fmtPct(v,1),
+      fmtAxis: (v) => fmtPct(v,1),
+      tooltipFn: (it) => `${it.raw.nombre}: ${fmtPct(it.value)} de posiciones en dead stock (${it.raw.dead} de ${it.raw.n}). Margen de error ±${fmtPct(it.ic,1)}. Promedio de la cadena: ${fmtPct(sig.p_global)}.`,
+      onClick: (it) => { select.value = it.raw.id_tienda; draw(it.raw.id_tienda); },
+    });
+    // marcar la seleccionada
+    if (t) {
+      const rows = document.querySelectorAll("#barChartTienda .bar-row");
+      ranking.forEach((x, i) => { if (x.id_tienda === t.id_tienda && rows[i]) rows[i].querySelector(".bar-fill").style.outline = "2px solid var(--text-1)"; });
+    }
+
+    document.getElementById("textoAvisoTiendas").innerHTML =
+      `Las diferencias entre tiendas de este panel <strong>son en su gran mayoría ruido estadístico, no desempeño</strong>. Cada tienda tiene ~${Math.round(tiendas.reduce((s,x)=>s+x.n,0)/tiendas.length)} posiciones con stock, y con una tasa promedio de ${fmtPct(sig.p_global)} el desvío esperable por puro azar es de ±${fmtPct(sig.desvio_esperado_azar,2)}. El desvío realmente observado entre las ${sig.n_tiendas} tiendas es de ${fmtPct(sig.desvio_observado,2)} — <strong>menor que el que produciría el azar solo</strong>. Además no hay relación con el tamaño del local (correlación ${sig.corr_m2.toLocaleString("es-AR",{minimumFractionDigits:2})} con los m² de venta). Solo ${sig.n_fuera_de_rango} de ${sig.n_tiendas} ${sig.n_fuera_de_rango === 1 ? "tienda se aparta" : "tiendas se apartan"} del promedio más allá del margen de error, que es aproximadamente lo que se esperaría encontrar por azar al comparar ${sig.n_tiendas} tiendas. <strong>Conclusión: no conviene abrir una investigación por tienda a partir de este ranking.</strong> Sirve para explorar y filtrar, no para asignar responsabilidades.`;
+
+    // categoria breakdown para la tienda seleccionada (o global si no hay)
+    const catData = t
+      ? porTiendaCategoria.filter(x => x.id_tienda === t.id_tienda)
+      : (() => {
+          const agg = {};
+          porTiendaCategoria.forEach(x => {
+            agg[x.categoria] = agg[x.categoria] || { categoria: x.categoria, n: 0, dead: 0, capital_inmovilizado: 0 };
+            agg[x.categoria].n += x.n; agg[x.categoria].dead += x.dead; agg[x.categoria].capital_inmovilizado += x.capital_inmovilizado;
+          });
+          return Object.values(agg).map(a => ({ ...a, pct_dead: a.n ? 100*a.dead/a.n : 0 }));
+        })();
+    document.getElementById("tituloCategoriaTienda").textContent = t ? "Por categoría — " + t.nombre.replace("Casa Óga ","") : "Por categoría — todas las tiendas";
+    document.getElementById("notaCategoriaTienda").textContent = "% de posiciones en dead stock por categoría";
+    const catSorted = [...catData].sort((a,b) => b.pct_dead - a.pct_dead);
+    renderBarRanking(document.getElementById("barChartTiendaCategoria"), catSorted.map(c => ({ label: c.categoria, value: c.pct_dead, raw: c })), {
+      nPriority: 0, step: 2,
+      fmtValue: (v) => fmtPct(v,1),
+      fmtAxis: (v) => fmtPct(v,1),
+      tooltipFn: (it) => `${it.label}: ${fmtPct(it.value)} de posiciones en dead stock (${it.raw.dead} de ${it.raw.n})`,
+    });
+
+    const tbody = document.querySelector("#tiendaTable tbody");
+    const rows = ranking.map(x => {
+      const tr = document.createElement("tr");
+      if (t && x.id_tienda === t.id_tienda) tr.className = "selected";
+      tr.innerHTML = `<td>${x.nombre}</td><td>${x.region}</td><td class="num">${fmtPct(x.pct_capital_inmovilizado)}</td><td class="num">${fmtMoney(x.capital_inmovilizado)}</td><td class="num">${fmtPct(x.pct_dead)}</td><td class="num">${fmtMoney(x.costo_mensual)}</td>`;
+      tr.style.cursor = "pointer";
+      tr.addEventListener("click", () => { select.value = x.id_tienda; draw(x.id_tienda); });
+      return tr;
+    });
+    renderTable(tbody, rows);
+  }
+
+  select.addEventListener("change", () => draw(select.value || null));
+  draw(null);
+}
+
+/* ============ init ============ */
+renderTabIfNeeded("contexto");
+window.addEventListener("resize", () => {
+  renderedTabs.forEach(t => { renderedTabs.delete(t); });
+  const activeTab = document.querySelector('.tab-btn[aria-selected="true"]').dataset.tab;
+  renderTabIfNeeded(activeTab);
+});
+</script>
+</body>
+</html>
