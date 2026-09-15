@@ -1,0 +1,16 @@
+﻿fuente,filas,columnas,nulos_total,dup_exactos,dup_clave,rangos_fecha
+Calendario,1461,5,1373,0,0,"{""fecha"": [""2022-01-01"", ""2025-12-31"", 0]}"
+Costo_almacenamiento,7,4,0,0,0,{}
+Devoluciones_SKU,2317,6,0,0,0,"{""fecha"": [""2022-03-04"", ""2025-12-28"", 0]}"
+Historial_Precios_SKU,1498,5,840,0,0,"{""fecha_vigencia_desde"": [""2022-01-01"", ""2026-07-31"", 0], ""fecha_vigencia_hasta"": [""2022-02-16"", ""2026-07-30"", 0]}"
+Liquidaciones,508,7,0,0,0,"{""fecha_inicio"": [""2022-03-17"", ""2025-12-30"", 0], ""fecha_fin"": [""2022-05-01"", ""2026-02-28"", 8]}"
+Ordenes_Compra,3000,7,0,0,0,"{""fecha_pedido"": [""2022-02-16"", ""2026-07-31"", 0], ""fecha_recepcion"": [""2022-03-18"", ""2026-09-27"", 0]}"
+Presupuesto_Ventas_Tienda_Categoria,10976,5,0,0,0,"{""fecha_mes"": [""2022-01-01"", ""2026-08-01"", 0]}"
+Productos_catalogo,815,9,669,0,15,"{""fecha_alta_catalogo"": [""2022-01-01"", ""2025-06-29"", 0], ""fecha_baja_catalogo"": [""2022-05-18"", ""2025-12-30"", 0]}"
+Promociones_Comerciales,119,8,119,1,2,"{""fecha_inicio"": [""2022-01-05"", ""2026-08-19"", 0], ""fecha_fin"": [""2022-01-17"", ""2026-08-24"", 0]}"
+Proveedores,10,5,0,0,0,{}
+Stock_Deposito_Central,23858,3,0,0,0,"{""fecha_mes"": [""2022-01-01"", ""2026-08-01"", 0]}"
+Stock_SKU_tienda_mensual,239336,5,0,21,2378,"{""fecha_mes"": [""2022-01-01"", ""2025-12-01"", 0]}"
+Tiendas,28,7,0,0,0,"{""fecha_apertura"": [""2014-08-29"", ""2025-02-11"", 0]}"
+Transferencias_Stock,4200,7,0,0,0,"{""fecha_envio"": [""2022-02-07"", ""2026-08-27"", 0], ""fecha_recepcion"": [""2022-02-22"", ""2026-09-15"", 0]}"
+Ventas_SKU_tienda_mensual,239336,5,0,56,2378,"{""fecha_mes"": [""2022-01-01"", ""2025-12-01"", 0]}"

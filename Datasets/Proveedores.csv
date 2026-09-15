@@ -1,0 +1,11 @@
+proveedor,lead_time_dias,pedido_minimo_unidades,condicion_pago,pais_origen
+Proveedor A,32,147,90 dias,Argentina
+Proveedor B,46,192,30 dias,Uruguay
+Proveedor C,10,35,60 dias,Argentina
+Proveedor D,25,153,60 dias,China
+Proveedor E,37,193,30 dias,Chile
+Proveedor F,56,52,Contado,Chile
+Proveedor G,28,21,90 dias,Brasil
+Proveedor H,11,36,90 dias,China
+Proveedor I,31,182,Contado,Uruguay
+Proveedor J,52,155,60 dias,Uruguay

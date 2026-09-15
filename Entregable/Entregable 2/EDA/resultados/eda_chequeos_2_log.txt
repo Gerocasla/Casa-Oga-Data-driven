@@ -1,0 +1,122 @@
+== A. Liquidaciones: las 8 fechas 'no parseables'
+  fecha_inicio: 0 filas con formato distinto a AAAA-MM-DD -> []
+  fecha_fin: 8 filas con formato distinto a AAAA-MM-DD -> ['2023-12-24 00:00:00', '2023-02-04 00:00:00', '2024-09-03 00:00:00', '2024-02-24 00:00:00', '2026-01-22 00:00:00', '2026-02-23 00:00:00', '2025-10-08 00:00:00', '2024-07-28 00:00:00']
+  Parseadas con formato libre: fin<inicio = 0
+
+== B. Stock total y cobertura con distintas definiciones
+           stock_total_prom_mes  stock_dic  unidades_anio
+fecha_mes                                                
+2022                    18826.0      41627          42946
+2023                    64962.0      85662         147750
+2024                   107698.0     126325         244916
+2025                   139033.0     135484         314926
+  Ratios 2025/2023: stock total prom mensual=2.14 | stock dic=1.58 | unidades=2.13
+  Ratio venta $ 2025/2023=2.17
+  Cobertura stock/unidades del mes: ene-23=5.29 dic-23=5.23 dic-25=5.26 prom2023=5.27 prom2025=5.30
+  Cobertura stock/prom 3m: ene-23=5.79 dic-23=5.58 dic-25=5.21 prom2023=5.61 prom2025=5.33
+  Cobertura stock/prom 12m: ene-23=10.55 dic-23=6.96 dic-25=5.16 prom2023=8.09 prom2025=5.77
+  Cobertura por posición (stock / prom venta hasta 12m) mediana: ene-23=5.11 dic-25=5.23 | p90 ene-23=9.39 dic-25=8.73
+
+== C. Estacionalidad: ¿es estacionalidad o crecimiento?
+  Unidades / media móvil centrada 12m (x100), promedio por mes calendario: {1: 105.0, 2: 104.0, 3: 103.0, 4: 102.0, 5: 102.0, 6: 103.0, 7: 105.0, 8: 101.0, 9: 101.0, 10: 103.0, 11: 104.0, 12: 105.0}
+  Unidades por mes 2023: [8561, 9348, 10091, 10492, 11259, 12027, 12830, 13042, 14037, 14318, 15358, 16387]
+  Unidades por mes 2024: [17045, 17188, 18005, 18568, 19174, 20281, 20518, 21449, 22020, 22839, 23634, 24195]
+  Unidades por mes 2025: [25096, 25506, 25810, 26546, 26258, 27003, 27519, 26918, 26316, 26192, 25981, 25781]
+  Unidades por posición SKU-tienda por mes 2025: [3.24, 3.24, 3.26, 3.26, 3.19, 3.23, 3.21, 3.17, 3.18, 3.21, 3.19, 3.19]
+  Unidades por posición promedio por mes calendario 2023-2025: {1: 3.16, 2: 3.17, 3: 3.18, 4: 3.16, 5: 3.14, 6: 3.18, 7: 3.18, 8: 3.16, 9: 3.17, 10: 3.18, 11: 3.19, 12: 3.22}
+  Posiciones (filas) por mes, cada 6 meses: {Timestamp('2022-01-01 00:00:00'): 17, Timestamp('2022-07-01 00:00:00'): 1354, Timestamp('2023-01-01 00:00:00'): 2807, Timestamp('2023-07-01 00:00:00'): 4035, Timestamp('2024-01-01 00:00:00'): 5344, Timestamp('2024-07-01 00:00:00'): 6535, Timestamp('2025-01-01 00:00:00'): 7748, Timestamp('2025-07-01 00:00:00'): 8571}
+  Variación interanual de unidades 2025 por mes (%): [47.2, 48.4, 43.3, 43.0, 36.9, 33.1, 34.1, 25.5, 19.5, 14.7, 9.9, 6.6]
+  (Granularidad mensual: Hot Sale 15-17 jun, Black Friday 24-25 nov, Navidad 15-31 dic no son aislables día a día)
+   Baño: índice sobre tendencia ene=101 jun=104 nov=99 dic=103 (rango 97-107)
+   Cocina y mesa: índice sobre tendencia ene=100 jun=104 nov=100 dic=102 (rango 98-110)
+   Decoracion: índice sobre tendencia ene=109 jun=102 nov=103 dic=107 (rango 97-109)
+   Iluminacion: índice sobre tendencia ene=108 jun=104 nov=111 dic=109 (rango 89-111)
+   Muebles: índice sobre tendencia ene=101 jun=102 nov=101 dic=105 (rango 95-106)
+   Organizacion: índice sobre tendencia ene=101 jun=105 nov=112 dic=104 (rango 97-112)
+   Textil hogar: índice sobre tendencia ene=107 jun=102 nov=100 dic=101 (rango 96-107)
+
+== D. Ventas antes de la apertura de la tienda
+                     nombre_tienda fecha_apertura primer_mes_con_venta  meses_vendiendo_antes_apertura  venta_M_antes_apertura
+id_tienda                                                                                                                     
+T05        Casa Óga Buenos Aires 5     2022-09-08           2022-01-01                               8                    24.9
+T07             Casa Óga Cordoba 7     2024-05-25           2022-02-01                              27                   391.1
+T19            Casa Óga Mendoza 19     2023-06-28           2022-01-01                              17                   145.4
+T21            Casa Óga Mendoza 21     2023-06-13           2022-01-01                              17                   136.3
+T22               Casa Óga CABA 22     2022-04-07           2022-02-01                               2                     1.9
+T25            Casa Óga Cordoba 25     2025-02-11           2022-02-01                              36                   776.2
+  Total filas antes de apertura: 10,903 | venta $1,475.9 M | unidades 33,868
+  Primer mes con venta por tienda (todas): {'2022-01': 10, '2022-02': 18}
+
+== E. Presupuesto: ceros, negativos y celdas sin venta real (2022-2025)
+  Negativos: 
+       fecha_mes id_tienda    categoria  presupuesto_venta_ars  presupuesto_unidades
+1127  2022-06-01       T22         Baño               -6596.18                     4
+1291  2022-07-01       T17  Iluminacion             -963369.27                    -9
+2516  2023-01-01       T24  Iluminacion             -514763.02                    14
+  Ceros por mes: {'2022-01-01': 186, '2022-02-01': 81, '2022-03-01': 28, '2022-04-01': 13, '2022-05-01': 1}
+  Ceros por tienda: {'T20': 18, 'T01': 14, 'T03': 14, 'T02': 13, 'T16': 13, 'T19': 13, 'T28': 13, 'T07': 12, 'T11': 12, 'T04': 11, 'T06': 11, 'T10': 11, 'T22': 11, 'T25': 11, 'T26': 11, 'T27': 11, 'T08': 10, 'T09': 10, 'T23': 10, 'T24': 10, 'T05': 9, 'T12': 9, 'T13': 9, 'T14': 9, 'T18': 9, 'T21': 9, 'T15': 8, 'T17': 8}
+  2022-2025: celdas presupuesto sin fila de venta=252 | de ellas con presupuesto>0: 0
+  2022-2025: celdas con presupuesto 0 o negativo y venta real>0: 3
+  Cumplimiento por categoría 2022-2025: {'Baño': 90.6, 'Cocina y mesa': 90.8, 'Decoracion': 92.1, 'Iluminacion': 91.9, 'Muebles': 90.6, 'Organizacion': 91.8, 'Textil hogar': 91.6}
+  Cumplimiento por tienda 2022-2025 (min/max): {'count': 28.0, 'mean': 91.4, 'std': 0.5, 'min': 90.1, '25%': 91.3, '50%': 91.5, '75%': 91.6, 'max': 92.2}
+  Cumplimiento por celda mes-tienda-categoría: {'count': 9096.0, 'mean': 97.4, 'std': 500.4, 'min': 37.7, '5%': 83.0, '25%': 88.0, '50%': 91.2, '75%': 94.5, '95%': 101.3, 'max': 47788.2}
+
+== F. Precio implícito vs precio de lista VIGENTE en ese mes (Historial_Precios)
+  Filas emparejadas: 189,990 | ratio precio implícito / lista vigente: {'count': 189990.0, 'mean': 1.719, 'std': 1.111, 'min': 0.85, '1%': 0.853, '5%': 0.863, '50%': 0.979, '95%': 4.057, '99%': 4.609, 'max': 4.934}
+  ratio > 1.0: 41.78% | ratio > 1.5: 39.34% | ratio < 0.5: 0.00%
+  Variación de precio entre vigencias consecutivas (%): {'count': 698.0, 'mean': 119.4, 'std': 98.9, 'min': 3.0, '5%': 9.3, '50%': 86.0, '95%': 325.6, 'max': 393.4}
+  Ejemplo SKU00001:   fecha_vigencia_desde fecha_vigencia_hasta  precio_lista  costo_unitario
+0           2023-08-01           2024-09-10       6361.36         2885.71
+1           2024-09-11                  NaN      17900.00         8120.00
+  Historial: vigencias con 'desde' > 2025-12-31: 176 | costo nulo en historial: 40 (SKUs 22)
+
+== G. Stock en tránsito vs Transferencias
+  Unidades en tránsito a fin de mes según Transferencias (hacia tiendas) vs suma stock_en_transito: corr=0.893 | dic-25: 868 vs 23,528 | prom: 648 vs 14,217
+  Transferencias con SKU/tienda destino sin fila de stock ese mes: 1803 de 4200
+
+== H. Liquidaciones 'Discontinuacion' de SKUs Activos
+  93 liquidaciones por discontinuación: SKU Activo=79 | Discontinuado=14
+  De las de SKU discontinuado, inicio antes de la baja: 14
+  Liquidaciones sobre SKU+tienda sin stock ese mes: 278 de 496
+
+== I. Promociones: duplicados, fechas invertidas y fuera de evento
+  Duplicados por id: 
+    id_promocion     categoria  canal medio_pago evento_asociado fecha_inicio   fecha_fin  descuento_pct
+82     PROMO0083  Textil hogar  Todos   Efectivo             NaN   2023-04-14  2023-04-26              5
+100    PROMO0101   Iluminacion  Todos   Efectivo             NaN   2024-12-18  2024-12-31             15
+117    PROMO0083  Textil hogar  Todos   Efectivo             NaN   2023-04-14  2023-04-26              5
+118    PROMO0101   Iluminacion  Todos   Efectivo             NaN   2024-12-18  2024-12-31              5
+  Fin < inicio: 
+   id_promocion   categoria   canal medio_pago evento_asociado fecha_inicio   fecha_fin  descuento_pct
+52    PROMO0053        Baño   Todos        NaN         Navidad   2023-12-31  2023-12-15             25
+63    PROMO0064  Decoracion  Tienda        NaN         Navidad   2025-12-31  2025-12-15             15
+  Descuento fuera de rango: 
+   id_promocion     categoria   canal      medio_pago evento_asociado fecha_inicio   fecha_fin  descuento_pct
+51    PROMO0052  Textil hogar  Online             NaN         Navidad   2023-12-15  2023-12-31            150
+71    PROMO0072          Baño  Online  Tarjeta debito             NaN   2022-06-03  2022-06-15            -15
+  Promos cuyo evento no cae en sus fechas: 
+   id_promocion      categoria   canal  medio_pago evento_asociado fecha_inicio   fecha_fin  descuento_pct
+38    PROMO0039  Cocina y mesa  Online         NaN        Hot Sale   2026-06-15  2026-06-17             20
+39    PROMO0040           Baño   Todos         NaN        Hot Sale   2026-06-15  2026-06-17             30
+40    PROMO0041   Organizacion   Todos         NaN        Hot Sale   2026-06-15  2026-06-17             30
+41    PROMO0042        Muebles   Todos         NaN        Hot Sale   2026-06-15  2026-06-17             25
+42    PROMO0043    Iluminacion   Todos         NaN        Hot Sale   2026-06-15  2026-06-17             20
+43    PROMO0044   Textil hogar   Todos         NaN        Hot Sale   2026-06-15  2026-06-17             25
+44    PROMO0045     Decoracion   Todos         NaN        Hot Sale   2026-06-15  2026-06-17             25
+52    PROMO0053           Baño   Todos         NaN         Navidad   2023-12-31  2023-12-15             25
+63    PROMO0064     Decoracion  Tienda         NaN         Navidad   2025-12-31  2025-12-15             15
+
+== J. Horizonte temporal por fuente (fin de datos)
+  Ventas_SKU_tienda_mensual.fecha_mes: 2022-01-01 -> 2025-12-01 | registros posteriores a 2025-12-31: 0
+  Stock_SKU_tienda_mensual.fecha_mes: 2022-01-01 -> 2025-12-01 | registros posteriores a 2025-12-31: 0
+  Stock_Deposito_Central.fecha_mes: 2022-01-01 -> 2026-08-01 | registros posteriores a 2025-12-31: 5072
+  Presupuesto_Ventas_Tienda_Categoria.fecha_mes: 2022-01-01 -> 2026-08-01 | registros posteriores a 2025-12-31: 1568
+  Ordenes_Compra.fecha_pedido: 2022-02-16 -> 2026-07-31 | registros posteriores a 2025-12-31: 532
+  Ordenes_Compra.fecha_recepcion: 2022-03-18 -> 2026-09-27 | registros posteriores a 2025-12-31: 623
+  Transferencias_Stock.fecha_envio: 2022-02-07 -> 2026-08-27 | registros posteriores a 2025-12-31: 826
+  Transferencias_Stock.fecha_recepcion: 2022-02-22 -> 2026-09-15 | registros posteriores a 2025-12-31: 854
+  Historial_Precios_SKU.fecha_vigencia_desde: 2022-01-01 -> 2026-07-31 | registros posteriores a 2025-12-31: 176
+  Promociones_Comerciales.fecha_inicio: 2022-01-05 -> 2026-08-19 | registros posteriores a 2025-12-31: 11
+  Liquidaciones.fecha_inicio: 2022-03-17 -> 2025-12-30 | registros posteriores a 2025-12-31: 0
+  Devoluciones_SKU.fecha: 2022-03-04 -> 2025-12-28 | registros posteriores a 2025-12-31: 0
+  Calendario.fecha: 2022-01-01 -> 2025-12-31 | registros posteriores a 2025-12-31: 0

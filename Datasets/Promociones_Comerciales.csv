@@ -1,0 +1,120 @@
+id_promocion,categoria,canal,medio_pago,evento_asociado,fecha_inicio,fecha_fin,descuento_pct
+PROMO0001,Textil hogar,Online,,Black Friday,2022-11-24,2022-11-25,35
+PROMO0002,Muebles,Todos,,Black Friday,2022-11-24,2022-11-25,25
+PROMO0003,Decoracion,Online,,Black Friday,2022-11-24,2022-11-25,20
+PROMO0004,Organizacion,Todos,,Black Friday,2023-11-24,2023-11-25,25
+PROMO0005,Iluminacion,Todos,,Black Friday,2023-11-24,2023-11-25,25
+PROMO0006,Muebles,Todos,,Black Friday,2023-11-24,2023-11-25,40
+PROMO0007,Decoracion,Todos,,Black Friday,2023-11-24,2023-11-25,35
+PROMO0008,Organizacion,Todos,,Black Friday,2024-11-24,2024-11-25,35
+PROMO0009,Muebles,Online,,Black Friday,2024-11-24,2024-11-25,30
+PROMO0010,Textil hogar,Todos,,Black Friday,2024-11-24,2024-11-25,30
+PROMO0011,Decoracion,Todos,,Black Friday,2024-11-24,2024-11-25,25
+PROMO0012,Iluminacion,Todos,,Black Friday,2024-11-24,2024-11-25,20
+PROMO0013,Cocina y mesa,Todos,,Black Friday,2024-11-24,2024-11-25,35
+PROMO0014,Baño,Todos,,Black Friday,2024-11-24,2024-11-25,40
+PROMO0015,Decoracion,Online,,Black Friday,2025-11-24,2025-11-25,30
+PROMO0016,Iluminacion,Todos,,Black Friday,2025-11-24,2025-11-25,35
+PROMO0017,Organizacion,Tienda,,Black Friday,2025-11-24,2025-11-25,20
+PROMO0018,Baño,Tienda,,Black Friday,2025-11-24,2025-11-25,25
+PROMO0019,Textil hogar,Online,,Black Friday,2025-11-24,2025-11-25,30
+PROMO0020,Muebles,Todos,,Black Friday,2025-11-24,2025-11-25,30
+PROMO0021,Textil Hogar,Todos,,Hot Sale,2022-06-15,2022-06-17,25
+PROMO0022,Decoracion,Todos,,Hot Sale,2022-06-15,2022-06-17,30
+PROMO0023,Cocina y mesa,Todos,,Hot Sale,2022-06-15,2022-06-17,40
+PROMO0024,Muebles,Todos,,Hot Sale,2022-06-15,2022-06-17,40
+PROMO0025,Baño,Todos,,Hot Sale,2022-06-15,2022-06-17,15
+PROMO0026,Iluminacion,Tienda,,Hot Sale,2023-06-15,2023-06-17,35
+PROMO0027,Decoracion,Todos,,Hot Sale,2023-06-15,2023-06-17,25
+PROMO0028,Cocina y mesa,Todos,,Hot Sale,2023-06-15,2023-06-17,20
+PROMO0029,Organizacion,Tienda,,Hot Sale,2023-06-15,2023-06-17,40
+PROMO0030,Baño,Todos,,Hot Sale,2023-06-15,2023-06-17,30
+PROMO0031,Muebles,Online,,Hot Sale,2023-06-15,2023-06-17,25
+PROMO0032,Cocina y mesa,Todos,,Hot Sale,2024-06-15,2024-06-17,25
+PROMO0033,Decoracion,Todos,,Hot Sale,2024-06-15,2024-06-17,25
+PROMO0034,Textil hogar,Tienda,,Hot Sale,2024-06-15,2024-06-17,35
+PROMO0035,Iluminacion,Todos,,Hot Sale,2024-06-15,2024-06-17,15
+PROMO0036,Decoracion,Todos,,Hot Sale,2025-06-15,2025-06-17,25
+PROMO0037,Textil hogar,Todos,,Hot Sale,2025-06-15,2025-06-17,15
+PROMO0038,Iluminacion,Online,,Hot Sale,2025-06-15,2025-06-17,20
+PROMO0039,Cocina y mesa,Online,,Hot Sale,2026-06-15,2026-06-17,20
+PROMO0040,Baño,Todos,,Hot Sale,2026-06-15,2026-06-17,30
+PROMO0041,Organizacion,Todos,,Hot Sale,2026-06-15,2026-06-17,30
+PROMO0042,Muebles,Todos,,Hot Sale,2026-06-15,2026-06-17,25
+PROMO0043,Iluminacion,Todos,,Hot Sale,2026-06-15,2026-06-17,20
+PROMO0044,Textil hogar,Todos,,Hot Sale,2026-06-15,2026-06-17,25
+PROMO0045,Decoracion,Todos,,Hot Sale,2026-06-15,2026-06-17,25
+PROMO0046,Muebles,Todos,,Navidad,2022-12-15,2022-12-31,20
+PROMO0047,Iluminacion,Tienda,,Navidad,2022-12-15,2022-12-31,30
+PROMO0048,Textil hogar,Todos,,Navidad,2022-12-15,2022-12-31,25
+PROMO0049,Decoracion,Todos,,Navidad,2022-12-15,2022-12-31,35
+PROMO0050,Cocina y mesa,Online,,Navidad,2022-12-15,2022-12-31,35
+PROMO0051,Organizacion,Todos,,Navidad,2022-12-15,2022-12-31,35
+PROMO0052,Textil hogar,Online,,Navidad,2023-12-15,2023-12-31,150
+PROMO0053,Baño,Todos,,Navidad,2023-12-31,2023-12-15,25
+PROMO0054,Decoracion,Online,,Navidad,2023-12-15,2023-12-31,35
+PROMO0055,Cocina y mesa,Todos,,Navidad,2024-12-15,2024-12-31,15
+PROMO0056,Decoracion,Tienda,,Navidad,2024-12-15,2024-12-31,30
+PROMO0057,Muebles,Todos,,Navidad,2024-12-15,2024-12-31,20
+PROMO0058,Baño,Tienda,,Navidad,2024-12-15,2024-12-31,25
+PROMO0059,Textil hogar,Todos,,Navidad,2024-12-15,2024-12-31,25
+PROMO0060,Organizacion,Todos,,Navidad,2024-12-15,2024-12-31,30
+PROMO0061,Iluminacion,Todos,,Navidad,2024-12-15,2024-12-31,30
+PROMO0062,Iluminacion,Online,,Navidad,2025-12-15,2025-12-31,35
+PROMO0063,Organizacion,Todos,,Navidad,2025-12-15,2025-12-31,30
+PROMO0064,Decoracion,Tienda,,Navidad,2025-12-31,2025-12-15,15
+PROMO0065,Cocina y mesa,Todos,,Navidad,2025-12-15,2025-12-31,25
+PROMO0066,Organizacion,Online,Tarjeta debito,,2022-01-17,2022-01-20,5
+PROMO0067,Cocina y mesa,Online,Efectivo,,2022-01-05,2022-01-17,15
+PROMO0068,Muebles,Online,Tarjeta credito,,2022-02-06,2022-02-17,20
+PROMO0069,Organizacion,Todos,Efectivo,,2022-02-06,2022-02-18,15
+PROMO0070,Baño,Online,Efectivo,,2022-04-06,2022-04-18,15
+PROMO0071,Cocina y mesa,Online,Tarjeta debito,,2022-06-15,2022-06-20,20
+PROMO0072,Baño,Online,Tarjeta debito,,2022-06-03,2022-06-15,-15
+PROMO0073,Organizacion,Online,Billetera virtual,,2022-09-18,2022-09-27,20
+PROMO0074,Baño,Online,Efectivo,,2022-11-20,2022-11-30,10
+PROMO0075,Organizacion,Todos,Tarjeta credito,,2022-12-07,2022-12-13,15
+PROMO0076,Iluminacion,Online,Tarjeta credito,,2023-01-04,2023-01-09,5
+PROMO0077,Textil hogar,Todos,Efectivo,,2023-01-03,2023-01-14,5
+PROMO0078,Cocina y mesa,Online,Tarjeta debito,,2023-02-10,2023-02-18,20
+PROMO0079,Muebles,Online,Billetera virtual,,2023-02-03,2023-02-10,10
+PROMO0080,Cocina y mesa,Todos,Efectivo,,2023-03-04,2023-03-11,10
+PROMO0081,Organizacion,Todos,Billetera virtual,,2023-03-18,2023-03-21,10
+PROMO0082,Baño,Online,Tarjeta credito,,2023-04-04,2023-04-16,5
+PROMO0083,Textil hogar,Todos,Efectivo,,2023-04-14,2023-04-26,5
+PROMO0084,Textil hogar,Online,Billetera virtual,,2023-05-04,2023-05-08,5
+PROMO0085,Textil hogar,Todos,Efectivo,,2023-07-09,2023-07-14,5
+PROMO0086,Decoración,Online,Billetera virtual,,2023-08-18,2023-08-24,10
+PROMO0087,Cocina y mesa,Todos,Efectivo,,2023-09-08,2023-09-13,5
+PROMO0088,Baño,Todos,Billetera virtual,,2024-02-11,2024-02-16,10
+PROMO0089,TEXTIL_HOGAR,Online,Tarjeta debito,,2024-02-06,2024-02-16,10
+PROMO0090,Textil hogar,Online,Tarjeta debito,,2024-04-11,2024-04-21,10
+PROMO0091,Iluminacion,Online,Billetera virtual,,2024-04-12,2024-04-25,5
+PROMO0092,Cocina y mesa,Todos,Tarjeta credito,,2024-05-17,2024-05-25,5
+PROMO0093,Organizacion,Online,Tarjeta credito,,2024-05-18,2024-05-27,5
+PROMO0094,Iluminacion,Todos,Billetera virtual,,2024-07-18,2024-07-29,5
+PROMO0095,Iluminacion,Todos,Tarjeta debito,,2024-07-06,2024-07-10,20
+PROMO0096,Textil hogar,Todos,Tarjeta credito,,2024-08-10,2024-08-16,5
+PROMO0097,Organizacion,Online,Tarjeta credito,,2024-08-10,2024-08-23,15
+PROMO0098,Cocina y mesa,Online,Tarjeta credito,,2024-10-18,2024-11-01,10
+PROMO0099,Muebles,Online,Tarjeta credito,,2024-11-17,2024-11-26,15
+PROMO0100,Muebles,Todos,Efectivo,,2024-11-03,2024-11-11,5
+PROMO0101,Iluminacion,Todos,Efectivo,,2024-12-18,2024-12-31,15
+PROMO0102,Organizacion,Todos,Tarjeta credito,,2024-12-19,2024-12-30,10
+PROMO0103,Baño,Todos,Billetera virtual,,2025-05-13,2025-05-19,10
+PROMO0104,Decoracion,Todos,Billetera virtual,,2025-06-14,2025-06-19,10
+PROMO0105,Cocina y mesa,Todos,Tarjeta credito,,2025-06-12,2025-06-22,20
+PROMO0106,Muebles,Online,Efectivo,,2025-07-17,2025-07-29,10
+PROMO0107,Baño,Todos,Tarjeta credito,,2025-07-20,2025-07-29,20
+PROMO0108,Organizacion,Online,Billetera virtual,,2025-08-19,2025-08-22,15
+PROMO0109,Muebles,Online,Tarjeta debito,,2025-10-08,2025-10-18,10
+PROMO0110,Baño,Todos,Tarjeta debito,,2025-11-19,2025-12-03,15
+PROMO0111,Muebles,Todos,Tarjeta credito,,2025-11-03,2025-11-09,10
+PROMO0112,Decoracion,Todos,Billetera virtual,,2025-12-13,2025-12-23,5
+PROMO0113,Baño,Online,Tarjeta debito,,2025-12-05,2025-12-08,20
+PROMO0114,Iluminacion,Online,Efectivo,,2026-01-06,2026-01-13,10
+PROMO0115,Organizacion,Online,Tarjeta credito,,2026-01-20,2026-02-01,15
+PROMO0116,Decoracion,Todos,Tarjeta debito,,2026-03-11,2026-03-18,10
+PROMO0117,Iluminacion,Online,Tarjeta debito,,2026-08-19,2026-08-24,5
+PROMO0083,Textil hogar,Todos,Efectivo,,2023-04-14,2023-04-26,5
+PROMO0101,Iluminacion,Todos,Efectivo,,2024-12-18,2024-12-31,5

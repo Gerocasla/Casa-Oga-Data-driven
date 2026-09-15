@@ -1,0 +1,8 @@
+categoria,precio_lista_promedio,costo_mensual_almacenamiento_unidad_ars,criterio
+Baño,43609.0,654.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
+Cocina y mesa,47583.0,714.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
+Decoracion,48136.0,722.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
+Iluminacion,43194.0,648.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
+Muebles,46255.0,694.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
+Organizacion,45098.0,676.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
+Textil hogar,47101.0,707.0,"1.5% del precio de lista promedio de la categoria, por unidad y por mes"
