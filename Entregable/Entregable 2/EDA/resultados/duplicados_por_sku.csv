@@ -1,0 +1,16 @@
+﻿sku,categoria,proveedores,alta,filas_ventas,filas_duplicadas,%,primer_mes,ultimo_mes,tiendas
+SKU00016,Muebles,Proveedor C / Proveedor A,2024-02-25,316,158,50.0,2024-03,2025-12,11
+SKU00058,Baño,Proveedor E / Proveedor B,2024-07-22,421,156,37.1,2024-08,2025-12,21
+SKU00112,Muebles,Proveedor F / Proveedor C,2022-08-13,467,272,58.2,2022-09,2023-11,23
+SKU00311,Muebles,Proveedor A / Proveedor D,2022-01-30,1501,904,60.2,2022-02,2025-12,23
+SKU00330,Cocina y mesa,Proveedor J / Proveedor D,2024-12-22,381,228,59.8,2025-01,2025-12,23
+SKU00333,Cocina y mesa,Proveedor H / Proveedor C,2022-10-24,615,200,32.5,2022-11,2025-12,14
+SKU00370,Decoracion,Proveedor A / Proveedor E,2022-05-02,24,8,33.3,2022-06,2022-07,10
+SKU00430,Decoracion,Proveedor A / Proveedor H,2023-12-03,542,162,29.9,2024-01,2025-12,20
+SKU00433,Organizacion,Proveedor I / Proveedor D,2023-12-26,646,288,44.6,2024-01,2025-12,22
+SKU00453,Baño,Proveedor C / Proveedor J,2022-11-09,1017,586,57.6,2022-12,2025-12,20
+SKU00533,Textil Hogar,Proveedor A / Proveedor D,2023-12-21,559,252,45.1,2024-01,2025-12,19
+SKU00552,Textil hogar,Proveedor B / Proveedor H,2025-03-18,321,190,59.2,2025-04,2025-12,26
+SKU00566,Cocina y mesa,Proveedor A / Proveedor B,2022-09-06,953,274,28.8,2022-10,2025-12,22
+SKU00737,Cocina y mesa,Proveedor J / Proveedor E,2022-04-25,1414,624,44.1,2022-05,2025-12,26
+SKU00785,Baño,Proveedor C / Proveedor D,2022-06-08,957,454,47.4,2022-07,2025-12,18

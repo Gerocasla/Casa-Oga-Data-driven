@@ -1,0 +1,135 @@
+====================================================================================================
+1. LOS 22 SKUs SIN COSTO UNITARIO
+====================================================================================================
+                 categoria          subcategoria    proveedor  precio_lista         estado fecha_alta_catalogo  ocs  costo_min  costo_max  costo_ult  ult_pedido   uds  costo_ponderado_oc  stock_dic25  tiendas_con_stock       venta  uds_vend  margen_si_uso_oc_%  dispersion_costo_oc_%
+id_producto                                                                                                                                                                                                                                                                                
+SKU00003              Baño     Alfombras de baño  Proveedor C       39000.0  Discontinuado          2025-03-25    2    17484.0    17787.0    17484.0  2025-07-21    70             17636.0          NaN                NaN   2015068.0        56                55.0                    2.0
+SKU00028        Decoracion  Plantas artificiales  Proveedor J       66500.0  Discontinuado          2025-06-27    3    27596.0    29907.0    29907.0  2025-12-20   775             29434.0        183.0               11.0  14995065.0       243                56.0                    8.0
+SKU00130      Organizacion                 Cajas  Proveedor B       45500.0         Activo          2025-02-22    2    19583.0    19744.0    19744.0  2026-07-20   768             19623.0         60.0                7.0   4826455.0       113                57.0                    1.0
+SKU00137           Muebles                Sillas  Proveedor A       47500.0  Discontinuado          2025-02-23    2    22240.0    23267.0    23267.0  2025-07-31   294             22754.0          NaN                NaN   8445453.0       190                52.0                    5.0
+SKU00214           Muebles           Estanterias  Proveedor J       18900.0  Discontinuado          2025-05-07    2     8317.0     9703.0     8317.0  2025-10-05   310              9010.0          NaN                NaN    722855.0        41                52.0                   17.0
+SKU00227              Baño      Cortinas de baño  Proveedor A       33200.0         Activo          2025-03-02    7    14113.0    15152.0    14963.0  2026-03-21  1911             14828.0         97.0               13.0   5731881.0       186                55.0                    7.0
+SKU00234           Muebles                Sillas  Proveedor I       82600.0         Activo          2025-03-07    2    36721.0    37205.0    36721.0  2026-01-13   728             37084.0         27.0               11.0   7246675.0        95                55.0                    1.0
+SKU00249              Baño     Alfombras de baño  Proveedor B       59600.0         Activo          2025-03-07    7    24266.0    26171.0    25275.0  2026-06-23  2688             25451.0        148.0                7.0  10940243.0       198                57.0                    8.0
+SKU00267              Baño     Alfombras de baño  Proveedor J       11100.0         Activo          2025-04-21    2     4715.0     4727.0     4715.0  2026-02-25   620              4718.0         23.0                9.0    461664.0        45                58.0                    0.0
+SKU00290     Cocina y mesa               Vajilla  Proveedor D       33900.0  Discontinuado          2025-05-21    9    14000.0    16361.0    15184.0  2025-09-02  1683             15022.0          NaN                NaN   3788921.0       121                56.0                   17.0
+SKU00305        Decoracion               Espejos  Proveedor A        9400.0         Activo          2025-02-23    5     4005.0     4470.0     4141.0  2026-04-04   882              4192.0         68.0                9.0   1256548.0       144                55.0                   12.0
+SKU00342        Decoracion               Espejos  Proveedor G       66200.0  Discontinuado          2025-02-06    3    28014.0    30625.0    29981.0  2025-02-11   105             29974.0          NaN                NaN    552472.0         9                55.0                    9.0
+SKU00369      Organizacion                 Cajas  Proveedor F       83300.0         Activo          2025-03-28    4    34777.0    41389.0    37651.0  2026-02-16   260             38504.0        602.0               15.0  71451859.0       924                54.0                   19.0
+SKU00392      Organizacion          Contenedores  Proveedor F       63500.0         Activo          2025-06-07    4    28217.0    29506.0    28364.0  2025-12-10   364             28778.0         46.0               15.0   3070374.0        52                55.0                    5.0
+SKU00411           Muebles      Mesas auxiliares  Proveedor H       69800.0         Activo          2025-04-20    2    28824.0    29930.0    28824.0  2026-06-28   144             29377.0         75.0                8.0   7573727.0       117                58.0                    4.0
+SKU00432      Organizacion                 Cajas  Proveedor B       45600.0         Activo          2025-05-19    8    19874.0    22105.0    20898.0  2026-05-21  1728             21162.0        162.0               18.0   6241914.0       148                54.0                   11.0
+SKU00485           Muebles      Mesas auxiliares  Proveedor G       13300.0         Activo          2025-06-26    1     5703.0     5703.0     5703.0  2025-07-16    21              5703.0        220.0               14.0   3519162.0       289                57.0                    0.0
+SKU00645        Decoracion  Plantas artificiales  Proveedor F       54000.0         Activo          2025-02-06    3    21640.0    24392.0    24392.0  2026-07-29   156             23227.0        487.0               16.0  51122073.0      1026                57.0                   13.0
+SKU00646              Baño      Cortinas de baño  Proveedor B       40900.0         Activo          2025-03-12    5    16505.0    19981.0    16505.0  2026-07-04  1344             18776.0        142.0                8.0   8220736.0       216                54.0                   21.0
+SKU00742        Decoracion                 Velas  Proveedor I       81300.0         Activo          2025-03-20    7    35100.0    40166.0    35100.0  2026-06-08  2002             37195.0         77.0                9.0  10027324.0       133                54.0                   14.0
+SKU00753      Textil hogar              Cortinas  Proveedor B       79200.0         Activo          2025-06-06    8    33519.0    38734.0    38734.0  2026-06-22  2112             35728.0        142.0               16.0  11514291.0       158                55.0                   16.0
+SKU00782        Decoración               Cuadros  Proveedor D       26300.0         Activo          2025-03-31    3    11051.0    11994.0    11994.0  2026-04-18   459             11528.0         51.0                6.0   1932678.0        78                56.0                    8.0
+
+  Resumen: 22 SKUs | categorias: {'Baño': 5, 'Decoracion': 5, 'Muebles': 5, 'Organizacion': 4, 'Cocina y mesa': 1, 'Textil hogar': 1, 'Decoración': 1}
+  Estado: {'Activo': 16, 'Discontinuado': 6} | altas 2025-02-06 a 2025-06-27
+  Stock a dic-2025: 2,610 unidades en 192 posiciones SKU-tienda
+  Venta acumulada de estos SKUs: $235.7 M (0.73% del total)
+  Valuacion del stock dic-25 con costo ponderado de OC: $67.1 M
+  Criterio TP1 (mediana de categoria) vs costo real de OC: diferencia mediana -11.9%, rango -84.4% a 63.1%
+  Valuacion del stock con mediana de categoria: $65.6 M (vs $67.1 M con costo de OC)
+  Margen de lista implicito usando costo de OC: 52.1% a 57.9% (mediana 55.2%) | margen del resto del catalogo: 45.4%
+  Dispersion de costo entre OCs del mismo SKU: mediana 8.4%, max 21.1%
+
+====================================================================================================
+2. HISTORIAL DE PRECIOS: COSTO NULO
+====================================================================================================
+  40 filas, 22 SKUs | ¿son los mismos 22 del catalogo? True
+  Vigencias por SKU: {2: 12, 1: 7, 3: 3}
+  ¿Algun SKU tiene costo en una vigencia y nulo en otra? 0
+  Precio de lista de esas filas: nulos 0 (o sea: falta el costo pero NO el precio)
+  Detalle:
+id_producto fecha_vigencia_desde fecha_vigencia_hasta  precio_lista  costo_unitario
+   SKU00003           2025-03-25           2026-06-28      24303.51             NaN
+   SKU00003           2026-06-29                  NaN      39000.00             NaN
+   SKU00028           2025-06-27           2026-07-06      45283.26             NaN
+   SKU00028           2026-07-07                  NaN      66500.00             NaN
+   SKU00130           2025-02-22           2026-04-02      27528.25             NaN
+   SKU00130           2026-04-03                  NaN      45500.00             NaN
+   SKU00137           2025-02-23           2025-04-01      28738.28             NaN
+   SKU00137           2025-04-02                  NaN      47500.00             NaN
+   SKU00214           2025-05-07           2025-11-22      12495.13             NaN
+   SKU00214           2025-11-23                  NaN      18900.00             NaN
+   SKU00227           2025-03-02           2026-07-18      20689.14             NaN
+   SKU00227           2026-07-19                  NaN      33200.00             NaN
+   SKU00234           2025-03-07                  NaN      82600.00             NaN
+   SKU00249           2025-03-07           2025-09-28      37140.75             NaN
+   SKU00249           2025-09-29                  NaN      59600.00             NaN
+   SKU00267           2025-04-21           2025-05-29       7124.67             NaN
+   SKU00267           2025-05-30           2025-11-29       7338.41             NaN
+   SKU00267           2025-11-30                  NaN      11100.00             NaN
+   SKU00290           2025-05-21           2025-10-23      22411.89             NaN
+   SKU00290           2025-10-24           2026-03-24      25981.53             NaN
+   SKU00290           2026-03-25                  NaN      33900.00             NaN
+   SKU00305           2025-02-23           2026-03-25       5687.15             NaN
+   SKU00305           2026-03-26                  NaN       9400.00             NaN
+   SKU00342           2025-02-06                  NaN      66200.00             NaN
+   SKU00369           2025-03-28           2026-06-26      51909.81             NaN
+   SKU00369           2026-06-27                  NaN      83300.00             NaN
+   SKU00392           2025-06-07                  NaN      63500.00             NaN
+   SKU00411           2025-04-20           2026-02-21      44801.96             NaN
+   SKU00411           2026-02-22                  NaN      69800.00             NaN
+   SKU00432           2025-05-19                  NaN      45600.00             NaN
+   SKU00485           2025-06-26           2025-10-09       9056.65             NaN
+   SKU00485           2025-10-10                  NaN      13300.00             NaN
+   SKU00645           2025-02-06                  NaN      54000.00             NaN
+   SKU00646           2025-03-12                  NaN      40900.00             NaN
+   SKU00742           2025-03-20           2026-05-06      50663.47             NaN
+   SKU00742           2026-05-07           2026-07-25      76633.05             NaN
+   SKU00742           2026-07-26                  NaN      81300.00             NaN
+   SKU00753           2025-06-06           2025-07-15      53931.35             NaN
+   SKU00753           2025-07-16                  NaN      79200.00             NaN
+   SKU00782           2025-03-31                  NaN      26300.00             NaN
+
+  Control general del historial: 1498 filas / 800 SKUs; ultima vigencia = catalogo en 800/800 precios; primera vigencia = fecha_alta en 800/800; sin solapamientos ni huecos
+  Vigencias con fecha de inicio posterior a dic-2025: 176
+  Saltos de precio entre vigencias consecutivas (%): {'count': 698.0, 'mean': 119.4, 'std': 98.9, 'min': 3.0, '5%': 9.3, '50%': 86.0, '95%': 325.6, 'max': 393.4}
+
+====================================================================================================
+3. OUTLIERS / VALORES IMPOSIBLES
+====================================================================================================
+
+3.1 Stock negativo
+  1,209 filas | min -152 | mediana -11.0 | suma -20,914
+  Por anio: {2022: 67, 2023: 255, 2024: 394, 2025: 493}
+  SKUs afectados: 548 | tiendas: 28 de 28 | posiciones SKU-tienda distintas: 1,117
+  Concentracion: top 5 tiendas {'T04': 58, 'T05': 53, 'T13': 53, 'T20': 51, 'T10': 49}
+  Tamanio: |stock| > 50 en 74 filas, > 100 en 5
+  De esas filas, con venta > 0 el mismo mes: 1,008 (81.6%) | unidades vendidas mediana 2
+  ¿El faltante se parece a la venta del mes? |stock_neg| vs unidades vendidas: correlacion 0.748 | |stock_neg| mediana 11
+  Mes siguiente de una posicion con stock negativo: vuelve a positivo en 1,148 casos, sigue negativo en 6, sin dato en 44
+
+3.2 Ventas y venta_neta negativas (= devoluciones)
+  2,317 filas | unidades -9,583 | monto $-418.3 M | coinciden 1 a 1 con Devoluciones_SKU (misma clave y mismas unidades)
+  Motivos (registros/unidades): {'Defecto de fabricacion': {'count': 435, 'sum': 1786}, 'Devolucion de cliente (cambio)': {'count': 466, 'sum': 1930}, 'Error de picking': {'count': 446, 'sum': 1787}, 'Producto dañado en logistica': {'count': 499, 'sum': 2067}, 'Producto sin rotacion / no vendido': {'count': 471, 'sum': 2013}}
+  Peso: 1.27% de las unidades vendidas
+  ¿La misma clave tiene tambien una fila de venta positiva ese mes? 40 de 2,317
+
+3.3 Descuentos fuera de rango
+  Liquidaciones:
+id_liquidacion id_producto tienda fecha_inicio  fecha_fin  descuento_pct           motivo
+       LIQ0077    SKU00150    T11   2023-12-11 2023-12-26            120 Fin de temporada
+       LIQ0306    SKU00308    T27   2025-12-09 2026-01-23            -10    Baja rotacion
+       LIQ0477    SKU00236    T27   2025-09-26 2025-11-25            120  Discontinuacion
+  Promociones:
+id_promocion    categoria  canal     medio_pago evento_asociado fecha_inicio  fecha_fin  descuento_pct
+   PROMO0052 Textil hogar Online            NaN         Navidad   2023-12-15 2023-12-31            150
+   PROMO0072         Baño Online Tarjeta debito             NaN   2022-06-03 2022-06-15            -15
+  Valores validos de descuento en liquidaciones: [np.int64(10), np.int64(15), np.int64(20), np.int64(25), np.int64(30), np.int64(40), np.int64(50)]
+  Valores validos en promociones: [np.int64(5), np.int64(10), np.int64(15), np.int64(20), np.int64(25), np.int64(30), np.int64(35), np.int64(40)]
+
+3.4 Presupuesto negativo y en cero
+  Negativos:
+ fecha_mes id_tienda    categoria  presupuesto_venta_ars  presupuesto_unidades
+2022-06-01       T07 Textil hogar               33895.50                    -2
+2022-06-01       T22         Baño               -6596.18                     4
+2022-07-01       T17  Iluminacion             -963369.27                    -9
+2023-01-01       T24  Iluminacion             -514763.02                    14
+2023-05-01       T10 Organizacion              359860.31                    -4
+  Ceros: 309 filas, meses ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01'] | tiendas afectadas 28 de 28
+  Presupuesto medio por celda en 2022: $850,428

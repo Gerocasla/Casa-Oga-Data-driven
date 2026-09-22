@@ -1,0 +1,53 @@
+﻿fuente,columna,regla,valor_crudo,valor_normalizado,filas
+Calendario,temporada,R1 sin tildes/enie,Otoño,Otono,368
+Costo_almacenamiento,categoria,R2 categoria unificada,Baño,Bano,1
+Devoluciones_SKU,motivo,R1 sin tildes/enie,Producto dañado en logistica,Producto danado en logistica,499
+Liquidaciones,fecha_fin,R3 formato de fecha,2023-02-04 00:00:00,2023-02-04,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2023-12-24 00:00:00,2023-12-24,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2024-02-24 00:00:00,2024-02-24,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2024-07-28 00:00:00,2024-07-28,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2024-09-03 00:00:00,2024-09-03,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2025-10-08 00:00:00,2025-10-08,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2026-01-22 00:00:00,2026-01-22,1
+Liquidaciones,fecha_fin,R3 formato de fecha,2026-02-23 00:00:00,2026-02-23,1
+Presupuesto_Ventas_Tienda_Categoria,categoria,R2 categoria unificada,Baño,Bano,1568
+Productos_catalogo,categoria,R2 categoria unificada,Baño,Bano,100
+Productos_catalogo,categoria,R2 categoria unificada,Decoración,Decoracion,8
+Productos_catalogo,categoria,R2 categoria unificada,Textil Hogar,Textil hogar,6
+Productos_catalogo,categoria,R2 categoria unificada,DECO,Decoracion,5
+Productos_catalogo,categoria,R2 categoria unificada,TEXTIL_HOGAR,Textil hogar,2
+Productos_catalogo,subcategoria,R1 sin tildes/enie,Alfombras de baño,Alfombras de bano,40
+Productos_catalogo,subcategoria,R1 sin tildes/enie,Accesorios de baño,Accesorios de bano,30
+Productos_catalogo,subcategoria,R1 sin tildes/enie,Cortinas de baño,Cortinas de bano,30
+Promociones_Comerciales,categoria,R2 categoria unificada,Baño,Bano,16
+Promociones_Comerciales,categoria,R2 categoria unificada,Decoración,Decoracion,1
+Promociones_Comerciales,categoria,R2 categoria unificada,TEXTIL_HOGAR,Textil hogar,1
+Promociones_Comerciales,categoria,R2 categoria unificada,Textil Hogar,Textil hogar,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 10,Casa Oga Buenos Aires 10,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 2,Casa Oga Buenos Aires 2,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 20,Casa Oga Buenos Aires 20,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 23,Casa Oga Buenos Aires 23,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 24,Casa Oga Buenos Aires 24,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 27,Casa Oga Buenos Aires 27,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Buenos Aires 5,Casa Oga Buenos Aires 5,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga CABA 11,Casa Oga CABA 11,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga CABA 14,Casa Oga CABA 14,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga CABA 22,Casa Oga CABA 22,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga CABA 28,Casa Oga CABA 28,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Cordoba 25,Casa Oga Cordoba 25,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Cordoba 7,Casa Oga Cordoba 7,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Entre Rios 17,Casa Oga Entre Rios 17,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Mendoza 1,Casa Oga Mendoza 1,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Mendoza 12,Casa Oga Mendoza 12,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Mendoza 19,Casa Oga Mendoza 19,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Mendoza 21,Casa Oga Mendoza 21,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Mendoza 3,Casa Oga Mendoza 3,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Neuquen 8,Casa Oga Neuquen 8,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Salta 15,Casa Oga Salta 15,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Salta 18,Casa Oga Salta 18,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Salta 26,Casa Oga Salta 26,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Santa Fe 13,Casa Oga Santa Fe 13,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Santa Fe 4,Casa Oga Santa Fe 4,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Santa Fe 6,Casa Oga Santa Fe 6,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Tucuman 16,Casa Oga Tucuman 16,1
+Tiendas,nombre_tienda,R1 sin tildes/enie,Casa Óga Tucuman 9,Casa Oga Tucuman 9,1

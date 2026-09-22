@@ -1,0 +1,2318 @@
+id_devolucion,id_producto,id_tienda,fecha,unidades_devueltas,motivo
+DEVP0001,SKU00002,T06,2025-07-07,6,Defecto de fabricacion
+DEVP0002,SKU00002,T09,2025-01-26,6,Devolucion de cliente (cambio)
+DEVP0003,SKU00002,T02,2024-07-09,8,Error de picking
+DEVP0004,SKU00002,T05,2025-11-16,7,Devolucion de cliente (cambio)
+DEVP0005,SKU00003,T15,2025-04-03,1,Devolucion de cliente (cambio)
+DEVP0006,SKU00003,T24,2025-06-14,1,Devolucion de cliente (cambio)
+DEVP0007,SKU00004,T26,2023-11-13,9,Defecto de fabricacion
+DEVP0008,SKU00004,T17,2024-11-03,11,Devolucion de cliente (cambio)
+DEVP0009,SKU00004,T18,2024-05-25,10,Defecto de fabricacion
+DEVP0010,SKU00004,T11,2024-01-22,6,Producto danado en logistica
+DEVP0011,SKU00004,T10,2025-04-18,2,Defecto de fabricacion
+DEVP0012,SKU00004,T16,2024-03-11,11,Producto danado en logistica
+DEVP0013,SKU00005,T22,2024-02-27,2,Devolucion de cliente (cambio)
+DEVP0014,SKU00005,T02,2025-06-08,4,Producto sin rotacion / no vendido
+DEVP0015,SKU00005,T02,2025-09-08,1,Producto danado en logistica
+DEVP0016,SKU00006,T07,2023-11-17,4,Producto danado en logistica
+DEVP0017,SKU00006,T13,2024-10-03,5,Producto sin rotacion / no vendido
+DEVP0018,SKU00006,T16,2022-10-13,4,Defecto de fabricacion
+DEVP0019,SKU00006,T15,2023-11-13,4,Producto sin rotacion / no vendido
+DEVP0020,SKU00006,T15,2024-11-25,6,Defecto de fabricacion
+DEVP0021,SKU00006,T17,2022-10-10,2,Producto sin rotacion / no vendido
+DEVP0022,SKU00006,T17,2023-07-06,5,Error de picking
+DEVP0023,SKU00007,T25,2024-06-09,4,Devolucion de cliente (cambio)
+DEVP0024,SKU00008,T22,2025-08-10,1,Devolucion de cliente (cambio)
+DEVP0025,SKU00008,T04,2024-09-09,4,Devolucion de cliente (cambio)
+DEVP0026,SKU00008,T20,2024-04-12,3,Producto danado en logistica
+DEVP0027,SKU00008,T20,2025-05-23,3,Producto danado en logistica
+DEVP0028,SKU00009,T03,2025-08-24,4,Devolucion de cliente (cambio)
+DEVP0029,SKU00009,T24,2024-12-11,8,Defecto de fabricacion
+DEVP0030,SKU00010,T08,2023-08-17,1,Defecto de fabricacion
+DEVP0031,SKU00010,T19,2024-01-25,3,Producto danado en logistica
+DEVP0032,SKU00010,T22,2024-07-13,1,Producto danado en logistica
+DEVP0033,SKU00010,T14,2023-03-16,4,Defecto de fabricacion
+DEVP0034,SKU00012,T21,2025-03-03,1,Error de picking
+DEVP0035,SKU00012,T12,2025-04-05,3,Defecto de fabricacion
+DEVP0036,SKU00013,T17,2023-10-15,12,Producto danado en logistica
+DEVP0037,SKU00013,T27,2023-12-09,6,Producto danado en logistica
+DEVP0038,SKU00013,T27,2024-07-18,7,Producto sin rotacion / no vendido
+DEVP0039,SKU00013,T06,2022-10-20,6,Defecto de fabricacion
+DEVP0040,SKU00013,T06,2024-02-06,11,Producto sin rotacion / no vendido
+DEVP0041,SKU00013,T04,2024-03-20,7,Producto sin rotacion / no vendido
+DEVP0042,SKU00014,T22,2025-09-09,2,Defecto de fabricacion
+DEVP0043,SKU00015,T11,2025-12-20,3,Defecto de fabricacion
+DEVP0044,SKU00015,T22,2025-03-09,5,Defecto de fabricacion
+DEVP0045,SKU00015,T22,2025-05-10,3,Defecto de fabricacion
+DEVP0046,SKU00015,T22,2025-07-06,3,Error de picking
+DEVP0047,SKU00016,T09,2024-07-02,12,Error de picking
+DEVP0048,SKU00019,T18,2025-11-17,5,Producto sin rotacion / no vendido
+DEVP0049,SKU00019,T13,2025-03-12,4,Defecto de fabricacion
+DEVP0050,SKU00021,T12,2022-07-09,3,Defecto de fabricacion
+DEVP0051,SKU00021,T07,2023-01-16,1,Producto sin rotacion / no vendido
+DEVP0052,SKU00021,T20,2022-04-19,1,Producto danado en logistica
+DEVP0053,SKU00021,T20,2022-11-06,1,Defecto de fabricacion
+DEVP0054,SKU00021,T05,2023-09-19,1,Devolucion de cliente (cambio)
+DEVP0055,SKU00021,T01,2023-11-10,2,Producto sin rotacion / no vendido
+DEVP0056,SKU00021,T14,2022-05-19,1,Defecto de fabricacion
+DEVP0057,SKU00024,T13,2024-10-23,2,Producto sin rotacion / no vendido
+DEVP0058,SKU00025,T10,2024-09-26,5,Error de picking
+DEVP0059,SKU00025,T20,2024-03-19,7,Error de picking
+DEVP0060,SKU00025,T20,2025-08-04,2,Producto sin rotacion / no vendido
+DEVP0061,SKU00025,T22,2025-07-15,5,Devolucion de cliente (cambio)
+DEVP0062,SKU00025,T18,2024-03-28,4,Error de picking
+DEVP0063,SKU00025,T05,2024-03-26,7,Producto danado en logistica
+DEVP0064,SKU00025,T28,2024-09-10,6,Producto sin rotacion / no vendido
+DEVP0065,SKU00025,T26,2023-12-24,2,Devolucion de cliente (cambio)
+DEVP0066,SKU00025,T26,2025-10-02,3,Producto danado en logistica
+DEVP0067,SKU00025,T26,2025-12-17,6,Producto danado en logistica
+DEVP0068,SKU00026,T18,2024-10-21,9,Producto danado en logistica
+DEVP0069,SKU00027,T08,2024-01-19,5,Error de picking
+DEVP0070,SKU00028,T18,2025-11-12,3,Defecto de fabricacion
+DEVP0071,SKU00031,T24,2023-09-25,5,Producto danado en logistica
+DEVP0072,SKU00032,T07,2025-03-25,19,Producto danado en logistica
+DEVP0073,SKU00032,T01,2025-03-20,5,Error de picking
+DEVP0074,SKU00032,T27,2023-04-19,17,Producto sin rotacion / no vendido
+DEVP0075,SKU00032,T02,2024-05-04,11,Devolucion de cliente (cambio)
+DEVP0076,SKU00032,T15,2025-02-27,26,Defecto de fabricacion
+DEVP0077,SKU00032,T12,2024-09-14,12,Producto danado en logistica
+DEVP0078,SKU00033,T04,2022-06-02,5,Producto danado en logistica
+DEVP0079,SKU00033,T04,2022-11-24,1,Devolucion de cliente (cambio)
+DEVP0080,SKU00033,T24,2023-07-19,3,Producto danado en logistica
+DEVP0081,SKU00033,T27,2023-07-23,1,Error de picking
+DEVP0082,SKU00033,T21,2023-07-16,3,Error de picking
+DEVP0083,SKU00033,T16,2024-10-26,2,Producto sin rotacion / no vendido
+DEVP0084,SKU00034,T03,2025-10-12,1,Defecto de fabricacion
+DEVP0085,SKU00034,T17,2023-09-12,2,Defecto de fabricacion
+DEVP0086,SKU00034,T27,2025-03-08,3,Error de picking
+DEVP0087,SKU00034,T07,2024-07-21,1,Devolucion de cliente (cambio)
+DEVP0088,SKU00034,T19,2023-07-12,1,Error de picking
+DEVP0089,SKU00035,T07,2025-07-09,2,Devolucion de cliente (cambio)
+DEVP0090,SKU00035,T16,2025-09-08,2,Devolucion de cliente (cambio)
+DEVP0091,SKU00037,T08,2025-06-14,3,Error de picking
+DEVP0092,SKU00039,T23,2025-02-04,1,Error de picking
+DEVP0093,SKU00039,T20,2025-10-10,1,Producto danado en logistica
+DEVP0094,SKU00039,T05,2022-09-17,3,Producto sin rotacion / no vendido
+DEVP0095,SKU00039,T05,2024-12-25,4,Error de picking
+DEVP0096,SKU00039,T19,2023-03-24,3,Defecto de fabricacion
+DEVP0097,SKU00039,T19,2023-07-03,1,Producto sin rotacion / no vendido
+DEVP0098,SKU00039,T19,2024-05-08,1,Devolucion de cliente (cambio)
+DEVP0099,SKU00040,T08,2024-04-04,7,Defecto de fabricacion
+DEVP0100,SKU00040,T28,2023-03-26,10,Devolucion de cliente (cambio)
+DEVP0101,SKU00040,T27,2024-02-25,3,Producto danado en logistica
+DEVP0102,SKU00041,T18,2025-07-22,2,Error de picking
+DEVP0103,SKU00042,T22,2024-06-20,3,Devolucion de cliente (cambio)
+DEVP0104,SKU00042,T25,2025-08-04,1,Producto danado en logistica
+DEVP0105,SKU00042,T06,2023-11-16,2,Devolucion de cliente (cambio)
+DEVP0106,SKU00042,T06,2025-09-04,1,Defecto de fabricacion
+DEVP0107,SKU00042,T21,2025-02-19,1,Error de picking
+DEVP0108,SKU00042,T09,2023-10-25,5,Devolucion de cliente (cambio)
+DEVP0109,SKU00042,T08,2025-04-03,2,Producto sin rotacion / no vendido
+DEVP0110,SKU00043,T10,2025-08-23,1,Defecto de fabricacion
+DEVP0111,SKU00045,T13,2025-04-28,1,Producto danado en logistica
+DEVP0112,SKU00045,T23,2024-09-09,1,Defecto de fabricacion
+DEVP0113,SKU00046,T08,2025-09-14,2,Producto danado en logistica
+DEVP0114,SKU00047,T20,2025-10-03,3,Producto sin rotacion / no vendido
+DEVP0115,SKU00047,T25,2025-03-13,3,Defecto de fabricacion
+DEVP0116,SKU00047,T26,2024-12-18,3,Producto danado en logistica
+DEVP0117,SKU00047,T13,2025-04-04,1,Error de picking
+DEVP0118,SKU00048,T12,2023-10-02,6,Producto sin rotacion / no vendido
+DEVP0119,SKU00048,T12,2024-04-10,5,Defecto de fabricacion
+DEVP0120,SKU00049,T16,2025-02-08,7,Producto danado en logistica
+DEVP0121,SKU00049,T12,2023-08-21,8,Defecto de fabricacion
+DEVP0122,SKU00049,T15,2023-07-20,7,Error de picking
+DEVP0123,SKU00049,T15,2024-04-11,9,Error de picking
+DEVP0124,SKU00051,T23,2022-06-04,1,Producto danado en logistica
+DEVP0125,SKU00051,T23,2024-06-26,2,Error de picking
+DEVP0126,SKU00051,T20,2025-05-13,1,Devolucion de cliente (cambio)
+DEVP0127,SKU00051,T15,2022-10-18,4,Defecto de fabricacion
+DEVP0128,SKU00051,T01,2022-08-19,2,Error de picking
+DEVP0129,SKU00051,T01,2022-12-18,4,Defecto de fabricacion
+DEVP0130,SKU00052,T04,2023-12-27,1,Producto danado en logistica
+DEVP0131,SKU00052,T04,2024-11-12,1,Devolucion de cliente (cambio)
+DEVP0132,SKU00052,T23,2023-12-19,1,Producto danado en logistica
+DEVP0133,SKU00053,T21,2025-02-16,4,Error de picking
+DEVP0134,SKU00053,T17,2022-10-04,4,Producto danado en logistica
+DEVP0135,SKU00053,T16,2025-10-23,1,Error de picking
+DEVP0136,SKU00053,T08,2022-12-28,2,Producto danado en logistica
+DEVP0137,SKU00054,T02,2025-03-13,3,Devolucion de cliente (cambio)
+DEVP0138,SKU00054,T25,2023-03-10,1,Producto sin rotacion / no vendido
+DEVP0139,SKU00054,T25,2024-01-02,2,Devolucion de cliente (cambio)
+DEVP0140,SKU00054,T08,2022-10-16,2,Error de picking
+DEVP0141,SKU00054,T01,2024-02-02,3,Defecto de fabricacion
+DEVP0142,SKU00054,T01,2024-03-27,3,Defecto de fabricacion
+DEVP0143,SKU00055,T09,2025-05-05,2,Devolucion de cliente (cambio)
+DEVP0144,SKU00055,T17,2025-08-16,1,Devolucion de cliente (cambio)
+DEVP0145,SKU00056,T17,2023-04-28,1,Producto sin rotacion / no vendido
+DEVP0146,SKU00056,T21,2022-10-12,3,Defecto de fabricacion
+DEVP0147,SKU00056,T21,2024-07-13,3,Defecto de fabricacion
+DEVP0148,SKU00058,T21,2024-12-02,4,Error de picking
+DEVP0149,SKU00058,T07,2025-05-23,1,Producto sin rotacion / no vendido
+DEVP0150,SKU00059,T10,2022-10-12,2,Producto sin rotacion / no vendido
+DEVP0151,SKU00059,T08,2023-04-20,2,Producto sin rotacion / no vendido
+DEVP0152,SKU00059,T08,2024-05-14,1,Devolucion de cliente (cambio)
+DEVP0153,SKU00059,T08,2024-06-19,2,Producto sin rotacion / no vendido
+DEVP0154,SKU00059,T03,2022-11-17,2,Producto danado en logistica
+DEVP0155,SKU00059,T27,2024-07-13,2,Producto danado en logistica
+DEVP0156,SKU00059,T28,2025-03-03,3,Error de picking
+DEVP0157,SKU00060,T23,2024-06-04,2,Defecto de fabricacion
+DEVP0158,SKU00061,T21,2024-08-15,4,Error de picking
+DEVP0159,SKU00061,T08,2025-01-11,5,Producto danado en logistica
+DEVP0160,SKU00061,T11,2023-10-03,5,Defecto de fabricacion
+DEVP0161,SKU00062,T04,2025-04-08,5,Producto sin rotacion / no vendido
+DEVP0162,SKU00062,T22,2025-06-06,1,Defecto de fabricacion
+DEVP0163,SKU00062,T22,2025-09-27,2,Defecto de fabricacion
+DEVP0164,SKU00062,T11,2024-05-23,2,Devolucion de cliente (cambio)
+DEVP0165,SKU00062,T09,2023-05-21,3,Defecto de fabricacion
+DEVP0166,SKU00062,T12,2023-03-04,2,Producto danado en logistica
+DEVP0167,SKU00062,T20,2024-09-27,3,Defecto de fabricacion
+DEVP0168,SKU00062,T20,2025-10-26,2,Producto sin rotacion / no vendido
+DEVP0169,SKU00062,T14,2024-12-14,3,Producto danado en logistica
+DEVP0170,SKU00062,T13,2023-10-13,2,Defecto de fabricacion
+DEVP0171,SKU00063,T21,2025-12-02,7,Defecto de fabricacion
+DEVP0172,SKU00063,T26,2024-07-06,3,Defecto de fabricacion
+DEVP0173,SKU00063,T07,2025-03-05,4,Defecto de fabricacion
+DEVP0174,SKU00063,T24,2024-01-11,5,Error de picking
+DEVP0175,SKU00063,T24,2025-11-18,5,Devolucion de cliente (cambio)
+DEVP0176,SKU00063,T02,2025-01-21,6,Producto danado en logistica
+DEVP0177,SKU00065,T25,2024-09-03,4,Devolucion de cliente (cambio)
+DEVP0178,SKU00065,T14,2025-02-17,4,Devolucion de cliente (cambio)
+DEVP0179,SKU00065,T27,2023-08-25,5,Producto sin rotacion / no vendido
+DEVP0180,SKU00066,T18,2025-08-12,1,Defecto de fabricacion
+DEVP0181,SKU00068,T12,2025-08-07,2,Defecto de fabricacion
+DEVP0182,SKU00068,T24,2025-02-04,4,Producto sin rotacion / no vendido
+DEVP0183,SKU00068,T09,2025-02-05,2,Defecto de fabricacion
+DEVP0184,SKU00070,T03,2024-07-12,7,Defecto de fabricacion
+DEVP0185,SKU00070,T18,2022-08-11,4,Producto sin rotacion / no vendido
+DEVP0186,SKU00070,T18,2025-05-09,6,Defecto de fabricacion
+DEVP0187,SKU00071,T09,2025-10-02,3,Defecto de fabricacion
+DEVP0188,SKU00071,T02,2023-11-25,2,Producto sin rotacion / no vendido
+DEVP0189,SKU00071,T02,2025-09-09,6,Defecto de fabricacion
+DEVP0190,SKU00072,T20,2024-07-24,5,Error de picking
+DEVP0191,SKU00072,T11,2023-03-06,4,Producto danado en logistica
+DEVP0192,SKU00072,T12,2024-07-06,3,Producto sin rotacion / no vendido
+DEVP0193,SKU00073,T04,2025-10-08,10,Error de picking
+DEVP0194,SKU00073,T22,2025-06-13,7,Defecto de fabricacion
+DEVP0195,SKU00073,T12,2025-02-17,3,Producto danado en logistica
+DEVP0196,SKU00073,T03,2025-11-18,7,Defecto de fabricacion
+DEVP0197,SKU00073,T18,2025-08-11,10,Devolucion de cliente (cambio)
+DEVP0198,SKU00073,T25,2025-04-05,9,Devolucion de cliente (cambio)
+DEVP0199,SKU00073,T16,2025-12-07,7,Producto sin rotacion / no vendido
+DEVP0200,SKU00074,T21,2025-08-23,14,Producto danado en logistica
+DEVP0201,SKU00074,T11,2025-07-04,10,Producto sin rotacion / no vendido
+DEVP0202,SKU00074,T26,2024-10-18,8,Devolucion de cliente (cambio)
+DEVP0203,SKU00074,T09,2023-12-18,10,Producto danado en logistica
+DEVP0204,SKU00074,T25,2025-08-18,11,Defecto de fabricacion
+DEVP0205,SKU00074,T24,2024-12-04,5,Defecto de fabricacion
+DEVP0206,SKU00075,T07,2024-07-13,2,Devolucion de cliente (cambio)
+DEVP0207,SKU00075,T23,2024-12-21,2,Defecto de fabricacion
+DEVP0208,SKU00075,T18,2024-08-27,1,Error de picking
+DEVP0209,SKU00075,T18,2025-06-15,2,Producto danado en logistica
+DEVP0210,SKU00076,T12,2024-07-09,8,Devolucion de cliente (cambio)
+DEVP0211,SKU00076,T27,2024-06-06,7,Error de picking
+DEVP0212,SKU00076,T01,2024-05-27,4,Producto sin rotacion / no vendido
+DEVP0213,SKU00076,T13,2023-04-10,6,Producto sin rotacion / no vendido
+DEVP0214,SKU00076,T15,2022-09-04,5,Error de picking
+DEVP0215,SKU00076,T15,2024-10-10,10,Error de picking
+DEVP0216,SKU00076,T06,2024-04-13,9,Devolucion de cliente (cambio)
+DEVP0217,SKU00076,T06,2025-06-15,6,Producto sin rotacion / no vendido
+DEVP0218,SKU00077,T13,2023-03-20,4,Error de picking
+DEVP0219,SKU00077,T28,2023-01-14,3,Producto danado en logistica
+DEVP0220,SKU00077,T19,2023-11-06,4,Producto sin rotacion / no vendido
+DEVP0221,SKU00077,T16,2023-12-11,6,Producto danado en logistica
+DEVP0222,SKU00078,T26,2024-05-18,3,Producto danado en logistica
+DEVP0223,SKU00079,T19,2024-05-09,1,Producto danado en logistica
+DEVP0224,SKU00079,T18,2024-09-25,1,Devolucion de cliente (cambio)
+DEVP0225,SKU00079,T11,2024-10-21,1,Devolucion de cliente (cambio)
+DEVP0226,SKU00080,T16,2024-06-12,3,Error de picking
+DEVP0227,SKU00080,T04,2025-07-14,2,Error de picking
+DEVP0228,SKU00080,T14,2023-10-21,3,Error de picking
+DEVP0229,SKU00080,T03,2024-09-05,4,Producto danado en logistica
+DEVP0230,SKU00080,T10,2024-03-20,7,Producto danado en logistica
+DEVP0231,SKU00080,T10,2024-10-08,7,Producto danado en logistica
+DEVP0232,SKU00081,T28,2025-11-18,6,Producto danado en logistica
+DEVP0233,SKU00081,T07,2025-11-02,5,Producto danado en logistica
+DEVP0234,SKU00082,T18,2025-12-15,1,Defecto de fabricacion
+DEVP0235,SKU00082,T20,2023-11-19,1,Producto sin rotacion / no vendido
+DEVP0236,SKU00082,T15,2024-12-11,2,Producto danado en logistica
+DEVP0237,SKU00083,T22,2024-09-11,4,Producto danado en logistica
+DEVP0238,SKU00083,T20,2025-03-22,2,Producto sin rotacion / no vendido
+DEVP0239,SKU00087,T21,2025-04-02,3,Producto sin rotacion / no vendido
+DEVP0240,SKU00091,T06,2025-06-10,1,Producto sin rotacion / no vendido
+DEVP0241,SKU00091,T15,2025-08-07,2,Devolucion de cliente (cambio)
+DEVP0242,SKU00093,T25,2025-07-13,6,Producto sin rotacion / no vendido
+DEVP0243,SKU00093,T27,2025-10-24,6,Devolucion de cliente (cambio)
+DEVP0244,SKU00093,T27,2025-12-11,2,Producto sin rotacion / no vendido
+DEVP0245,SKU00093,T16,2024-04-28,4,Error de picking
+DEVP0246,SKU00093,T24,2024-02-28,3,Devolucion de cliente (cambio)
+DEVP0247,SKU00093,T11,2025-02-12,5,Producto sin rotacion / no vendido
+DEVP0248,SKU00093,T08,2025-12-26,6,Producto sin rotacion / no vendido
+DEVP0249,SKU00095,T16,2025-10-12,1,Producto sin rotacion / no vendido
+DEVP0250,SKU00096,T12,2024-06-08,1,Error de picking
+DEVP0251,SKU00096,T06,2024-12-16,1,Devolucion de cliente (cambio)
+DEVP0252,SKU00096,T05,2023-05-26,1,Defecto de fabricacion
+DEVP0253,SKU00096,T02,2024-06-02,2,Error de picking
+DEVP0254,SKU00096,T08,2023-02-06,1,Defecto de fabricacion
+DEVP0255,SKU00096,T08,2024-06-11,1,Devolucion de cliente (cambio)
+DEVP0256,SKU00097,T19,2025-07-23,3,Devolucion de cliente (cambio)
+DEVP0257,SKU00097,T28,2025-04-04,4,Devolucion de cliente (cambio)
+DEVP0258,SKU00098,T13,2024-06-18,1,Devolucion de cliente (cambio)
+DEVP0259,SKU00098,T13,2025-07-06,2,Error de picking
+DEVP0260,SKU00098,T19,2025-04-08,1,Devolucion de cliente (cambio)
+DEVP0261,SKU00098,T23,2024-05-27,3,Producto sin rotacion / no vendido
+DEVP0262,SKU00098,T25,2025-03-06,1,Devolucion de cliente (cambio)
+DEVP0263,SKU00098,T11,2025-09-06,3,Producto sin rotacion / no vendido
+DEVP0264,SKU00098,T24,2024-03-18,3,Producto sin rotacion / no vendido
+DEVP0265,SKU00098,T16,2024-04-26,3,Producto sin rotacion / no vendido
+DEVP0266,SKU00098,T21,2025-04-18,1,Producto danado en logistica
+DEVP0267,SKU00099,T23,2025-06-04,1,Defecto de fabricacion
+DEVP0268,SKU00099,T07,2025-05-27,4,Producto sin rotacion / no vendido
+DEVP0269,SKU00100,T26,2025-05-15,3,Producto danado en logistica
+DEVP0270,SKU00100,T04,2023-10-28,4,Error de picking
+DEVP0271,SKU00100,T08,2025-12-11,3,Devolucion de cliente (cambio)
+DEVP0272,SKU00100,T05,2024-02-25,2,Producto danado en logistica
+DEVP0273,SKU00101,T18,2025-03-23,7,Error de picking
+DEVP0274,SKU00101,T23,2025-03-08,6,Producto danado en logistica
+DEVP0275,SKU00101,T11,2023-09-14,2,Producto sin rotacion / no vendido
+DEVP0276,SKU00101,T11,2024-04-09,5,Producto danado en logistica
+DEVP0277,SKU00101,T24,2023-02-24,8,Defecto de fabricacion
+DEVP0278,SKU00101,T24,2023-05-04,4,Defecto de fabricacion
+DEVP0279,SKU00101,T24,2024-05-21,2,Producto danado en logistica
+DEVP0280,SKU00101,T20,2023-09-03,2,Error de picking
+DEVP0281,SKU00101,T20,2025-11-11,1,Error de picking
+DEVP0282,SKU00103,T11,2023-11-06,1,Producto danado en logistica
+DEVP0283,SKU00104,T12,2024-03-12,4,Error de picking
+DEVP0284,SKU00104,T11,2024-11-10,1,Producto danado en logistica
+DEVP0285,SKU00105,T12,2025-04-28,4,Defecto de fabricacion
+DEVP0286,SKU00106,T12,2024-12-15,1,Devolucion de cliente (cambio)
+DEVP0287,SKU00107,T06,2024-11-05,4,Defecto de fabricacion
+DEVP0288,SKU00107,T04,2025-08-28,1,Devolucion de cliente (cambio)
+DEVP0289,SKU00107,T18,2025-07-03,2,Error de picking
+DEVP0290,SKU00109,T11,2023-01-17,1,Error de picking
+DEVP0291,SKU00109,T15,2024-06-18,2,Producto danado en logistica
+DEVP0292,SKU00110,T22,2025-05-02,15,Producto danado en logistica
+DEVP0293,SKU00110,T03,2025-01-03,12,Producto sin rotacion / no vendido
+DEVP0294,SKU00112,T17,2022-11-15,3,Producto sin rotacion / no vendido
+DEVP0295,SKU00112,T26,2023-11-10,4,Devolucion de cliente (cambio)
+DEVP0296,SKU00112,T09,2022-09-13,4,Producto sin rotacion / no vendido
+DEVP0297,SKU00112,T09,2023-06-19,2,Producto sin rotacion / no vendido
+DEVP0298,SKU00113,T04,2024-09-06,5,Devolucion de cliente (cambio)
+DEVP0299,SKU00113,T04,2025-07-12,4,Error de picking
+DEVP0300,SKU00113,T16,2024-08-20,9,Producto danado en logistica
+DEVP0301,SKU00113,T17,2025-06-05,6,Producto sin rotacion / no vendido
+DEVP0302,SKU00113,T27,2025-05-08,5,Producto sin rotacion / no vendido
+DEVP0303,SKU00114,T04,2024-04-27,2,Producto sin rotacion / no vendido
+DEVP0304,SKU00114,T05,2024-02-24,1,Error de picking
+DEVP0305,SKU00114,T08,2025-12-14,1,Defecto de fabricacion
+DEVP0306,SKU00114,T14,2025-06-08,2,Producto sin rotacion / no vendido
+DEVP0307,SKU00114,T26,2025-09-10,1,Defecto de fabricacion
+DEVP0308,SKU00115,T26,2024-03-19,1,Producto danado en logistica
+DEVP0309,SKU00115,T26,2025-04-20,2,Devolucion de cliente (cambio)
+DEVP0310,SKU00115,T25,2024-11-06,2,Defecto de fabricacion
+DEVP0311,SKU00115,T19,2024-08-17,1,Error de picking
+DEVP0312,SKU00115,T04,2025-10-17,3,Producto danado en logistica
+DEVP0313,SKU00115,T02,2024-10-06,3,Defecto de fabricacion
+DEVP0314,SKU00115,T10,2024-04-18,1,Devolucion de cliente (cambio)
+DEVP0315,SKU00115,T10,2025-02-11,1,Error de picking
+DEVP0316,SKU00115,T12,2024-05-26,3,Defecto de fabricacion
+DEVP0317,SKU00116,T26,2025-11-02,3,Error de picking
+DEVP0318,SKU00117,T05,2024-08-17,3,Error de picking
+DEVP0319,SKU00117,T19,2025-02-24,5,Devolucion de cliente (cambio)
+DEVP0320,SKU00117,T28,2025-04-08,3,Producto danado en logistica
+DEVP0321,SKU00117,T01,2024-06-03,6,Producto sin rotacion / no vendido
+DEVP0322,SKU00118,T25,2024-12-14,1,Error de picking
+DEVP0323,SKU00118,T21,2025-06-06,1,Producto sin rotacion / no vendido
+DEVP0324,SKU00118,T22,2024-08-26,1,Error de picking
+DEVP0325,SKU00118,T22,2025-03-28,3,Error de picking
+DEVP0326,SKU00118,T23,2025-11-28,1,Error de picking
+DEVP0327,SKU00119,T09,2024-12-17,5,Producto sin rotacion / no vendido
+DEVP0328,SKU00119,T09,2025-03-24,6,Error de picking
+DEVP0329,SKU00119,T22,2025-02-26,6,Devolucion de cliente (cambio)
+DEVP0330,SKU00120,T06,2024-12-19,2,Producto danado en logistica
+DEVP0331,SKU00120,T26,2022-10-10,3,Producto sin rotacion / no vendido
+DEVP0332,SKU00121,T23,2022-08-11,4,Producto sin rotacion / no vendido
+DEVP0333,SKU00121,T02,2024-01-25,3,Devolucion de cliente (cambio)
+DEVP0334,SKU00121,T02,2025-07-14,9,Error de picking
+DEVP0335,SKU00121,T03,2023-05-03,2,Error de picking
+DEVP0336,SKU00121,T09,2024-05-13,3,Error de picking
+DEVP0337,SKU00122,T09,2024-09-25,2,Producto sin rotacion / no vendido
+DEVP0338,SKU00123,T18,2025-08-03,5,Devolucion de cliente (cambio)
+DEVP0339,SKU00123,T03,2025-08-26,11,Devolucion de cliente (cambio)
+DEVP0340,SKU00124,T23,2025-10-26,3,Error de picking
+DEVP0341,SKU00124,T15,2025-05-20,2,Producto danado en logistica
+DEVP0342,SKU00125,T21,2023-04-12,1,Defecto de fabricacion
+DEVP0343,SKU00125,T21,2024-02-19,1,Producto danado en logistica
+DEVP0344,SKU00125,T10,2023-02-27,3,Defecto de fabricacion
+DEVP0345,SKU00125,T23,2023-04-21,2,Defecto de fabricacion
+DEVP0346,SKU00126,T11,2024-02-14,6,Devolucion de cliente (cambio)
+DEVP0347,SKU00126,T04,2023-10-26,2,Error de picking
+DEVP0348,SKU00126,T22,2025-05-03,3,Producto sin rotacion / no vendido
+DEVP0349,SKU00127,T07,2023-10-21,6,Error de picking
+DEVP0350,SKU00127,T13,2025-03-09,5,Devolucion de cliente (cambio)
+DEVP0351,SKU00127,T06,2025-03-17,6,Devolucion de cliente (cambio)
+DEVP0352,SKU00127,T06,2025-08-19,5,Producto danado en logistica
+DEVP0353,SKU00129,T13,2024-03-09,8,Devolucion de cliente (cambio)
+DEVP0354,SKU00131,T05,2025-11-27,7,Producto danado en logistica
+DEVP0355,SKU00131,T12,2024-09-22,5,Producto danado en logistica
+DEVP0356,SKU00132,T05,2024-10-12,1,Producto danado en logistica
+DEVP0357,SKU00132,T22,2024-12-05,4,Producto danado en logistica
+DEVP0358,SKU00132,T11,2025-02-11,3,Producto sin rotacion / no vendido
+DEVP0359,SKU00133,T09,2025-05-22,4,Producto danado en logistica
+DEVP0360,SKU00134,T07,2025-04-02,2,Producto sin rotacion / no vendido
+DEVP0361,SKU00134,T15,2025-06-07,1,Defecto de fabricacion
+DEVP0362,SKU00134,T22,2025-10-26,2,Devolucion de cliente (cambio)
+DEVP0363,SKU00135,T07,2023-12-09,3,Defecto de fabricacion
+DEVP0364,SKU00135,T23,2024-05-18,6,Producto danado en logistica
+DEVP0365,SKU00135,T20,2025-11-10,2,Producto danado en logistica
+DEVP0366,SKU00135,T06,2024-05-02,4,Defecto de fabricacion
+DEVP0367,SKU00136,T16,2025-06-02,20,Error de picking
+DEVP0368,SKU00136,T15,2025-10-02,17,Error de picking
+DEVP0369,SKU00136,T06,2025-01-25,9,Error de picking
+DEVP0370,SKU00136,T06,2025-07-18,7,Producto danado en logistica
+DEVP0371,SKU00138,T03,2023-11-02,3,Error de picking
+DEVP0372,SKU00138,T04,2024-03-21,2,Error de picking
+DEVP0373,SKU00138,T16,2024-09-09,3,Defecto de fabricacion
+DEVP0374,SKU00139,T07,2025-04-28,2,Error de picking
+DEVP0375,SKU00139,T28,2025-06-14,4,Devolucion de cliente (cambio)
+DEVP0376,SKU00139,T15,2025-10-04,6,Defecto de fabricacion
+DEVP0377,SKU00139,T13,2025-05-26,4,Error de picking
+DEVP0378,SKU00140,T23,2025-11-03,2,Devolucion de cliente (cambio)
+DEVP0379,SKU00140,T28,2025-10-06,1,Producto sin rotacion / no vendido
+DEVP0380,SKU00141,T15,2025-04-11,4,Defecto de fabricacion
+DEVP0381,SKU00141,T07,2024-12-20,4,Producto sin rotacion / no vendido
+DEVP0382,SKU00141,T11,2024-09-16,5,Producto danado en logistica
+DEVP0383,SKU00141,T01,2025-01-11,5,Defecto de fabricacion
+DEVP0384,SKU00141,T17,2025-09-18,7,Devolucion de cliente (cambio)
+DEVP0385,SKU00141,T10,2024-07-02,2,Devolucion de cliente (cambio)
+DEVP0386,SKU00142,T13,2025-07-26,2,Producto danado en logistica
+DEVP0387,SKU00143,T19,2023-07-20,3,Producto danado en logistica
+DEVP0388,SKU00143,T07,2025-06-21,2,Devolucion de cliente (cambio)
+DEVP0389,SKU00143,T15,2025-01-08,7,Error de picking
+DEVP0390,SKU00143,T18,2025-11-11,8,Devolucion de cliente (cambio)
+DEVP0391,SKU00143,T08,2024-02-25,3,Error de picking
+DEVP0392,SKU00143,T08,2025-05-18,1,Devolucion de cliente (cambio)
+DEVP0393,SKU00144,T27,2025-12-18,8,Devolucion de cliente (cambio)
+DEVP0394,SKU00144,T17,2024-09-24,4,Producto danado en logistica
+DEVP0395,SKU00144,T20,2025-10-06,5,Defecto de fabricacion
+DEVP0396,SKU00144,T12,2025-09-16,3,Error de picking
+DEVP0397,SKU00144,T04,2025-08-04,5,Error de picking
+DEVP0398,SKU00145,T04,2025-07-23,3,Producto sin rotacion / no vendido
+DEVP0399,SKU00146,T08,2025-02-06,3,Producto danado en logistica
+DEVP0400,SKU00146,T19,2022-10-18,7,Producto danado en logistica
+DEVP0401,SKU00146,T19,2025-10-09,1,Producto sin rotacion / no vendido
+DEVP0402,SKU00146,T28,2025-08-11,1,Producto sin rotacion / no vendido
+DEVP0403,SKU00148,T20,2025-10-19,3,Producto danado en logistica
+DEVP0404,SKU00148,T24,2025-04-04,5,Producto sin rotacion / no vendido
+DEVP0405,SKU00150,T08,2025-03-02,2,Error de picking
+DEVP0406,SKU00150,T06,2024-05-13,1,Devolucion de cliente (cambio)
+DEVP0407,SKU00150,T12,2024-07-13,1,Defecto de fabricacion
+DEVP0408,SKU00150,T12,2025-01-26,2,Devolucion de cliente (cambio)
+DEVP0409,SKU00150,T04,2025-01-16,4,Producto danado en logistica
+DEVP0410,SKU00150,T04,2025-08-02,3,Error de picking
+DEVP0411,SKU00150,T04,2025-09-16,2,Devolucion de cliente (cambio)
+DEVP0412,SKU00150,T10,2025-06-25,3,Defecto de fabricacion
+DEVP0413,SKU00150,T10,2025-07-25,4,Error de picking
+DEVP0414,SKU00150,T25,2023-12-22,4,Producto danado en logistica
+DEVP0415,SKU00150,T25,2024-04-03,3,Producto sin rotacion / no vendido
+DEVP0416,SKU00150,T25,2025-04-18,3,Producto danado en logistica
+DEVP0417,SKU00150,T17,2025-02-05,1,Producto danado en logistica
+DEVP0418,SKU00151,T24,2025-10-20,1,Producto danado en logistica
+DEVP0419,SKU00151,T13,2024-08-27,2,Producto sin rotacion / no vendido
+DEVP0420,SKU00151,T14,2025-04-25,1,Devolucion de cliente (cambio)
+DEVP0421,SKU00152,T10,2024-05-28,7,Producto sin rotacion / no vendido
+DEVP0422,SKU00152,T16,2024-08-19,13,Error de picking
+DEVP0423,SKU00152,T26,2024-02-11,5,Producto sin rotacion / no vendido
+DEVP0424,SKU00152,T26,2024-08-10,10,Error de picking
+DEVP0425,SKU00153,T18,2024-07-21,9,Defecto de fabricacion
+DEVP0426,SKU00153,T19,2025-05-18,5,Defecto de fabricacion
+DEVP0427,SKU00153,T13,2025-05-28,5,Error de picking
+DEVP0428,SKU00154,T05,2025-03-25,13,Producto danado en logistica
+DEVP0429,SKU00154,T13,2025-02-06,16,Defecto de fabricacion
+DEVP0430,SKU00155,T05,2024-04-27,2,Devolucion de cliente (cambio)
+DEVP0431,SKU00155,T01,2025-09-20,2,Error de picking
+DEVP0432,SKU00155,T11,2024-04-27,2,Error de picking
+DEVP0433,SKU00156,T19,2025-12-23,17,Devolucion de cliente (cambio)
+DEVP0434,SKU00156,T18,2025-11-18,13,Producto sin rotacion / no vendido
+DEVP0435,SKU00156,T17,2024-11-28,21,Devolucion de cliente (cambio)
+DEVP0436,SKU00157,T07,2022-05-19,2,Producto sin rotacion / no vendido
+DEVP0437,SKU00158,T20,2023-10-09,3,Producto sin rotacion / no vendido
+DEVP0438,SKU00158,T20,2025-11-09,6,Producto sin rotacion / no vendido
+DEVP0439,SKU00158,T01,2025-10-26,2,Producto danado en logistica
+DEVP0440,SKU00160,T23,2025-07-05,3,Producto sin rotacion / no vendido
+DEVP0441,SKU00161,T14,2024-03-21,1,Defecto de fabricacion
+DEVP0442,SKU00162,T24,2025-08-09,2,Defecto de fabricacion
+DEVP0443,SKU00162,T16,2025-10-08,1,Producto danado en logistica
+DEVP0444,SKU00164,T09,2025-01-12,1,Producto sin rotacion / no vendido
+DEVP0445,SKU00164,T21,2023-06-17,2,Producto sin rotacion / no vendido
+DEVP0446,SKU00164,T21,2025-01-24,2,Producto sin rotacion / no vendido
+DEVP0447,SKU00164,T06,2025-08-04,3,Producto danado en logistica
+DEVP0448,SKU00164,T04,2024-11-27,4,Error de picking
+DEVP0449,SKU00164,T12,2024-09-18,4,Producto danado en logistica
+DEVP0450,SKU00164,T15,2025-10-22,2,Error de picking
+DEVP0451,SKU00164,T24,2023-12-25,1,Devolucion de cliente (cambio)
+DEVP0452,SKU00164,T24,2025-05-25,3,Producto sin rotacion / no vendido
+DEVP0453,SKU00164,T17,2024-05-10,1,Producto danado en logistica
+DEVP0454,SKU00164,T13,2022-12-08,3,Devolucion de cliente (cambio)
+DEVP0455,SKU00165,T01,2024-08-19,3,Producto danado en logistica
+DEVP0456,SKU00165,T15,2023-11-24,1,Devolucion de cliente (cambio)
+DEVP0457,SKU00165,T20,2025-08-08,3,Defecto de fabricacion
+DEVP0458,SKU00165,T22,2025-10-07,2,Devolucion de cliente (cambio)
+DEVP0459,SKU00166,T21,2023-08-23,1,Producto danado en logistica
+DEVP0460,SKU00166,T04,2023-12-18,2,Defecto de fabricacion
+DEVP0461,SKU00166,T02,2023-06-16,1,Devolucion de cliente (cambio)
+DEVP0462,SKU00166,T18,2024-11-13,1,Producto sin rotacion / no vendido
+DEVP0463,SKU00167,T16,2024-11-08,6,Devolucion de cliente (cambio)
+DEVP0464,SKU00168,T21,2025-08-02,3,Error de picking
+DEVP0465,SKU00168,T28,2023-02-14,1,Producto sin rotacion / no vendido
+DEVP0466,SKU00168,T28,2023-09-24,2,Producto sin rotacion / no vendido
+DEVP0467,SKU00168,T06,2024-03-08,3,Defecto de fabricacion
+DEVP0468,SKU00168,T06,2024-04-23,4,Producto sin rotacion / no vendido
+DEVP0469,SKU00168,T10,2023-10-10,3,Defecto de fabricacion
+DEVP0470,SKU00168,T13,2025-12-16,2,Devolucion de cliente (cambio)
+DEVP0471,SKU00169,T26,2024-04-25,3,Producto sin rotacion / no vendido
+DEVP0472,SKU00169,T10,2025-04-11,4,Devolucion de cliente (cambio)
+DEVP0473,SKU00169,T15,2025-05-24,2,Defecto de fabricacion
+DEVP0474,SKU00169,T04,2025-05-03,1,Error de picking
+DEVP0475,SKU00170,T18,2025-11-13,3,Defecto de fabricacion
+DEVP0476,SKU00170,T21,2025-08-18,2,Devolucion de cliente (cambio)
+DEVP0477,SKU00170,T16,2025-03-08,1,Producto danado en logistica
+DEVP0478,SKU00173,T18,2025-12-21,5,Producto danado en logistica
+DEVP0479,SKU00173,T10,2025-07-28,3,Defecto de fabricacion
+DEVP0480,SKU00174,T26,2023-08-28,1,Producto sin rotacion / no vendido
+DEVP0481,SKU00174,T25,2024-07-11,2,Producto sin rotacion / no vendido
+DEVP0482,SKU00174,T11,2024-03-05,2,Producto danado en logistica
+DEVP0483,SKU00174,T09,2025-07-13,2,Devolucion de cliente (cambio)
+DEVP0484,SKU00174,T19,2025-05-21,1,Devolucion de cliente (cambio)
+DEVP0485,SKU00174,T23,2024-07-10,1,Devolucion de cliente (cambio)
+DEVP0486,SKU00174,T27,2022-11-05,3,Devolucion de cliente (cambio)
+DEVP0487,SKU00174,T27,2024-03-27,1,Defecto de fabricacion
+DEVP0488,SKU00175,T08,2025-08-12,3,Devolucion de cliente (cambio)
+DEVP0489,SKU00177,T16,2025-05-23,1,Error de picking
+DEVP0490,SKU00177,T01,2025-05-08,1,Producto sin rotacion / no vendido
+DEVP0491,SKU00178,T10,2025-08-19,6,Producto sin rotacion / no vendido
+DEVP0492,SKU00178,T02,2025-08-17,5,Error de picking
+DEVP0493,SKU00178,T04,2025-11-16,10,Defecto de fabricacion
+DEVP0494,SKU00179,T23,2024-03-19,8,Defecto de fabricacion
+DEVP0495,SKU00179,T09,2024-12-10,6,Error de picking
+DEVP0496,SKU00179,T08,2023-08-09,10,Error de picking
+DEVP0497,SKU00179,T04,2024-03-19,5,Error de picking
+DEVP0498,SKU00179,T07,2025-03-10,4,Producto sin rotacion / no vendido
+DEVP0499,SKU00180,T28,2024-12-21,4,Defecto de fabricacion
+DEVP0500,SKU00180,T05,2025-09-15,2,Defecto de fabricacion
+DEVP0501,SKU00182,T23,2024-01-25,2,Devolucion de cliente (cambio)
+DEVP0502,SKU00182,T09,2025-08-24,3,Producto danado en logistica
+DEVP0503,SKU00182,T22,2025-11-16,4,Producto danado en logistica
+DEVP0504,SKU00182,T17,2024-06-02,1,Error de picking
+DEVP0505,SKU00182,T13,2023-03-06,4,Devolucion de cliente (cambio)
+DEVP0506,SKU00183,T09,2025-11-08,2,Devolucion de cliente (cambio)
+DEVP0507,SKU00183,T17,2025-01-15,3,Producto danado en logistica
+DEVP0508,SKU00183,T19,2025-07-04,1,Devolucion de cliente (cambio)
+DEVP0509,SKU00183,T06,2024-03-21,1,Producto danado en logistica
+DEVP0510,SKU00183,T24,2023-11-05,2,Defecto de fabricacion
+DEVP0511,SKU00183,T16,2025-12-09,1,Producto sin rotacion / no vendido
+DEVP0512,SKU00183,T12,2025-05-04,2,Devolucion de cliente (cambio)
+DEVP0513,SKU00184,T26,2025-04-08,3,Producto sin rotacion / no vendido
+DEVP0514,SKU00185,T15,2025-05-09,10,Defecto de fabricacion
+DEVP0515,SKU00186,T19,2025-05-16,1,Producto sin rotacion / no vendido
+DEVP0516,SKU00187,T12,2025-04-07,1,Defecto de fabricacion
+DEVP0517,SKU00187,T14,2023-01-13,1,Producto sin rotacion / no vendido
+DEVP0518,SKU00187,T08,2023-08-28,3,Error de picking
+DEVP0519,SKU00188,T28,2023-08-27,1,Devolucion de cliente (cambio)
+DEVP0520,SKU00188,T27,2025-07-24,1,Error de picking
+DEVP0521,SKU00188,T25,2025-06-11,1,Defecto de fabricacion
+DEVP0522,SKU00188,T20,2025-06-07,1,Error de picking
+DEVP0523,SKU00188,T20,2025-08-11,1,Devolucion de cliente (cambio)
+DEVP0524,SKU00189,T24,2024-07-20,4,Devolucion de cliente (cambio)
+DEVP0525,SKU00189,T24,2025-02-15,8,Devolucion de cliente (cambio)
+DEVP0526,SKU00189,T18,2024-07-25,2,Error de picking
+DEVP0527,SKU00190,T13,2023-06-12,8,Defecto de fabricacion
+DEVP0528,SKU00190,T13,2024-10-03,4,Producto sin rotacion / no vendido
+DEVP0529,SKU00190,T05,2024-01-22,8,Defecto de fabricacion
+DEVP0530,SKU00190,T05,2025-03-23,7,Defecto de fabricacion
+DEVP0531,SKU00190,T18,2024-11-04,5,Devolucion de cliente (cambio)
+DEVP0532,SKU00190,T25,2025-07-12,11,Defecto de fabricacion
+DEVP0533,SKU00190,T12,2025-08-06,9,Devolucion de cliente (cambio)
+DEVP0534,SKU00190,T03,2023-08-06,8,Devolucion de cliente (cambio)
+DEVP0535,SKU00190,T01,2024-10-08,10,Devolucion de cliente (cambio)
+DEVP0536,SKU00191,T01,2024-10-22,10,Devolucion de cliente (cambio)
+DEVP0537,SKU00192,T12,2024-04-20,1,Producto danado en logistica
+DEVP0538,SKU00192,T23,2024-12-16,1,Error de picking
+DEVP0539,SKU00192,T26,2024-10-25,1,Devolucion de cliente (cambio)
+DEVP0540,SKU00193,T24,2025-04-04,2,Error de picking
+DEVP0541,SKU00193,T06,2025-01-05,3,Devolucion de cliente (cambio)
+DEVP0542,SKU00194,T27,2025-11-21,11,Defecto de fabricacion
+DEVP0543,SKU00194,T14,2025-04-23,10,Producto danado en logistica
+DEVP0544,SKU00194,T18,2025-11-16,4,Producto danado en logistica
+DEVP0545,SKU00194,T17,2025-04-10,4,Producto sin rotacion / no vendido
+DEVP0546,SKU00194,T17,2025-12-20,9,Defecto de fabricacion
+DEVP0547,SKU00196,T13,2024-03-13,9,Devolucion de cliente (cambio)
+DEVP0548,SKU00196,T13,2024-07-26,9,Producto sin rotacion / no vendido
+DEVP0549,SKU00196,T13,2025-01-10,6,Error de picking
+DEVP0550,SKU00196,T23,2023-09-04,3,Producto sin rotacion / no vendido
+DEVP0551,SKU00196,T23,2024-06-19,5,Devolucion de cliente (cambio)
+DEVP0552,SKU00199,T18,2024-11-04,5,Producto danado en logistica
+DEVP0553,SKU00200,T04,2024-01-06,1,Producto danado en logistica
+DEVP0554,SKU00200,T26,2025-05-20,1,Error de picking
+DEVP0555,SKU00200,T27,2024-05-15,2,Defecto de fabricacion
+DEVP0556,SKU00200,T20,2025-08-23,1,Producto sin rotacion / no vendido
+DEVP0557,SKU00200,T08,2025-11-21,1,Producto sin rotacion / no vendido
+DEVP0558,SKU00201,T28,2023-08-12,4,Devolucion de cliente (cambio)
+DEVP0559,SKU00201,T06,2024-04-24,4,Producto danado en logistica
+DEVP0560,SKU00201,T06,2024-12-17,3,Producto danado en logistica
+DEVP0561,SKU00201,T02,2023-06-28,3,Producto sin rotacion / no vendido
+DEVP0562,SKU00202,T02,2025-01-27,8,Producto danado en logistica
+DEVP0563,SKU00202,T17,2025-09-06,8,Producto sin rotacion / no vendido
+DEVP0564,SKU00203,T24,2023-07-24,3,Devolucion de cliente (cambio)
+DEVP0565,SKU00203,T09,2023-11-02,2,Producto danado en logistica
+DEVP0566,SKU00204,T10,2025-08-20,18,Producto danado en logistica
+DEVP0567,SKU00204,T25,2023-05-18,18,Devolucion de cliente (cambio)
+DEVP0568,SKU00204,T22,2023-02-18,15,Producto danado en logistica
+DEVP0569,SKU00204,T22,2025-12-25,13,Defecto de fabricacion
+DEVP0570,SKU00206,T01,2025-11-03,1,Producto sin rotacion / no vendido
+DEVP0571,SKU00207,T21,2022-11-16,2,Producto danado en logistica
+DEVP0572,SKU00207,T18,2023-10-03,1,Devolucion de cliente (cambio)
+DEVP0573,SKU00207,T01,2024-12-10,1,Producto sin rotacion / no vendido
+DEVP0574,SKU00207,T05,2023-12-21,1,Producto danado en logistica
+DEVP0575,SKU00207,T11,2025-01-16,3,Error de picking
+DEVP0576,SKU00207,T11,2025-12-14,2,Error de picking
+DEVP0577,SKU00208,T20,2025-04-26,2,Devolucion de cliente (cambio)
+DEVP0578,SKU00209,T20,2023-10-12,2,Producto danado en logistica
+DEVP0579,SKU00209,T20,2025-09-13,2,Devolucion de cliente (cambio)
+DEVP0580,SKU00209,T01,2025-05-19,3,Error de picking
+DEVP0581,SKU00209,T25,2024-06-12,7,Devolucion de cliente (cambio)
+DEVP0582,SKU00209,T21,2023-01-22,2,Error de picking
+DEVP0583,SKU00209,T11,2024-04-02,3,Producto sin rotacion / no vendido
+DEVP0584,SKU00209,T11,2024-10-06,1,Defecto de fabricacion
+DEVP0585,SKU00210,T11,2025-10-11,1,Error de picking
+DEVP0586,SKU00211,T15,2023-10-21,5,Producto danado en logistica
+DEVP0587,SKU00211,T16,2024-12-21,1,Producto sin rotacion / no vendido
+DEVP0588,SKU00211,T24,2023-10-23,4,Producto danado en logistica
+DEVP0589,SKU00211,T24,2024-09-11,2,Producto danado en logistica
+DEVP0590,SKU00212,T19,2025-01-22,4,Producto danado en logistica
+DEVP0591,SKU00212,T15,2025-11-22,3,Producto sin rotacion / no vendido
+DEVP0592,SKU00212,T24,2024-06-26,2,Defecto de fabricacion
+DEVP0593,SKU00216,T10,2023-11-07,4,Devolucion de cliente (cambio)
+DEVP0594,SKU00217,T06,2023-04-14,3,Producto danado en logistica
+DEVP0595,SKU00220,T26,2024-12-11,4,Producto sin rotacion / no vendido
+DEVP0596,SKU00220,T01,2025-07-17,5,Error de picking
+DEVP0597,SKU00220,T17,2023-01-19,2,Error de picking
+DEVP0598,SKU00220,T13,2024-03-05,3,Error de picking
+DEVP0599,SKU00220,T19,2024-05-06,3,Devolucion de cliente (cambio)
+DEVP0600,SKU00220,T09,2025-02-21,4,Producto sin rotacion / no vendido
+DEVP0601,SKU00221,T04,2024-01-21,4,Producto danado en logistica
+DEVP0602,SKU00221,T24,2024-09-13,6,Producto sin rotacion / no vendido
+DEVP0603,SKU00221,T14,2024-04-20,5,Devolucion de cliente (cambio)
+DEVP0604,SKU00222,T03,2025-03-07,3,Defecto de fabricacion
+DEVP0605,SKU00222,T11,2024-06-26,1,Error de picking
+DEVP0606,SKU00224,T14,2025-01-11,4,Error de picking
+DEVP0607,SKU00227,T13,2025-12-11,1,Defecto de fabricacion
+DEVP0608,SKU00228,T03,2022-07-10,8,Devolucion de cliente (cambio)
+DEVP0609,SKU00228,T03,2024-04-23,3,Error de picking
+DEVP0610,SKU00228,T03,2024-06-28,7,Producto sin rotacion / no vendido
+DEVP0611,SKU00228,T09,2022-11-06,7,Producto danado en logistica
+DEVP0612,SKU00228,T09,2024-11-28,4,Devolucion de cliente (cambio)
+DEVP0613,SKU00228,T09,2025-07-15,8,Defecto de fabricacion
+DEVP0614,SKU00228,T17,2023-12-06,6,Producto danado en logistica
+DEVP0615,SKU00228,T07,2023-02-10,7,Defecto de fabricacion
+DEVP0616,SKU00229,T13,2025-09-17,8,Defecto de fabricacion
+DEVP0617,SKU00230,T22,2025-03-23,2,Producto sin rotacion / no vendido
+DEVP0618,SKU00230,T16,2025-06-06,1,Producto sin rotacion / no vendido
+DEVP0619,SKU00231,T16,2023-09-03,1,Defecto de fabricacion
+DEVP0620,SKU00231,T07,2024-08-14,2,Error de picking
+DEVP0621,SKU00231,T21,2023-08-05,1,Error de picking
+DEVP0622,SKU00231,T21,2024-02-12,2,Devolucion de cliente (cambio)
+DEVP0623,SKU00231,T26,2024-02-11,1,Producto sin rotacion / no vendido
+DEVP0624,SKU00233,T07,2024-12-24,1,Error de picking
+DEVP0625,SKU00233,T07,2025-10-13,1,Producto danado en logistica
+DEVP0626,SKU00233,T19,2024-06-28,4,Devolucion de cliente (cambio)
+DEVP0627,SKU00233,T23,2025-05-07,2,Producto sin rotacion / no vendido
+DEVP0628,SKU00234,T03,2025-11-02,1,Producto sin rotacion / no vendido
+DEVP0629,SKU00234,T24,2025-10-22,4,Devolucion de cliente (cambio)
+DEVP0630,SKU00235,T27,2024-08-18,1,Devolucion de cliente (cambio)
+DEVP0631,SKU00235,T28,2025-02-18,3,Error de picking
+DEVP0632,SKU00235,T10,2024-11-19,3,Devolucion de cliente (cambio)
+DEVP0633,SKU00235,T13,2025-06-04,4,Defecto de fabricacion
+DEVP0634,SKU00235,T13,2025-07-24,4,Producto danado en logistica
+DEVP0635,SKU00235,T12,2024-04-14,2,Devolucion de cliente (cambio)
+DEVP0636,SKU00235,T21,2023-07-18,3,Devolucion de cliente (cambio)
+DEVP0637,SKU00236,T25,2024-10-16,5,Devolucion de cliente (cambio)
+DEVP0638,SKU00236,T22,2024-10-05,6,Devolucion de cliente (cambio)
+DEVP0639,SKU00239,T14,2023-11-02,4,Defecto de fabricacion
+DEVP0640,SKU00239,T05,2024-01-15,2,Producto danado en logistica
+DEVP0641,SKU00239,T17,2024-06-14,2,Producto sin rotacion / no vendido
+DEVP0642,SKU00239,T02,2024-11-17,4,Producto sin rotacion / no vendido
+DEVP0643,SKU00239,T22,2024-06-03,3,Defecto de fabricacion
+DEVP0644,SKU00240,T15,2025-01-12,6,Error de picking
+DEVP0645,SKU00240,T13,2022-10-21,5,Producto danado en logistica
+DEVP0646,SKU00240,T13,2025-01-07,1,Defecto de fabricacion
+DEVP0647,SKU00240,T11,2024-04-15,2,Producto sin rotacion / no vendido
+DEVP0648,SKU00241,T16,2025-05-21,2,Error de picking
+DEVP0649,SKU00241,T15,2025-05-16,2,Defecto de fabricacion
+DEVP0650,SKU00241,T02,2024-12-27,3,Producto sin rotacion / no vendido
+DEVP0651,SKU00243,T14,2024-12-09,3,Devolucion de cliente (cambio)
+DEVP0652,SKU00243,T14,2025-09-10,4,Producto sin rotacion / no vendido
+DEVP0653,SKU00243,T10,2025-01-12,3,Producto danado en logistica
+DEVP0654,SKU00243,T23,2024-08-07,5,Producto sin rotacion / no vendido
+DEVP0655,SKU00244,T19,2022-12-09,2,Defecto de fabricacion
+DEVP0656,SKU00244,T04,2025-06-21,1,Producto sin rotacion / no vendido
+DEVP0657,SKU00244,T25,2024-09-03,4,Devolucion de cliente (cambio)
+DEVP0658,SKU00246,T13,2024-02-21,2,Producto sin rotacion / no vendido
+DEVP0659,SKU00246,T13,2025-05-24,1,Defecto de fabricacion
+DEVP0660,SKU00248,T05,2025-06-22,1,Producto danado en logistica
+DEVP0661,SKU00248,T12,2024-10-07,1,Defecto de fabricacion
+DEVP0662,SKU00250,T05,2025-04-25,8,Producto danado en logistica
+DEVP0663,SKU00250,T06,2025-10-05,4,Producto danado en logistica
+DEVP0664,SKU00250,T10,2025-09-14,9,Producto danado en logistica
+DEVP0665,SKU00250,T10,2025-11-19,6,Producto danado en logistica
+DEVP0666,SKU00250,T02,2025-03-26,3,Devolucion de cliente (cambio)
+DEVP0667,SKU00251,T02,2024-04-07,5,Devolucion de cliente (cambio)
+DEVP0668,SKU00251,T18,2023-12-22,2,Error de picking
+DEVP0669,SKU00251,T20,2023-06-13,6,Devolucion de cliente (cambio)
+DEVP0670,SKU00251,T27,2023-11-27,3,Defecto de fabricacion
+DEVP0671,SKU00251,T17,2025-02-05,5,Producto danado en logistica
+DEVP0672,SKU00253,T13,2024-08-12,2,Error de picking
+DEVP0673,SKU00253,T24,2025-02-21,1,Devolucion de cliente (cambio)
+DEVP0674,SKU00254,T19,2025-05-17,1,Error de picking
+DEVP0675,SKU00255,T11,2023-12-24,3,Defecto de fabricacion
+DEVP0676,SKU00255,T11,2025-07-08,4,Devolucion de cliente (cambio)
+DEVP0677,SKU00255,T19,2024-02-05,4,Producto danado en logistica
+DEVP0678,SKU00256,T02,2024-12-11,5,Producto sin rotacion / no vendido
+DEVP0679,SKU00256,T05,2024-01-23,4,Producto danado en logistica
+DEVP0680,SKU00256,T18,2022-12-11,4,Producto sin rotacion / no vendido
+DEVP0681,SKU00256,T18,2023-12-22,3,Error de picking
+DEVP0682,SKU00258,T17,2025-01-10,2,Defecto de fabricacion
+DEVP0683,SKU00258,T12,2025-10-06,1,Defecto de fabricacion
+DEVP0684,SKU00259,T19,2025-07-28,16,Producto sin rotacion / no vendido
+DEVP0685,SKU00259,T04,2024-02-16,15,Defecto de fabricacion
+DEVP0686,SKU00259,T25,2025-11-28,20,Defecto de fabricacion
+DEVP0687,SKU00259,T02,2025-03-19,16,Producto danado en logistica
+DEVP0688,SKU00259,T26,2025-06-12,15,Producto sin rotacion / no vendido
+DEVP0689,SKU00259,T23,2023-08-22,17,Defecto de fabricacion
+DEVP0690,SKU00259,T07,2023-02-16,15,Error de picking
+DEVP0691,SKU00259,T07,2023-04-08,11,Defecto de fabricacion
+DEVP0692,SKU00260,T22,2023-09-16,3,Defecto de fabricacion
+DEVP0693,SKU00260,T09,2024-04-22,3,Defecto de fabricacion
+DEVP0694,SKU00260,T21,2023-06-06,2,Producto sin rotacion / no vendido
+DEVP0695,SKU00260,T21,2024-09-04,3,Error de picking
+DEVP0696,SKU00260,T15,2025-01-18,2,Producto sin rotacion / no vendido
+DEVP0697,SKU00260,T15,2025-03-19,3,Error de picking
+DEVP0698,SKU00260,T15,2025-10-05,3,Producto sin rotacion / no vendido
+DEVP0699,SKU00261,T22,2025-01-14,1,Producto sin rotacion / no vendido
+DEVP0700,SKU00263,T17,2024-10-22,2,Error de picking
+DEVP0701,SKU00264,T20,2025-08-10,1,Defecto de fabricacion
+DEVP0702,SKU00264,T17,2024-11-16,1,Devolucion de cliente (cambio)
+DEVP0703,SKU00264,T18,2024-11-04,2,Devolucion de cliente (cambio)
+DEVP0704,SKU00265,T15,2025-12-18,5,Defecto de fabricacion
+DEVP0705,SKU00266,T23,2025-12-19,3,Error de picking
+DEVP0706,SKU00268,T08,2025-10-18,14,Error de picking
+DEVP0707,SKU00269,T01,2025-06-27,4,Defecto de fabricacion
+DEVP0708,SKU00269,T10,2025-12-23,2,Error de picking
+DEVP0709,SKU00270,T07,2022-06-04,7,Producto sin rotacion / no vendido
+DEVP0710,SKU00270,T27,2022-09-25,4,Error de picking
+DEVP0711,SKU00271,T07,2024-12-28,6,Devolucion de cliente (cambio)
+DEVP0712,SKU00271,T04,2024-04-03,3,Devolucion de cliente (cambio)
+DEVP0713,SKU00271,T25,2024-02-14,4,Error de picking
+DEVP0714,SKU00271,T25,2024-08-22,4,Error de picking
+DEVP0715,SKU00271,T27,2024-02-21,3,Error de picking
+DEVP0716,SKU00271,T27,2024-09-03,8,Producto sin rotacion / no vendido
+DEVP0717,SKU00272,T02,2025-05-13,2,Defecto de fabricacion
+DEVP0718,SKU00272,T09,2024-08-11,2,Error de picking
+DEVP0719,SKU00273,T01,2025-11-13,9,Defecto de fabricacion
+DEVP0720,SKU00273,T08,2025-08-06,11,Producto sin rotacion / no vendido
+DEVP0721,SKU00274,T05,2025-01-17,4,Defecto de fabricacion
+DEVP0722,SKU00274,T05,2025-04-23,4,Producto sin rotacion / no vendido
+DEVP0723,SKU00274,T14,2025-07-11,5,Producto danado en logistica
+DEVP0724,SKU00275,T25,2024-08-06,10,Producto sin rotacion / no vendido
+DEVP0725,SKU00277,T06,2024-02-21,4,Defecto de fabricacion
+DEVP0726,SKU00277,T06,2025-12-12,7,Producto sin rotacion / no vendido
+DEVP0727,SKU00277,T14,2023-06-07,3,Producto danado en logistica
+DEVP0728,SKU00277,T16,2025-08-13,4,Producto sin rotacion / no vendido
+DEVP0729,SKU00278,T06,2024-03-10,5,Defecto de fabricacion
+DEVP0730,SKU00278,T05,2025-09-25,7,Devolucion de cliente (cambio)
+DEVP0731,SKU00278,T27,2024-06-19,10,Producto sin rotacion / no vendido
+DEVP0732,SKU00278,T04,2024-12-23,8,Producto sin rotacion / no vendido
+DEVP0733,SKU00278,T04,2025-02-04,6,Producto danado en logistica
+DEVP0734,SKU00278,T04,2025-03-08,12,Error de picking
+DEVP0735,SKU00279,T16,2025-07-20,7,Producto sin rotacion / no vendido
+DEVP0736,SKU00279,T10,2025-09-14,6,Error de picking
+DEVP0737,SKU00280,T28,2025-07-06,1,Error de picking
+DEVP0738,SKU00281,T16,2022-10-17,6,Error de picking
+DEVP0739,SKU00281,T17,2025-04-09,4,Producto sin rotacion / no vendido
+DEVP0740,SKU00281,T11,2025-04-16,6,Defecto de fabricacion
+DEVP0741,SKU00281,T06,2025-08-09,4,Producto danado en logistica
+DEVP0742,SKU00281,T21,2024-04-24,6,Defecto de fabricacion
+DEVP0743,SKU00281,T05,2024-11-17,5,Error de picking
+DEVP0744,SKU00281,T05,2024-12-21,9,Producto danado en logistica
+DEVP0745,SKU00281,T24,2025-11-02,12,Error de picking
+DEVP0746,SKU00283,T01,2025-10-02,3,Error de picking
+DEVP0747,SKU00284,T24,2024-02-07,3,Devolucion de cliente (cambio)
+DEVP0748,SKU00284,T14,2023-11-11,1,Error de picking
+DEVP0749,SKU00284,T13,2024-06-23,2,Devolucion de cliente (cambio)
+DEVP0750,SKU00284,T01,2024-12-26,2,Defecto de fabricacion
+DEVP0751,SKU00284,T16,2025-12-18,2,Producto danado en logistica
+DEVP0752,SKU00284,T03,2024-09-23,3,Producto danado en logistica
+DEVP0753,SKU00284,T20,2025-04-09,4,Producto sin rotacion / no vendido
+DEVP0754,SKU00284,T02,2024-11-25,3,Producto danado en logistica
+DEVP0755,SKU00285,T26,2024-04-24,5,Devolucion de cliente (cambio)
+DEVP0756,SKU00286,T26,2025-08-07,1,Producto danado en logistica
+DEVP0757,SKU00286,T18,2024-12-28,2,Defecto de fabricacion
+DEVP0758,SKU00287,T03,2024-04-17,2,Producto danado en logistica
+DEVP0759,SKU00287,T09,2025-12-22,2,Producto danado en logistica
+DEVP0760,SKU00288,T02,2025-01-27,2,Producto danado en logistica
+DEVP0761,SKU00288,T09,2025-04-27,2,Error de picking
+DEVP0762,SKU00288,T26,2025-08-24,1,Producto danado en logistica
+DEVP0763,SKU00288,T06,2025-10-27,2,Producto sin rotacion / no vendido
+DEVP0764,SKU00288,T12,2025-11-27,4,Producto sin rotacion / no vendido
+DEVP0765,SKU00289,T01,2023-03-13,1,Defecto de fabricacion
+DEVP0766,SKU00289,T26,2025-10-08,1,Producto sin rotacion / no vendido
+DEVP0767,SKU00289,T22,2022-09-19,1,Producto sin rotacion / no vendido
+DEVP0768,SKU00289,T19,2025-08-25,2,Devolucion de cliente (cambio)
+DEVP0769,SKU00289,T03,2023-06-03,2,Producto danado en logistica
+DEVP0770,SKU00289,T11,2024-05-19,2,Producto sin rotacion / no vendido
+DEVP0771,SKU00289,T23,2023-04-05,1,Producto danado en logistica
+DEVP0772,SKU00289,T15,2022-06-14,2,Defecto de fabricacion
+DEVP0773,SKU00289,T10,2022-08-03,3,Producto danado en logistica
+DEVP0774,SKU00291,T25,2025-04-03,5,Devolucion de cliente (cambio)
+DEVP0775,SKU00291,T28,2024-10-11,4,Producto danado en logistica
+DEVP0776,SKU00291,T15,2025-05-04,2,Devolucion de cliente (cambio)
+DEVP0777,SKU00291,T16,2024-01-06,3,Producto sin rotacion / no vendido
+DEVP0778,SKU00295,T06,2025-02-19,7,Producto danado en logistica
+DEVP0779,SKU00296,T26,2023-12-16,22,Error de picking
+DEVP0780,SKU00296,T07,2022-08-28,14,Producto danado en logistica
+DEVP0781,SKU00296,T04,2024-06-20,14,Error de picking
+DEVP0782,SKU00296,T24,2024-10-22,20,Error de picking
+DEVP0783,SKU00296,T24,2025-10-09,20,Producto danado en logistica
+DEVP0784,SKU00297,T24,2024-03-23,4,Error de picking
+DEVP0785,SKU00297,T10,2025-10-07,2,Error de picking
+DEVP0786,SKU00298,T11,2024-12-13,6,Producto sin rotacion / no vendido
+DEVP0787,SKU00298,T03,2023-11-22,4,Producto sin rotacion / no vendido
+DEVP0788,SKU00298,T18,2024-06-24,5,Devolucion de cliente (cambio)
+DEVP0789,SKU00298,T24,2023-10-26,8,Error de picking
+DEVP0790,SKU00298,T24,2025-11-18,1,Devolucion de cliente (cambio)
+DEVP0791,SKU00299,T23,2025-07-10,1,Producto sin rotacion / no vendido
+DEVP0792,SKU00299,T12,2025-08-20,1,Devolucion de cliente (cambio)
+DEVP0793,SKU00300,T14,2025-07-08,1,Error de picking
+DEVP0794,SKU00301,T25,2024-05-11,3,Producto sin rotacion / no vendido
+DEVP0795,SKU00301,T26,2023-09-24,3,Producto danado en logistica
+DEVP0796,SKU00302,T18,2025-06-28,6,Defecto de fabricacion
+DEVP0797,SKU00302,T17,2025-02-20,5,Devolucion de cliente (cambio)
+DEVP0798,SKU00302,T13,2024-11-03,4,Devolucion de cliente (cambio)
+DEVP0799,SKU00303,T12,2023-02-13,1,Defecto de fabricacion
+DEVP0800,SKU00303,T11,2023-01-19,2,Producto danado en logistica
+DEVP0801,SKU00305,T04,2025-05-28,1,Error de picking
+DEVP0802,SKU00306,T19,2023-10-24,2,Devolucion de cliente (cambio)
+DEVP0803,SKU00306,T16,2023-12-21,7,Devolucion de cliente (cambio)
+DEVP0804,SKU00307,T21,2024-06-03,1,Producto sin rotacion / no vendido
+DEVP0805,SKU00307,T18,2023-09-28,2,Producto danado en logistica
+DEVP0806,SKU00307,T26,2023-01-23,2,Error de picking
+DEVP0807,SKU00307,T03,2024-01-06,1,Devolucion de cliente (cambio)
+DEVP0808,SKU00307,T03,2024-06-22,2,Error de picking
+DEVP0809,SKU00307,T24,2023-04-17,2,Producto danado en logistica
+DEVP0810,SKU00307,T17,2022-10-22,3,Error de picking
+DEVP0811,SKU00307,T02,2024-04-21,1,Producto sin rotacion / no vendido
+DEVP0812,SKU00308,T21,2025-09-16,10,Producto sin rotacion / no vendido
+DEVP0813,SKU00308,T01,2025-05-21,7,Defecto de fabricacion
+DEVP0814,SKU00309,T06,2023-11-15,4,Devolucion de cliente (cambio)
+DEVP0815,SKU00309,T23,2023-03-10,5,Defecto de fabricacion
+DEVP0816,SKU00309,T28,2022-10-06,4,Producto sin rotacion / no vendido
+DEVP0817,SKU00309,T28,2024-03-15,2,Error de picking
+DEVP0818,SKU00309,T02,2023-07-11,3,Producto sin rotacion / no vendido
+DEVP0819,SKU00309,T02,2023-11-25,6,Devolucion de cliente (cambio)
+DEVP0820,SKU00309,T11,2023-01-28,1,Error de picking
+DEVP0821,SKU00311,T27,2023-12-23,3,Error de picking
+DEVP0822,SKU00311,T02,2023-03-07,3,Defecto de fabricacion
+DEVP0823,SKU00311,T28,2022-09-28,4,Defecto de fabricacion
+DEVP0824,SKU00311,T01,2023-01-28,5,Producto sin rotacion / no vendido
+DEVP0825,SKU00311,T04,2025-08-09,6,Devolucion de cliente (cambio)
+DEVP0826,SKU00311,T15,2022-03-04,3,Error de picking
+DEVP0827,SKU00311,T15,2024-02-23,2,Error de picking
+DEVP0828,SKU00311,T21,2023-11-12,5,Producto danado en logistica
+DEVP0829,SKU00312,T02,2024-08-08,3,Producto danado en logistica
+DEVP0830,SKU00312,T13,2024-07-17,1,Error de picking
+DEVP0831,SKU00312,T12,2025-07-25,2,Producto danado en logistica
+DEVP0832,SKU00313,T01,2022-12-19,10,Producto danado en logistica
+DEVP0833,SKU00313,T02,2023-10-03,6,Devolucion de cliente (cambio)
+DEVP0834,SKU00313,T10,2023-04-23,6,Producto danado en logistica
+DEVP0835,SKU00313,T24,2024-08-20,6,Producto sin rotacion / no vendido
+DEVP0836,SKU00313,T08,2023-09-04,12,Producto danado en logistica
+DEVP0837,SKU00314,T20,2024-11-08,17,Producto sin rotacion / no vendido
+DEVP0838,SKU00314,T13,2025-04-14,9,Devolucion de cliente (cambio)
+DEVP0839,SKU00316,T14,2025-05-13,1,Producto danado en logistica
+DEVP0840,SKU00316,T01,2025-03-09,1,Defecto de fabricacion
+DEVP0841,SKU00316,T10,2024-08-03,1,Error de picking
+DEVP0842,SKU00316,T15,2024-06-21,1,Producto danado en logistica
+DEVP0843,SKU00316,T06,2024-06-15,2,Devolucion de cliente (cambio)
+DEVP0844,SKU00317,T10,2022-09-22,4,Error de picking
+DEVP0845,SKU00317,T17,2022-10-03,4,Error de picking
+DEVP0846,SKU00317,T06,2025-04-11,3,Producto sin rotacion / no vendido
+DEVP0847,SKU00317,T25,2023-03-24,1,Defecto de fabricacion
+DEVP0848,SKU00317,T25,2025-10-11,4,Producto danado en logistica
+DEVP0849,SKU00319,T14,2024-08-12,2,Defecto de fabricacion
+DEVP0850,SKU00319,T10,2024-01-08,3,Error de picking
+DEVP0851,SKU00320,T12,2023-04-22,6,Defecto de fabricacion
+DEVP0852,SKU00321,T22,2022-11-28,3,Producto danado en logistica
+DEVP0853,SKU00321,T13,2025-08-09,3,Producto danado en logistica
+DEVP0854,SKU00321,T07,2023-05-06,3,Producto sin rotacion / no vendido
+DEVP0855,SKU00321,T09,2024-09-05,3,Devolucion de cliente (cambio)
+DEVP0856,SKU00321,T21,2024-01-03,4,Producto danado en logistica
+DEVP0857,SKU00321,T17,2025-05-10,5,Error de picking
+DEVP0858,SKU00321,T08,2024-01-05,6,Devolucion de cliente (cambio)
+DEVP0859,SKU00322,T10,2024-01-07,7,Error de picking
+DEVP0860,SKU00322,T23,2025-08-28,4,Producto danado en logistica
+DEVP0861,SKU00323,T12,2024-01-02,4,Producto danado en logistica
+DEVP0862,SKU00323,T14,2025-01-07,1,Producto sin rotacion / no vendido
+DEVP0863,SKU00323,T24,2023-11-09,3,Defecto de fabricacion
+DEVP0864,SKU00324,T07,2025-08-16,2,Producto sin rotacion / no vendido
+DEVP0865,SKU00324,T24,2025-04-06,3,Defecto de fabricacion
+DEVP0866,SKU00324,T11,2024-03-04,2,Producto sin rotacion / no vendido
+DEVP0867,SKU00324,T28,2023-07-21,2,Producto sin rotacion / no vendido
+DEVP0868,SKU00324,T19,2024-06-07,1,Producto danado en logistica
+DEVP0869,SKU00324,T19,2025-02-07,5,Error de picking
+DEVP0870,SKU00324,T05,2023-09-27,1,Error de picking
+DEVP0871,SKU00325,T20,2024-08-10,3,Error de picking
+DEVP0872,SKU00325,T20,2025-12-19,2,Devolucion de cliente (cambio)
+DEVP0873,SKU00325,T13,2024-02-28,6,Producto danado en logistica
+DEVP0874,SKU00325,T26,2024-09-19,2,Defecto de fabricacion
+DEVP0875,SKU00327,T17,2025-05-09,7,Devolucion de cliente (cambio)
+DEVP0876,SKU00327,T02,2024-06-08,8,Producto danado en logistica
+DEVP0877,SKU00327,T02,2025-04-10,4,Producto sin rotacion / no vendido
+DEVP0878,SKU00327,T02,2025-06-18,9,Error de picking
+DEVP0879,SKU00327,T18,2023-05-28,7,Producto danado en logistica
+DEVP0880,SKU00328,T05,2024-06-10,3,Error de picking
+DEVP0881,SKU00328,T11,2024-12-13,3,Producto danado en logistica
+DEVP0882,SKU00328,T21,2025-02-28,5,Defecto de fabricacion
+DEVP0883,SKU00329,T20,2024-07-16,2,Devolucion de cliente (cambio)
+DEVP0884,SKU00329,T16,2024-10-04,6,Defecto de fabricacion
+DEVP0885,SKU00331,T14,2024-07-11,1,Devolucion de cliente (cambio)
+DEVP0886,SKU00331,T19,2024-09-14,1,Defecto de fabricacion
+DEVP0887,SKU00331,T19,2025-05-04,1,Producto sin rotacion / no vendido
+DEVP0888,SKU00331,T19,2025-12-28,1,Producto sin rotacion / no vendido
+DEVP0889,SKU00332,T28,2025-02-04,2,Producto danado en logistica
+DEVP0890,SKU00333,T09,2024-06-10,6,Producto sin rotacion / no vendido
+DEVP0891,SKU00333,T18,2025-11-16,3,Devolucion de cliente (cambio)
+DEVP0892,SKU00334,T08,2024-09-11,13,Error de picking
+DEVP0893,SKU00335,T03,2025-10-09,1,Producto sin rotacion / no vendido
+DEVP0894,SKU00337,T26,2023-05-21,5,Producto sin rotacion / no vendido
+DEVP0895,SKU00337,T26,2023-09-20,3,Producto danado en logistica
+DEVP0896,SKU00337,T04,2023-07-10,9,Error de picking
+DEVP0897,SKU00337,T13,2024-02-15,6,Producto danado en logistica
+DEVP0898,SKU00337,T13,2024-08-19,3,Producto danado en logistica
+DEVP0899,SKU00337,T09,2025-07-19,6,Devolucion de cliente (cambio)
+DEVP0900,SKU00337,T24,2024-03-04,4,Devolucion de cliente (cambio)
+DEVP0901,SKU00337,T12,2025-09-11,6,Error de picking
+DEVP0902,SKU00337,T22,2025-08-05,3,Devolucion de cliente (cambio)
+DEVP0903,SKU00338,T21,2025-03-11,3,Devolucion de cliente (cambio)
+DEVP0904,SKU00338,T21,2025-05-06,4,Devolucion de cliente (cambio)
+DEVP0905,SKU00340,T05,2023-01-28,12,Defecto de fabricacion
+DEVP0906,SKU00340,T26,2024-10-10,13,Devolucion de cliente (cambio)
+DEVP0907,SKU00340,T07,2023-04-25,19,Error de picking
+DEVP0908,SKU00340,T13,2024-11-12,16,Devolucion de cliente (cambio)
+DEVP0909,SKU00341,T17,2025-10-10,7,Producto sin rotacion / no vendido
+DEVP0910,SKU00343,T12,2025-12-05,3,Defecto de fabricacion
+DEVP0911,SKU00343,T03,2025-03-21,7,Devolucion de cliente (cambio)
+DEVP0912,SKU00343,T05,2023-09-27,2,Producto sin rotacion / no vendido
+DEVP0913,SKU00343,T01,2023-10-23,2,Error de picking
+DEVP0914,SKU00343,T27,2024-12-05,1,Devolucion de cliente (cambio)
+DEVP0915,SKU00343,T27,2025-02-13,6,Defecto de fabricacion
+DEVP0916,SKU00343,T20,2025-09-24,1,Producto sin rotacion / no vendido
+DEVP0917,SKU00343,T08,2024-12-27,2,Devolucion de cliente (cambio)
+DEVP0918,SKU00343,T26,2023-03-27,1,Producto sin rotacion / no vendido
+DEVP0919,SKU00344,T07,2025-03-11,17,Producto danado en logistica
+DEVP0920,SKU00344,T20,2025-07-28,16,Error de picking
+DEVP0921,SKU00344,T20,2025-09-14,14,Producto sin rotacion / no vendido
+DEVP0922,SKU00344,T22,2025-05-02,14,Producto danado en logistica
+DEVP0923,SKU00347,T10,2025-04-03,1,Defecto de fabricacion
+DEVP0924,SKU00347,T20,2025-09-08,1,Producto sin rotacion / no vendido
+DEVP0925,SKU00348,T25,2025-04-28,2,Producto sin rotacion / no vendido
+DEVP0926,SKU00348,T15,2023-12-04,4,Devolucion de cliente (cambio)
+DEVP0927,SKU00348,T16,2023-09-28,3,Devolucion de cliente (cambio)
+DEVP0928,SKU00348,T16,2023-11-12,6,Error de picking
+DEVP0929,SKU00348,T16,2025-04-21,6,Error de picking
+DEVP0930,SKU00348,T24,2023-09-03,6,Devolucion de cliente (cambio)
+DEVP0931,SKU00350,T21,2025-11-17,2,Producto danado en logistica
+DEVP0932,SKU00350,T18,2023-01-06,1,Devolucion de cliente (cambio)
+DEVP0933,SKU00350,T18,2023-09-02,1,Producto sin rotacion / no vendido
+DEVP0934,SKU00350,T03,2023-02-22,4,Devolucion de cliente (cambio)
+DEVP0935,SKU00351,T22,2024-07-05,2,Producto danado en logistica
+DEVP0936,SKU00351,T06,2022-10-05,2,Producto sin rotacion / no vendido
+DEVP0937,SKU00351,T06,2023-04-02,4,Producto sin rotacion / no vendido
+DEVP0938,SKU00351,T09,2025-03-04,6,Producto sin rotacion / no vendido
+DEVP0939,SKU00351,T01,2025-12-13,3,Producto sin rotacion / no vendido
+DEVP0940,SKU00351,T25,2024-09-11,2,Producto danado en logistica
+DEVP0941,SKU00351,T17,2024-01-09,6,Devolucion de cliente (cambio)
+DEVP0942,SKU00351,T14,2025-04-16,9,Defecto de fabricacion
+DEVP0943,SKU00352,T06,2025-09-21,5,Error de picking
+DEVP0944,SKU00352,T28,2025-09-12,4,Producto danado en logistica
+DEVP0945,SKU00354,T13,2023-01-20,3,Devolucion de cliente (cambio)
+DEVP0946,SKU00354,T19,2024-12-07,8,Producto danado en logistica
+DEVP0947,SKU00354,T04,2025-11-20,12,Producto sin rotacion / no vendido
+DEVP0948,SKU00354,T27,2023-06-10,4,Devolucion de cliente (cambio)
+DEVP0949,SKU00354,T07,2024-03-10,5,Producto sin rotacion / no vendido
+DEVP0950,SKU00355,T08,2025-04-28,1,Devolucion de cliente (cambio)
+DEVP0951,SKU00355,T03,2024-11-26,2,Error de picking
+DEVP0952,SKU00356,T22,2024-12-21,4,Producto sin rotacion / no vendido
+DEVP0953,SKU00356,T12,2025-02-26,2,Producto danado en logistica
+DEVP0954,SKU00357,T11,2024-11-24,2,Producto danado en logistica
+DEVP0955,SKU00357,T11,2025-09-03,1,Producto danado en logistica
+DEVP0956,SKU00358,T05,2025-08-07,1,Defecto de fabricacion
+DEVP0957,SKU00358,T09,2024-12-23,4,Producto sin rotacion / no vendido
+DEVP0958,SKU00358,T13,2025-05-07,1,Producto danado en logistica
+DEVP0959,SKU00359,T25,2023-12-26,2,Defecto de fabricacion
+DEVP0960,SKU00359,T25,2024-04-05,1,Producto sin rotacion / no vendido
+DEVP0961,SKU00359,T20,2024-04-09,1,Producto danado en logistica
+DEVP0962,SKU00359,T20,2025-05-23,1,Producto danado en logistica
+DEVP0963,SKU00359,T14,2024-01-26,2,Defecto de fabricacion
+DEVP0964,SKU00359,T14,2025-08-22,1,Devolucion de cliente (cambio)
+DEVP0965,SKU00360,T27,2022-08-13,1,Defecto de fabricacion
+DEVP0966,SKU00360,T28,2022-06-25,3,Devolucion de cliente (cambio)
+DEVP0967,SKU00360,T11,2022-06-20,4,Error de picking
+DEVP0968,SKU00360,T04,2022-07-12,1,Error de picking
+DEVP0969,SKU00361,T18,2023-12-26,2,Producto sin rotacion / no vendido
+DEVP0970,SKU00361,T12,2024-05-06,4,Producto sin rotacion / no vendido
+DEVP0971,SKU00362,T20,2024-01-22,5,Defecto de fabricacion
+DEVP0972,SKU00362,T24,2024-03-26,5,Defecto de fabricacion
+DEVP0973,SKU00363,T06,2024-09-18,4,Defecto de fabricacion
+DEVP0974,SKU00363,T06,2024-10-25,6,Producto danado en logistica
+DEVP0975,SKU00363,T16,2024-03-05,7,Producto sin rotacion / no vendido
+DEVP0976,SKU00364,T18,2023-01-08,4,Devolucion de cliente (cambio)
+DEVP0977,SKU00364,T18,2023-11-03,4,Producto sin rotacion / no vendido
+DEVP0978,SKU00365,T07,2024-07-08,1,Producto danado en logistica
+DEVP0979,SKU00365,T26,2024-01-10,1,Error de picking
+DEVP0980,SKU00365,T06,2025-04-20,1,Producto danado en logistica
+DEVP0981,SKU00365,T22,2025-08-07,1,Producto danado en logistica
+DEVP0982,SKU00366,T14,2023-08-10,2,Error de picking
+DEVP0983,SKU00366,T14,2024-02-06,1,Devolucion de cliente (cambio)
+DEVP0984,SKU00366,T20,2025-06-17,1,Producto danado en logistica
+DEVP0985,SKU00366,T03,2024-09-17,1,Defecto de fabricacion
+DEVP0986,SKU00366,T22,2023-08-15,1,Error de picking
+DEVP0987,SKU00366,T22,2025-06-17,1,Producto sin rotacion / no vendido
+DEVP0988,SKU00370,T16,2022-07-14,18,Defecto de fabricacion
+DEVP0989,SKU00371,T03,2025-06-18,12,Producto danado en logistica
+DEVP0990,SKU00371,T12,2025-06-26,16,Producto danado en logistica
+DEVP0991,SKU00372,T04,2024-02-02,2,Error de picking
+DEVP0992,SKU00372,T16,2023-12-28,1,Defecto de fabricacion
+DEVP0993,SKU00372,T16,2025-09-26,3,Error de picking
+DEVP0994,SKU00372,T09,2023-10-06,3,Producto sin rotacion / no vendido
+DEVP0995,SKU00372,T09,2024-09-28,3,Devolucion de cliente (cambio)
+DEVP0996,SKU00372,T26,2024-04-21,3,Error de picking
+DEVP0997,SKU00372,T07,2025-02-04,2,Defecto de fabricacion
+DEVP0998,SKU00372,T23,2024-10-26,3,Devolucion de cliente (cambio)
+DEVP0999,SKU00373,T15,2025-02-04,10,Producto danado en logistica
+DEVP1000,SKU00373,T26,2025-04-18,3,Producto danado en logistica
+DEVP1001,SKU00373,T25,2025-04-07,5,Defecto de fabricacion
+DEVP1002,SKU00374,T09,2023-06-08,1,Devolucion de cliente (cambio)
+DEVP1003,SKU00374,T19,2025-05-03,1,Producto sin rotacion / no vendido
+DEVP1004,SKU00374,T20,2023-08-15,3,Defecto de fabricacion
+DEVP1005,SKU00374,T25,2025-11-18,2,Defecto de fabricacion
+DEVP1006,SKU00374,T11,2024-02-14,4,Producto sin rotacion / no vendido
+DEVP1007,SKU00375,T24,2024-05-06,15,Devolucion de cliente (cambio)
+DEVP1008,SKU00375,T11,2024-03-04,12,Producto sin rotacion / no vendido
+DEVP1009,SKU00375,T11,2025-10-13,14,Producto sin rotacion / no vendido
+DEVP1010,SKU00376,T09,2024-02-22,7,Producto sin rotacion / no vendido
+DEVP1011,SKU00376,T27,2024-01-05,6,Error de picking
+DEVP1012,SKU00376,T25,2024-02-20,5,Defecto de fabricacion
+DEVP1013,SKU00376,T13,2025-12-26,8,Producto danado en logistica
+DEVP1014,SKU00377,T07,2023-08-05,4,Defecto de fabricacion
+DEVP1015,SKU00377,T07,2024-12-28,2,Defecto de fabricacion
+DEVP1016,SKU00378,T01,2025-05-24,1,Producto danado en logistica
+DEVP1017,SKU00378,T18,2025-01-03,1,Defecto de fabricacion
+DEVP1018,SKU00378,T24,2025-06-26,1,Producto sin rotacion / no vendido
+DEVP1019,SKU00378,T25,2024-02-28,2,Producto sin rotacion / no vendido
+DEVP1020,SKU00378,T25,2025-06-07,1,Devolucion de cliente (cambio)
+DEVP1021,SKU00378,T09,2024-10-17,1,Producto danado en logistica
+DEVP1022,SKU00379,T15,2024-09-07,3,Devolucion de cliente (cambio)
+DEVP1023,SKU00380,T11,2025-06-17,3,Producto sin rotacion / no vendido
+DEVP1024,SKU00380,T21,2023-05-18,2,Devolucion de cliente (cambio)
+DEVP1025,SKU00381,T06,2024-01-14,1,Producto sin rotacion / no vendido
+DEVP1026,SKU00381,T27,2024-04-07,3,Devolucion de cliente (cambio)
+DEVP1027,SKU00381,T10,2025-08-25,4,Producto danado en logistica
+DEVP1028,SKU00381,T05,2025-08-13,2,Producto danado en logistica
+DEVP1029,SKU00383,T10,2024-08-26,15,Producto sin rotacion / no vendido
+DEVP1030,SKU00383,T06,2023-12-04,12,Devolucion de cliente (cambio)
+DEVP1031,SKU00383,T06,2025-02-09,17,Defecto de fabricacion
+DEVP1032,SKU00383,T20,2023-09-19,18,Devolucion de cliente (cambio)
+DEVP1033,SKU00383,T14,2023-03-05,15,Producto sin rotacion / no vendido
+DEVP1034,SKU00383,T09,2024-11-26,18,Defecto de fabricacion
+DEVP1035,SKU00383,T25,2022-12-19,10,Producto sin rotacion / no vendido
+DEVP1036,SKU00383,T07,2022-11-17,15,Defecto de fabricacion
+DEVP1037,SKU00383,T01,2023-08-06,16,Devolucion de cliente (cambio)
+DEVP1038,SKU00383,T17,2024-11-02,14,Producto danado en logistica
+DEVP1039,SKU00383,T19,2024-09-16,18,Producto danado en logistica
+DEVP1040,SKU00383,T19,2025-11-21,9,Error de picking
+DEVP1041,SKU00384,T23,2024-12-10,1,Producto sin rotacion / no vendido
+DEVP1042,SKU00384,T05,2024-07-07,1,Defecto de fabricacion
+DEVP1043,SKU00384,T09,2025-10-27,2,Error de picking
+DEVP1044,SKU00384,T12,2025-05-08,2,Error de picking
+DEVP1045,SKU00386,T10,2025-03-04,1,Error de picking
+DEVP1046,SKU00386,T10,2025-09-27,4,Devolucion de cliente (cambio)
+DEVP1047,SKU00386,T22,2025-05-09,1,Devolucion de cliente (cambio)
+DEVP1048,SKU00388,T01,2025-02-26,3,Error de picking
+DEVP1049,SKU00388,T10,2025-10-06,3,Error de picking
+DEVP1050,SKU00389,T28,2024-11-22,9,Devolucion de cliente (cambio)
+DEVP1051,SKU00389,T14,2025-09-08,6,Producto danado en logistica
+DEVP1052,SKU00389,T08,2024-04-26,5,Producto danado en logistica
+DEVP1053,SKU00389,T25,2024-05-10,9,Producto sin rotacion / no vendido
+DEVP1054,SKU00391,T03,2024-08-23,1,Producto sin rotacion / no vendido
+DEVP1055,SKU00393,T01,2025-08-04,5,Defecto de fabricacion
+DEVP1056,SKU00394,T22,2024-11-27,2,Error de picking
+DEVP1057,SKU00394,T23,2024-03-11,1,Devolucion de cliente (cambio)
+DEVP1058,SKU00394,T26,2024-08-24,3,Producto danado en logistica
+DEVP1059,SKU00395,T09,2024-12-02,4,Producto danado en logistica
+DEVP1060,SKU00395,T12,2024-12-24,3,Defecto de fabricacion
+DEVP1061,SKU00396,T04,2025-12-20,1,Error de picking
+DEVP1062,SKU00396,T03,2025-05-21,1,Error de picking
+DEVP1063,SKU00396,T12,2025-07-10,1,Defecto de fabricacion
+DEVP1064,SKU00396,T24,2025-08-24,3,Defecto de fabricacion
+DEVP1065,SKU00396,T28,2025-08-13,2,Producto danado en logistica
+DEVP1066,SKU00399,T17,2025-11-09,3,Devolucion de cliente (cambio)
+DEVP1067,SKU00399,T25,2025-05-23,7,Defecto de fabricacion
+DEVP1068,SKU00400,T21,2024-08-24,5,Defecto de fabricacion
+DEVP1069,SKU00400,T28,2025-06-04,4,Defecto de fabricacion
+DEVP1070,SKU00400,T05,2025-09-02,8,Defecto de fabricacion
+DEVP1071,SKU00402,T04,2024-12-16,2,Error de picking
+DEVP1072,SKU00402,T21,2024-12-26,3,Devolucion de cliente (cambio)
+DEVP1073,SKU00403,T12,2025-10-25,5,Error de picking
+DEVP1074,SKU00404,T26,2025-11-25,2,Producto sin rotacion / no vendido
+DEVP1075,SKU00404,T06,2022-08-24,4,Defecto de fabricacion
+DEVP1076,SKU00404,T16,2024-11-14,1,Defecto de fabricacion
+DEVP1077,SKU00405,T21,2025-03-27,10,Producto sin rotacion / no vendido
+DEVP1078,SKU00405,T24,2025-10-24,11,Defecto de fabricacion
+DEVP1079,SKU00405,T26,2024-02-17,10,Devolucion de cliente (cambio)
+DEVP1080,SKU00405,T08,2024-06-09,9,Producto sin rotacion / no vendido
+DEVP1081,SKU00406,T10,2025-08-26,2,Error de picking
+DEVP1082,SKU00406,T26,2025-06-16,4,Defecto de fabricacion
+DEVP1083,SKU00406,T14,2024-12-22,3,Error de picking
+DEVP1084,SKU00406,T07,2024-10-26,3,Producto danado en logistica
+DEVP1085,SKU00406,T08,2025-02-19,3,Producto danado en logistica
+DEVP1086,SKU00407,T15,2022-09-14,11,Producto sin rotacion / no vendido
+DEVP1087,SKU00407,T15,2024-03-28,3,Devolucion de cliente (cambio)
+DEVP1088,SKU00407,T09,2024-09-07,4,Defecto de fabricacion
+DEVP1089,SKU00407,T19,2024-07-18,5,Producto danado en logistica
+DEVP1090,SKU00408,T03,2023-10-03,4,Defecto de fabricacion
+DEVP1091,SKU00408,T07,2024-07-28,3,Devolucion de cliente (cambio)
+DEVP1092,SKU00409,T23,2024-09-16,2,Devolucion de cliente (cambio)
+DEVP1093,SKU00409,T13,2025-07-06,2,Defecto de fabricacion
+DEVP1094,SKU00410,T24,2023-09-27,5,Devolucion de cliente (cambio)
+DEVP1095,SKU00410,T17,2024-08-03,6,Producto danado en logistica
+DEVP1096,SKU00410,T14,2023-03-14,5,Producto sin rotacion / no vendido
+DEVP1097,SKU00410,T16,2024-10-16,1,Producto danado en logistica
+DEVP1098,SKU00410,T11,2024-07-05,1,Defecto de fabricacion
+DEVP1099,SKU00412,T04,2024-06-09,7,Producto danado en logistica
+DEVP1100,SKU00412,T12,2024-07-16,9,Producto danado en logistica
+DEVP1101,SKU00413,T02,2024-07-17,1,Producto danado en logistica
+DEVP1102,SKU00413,T08,2025-02-28,1,Devolucion de cliente (cambio)
+DEVP1103,SKU00413,T27,2024-12-02,1,Error de picking
+DEVP1104,SKU00413,T13,2025-04-07,1,Defecto de fabricacion
+DEVP1105,SKU00413,T20,2025-04-13,2,Producto danado en logistica
+DEVP1106,SKU00413,T07,2025-03-05,3,Devolucion de cliente (cambio)
+DEVP1107,SKU00415,T20,2024-06-11,4,Error de picking
+DEVP1108,SKU00415,T19,2025-01-26,4,Error de picking
+DEVP1109,SKU00415,T03,2025-10-26,4,Devolucion de cliente (cambio)
+DEVP1110,SKU00415,T01,2024-01-23,6,Producto sin rotacion / no vendido
+DEVP1111,SKU00416,T28,2024-09-22,1,Devolucion de cliente (cambio)
+DEVP1112,SKU00416,T15,2025-04-10,1,Defecto de fabricacion
+DEVP1113,SKU00416,T27,2023-06-06,1,Error de picking
+DEVP1114,SKU00416,T19,2023-06-23,3,Producto sin rotacion / no vendido
+DEVP1115,SKU00416,T19,2024-03-16,1,Producto sin rotacion / no vendido
+DEVP1116,SKU00416,T23,2023-12-27,2,Producto danado en logistica
+DEVP1117,SKU00416,T01,2023-09-07,1,Defecto de fabricacion
+DEVP1118,SKU00416,T26,2025-03-16,3,Devolucion de cliente (cambio)
+DEVP1119,SKU00417,T03,2025-11-03,9,Producto danado en logistica
+DEVP1120,SKU00418,T03,2024-12-04,1,Error de picking
+DEVP1121,SKU00418,T04,2025-05-02,2,Producto sin rotacion / no vendido
+DEVP1122,SKU00418,T16,2025-07-17,1,Producto danado en logistica
+DEVP1123,SKU00419,T24,2025-09-03,1,Producto danado en logistica
+DEVP1124,SKU00419,T07,2024-10-24,1,Devolucion de cliente (cambio)
+DEVP1125,SKU00420,T16,2024-12-23,5,Devolucion de cliente (cambio)
+DEVP1126,SKU00420,T17,2025-08-02,5,Producto danado en logistica
+DEVP1127,SKU00420,T07,2025-10-21,3,Error de picking
+DEVP1128,SKU00420,T24,2025-03-07,2,Devolucion de cliente (cambio)
+DEVP1129,SKU00421,T24,2024-04-26,2,Producto danado en logistica
+DEVP1130,SKU00421,T28,2023-09-19,7,Error de picking
+DEVP1131,SKU00421,T18,2023-05-11,3,Producto danado en logistica
+DEVP1132,SKU00421,T10,2024-05-12,4,Producto sin rotacion / no vendido
+DEVP1133,SKU00421,T13,2023-12-14,2,Error de picking
+DEVP1134,SKU00421,T20,2024-02-02,6,Devolucion de cliente (cambio)
+DEVP1135,SKU00422,T15,2024-10-18,3,Devolucion de cliente (cambio)
+DEVP1136,SKU00423,T14,2023-06-02,2,Producto danado en logistica
+DEVP1137,SKU00423,T21,2023-08-08,2,Error de picking
+DEVP1138,SKU00424,T25,2023-07-27,1,Devolucion de cliente (cambio)
+DEVP1139,SKU00424,T13,2025-10-12,2,Producto danado en logistica
+DEVP1140,SKU00424,T01,2023-09-12,3,Producto sin rotacion / no vendido
+DEVP1141,SKU00424,T01,2023-11-27,2,Producto danado en logistica
+DEVP1142,SKU00424,T16,2024-03-16,2,Error de picking
+DEVP1143,SKU00424,T24,2025-06-21,6,Producto sin rotacion / no vendido
+DEVP1144,SKU00425,T16,2024-06-16,2,Devolucion de cliente (cambio)
+DEVP1145,SKU00425,T05,2024-03-07,1,Defecto de fabricacion
+DEVP1146,SKU00425,T24,2024-12-06,1,Producto sin rotacion / no vendido
+DEVP1147,SKU00425,T17,2024-12-04,1,Producto sin rotacion / no vendido
+DEVP1148,SKU00426,T03,2025-08-13,3,Devolucion de cliente (cambio)
+DEVP1149,SKU00426,T08,2025-08-16,5,Producto sin rotacion / no vendido
+DEVP1150,SKU00426,T01,2025-05-28,3,Producto danado en logistica
+DEVP1151,SKU00426,T24,2024-02-27,1,Producto sin rotacion / no vendido
+DEVP1152,SKU00426,T13,2024-08-26,5,Devolucion de cliente (cambio)
+DEVP1153,SKU00427,T04,2022-12-20,2,Devolucion de cliente (cambio)
+DEVP1154,SKU00427,T04,2023-06-13,6,Producto danado en logistica
+DEVP1155,SKU00428,T06,2023-04-25,2,Producto danado en logistica
+DEVP1156,SKU00429,T03,2025-08-15,14,Devolucion de cliente (cambio)
+DEVP1157,SKU00430,T28,2025-07-03,2,Error de picking
+DEVP1158,SKU00430,T21,2025-08-17,1,Producto danado en logistica
+DEVP1159,SKU00431,T16,2024-02-07,3,Error de picking
+DEVP1160,SKU00431,T16,2025-06-18,5,Producto danado en logistica
+DEVP1161,SKU00431,T11,2025-05-18,5,Producto danado en logistica
+DEVP1162,SKU00431,T15,2024-12-12,8,Devolucion de cliente (cambio)
+DEVP1163,SKU00431,T23,2024-01-26,8,Devolucion de cliente (cambio)
+DEVP1164,SKU00431,T24,2025-07-05,7,Producto sin rotacion / no vendido
+DEVP1165,SKU00432,T18,2025-06-06,4,Devolucion de cliente (cambio)
+DEVP1166,SKU00432,T10,2025-12-25,2,Producto sin rotacion / no vendido
+DEVP1167,SKU00432,T03,2025-06-19,2,Devolucion de cliente (cambio)
+DEVP1168,SKU00432,T21,2025-11-04,2,Producto sin rotacion / no vendido
+DEVP1169,SKU00433,T06,2024-07-21,4,Producto danado en logistica
+DEVP1170,SKU00433,T20,2024-03-07,3,Devolucion de cliente (cambio)
+DEVP1171,SKU00433,T27,2025-10-13,2,Defecto de fabricacion
+DEVP1172,SKU00433,T17,2024-07-11,4,Producto danado en logistica
+DEVP1173,SKU00435,T05,2025-05-10,3,Producto danado en logistica
+DEVP1174,SKU00435,T24,2025-09-15,1,Defecto de fabricacion
+DEVP1175,SKU00435,T24,2025-10-16,2,Error de picking
+DEVP1176,SKU00435,T11,2024-09-24,5,Defecto de fabricacion
+DEVP1177,SKU00436,T08,2024-11-16,4,Error de picking
+DEVP1178,SKU00437,T19,2024-07-04,2,Defecto de fabricacion
+DEVP1179,SKU00437,T19,2025-07-09,2,Devolucion de cliente (cambio)
+DEVP1180,SKU00438,T06,2025-11-17,2,Error de picking
+DEVP1181,SKU00438,T18,2025-11-13,1,Producto danado en logistica
+DEVP1182,SKU00439,T16,2023-05-14,3,Producto sin rotacion / no vendido
+DEVP1183,SKU00439,T23,2024-09-14,3,Defecto de fabricacion
+DEVP1184,SKU00439,T07,2024-03-09,1,Defecto de fabricacion
+DEVP1185,SKU00439,T01,2022-11-14,3,Error de picking
+DEVP1186,SKU00441,T03,2025-01-10,1,Defecto de fabricacion
+DEVP1187,SKU00441,T13,2024-12-07,3,Defecto de fabricacion
+DEVP1188,SKU00441,T05,2024-10-11,1,Producto danado en logistica
+DEVP1189,SKU00441,T14,2025-05-04,3,Producto sin rotacion / no vendido
+DEVP1190,SKU00442,T07,2023-01-12,2,Defecto de fabricacion
+DEVP1191,SKU00442,T05,2023-04-05,2,Error de picking
+DEVP1192,SKU00442,T12,2022-10-23,1,Producto danado en logistica
+DEVP1193,SKU00442,T06,2022-09-15,3,Producto danado en logistica
+DEVP1194,SKU00443,T28,2024-05-22,4,Error de picking
+DEVP1195,SKU00444,T25,2025-05-24,6,Producto sin rotacion / no vendido
+DEVP1196,SKU00444,T14,2022-06-11,6,Producto sin rotacion / no vendido
+DEVP1197,SKU00444,T27,2023-02-04,2,Devolucion de cliente (cambio)
+DEVP1198,SKU00444,T26,2023-07-11,4,Producto sin rotacion / no vendido
+DEVP1199,SKU00444,T10,2023-10-04,3,Defecto de fabricacion
+DEVP1200,SKU00444,T17,2023-01-19,5,Producto sin rotacion / no vendido
+DEVP1201,SKU00446,T01,2025-04-20,3,Defecto de fabricacion
+DEVP1202,SKU00446,T27,2024-02-17,2,Devolucion de cliente (cambio)
+DEVP1203,SKU00446,T27,2025-12-07,4,Producto sin rotacion / no vendido
+DEVP1204,SKU00447,T05,2024-11-18,18,Devolucion de cliente (cambio)
+DEVP1205,SKU00447,T28,2024-07-15,9,Devolucion de cliente (cambio)
+DEVP1206,SKU00447,T08,2024-06-12,16,Error de picking
+DEVP1207,SKU00448,T07,2024-09-24,6,Producto danado en logistica
+DEVP1208,SKU00448,T03,2024-02-21,4,Producto danado en logistica
+DEVP1209,SKU00448,T01,2024-05-28,4,Defecto de fabricacion
+DEVP1210,SKU00449,T22,2023-10-06,2,Defecto de fabricacion
+DEVP1211,SKU00449,T26,2024-07-26,1,Devolucion de cliente (cambio)
+DEVP1212,SKU00452,T17,2025-09-08,1,Error de picking
+DEVP1213,SKU00452,T07,2024-09-27,2,Defecto de fabricacion
+DEVP1214,SKU00452,T08,2023-03-11,1,Defecto de fabricacion
+DEVP1215,SKU00452,T22,2024-03-16,1,Producto danado en logistica
+DEVP1216,SKU00453,T02,2023-07-06,5,Error de picking
+DEVP1217,SKU00453,T25,2024-06-02,2,Devolucion de cliente (cambio)
+DEVP1218,SKU00453,T12,2023-09-02,7,Devolucion de cliente (cambio)
+DEVP1219,SKU00453,T12,2025-12-21,8,Producto sin rotacion / no vendido
+DEVP1220,SKU00453,T20,2025-03-23,5,Producto sin rotacion / no vendido
+DEVP1221,SKU00453,T07,2023-08-24,4,Defecto de fabricacion
+DEVP1222,SKU00454,T19,2025-03-22,4,Producto sin rotacion / no vendido
+DEVP1223,SKU00454,T28,2023-09-02,4,Producto sin rotacion / no vendido
+DEVP1224,SKU00454,T28,2025-06-28,3,Defecto de fabricacion
+DEVP1225,SKU00454,T04,2025-10-16,4,Producto sin rotacion / no vendido
+DEVP1226,SKU00454,T17,2024-07-06,2,Devolucion de cliente (cambio)
+DEVP1227,SKU00455,T06,2023-08-03,5,Producto sin rotacion / no vendido
+DEVP1228,SKU00455,T06,2024-03-12,11,Defecto de fabricacion
+DEVP1229,SKU00455,T12,2025-03-11,5,Error de picking
+DEVP1230,SKU00455,T10,2025-12-20,9,Producto sin rotacion / no vendido
+DEVP1231,SKU00455,T03,2023-03-19,4,Devolucion de cliente (cambio)
+DEVP1232,SKU00455,T08,2022-12-26,12,Producto sin rotacion / no vendido
+DEVP1233,SKU00455,T08,2025-12-13,6,Producto sin rotacion / no vendido
+DEVP1234,SKU00457,T15,2025-02-17,5,Producto sin rotacion / no vendido
+DEVP1235,SKU00457,T15,2025-12-02,7,Producto danado en logistica
+DEVP1236,SKU00457,T11,2023-09-27,1,Defecto de fabricacion
+DEVP1237,SKU00457,T11,2025-08-09,3,Producto danado en logistica
+DEVP1238,SKU00457,T08,2025-02-14,6,Devolucion de cliente (cambio)
+DEVP1239,SKU00457,T09,2023-06-17,4,Producto danado en logistica
+DEVP1240,SKU00457,T03,2025-09-28,5,Producto sin rotacion / no vendido
+DEVP1241,SKU00457,T06,2025-09-11,5,Devolucion de cliente (cambio)
+DEVP1242,SKU00460,T10,2025-11-05,5,Devolucion de cliente (cambio)
+DEVP1243,SKU00460,T09,2023-08-02,11,Producto sin rotacion / no vendido
+DEVP1244,SKU00460,T26,2023-10-27,6,Producto sin rotacion / no vendido
+DEVP1245,SKU00460,T24,2022-08-12,5,Producto danado en logistica
+DEVP1246,SKU00460,T12,2022-12-10,6,Devolucion de cliente (cambio)
+DEVP1247,SKU00463,T25,2024-05-13,9,Error de picking
+DEVP1248,SKU00463,T13,2023-02-04,6,Error de picking
+DEVP1249,SKU00463,T26,2025-05-02,5,Defecto de fabricacion
+DEVP1250,SKU00463,T27,2025-04-08,3,Defecto de fabricacion
+DEVP1251,SKU00464,T24,2023-09-11,5,Producto sin rotacion / no vendido
+DEVP1252,SKU00464,T24,2025-02-05,5,Producto sin rotacion / no vendido
+DEVP1253,SKU00464,T03,2023-10-02,3,Producto sin rotacion / no vendido
+DEVP1254,SKU00464,T03,2024-09-20,5,Producto sin rotacion / no vendido
+DEVP1255,SKU00464,T28,2023-10-19,4,Producto sin rotacion / no vendido
+DEVP1256,SKU00464,T08,2024-03-20,6,Error de picking
+DEVP1257,SKU00465,T24,2025-07-21,1,Error de picking
+DEVP1258,SKU00465,T05,2024-11-13,1,Producto sin rotacion / no vendido
+DEVP1259,SKU00465,T22,2025-04-08,3,Producto danado en logistica
+DEVP1260,SKU00465,T16,2024-02-17,2,Defecto de fabricacion
+DEVP1261,SKU00466,T17,2025-10-28,1,Error de picking
+DEVP1262,SKU00466,T27,2025-11-23,2,Devolucion de cliente (cambio)
+DEVP1263,SKU00467,T09,2023-08-17,5,Producto danado en logistica
+DEVP1264,SKU00469,T02,2023-10-11,1,Producto sin rotacion / no vendido
+DEVP1265,SKU00469,T02,2025-11-25,1,Error de picking
+DEVP1266,SKU00471,T23,2025-08-24,9,Producto danado en logistica
+DEVP1267,SKU00471,T23,2025-09-04,7,Devolucion de cliente (cambio)
+DEVP1268,SKU00472,T02,2025-02-10,1,Devolucion de cliente (cambio)
+DEVP1269,SKU00472,T13,2025-10-06,1,Producto danado en logistica
+DEVP1270,SKU00472,T19,2025-08-21,5,Producto danado en logistica
+DEVP1271,SKU00473,T19,2023-05-26,5,Producto sin rotacion / no vendido
+DEVP1272,SKU00473,T19,2025-03-03,4,Producto sin rotacion / no vendido
+DEVP1273,SKU00473,T07,2022-12-10,3,Producto sin rotacion / no vendido
+DEVP1274,SKU00473,T13,2023-08-23,3,Error de picking
+DEVP1275,SKU00473,T21,2022-06-17,4,Devolucion de cliente (cambio)
+DEVP1276,SKU00473,T22,2025-07-13,1,Producto danado en logistica
+DEVP1277,SKU00473,T15,2023-03-17,6,Devolucion de cliente (cambio)
+DEVP1278,SKU00473,T03,2023-02-09,4,Defecto de fabricacion
+DEVP1279,SKU00473,T12,2023-08-18,3,Devolucion de cliente (cambio)
+DEVP1280,SKU00473,T12,2025-02-16,5,Devolucion de cliente (cambio)
+DEVP1281,SKU00473,T24,2022-11-06,6,Devolucion de cliente (cambio)
+DEVP1282,SKU00474,T11,2024-05-15,9,Devolucion de cliente (cambio)
+DEVP1283,SKU00474,T21,2025-12-02,8,Error de picking
+DEVP1284,SKU00474,T24,2024-11-15,8,Defecto de fabricacion
+DEVP1285,SKU00474,T24,2025-07-03,5,Defecto de fabricacion
+DEVP1286,SKU00475,T26,2025-06-03,2,Producto danado en logistica
+DEVP1287,SKU00475,T20,2024-02-09,1,Error de picking
+DEVP1288,SKU00476,T17,2025-08-20,5,Defecto de fabricacion
+DEVP1289,SKU00477,T17,2025-01-24,5,Devolucion de cliente (cambio)
+DEVP1290,SKU00477,T13,2022-04-08,2,Producto sin rotacion / no vendido
+DEVP1291,SKU00477,T20,2023-10-03,1,Producto danado en logistica
+DEVP1292,SKU00477,T20,2025-01-19,1,Defecto de fabricacion
+DEVP1293,SKU00477,T23,2025-01-02,3,Devolucion de cliente (cambio)
+DEVP1294,SKU00477,T08,2022-10-13,4,Devolucion de cliente (cambio)
+DEVP1295,SKU00477,T06,2023-01-19,3,Producto sin rotacion / no vendido
+DEVP1296,SKU00478,T26,2024-03-15,8,Devolucion de cliente (cambio)
+DEVP1297,SKU00478,T24,2024-08-27,6,Producto sin rotacion / no vendido
+DEVP1298,SKU00479,T01,2023-01-26,2,Devolucion de cliente (cambio)
+DEVP1299,SKU00480,T22,2025-01-27,4,Producto sin rotacion / no vendido
+DEVP1300,SKU00480,T25,2024-06-08,4,Error de picking
+DEVP1301,SKU00481,T25,2023-10-17,1,Producto sin rotacion / no vendido
+DEVP1302,SKU00481,T19,2024-08-22,3,Error de picking
+DEVP1303,SKU00481,T08,2022-12-13,3,Defecto de fabricacion
+DEVP1304,SKU00481,T16,2023-02-19,2,Defecto de fabricacion
+DEVP1305,SKU00481,T23,2023-11-28,4,Error de picking
+DEVP1306,SKU00481,T18,2023-06-17,5,Defecto de fabricacion
+DEVP1307,SKU00483,T11,2024-10-11,4,Devolucion de cliente (cambio)
+DEVP1308,SKU00483,T13,2025-10-13,2,Defecto de fabricacion
+DEVP1309,SKU00483,T09,2024-11-23,3,Error de picking
+DEVP1310,SKU00483,T28,2025-12-05,3,Devolucion de cliente (cambio)
+DEVP1311,SKU00484,T08,2023-12-10,1,Devolucion de cliente (cambio)
+DEVP1312,SKU00484,T08,2024-08-05,1,Error de picking
+DEVP1313,SKU00484,T07,2024-09-13,1,Devolucion de cliente (cambio)
+DEVP1314,SKU00484,T04,2025-09-23,2,Error de picking
+DEVP1315,SKU00484,T13,2024-03-21,1,Devolucion de cliente (cambio)
+DEVP1316,SKU00485,T07,2025-09-18,4,Producto sin rotacion / no vendido
+DEVP1317,SKU00486,T15,2025-07-18,1,Error de picking
+DEVP1318,SKU00486,T07,2025-10-21,2,Error de picking
+DEVP1319,SKU00486,T21,2025-12-03,2,Defecto de fabricacion
+DEVP1320,SKU00488,T18,2024-11-08,4,Error de picking
+DEVP1321,SKU00488,T10,2025-08-04,4,Producto sin rotacion / no vendido
+DEVP1322,SKU00488,T04,2025-01-22,2,Devolucion de cliente (cambio)
+DEVP1323,SKU00488,T25,2023-09-16,6,Producto sin rotacion / no vendido
+DEVP1324,SKU00488,T07,2024-07-07,4,Producto danado en logistica
+DEVP1325,SKU00488,T19,2022-11-19,5,Producto sin rotacion / no vendido
+DEVP1326,SKU00489,T22,2025-05-13,3,Producto danado en logistica
+DEVP1327,SKU00489,T24,2025-06-23,2,Defecto de fabricacion
+DEVP1328,SKU00489,T26,2025-06-12,2,Error de picking
+DEVP1329,SKU00490,T12,2024-12-14,6,Error de picking
+DEVP1330,SKU00490,T13,2025-10-14,1,Producto sin rotacion / no vendido
+DEVP1331,SKU00490,T05,2024-11-20,7,Producto danado en logistica
+DEVP1332,SKU00490,T05,2025-01-23,6,Producto danado en logistica
+DEVP1333,SKU00491,T24,2025-12-05,3,Producto sin rotacion / no vendido
+DEVP1334,SKU00491,T06,2024-11-04,1,Devolucion de cliente (cambio)
+DEVP1335,SKU00491,T01,2024-04-12,2,Error de picking
+DEVP1336,SKU00491,T16,2025-02-07,6,Devolucion de cliente (cambio)
+DEVP1337,SKU00491,T16,2025-04-06,2,Producto danado en logistica
+DEVP1338,SKU00492,T07,2024-07-18,3,Producto sin rotacion / no vendido
+DEVP1339,SKU00492,T07,2025-07-13,1,Defecto de fabricacion
+DEVP1340,SKU00493,T01,2024-02-17,1,Producto sin rotacion / no vendido
+DEVP1341,SKU00493,T02,2023-04-15,1,Defecto de fabricacion
+DEVP1342,SKU00493,T26,2024-09-15,4,Producto sin rotacion / no vendido
+DEVP1343,SKU00493,T03,2023-06-11,2,Devolucion de cliente (cambio)
+DEVP1344,SKU00494,T06,2024-12-22,5,Defecto de fabricacion
+DEVP1345,SKU00494,T27,2024-06-16,3,Producto danado en logistica
+DEVP1346,SKU00495,T02,2024-08-19,4,Producto danado en logistica
+DEVP1347,SKU00497,T11,2024-09-24,4,Defecto de fabricacion
+DEVP1348,SKU00497,T07,2023-12-04,3,Producto danado en logistica
+DEVP1349,SKU00497,T08,2024-07-02,5,Devolucion de cliente (cambio)
+DEVP1350,SKU00497,T20,2025-12-09,4,Error de picking
+DEVP1351,SKU00497,T09,2022-12-28,5,Defecto de fabricacion
+DEVP1352,SKU00497,T06,2025-05-25,6,Defecto de fabricacion
+DEVP1353,SKU00498,T15,2025-11-28,2,Error de picking
+DEVP1354,SKU00498,T28,2025-11-09,4,Producto sin rotacion / no vendido
+DEVP1355,SKU00498,T19,2025-11-26,2,Defecto de fabricacion
+DEVP1356,SKU00500,T25,2025-09-25,3,Devolucion de cliente (cambio)
+DEVP1357,SKU00500,T01,2023-10-16,3,Producto danado en logistica
+DEVP1358,SKU00500,T19,2023-01-09,6,Defecto de fabricacion
+DEVP1359,SKU00500,T19,2023-11-09,2,Producto danado en logistica
+DEVP1360,SKU00500,T19,2025-06-10,1,Error de picking
+DEVP1361,SKU00500,T16,2025-01-18,2,Devolucion de cliente (cambio)
+DEVP1362,SKU00500,T24,2022-10-27,1,Producto danado en logistica
+DEVP1363,SKU00501,T27,2022-06-06,2,Error de picking
+DEVP1364,SKU00501,T09,2023-10-02,3,Error de picking
+DEVP1365,SKU00502,T02,2023-11-23,1,Producto sin rotacion / no vendido
+DEVP1366,SKU00502,T17,2025-10-26,1,Producto sin rotacion / no vendido
+DEVP1367,SKU00503,T18,2025-05-11,1,Producto sin rotacion / no vendido
+DEVP1368,SKU00503,T13,2024-07-05,2,Producto danado en logistica
+DEVP1369,SKU00503,T07,2025-09-07,2,Defecto de fabricacion
+DEVP1370,SKU00506,T17,2025-11-10,4,Devolucion de cliente (cambio)
+DEVP1371,SKU00506,T05,2023-06-16,2,Producto sin rotacion / no vendido
+DEVP1372,SKU00506,T14,2022-11-15,3,Producto danado en logistica
+DEVP1373,SKU00506,T15,2024-10-06,3,Producto danado en logistica
+DEVP1374,SKU00506,T18,2025-02-27,1,Producto danado en logistica
+DEVP1375,SKU00506,T16,2023-05-20,4,Producto sin rotacion / no vendido
+DEVP1376,SKU00506,T25,2023-10-10,3,Defecto de fabricacion
+DEVP1377,SKU00506,T28,2025-07-25,8,Devolucion de cliente (cambio)
+DEVP1378,SKU00506,T13,2024-12-14,2,Defecto de fabricacion
+DEVP1379,SKU00507,T14,2025-03-16,13,Producto danado en logistica
+DEVP1380,SKU00508,T19,2025-08-02,3,Error de picking
+DEVP1381,SKU00508,T12,2025-09-21,3,Producto danado en logistica
+DEVP1382,SKU00508,T28,2024-07-28,7,Producto sin rotacion / no vendido
+DEVP1383,SKU00508,T01,2025-10-22,4,Defecto de fabricacion
+DEVP1384,SKU00508,T10,2024-04-05,4,Producto sin rotacion / no vendido
+DEVP1385,SKU00508,T10,2025-04-21,6,Error de picking
+DEVP1386,SKU00510,T18,2023-09-07,4,Defecto de fabricacion
+DEVP1387,SKU00511,T26,2024-07-04,1,Error de picking
+DEVP1388,SKU00511,T13,2025-08-27,2,Producto sin rotacion / no vendido
+DEVP1389,SKU00512,T26,2025-09-25,5,Producto danado en logistica
+DEVP1390,SKU00513,T19,2023-09-12,4,Producto danado en logistica
+DEVP1391,SKU00514,T12,2025-07-17,3,Producto danado en logistica
+DEVP1392,SKU00515,T17,2024-09-10,3,Devolucion de cliente (cambio)
+DEVP1393,SKU00515,T09,2023-07-23,1,Error de picking
+DEVP1394,SKU00515,T09,2024-05-22,2,Error de picking
+DEVP1395,SKU00516,T28,2024-01-16,2,Producto danado en logistica
+DEVP1396,SKU00516,T04,2025-02-18,4,Devolucion de cliente (cambio)
+DEVP1397,SKU00516,T12,2024-12-10,2,Devolucion de cliente (cambio)
+DEVP1398,SKU00516,T08,2022-11-16,2,Error de picking
+DEVP1399,SKU00517,T11,2024-10-02,2,Devolucion de cliente (cambio)
+DEVP1400,SKU00517,T06,2024-08-05,1,Devolucion de cliente (cambio)
+DEVP1401,SKU00517,T06,2025-07-16,2,Error de picking
+DEVP1402,SKU00517,T04,2025-01-25,4,Producto danado en logistica
+DEVP1403,SKU00517,T18,2025-09-14,2,Error de picking
+DEVP1404,SKU00517,T05,2024-12-16,4,Devolucion de cliente (cambio)
+DEVP1405,SKU00518,T24,2025-08-25,6,Producto danado en logistica
+DEVP1406,SKU00518,T06,2025-09-26,1,Producto sin rotacion / no vendido
+DEVP1407,SKU00520,T15,2023-09-23,1,Producto sin rotacion / no vendido
+DEVP1408,SKU00520,T07,2023-02-08,2,Producto sin rotacion / no vendido
+DEVP1409,SKU00520,T24,2024-02-28,2,Error de picking
+DEVP1410,SKU00520,T24,2025-03-05,2,Producto sin rotacion / no vendido
+DEVP1411,SKU00521,T15,2025-08-26,1,Producto sin rotacion / no vendido
+DEVP1412,SKU00522,T16,2025-06-08,2,Error de picking
+DEVP1413,SKU00523,T05,2025-02-24,1,Devolucion de cliente (cambio)
+DEVP1414,SKU00523,T20,2024-11-21,1,Producto sin rotacion / no vendido
+DEVP1415,SKU00523,T14,2025-05-23,2,Producto danado en logistica
+DEVP1416,SKU00523,T02,2024-05-26,2,Producto sin rotacion / no vendido
+DEVP1417,SKU00523,T22,2025-09-18,3,Defecto de fabricacion
+DEVP1418,SKU00524,T13,2024-08-27,4,Producto sin rotacion / no vendido
+DEVP1419,SKU00524,T21,2025-12-25,2,Defecto de fabricacion
+DEVP1420,SKU00524,T05,2023-07-23,2,Defecto de fabricacion
+DEVP1421,SKU00524,T27,2025-02-10,4,Producto danado en logistica
+DEVP1422,SKU00524,T28,2024-08-28,2,Producto danado en logistica
+DEVP1423,SKU00524,T25,2025-03-11,2,Devolucion de cliente (cambio)
+DEVP1424,SKU00524,T25,2025-11-10,1,Error de picking
+DEVP1425,SKU00525,T03,2024-03-07,4,Producto sin rotacion / no vendido
+DEVP1426,SKU00525,T20,2025-05-16,2,Defecto de fabricacion
+DEVP1427,SKU00525,T09,2024-10-28,2,Producto danado en logistica
+DEVP1428,SKU00525,T21,2025-03-07,3,Devolucion de cliente (cambio)
+DEVP1429,SKU00526,T19,2024-09-23,11,Producto danado en logistica
+DEVP1430,SKU00526,T15,2024-09-04,17,Devolucion de cliente (cambio)
+DEVP1431,SKU00526,T17,2025-11-16,14,Producto sin rotacion / no vendido
+DEVP1432,SKU00527,T23,2025-09-17,2,Devolucion de cliente (cambio)
+DEVP1433,SKU00527,T03,2025-11-27,3,Defecto de fabricacion
+DEVP1434,SKU00528,T22,2025-10-25,2,Producto sin rotacion / no vendido
+DEVP1435,SKU00528,T14,2025-01-23,2,Producto sin rotacion / no vendido
+DEVP1436,SKU00528,T19,2025-02-20,3,Defecto de fabricacion
+DEVP1437,SKU00528,T17,2025-11-26,1,Defecto de fabricacion
+DEVP1438,SKU00529,T13,2025-07-04,15,Devolucion de cliente (cambio)
+DEVP1439,SKU00529,T22,2025-09-14,8,Devolucion de cliente (cambio)
+DEVP1440,SKU00529,T11,2025-01-15,12,Producto danado en logistica
+DEVP1441,SKU00530,T02,2023-08-16,15,Producto danado en logistica
+DEVP1442,SKU00530,T02,2024-01-28,13,Error de picking
+DEVP1443,SKU00530,T19,2023-11-19,14,Producto sin rotacion / no vendido
+DEVP1444,SKU00530,T20,2023-06-23,14,Defecto de fabricacion
+DEVP1445,SKU00530,T25,2025-01-25,10,Error de picking
+DEVP1446,SKU00530,T24,2023-01-05,23,Devolucion de cliente (cambio)
+DEVP1447,SKU00530,T17,2022-07-12,18,Producto sin rotacion / no vendido
+DEVP1448,SKU00530,T28,2024-11-17,16,Error de picking
+DEVP1449,SKU00530,T14,2023-01-10,12,Defecto de fabricacion
+DEVP1450,SKU00531,T19,2025-12-12,6,Producto danado en logistica
+DEVP1451,SKU00531,T06,2025-06-21,4,Producto danado en logistica
+DEVP1452,SKU00533,T08,2024-09-26,3,Producto danado en logistica
+DEVP1453,SKU00533,T08,2025-07-13,5,Devolucion de cliente (cambio)
+DEVP1454,SKU00533,T22,2025-06-06,4,Producto sin rotacion / no vendido
+DEVP1455,SKU00534,T09,2024-07-25,7,Devolucion de cliente (cambio)
+DEVP1456,SKU00534,T23,2024-09-19,12,Defecto de fabricacion
+DEVP1457,SKU00534,T03,2023-12-19,4,Defecto de fabricacion
+DEVP1458,SKU00535,T23,2025-01-05,3,Producto sin rotacion / no vendido
+DEVP1459,SKU00535,T12,2025-11-25,2,Error de picking
+DEVP1460,SKU00536,T14,2025-07-19,3,Error de picking
+DEVP1461,SKU00536,T20,2025-11-14,2,Devolucion de cliente (cambio)
+DEVP1462,SKU00537,T12,2025-08-21,11,Producto sin rotacion / no vendido
+DEVP1463,SKU00538,T24,2023-03-03,3,Producto sin rotacion / no vendido
+DEVP1464,SKU00538,T21,2023-01-02,2,Defecto de fabricacion
+DEVP1465,SKU00538,T21,2023-03-12,2,Devolucion de cliente (cambio)
+DEVP1466,SKU00538,T21,2024-06-26,2,Producto sin rotacion / no vendido
+DEVP1467,SKU00538,T26,2023-12-25,2,Devolucion de cliente (cambio)
+DEVP1468,SKU00538,T08,2025-01-28,3,Defecto de fabricacion
+DEVP1469,SKU00538,T08,2025-08-17,2,Defecto de fabricacion
+DEVP1470,SKU00538,T08,2025-12-15,1,Error de picking
+DEVP1471,SKU00538,T23,2023-08-05,1,Defecto de fabricacion
+DEVP1472,SKU00539,T10,2024-11-24,1,Error de picking
+DEVP1473,SKU00539,T09,2025-09-25,1,Devolucion de cliente (cambio)
+DEVP1474,SKU00539,T20,2024-06-16,1,Defecto de fabricacion
+DEVP1475,SKU00539,T20,2025-07-26,1,Error de picking
+DEVP1476,SKU00539,T27,2024-05-22,1,Defecto de fabricacion
+DEVP1477,SKU00539,T05,2025-01-26,4,Producto sin rotacion / no vendido
+DEVP1478,SKU00539,T28,2024-05-13,1,Devolucion de cliente (cambio)
+DEVP1479,SKU00540,T28,2024-03-22,6,Error de picking
+DEVP1480,SKU00540,T28,2024-12-09,4,Producto sin rotacion / no vendido
+DEVP1481,SKU00540,T26,2023-12-05,4,Defecto de fabricacion
+DEVP1482,SKU00540,T12,2022-10-21,3,Defecto de fabricacion
+DEVP1483,SKU00541,T03,2024-12-28,3,Producto danado en logistica
+DEVP1484,SKU00541,T06,2025-01-12,4,Error de picking
+DEVP1485,SKU00541,T25,2023-04-25,3,Producto sin rotacion / no vendido
+DEVP1486,SKU00541,T19,2023-02-22,6,Producto sin rotacion / no vendido
+DEVP1487,SKU00541,T15,2023-08-06,8,Producto danado en logistica
+DEVP1488,SKU00541,T27,2025-01-13,2,Error de picking
+DEVP1489,SKU00541,T18,2024-01-02,4,Producto danado en logistica
+DEVP1490,SKU00541,T18,2025-09-08,5,Devolucion de cliente (cambio)
+DEVP1491,SKU00542,T18,2025-01-11,6,Defecto de fabricacion
+DEVP1492,SKU00542,T12,2024-12-21,2,Defecto de fabricacion
+DEVP1493,SKU00542,T25,2025-09-26,3,Devolucion de cliente (cambio)
+DEVP1494,SKU00542,T10,2025-01-11,4,Devolucion de cliente (cambio)
+DEVP1495,SKU00542,T14,2025-11-09,2,Producto danado en logistica
+DEVP1496,SKU00543,T16,2025-08-19,1,Producto danado en logistica
+DEVP1497,SKU00543,T26,2024-07-08,3,Producto sin rotacion / no vendido
+DEVP1498,SKU00545,T01,2025-04-19,1,Producto sin rotacion / no vendido
+DEVP1499,SKU00545,T11,2025-10-15,1,Devolucion de cliente (cambio)
+DEVP1500,SKU00546,T16,2025-03-20,10,Error de picking
+DEVP1501,SKU00546,T11,2023-08-26,9,Defecto de fabricacion
+DEVP1502,SKU00546,T27,2024-02-20,7,Producto danado en logistica
+DEVP1503,SKU00548,T20,2025-07-05,8,Producto danado en logistica
+DEVP1504,SKU00549,T26,2024-10-05,1,Producto sin rotacion / no vendido
+DEVP1505,SKU00549,T22,2022-12-03,3,Devolucion de cliente (cambio)
+DEVP1506,SKU00550,T24,2025-09-13,1,Producto danado en logistica
+DEVP1507,SKU00551,T03,2024-10-10,2,Producto sin rotacion / no vendido
+DEVP1508,SKU00551,T01,2025-04-02,1,Defecto de fabricacion
+DEVP1509,SKU00551,T01,2025-05-27,1,Producto danado en logistica
+DEVP1510,SKU00552,T16,2025-08-07,1,Producto sin rotacion / no vendido
+DEVP1511,SKU00552,T16,2025-11-09,2,Producto sin rotacion / no vendido
+DEVP1512,SKU00552,T12,2025-05-13,2,Defecto de fabricacion
+DEVP1513,SKU00553,T11,2025-11-27,5,Producto danado en logistica
+DEVP1514,SKU00555,T06,2025-02-21,2,Error de picking
+DEVP1515,SKU00556,T03,2024-07-25,5,Error de picking
+DEVP1516,SKU00556,T04,2024-06-21,8,Producto sin rotacion / no vendido
+DEVP1517,SKU00557,T05,2023-12-13,2,Producto danado en logistica
+DEVP1518,SKU00557,T27,2025-11-20,4,Producto danado en logistica
+DEVP1519,SKU00560,T08,2023-03-22,3,Producto danado en logistica
+DEVP1520,SKU00560,T23,2023-06-06,7,Error de picking
+DEVP1521,SKU00560,T09,2024-06-12,3,Producto danado en logistica
+DEVP1522,SKU00560,T20,2023-04-28,5,Producto sin rotacion / no vendido
+DEVP1523,SKU00560,T14,2025-05-09,3,Producto sin rotacion / no vendido
+DEVP1524,SKU00560,T19,2023-02-26,1,Defecto de fabricacion
+DEVP1525,SKU00560,T05,2025-05-27,6,Producto sin rotacion / no vendido
+DEVP1526,SKU00560,T28,2023-02-23,4,Producto sin rotacion / no vendido
+DEVP1527,SKU00560,T25,2023-08-19,2,Producto danado en logistica
+DEVP1528,SKU00560,T25,2024-12-11,9,Defecto de fabricacion
+DEVP1529,SKU00560,T27,2024-12-27,6,Producto danado en logistica
+DEVP1530,SKU00561,T18,2025-03-11,2,Producto danado en logistica
+DEVP1531,SKU00561,T13,2024-07-06,3,Producto danado en logistica
+DEVP1532,SKU00561,T13,2024-10-09,1,Error de picking
+DEVP1533,SKU00561,T06,2025-10-18,3,Devolucion de cliente (cambio)
+DEVP1534,SKU00561,T28,2023-10-10,3,Producto danado en logistica
+DEVP1535,SKU00562,T03,2024-11-07,2,Devolucion de cliente (cambio)
+DEVP1536,SKU00562,T23,2023-10-10,3,Error de picking
+DEVP1537,SKU00562,T23,2025-08-15,1,Defecto de fabricacion
+DEVP1538,SKU00562,T17,2023-11-11,6,Error de picking
+DEVP1539,SKU00562,T17,2025-02-18,4,Defecto de fabricacion
+DEVP1540,SKU00563,T10,2025-03-05,13,Defecto de fabricacion
+DEVP1541,SKU00563,T18,2024-01-22,11,Producto danado en logistica
+DEVP1542,SKU00563,T14,2024-10-09,7,Error de picking
+DEVP1543,SKU00564,T25,2023-10-22,2,Producto danado en logistica
+DEVP1544,SKU00564,T25,2023-12-18,2,Devolucion de cliente (cambio)
+DEVP1545,SKU00564,T11,2024-03-18,2,Error de picking
+DEVP1546,SKU00564,T11,2025-06-06,1,Error de picking
+DEVP1547,SKU00564,T19,2024-07-04,2,Devolucion de cliente (cambio)
+DEVP1548,SKU00564,T26,2025-07-08,6,Devolucion de cliente (cambio)
+DEVP1549,SKU00564,T18,2025-02-14,3,Producto sin rotacion / no vendido
+DEVP1550,SKU00565,T15,2023-09-19,5,Producto sin rotacion / no vendido
+DEVP1551,SKU00566,T03,2023-07-04,5,Devolucion de cliente (cambio)
+DEVP1552,SKU00566,T03,2023-12-24,4,Producto sin rotacion / no vendido
+DEVP1553,SKU00566,T08,2025-07-21,6,Producto danado en logistica
+DEVP1554,SKU00566,T20,2024-05-08,4,Error de picking
+DEVP1555,SKU00566,T23,2023-05-18,3,Producto sin rotacion / no vendido
+DEVP1556,SKU00567,T05,2024-04-27,4,Error de picking
+DEVP1557,SKU00567,T04,2024-07-20,1,Producto sin rotacion / no vendido
+DEVP1558,SKU00568,T05,2025-10-06,3,Defecto de fabricacion
+DEVP1559,SKU00568,T07,2025-11-04,3,Devolucion de cliente (cambio)
+DEVP1560,SKU00569,T24,2025-09-28,1,Producto sin rotacion / no vendido
+DEVP1561,SKU00569,T24,2025-11-14,4,Producto danado en logistica
+DEVP1562,SKU00569,T17,2024-10-10,3,Producto danado en logistica
+DEVP1563,SKU00569,T04,2024-06-10,2,Devolucion de cliente (cambio)
+DEVP1564,SKU00569,T21,2024-01-22,2,Producto sin rotacion / no vendido
+DEVP1565,SKU00570,T16,2025-05-22,1,Error de picking
+DEVP1566,SKU00571,T16,2025-12-11,2,Producto sin rotacion / no vendido
+DEVP1567,SKU00571,T18,2024-03-17,1,Devolucion de cliente (cambio)
+DEVP1568,SKU00571,T27,2025-10-16,2,Error de picking
+DEVP1569,SKU00572,T21,2022-12-20,1,Producto danado en logistica
+DEVP1570,SKU00572,T03,2023-01-02,1,Producto danado en logistica
+DEVP1571,SKU00572,T12,2024-03-16,1,Producto danado en logistica
+DEVP1572,SKU00572,T13,2023-02-08,1,Producto sin rotacion / no vendido
+DEVP1573,SKU00572,T13,2023-06-13,2,Error de picking
+DEVP1574,SKU00572,T05,2023-08-02,1,Devolucion de cliente (cambio)
+DEVP1575,SKU00572,T05,2025-02-06,1,Defecto de fabricacion
+DEVP1576,SKU00572,T08,2024-02-25,1,Producto sin rotacion / no vendido
+DEVP1577,SKU00572,T16,2023-06-28,1,Defecto de fabricacion
+DEVP1578,SKU00572,T20,2022-10-23,2,Defecto de fabricacion
+DEVP1579,SKU00573,T03,2025-07-07,4,Defecto de fabricacion
+DEVP1580,SKU00573,T16,2025-05-06,3,Defecto de fabricacion
+DEVP1581,SKU00574,T12,2025-11-12,1,Producto danado en logistica
+DEVP1582,SKU00576,T08,2024-10-17,6,Defecto de fabricacion
+DEVP1583,SKU00576,T25,2024-12-17,4,Devolucion de cliente (cambio)
+DEVP1584,SKU00577,T26,2024-12-23,1,Producto danado en logistica
+DEVP1585,SKU00577,T14,2024-12-16,4,Defecto de fabricacion
+DEVP1586,SKU00581,T01,2024-07-20,3,Producto danado en logistica
+DEVP1587,SKU00581,T23,2025-12-06,2,Error de picking
+DEVP1588,SKU00581,T09,2024-05-19,5,Error de picking
+DEVP1589,SKU00581,T04,2024-02-06,4,Error de picking
+DEVP1590,SKU00582,T17,2025-03-20,3,Error de picking
+DEVP1591,SKU00582,T21,2025-10-19,2,Error de picking
+DEVP1592,SKU00582,T08,2025-12-18,3,Devolucion de cliente (cambio)
+DEVP1593,SKU00583,T11,2025-02-24,3,Producto danado en logistica
+DEVP1594,SKU00583,T16,2022-06-21,3,Producto sin rotacion / no vendido
+DEVP1595,SKU00583,T16,2025-07-09,2,Producto sin rotacion / no vendido
+DEVP1596,SKU00583,T03,2022-07-11,2,Devolucion de cliente (cambio)
+DEVP1597,SKU00583,T03,2025-04-04,4,Producto sin rotacion / no vendido
+DEVP1598,SKU00583,T09,2025-06-27,4,Producto danado en logistica
+DEVP1599,SKU00583,T02,2023-03-08,3,Devolucion de cliente (cambio)
+DEVP1600,SKU00583,T02,2024-07-14,6,Producto sin rotacion / no vendido
+DEVP1601,SKU00583,T02,2024-09-18,3,Error de picking
+DEVP1602,SKU00583,T10,2025-11-06,4,Producto danado en logistica
+DEVP1603,SKU00583,T08,2022-12-23,3,Error de picking
+DEVP1604,SKU00583,T28,2024-08-28,3,Devolucion de cliente (cambio)
+DEVP1605,SKU00584,T14,2023-03-13,2,Producto sin rotacion / no vendido
+DEVP1606,SKU00584,T14,2024-08-19,2,Defecto de fabricacion
+DEVP1607,SKU00584,T05,2022-11-09,1,Devolucion de cliente (cambio)
+DEVP1608,SKU00584,T05,2023-09-05,2,Defecto de fabricacion
+DEVP1609,SKU00584,T19,2022-10-05,2,Devolucion de cliente (cambio)
+DEVP1610,SKU00584,T19,2023-11-03,2,Defecto de fabricacion
+DEVP1611,SKU00586,T26,2025-01-11,1,Producto danado en logistica
+DEVP1612,SKU00587,T08,2022-08-26,2,Producto sin rotacion / no vendido
+DEVP1613,SKU00587,T21,2022-08-19,3,Error de picking
+DEVP1614,SKU00587,T07,2023-06-02,4,Devolucion de cliente (cambio)
+DEVP1615,SKU00587,T05,2024-03-02,4,Producto sin rotacion / no vendido
+DEVP1616,SKU00587,T19,2023-11-15,5,Error de picking
+DEVP1617,SKU00587,T04,2024-08-28,7,Producto sin rotacion / no vendido
+DEVP1618,SKU00587,T23,2024-10-23,7,Defecto de fabricacion
+DEVP1619,SKU00588,T03,2025-03-16,6,Producto sin rotacion / no vendido
+DEVP1620,SKU00588,T10,2024-12-13,2,Defecto de fabricacion
+DEVP1621,SKU00588,T10,2025-02-15,2,Error de picking
+DEVP1622,SKU00588,T22,2024-12-14,5,Producto sin rotacion / no vendido
+DEVP1623,SKU00588,T17,2024-11-16,4,Error de picking
+DEVP1624,SKU00588,T13,2025-02-04,6,Error de picking
+DEVP1625,SKU00589,T10,2023-09-11,5,Defecto de fabricacion
+DEVP1626,SKU00589,T10,2024-10-05,6,Devolucion de cliente (cambio)
+DEVP1627,SKU00589,T21,2024-09-11,2,Error de picking
+DEVP1628,SKU00589,T21,2024-12-02,4,Producto danado en logistica
+DEVP1629,SKU00589,T19,2024-08-24,6,Error de picking
+DEVP1630,SKU00591,T11,2024-10-16,2,Producto danado en logistica
+DEVP1631,SKU00591,T19,2025-01-24,1,Producto danado en logistica
+DEVP1632,SKU00591,T08,2023-11-09,1,Producto sin rotacion / no vendido
+DEVP1633,SKU00591,T08,2025-02-22,1,Error de picking
+DEVP1634,SKU00591,T18,2025-07-28,2,Error de picking
+DEVP1635,SKU00591,T14,2025-06-27,2,Producto danado en logistica
+DEVP1636,SKU00591,T17,2024-08-09,1,Devolucion de cliente (cambio)
+DEVP1637,SKU00592,T11,2025-04-11,4,Producto sin rotacion / no vendido
+DEVP1638,SKU00593,T24,2024-06-20,1,Error de picking
+DEVP1639,SKU00593,T04,2025-03-25,3,Producto danado en logistica
+DEVP1640,SKU00593,T26,2025-03-14,2,Producto danado en logistica
+DEVP1641,SKU00594,T16,2025-10-03,1,Defecto de fabricacion
+DEVP1642,SKU00594,T03,2024-07-16,7,Defecto de fabricacion
+DEVP1643,SKU00595,T17,2025-08-13,2,Error de picking
+DEVP1644,SKU00595,T12,2025-10-06,1,Producto sin rotacion / no vendido
+DEVP1645,SKU00595,T12,2025-11-22,5,Error de picking
+DEVP1646,SKU00595,T13,2025-12-17,2,Producto sin rotacion / no vendido
+DEVP1647,SKU00595,T18,2025-09-02,4,Producto danado en logistica
+DEVP1648,SKU00595,T02,2025-08-13,4,Producto danado en logistica
+DEVP1649,SKU00596,T14,2024-11-24,1,Producto sin rotacion / no vendido
+DEVP1650,SKU00597,T19,2024-09-21,3,Error de picking
+DEVP1651,SKU00597,T20,2025-11-03,3,Producto sin rotacion / no vendido
+DEVP1652,SKU00597,T01,2024-12-13,1,Defecto de fabricacion
+DEVP1653,SKU00599,T25,2025-11-25,3,Producto danado en logistica
+DEVP1654,SKU00599,T28,2025-05-14,2,Producto sin rotacion / no vendido
+DEVP1655,SKU00599,T28,2025-07-23,2,Producto danado en logistica
+DEVP1656,SKU00599,T27,2024-12-13,1,Error de picking
+DEVP1657,SKU00600,T19,2025-03-03,4,Error de picking
+DEVP1658,SKU00600,T02,2024-08-26,4,Devolucion de cliente (cambio)
+DEVP1659,SKU00601,T12,2025-11-21,4,Producto sin rotacion / no vendido
+DEVP1660,SKU00601,T28,2025-10-14,7,Error de picking
+DEVP1661,SKU00603,T01,2025-04-22,2,Defecto de fabricacion
+DEVP1662,SKU00604,T25,2025-10-07,2,Error de picking
+DEVP1663,SKU00604,T18,2025-11-23,2,Defecto de fabricacion
+DEVP1664,SKU00605,T15,2025-08-27,14,Error de picking
+DEVP1665,SKU00605,T07,2025-07-17,14,Error de picking
+DEVP1666,SKU00606,T28,2025-10-17,2,Producto sin rotacion / no vendido
+DEVP1667,SKU00607,T26,2024-11-05,7,Error de picking
+DEVP1668,SKU00607,T26,2025-08-06,6,Devolucion de cliente (cambio)
+DEVP1669,SKU00607,T22,2025-10-23,7,Devolucion de cliente (cambio)
+DEVP1670,SKU00607,T09,2024-09-23,8,Producto sin rotacion / no vendido
+DEVP1671,SKU00607,T16,2024-10-28,4,Producto danado en logistica
+DEVP1672,SKU00608,T27,2023-11-07,2,Producto sin rotacion / no vendido
+DEVP1673,SKU00608,T21,2025-05-19,1,Defecto de fabricacion
+DEVP1674,SKU00608,T04,2025-09-18,1,Defecto de fabricacion
+DEVP1675,SKU00608,T14,2025-10-09,5,Devolucion de cliente (cambio)
+DEVP1676,SKU00608,T07,2023-11-19,1,Producto danado en logistica
+DEVP1677,SKU00608,T28,2025-06-11,1,Error de picking
+DEVP1678,SKU00608,T08,2025-06-23,1,Producto danado en logistica
+DEVP1679,SKU00609,T02,2025-11-19,2,Producto sin rotacion / no vendido
+DEVP1680,SKU00609,T26,2025-09-19,1,Producto danado en logistica
+DEVP1681,SKU00609,T09,2024-09-09,2,Error de picking
+DEVP1682,SKU00610,T14,2025-01-28,1,Devolucion de cliente (cambio)
+DEVP1683,SKU00610,T14,2025-10-20,2,Producto danado en logistica
+DEVP1684,SKU00611,T17,2024-09-13,3,Error de picking
+DEVP1685,SKU00611,T13,2023-11-22,4,Devolucion de cliente (cambio)
+DEVP1686,SKU00611,T20,2023-09-25,3,Devolucion de cliente (cambio)
+DEVP1687,SKU00611,T15,2024-09-20,1,Defecto de fabricacion
+DEVP1688,SKU00612,T07,2025-12-17,5,Error de picking
+DEVP1689,SKU00612,T03,2024-02-15,4,Producto danado en logistica
+DEVP1690,SKU00613,T14,2025-11-11,2,Producto danado en logistica
+DEVP1691,SKU00614,T20,2025-10-06,4,Producto sin rotacion / no vendido
+DEVP1692,SKU00616,T14,2023-04-13,3,Producto danado en logistica
+DEVP1693,SKU00616,T14,2025-02-11,1,Producto danado en logistica
+DEVP1694,SKU00616,T02,2024-10-06,4,Producto danado en logistica
+DEVP1695,SKU00616,T02,2025-02-24,6,Producto danado en logistica
+DEVP1696,SKU00616,T03,2024-01-21,3,Producto sin rotacion / no vendido
+DEVP1697,SKU00616,T03,2025-04-17,1,Producto danado en logistica
+DEVP1698,SKU00616,T03,2025-10-04,4,Devolucion de cliente (cambio)
+DEVP1699,SKU00616,T01,2025-12-04,2,Defecto de fabricacion
+DEVP1700,SKU00617,T25,2024-02-06,3,Defecto de fabricacion
+DEVP1701,SKU00617,T28,2023-09-05,2,Producto sin rotacion / no vendido
+DEVP1702,SKU00617,T22,2025-10-21,1,Devolucion de cliente (cambio)
+DEVP1703,SKU00618,T14,2024-06-23,9,Error de picking
+DEVP1704,SKU00619,T22,2024-06-11,4,Producto danado en logistica
+DEVP1705,SKU00619,T10,2024-07-06,8,Defecto de fabricacion
+DEVP1706,SKU00619,T14,2025-12-27,5,Defecto de fabricacion
+DEVP1707,SKU00619,T18,2025-02-06,3,Error de picking
+DEVP1708,SKU00621,T02,2024-07-16,3,Producto danado en logistica
+DEVP1709,SKU00621,T07,2025-07-08,2,Error de picking
+DEVP1710,SKU00622,T24,2024-05-03,3,Error de picking
+DEVP1711,SKU00622,T24,2025-03-15,3,Defecto de fabricacion
+DEVP1712,SKU00623,T21,2025-10-24,2,Producto danado en logistica
+DEVP1713,SKU00623,T20,2023-01-06,3,Error de picking
+DEVP1714,SKU00623,T04,2024-04-03,1,Devolucion de cliente (cambio)
+DEVP1715,SKU00624,T22,2025-06-08,3,Producto sin rotacion / no vendido
+DEVP1716,SKU00624,T22,2025-09-25,1,Producto danado en logistica
+DEVP1717,SKU00625,T01,2025-09-24,4,Defecto de fabricacion
+DEVP1718,SKU00625,T16,2025-05-19,5,Error de picking
+DEVP1719,SKU00625,T04,2025-03-24,1,Defecto de fabricacion
+DEVP1720,SKU00626,T27,2023-05-04,1,Producto danado en logistica
+DEVP1721,SKU00627,T21,2022-12-07,3,Producto danado en logistica
+DEVP1722,SKU00627,T19,2024-10-11,2,Devolucion de cliente (cambio)
+DEVP1723,SKU00627,T05,2023-03-20,4,Producto danado en logistica
+DEVP1724,SKU00627,T24,2024-06-17,2,Devolucion de cliente (cambio)
+DEVP1725,SKU00627,T17,2022-11-03,2,Error de picking
+DEVP1726,SKU00627,T06,2025-11-25,7,Producto danado en logistica
+DEVP1727,SKU00628,T24,2025-09-19,8,Producto danado en logistica
+DEVP1728,SKU00628,T26,2024-07-03,7,Defecto de fabricacion
+DEVP1729,SKU00628,T11,2024-01-13,6,Devolucion de cliente (cambio)
+DEVP1730,SKU00629,T06,2025-05-23,3,Error de picking
+DEVP1731,SKU00629,T25,2025-07-16,4,Producto danado en logistica
+DEVP1732,SKU00629,T09,2025-10-17,1,Error de picking
+DEVP1733,SKU00630,T23,2025-10-19,2,Producto danado en logistica
+DEVP1734,SKU00630,T23,2025-12-09,2,Producto danado en logistica
+DEVP1735,SKU00631,T20,2023-01-09,1,Error de picking
+DEVP1736,SKU00631,T23,2023-12-04,1,Producto danado en logistica
+DEVP1737,SKU00631,T23,2024-06-19,1,Producto sin rotacion / no vendido
+DEVP1738,SKU00631,T18,2024-04-16,1,Producto danado en logistica
+DEVP1739,SKU00631,T19,2022-07-27,1,Devolucion de cliente (cambio)
+DEVP1740,SKU00631,T19,2022-09-17,1,Producto danado en logistica
+DEVP1741,SKU00632,T27,2023-04-13,1,Producto danado en logistica
+DEVP1742,SKU00632,T21,2024-08-15,2,Producto sin rotacion / no vendido
+DEVP1743,SKU00632,T17,2022-11-20,3,Producto danado en logistica
+DEVP1744,SKU00632,T17,2023-04-14,1,Error de picking
+DEVP1745,SKU00632,T03,2024-07-13,2,Error de picking
+DEVP1746,SKU00632,T03,2024-09-02,2,Devolucion de cliente (cambio)
+DEVP1747,SKU00633,T19,2025-03-15,11,Producto sin rotacion / no vendido
+DEVP1748,SKU00633,T18,2023-03-25,7,Producto sin rotacion / no vendido
+DEVP1749,SKU00633,T15,2023-07-17,8,Producto danado en logistica
+DEVP1750,SKU00633,T12,2023-08-26,8,Error de picking
+DEVP1751,SKU00633,T05,2025-08-06,6,Error de picking
+DEVP1752,SKU00634,T16,2024-07-04,4,Devolucion de cliente (cambio)
+DEVP1753,SKU00634,T16,2025-10-19,3,Defecto de fabricacion
+DEVP1754,SKU00634,T21,2025-11-18,4,Error de picking
+DEVP1755,SKU00635,T03,2023-06-02,2,Error de picking
+DEVP1756,SKU00635,T03,2023-12-13,1,Error de picking
+DEVP1757,SKU00635,T03,2024-04-15,1,Producto sin rotacion / no vendido
+DEVP1758,SKU00635,T15,2024-07-25,1,Defecto de fabricacion
+DEVP1759,SKU00635,T24,2023-05-04,1,Defecto de fabricacion
+DEVP1760,SKU00635,T24,2024-11-12,2,Devolucion de cliente (cambio)
+DEVP1761,SKU00635,T10,2024-09-10,1,Producto danado en logistica
+DEVP1762,SKU00637,T28,2023-10-20,2,Error de picking
+DEVP1763,SKU00637,T03,2023-12-24,3,Devolucion de cliente (cambio)
+DEVP1764,SKU00637,T08,2022-11-22,2,Producto sin rotacion / no vendido
+DEVP1765,SKU00637,T19,2023-08-14,1,Error de picking
+DEVP1766,SKU00637,T17,2025-02-27,1,Producto sin rotacion / no vendido
+DEVP1767,SKU00637,T16,2024-01-06,1,Error de picking
+DEVP1768,SKU00638,T17,2024-10-17,1,Defecto de fabricacion
+DEVP1769,SKU00638,T21,2025-10-07,1,Producto danado en logistica
+DEVP1770,SKU00639,T28,2024-10-18,3,Error de picking
+DEVP1771,SKU00639,T06,2023-07-26,5,Devolucion de cliente (cambio)
+DEVP1772,SKU00639,T03,2022-12-07,4,Producto sin rotacion / no vendido
+DEVP1773,SKU00640,T08,2024-10-08,10,Producto sin rotacion / no vendido
+DEVP1774,SKU00640,T08,2024-11-04,11,Devolucion de cliente (cambio)
+DEVP1775,SKU00641,T10,2024-12-02,1,Producto sin rotacion / no vendido
+DEVP1776,SKU00641,T14,2024-05-11,4,Producto danado en logistica
+DEVP1777,SKU00641,T23,2025-11-11,2,Producto sin rotacion / no vendido
+DEVP1778,SKU00641,T09,2023-06-22,3,Defecto de fabricacion
+DEVP1779,SKU00642,T20,2024-04-11,8,Producto sin rotacion / no vendido
+DEVP1780,SKU00642,T15,2024-12-07,9,Devolucion de cliente (cambio)
+DEVP1781,SKU00642,T25,2024-03-02,3,Devolucion de cliente (cambio)
+DEVP1782,SKU00642,T25,2024-10-19,16,Defecto de fabricacion
+DEVP1783,SKU00642,T28,2025-02-09,7,Defecto de fabricacion
+DEVP1784,SKU00644,T13,2023-09-16,1,Devolucion de cliente (cambio)
+DEVP1785,SKU00644,T04,2025-06-07,3,Producto sin rotacion / no vendido
+DEVP1786,SKU00644,T23,2025-07-12,2,Defecto de fabricacion
+DEVP1787,SKU00644,T12,2023-02-09,1,Defecto de fabricacion
+DEVP1788,SKU00645,T26,2025-09-21,6,Producto sin rotacion / no vendido
+DEVP1789,SKU00648,T06,2025-09-07,1,Devolucion de cliente (cambio)
+DEVP1790,SKU00648,T15,2025-07-23,1,Defecto de fabricacion
+DEVP1791,SKU00649,T28,2023-10-27,15,Producto sin rotacion / no vendido
+DEVP1792,SKU00649,T08,2023-10-13,9,Devolucion de cliente (cambio)
+DEVP1793,SKU00650,T17,2023-04-10,6,Producto danado en logistica
+DEVP1794,SKU00650,T17,2024-06-16,5,Defecto de fabricacion
+DEVP1795,SKU00650,T07,2023-10-18,7,Producto danado en logistica
+DEVP1796,SKU00650,T11,2025-02-12,13,Producto sin rotacion / no vendido
+DEVP1797,SKU00650,T19,2023-04-10,10,Devolucion de cliente (cambio)
+DEVP1798,SKU00651,T01,2025-12-20,15,Producto danado en logistica
+DEVP1799,SKU00651,T14,2023-01-11,11,Devolucion de cliente (cambio)
+DEVP1800,SKU00651,T14,2023-09-06,3,Producto danado en logistica
+DEVP1801,SKU00652,T26,2025-09-19,2,Producto danado en logistica
+DEVP1802,SKU00653,T05,2025-09-03,6,Devolucion de cliente (cambio)
+DEVP1803,SKU00653,T12,2025-03-21,6,Producto sin rotacion / no vendido
+DEVP1804,SKU00653,T09,2025-03-09,7,Devolucion de cliente (cambio)
+DEVP1805,SKU00653,T09,2025-10-10,6,Error de picking
+DEVP1806,SKU00653,T09,2025-11-02,8,Defecto de fabricacion
+DEVP1807,SKU00654,T23,2023-12-19,5,Devolucion de cliente (cambio)
+DEVP1808,SKU00655,T24,2024-06-12,3,Defecto de fabricacion
+DEVP1809,SKU00655,T14,2025-09-03,5,Producto danado en logistica
+DEVP1810,SKU00655,T03,2025-04-14,6,Defecto de fabricacion
+DEVP1811,SKU00656,T21,2025-07-03,1,Devolucion de cliente (cambio)
+DEVP1812,SKU00657,T26,2025-03-10,4,Devolucion de cliente (cambio)
+DEVP1813,SKU00657,T26,2025-06-15,3,Error de picking
+DEVP1814,SKU00657,T23,2023-08-02,3,Producto danado en logistica
+DEVP1815,SKU00657,T13,2023-11-04,2,Devolucion de cliente (cambio)
+DEVP1816,SKU00657,T09,2024-03-28,3,Defecto de fabricacion
+DEVP1817,SKU00659,T14,2023-04-16,4,Error de picking
+DEVP1818,SKU00659,T28,2023-05-17,4,Error de picking
+DEVP1819,SKU00660,T25,2024-04-04,1,Devolucion de cliente (cambio)
+DEVP1820,SKU00661,T22,2025-02-22,11,Defecto de fabricacion
+DEVP1821,SKU00661,T01,2024-12-25,5,Defecto de fabricacion
+DEVP1822,SKU00661,T13,2025-06-19,5,Devolucion de cliente (cambio)
+DEVP1823,SKU00661,T23,2025-01-11,8,Producto sin rotacion / no vendido
+DEVP1824,SKU00662,T22,2024-02-06,4,Producto sin rotacion / no vendido
+DEVP1825,SKU00662,T16,2023-08-18,4,Defecto de fabricacion
+DEVP1826,SKU00662,T16,2024-05-06,6,Devolucion de cliente (cambio)
+DEVP1827,SKU00664,T11,2024-09-23,8,Producto danado en logistica
+DEVP1828,SKU00664,T11,2025-06-22,15,Producto sin rotacion / no vendido
+DEVP1829,SKU00664,T20,2024-07-07,14,Producto sin rotacion / no vendido
+DEVP1830,SKU00664,T16,2025-06-15,12,Defecto de fabricacion
+DEVP1831,SKU00665,T19,2025-01-06,4,Error de picking
+DEVP1832,SKU00665,T05,2024-12-28,2,Producto danado en logistica
+DEVP1833,SKU00666,T26,2022-09-04,2,Producto danado en logistica
+DEVP1834,SKU00666,T05,2023-01-23,1,Defecto de fabricacion
+DEVP1835,SKU00666,T24,2022-09-08,1,Defecto de fabricacion
+DEVP1836,SKU00667,T15,2023-07-09,2,Defecto de fabricacion
+DEVP1837,SKU00667,T16,2025-04-12,1,Devolucion de cliente (cambio)
+DEVP1838,SKU00667,T07,2023-07-08,1,Error de picking
+DEVP1839,SKU00667,T20,2024-09-26,1,Producto danado en logistica
+DEVP1840,SKU00667,T20,2025-11-12,1,Producto sin rotacion / no vendido
+DEVP1841,SKU00667,T19,2023-12-22,1,Error de picking
+DEVP1842,SKU00668,T28,2023-04-13,11,Defecto de fabricacion
+DEVP1843,SKU00668,T25,2024-10-24,15,Producto danado en logistica
+DEVP1844,SKU00668,T03,2024-01-04,7,Defecto de fabricacion
+DEVP1845,SKU00668,T11,2024-04-25,7,Error de picking
+DEVP1846,SKU00668,T21,2024-06-07,5,Producto danado en logistica
+DEVP1847,SKU00669,T25,2025-11-07,5,Devolucion de cliente (cambio)
+DEVP1848,SKU00669,T13,2025-07-28,3,Devolucion de cliente (cambio)
+DEVP1849,SKU00669,T13,2025-11-11,7,Error de picking
+DEVP1850,SKU00669,T22,2025-05-24,1,Error de picking
+DEVP1851,SKU00669,T03,2025-05-08,6,Devolucion de cliente (cambio)
+DEVP1852,SKU00670,T19,2024-07-25,1,Producto danado en logistica
+DEVP1853,SKU00671,T24,2025-02-05,4,Devolucion de cliente (cambio)
+DEVP1854,SKU00673,T07,2025-09-18,4,Devolucion de cliente (cambio)
+DEVP1855,SKU00673,T03,2024-09-23,12,Devolucion de cliente (cambio)
+DEVP1856,SKU00673,T02,2025-01-22,9,Error de picking
+DEVP1857,SKU00673,T08,2022-09-18,9,Producto danado en logistica
+DEVP1858,SKU00673,T18,2025-05-28,9,Devolucion de cliente (cambio)
+DEVP1859,SKU00674,T23,2025-01-27,2,Defecto de fabricacion
+DEVP1860,SKU00674,T19,2025-07-16,3,Error de picking
+DEVP1861,SKU00675,T01,2025-01-04,3,Error de picking
+DEVP1862,SKU00675,T22,2022-06-02,3,Devolucion de cliente (cambio)
+DEVP1863,SKU00675,T19,2024-02-15,1,Producto danado en logistica
+DEVP1864,SKU00675,T21,2022-08-26,2,Producto sin rotacion / no vendido
+DEVP1865,SKU00676,T23,2025-10-05,2,Producto sin rotacion / no vendido
+DEVP1866,SKU00677,T05,2025-02-28,8,Error de picking
+DEVP1867,SKU00677,T07,2024-12-08,13,Defecto de fabricacion
+DEVP1868,SKU00678,T15,2022-06-25,6,Error de picking
+DEVP1869,SKU00678,T15,2024-09-06,9,Error de picking
+DEVP1870,SKU00678,T18,2023-10-07,6,Defecto de fabricacion
+DEVP1871,SKU00678,T25,2023-08-10,7,Producto danado en logistica
+DEVP1872,SKU00678,T04,2023-01-08,4,Defecto de fabricacion
+DEVP1873,SKU00679,T17,2024-12-28,9,Defecto de fabricacion
+DEVP1874,SKU00679,T21,2024-03-20,16,Defecto de fabricacion
+DEVP1875,SKU00679,T21,2025-02-22,16,Devolucion de cliente (cambio)
+DEVP1876,SKU00680,T09,2025-09-06,3,Producto sin rotacion / no vendido
+DEVP1877,SKU00680,T20,2022-08-28,1,Defecto de fabricacion
+DEVP1878,SKU00680,T18,2025-09-23,3,Devolucion de cliente (cambio)
+DEVP1879,SKU00680,T06,2025-02-20,3,Defecto de fabricacion
+DEVP1880,SKU00680,T06,2025-03-11,4,Producto danado en logistica
+DEVP1881,SKU00680,T22,2022-07-26,2,Producto sin rotacion / no vendido
+DEVP1882,SKU00681,T11,2024-10-08,16,Producto sin rotacion / no vendido
+DEVP1883,SKU00681,T21,2023-11-06,7,Defecto de fabricacion
+DEVP1884,SKU00681,T06,2024-11-11,24,Producto danado en logistica
+DEVP1885,SKU00681,T15,2024-02-15,13,Producto danado en logistica
+DEVP1886,SKU00681,T15,2025-07-24,10,Defecto de fabricacion
+DEVP1887,SKU00682,T11,2024-09-17,1,Producto danado en logistica
+DEVP1888,SKU00682,T28,2024-04-22,1,Producto sin rotacion / no vendido
+DEVP1889,SKU00682,T22,2025-01-11,1,Error de picking
+DEVP1890,SKU00684,T26,2024-04-05,5,Producto danado en logistica
+DEVP1891,SKU00684,T17,2024-04-26,3,Producto danado en logistica
+DEVP1892,SKU00684,T16,2024-02-11,3,Devolucion de cliente (cambio)
+DEVP1893,SKU00684,T04,2024-05-17,1,Devolucion de cliente (cambio)
+DEVP1894,SKU00684,T24,2024-02-12,2,Devolucion de cliente (cambio)
+DEVP1895,SKU00684,T24,2025-12-21,3,Error de picking
+DEVP1896,SKU00686,T24,2024-11-11,2,Defecto de fabricacion
+DEVP1897,SKU00686,T18,2024-11-07,1,Producto danado en logistica
+DEVP1898,SKU00687,T27,2025-06-05,4,Producto danado en logistica
+DEVP1899,SKU00687,T20,2025-05-03,4,Producto sin rotacion / no vendido
+DEVP1900,SKU00687,T23,2024-11-23,1,Defecto de fabricacion
+DEVP1901,SKU00688,T23,2023-07-14,8,Producto sin rotacion / no vendido
+DEVP1902,SKU00688,T26,2024-01-21,6,Producto sin rotacion / no vendido
+DEVP1903,SKU00689,T24,2025-04-23,20,Producto sin rotacion / no vendido
+DEVP1904,SKU00689,T07,2025-10-26,16,Defecto de fabricacion
+DEVP1905,SKU00690,T12,2023-03-13,2,Devolucion de cliente (cambio)
+DEVP1906,SKU00690,T08,2023-09-08,1,Producto sin rotacion / no vendido
+DEVP1907,SKU00690,T13,2025-06-07,3,Producto danado en logistica
+DEVP1908,SKU00690,T22,2024-09-05,2,Defecto de fabricacion
+DEVP1909,SKU00691,T11,2025-10-24,1,Producto sin rotacion / no vendido
+DEVP1910,SKU00692,T23,2023-11-12,3,Devolucion de cliente (cambio)
+DEVP1911,SKU00693,T21,2024-02-14,2,Defecto de fabricacion
+DEVP1912,SKU00693,T21,2025-09-06,7,Error de picking
+DEVP1913,SKU00693,T23,2024-02-22,5,Producto danado en logistica
+DEVP1914,SKU00693,T22,2025-06-15,3,Producto danado en logistica
+DEVP1915,SKU00695,T25,2025-04-08,3,Producto danado en logistica
+DEVP1916,SKU00695,T28,2025-01-24,3,Error de picking
+DEVP1917,SKU00695,T11,2025-04-12,1,Producto danado en logistica
+DEVP1918,SKU00696,T18,2024-02-27,2,Error de picking
+DEVP1919,SKU00696,T16,2025-11-09,4,Error de picking
+DEVP1920,SKU00696,T21,2023-05-03,4,Producto sin rotacion / no vendido
+DEVP1921,SKU00696,T19,2024-12-26,6,Producto danado en logistica
+DEVP1922,SKU00696,T11,2024-10-07,6,Defecto de fabricacion
+DEVP1923,SKU00696,T27,2025-02-22,4,Defecto de fabricacion
+DEVP1924,SKU00696,T12,2025-03-13,1,Error de picking
+DEVP1925,SKU00697,T06,2025-02-28,4,Producto sin rotacion / no vendido
+DEVP1926,SKU00697,T15,2025-04-08,6,Producto sin rotacion / no vendido
+DEVP1927,SKU00697,T15,2025-10-07,4,Devolucion de cliente (cambio)
+DEVP1928,SKU00697,T26,2023-03-18,4,Devolucion de cliente (cambio)
+DEVP1929,SKU00697,T24,2024-05-12,3,Error de picking
+DEVP1930,SKU00697,T09,2024-07-09,4,Producto sin rotacion / no vendido
+DEVP1931,SKU00698,T10,2023-09-02,1,Devolucion de cliente (cambio)
+DEVP1932,SKU00698,T10,2024-05-28,3,Producto sin rotacion / no vendido
+DEVP1933,SKU00698,T19,2025-11-19,2,Producto sin rotacion / no vendido
+DEVP1934,SKU00698,T27,2025-07-15,1,Producto danado en logistica
+DEVP1935,SKU00699,T19,2024-02-05,1,Devolucion de cliente (cambio)
+DEVP1936,SKU00699,T03,2024-01-27,2,Producto danado en logistica
+DEVP1937,SKU00699,T22,2024-06-25,1,Producto danado en logistica
+DEVP1938,SKU00700,T11,2024-12-18,2,Error de picking
+DEVP1939,SKU00700,T23,2025-03-06,2,Producto sin rotacion / no vendido
+DEVP1940,SKU00700,T08,2025-06-02,3,Producto sin rotacion / no vendido
+DEVP1941,SKU00701,T21,2025-02-05,3,Producto sin rotacion / no vendido
+DEVP1942,SKU00701,T28,2024-03-18,4,Producto danado en logistica
+DEVP1943,SKU00701,T04,2023-05-09,1,Error de picking
+DEVP1944,SKU00702,T08,2025-07-07,2,Producto sin rotacion / no vendido
+DEVP1945,SKU00702,T02,2024-06-22,3,Defecto de fabricacion
+DEVP1946,SKU00702,T21,2025-01-18,6,Producto sin rotacion / no vendido
+DEVP1947,SKU00702,T11,2025-03-11,3,Defecto de fabricacion
+DEVP1948,SKU00703,T16,2022-12-25,3,Producto sin rotacion / no vendido
+DEVP1949,SKU00703,T16,2025-12-15,1,Producto sin rotacion / no vendido
+DEVP1950,SKU00703,T22,2024-01-08,3,Producto sin rotacion / no vendido
+DEVP1951,SKU00703,T07,2025-10-26,2,Error de picking
+DEVP1952,SKU00703,T27,2023-08-17,2,Defecto de fabricacion
+DEVP1953,SKU00704,T15,2023-07-18,3,Producto danado en logistica
+DEVP1954,SKU00704,T15,2024-05-09,4,Error de picking
+DEVP1955,SKU00705,T22,2023-12-10,3,Defecto de fabricacion
+DEVP1956,SKU00705,T15,2025-01-23,3,Producto danado en logistica
+DEVP1957,SKU00705,T01,2025-03-14,6,Error de picking
+DEVP1958,SKU00705,T07,2025-04-15,6,Producto sin rotacion / no vendido
+DEVP1959,SKU00705,T18,2024-03-04,3,Devolucion de cliente (cambio)
+DEVP1960,SKU00705,T03,2024-12-04,4,Producto danado en logistica
+DEVP1961,SKU00705,T10,2025-02-23,7,Producto sin rotacion / no vendido
+DEVP1962,SKU00705,T10,2025-11-02,3,Producto danado en logistica
+DEVP1963,SKU00705,T02,2023-12-03,5,Devolucion de cliente (cambio)
+DEVP1964,SKU00705,T19,2024-06-15,3,Producto danado en logistica
+DEVP1965,SKU00706,T08,2025-06-02,2,Defecto de fabricacion
+DEVP1966,SKU00707,T27,2025-05-13,2,Defecto de fabricacion
+DEVP1967,SKU00708,T09,2022-06-28,1,Devolucion de cliente (cambio)
+DEVP1968,SKU00708,T23,2022-09-10,2,Producto sin rotacion / no vendido
+DEVP1969,SKU00708,T12,2024-04-08,2,Devolucion de cliente (cambio)
+DEVP1970,SKU00708,T06,2025-04-08,4,Producto danado en logistica
+DEVP1971,SKU00708,T15,2025-11-14,3,Devolucion de cliente (cambio)
+DEVP1972,SKU00709,T09,2025-03-03,2,Producto sin rotacion / no vendido
+DEVP1973,SKU00709,T22,2024-10-10,3,Devolucion de cliente (cambio)
+DEVP1974,SKU00709,T06,2024-02-16,4,Producto danado en logistica
+DEVP1975,SKU00709,T15,2024-01-22,3,Producto danado en logistica
+DEVP1976,SKU00709,T15,2024-09-04,4,Error de picking
+DEVP1977,SKU00709,T08,2024-02-03,1,Error de picking
+DEVP1978,SKU00710,T18,2025-10-10,8,Error de picking
+DEVP1979,SKU00710,T08,2025-01-14,3,Devolucion de cliente (cambio)
+DEVP1980,SKU00710,T21,2025-09-05,8,Producto danado en logistica
+DEVP1981,SKU00710,T16,2025-09-07,5,Error de picking
+DEVP1982,SKU00711,T11,2023-11-23,3,Error de picking
+DEVP1983,SKU00711,T19,2025-07-11,2,Producto sin rotacion / no vendido
+DEVP1984,SKU00711,T03,2023-07-05,3,Producto danado en logistica
+DEVP1985,SKU00711,T28,2025-03-26,4,Defecto de fabricacion
+DEVP1986,SKU00711,T28,2025-12-08,2,Error de picking
+DEVP1987,SKU00711,T20,2024-10-24,2,Producto danado en logistica
+DEVP1988,SKU00711,T12,2024-11-03,2,Defecto de fabricacion
+DEVP1989,SKU00711,T04,2025-01-19,4,Producto danado en logistica
+DEVP1990,SKU00711,T14,2025-03-12,2,Producto danado en logistica
+DEVP1991,SKU00712,T19,2024-04-06,4,Devolucion de cliente (cambio)
+DEVP1992,SKU00712,T21,2024-02-21,5,Producto sin rotacion / no vendido
+DEVP1993,SKU00713,T09,2023-09-15,2,Defecto de fabricacion
+DEVP1994,SKU00713,T02,2025-03-22,2,Devolucion de cliente (cambio)
+DEVP1995,SKU00713,T08,2023-02-22,1,Producto danado en logistica
+DEVP1996,SKU00713,T28,2022-05-18,3,Devolucion de cliente (cambio)
+DEVP1997,SKU00715,T07,2025-01-04,3,Defecto de fabricacion
+DEVP1998,SKU00715,T14,2023-11-15,2,Error de picking
+DEVP1999,SKU00715,T18,2023-02-09,3,Producto sin rotacion / no vendido
+DEVP2000,SKU00716,T16,2024-06-28,4,Defecto de fabricacion
+DEVP2001,SKU00716,T26,2025-03-02,3,Defecto de fabricacion
+DEVP2002,SKU00716,T20,2024-03-04,2,Producto sin rotacion / no vendido
+DEVP2003,SKU00717,T11,2025-06-02,8,Error de picking
+DEVP2004,SKU00717,T06,2023-02-27,9,Producto danado en logistica
+DEVP2005,SKU00718,T13,2025-04-26,5,Defecto de fabricacion
+DEVP2006,SKU00718,T16,2024-08-19,1,Defecto de fabricacion
+DEVP2007,SKU00718,T11,2024-02-11,1,Producto danado en logistica
+DEVP2008,SKU00718,T20,2024-05-25,3,Producto danado en logistica
+DEVP2009,SKU00718,T20,2024-08-02,1,Devolucion de cliente (cambio)
+DEVP2010,SKU00718,T12,2023-11-15,3,Producto danado en logistica
+DEVP2011,SKU00718,T09,2024-07-18,5,Error de picking
+DEVP2012,SKU00718,T04,2023-10-10,2,Error de picking
+DEVP2013,SKU00719,T20,2025-12-20,8,Producto danado en logistica
+DEVP2014,SKU00719,T06,2024-03-18,4,Producto danado en logistica
+DEVP2015,SKU00719,T06,2024-07-22,9,Producto danado en logistica
+DEVP2016,SKU00719,T02,2024-10-18,7,Error de picking
+DEVP2017,SKU00719,T09,2025-09-18,3,Producto sin rotacion / no vendido
+DEVP2018,SKU00719,T22,2024-09-20,7,Error de picking
+DEVP2019,SKU00720,T16,2023-10-21,11,Producto sin rotacion / no vendido
+DEVP2020,SKU00720,T16,2025-02-21,16,Devolucion de cliente (cambio)
+DEVP2021,SKU00720,T28,2023-08-08,18,Error de picking
+DEVP2022,SKU00720,T06,2023-04-20,15,Defecto de fabricacion
+DEVP2023,SKU00721,T21,2024-06-11,3,Error de picking
+DEVP2024,SKU00721,T21,2024-12-12,6,Producto danado en logistica
+DEVP2025,SKU00721,T09,2025-10-28,4,Producto danado en logistica
+DEVP2026,SKU00721,T10,2025-04-07,6,Defecto de fabricacion
+DEVP2027,SKU00721,T28,2025-11-22,4,Error de picking
+DEVP2028,SKU00721,T06,2025-08-02,8,Producto sin rotacion / no vendido
+DEVP2029,SKU00721,T07,2023-08-04,5,Defecto de fabricacion
+DEVP2030,SKU00721,T13,2024-10-24,5,Defecto de fabricacion
+DEVP2031,SKU00722,T04,2023-10-19,5,Devolucion de cliente (cambio)
+DEVP2032,SKU00722,T10,2023-10-05,2,Producto sin rotacion / no vendido
+DEVP2033,SKU00722,T10,2024-10-25,8,Error de picking
+DEVP2034,SKU00722,T19,2023-07-16,5,Producto danado en logistica
+DEVP2035,SKU00722,T19,2025-08-02,2,Error de picking
+DEVP2036,SKU00722,T11,2025-01-18,3,Devolucion de cliente (cambio)
+DEVP2037,SKU00723,T27,2025-07-17,11,Producto danado en logistica
+DEVP2038,SKU00724,T03,2023-05-19,3,Devolucion de cliente (cambio)
+DEVP2039,SKU00724,T06,2025-12-28,2,Defecto de fabricacion
+DEVP2040,SKU00724,T04,2025-03-14,1,Error de picking
+DEVP2041,SKU00724,T25,2025-03-09,1,Producto danado en logistica
+DEVP2042,SKU00724,T12,2025-09-23,2,Devolucion de cliente (cambio)
+DEVP2043,SKU00724,T05,2023-12-25,1,Error de picking
+DEVP2044,SKU00725,T20,2023-01-13,7,Devolucion de cliente (cambio)
+DEVP2045,SKU00725,T18,2024-08-15,4,Devolucion de cliente (cambio)
+DEVP2046,SKU00726,T18,2025-02-09,15,Producto sin rotacion / no vendido
+DEVP2047,SKU00726,T07,2023-04-08,8,Error de picking
+DEVP2048,SKU00726,T15,2023-04-12,6,Error de picking
+DEVP2049,SKU00727,T02,2025-09-28,3,Defecto de fabricacion
+DEVP2050,SKU00727,T19,2024-11-02,2,Producto danado en logistica
+DEVP2051,SKU00729,T01,2024-10-23,11,Producto sin rotacion / no vendido
+DEVP2052,SKU00730,T12,2023-06-27,10,Devolucion de cliente (cambio)
+DEVP2053,SKU00730,T04,2025-04-28,4,Devolucion de cliente (cambio)
+DEVP2054,SKU00730,T14,2025-05-13,13,Devolucion de cliente (cambio)
+DEVP2055,SKU00731,T04,2023-03-18,5,Devolucion de cliente (cambio)
+DEVP2056,SKU00731,T05,2022-07-02,4,Defecto de fabricacion
+DEVP2057,SKU00731,T23,2025-07-18,5,Producto sin rotacion / no vendido
+DEVP2058,SKU00731,T02,2023-02-25,6,Producto sin rotacion / no vendido
+DEVP2059,SKU00732,T06,2022-10-08,8,Devolucion de cliente (cambio)
+DEVP2060,SKU00732,T10,2022-12-08,4,Devolucion de cliente (cambio)
+DEVP2061,SKU00732,T15,2023-03-17,6,Producto danado en logistica
+DEVP2062,SKU00732,T15,2025-05-12,9,Producto sin rotacion / no vendido
+DEVP2063,SKU00732,T03,2023-09-20,8,Producto danado en logistica
+DEVP2064,SKU00732,T22,2025-11-18,10,Producto danado en logistica
+DEVP2065,SKU00732,T24,2025-11-11,6,Producto sin rotacion / no vendido
+DEVP2066,SKU00732,T20,2022-10-12,11,Producto danado en logistica
+DEVP2067,SKU00732,T26,2024-11-21,2,Error de picking
+DEVP2068,SKU00732,T04,2023-08-25,13,Devolucion de cliente (cambio)
+DEVP2069,SKU00732,T27,2024-05-28,8,Producto sin rotacion / no vendido
+DEVP2070,SKU00733,T09,2024-06-06,2,Error de picking
+DEVP2071,SKU00733,T18,2025-04-12,2,Defecto de fabricacion
+DEVP2072,SKU00734,T08,2023-01-10,3,Producto danado en logistica
+DEVP2073,SKU00734,T27,2025-06-21,1,Error de picking
+DEVP2074,SKU00734,T17,2024-02-16,3,Defecto de fabricacion
+DEVP2075,SKU00734,T17,2024-12-14,3,Error de picking
+DEVP2076,SKU00734,T17,2025-08-18,2,Defecto de fabricacion
+DEVP2077,SKU00735,T04,2024-05-24,19,Devolucion de cliente (cambio)
+DEVP2078,SKU00735,T18,2023-06-17,19,Error de picking
+DEVP2079,SKU00735,T01,2025-01-05,12,Defecto de fabricacion
+DEVP2080,SKU00736,T28,2025-05-28,6,Producto sin rotacion / no vendido
+DEVP2081,SKU00736,T27,2025-05-05,9,Devolucion de cliente (cambio)
+DEVP2082,SKU00737,T15,2025-10-21,9,Devolucion de cliente (cambio)
+DEVP2083,SKU00737,T20,2024-08-22,12,Error de picking
+DEVP2084,SKU00737,T21,2023-11-04,12,Defecto de fabricacion
+DEVP2085,SKU00739,T26,2023-06-11,14,Producto sin rotacion / no vendido
+DEVP2086,SKU00739,T27,2023-07-08,13,Error de picking
+DEVP2087,SKU00739,T10,2023-05-15,21,Producto sin rotacion / no vendido
+DEVP2088,SKU00739,T04,2023-08-27,15,Producto sin rotacion / no vendido
+DEVP2089,SKU00739,T04,2023-10-10,12,Devolucion de cliente (cambio)
+DEVP2090,SKU00739,T28,2025-06-06,13,Producto danado en logistica
+DEVP2091,SKU00740,T08,2023-06-27,1,Devolucion de cliente (cambio)
+DEVP2092,SKU00740,T06,2023-11-12,5,Producto sin rotacion / no vendido
+DEVP2093,SKU00740,T06,2024-03-08,5,Producto sin rotacion / no vendido
+DEVP2094,SKU00740,T10,2024-01-04,2,Error de picking
+DEVP2095,SKU00743,T23,2023-12-16,11,Error de picking
+DEVP2096,SKU00743,T10,2023-12-12,6,Producto danado en logistica
+DEVP2097,SKU00743,T17,2024-07-06,2,Devolucion de cliente (cambio)
+DEVP2098,SKU00743,T09,2025-07-26,6,Producto danado en logistica
+DEVP2099,SKU00743,T21,2024-04-22,6,Defecto de fabricacion
+DEVP2100,SKU00743,T21,2024-11-05,6,Error de picking
+DEVP2101,SKU00744,T22,2024-06-08,10,Devolucion de cliente (cambio)
+DEVP2102,SKU00744,T07,2024-12-24,3,Devolucion de cliente (cambio)
+DEVP2103,SKU00744,T19,2024-06-28,6,Producto sin rotacion / no vendido
+DEVP2104,SKU00744,T19,2025-02-06,7,Error de picking
+DEVP2105,SKU00745,T17,2024-09-27,2,Producto danado en logistica
+DEVP2106,SKU00746,T15,2025-03-20,6,Defecto de fabricacion
+DEVP2107,SKU00748,T16,2023-12-25,4,Defecto de fabricacion
+DEVP2108,SKU00748,T19,2025-09-09,2,Error de picking
+DEVP2109,SKU00749,T06,2025-05-13,2,Defecto de fabricacion
+DEVP2110,SKU00749,T09,2024-09-17,2,Error de picking
+DEVP2111,SKU00749,T24,2024-03-07,1,Devolucion de cliente (cambio)
+DEVP2112,SKU00749,T02,2025-10-20,1,Defecto de fabricacion
+DEVP2113,SKU00749,T20,2024-05-16,2,Defecto de fabricacion
+DEVP2114,SKU00749,T20,2025-09-16,2,Producto danado en logistica
+DEVP2115,SKU00749,T25,2024-04-11,1,Devolucion de cliente (cambio)
+DEVP2116,SKU00749,T07,2024-02-07,2,Producto danado en logistica
+DEVP2117,SKU00750,T09,2025-10-12,5,Producto sin rotacion / no vendido
+DEVP2118,SKU00750,T12,2024-08-11,3,Defecto de fabricacion
+DEVP2119,SKU00750,T19,2023-03-03,5,Error de picking
+DEVP2120,SKU00751,T26,2025-01-02,9,Error de picking
+DEVP2121,SKU00751,T26,2025-06-08,6,Producto sin rotacion / no vendido
+DEVP2122,SKU00751,T10,2024-10-26,7,Producto sin rotacion / no vendido
+DEVP2123,SKU00751,T10,2024-11-08,8,Defecto de fabricacion
+DEVP2124,SKU00752,T16,2025-09-22,2,Defecto de fabricacion
+DEVP2125,SKU00753,T18,2025-08-07,3,Producto danado en logistica
+DEVP2126,SKU00754,T12,2024-12-11,6,Producto sin rotacion / no vendido
+DEVP2127,SKU00755,T21,2025-06-07,3,Error de picking
+DEVP2128,SKU00756,T19,2022-12-20,4,Producto danado en logistica
+DEVP2129,SKU00756,T04,2022-09-27,7,Producto sin rotacion / no vendido
+DEVP2130,SKU00756,T18,2022-06-06,4,Defecto de fabricacion
+DEVP2131,SKU00756,T16,2023-04-20,5,Producto danado en logistica
+DEVP2132,SKU00756,T08,2022-08-07,7,Defecto de fabricacion
+DEVP2133,SKU00756,T23,2023-02-14,4,Error de picking
+DEVP2134,SKU00756,T27,2022-10-17,5,Devolucion de cliente (cambio)
+DEVP2135,SKU00756,T13,2023-05-08,3,Devolucion de cliente (cambio)
+DEVP2136,SKU00757,T12,2024-02-05,1,Devolucion de cliente (cambio)
+DEVP2137,SKU00757,T12,2024-03-09,2,Defecto de fabricacion
+DEVP2138,SKU00757,T27,2023-08-16,2,Devolucion de cliente (cambio)
+DEVP2139,SKU00757,T28,2024-07-10,1,Defecto de fabricacion
+DEVP2140,SKU00757,T28,2024-08-03,1,Devolucion de cliente (cambio)
+DEVP2141,SKU00758,T01,2024-03-16,3,Devolucion de cliente (cambio)
+DEVP2142,SKU00758,T15,2025-01-16,2,Producto sin rotacion / no vendido
+DEVP2143,SKU00759,T03,2024-03-27,4,Producto danado en logistica
+DEVP2144,SKU00759,T18,2023-11-12,4,Defecto de fabricacion
+DEVP2145,SKU00759,T23,2024-08-06,3,Defecto de fabricacion
+DEVP2146,SKU00760,T04,2024-10-13,2,Producto danado en logistica
+DEVP2147,SKU00760,T22,2023-12-26,3,Defecto de fabricacion
+DEVP2148,SKU00760,T12,2024-04-17,8,Producto sin rotacion / no vendido
+DEVP2149,SKU00761,T23,2025-07-19,2,Defecto de fabricacion
+DEVP2150,SKU00761,T23,2025-10-18,2,Producto sin rotacion / no vendido
+DEVP2151,SKU00761,T28,2025-03-16,3,Producto sin rotacion / no vendido
+DEVP2152,SKU00761,T07,2025-11-24,2,Error de picking
+DEVP2153,SKU00762,T17,2025-02-13,4,Producto sin rotacion / no vendido
+DEVP2154,SKU00762,T25,2025-01-05,4,Defecto de fabricacion
+DEVP2155,SKU00763,T25,2025-01-25,2,Producto danado en logistica
+DEVP2156,SKU00763,T09,2024-10-13,2,Devolucion de cliente (cambio)
+DEVP2157,SKU00764,T05,2025-12-21,2,Producto danado en logistica
+DEVP2158,SKU00764,T01,2022-09-02,4,Error de picking
+DEVP2159,SKU00764,T01,2025-06-08,2,Devolucion de cliente (cambio)
+DEVP2160,SKU00764,T08,2023-08-15,1,Devolucion de cliente (cambio)
+DEVP2161,SKU00764,T07,2022-09-07,2,Error de picking
+DEVP2162,SKU00764,T13,2023-07-03,2,Devolucion de cliente (cambio)
+DEVP2163,SKU00767,T22,2024-05-10,4,Producto sin rotacion / no vendido
+DEVP2164,SKU00767,T28,2023-09-02,1,Defecto de fabricacion
+DEVP2165,SKU00767,T28,2025-11-14,2,Producto danado en logistica
+DEVP2166,SKU00767,T26,2024-02-04,3,Error de picking
+DEVP2167,SKU00767,T26,2024-07-26,4,Producto danado en logistica
+DEVP2168,SKU00767,T26,2024-10-11,2,Devolucion de cliente (cambio)
+DEVP2169,SKU00767,T17,2025-09-21,3,Error de picking
+DEVP2170,SKU00768,T27,2023-11-10,2,Producto danado en logistica
+DEVP2171,SKU00768,T11,2025-07-14,2,Producto sin rotacion / no vendido
+DEVP2172,SKU00768,T18,2024-11-03,3,Devolucion de cliente (cambio)
+DEVP2173,SKU00768,T14,2024-02-19,1,Devolucion de cliente (cambio)
+DEVP2174,SKU00769,T08,2022-09-28,6,Producto danado en logistica
+DEVP2175,SKU00771,T23,2024-03-08,6,Producto danado en logistica
+DEVP2176,SKU00771,T09,2023-12-17,5,Error de picking
+DEVP2177,SKU00772,T16,2025-08-06,8,Defecto de fabricacion
+DEVP2178,SKU00773,T26,2024-11-19,5,Defecto de fabricacion
+DEVP2179,SKU00773,T26,2025-11-24,11,Devolucion de cliente (cambio)
+DEVP2180,SKU00773,T17,2023-03-15,8,Producto sin rotacion / no vendido
+DEVP2181,SKU00774,T28,2025-08-12,10,Producto danado en logistica
+DEVP2182,SKU00774,T02,2025-10-21,5,Devolucion de cliente (cambio)
+DEVP2183,SKU00776,T07,2022-11-28,1,Defecto de fabricacion
+DEVP2184,SKU00776,T23,2023-03-14,2,Defecto de fabricacion
+DEVP2185,SKU00776,T03,2022-12-25,3,Defecto de fabricacion
+DEVP2186,SKU00776,T03,2025-06-18,2,Devolucion de cliente (cambio)
+DEVP2187,SKU00776,T26,2024-08-03,1,Producto danado en logistica
+DEVP2188,SKU00777,T21,2023-02-10,2,Defecto de fabricacion
+DEVP2189,SKU00777,T19,2023-07-11,4,Devolucion de cliente (cambio)
+DEVP2190,SKU00777,T24,2023-11-22,1,Producto danado en logistica
+DEVP2191,SKU00777,T25,2024-11-19,2,Devolucion de cliente (cambio)
+DEVP2192,SKU00777,T05,2023-01-09,3,Producto danado en logistica
+DEVP2193,SKU00777,T02,2023-11-03,2,Producto sin rotacion / no vendido
+DEVP2194,SKU00777,T18,2023-10-28,2,Defecto de fabricacion
+DEVP2195,SKU00777,T11,2023-01-13,5,Devolucion de cliente (cambio)
+DEVP2196,SKU00777,T11,2025-02-03,4,Error de picking
+DEVP2197,SKU00778,T23,2022-12-14,8,Producto sin rotacion / no vendido
+DEVP2198,SKU00778,T23,2024-02-20,3,Error de picking
+DEVP2199,SKU00778,T19,2024-08-24,4,Error de picking
+DEVP2200,SKU00778,T27,2025-01-21,3,Devolucion de cliente (cambio)
+DEVP2201,SKU00778,T21,2023-07-21,4,Producto sin rotacion / no vendido
+DEVP2202,SKU00778,T05,2025-07-22,5,Error de picking
+DEVP2203,SKU00778,T06,2023-01-19,3,Producto sin rotacion / no vendido
+DEVP2204,SKU00778,T16,2023-09-12,5,Producto danado en logistica
+DEVP2205,SKU00778,T20,2024-10-12,4,Defecto de fabricacion
+DEVP2206,SKU00779,T01,2024-02-04,1,Producto sin rotacion / no vendido
+DEVP2207,SKU00779,T10,2025-11-14,4,Defecto de fabricacion
+DEVP2208,SKU00780,T01,2024-08-08,6,Error de picking
+DEVP2209,SKU00780,T11,2025-12-11,6,Producto sin rotacion / no vendido
+DEVP2210,SKU00780,T08,2024-08-09,6,Devolucion de cliente (cambio)
+DEVP2211,SKU00781,T06,2025-04-03,3,Error de picking
+DEVP2212,SKU00781,T08,2025-01-13,4,Error de picking
+DEVP2213,SKU00781,T16,2024-02-17,5,Producto danado en logistica
+DEVP2214,SKU00783,T07,2025-12-13,6,Producto danado en logistica
+DEVP2215,SKU00783,T18,2023-08-19,1,Devolucion de cliente (cambio)
+DEVP2216,SKU00783,T09,2024-08-19,2,Producto sin rotacion / no vendido
+DEVP2217,SKU00783,T11,2023-05-05,2,Producto danado en logistica
+DEVP2218,SKU00783,T23,2024-04-23,1,Error de picking
+DEVP2219,SKU00783,T23,2024-06-26,2,Defecto de fabricacion
+DEVP2220,SKU00783,T12,2025-08-10,2,Defecto de fabricacion
+DEVP2221,SKU00783,T26,2023-05-27,5,Defecto de fabricacion
+DEVP2222,SKU00783,T26,2025-11-06,1,Error de picking
+DEVP2223,SKU00783,T19,2024-05-25,3,Producto danado en logistica
+DEVP2224,SKU00784,T08,2023-11-22,8,Devolucion de cliente (cambio)
+DEVP2225,SKU00784,T15,2025-11-17,7,Error de picking
+DEVP2226,SKU00785,T19,2024-12-19,5,Producto sin rotacion / no vendido
+DEVP2227,SKU00785,T26,2022-09-19,8,Producto sin rotacion / no vendido
+DEVP2228,SKU00785,T26,2024-09-26,7,Producto sin rotacion / no vendido
+DEVP2229,SKU00788,T17,2024-04-16,3,Producto sin rotacion / no vendido
+DEVP2230,SKU00788,T03,2024-06-27,4,Error de picking
+DEVP2231,SKU00789,T09,2025-06-05,3,Devolucion de cliente (cambio)
+DEVP2232,SKU00789,T25,2025-12-15,1,Error de picking
+DEVP2233,SKU00789,T21,2025-08-26,1,Producto danado en logistica
+DEVP2234,SKU00789,T26,2024-05-21,2,Producto sin rotacion / no vendido
+DEVP2235,SKU00789,T05,2023-02-16,1,Producto danado en logistica
+DEVP2236,SKU00789,T03,2025-06-06,4,Producto danado en logistica
+DEVP2237,SKU00789,T19,2024-09-11,2,Producto danado en logistica
+DEVP2238,SKU00790,T01,2025-08-18,5,Defecto de fabricacion
+DEVP2239,SKU00791,T04,2025-11-10,3,Devolucion de cliente (cambio)
+DEVP2240,SKU00791,T14,2025-11-09,2,Defecto de fabricacion
+DEVP2241,SKU00793,T11,2024-12-12,4,Producto danado en logistica
+DEVP2242,SKU00794,T07,2024-11-26,5,Devolucion de cliente (cambio)
+DEVP2243,SKU00794,T26,2022-08-24,4,Defecto de fabricacion
+DEVP2244,SKU00794,T26,2023-09-27,2,Producto sin rotacion / no vendido
+DEVP2245,SKU00794,T05,2023-09-04,4,Devolucion de cliente (cambio)
+DEVP2246,SKU00794,T01,2025-08-10,2,Producto danado en logistica
+DEVP2247,SKU00794,T20,2024-04-09,3,Producto danado en logistica
+DEVP2248,SKU00794,T13,2025-10-10,12,Error de picking
+DEVP2249,SKU00795,T16,2025-11-10,3,Devolucion de cliente (cambio)
+DEVP2250,SKU00795,T11,2024-12-21,1,Producto danado en logistica
+DEVP2251,SKU00795,T21,2025-12-24,2,Defecto de fabricacion
+DEVP2252,SKU00796,T23,2024-06-22,1,Devolucion de cliente (cambio)
+DEVP2253,SKU00796,T03,2023-04-04,1,Error de picking
+DEVP2254,SKU00797,T18,2025-04-23,4,Defecto de fabricacion
+DEVP2255,SKU00797,T27,2025-07-07,3,Producto sin rotacion / no vendido
+DEVP2256,SKU00798,T06,2023-05-15,1,Producto danado en logistica
+DEVP2257,SKU00798,T25,2025-08-25,2,Producto danado en logistica
+DEVP2258,SKU00798,T24,2024-03-25,3,Producto sin rotacion / no vendido
+DEVP2259,SKU00799,T13,2024-11-15,3,Error de picking
+DEVP2260,SKU00799,T20,2025-05-28,1,Devolucion de cliente (cambio)
+DEVP2261,SKU00453,T11,2024-03-07,2,Producto danado en logistica
+DEVP2262,SKU00453,T04,2023-06-02,2,Defecto de fabricacion
+DEVP2263,SKU00453,T24,2025-01-19,2,Defecto de fabricacion
+DEVP2264,SKU00058,T03,2024-10-08,7,Producto danado en logistica
+DEVP2265,SKU00058,T21,2025-07-28,6,Producto danado en logistica
+DEVP2266,SKU00058,T16,2024-08-23,5,Defecto de fabricacion
+DEVP2267,SKU00058,T07,2024-08-25,3,Defecto de fabricacion
+DEVP2268,SKU00058,T15,2025-02-02,6,Devolucion de cliente (cambio)
+DEVP2269,SKU00058,T14,2025-05-18,7,Devolucion de cliente (cambio)
+DEVP2270,SKU00112,T09,2023-07-08,16,Producto danado en logistica
+DEVP2271,SKU00016,T02,2025-02-15,2,Devolucion de cliente (cambio)
+DEVP2272,SKU00430,T27,2025-04-03,1,Defecto de fabricacion
+DEVP2273,SKU00430,T25,2024-11-22,2,Devolucion de cliente (cambio)
+DEVP2274,SKU00430,T12,2025-02-15,2,Devolucion de cliente (cambio)
+DEVP2275,SKU00433,T14,2025-10-22,3,Error de picking
+DEVP2276,SKU00533,T22,2024-06-04,4,Devolucion de cliente (cambio)
+DEVP2277,SKU00533,T01,2025-04-05,4,Devolucion de cliente (cambio)
+DEVP2278,SKU00533,T11,2024-07-27,3,Devolucion de cliente (cambio)
+DEVP2279,SKU00533,T19,2025-11-16,1,Error de picking
+DEVP2280,SKU00533,T14,2024-06-25,6,Producto sin rotacion / no vendido
+DEVP2281,SKU00330,T13,2025-02-27,1,Devolucion de cliente (cambio)
+DEVP2282,SKU00552,T05,2025-09-06,2,Producto sin rotacion / no vendido
+DEVP2283,SKU00785,T11,2025-06-07,4,Error de picking
+DEVP2284,SKU00785,T15,2024-07-23,7,Error de picking
+DEVP2285,SKU00785,T16,2022-09-11,4,Producto danado en logistica
+DEVP2286,SKU00785,T16,2024-07-15,2,Error de picking
+DEVP2287,SKU00785,T13,2024-07-15,1,Producto sin rotacion / no vendido
+DEVP2288,SKU00566,T19,2024-09-23,5,Producto danado en logistica
+DEVP2289,SKU00566,T06,2022-12-15,7,Error de picking
+DEVP2290,SKU00566,T06,2025-03-25,3,Producto danado en logistica
+DEVP2291,SKU00566,T11,2023-06-16,7,Producto danado en logistica
+DEVP2292,SKU00566,T17,2023-08-18,3,Error de picking
+DEVP2293,SKU00566,T25,2022-12-18,2,Error de picking
+DEVP2294,SKU00566,T24,2023-11-02,5,Devolucion de cliente (cambio)
+DEVP2295,SKU00566,T28,2025-04-26,5,Error de picking
+DEVP2296,SKU00566,T18,2024-12-11,3,Producto danado en logistica
+DEVP2297,SKU00333,T15,2024-02-05,7,Defecto de fabricacion
+DEVP2298,SKU00333,T17,2023-02-24,7,Producto danado en logistica
+DEVP2299,SKU00333,T12,2025-03-18,6,Defecto de fabricacion
+DEVP2300,SKU00737,T18,2022-12-08,3,Error de picking
+DEVP2301,SKU00737,T16,2022-12-11,5,Producto danado en logistica
+DEVP2302,SKU00737,T03,2023-12-12,2,Producto danado en logistica
+DEVP2303,SKU00737,T14,2022-11-12,3,Error de picking
+DEVP2304,SKU00737,T19,2024-07-14,2,Error de picking
+DEVP2305,SKU00737,T19,2025-06-02,2,Devolucion de cliente (cambio)
+DEVP2306,SKU00737,T06,2022-06-28,1,Producto danado en logistica
+DEVP2307,SKU00737,T06,2025-01-24,2,Error de picking
+DEVP2308,SKU00737,T15,2022-12-18,3,Devolucion de cliente (cambio)
+DEVP2309,SKU00311,T15,2024-10-16,1,Producto danado en logistica
+DEVP2310,SKU00311,T15,2025-03-14,1,Devolucion de cliente (cambio)
+DEVP2311,SKU00311,T02,2025-01-18,1,Defecto de fabricacion
+DEVP2312,SKU00311,T16,2025-01-24,2,Defecto de fabricacion
+DEVP2313,SKU00311,T23,2024-07-16,1,Producto sin rotacion / no vendido
+DEVP2314,SKU00311,T06,2025-05-07,3,Devolucion de cliente (cambio)
+DEVP2315,SKU00311,T07,2023-01-03,3,Producto sin rotacion / no vendido
+DEVP2316,SKU00311,T07,2023-04-12,1,Devolucion de cliente (cambio)
+DEVP2317,SKU00311,T18,2023-11-12,1,Defecto de fabricacion

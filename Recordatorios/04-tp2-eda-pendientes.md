@@ -1,8 +1,15 @@
 # Entregable 2 — Estado y pendientes
 
+> **22-09-2026 — ATENCION, cambio de base de datos.** Llegaron versiones nuevas de Ventas, Stock y Liquidaciones desde el repo: ahora cubren hasta **ago-2026** (antes dic-2025). Ventas y Stock pasan de 239.336 a 299.400 filas; Liquidaciones de 508 a 593. **Todos los numeros del EDA y del TP1 estan calculados sobre el corte viejo y hay que recalcularlos.** Detalle en `REGISTRO-CAMBIOS-DATASETS.md`.
+>
+> **Datos a usar de ahora en mas:** `Datasets_Normalizados/` (representacion unificada, sin tildes ni enie, fechas AAAA-MM-DD). `Datasets/` queda como copia intacta de la catedra. Toda modificacion se anota en `REGISTRO-CAMBIOS-DATASETS.md`.
+>
+> **Un companiero subio `Entregable 2 - Parte A - COMPLETADO.docx`** al repo (copiado a `Entregable/Entregable 2/`). Revisar que no se pise con lo que armemos nosotros.
+
 - **Consigna/plantilla:** `Entregable\Entregable 2\Entregable 2 - Parte A - Alcance y Evaluacion de Calidad de Datos.docx` (NO modificada todavía)
 - **EDA corrido (15 fuentes):** `Entregable\Entregable 2\EDA\` → `HALLAZGOS_EDA.md` (resumen completo), `eda.py`, `eda_chequeos_2.py`, `resultados\`, `graficos\`
-- **Estado:** ⏳ Recopilación terminada. Esperando respuestas del usuario antes de escribir el entregable.
+- **Preguntas al negocio (ronda 2):** `Entregable\Entregable 2\Preguntas-Calidad-de-Datos-Ronda-2.docx` (22 preguntas: costo de 22 SKUs, historial de precios, stock negativo, devoluciones, descuentos fuera de rango, presupuesto). Generado con `gen_preguntas.py`.
+- **Estado:** ⏳ Recopilación terminada. Esperando respuestas del usuario y del negocio antes de escribir el entregable.
 
 ## Qué pide la plantilla
 1. Carátula: integrantes, legajos, rol en esta fase, fecha.

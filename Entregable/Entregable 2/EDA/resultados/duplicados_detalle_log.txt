@@ -1,0 +1,116 @@
+=========================================================================================================
+1. ALCANCE: ¿QUE FILAS ESTAN DUPLICADAS?
+=========================================================================================================
+  Ventas: 239,336 filas; 4,756 en claves repetidas (1.99%); 2,378 sobrantes; filas por clave: {2: 2378}
+  Stock: 239,336 filas; 4,756 en claves repetidas (1.99%); 2,378 sobrantes; filas por clave: {2: 2378}
+  ¿Las claves duplicadas de Ventas y Stock son las MISMAS? True (ventas 2,378, stock 2,378, comunes 2,378)
+
+  ¿Se duplica TODA la historia de esos 15 SKUs o solo parte?
+     sku     categoria               proveedores       alta  filas_ventas  filas_duplicadas    % primer_mes ultimo_mes  tiendas
+SKU00016       Muebles Proveedor C / Proveedor A 2024-02-25           316               158 50.0    2024-03    2025-12       11
+SKU00058          Baño Proveedor E / Proveedor B 2024-07-22           421               156 37.1    2024-08    2025-12       21
+SKU00112       Muebles Proveedor F / Proveedor C 2022-08-13           467               272 58.2    2022-09    2023-11       23
+SKU00311       Muebles Proveedor A / Proveedor D 2022-01-30          1501               904 60.2    2022-02    2025-12       23
+SKU00330 Cocina y mesa Proveedor J / Proveedor D 2024-12-22           381               228 59.8    2025-01    2025-12       23
+SKU00333 Cocina y mesa Proveedor H / Proveedor C 2022-10-24           615               200 32.5    2022-11    2025-12       14
+SKU00370    Decoracion Proveedor A / Proveedor E 2022-05-02            24                 8 33.3    2022-06    2022-07       10
+SKU00430    Decoracion Proveedor A / Proveedor H 2023-12-03           542               162 29.9    2024-01    2025-12       20
+SKU00433  Organizacion Proveedor I / Proveedor D 2023-12-26           646               288 44.6    2024-01    2025-12       22
+SKU00453          Baño Proveedor C / Proveedor J 2022-11-09          1017               586 57.6    2022-12    2025-12       20
+SKU00533  Textil Hogar Proveedor A / Proveedor D 2023-12-21           559               252 45.1    2024-01    2025-12       19
+SKU00552  Textil hogar Proveedor B / Proveedor H 2025-03-18           321               190 59.2    2025-04    2025-12       26
+SKU00566 Cocina y mesa Proveedor A / Proveedor B 2022-09-06           953               274 28.8    2022-10    2025-12       22
+SKU00737 Cocina y mesa Proveedor J / Proveedor E 2022-04-25          1414               624 44.1    2022-05    2025-12       26
+SKU00785          Baño Proveedor C / Proveedor D 2022-06-08           957               454 47.4    2022-07    2025-12       18
+
+  -> En los 15 SKUs, el 46.9% de sus filas está duplicado. SKUs con el 100% duplicado: 0 de 15
+  -> Fuera de esos 15 SKUs no hay ni una clave repetida: 0 filas
+
+=========================================================================================================
+2. ¿COMO SE UBICAN EN EL ARCHIVO? (pistas sobre el origen)
+=========================================================================================================
+  Ventas: distancia entre las dos filas de la misma clave -> mediana 107,761 filas | adyacentes (distancia 1): 0 | min 6,097 | max 230,686
+     posición de la 1ra ocurrencia: filas 4,331 a 230,274 | de la 2da: 234,010 a 239,289 | total de filas del archivo: 239,336
+     ¿todas las 2das ocurrencias están al final del archivo? True
+  Stock: distancia entre las dos filas de la misma clave -> mediana 107,761 filas | adyacentes (distancia 1): 0 | min 6,097 | max 230,686
+     posición de la 1ra ocurrencia: filas 4,331 a 230,274 | de la 2da: 234,010 a 239,289 | total de filas del archivo: 239,336
+     ¿todas las 2das ocurrencias están al final del archivo? True
+
+=========================================================================================================
+3. ANATOMIA DEL PAR: ¿QUE DIFERENCIA A LAS DOS FILAS?
+=========================================================================================================
+
+  --- Ventas ---
+  Pares idénticos en todas las columnas: 56 de 2,378
+  1ra > 2da en unidades_vendidas: 1,599 | 1ra < 2da: 536 | iguales: 243
+  -> ¿hay un orden sistemático (una siempre mayor)? SI
+  Valores 1ra ocurrencia: media 3.88 mediana 3.0 | 2da: media 2.26 mediana 1.0
+  Correlación entre los dos valores del par: -0.128
+  |diferencia|: mediana 3.0 | p90 8.0 | max 22 | como % del mayor: mediana 78.8%
+  Pares con un valor en 0: 811 -> el 0 está en la 1ra: 172, en la 2da: 695, en ambas: 56
+  Coherencia interna: venta_neta/unidades_vendidas -> 1ra mediana 52,258 | 2da mediana 42,009 (si son iguales, cada fila es internamente consistente)
+
+  --- Stock ---
+  Pares idénticos en todas las columnas: 21 de 2,378
+  1ra > 2da en stock_disponible: 1,767 | 1ra < 2da: 550 | iguales: 61
+  -> ¿hay un orden sistemático (una siempre mayor)? SI
+  Valores 1ra ocurrencia: media 20.45 mediana 18.0 | 2da: media 12.02 mediana 6.0
+  Correlación entre los dos valores del par: -0.179
+  |diferencia|: mediana 15.0 | p90 40.0 | max 143 | como % del mayor: mediana 75.0%
+  Pares con un valor en 0: 26 -> el 0 está en la 1ra: 12, en la 2da: 14, en ambas: 0
+  Coherencia interna: stock_en_transito/stock_disponible -> 1ra mediana 0 | 2da mediana 0 (si son iguales, cada fila es internamente consistente)
+
+  ¿La 1ra fila de Ventas se corresponde con la 1ra de Stock (mismo 'registro' de origen)?
+    corr(unidades 1ra, stock 1ra) = 0.514 | corr(unidades 1ra, stock 2da) = -0.138
+    corr(unidades 2da, stock 2da) = 0.764 | corr(unidades 2da, stock 1ra) = -0.169
+    casos con venta > stock dentro de la misma posición (1ra-1ra): 40 | cruzado (1ra venta vs 2da stock): 585
+
+  ¿Las dos filas podrían ser una partición (dos proveedores) de un total?
+    suma del par vs. filas NO duplicadas del mismo SKU y mes en otras tiendas: se compara la media por posición
+    filas no duplicadas de esos 15 SKUs: 5,378 (si es 0, el SKU siempre viene duplicado y no hay con qué comparar)
+    unidades promedio: 1ra ocurrencia 3.88 | suma del par 6.14 | resto del catálogo 3.12
+    -> si la suma se pareciera al resto, serían una partición; si la 1ra ya se parece, son registros repetidos
+
+=========================================================================================================
+4. IMPACTO DE CADA CRITERIO DE CONSOLIDACION
+=========================================================================================================
+  Unidades vendidas totales 2022-2025 según el criterio (resto del dataset = 731,821 uds):
+    1ra ocurrencia (V1 del TP1)            ->      741,044 uds   (dif vs 1ra ocurrencia: +0)
+    2da ocurrencia                         ->      737,191 uds   (dif vs 1ra ocurrencia: -3,853)
+    mayor venta (sugerido por negocio)     ->      743,593 uds   (dif vs 1ra ocurrencia: +2,549)
+    menor                                  ->      734,642 uds   (dif vs 1ra ocurrencia: -6,402)
+    promedio                               ->      739,118 uds   (dif vs 1ra ocurrencia: -1,926)
+    suma                                   ->      746,414 uds   (dif vs 1ra ocurrencia: +5,370)
+
+  Venta neta total ($ M):
+    1ra      -> $  32,124.6 M
+    2da      -> $  31,859.4 M
+    mayor    -> $  32,212.0 M
+    suma     -> $  32,352.9 M
+
+  Stock total a dic-2025 (unidades) y posiciones con stock > 0:
+    1ra ocurrencia (V1 del TP1)  ->   135,484 uds | posiciones con stock>0: 7,993
+    2da ocurrencia               ->   134,534 uds | posiciones con stock>0: 7,992
+    mayor                        ->   135,623 uds | posiciones con stock>0: 7,993
+    menor                        ->   134,395 uds | posiciones con stock>0: 7,992
+    promedio                     ->   135,007 uds | posiciones con stock>0: 7,993
+    suma                         ->   136,094 uds | posiciones con stock>0: 7,993
+
+  Efecto sobre la cobertura de las posiciones afectadas (dic-2025, stock / venta promedio 12m):
+    1ra ocurrencia (V1 del TP1)  -> cobertura mediana global  5.29 meses | de los 15 SKUs afectados  5.67 | posiciones >12 meses: 235 (de los 15 SKUs: 16)
+    2da ocurrencia               -> cobertura mediana global  5.26 meses | de los 15 SKUs afectados  4.62 | posiciones >12 meses: 226 (de los 15 SKUs: 7)
+    mayor                        -> cobertura mediana global  5.30 meses | de los 15 SKUs afectados  6.00 | posiciones >12 meses: 235 (de los 15 SKUs: 16)
+    menor                        -> cobertura mediana global  5.25 meses | de los 15 SKUs afectados  4.17 | posiciones >12 meses: 226 (de los 15 SKUs: 7)
+    promedio                     -> cobertura mediana global  5.28 meses | de los 15 SKUs afectados  5.25 | posiciones >12 meses: 226 (de los 15 SKUs: 7)
+    suma                         -> cobertura mediana global  5.32 meses | de los 15 SKUs afectados  6.67 | posiciones >12 meses: 248 (de los 15 SKUs: 29)
+
+=========================================================================================================
+5. ¿QUE HIPOTESIS SOBREVIVE?
+=========================================================================================================
+  Duplicados por año: {2022: 264, 2023: 530, 2024: 666, 2025: 918}
+  Filas totales por año:   {2022: 14998, 2023: 47496, 2024: 77904, 2025: 98938}
+  % de filas duplicadas sobre el total del año: {2022: '1.76%', 2023: '1.12%', 2024: '0.85%', 2025: '0.93%'}
+  Meses distintos con duplicados: 47 de 48 | tiendas: 26 de 28
+  Hipótesis del negocio (Entregable 1): 'migración parcial del reporting en 2024'.
+  Contraste: los duplicados aparecen en todos los meses y años, y su peso relativo es estable, no hay salto en 2024.
+  Los 15 SKUs duplicados del catálogo difieren SOLO en el proveedor, y son exactamente los que tienen filas repetidas.

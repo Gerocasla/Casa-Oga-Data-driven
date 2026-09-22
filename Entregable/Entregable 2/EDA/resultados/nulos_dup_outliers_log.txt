@@ -1,0 +1,132 @@
+==============================================================================================================
+A. VALORES NULOS
+==============================================================================================================
+                             fuente              columna  nulos     %  filas
+                         Calendario      evento_especial   1373 93.98   1461
+               Costo_almacenamiento       -- (sin nulos)      0  0.00      7
+                   Devoluciones_SKU       -- (sin nulos)      0  0.00   2317
+              Historial_Precios_SKU fecha_vigencia_hasta    800 53.40   1498
+              Historial_Precios_SKU       costo_unitario     40  2.67   1498
+                      Liquidaciones       -- (sin nulos)      0  0.00    508
+                     Ordenes_Compra       -- (sin nulos)      0  0.00   3000
+Presupuesto_Ventas_Tienda_Categoria       -- (sin nulos)      0  0.00  10976
+                 Productos_catalogo       costo_unitario     22  2.70    815
+                 Productos_catalogo  fecha_baja_catalogo    647 79.39    815
+            Promociones_Comerciales           medio_pago     65 54.62    119
+            Promociones_Comerciales      evento_asociado     54 45.38    119
+                        Proveedores       -- (sin nulos)      0  0.00     10
+             Stock_Deposito_Central       -- (sin nulos)      0  0.00  23858
+           Stock_SKU_tienda_mensual       -- (sin nulos)      0  0.00 239336
+                            Tiendas       -- (sin nulos)      0  0.00     28
+               Transferencias_Stock       -- (sin nulos)      0  0.00   4200
+          Ventas_SKU_tienda_mensual       -- (sin nulos)      0  0.00 239336
+
+  Celdas vacias totales: 3001
+  Filas completamente vacias: 0
+
+  Nulos encubiertos (texto vacio, NA, N/A, -, null, sin dato):
+    ninguno
+
+  SKUs sin costo en catalogo: 22 | de ellos con algun costo en Historial_Precios: 0
+  Recuperables desde Ordenes_Compra: 22 de 22 SKUs tienen OC | costo medio de esas OC: $22,864
+  Control estructural: fecha_baja_catalogo nula 647 == SKUs Activos 647: True
+  Control estructural: fecha_vigencia_hasta nula 800 == SKUs unicos 800: True
+
+  Ceros que funcionan como nulos:
+    Ventas.unidades_vendidas = 0: 45,372 (19.0%) -> con stock>0: 45,524 (sin demanda) | con stock<=0: 715 (quiebre)
+    Stock.stock_disponible = 0: 1,318 | stock_en_transito = 0: 51,321
+    Presupuesto = 0: 309 filas, meses ['2022-01-01', '2022-02-01', '2022-03-01', '2022-04-01', '2022-05-01']
+
+==============================================================================================================
+B. VALORES REPETIDOS
+==============================================================================================================
+
+B1. Duplicados exactos y por clave natural
+                             fuente  filas  dup_exactos                            clave  dup_por_clave  claves_afectadas
+                         Calendario   1461            0                            fecha              0                 0
+               Costo_almacenamiento      7            0                        categoria              0                 0
+                   Devoluciones_SKU   2317            0                    id_devolucion              0                 0
+              Historial_Precios_SKU   1498            0 id_producto+fecha_vigencia_desde              0                 0
+                      Liquidaciones    508            0                   id_liquidacion              0                 0
+                     Ordenes_Compra   3000            0                            id_oc              0                 0
+Presupuesto_Ventas_Tienda_Categoria  10976            0    fecha_mes+id_tienda+categoria              0                 0
+                 Productos_catalogo    815            0                      id_producto             15                15
+            Promociones_Comerciales    119            1                     id_promocion              2                 2
+                        Proveedores     10            0                        proveedor              0                 0
+             Stock_Deposito_Central  23858            0            fecha_mes+id_producto              0                 0
+           Stock_SKU_tienda_mensual 239336           21  fecha_mes+id_tienda+id_producto           2378              2378
+                            Tiendas     28            0                        id_tienda              0                 0
+               Transferencias_Stock   4200            0                 id_transferencia              0                 0
+          Ventas_SKU_tienda_mensual 239336           56  fecha_mes+id_tienda+id_producto           2378              2378
+
+B2. Ventas y Stock: anatomia de los 2.378 duplicados por clave
+  Ventas: 2,378 claves con 2 filas (4,756 filas; 2,378 sobrantes) | identicas: 56 | con valores DISTINTOS: 2,322 (97.6%) | con un registro en 0: 811
+     SKUs involucrados: 15 | todos dentro de los 15 duplicados del catalogo: True | diferencia entre las 2 filas (unidades_vendidas): mediana 3.0, p90 8.0, max 22
+     anios: {2022: 528, 2023: 1060, 2024: 1332, 2025: 1836}
+  Stock: 2,378 claves con 2 filas (4,756 filas; 2,378 sobrantes) | identicas: 21 | con valores DISTINTOS: 2,357 (99.1%) | con un registro en 0: 26
+     SKUs involucrados: 15 | todos dentro de los 15 duplicados del catalogo: True | diferencia entre las 2 filas (stock_disponible): mediana 15.0, p90 40.0, max 143
+     anios: {2022: 528, 2023: 1060, 2024: 1332, 2025: 1836}
+  Alcance: los 15 SKUs duplicados generan 10,134 filas de ventas (4.2%) y $1,538 M de venta bruta
+
+B3. Repeticiones logicas
+  Catalogo: 15 SKUs en 2 filas. Columnas en que difieren (n SKUs): {'categoria': 0, 'subcategoria': 0, 'proveedor': 15, 'costo_unitario': 0, 'precio_lista': 0, 'fecha_alta_catalogo': 0, 'fecha_baja_catalogo': 0, 'estado': 0}
+    -> difieren solo en proveedor. SKUs: ['SKU00016', 'SKU00058', 'SKU00112', 'SKU00311', 'SKU00330', 'SKU00333', 'SKU00370', 'SKU00430', 'SKU00433', 'SKU00453', 'SKU00533', 'SKU00552', 'SKU00566', 'SKU00737', 'SKU00785']
+  Promociones: ids repetidos ['PROMO0083', 'PROMO0101'] | promos con mismo contenido y distinto id: 2
+  Categorias con escritura repetida: catalogo 11 valores para 7 reales (21 filas) | promociones 10 valores (3 filas)
+  Devoluciones con mismo SKU+tienda+fecha: 0
+  Transferencias con mismo SKU+origen+destino+fecha_envio: 0
+  OC con mismo SKU+proveedor+fecha_pedido: 14
+  Liquidaciones del mismo SKU+tienda con periodos solapados: 8
+
+==============================================================================================================
+C. OUTLIERS
+==============================================================================================================
+
+C1. Por variable numerica (IQR: fuera de [Q1-1.5*IQR, Q3+1.5*IQR]; z: |x-media|/desvio > 3)
+                             fuente                                variable      n        min       p50        p99        max  lim_sup_IQR  out_bajo  out_alto  %out_IQR  out_z3  max_z  max/p99  skew
+          Ventas_SKU_tienda_mensual                       unidades_vendidas 239336      -26.0       2.0       17.0       31.0          8.5      1011     19774      8.68    5130    8.0     1.82  1.76
+          Ventas_SKU_tienda_mensual                              venta_neta 239336 -1705312.3   66113.9   962339.6  2120729.2     408047.3       615     19356      8.34    6044   10.0     2.20  2.58
+           Stock_SKU_tienda_mensual                        stock_disponible 239336     -152.0      10.0       94.0      173.0         46.5       309     17141      7.29    6597    9.0     1.84  2.32
+           Stock_SKU_tienda_mensual                       stock_en_transito 239336        0.0       2.0       15.0       27.0          8.5         0     16528      6.91    5922    7.4     1.80  1.98
+             Stock_Deposito_Central                        stock_disponible  23858        0.0      44.0      427.9      677.0        193.5         0      1847      7.74     580    7.3     1.58  2.61
+                 Productos_catalogo                          costo_unitario    793     1330.0   25170.0    52668.4    57090.0      71070.0         0         0      0.00       0    2.3     1.08  0.02
+                 Productos_catalogo                            precio_lista    815     2400.0   45800.0    88886.0    89700.0     128700.0         0         0      0.00       0    1.8     1.01 -0.04
+                      Liquidaciones                           descuento_pct    508      -10.0      25.0       50.0      120.0         77.5         0         2      0.39       2    6.4     2.40  1.33
+                   Devoluciones_SKU                      unidades_devueltas   2317        1.0       3.0       17.8       26.0          9.5         0       180      7.77      66    6.2     1.46  2.06
+              Historial_Precios_SKU                            precio_lista   1498      587.7   28369.4    87306.0    89700.0     108444.8         0         0      0.00       0    2.3     1.03  0.60
+              Historial_Precios_SKU                          costo_unitario   1458      277.7   15172.2    50725.8    57090.0      58494.5         0         0      0.00       0    2.8     1.13  0.65
+                     Ordenes_Compra                                unidades   3000       21.0     153.0      576.0      579.0        402.0         0       205      6.83      73    3.1     1.01  1.35
+                     Ordenes_Compra                      costo_unitario_ars   3000     1280.7   25439.1    52872.7    59720.2      71619.2         0         0      0.00       0    2.5     1.13  0.04
+Presupuesto_Ventas_Tienda_Categoria                   presupuesto_venta_ars  10976  -963369.3 3770630.3 11174803.7 15320222.3   11740625.5         0        58      0.53      37    4.1     1.37  0.56
+Presupuesto_Ventas_Tienda_Categoria                    presupuesto_unidades  10976       -9.0      91.0      246.2      336.0        263.5         0        44      0.40      34    4.1     1.36  0.41
+            Promociones_Comerciales                           descuento_pct    119      -15.0      20.0       40.0      150.0         60.0         0         1      0.84       1    8.0     3.75  4.30
+                        Proveedores                          lead_time_dias     10       10.0      31.5       55.6       56.0         70.8         0         0      0.00       0    1.5     1.01 -0.03
+                        Proveedores                  pedido_minimo_unidades     10       21.0     150.0      192.9      193.0        378.1         0         0      0.00       0    1.3     1.00 -0.35
+               Transferencias_Stock                                unidades   4200        2.0      30.0       59.0       59.0         88.5         0         0      0.00       0    1.7     1.00  0.01
+                            Tiendas                                m2_venta     28      450.0     800.0     1500.0     1500.0       2156.2         0         0      0.00       0    1.6     1.00  0.54
+               Costo_almacenamiento                   precio_lista_promedio      7    43194.0   46255.0    48102.8    48136.0      51824.8         0         0      0.00       0    1.4     1.00 -0.37
+               Costo_almacenamiento costo_mensual_almacenamiento_unidad_ars      7      648.0     694.0      721.5      722.0        778.8         0         0      0.00       0    1.4     1.00 -0.36
+
+C2. Outliers que son ERRORES (valor imposible por definicion)
+  Stock.stock_disponible < 0: 1,209 filas | min -152 | suma -20,914 unidades
+  Ventas.unidades_vendidas < 0: 2,317 filas | min -26 (coinciden 1 a 1 con Devoluciones_SKU)
+  Ventas.venta_neta < 0: 2,317 filas | min $-1,705,312
+  Liquidaciones.descuento_pct fuera de [0,100]: [120, -10, 120]
+  Promociones.descuento_pct fuera de [0,100]: [150, -15]
+  Presupuesto negativo: [-6596.0, -963369.0, -514763.0] | unidades: [-2, -9, -4]
+  TOTAL valores imposibles: 5,854
+
+C3. Outliers que NO son errores (cola larga legitima)
+  Ventas.unidades_vendidas: IQR marca 19,774 filas sobre 8 | p99 17 | max 31 (max/p99 = 1.8) | skew 1.76
+  Ventas.venta_neta: IQR marca 19,356 filas sobre 408047 | p99 962,340 | max 2,120,729 (max/p99 = 2.2) | skew 2.58
+  Stock.stock_disponible: IQR marca 17,141 filas sobre 46 | p99 94 | max 173 (max/p99 = 1.8) | skew 2.32
+  Devoluciones.unidades_devueltas: IQR marca 180 filas sobre 10 | p99 18 | max 26 (max/p99 = 1.5) | skew 2.06
+  Stock_Deposito.stock_disponible: IQR marca 1,847 filas sobre 194 | p99 428 | max 677 (max/p99 = 1.6) | skew 2.61
+
+C4. Outliers detectables solo cruzando fuentes
+  Ventas en tiendas antes de su fecha de apertura: 10.903 filas, $1.475,9 M (T25: 36 meses antes)
+  Unidades vendidas > stock del mismo mes: 5,278 filas | venta>0 con stock=0: 833
+  stock_en_transito vs transferencias en curso: 23.528 vs 868 unidades en dic-25 (~27x)
+  Precio implicito vs precio vigente del Historial: 39% de las filas por encima de 1,5x (max 4,9x)
+  Saltos de precio entre vigencias: mediana +86%, p95 +326%, max +393%
+  Liquidaciones sobre SKU-tienda sin stock ese mes: 278 de 496 | 'Discontinuacion' sobre SKU Activo: 79 de 93

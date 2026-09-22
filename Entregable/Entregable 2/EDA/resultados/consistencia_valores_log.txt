@@ -1,0 +1,146 @@
+==============================================================================================================
+1. MISMO VALOR ESCRITO DE DISTINTA FORMA (dentro de cada columna)
+==============================================================================================================
+
+  Productos_catalogo.categoria  (11 valores distintos, 2 grupo(s) con variantes)
+     'Decoracion' x146 | 'Decoración' x8   ->  canonico sugerido: 'Decoracion'
+     'Textil hogar' x121 | 'Textil Hogar' x6 | 'TEXTIL_HOGAR' x2   ->  canonico sugerido: 'Textil hogar'
+
+  Promociones_Comerciales.categoria  (10 valores distintos, 2 grupo(s) con variantes)
+     'Textil hogar' x16 | 'Textil Hogar' x1 | 'TEXTIL_HOGAR' x1   ->  canonico sugerido: 'Textil hogar'
+     'Decoracion' x16 | 'Decoración' x1   ->  canonico sugerido: 'Decoracion'
+
+==============================================================================================================
+2. ESPACIOS, MAYUSCULAS Y CARACTERES RAROS
+==============================================================================================================
+  Ninguna columna tiene espacios sobrantes, espacios dobles ni caracteres raros.
+
+==============================================================================================================
+3. FORMATOS DE FECHA
+==============================================================================================================
+  Calendario.fecha: {'9999-99-99': np.int64(1461)}  OK
+  Devoluciones_SKU.fecha: {'9999-99-99': np.int64(2317)}  OK
+  Historial_Precios_SKU.fecha_vigencia_desde: {'9999-99-99': np.int64(1498)}  OK
+  Historial_Precios_SKU.fecha_vigencia_hasta: {'9999-99-99': np.int64(698)}  OK
+  Liquidaciones.fecha_inicio: {'9999-99-99': np.int64(508)}  OK
+  Liquidaciones.fecha_fin: {'9999-99-99': np.int64(500), '9999-99-99 99:99:99': np.int64(8)}  *** MEZCLA DE FORMATOS ***
+       formato minoritario 9999-99-99 99:99:99 (8 filas): ['2023-12-24 00:00:00', '2023-02-04 00:00:00', '2024-09-03 00:00:00', '2024-02-24 00:00:00', '2026-01-22 00:00:00', '2026-02-23 00:00:00', '2025-10-08 00:00:00', '2024-07-28 00:00:00']
+  Ordenes_Compra.fecha_pedido: {'9999-99-99': np.int64(3000)}  OK
+  Ordenes_Compra.fecha_recepcion: {'9999-99-99': np.int64(3000)}  OK
+  Presupuesto_Ventas_Tienda_Categoria.fecha_mes: {'9999-99-99': np.int64(10976)}  OK
+  Productos_catalogo.fecha_alta_catalogo: {'9999-99-99': np.int64(815)}  OK
+  Productos_catalogo.fecha_baja_catalogo: {'9999-99-99': np.int64(168)}  OK
+  Promociones_Comerciales.fecha_inicio: {'9999-99-99': np.int64(119)}  OK
+  Promociones_Comerciales.fecha_fin: {'9999-99-99': np.int64(119)}  OK
+  Stock_Deposito_Central.fecha_mes: {'9999-99-99': np.int64(23858)}  OK
+  Stock_SKU_tienda_mensual.fecha_mes: {'9999-99-99': np.int64(239336)}  OK
+  Tiendas.fecha_apertura: {'9999-99-99': np.int64(28)}  OK
+  Transferencias_Stock.fecha_envio: {'9999-99-99': np.int64(4200)}  OK
+  Transferencias_Stock.fecha_recepcion: {'9999-99-99': np.int64(4200)}  OK
+  Ventas_SKU_tienda_mensual.fecha_mes: {'9999-99-99': np.int64(239336)}  OK
+
+==============================================================================================================
+4. FORMATOS DE IDENTIFICADOR Y DE NUMERO
+==============================================================================================================
+  Liquidaciones.tienda: {'T99': 496, 'Todas': 12}
+  Ordenes_Compra.proveedor: {'Proveedor B': 407, 'Proveedor G': 347, 'Proveedor F': 321, 'Proveedor D': 312, 'Proveedor H': 305, 'Proveedor A': 285}
+  Productos_catalogo.proveedor: {'Proveedor B': 105, 'Proveedor G': 90, 'Proveedor D': 86, 'Proveedor F': 83, 'Proveedor I': 79, 'Proveedor A': 78}
+  Proveedores.proveedor: {'Proveedor A': 1, 'Proveedor B': 1, 'Proveedor C': 1, 'Proveedor D': 1, 'Proveedor E': 1, 'Proveedor F': 1}
+  Transferencias_Stock.origen: {'DEP-CENTRAL': 2258, 'T99': 1942}
+  Transferencias_Stock.destino: {'T99': 3718, 'DEP-CENTRAL': 482}
+  (si no aparece nada arriba: todos los IDs siguen un unico patron y los numeros usan punto decimal)
+
+==============================================================================================================
+5. EL MISMO CONCEPTO ENTRE FUENTES DISTINTAS
+==============================================================================================================
+
+  a) CATEGORIA
+     Productos_catalogo: 11 valores -> ['Baño', 'Cocina y mesa', 'DECO', 'Decoracion', 'Decoración', 'Iluminacion', 'Muebles', 'Organizacion', 'TEXTIL_HOGAR', 'Textil Hogar', 'Textil hogar']
+     Presupuesto_Ventas_Tienda_Categoria: 7 valores -> ['Baño', 'Cocina y mesa', 'Decoracion', 'Iluminacion', 'Muebles', 'Organizacion', 'Textil hogar']
+     Promociones_Comerciales: 10 valores -> ['Baño', 'Cocina y mesa', 'Decoracion', 'Decoración', 'Iluminacion', 'Muebles', 'Organizacion', 'TEXTIL_HOGAR', 'Textil Hogar', 'Textil hogar']
+     Costo_almacenamiento: 7 valores -> ['Baño', 'Cocina y mesa', 'Decoracion', 'Iluminacion', 'Muebles', 'Organizacion', 'Textil hogar']
+     Canonico propuesto (el de Costo_almacenamiento y Presupuesto, sin acentos): ['Baño', 'Cocina y mesa', 'Decoracion', 'Iluminacion', 'Muebles', 'Organizacion', 'Textil hogar']
+     Productos_catalogo: valores que NO mapean a ninguna categoria canonica -> ['DECO']
+     Presupuesto_Ventas_Tienda_Categoria: valores que NO mapean a ninguna categoria canonica -> ninguno
+     Promociones_Comerciales: valores que NO mapean a ninguna categoria canonica -> ninguno
+     Costo_almacenamiento: valores que NO mapean a ninguna categoria canonica -> ninguno
+
+  b) TIENDA
+     Tiendas.id_tienda: 28 ids, patron T99
+     Liquidaciones.tienda: ['Todas'] (valor especial)
+     Transferencias.origen/destino: ['DEP-CENTRAL'] (valor especial)
+     Tiendas.provincia: ['Buenos Aires', 'CABA', 'Cordoba', 'Entre Rios', 'Mendoza', 'Neuquen', 'Salta', 'Santa Fe', 'Tucuman']
+     nombre_tienda: patron 'Casa Óga <Provincia> <N>' en 28 de 28
+     Nombre de tienda que no coincide con su provincia: ninguno
+     Numero del nombre == numero del id: 28 de 28
+
+  c) PROVEEDOR
+     Proveedores: ['Proveedor A', 'Proveedor B', 'Proveedor C', 'Proveedor D', 'Proveedor E', 'Proveedor F', 'Proveedor G', 'Proveedor H', 'Proveedor I', 'Proveedor J']
+     Productos_catalogo: 10 valores, todos en el maestro: True
+     Ordenes_Compra: 10 valores, todos en el maestro: True
+
+  d) EVENTOS
+     Calendario.evento_especial: ['Black Friday', 'Hot Sale', 'Navidad']
+     Promociones.evento_asociado: ['Black Friday', 'Hot Sale', 'Navidad']
+     Eventos de promociones que no existen en el calendario: ninguno
+
+  e) MOTIVOS Y OTRAS LISTAS CERRADAS
+     Liquidaciones.motivo: 4 valores | con acento: ninguno
+        ['Baja rotacion', 'Discontinuacion', 'Fin de temporada', 'Sobrestock']
+     Devoluciones_SKU.motivo: 5 valores | con acento: ['Producto dañado en logistica']
+        ['Defecto de fabricacion', 'Devolucion de cliente (cambio)', 'Error de picking', 'Producto dañado en logistica', 'Producto sin rotacion / no vendido']
+     Promociones_Comerciales.canal: 3 valores | con acento: ninguno
+        ['Online', 'Tienda', 'Todos']
+     Promociones_Comerciales.medio_pago: 4 valores | con acento: ninguno
+        ['Billetera virtual', 'Efectivo', 'Tarjeta credito', 'Tarjeta debito']
+     Proveedores.condicion_pago: 4 valores | con acento: ninguno
+        ['30 dias', '60 dias', '90 dias', 'Contado']
+     Proveedores.pais_origen: 5 valores | con acento: ninguno
+        ['Argentina', 'Brasil', 'Chile', 'China', 'Uruguay']
+     Tiendas.formato: 3 valores | con acento: ninguno
+        ['Chico', 'Grande', 'Mediano']
+     Tiendas.region: 5 valores | con acento: ninguno
+        ['AMBA', 'Centro', 'Cuyo', 'NOA', 'Patagonia']
+     Calendario.temporada: 4 valores | con acento: ['Otoño']
+        ['Invierno', 'Otoño', 'Primavera', 'Verano']
+     Calendario.dia_semana: 7 valores | con acento: ninguno
+        ['Friday', 'Monday', 'Saturday', 'Sunday', 'Thursday', 'Tuesday', 'Wednesday']
+     Calendario.es_feriado: 2 valores | con acento: ninguno
+        ['False', 'True']
+     Productos_catalogo.estado: 2 valores | con acento: ninguno
+        ['Activo', 'Discontinuado']
+     Productos_catalogo.subcategoria: 25 valores | con acento: ['Accesorios de baño', 'Alfombras de baño', 'Cortinas de baño']
+
+  f) IDIOMA Y ACENTUACION: la mezcla mas evidente
+     Calendario.dia_semana esta en INGLES (Monday, Tuesday...) mientras el resto del dataset esta en espaniol.
+     Las categorias 'Decoracion', 'Iluminacion', 'Organizacion' y 'Bano' aparecen SIN acento como forma mayoritaria,
+     pero 'Baño' si lleva enie y 'Casa Óga' lleva tilde: la convencion no es uniforme dentro del mismo dataset.
+     Calendario.temporada: 368 de 1461 filas con acento (convive con filas sin acento)
+     Costo_almacenamiento.categoria: 1 de 7 filas con acento (convive con filas sin acento)
+     Devoluciones_SKU.motivo: 499 de 2317 filas con acento (convive con filas sin acento)
+     Presupuesto_Ventas_Tienda_Categoria.categoria: 1568 de 10976 filas con acento (convive con filas sin acento)
+     Productos_catalogo.categoria: 108 de 815 filas con acento (convive con filas sin acento)
+     Productos_catalogo.subcategoria: 100 de 815 filas con acento (convive con filas sin acento)
+     Promociones_Comerciales.categoria: 17 de 119 filas con acento (convive con filas sin acento)
+
+==============================================================================================================
+6. TABLA DE NORMALIZACION PROPUESTA
+==============================================================================================================
+                 fuente   columna         valor_crudo  filas valor_canonico                  tipo
+          Liquidaciones fecha_fin 2023-12-24 00:00:00      1     2023-12-24      formato de fecha
+          Liquidaciones fecha_fin 2023-02-04 00:00:00      1     2023-02-04      formato de fecha
+          Liquidaciones fecha_fin 2024-09-03 00:00:00      1     2024-09-03      formato de fecha
+          Liquidaciones fecha_fin 2024-02-24 00:00:00      1     2024-02-24      formato de fecha
+          Liquidaciones fecha_fin 2026-01-22 00:00:00      1     2026-01-22      formato de fecha
+          Liquidaciones fecha_fin 2026-02-23 00:00:00      1     2026-02-23      formato de fecha
+          Liquidaciones fecha_fin 2025-10-08 00:00:00      1     2025-10-08      formato de fecha
+          Liquidaciones fecha_fin 2024-07-28 00:00:00      1     2024-07-28      formato de fecha
+     Productos_catalogo categoria          Decoración      8     Decoracion variante de escritura
+     Productos_catalogo categoria        Textil Hogar      6   Textil hogar variante de escritura
+     Productos_catalogo categoria        TEXTIL_HOGAR      2   Textil hogar variante de escritura
+Promociones_Comerciales categoria        Textil Hogar      1   Textil hogar variante de escritura
+Promociones_Comerciales categoria        TEXTIL_HOGAR      1   Textil hogar variante de escritura
+Promociones_Comerciales categoria          Decoración      1     Decoracion variante de escritura
+
+  Total de celdas a normalizar: 27 en 3 columnas
+  Guardado en resultados/mapeo_normalizacion.csv

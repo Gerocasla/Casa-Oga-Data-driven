@@ -1,0 +1,16 @@
+﻿fuente,filas,dup_exactos,clave,dup_por_clave,claves_afectadas
+Calendario,1461,0,fecha,0,0
+Costo_almacenamiento,7,0,categoria,0,0
+Devoluciones_SKU,2317,0,id_devolucion,0,0
+Historial_Precios_SKU,1498,0,id_producto+fecha_vigencia_desde,0,0
+Liquidaciones,508,0,id_liquidacion,0,0
+Ordenes_Compra,3000,0,id_oc,0,0
+Presupuesto_Ventas_Tienda_Categoria,10976,0,fecha_mes+id_tienda+categoria,0,0
+Productos_catalogo,815,0,id_producto,15,15
+Promociones_Comerciales,119,1,id_promocion,2,2
+Proveedores,10,0,proveedor,0,0
+Stock_Deposito_Central,23858,0,fecha_mes+id_producto,0,0
+Stock_SKU_tienda_mensual,239336,21,fecha_mes+id_tienda+id_producto,2378,2378
+Tiendas,28,0,id_tienda,0,0
+Transferencias_Stock,4200,0,id_transferencia,0,0
+Ventas_SKU_tienda_mensual,239336,56,fecha_mes+id_tienda+id_producto,2378,2378

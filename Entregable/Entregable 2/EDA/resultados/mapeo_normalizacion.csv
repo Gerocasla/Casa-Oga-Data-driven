@@ -1,0 +1,16 @@
+﻿fuente,columna,valor_crudo,filas,valor_canonico,tipo
+Productos_catalogo,categoria,DECO,5,Decoracion,abreviatura (no detectable automaticamente)
+Liquidaciones,fecha_fin,2023-12-24 00:00:00,1,2023-12-24,formato de fecha
+Liquidaciones,fecha_fin,2023-02-04 00:00:00,1,2023-02-04,formato de fecha
+Liquidaciones,fecha_fin,2024-09-03 00:00:00,1,2024-09-03,formato de fecha
+Liquidaciones,fecha_fin,2024-02-24 00:00:00,1,2024-02-24,formato de fecha
+Liquidaciones,fecha_fin,2026-01-22 00:00:00,1,2026-01-22,formato de fecha
+Liquidaciones,fecha_fin,2026-02-23 00:00:00,1,2026-02-23,formato de fecha
+Liquidaciones,fecha_fin,2025-10-08 00:00:00,1,2025-10-08,formato de fecha
+Liquidaciones,fecha_fin,2024-07-28 00:00:00,1,2024-07-28,formato de fecha
+Productos_catalogo,categoria,Decoración,8,Decoracion,variante de escritura
+Productos_catalogo,categoria,Textil Hogar,6,Textil hogar,variante de escritura
+Productos_catalogo,categoria,TEXTIL_HOGAR,2,Textil hogar,variante de escritura
+Promociones_Comerciales,categoria,Textil Hogar,1,Textil hogar,variante de escritura
+Promociones_Comerciales,categoria,TEXTIL_HOGAR,1,Textil hogar,variante de escritura
+Promociones_Comerciales,categoria,Decoración,1,Decoracion,variante de escritura

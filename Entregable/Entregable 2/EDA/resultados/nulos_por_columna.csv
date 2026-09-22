@@ -1,0 +1,19 @@
+﻿fuente,columna,nulos,%,filas
+Calendario,evento_especial,1373,93.98,1461
+Costo_almacenamiento,-- (sin nulos),0,0.0,7
+Devoluciones_SKU,-- (sin nulos),0,0.0,2317
+Historial_Precios_SKU,fecha_vigencia_hasta,800,53.4,1498
+Historial_Precios_SKU,costo_unitario,40,2.67,1498
+Liquidaciones,-- (sin nulos),0,0.0,508
+Ordenes_Compra,-- (sin nulos),0,0.0,3000
+Presupuesto_Ventas_Tienda_Categoria,-- (sin nulos),0,0.0,10976
+Productos_catalogo,costo_unitario,22,2.7,815
+Productos_catalogo,fecha_baja_catalogo,647,79.39,815
+Promociones_Comerciales,medio_pago,65,54.62,119
+Promociones_Comerciales,evento_asociado,54,45.38,119
+Proveedores,-- (sin nulos),0,0.0,10
+Stock_Deposito_Central,-- (sin nulos),0,0.0,23858
+Stock_SKU_tienda_mensual,-- (sin nulos),0,0.0,239336
+Tiendas,-- (sin nulos),0,0.0,28
+Transferencias_Stock,-- (sin nulos),0,0.0,4200
+Ventas_SKU_tienda_mensual,-- (sin nulos),0,0.0,239336
