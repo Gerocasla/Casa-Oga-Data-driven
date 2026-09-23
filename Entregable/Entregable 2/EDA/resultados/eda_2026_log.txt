@@ -1,0 +1,128 @@
+
+==============================================================================
+1 · PERFIL DEL PERIODO NUEVO
+==============================================================================
+  Meses incorporados      : 8 (Jan-2026 a Aug-2026)
+  Filas de venta (crudas) : 60,064
+  Filas de venta (limpias): 60,064
+  Filas de stock (limpias): 60,064
+  Tiendas con venta       : 28 de 28
+  SKUs con venta          : 634
+  Posiciones activas/mes  : min 7,454 · max 7,573
+
+==============================================================================
+2 · VOLUMEN Y COMPARACION CONTRA EL MISMO PERIODO DE 2025
+==============================================================================
+                             ene-ago 2025     ene-ago 2026    variacion
+  ----------------------------------------------------------------------
+  Venta neta ($ M)                9,173.8          7,961.4       -13.2%
+  Unidades                      210,656.0        183,996.0       -12.7%
+  Posiciones (prom/mes)             8,168            7,508        -8.1%
+  Unidades por posicion              3.22             3.06        -5.0%
+  Precio medio unidad              43,549           43,269        -0.6%
+
+==============================================================================
+3 · EVOLUCION MENSUAL 2026 (y ultimos meses de 2025 para ver la continuidad)
+==============================================================================
+  mes         posiciones   unidades   venta ($ M)  u/posicion
+  ------------------------------------------------------------
+  Sep-2025       8,288     26,316       1,159.0        3.18
+  Oct-2025       8,164     26,192       1,141.8        3.21
+  Nov-2025       8,154     25,981       1,132.4        3.19
+  Dec-2025       8,073     25,781       1,126.9        3.19  <- corte viejo
+  Jan-2026       7,509     20,414         884.7        2.72
+  Feb-2026       7,486     20,748         902.3        2.77
+  Mar-2026       7,454     21,702         940.3        2.91
+  Apr-2026       7,524     22,768         986.3        3.03
+  May-2026       7,573     23,618       1,016.8        3.12
+  Jun-2026       7,517     24,198       1,042.0        3.22
+  Jul-2026       7,497     25,291       1,099.3        3.37
+  Aug-2026       7,504     25,257       1,089.6        3.37
+
+==============================================================================
+4 · DISTRIBUCION POR DIMENSIONES EN 2026
+==============================================================================
+  Por categoria:
+    Decoracion        20.8%   (mismo periodo 2025:  21.2%)
+    Cocina y mesa     20.7%   (mismo periodo 2025:  19.9%)
+    Textil hogar      14.1%   (mismo periodo 2025:  13.2%)
+    Organizacion      12.9%   (mismo periodo 2025:  12.6%)
+    Muebles           12.5%   (mismo periodo 2025:  11.9%)
+    Iluminacion       11.3%   (mismo periodo 2025:  13.2%)
+    Bano               7.8%   (mismo periodo 2025:   7.9%)
+  Por region:
+    AMBA              39.6%
+    Centro            21.3%
+    NOA               17.9%
+    Cuyo              17.6%
+    Patagonia          3.6%
+
+==============================================================================
+5 · STOCK Y COBERTURA AL NUEVO CORTE
+==============================================================================
+  Corte                        : Aug-2026
+  Posiciones con stock > 0     : 7,479   (a dic-2025: 7.993)
+  Stock total (unidades)       : 118,888
+  Stock por posicion (mediana) : 10
+  Cobertura agregada (12m)     : 4.95 meses   (a dic-2025: ~5,2)
+  Correlacion unidades vs stock: 0.81
+
+==============================================================================
+6 · CALIDAD DE DATOS EN EL TRAMO 2026
+==============================================================================
+  Ventas  · nulos                : 0
+  Ventas  · duplicados exactos   : 0
+  Ventas  · duplicados por clave : 0   (2022-2025: 2.378)
+  Ventas  · unidades negativas   : 0   (2022-2025: 2.317)
+  Ventas  · filas en cero        : 8805 (14.7%)   (2022-2025: 19,0%)
+  Stock   · duplicados por clave : 0
+  Stock   · negativos            : 0   (2022-2025: 1.209)
+  Cruce   · venta>0 con stock=0  : 187
+  Cruce   · venta > stock        : 449
+
+==============================================================================
+7 · COBERTURA TEMPORAL DE LAS 15 FUENTES (desalineacion)
+==============================================================================
+  fuente                                        hasta     filas 2026
+  --------------------------------------------------------------------
+  Ventas_SKU_tienda_mensual              2026-08-01         60,064
+  Stock_SKU_tienda_mensual               2026-08-01         60,064
+  Liquidaciones                          2026-08-26             85
+  Devoluciones_SKU                       2025-12-28    NO  <-- GAP
+  Historial_Precios_SKU                  2026-07-31            176
+  Ordenes_Compra                         2026-07-31            532
+  Presupuesto_Ventas_Tienda_Categoria    2026-08-01          1,568
+  Promociones_Comerciales                2026-08-19             11
+  Stock_Deposito_Central                 2026-08-01          5,072
+  Transferencias_Stock                   2026-08-27            826
+  Calendario                             2025-12-31    NO  <-- GAP
+  Productos_catalogo                     2025-06-29    NO  <-- GAP
+
+  Sin datos en 2026: Devoluciones_SKU, Calendario, Productos_catalogo
+
+==============================================================================
+8 · LIQUIDACIONES: REGISTROS NUEVOS
+==============================================================================
+  Total liquidaciones        : 593   (EDA anterior: 508)
+  Con inicio en 2026         : 85
+  Motivos de las nuevas:
+    Fin de temporada           31
+    Baja rotacion              31
+    Discontinuacion            15
+    Sobrestock                 8
+  Descuento promedio nuevas  : 22.8%   (rango 10-50%)
+  Fuera de rango [0,100]     : 0
+
+==============================================================================
+9 · TOTALES CONSOLIDADOS AL NUEVO CORTE
+==============================================================================
+  Venta total 2022 a ago-2026 : $40,499.8 M   (al corte dic-2025: $32.538,4 M)
+  Unidades                    : 934,534   (al corte dic-2025: 750.538)
+  Filas limpias               : 297,022   (al corte dic-2025: 236.958)
+
+  Venta por anio:
+    2022: $  1,812.4 M
+    2023: $  6,323.0 M
+    2024: $ 10,669.1 M
+    2025: $ 13,733.9 M
+    2026: $  7,961.4 M (8 meses)

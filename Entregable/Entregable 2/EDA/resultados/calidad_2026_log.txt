@@ -1,0 +1,96 @@
+
+============================================================================
+H1 · UNICIDAD — duplicados por clave
+============================================================================
+  Ventas   exactos    56 | por clave  2378  (2022-25:  2378 · 2026:   0)
+  Stock    exactos    21 | por clave  2378  (2022-25:  2378 · 2026:   0)
+  Catalogo: 15 ids repetidos (15 SKUs)
+    columnas en que difieren: ['proveedor']
+  Promociones: 1 exactos · 2 ids repetidos
+
+============================================================================
+H2 · CONSISTENCIA — ventas antes de la apertura de la tienda
+============================================================================
+  Filas: 11,058 · venta $1,471.7 M · tiendas 6
+    T05  abre Sep-2022  ·   8 meses previos  ·  $  25.1 M
+    T07  abre May-2024  ·  27 meses previos  ·  $ 385.1 M
+    T19  abre Jun-2023  ·  17 meses previos  ·  $ 148.5 M
+    T21  abre Jun-2023  ·  17 meses previos  ·  $ 137.7 M
+    T22  abre Apr-2022  ·   2 meses previos  ·  $   1.9 M
+    T25  abre Feb-2025  ·  36 meses previos  ·  $ 773.4 M
+
+============================================================================
+H3 · EXACTITUD / VALIDEZ — valores imposibles
+============================================================================
+  Ventas·unidades      negativos  2317  (2022-25:  2317 · 2026:   0)  min -26
+  Ventas·venta_neta    negativos  2317  (2022-25:  2317 · 2026:   0)  min -1,705,312
+  Stock·disponible     negativos  1209  (2022-25:  1209 · 2026:   0)  min -152
+  Liquidaciones·descuento fuera de [0,100]: 3 -> [120, -10, 120]
+  Promociones·descuento fuera de [0,100]:  2 -> [150, -15]
+  Presupuesto·presupuesto_venta_ars: 3 valores negativos
+  Presupuesto·presupuesto_unidades: 3 valores negativos
+  Presupuesto·ceros en presupuesto_venta_ars: 309
+
+============================================================================
+H4 · CONSISTENCIA — cruce ventas vs stock
+============================================================================
+  venta > 0 con stock = 0      1020  (2022-25:   833 · 2026:  187)
+  venta > stock disponible     5727  (2022-25:  5278 · 2026:  449)
+
+============================================================================
+H5 · CONSISTENCIA — stock en transito vs transferencias
+============================================================================
+  Stock en transito a Aug-2026: 8,771 unidades
+  Transferencias en curso a esa fecha:     936 unidades (28 envios)
+  Relacion: 9x
+
+============================================================================
+H6 · CONSISTENCIA — liquidaciones
+============================================================================
+  Liquidaciones "Discontinuacion": 108 · de SKUs Activos: 90
+  Con tienda "Todas" (no es un id valido): 12
+  fecha_fin con formato distinto (AAAA-MM-DD 00:00:00): 0
+
+============================================================================
+H7 · CONSISTENCIA — ventas vs historial de precios
+============================================================================
+  Precio implicito / precio de lista ACTUAL: min 0.14 · max 1.21
+  Precio implicito / precio VIGENTE segun historial: >1,5x en 33% de las filas (max 5.4x)
+
+============================================================================
+H8 · COMPLETITUD — faltantes relevantes
+============================================================================
+  Catalogo · SKUs sin costo_unitario: 22
+  Historial · vigencias sin costo   : 40
+  Promociones · sin medio_pago      : 65 de 119
+  Promociones · sin evento_asociado : 54 de 119
+
+============================================================================
+H9 · CONSISTENCIA — variantes de categoria
+============================================================================
+  Productos_catalogo         7 valores: ['Bano', 'Cocina y mesa', 'Decoracion', 'Iluminacion', 'Muebles', 'Organizacion', 'Textil hogar']
+  Promociones_Comerciales    7 valores: ['Bano', 'Cocina y mesa', 'Decoracion', 'Iluminacion', 'Muebles', 'Organizacion', 'Textil hogar']
+
+============================================================================
+H10 · ACTUALIDAD — cobertura temporal por fuente
+============================================================================
+  Ventas_SKU_tienda_mensual              hasta 2026-08-01 · filas 2026: 60,064
+  Stock_SKU_tienda_mensual               hasta 2026-08-01 · filas 2026: 60,064
+  Liquidaciones                          hasta 2026-08-26 · filas 2026:     85
+  Devoluciones_SKU                       hasta 2025-12-28 · filas 2026:      0   <-- SIN 2026
+  Historial_Precios_SKU                  hasta 2026-07-31 · filas 2026:    176
+  Ordenes_Compra                         hasta 2026-07-31 · filas 2026:    532
+  Presupuesto_Ventas_Tienda_Categoria    hasta 2026-08-01 · filas 2026:  1,568
+  Promociones_Comerciales                hasta 2026-08-19 · filas 2026:     11
+  Stock_Deposito_Central                 hasta 2026-08-01 · filas 2026:  5,072
+  Transferencias_Stock                   hasta 2026-08-27 · filas 2026:    826
+  Calendario                             hasta 2025-12-31 · filas 2026:      0   <-- SIN 2026
+  Productos_catalogo                     hasta 2025-06-29 · filas 2026:      0   <-- SIN 2026
+
+  Fuentes sin cobertura de 2026: Devoluciones_SKU, Calendario, Productos_catalogo
+
+============================================================================
+RESUMEN — dónde se concentran los problemas
+============================================================================
+  Los problemas de unicidad, exactitud y validez se concentran en 2022-2025.
+  El tramo 2026 no presenta duplicados, negativos ni nulos en Ventas ni en Stock.
