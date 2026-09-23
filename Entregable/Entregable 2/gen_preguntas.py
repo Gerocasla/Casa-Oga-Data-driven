@@ -1,4 +1,7 @@
-"""Genera el documento de preguntas de calidad de datos (ronda 2) para Casa Óga."""
+"""Genera el documento de preguntas de calidad de datos (ronda 2) para Casa Óga.
+Criterio: preguntas abiertas. No se propone ninguna respuesta ni criterio provisorio:
+la definicion la tiene que dar el negocio.
+"""
 import os
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
@@ -8,8 +11,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(BASE, "Preguntas-Calidad-de-Datos-Ronda-2.docx")
 
 d = Document()
-for st, sz in [("Normal", 10.5)]:
-    d.styles[st].font.name = "Calibri"; d.styles[st].font.size = Pt(sz)
+d.styles["Normal"].font.name = "Calibri"; d.styles["Normal"].font.size = Pt(10.5)
 sec = d.sections[0]
 sec.top_margin = sec.bottom_margin = Cm(2); sec.left_margin = sec.right_margin = Cm(2.2)
 
@@ -23,9 +25,9 @@ def par(txt, bold=False, italic=False, space=4):
     r = p.add_run(txt); r.bold = bold; r.italic = italic
     return p
 
-def bullets(items, style="List Bullet"):
+def bullets(items):
     for it in items:
-        p = d.add_paragraph(style=style); p.paragraph_format.space_after = Pt(2)
+        p = d.add_paragraph(style="List Bullet"); p.paragraph_format.space_after = Pt(2)
         if isinstance(it, tuple):
             r = p.add_run(it[0]); r.bold = True; p.add_run(it[1])
         else:
@@ -47,10 +49,15 @@ def tabla(headers, rows, widths=None):
     d.add_paragraph().paragraph_format.space_after = Pt(2)
     return t
 
-def pregunta(n, txt):
+N = [0]
+def pregunta(txt):
+    N[0] += 1
     p = d.add_paragraph(); p.paragraph_format.space_before = Pt(6); p.paragraph_format.space_after = Pt(3)
-    r = p.add_run(f"P{n}. "); r.bold = True; r.font.color.rgb = RGBColor(0xC0, 0x39, 0x2B)
+    r = p.add_run(f"P{N[0]}. "); r.bold = True; r.font.color.rgb = RGBColor(0xC0, 0x39, 0x2B)
     r2 = p.add_run(txt); r2.bold = True
+    resp = d.add_paragraph(); resp.paragraph_format.space_after = Pt(8)
+    rr = resp.add_run("Respuesta: "); rr.italic = True; rr.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
+    rs = resp.add_run("_" * 78); rs.font.color.rgb = RGBColor(0xBF, 0xBF, 0xBF)
 
 # ---------------------------------------------------------------- portada
 t = d.add_heading("Casa Óga — Preguntas abiertas de calidad de datos (Ronda 2)", level=0)
@@ -58,109 +65,99 @@ t.alignment = WD_ALIGN_PARAGRAPH.CENTER
 par("Proyecto Data Driven · Grupo 1 · Entregable 2 — Evaluación de calidad de datos", italic=True).alignment = WD_ALIGN_PARAGRAPH.CENTER
 par("")
 tabla(["Campo", "Detalle"],
-      [["Origen de las preguntas", "Análisis exploratorio y de calidad sobre los 15 datasets recibidos (período ene-2022 a dic-2025)."],
-       ["Destinatarios sugeridos", "Compras y Categorías (Diego P.), Dirección Financiera (Carlos F.), Dirección Comercial (María G.), Sistemas / referente técnico de Operaciones."],
-       ["Fecha", "[completar]"],
-       ["Respuestas", "[completar]"]], widths=[4.5, 12])
-par("Cada punto indica qué se detectó, por qué importa para el proyecto y qué criterio aplicaríamos si no hubiera respuesta. "
-    "Los criterios provisorios están marcados como tales: no son decisiones tomadas.", italic=True)
+      [["Origen de las preguntas", "Análisis exploratorio y de calidad sobre los 15 datasets recibidos (período enero 2022 a agosto 2026)."],
+       ["Destinatarios sugeridos", "Compras y Categorías, Dirección Financiera, Dirección Comercial, Sistemas / referente técnico de Operaciones."],
+       ["Fecha de envío", "[completar]"],
+       ["Fecha solicitada de respuesta", "[completar]"],
+       ["Respondido por", "[completar]"]], widths=[5.0, 11.5])
+par("Cada bloque empieza con lo que encontramos en los datos y sigue con las preguntas. "
+    "No proponemos respuestas: necesitamos el criterio de ustedes para poder aplicarlo. "
+    "Las preguntas están numeradas para facilitar la respuesta punto por punto, por escrito o en una reunión.", italic=True)
 
 # ---------------------------------------------------------------- BLOQUE 1
 H("Bloque 1 · Productos sin costo unitario en el catálogo (22 SKUs)", 1)
-par("Qué se detectó", bold=True)
+par("Qué encontramos en los datos", bold=True)
 bullets([
-    ("22 de 800 SKUs (2,7%) no tienen cargado el costo unitario", " en Productos_catalogo.csv. Sí tienen precio de lista."),
-    ("Los 22 son altas recientes: ", "todas sus fechas de alta están entre el 6-feb-2025 y el 27-jun-2025. Ningún SKU anterior a 2025 tiene el costo vacío."),
-    ("16 siguen activos y 6 fueron discontinuados. ", "A dic-2025 tienen 2.610 unidades en stock repartidas en 192 posiciones SKU-tienda."),
-    ("Representan $235,7 M de venta acumulada (0,73% del total)", ", pero su stock no se puede valuar a costo, que es la base del cálculo de capital inmovilizado."),
-    ("Los 22 SKUs sí tienen órdenes de compra con costo cargado", " (entre 1 y 9 OC cada uno). El costo promedio ponderado por unidades va de $4.718 a $38.504."),
+    ("22 de 800 productos (2,7%) no tienen cargado el costo unitario", " en el catálogo. El precio de lista sí está cargado en los 22."),
+    ("Los 22 son altas recientes: ", "sus fechas de alta van del 6 de febrero al 27 de junio de 2025. Ningún producto anterior a 2025 tiene el costo vacío."),
+    ("16 siguen activos y 6 fueron discontinuados.", " Entre todos suman 2.610 unidades en stock, repartidas en 192 combinaciones de producto y tienda."),
+    ("Acumulan $235,7 millones de venta", " en el período analizado."),
+    ("Esos mismos 22 productos sí tienen costo cargado en sus órdenes de compra", " (entre 1 y 9 órdenes cada uno)."),
+    ("Tomando el costo de esas órdenes de compra, ", "el margen sobre precio de lista de estos 22 productos daría entre 52% y 58%, mientras que el resto del catálogo tiene un margen promedio de 45%."),
 ])
-par("Por qué importa", bold=True)
-par("El capital inmovilizado —la cifra central del proyecto— se calcula valuando el stock a costo. Hoy estos SKUs quedan fuera de esa "
-    "valuación o se estiman. En el Entregable 1 se imputaron con la mediana de costo de su categoría; comparado contra el costo real de "
-    "las órdenes de compra, esa estimación se desvía un 11,9% en la mediana, con casos de −84% y +63%.")
-par("Un dato que no cierra y necesita explicación", bold=True)
-par("Si se usara el costo de las órdenes de compra, estos 22 productos tendrían un margen sobre precio de lista de 52% a 58% "
-    "(mediana 55,2%), muy por encima del 45,4% del resto del catálogo. O son productos genuinamente más rentables, o el costo de la "
-    "orden de compra y el costo del catálogo no son la misma magnitud (por ejemplo, si el del catálogo incluye flete, impuestos o "
-    "costos de importación que la OC no tiene).")
-pregunta(1, "¿Por qué quedaron sin costo justamente los productos dados de alta en 2025? ¿Cambió el circuito de carga de productos nuevos ese año?")
-pregunta(2, "¿Quién es hoy el responsable de cargar el costo unitario de un producto nuevo, y en qué momento del alta debería quedar cargado?")
-pregunta(3, "¿El costo_unitario del catálogo es el mismo concepto que el costo_unitario_ars de una orden de compra, o el del catálogo incluye componentes adicionales (flete, impuestos, nacionalización)? Esto define si podemos completar los faltantes desde las órdenes de compra.")
-pregunta(4, "Si podemos usar las órdenes de compra: ¿qué criterio prefieren, el costo de la última orden, el promedio ponderado por unidades, o un costo de reposición que ustedes definan?")
-pregunta(5, "¿Pueden entregar directamente el costo de estos 22 SKUs desde el sistema de Compras? Es la opción preferible: evita cualquier estimación.")
-par("Criterio provisorio si no hay respuesta: ", bold=True)
-par("se valúa con el costo promedio ponderado de las órdenes de compra de cada SKU y se marca la fila como costo estimado, para poder "
-    "recalcular después. Con ese criterio el stock de estos SKUs vale $67,1 M a dic-2025.", space=10)
-par("Detalle de los 22 SKUs: archivo Entregable 2/EDA/resultados/skus_sin_costo.csv", italic=True)
+par("Por qué lo preguntamos", bold=True)
+par("El capital inmovilizado se calcula valuando el stock a costo. Sin ese dato, estos productos quedan fuera de la medición.")
+pregunta("¿Cuál es el circuito de carga del costo unitario de un producto nuevo? ¿Qué área lo carga y en qué momento del alta?")
+pregunta("¿Qué explica que estos 22 productos, todos dados de alta en 2025, hayan quedado sin costo?")
+pregunta("¿Qué incluye exactamente el costo unitario del catálogo? ¿Es el precio de compra al proveedor, o incorpora otros componentes como flete, impuestos o nacionalización?")
+pregunta("¿Es el mismo concepto que el costo unitario que figura en las órdenes de compra? Si no lo es, ¿en qué se diferencian?")
+pregunta("¿De qué fuente debemos tomar el costo de estos 22 productos?")
+pregunta("¿Quién puede entregarnos ese dato y en qué plazo?")
+pregunta("Mientras tanto, ¿cómo quieren que tratemos a estos 22 productos en los cálculos de capital inmovilizado y de margen?")
+par("Listado de los 22 productos: archivo adjunto “skus_sin_costo.csv”.", italic=True)
 
 # ---------------------------------------------------------------- BLOQUE 2
 d.add_page_break()
 H("Bloque 2 · Costo unitario vacío en el historial de precios", 1)
-par("Qué se detectó", bold=True)
+par("Qué encontramos en los datos", bold=True)
 bullets([
-    ("40 filas de Historial_Precios_SKU.csv no tienen costo unitario", ", y corresponden exactamente a los mismos 22 SKUs del Bloque 1."),
-    ("El vacío es total por producto: ", "ninguno de los 22 tiene costo en una vigencia y vacío en otra. O está en todas, o en ninguna."),
-    ("El precio de lista sí está cargado en las 40 filas.", " Falta únicamente el costo."),
-    ("El resto del historial es consistente: ", "sin solapamientos ni huecos entre vigencias, la última vigencia coincide con el precio del catálogo en los 800 SKUs, y la primera coincide con la fecha de alta en los 800."),
+    ("40 registros del historial de precios no tienen costo unitario", ", y corresponden exactamente a los mismos 22 productos del bloque anterior."),
+    ("El vacío es total por producto: ", "ninguno de los 22 tiene costo cargado en una vigencia y vacío en otra."),
+    ("En esos 40 registros el precio de lista sí está cargado.", " Falta únicamente el costo."),
+    ("El resto del historial es consistente: ", "no hay vigencias solapadas ni períodos sin cubrir, la última vigencia de cada producto coincide con el precio del catálogo en los 800 casos, y la primera coincide con la fecha de alta en los 800."),
+    ("Entre una vigencia y la siguiente, ", "el precio de lista sube 86% en la mediana, con casos de hasta 393%."),
 ])
-par("Por qué importa", bold=True)
-par("Confirma que el problema está en el alta del producto y no en el mantenimiento de precios: el costo nunca entró al sistema. "
-    "También implica que no se puede reconstruir el costo histórico de estos SKUs, ni calcular su margen real en liquidaciones.")
-pregunta(6, "¿Cuál es la fuente maestra del costo: el catálogo de productos o el historial de precios? ¿Cuál manda si difieren?")
-pregunta(7, "¿El historial de precios se alimenta automáticamente del catálogo, o son cargas independientes? Lo preguntamos porque el vacío es idéntico en ambos, lo que sugiere una única fuente o una réplica.")
-pregunta(8, "Cuando un producto cambia de proveedor y de costo, ¿se registra una nueva vigencia en el historial o se pisa el valor anterior?")
-pregunta(9, "Para los 15 SKUs que aparecen duplicados en el catálogo con dos proveedores distintos: ¿el costo debería ser uno por proveedor? Hoy el historial guarda un solo costo por SKU y por vigencia, así que el modelo de datos no contempla ese caso.")
-par("Observación adicional para validar", bold=True)
-par("Entre vigencias consecutivas, el precio de lista sube 86% en la mediana y hasta 393%. Son saltos nominales grandes: hace falta "
-    "confirmar si responden a la inflación del período, para decidir si el análisis se hace a precios corrientes o constantes.", space=10)
+pregunta("¿Cuál de los dos sistemas es la fuente maestra del costo: el catálogo de productos o el historial de precios? Si los valores difieren, ¿cuál debe prevalecer?")
+pregunta("¿Cómo se alimenta el historial de precios? ¿Se genera a partir del catálogo o son cargas independientes?")
+pregunta("Cuando cambia el costo de un producto, ¿qué se registra? ¿Se abre una vigencia nueva o se actualiza el valor existente?")
+pregunta("Cuando un producto se compra a más de un proveedor con costos distintos, ¿cómo se registra esa situación? Lo consultamos porque hay 15 productos que figuran en el catálogo con dos proveedores, y el historial guarda un único costo por producto y vigencia.")
+pregunta("¿A qué responden las variaciones de precio entre vigencias? ¿Siguen algún criterio de actualización definido?")
+pregunta("¿Los análisis de venta y de margen deben hacerse a precios corrientes de cada período, o hay una referencia que la empresa use para comparar valores entre años?")
 
 # ---------------------------------------------------------------- BLOQUE 3
 d.add_page_break()
-H("Bloque 3 · Valores imposibles detectados (5.854 registros)", 1)
-par("Se agrupan acá todos los valores que no pueden existir por definición. No son valores extremos discutibles: son datos que "
-    "contradicen la naturaleza de la variable.")
+H("Bloque 3 · Valores que no pueden existir por definición", 1)
+par("Encontramos 5.854 registros con valores que contradicen la naturaleza de la variable. No son valores extremos "
+    "discutibles: son datos imposibles, como un stock negativo.")
 tabla(["Caso", "Registros", "Rango del problema", "Fuente"],
-      [["Stock disponible negativo", "1.209", "hasta −152 unidades", "Stock_SKU_tienda_mensual"],
-       ["Unidades vendidas negativas", "2.317", "hasta −26 unidades", "Ventas_SKU_tienda_mensual"],
-       ["Venta neta negativa", "2.317", "hasta −$1.705.312", "Ventas_SKU_tienda_mensual"],
-       ["Descuento fuera de 0-100%", "3", "120%, 120% y −10%", "Liquidaciones"],
-       ["Descuento fuera de 0-100%", "2", "150% y −15%", "Promociones_Comerciales"],
-       ["Presupuesto o unidades negativas", "6", "hasta −$963.369 y −9 unidades", "Presupuesto_Ventas"]],
+      [["Stock disponible negativo", "1.209", "hasta −152 unidades", "Stock por SKU, tienda y mes"],
+       ["Unidades vendidas negativas", "2.317", "hasta −26 unidades", "Ventas por SKU, tienda y mes"],
+       ["Venta neta negativa", "2.317", "hasta −$1.705.312", "Ventas por SKU, tienda y mes"],
+       ["Descuento fuera del rango 0-100%", "3", "120%, 120% y −10%", "Liquidaciones"],
+       ["Descuento fuera del rango 0-100%", "2", "150% y −15%", "Promociones comerciales"],
+       ["Presupuesto o unidades negativas", "6", "hasta −$963.369 y −9 unidades", "Presupuesto de ventas"]],
       widths=[6.5, 2.2, 5.3, 5.5])
 
-H("3.1 Stock negativo (1.209 filas)", 2)
-par("Qué encontramos", bold=True)
+H("3.1 Stock disponible negativo (1.209 registros)", 2)
+par("Qué encontramos en los datos", bold=True)
 bullets([
-    ("Está repartido, no concentrado: ", "548 SKUs, las 28 tiendas, 1.117 posiciones distintas. La tienda más afectada tiene 58 casos."),
-    ("Crece con el negocio: ", "67 casos en 2022, 255 en 2023, 394 en 2024 y 493 en 2025."),
-    ("Es chico en magnitud: ", "mediana −11 unidades; solo 5 filas superan las 100 unidades."),
-    ("Respalda la explicación de sincronización POS-inventario que dio el negocio: ", "el 81,6% de esas filas tuvo ventas ese mes, el faltante se correlaciona con las unidades vendidas (0,75) y en 1.148 de 1.209 casos el mes siguiente vuelve a stock positivo."),
+    ("Está repartido, no concentrado: ", "afecta a 548 productos, a las 28 tiendas y a 1.117 combinaciones distintas de producto y tienda."),
+    ("Aumenta a lo largo del tiempo: ", "67 casos en 2022, 255 en 2023, 394 en 2024 y 493 en 2025."),
+    ("Los valores son chicos: ", "la mediana es de −11 unidades y solo 5 registros superan las 100 unidades."),
+    ("El 81,6% de esos registros tuvo ventas ese mismo mes", " y el tamaño del faltante acompaña a las unidades vendidas."),
+    ("En 1.148 de los 1.209 casos, ", "el mes siguiente esa misma combinación vuelve a tener stock positivo."),
 ])
-pregunta(10, "¿Confirman que el stock negativo es un desfasaje de sincronización entre el POS y el sistema de inventario, y no un ajuste de inventario real?")
-pregunta(11, "¿Llevarlo a cero es el tratamiento correcto, o prefieren que lo reconstruyamos como “stock inicial menos ventas” del mes?")
-pregunta(12, "¿Hay algún proceso de conteo o ajuste que corrija estos casos más adelante? Si existe, ¿podemos recibir esos ajustes?")
-par("Criterio provisorio: ", bold=True)
-par("se lleva a 0 y se marca la fila con una columna de auditoría. Impacto acotado: son 20.914 unidades sobre un stock que a "
-    "dic-2025 es de 135.484.", space=8)
+pregunta("¿Qué representa un stock negativo en el reporte? ¿A qué situación operativa corresponde?")
+pregunta("¿Existe algún proceso de conteo o ajuste posterior que corrija estos casos? Si existe, ¿podemos recibir esos ajustes?")
+pregunta("¿Cómo quieren que tratemos estos registros en el análisis?")
+pregunta("¿Hay algún control previsto para evitar que el stock quede en negativo?")
 
-H("3.2 Unidades y venta neta negativas (2.317 filas)", 2)
-par("Qué encontramos", bold=True)
+H("3.2 Unidades y venta neta negativas (2.317 registros)", 2)
+par("Qué encontramos en los datos", bold=True)
 bullets([
-    ("Son exactamente las devoluciones. ", "Las 2.317 filas negativas coinciden una a una con los 2.317 registros de Devoluciones_SKU.csv: misma tienda, mismo SKU, mismo mes y las mismas unidades. Ya no es una hipótesis."),
-    ("Pesan poco: ", "9.583 unidades, el 1,27% de las unidades vendidas; $418,3 M en valor absoluto."),
-    ("Pero los motivos no coinciden con lo que se nos informó. ", "En el Entregable 1 el negocio indicó que eran “mayormente devoluciones de clientes”. En el dataset solo 466 de 2.317 (20%) son “Devolución de cliente (cambio)”. El resto es producto dañado en logística (499), producto sin rotación / no vendido (471), error de picking (446) y defecto de fabricación (435)."),
-    ("En solo 40 de los 2.317 casos ", "hay además una fila de venta positiva del mismo producto, tienda y mes."),
+    ("Los 2.317 registros negativos de venta coinciden uno a uno con los 2.317 registros del dataset de devoluciones", ": misma tienda, mismo producto, mismo mes y las mismas unidades."),
+    ("Representan 9.583 unidades, ", "el 1,27% de las unidades vendidas en el período."),
+    ("Por motivo de devolución: ", "producto dañado en logística 499 casos, producto sin rotación o no vendido 471, devolución de cliente por cambio 466, error de picking 446 y defecto de fabricación 435."),
+    ("En solo 40 de los 2.317 casos ", "existe además un registro de venta positiva del mismo producto, tienda y mes."),
 ])
-pregunta(13, "El dataset de devoluciones muestra que solo el 20% son devoluciones de clientes. ¿Los otros cuatro motivos (daño en logística, error de picking, defecto de fábrica, producto sin rotación) también se registran como venta negativa en el POS, o deberían ser movimientos de inventario?")
-pregunta(14, "“Producto sin rotación / no vendido” (471 registros, 2.013 unidades) — ¿qué operación representa? ¿Es una devolución al proveedor? Es directamente relevante para el proyecto: si se puede devolver mercadería sin rotación, es una palanca de acción que hoy no estamos contemplando.")
-pregunta(15, "¿La venta neta ya tiene descontadas las devoluciones, o hay que restarlas aparte? Con la coincidencia uno a uno, la lectura es que la devolución está cargada como una fila negativa separada.")
-pregunta(16, "Para el modelo: cuando un producto se devuelve por daño o defecto, ¿la unidad vuelve al stock vendible de la tienda o se da de baja?")
-par("Criterio provisorio: ", bold=True)
-par("se dejan de llevar a cero. Se separan como devoluciones y se netean de la venta del mes para calcular el ritmo de rotación, "
-    "conservando el motivo como variable.", space=8)
+pregunta("¿Qué operación hay detrás de cada uno de los cinco motivos de devolución? Nos interesa entender en particular qué significa “producto sin rotación / no vendido”.")
+pregunta("¿Todos esos motivos se registran como una venta negativa en el sistema, o algunos deberían ser movimientos de inventario?")
+pregunta("¿La venta neta que figura en el reporte ya tiene descontadas las devoluciones, o el reporte las presenta como un registro separado?")
+pregunta("Cuando se devuelve una unidad, ¿qué sucede físicamente con ella? ¿Vuelve al stock vendible de la tienda, se da de baja o se devuelve al proveedor?")
+pregunta("¿Existe la posibilidad de devolverle mercadería sin rotación al proveedor? Si existe, ¿bajo qué condiciones y con qué proveedores?")
+pregunta("¿Cómo quieren que tratemos estos registros al calcular el ritmo de venta de cada producto?")
 
-H("3.3 Descuentos fuera de rango (5 registros)", 2)
+H("3.3 Descuentos fuera del rango 0-100% (5 registros)", 2)
 tabla(["Registro", "Producto / Categoría", "Tienda", "Fecha", "Descuento", "Motivo"],
       [["LIQ0077", "SKU00150", "T11", "11-dic-2023", "120%", "Fin de temporada"],
        ["LIQ0477", "SKU00236", "T27", "26-sep-2025", "120%", "Discontinuación"],
@@ -168,17 +165,15 @@ tabla(["Registro", "Producto / Categoría", "Tienda", "Fecha", "Descuento", "Mot
        ["PROMO0052", "Textil hogar (Online)", "—", "15-dic-2023", "150%", "Navidad"],
        ["PROMO0072", "Baño (Online)", "—", "03-jun-2022", "−15%", "—"]],
       widths=[2.8, 4.6, 1.8, 2.8, 2.2, 3.3])
-par("Contexto útil: ", bold=True)
-par("el resto de los descuentos usa solo valores redondos. En liquidaciones son 10, 15, 20, 25, 30, 40 y 50%. En promociones, de 5 a 40%. "
-    "Los cinco casos son los únicos fuera de ese patrón, lo que sugiere error de carga y no una política excepcional.")
-pregunta(17, "Los dos descuentos de 120% y el de 150%: ¿son errores de tipeo (por ejemplo 20% y 50%), o hubo alguna acción de bonificación total? Un descuento mayor a 100% implicaría pagarle al cliente por llevarse el producto.")
-pregunta(18, "Los descuentos negativos (−10% y −15%): ¿significan un recargo, o son también un error de carga?")
-pregunta(19, "¿El sistema valida el rango del descuento al cargarlo? Si no lo valida, conviene incluirlo en el plan de mejora de calidad de datos.")
-par("Criterio provisorio: ", bold=True)
-par("se excluyen los 5 registros de los cálculos de margen y se marcan, en lugar de acotarlos a 0-100% como se hizo en el "
-    "Entregable 1. Acotar inventa un valor que nadie confirmó.", space=8)
+par("Dato de contexto: el resto de los descuentos toma solo valores redondos. En liquidaciones, de 10% a 50%; "
+    "en promociones, de 5% a 40%.")
+pregunta("¿Qué significa un descuento de 120% o de 150%? ¿Corresponde a algún tipo de acción comercial?")
+pregunta("¿Y un descuento negativo, como −10% o −15%?")
+pregunta("¿Cuál es el rango válido de descuento según la política comercial? ¿Quién lo autoriza?")
+pregunta("¿El sistema valida el valor del descuento al momento de la carga?")
+pregunta("¿Cómo quieren que tratemos estos 5 registros en el análisis de margen?")
 
-H("3.4 Presupuesto negativo (6 valores en 5 filas)", 2)
+H("3.4 Presupuesto con valores negativos o en cero", 2)
 tabla(["Mes", "Tienda", "Categoría", "Presupuesto $", "Presupuesto unidades"],
       [["jun-2022", "T07", "Textil hogar", "33.895", "−2"],
        ["jun-2022", "T22", "Baño", "−6.596", "4"],
@@ -186,30 +181,29 @@ tabla(["Mes", "Tienda", "Categoría", "Presupuesto $", "Presupuesto unidades"],
        ["ene-2023", "T24", "Iluminación", "−514.763", "14"],
        ["may-2023", "T10", "Organización", "359.860", "−4"]],
       widths=[2.6, 2.2, 3.4, 3.6, 4.2])
-par("Se suma un caso relacionado: ", bold=True)
-par("309 celdas con presupuesto en cero, todas entre enero y mayo de 2022, en las 28 tiendas. El presupuesto promedio de una celda "
-    "en 2022 es de $850.428, así que un cero no parece una meta real sino una carga pendiente.")
-pregunta(20, "¿Un presupuesto negativo tiene algún significado (por ejemplo, un ajuste o una corrección contra un mes anterior), o son errores de carga?")
-pregunta(21, "Los 309 ceros de enero a mayo 2022: ¿son meses sin presupuesto asignado o es información que no llegó a cargarse? Cambia si los tomamos como meta cero o los excluimos del cálculo de cumplimiento.")
-pregunta(22, "¿Cómo se arma el presupuesto y quién lo aprueba? Lo consultamos porque el cumplimiento da un valor casi idéntico —alrededor del 91%— en todos los años, categorías y tiendas, lo que es llamativamente parejo para una meta comercial.")
-par("Criterio provisorio: ", bold=True)
-par("se excluyen las 5 filas negativas y los 309 ceros del cálculo de cumplimiento, y se documenta la exclusión.", space=8)
+par("Además hay 309 celdas con presupuesto en cero, todas entre enero y mayo de 2022 y repartidas en las 28 tiendas. "
+    "Como referencia, el presupuesto promedio de una celda en 2022 es de $850.428.")
+pregunta("¿Qué significa un presupuesto negativo? ¿Corresponde a un ajuste o corrección sobre otro período?")
+pregunta("¿Y un presupuesto en cero? ¿Significa que no se asignó meta para ese mes, o que el dato no llegó a cargarse?")
+pregunta("¿Cómo se construye el presupuesto de ventas y quién lo aprueba?")
+pregunta("¿Cómo quieren que tratemos estos registros al medir el cumplimiento contra presupuesto?")
 
 # ---------------------------------------------------------------- cierre
 d.add_page_break()
-H("Resumen de lo que necesitamos", 1)
-tabla(["Tema", "Qué pedimos", "Responsable sugerido", "Bloquea"],
-      [["Costo de 22 SKUs", "Costo unitario real desde el sistema de Compras, o confirmar que podemos usar el de las órdenes de compra",
-        "Compras y Categorías · Finanzas", "Valuación del capital inmovilizado"],
-       ["Definición de costo", "Si el costo del catálogo y el de la orden de compra son el mismo concepto", "Finanzas", "Cálculo de margen y de capital"],
-       ["Stock negativo", "Confirmar el origen y el tratamiento", "Sistemas · Operaciones", "Cálculo de cobertura"],
-       ["Devoluciones", "Qué operación hay detrás de cada motivo y si la unidad vuelve al stock", "Operaciones · Comercial", "Variable objetivo del modelo"],
-       ["Descuentos fuera de rango", "Confirmar si son errores de carga", "Comercial", "Análisis de margen (impacto menor)"],
-       ["Presupuesto", "Sentido de los negativos y de los ceros de 2022", "Finanzas · Comercial", "KPI de desvío contra presupuesto"]],
-      widths=[3.6, 6.4, 3.6, 3.4])
+H("Resumen de lo que necesitamos definir", 1)
+tabla(["Tema", "Preguntas", "Área que puede responder", "Impacto si no se define"],
+      [["Costo de 22 productos", "P1 a P7", "Compras y Categorías · Finanzas", "No se puede valuar el capital inmovilizado de esos productos"],
+       ["Fuente maestra del costo", "P8 a P13", "Finanzas · Sistemas", "Cálculo de margen y de capital a costo"],
+       ["Stock negativo", "P14 a P17", "Sistemas · Operaciones", "Cálculo de cobertura y de meses de stock"],
+       ["Devoluciones", "P18 a P23", "Operaciones · Comercial", "Definición de la variable que va a predecir el modelo"],
+       ["Descuentos fuera de rango", "P24 a P28", "Comercial", "Análisis de margen en liquidaciones"],
+       ["Presupuesto", "P29 a P32", "Finanzas · Comercial", "Indicador de desvío contra presupuesto"]],
+      widths=[3.6, 2.6, 4.4, 6.4])
 par("")
-par("Los cuatro primeros son bloqueantes para la fase de modelado. Los dos últimos tienen impacto acotado y pueden resolverse en "
-    "paralelo.", italic=True)
+par("Los cuatro primeros temas son necesarios para avanzar con la etapa de modelado. Los dos últimos tienen un "
+    "impacto acotado y pueden resolverse en paralelo.", italic=True)
+par("")
+par("Quedamos a disposición para coordinar una reunión si resulta más práctico que responder por escrito.", italic=True)
 
 d.save(OUT)
-print("OK ->", OUT)
+print("OK ->", OUT, "| preguntas:", N[0])
