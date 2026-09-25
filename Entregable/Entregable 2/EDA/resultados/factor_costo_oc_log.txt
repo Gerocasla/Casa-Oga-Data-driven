@@ -1,0 +1,34 @@
+==============================================================================
+FACTOR DE AJUSTE DEL COSTO DE OC — 22 SKUs sin costo en catalogo
+==============================================================================
+SKUs sin costo en catalogo      : 22
+  con ordenes de compra          : 22  (OCs: 91)
+
+--- Relacion costo / precio de lista ---
+  Resto del catalogo (costo catalogo): 0.5509  -> margen 44.9%
+  22 SKUs (costo OC sin ajustar)     : 0.4471  -> margen 55.3%
+
+  FACTOR = 0.5509 / 0.4471 = 1.2321  (+23.2% sobre el costo de OC)
+  Margen de los 22 con costo ajustado: 44.9%  (objetivo: 44.9%)
+
+--- Control: costo OC / costo catalogo en el resto de los SKUs ---
+  SKUs comparables: 766 · mediana 0.999 · p10 0.961 · p90 1.040
+  (Si en el resto la OC ~ catalogo, la brecha de los 22 es propia de esos productos.)
+
+--- Sensibilidad ---
+  Con mediana de OC en vez de ponderado: factor 1.2307
+
+--- Distribucion de los 22 por categoria ---
+  Bano            5 SKUs · margen OC sin ajustar 55.8%
+  Cocina y mesa   1 SKUs · margen OC sin ajustar 55.7%
+  Decoracion      6 SKUs · margen OC sin ajustar 55.5%
+  Muebles         5 SKUs · margen OC sin ajustar 54.9%
+  Organizacion    4 SKUs · margen OC sin ajustar 54.7%
+  Textil hogar    1 SKUs · margen OC sin ajustar 54.9%
+
+--- Valor del stock de los 22 SKUs a Aug-2026 (2,338 unidades) ---
+  Mediana de categoria (criterio anterior)   $  58.67 M
+  Costo OC sin ajustar                       $  58.65 M
+  Costo OC ajustado (criterio adoptado)      $  72.27 M
+
+Guardado: resultados/costo_ajustado_22_skus.csv

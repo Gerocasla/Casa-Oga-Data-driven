@@ -13,11 +13,22 @@ def P(*a):
     s = " ".join(str(x) for x in a); print(s); LOG.write(s + "\n")
 K = ["fecha_mes", "id_tienda", "id_producto"]
 
-v = pd.read_csv(os.path.join(DATA, "Ventas_SKU_tienda_mensual.csv")).drop_duplicates(K)
+# Tratamiento de ventas negativas (devoluciones). Default del negocio (respuesta P23, ronda 2):
+#   "neteo" -> se restan del mismo SKU-tienda-mes (las devoluciones no son ritmo de venta).
+#   "clip"  -> se llevan a 0 (criterio anterior, se conserva para comparar).
+CRITERIO_NEG = os.environ.get("CRITERIO_NEG", "neteo")
+v_raw = pd.read_csv(os.path.join(DATA, "Ventas_SKU_tienda_mensual.csv"))
 s = pd.read_csv(os.path.join(DATA, "Stock_SKU_tienda_mensual.csv")).drop_duplicates(K)
 cat = pd.read_csv(os.path.join(DATA, "Productos_catalogo.csv")).drop_duplicates("id_producto")
-v[["unidades_vendidas", "venta_neta"]] = v[["unidades_vendidas", "venta_neta"]].clip(lower=0)
-s["stock_disponible"] = s["stock_disponible"].clip(lower=0)
+if CRITERIO_NEG == "neteo":
+    pos = v_raw[v_raw["unidades_vendidas"] >= 0].drop_duplicates(K)   # dedup H1 solo sobre ventas
+    neg = v_raw[v_raw["unidades_vendidas"] < 0]                         # devoluciones, se suman
+    v = pd.concat([pos, neg]).groupby(K, as_index=False)[["unidades_vendidas", "venta_neta"]].sum()
+else:
+    v = v_raw.drop_duplicates(K).copy()
+    v[["unidades_vendidas", "venta_neta"]] = v[["unidades_vendidas", "venta_neta"]].clip(lower=0)
+s["stock_disponible"] = s["stock_disponible"].clip(lower=0)   # P16: piso en 0 (error de sincronizacion)
+P(f"Criterio para ventas negativas: {CRITERIO_NEG}")
 d = s.merge(v, on=K)
 d["fecha_mes"] = pd.to_datetime(d["fecha_mes"])
 d = d.sort_values(["id_tienda", "id_producto", "fecha_mes"])
@@ -34,9 +45,9 @@ d["discontinuado"] = d["baja"].notna() & (d["baja"] <= d["fin_mes"])
 d["con_stock"] = d["stock_disponible"] > 0
 
 # --- candidatos de estado en un mes dado ---
-d["A_deadstock"] = d["con_stock"] & ((d["u3"] == 0) | (d["cobertura"] > 12) | d["discontinuado"])
+d["A_deadstock"] = d["con_stock"] & ((d["u3"] <= 0) | (d["cobertura"] > 12) | d["discontinuado"])
 d["B_rojo"] = d["con_stock"] & ((d["cobertura"] > 12) | d["discontinuado"])
-d["C_sin_venta3"] = d["con_stock"] & (d["u3"] == 0)
+d["C_sin_venta3"] = d["con_stock"] & (d["u3"] <= 0)
 d["D_cob12"] = d["con_stock"] & (d["cobertura"] > 12) & ~d["discontinuado"]
 d["E_cob9"] = d["con_stock"] & (d["cobertura"] > 9) & ~d["discontinuado"]
 

@@ -1,7 +1,7 @@
 # Problemas de calidad de datos — Casa Óga
 
 > **Corte:** agosto 2026 · **Fuente de los números:** `Datasets_Normalizados/` (15 fuentes)
-> **Verificado con:** `EDA/calidad_2026.py` · **Actualizado:** 22-09-2026
+> **Verificado con:** `EDA/calidad_2026.py` · **Actualizado:** 25-09-2026 (incorpora las respuestas del negocio a la ronda 2)
 >
 > Este archivo es el insumo de la **Sección 1 del Entregable 2 · Parte B** (Hallazgos y Plan de Mejora de Calidad).
 > Cada vez que se resuelva un hallazgo, marcarlo acá y anotarlo en `REGISTRO-CAMBIOS-DATASETS.md`.
@@ -55,7 +55,8 @@ En Ventas, 2.322 duplicados tienen valores distintos entre sí y 811 tienen un r
 
 ### H2 · SKUs duplicados en el maestro de producto
 15 identificadores aparecen en dos filas, **idénticas en todo salvo el proveedor**. Es la causa raíz de H1.
-Puede ser legítimo (producto comprado a más de un proveedor) o un error de carga al cambiar de proveedor sin dar de baja el registro anterior. El negocio no lo confirmó.
+**Confirmado por el negocio (P11): es un error del sistema**, no un producto multi-proveedor. Está en revisión con Compras caso por caso.
+**Tratamiento:** no modelar costos por proveedor; tomar el costo único que figura en catálogo como costo vigente del SKU.
 
 ### H3 · Ventas registradas antes de la apertura de la tienda
 11.058 filas por **$1.471,7 M** en seis tiendas, con ventas anteriores a su `fecha_apertura`:
@@ -76,14 +77,20 @@ O la fecha de apertura está mal, o las ventas están mal asignadas. **Afecta cu
 - **Stock:** 1.209 filas con stock disponible negativo (mínimo −152 unidades).
 
 Las 2.317 filas de venta negativa **coinciden una a una con los registros de Devoluciones_SKU** (misma clave, mismas unidades), así que el dato es recuperable.
-Los motivos contradicen lo declarado por el negocio: solo el 20% son devoluciones de cliente; el resto es daño en logística, producto sin rotación, error de picking y defecto de fabricación.
+
+**Respuestas del negocio (P14-P23):**
+- **Stock negativo:** confirmado como error de sincronización entre el POS y el sistema de inventario (una venta se descuenta antes de cargar el stock). No es información real. No existe ningún control automático que lo evite.
+- **Venta negativa:** son devoluciones reales. Los cinco motivos se registran igual, como venta negativa, porque el sistema no los distingue. "Sin rotación / no vendido" corresponde a devoluciones **al proveedor** con cláusula de devolución parcial: conceptualmente es un movimiento de inventario, no una venta (limitación conocida del dato).
+- **Reingreso a stock:** dañado o con defecto de fabricación no vuelve a stock vendible; cambio y error de picking sí podrían reingresar.
+
+**Tratamiento adoptado (defaults del negocio):** stock negativo con piso en 0; ventas negativas **neteadas** contra la venta del mismo SKU-tienda-mes para calcular el ritmo de venta (antes se llevaban a 0).
 **No ocurre en 2026.**
 
 ### H5 · Venta sin stock o mayor al stock
 - 1.020 filas con venta mayor a cero y stock en cero el mismo mes (833 en 2022-25, **187 en 2026**).
 - 5.727 filas con venta superior al stock disponible (5.278 + **449 en 2026**).
 
-Es el único problema de consistencia que **persiste en 2026**. Apunta a una falta de sincronización entre el punto de venta y el sistema de inventario, o a que el stock se informa a fin de mes y la venta es del mes completo.
+Es el único problema de consistencia que **persiste en 2026**. El negocio confirmó (P14) una falta de sincronización entre el POS y el sistema de inventario como causa del stock negativo; es la explicación más probable también para este caso, aunque no se consultó específicamente.
 
 ### H6 · Stock en tránsito sin conciliar con transferencias
 A ago-2026 el campo `stock_en_transito` registra **8.771 unidades**, mientras que las transferencias en curso a esa fecha explican **936** (28 envíos). Relación de **9×**.
@@ -100,10 +107,18 @@ El precio implícito (venta ÷ unidades) comparado con el **precio de lista actu
 Comparado con el precio **vigente según Historial_Precios** en ese mes, lo supera en más de 1,5 veces en el **33%** de las filas (máximo 5,4×).
 Las ventas parecen valuadas con el precio actual y no con el histórico. **Invalida cualquier análisis de elasticidad o de impacto de descuentos.**
 
+**Respuestas del negocio (P8-P13):** el historial **no es un registro real**. Se reconstruyó una única vez para este proyecto a partir de Compras e Inventario; el sistema pisa el precio vigente y no guarda historia. El catálogo es la fuente maestra: ante cualquier diferencia, manda el catálogo. Las variaciones entre vigencias son repricing de mercado y no hay un criterio de actualización documentado.
+
+**Tratamiento:** no usar el historial para revaluar ventas; usar `precio_lista` tal como está. Para comparar montos entre años hay que construir un criterio propio (P13) — con una advertencia: como `venta_neta` ya está valuada aproximadamente al precio de lista actual (85%-99% en todo el período), **no hay que deflactarla por IPC**, porque se corregiría la inflación dos veces. Para comparaciones interanuales conviene usar unidades.
+
 ### H9 · Descuentos fuera de rango
 - **Liquidaciones:** 3 valores fuera de [0, 100] → 120%, −10%, 120%.
 - **Promociones:** 2 valores → 150%, −15%.
 - **Presupuesto:** 3 valores negativos y 309 ceros concentrados en los primeros meses de 2022.
+
+**Respuestas del negocio (P24-P32):** los descuentos fuera de rango son **error de carga** (dígito de más o signo invertido); no hay validación automática ni política formal. Rangos de referencia empíricos: 10%-50% en liquidaciones y 5%-40% en promociones. En el presupuesto, los ceros de ene-may 2022 son un **proceso inmaduro** en el arranque (dato no disponible) y los negativos, **error de carga**. El presupuesto lo arman María G. y Carlos F.
+
+**Tratamiento:** excluir los 5 descuentos del cálculo de margen; excluir del desvío contra presupuesto tanto los 309 ceros como los 3 negativos.
 
 ### H10 · Promociones duplicadas e inválidas
 - 1 fila exactamente duplicada y 2 identificadores repetidos (uno de ellos, `PROMO0101`, con dos descuentos distintos: 15% y 5%).
@@ -112,7 +127,11 @@ Las ventas parecen valuadas con el precio actual y no con el histórico. **Inval
 ### H11 · Faltantes de costo
 - **22 SKUs** sin `costo_unitario` en el catálogo.
 - **40 vigencias** (de 22 SKUs) sin costo en el historial de precios.
-- No se puede completar desde ninguna otra fuente. Impide calcular margen y capital inmovilizado para esos productos.
+- Los 22 tienen órdenes de compra (91 OCs), pero **el costo de OC no es el mismo concepto que el de catálogo** (P3-P4): usado tal cual da un margen de 55,3% contra 44,9% del resto. No hay documentación que defina qué incluye el costo de catálogo: el responsable de IT renunció y no dejó documentación.
+- **Causa (P1-P2):** el alta comercial (Compras) y la carga de costo (Finanzas) son dos pasos separados, sin control que exija ambos antes de activar el producto.
+- **Tratamiento (supuesto del proyecto, no dato del negocio):** costo de OC ponderado por unidades × **factor 1,2321** (+23,2%), que nivela el margen de los 22 SKUs con el 44,9% del resto. Robusto al criterio (con mediana de OC: 1,2307). Detalle en `EDA/factor_costo_oc.py` y `resultados/costo_ajustado_22_skus.csv`.
+- **Impacto:** el stock de estos 22 SKUs a ago-2026 (2.338 unidades) vale **$72,3 M** con el costo ajustado, contra $58,7 M con la mediana de categoría que se usaba antes.
+- **Observación:** en los otros 766 SKUs el costo de OC coincide con el de catálogo (mediana 0,999). La brecha es propia de estos 22 productos, así que "no es el mismo concepto" no alcanza a explicarla del todo.
 - Menores: 65 de 119 promociones sin `medio_pago` y 54 sin `evento_asociado`.
 
 ### H12 · Fuentes sin cobertura de 2026
@@ -139,13 +158,23 @@ Ambas fuentes quedan en los mismos 7 valores canónicos: `Bano, Cocina y mesa, D
 
 ---
 
-## Pendiente de confirmar con el negocio
+## Respuestas del negocio · ronda 2 (recibidas 25-09-2026)
 
-Las siguientes preguntas condicionan cómo se corrige cada hallazgo y están en `Preguntas-Calidad-de-Datos-Ronda-2.docx`:
+El cuestionario `Preguntas-Calidad-de-Datos-Ronda-2.docx` (32 preguntas) cubrió costos, historial de precios, stock negativo, devoluciones, descuentos y presupuesto. Las respuestas quedaron volcadas en H2, H4, H5, H8, H9 y H11.
 
-1. **H2** — ¿Los 15 SKUs duplicados son multi-proveedor legítimo o error de carga? ¿Cuál es el registro válido?
-2. **H3** — ¿Está mal la fecha de apertura o la asignación de las ventas?
-3. **H4** — ¿Se reemplazan las ventas negativas por el dataset de devoluciones? ¿Por qué solo el 20% son de cliente?
-4. **H6** — ¿Qué incluye exactamente `stock_en_transito`?
-5. **H8** — ¿Con qué precio se valúan las ventas: el vigente del mes o el actual?
-6. **H12** — ¿Van a enviar Devoluciones, Calendario y Catálogo actualizados a 2026?
+**Sugerencias que el negocio pidió explícitamente (P1-P2), de cara a la implementación definitiva:**
+- Que el alta de un producto no pueda quedar activa sin costo cargado (control bloqueante o estado "pendiente de costo").
+- Que el costo de catálogo tenga una definición documentada: qué incluye y cómo se relaciona con el costo de OC.
+- Que el modelo excluya o marque los SKUs sin costo en producción, en lugar de imputarlos en silencio.
+
+## Sigue abierto
+
+No se preguntó en la ronda 2 (verificado sobre el cuestionario):
+1. **H3** — ¿Está mal la fecha de apertura o la asignación de las ventas?
+2. **H6** — ¿Qué incluye exactamente `stock_en_transito`?
+3. **H12** — ¿Van a enviar Devoluciones, Calendario y Catálogo actualizados a 2026?
+
+Tampoco tuvieron respuesta en la ronda 2:
+4. **H7** — Liquidaciones "Discontinuación" sobre SKUs activos y tienda "Todas".
+5. **H10** — Promociones con id repetido y con fecha de fin anterior a la de inicio.
+6. Presupuesto — cumplimiento uniforme de ~91% en todos los niveles.

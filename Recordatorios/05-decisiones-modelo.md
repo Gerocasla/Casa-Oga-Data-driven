@@ -1,7 +1,7 @@
 # Decisiones sobre el modelo — variable objetivo y semáforo
 
 > **Estado: PROPUESTA, no aprobada.** Enviada a validación de María G. el [fecha]. Nada de esto es definición oficial de Casa Óga hasta que responda.
-> Actualizado: 23-09-2026 · Datos: `Datasets_Normalizados/` corte ago-2026 · Scripts: `Entregable/Entregable 2/EDA/candidatos_target.py`
+> Actualizado: 25-09-2026 (ventas negativas neteadas, ver al final) · Datos: `Datasets_Normalizados/` corte ago-2026 · Scripts: `Entregable/Entregable 2/EDA/candidatos_target.py`
 
 ## La propuesta en corto
 
@@ -11,10 +11,10 @@
 | **Unidad de análisis** | SKU–tienda–mes |
 | **Universo** | Posiciones con `stock_disponible > 0` en el mes t |
 | **Horizonte** | 3 meses (etiqueta en t+3, features hasta t) |
-| **Cobertura** | `stock_disponible / promedio de unidades vendidas de los últimos 12 meses` |
+| **Cobertura** | `stock_disponible / promedio de unidades vendidas de los últimos 12 meses`, con las devoluciones neteadas |
 | **Optimización** | Recall por encima de precisión |
 | **Partición** | Temporal, nunca aleatoria |
-| **Prevalencia** | 2,67% (3.509 positivos sobre 131.189 filas) |
+| **Prevalencia** | 3,38% (4.428 positivos sobre 131.189 filas) |
 
 **Semáforo:** Rojo > 12 meses · Amarillo 9 a 12 · Verde < 9.
 **Acciones:** Rojo liquidar o transferir · Amarillo frenar reposición y vigilar · Verde nada.
@@ -45,17 +45,17 @@ Comparación sobre 131.189 filas, etiqueta a 3 meses. La columna que decide es e
 
 | Candidato | Positivos | Info nueva | Recall regla trivial | Veredicto |
 |---|---|---|---|---|
-| Dead stock binario (3 condiciones OR) | 7,41% | 58% | 41,8% | Descartado: mucha inercia |
-| **Cobertura > 12 o discontinuado** | 3,15% | 76% | 24,4% | Mejor señal, pero ver problema de 2026 |
-| Sin ventas en 3 meses | 6,04% | 56% | 44,3% | Descartado: el más inercial y el más ruidoso |
-| **Cobertura > 12 sin discontinuados** | **2,67%** | **71%** | 28,6% | **Elegido** |
-| Cobertura > 9 (rojo + amarillo) | 8,52% | 68% | 32,3% | Alternativa si hace falta volumen |
+| Dead stock binario (3 condiciones OR) | 8,51% | 58% | 41,8% | Descartado: mucha inercia |
+| **Cobertura > 12 o discontinuado** | 3,85% | 71% | 28,6% | Mejor señal, pero ver problema de 2026 |
+| Sin ventas en 3 meses | 6,75% | 58% | 42,2% | Descartado: el más inercial y el más ruidoso |
+| **Cobertura > 12 sin discontinuados** | **3,38%** | **68%** | 32,5% | **Elegido** |
+| Cobertura > 9 (rojo + amarillo) | 9,84% | 64% | 35,9% | Alternativa si hace falta volumen |
 
 ---
 
 ## Advertencias que NO hay que perder de vista
 
-1. **La tasa objetivo no es estable:** 1,9% en 2023-2025 contra 8,3% en 2026. La mediana de cobertura está clavada en 5,0 meses todo el período, pero el percentil 99 pasa de 15 a 48 meses entre enero y agosto de 2026: se engorda la cola justo en el tramo nuevo. No está explicado. Obliga a partición temporal y entra como pregunta al negocio.
+1. **La tasa objetivo no es estable:** entre 1,7% y 2,2% en 2023-2025 contra 9,0% en 2026 (con el criterio anterior, 1,1%-1,4% contra 8,3%; el "1,9%" que figuraba antes era la tasa del candidato B, no la del target elegido). La mediana de cobertura está clavada en 5,0 meses todo el período, pero el percentil 99 pasa de 15 a 48 meses entre enero y agosto de 2026: se engorda la cola justo en el tramo nuevo. No está explicado. Obliga a partición temporal y entra como pregunta al negocio.
 2. **El catálogo está congelado desde junio 2025** (H12): en 2026 no hay ningún discontinuado. Si esa condición queda dentro del target, la etiqueta significa una cosa hasta dic-2025 y otra después. Es la razón técnica —además de la conceptual— para sacarla.
 3. **Nuestros cortes son laxos contra el estándar del sector:** la práctica retail trata como stock muerto lo que pasa los 180 días. Con ese criterio la banda roja serían miles de posiciones. Nuestra defensa es la capacidad operativa, y hay que escribirla explícitamente en el entregable.
 4. **Casa Óga rota 2,3 veces al año** contra un rango de 2,5 a 5,0 en home furnishings: está por debajo del piso de su industria.
@@ -98,3 +98,20 @@ Comparación sobre 131.189 filas, etiqueta a 3 meses. La columna que decide es e
 ## Próximo paso
 
 Mapa de features y script que construye el dataset de entrenamiento (tabla 2.1 y 2.2 del Entregable 2 · Parte B). Ver limitaciones vigentes en `PROBLEMAS-CALIDAD-DATOS.md`: H1 duplicados, H3 ventas antes de apertura, H8 precios, H12 fuentes sin 2026.
+
+---
+
+## Cambio de criterio · 25-09-2026 — ventas negativas neteadas
+
+Las respuestas del negocio a la ronda 2 (P23) fijan como default **netear las devoluciones** contra la venta del mismo SKU-tienda-mes, en lugar de llevarlas a 0. `candidatos_target.py` pasa a usar ese criterio (variable `CRITERIO_NEG`; `clip` reproduce el anterior, log en `resultados/candidatos_target_log_clip.txt`).
+
+| | Criterio anterior (a 0) | Criterio actual (neteo) |
+|---|---:|---:|
+| Positivos del target | 3.509 | **4.428** (+26%) |
+| Prevalencia | 2,67% | **3,38%** |
+| Información nueva | 71% | 68% |
+| Recall de la regla trivial | 28,6% | 32,5% |
+
+- Las devoluciones son ~1% de las unidades, pero el impacto se concentra en posiciones de **muy bajo volumen** (mediana 1 unidad/mes): una sola devolución baja el ritmo de 12 meses y empuja la cobertura por encima de 12. De las 2.442 posiciones-mes que cambian de clase, 339 quedan con venta neta ≤ 0 en 12 meses (cobertura infinita).
+- **La elección del target no cambia:** D sigue teniendo mucha menos inercia que A y C (recall trivial 32,5% contra 41,8% y 42,2%).
+- **Punto a discutir:** el motivo "sin rotación / no vendido" (~21% de las unidades devueltas) es devolución **al proveedor** (P18), que el negocio reconoce como un movimiento de inventario y no como venta (P19). Netearlo baja el ritmo de venta de posiciones que no perdieron demanda. Si se decide excluir ese motivo del neteo hay que justificarlo, porque se aparta del default.
