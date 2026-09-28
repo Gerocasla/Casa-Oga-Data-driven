@@ -11,12 +11,9 @@ tendencia_u3_vs_u12,"Ritmo de 3 meses sobre ritmo de 12 meses (>1 acelera, <1 fr
 meses_con_venta_12,Meses con venta > 0 en los ultimos 12
 meses_sin_venta,Meses consecutivos sin venta hasta t
 sin_venta_12m,1 si no hubo venta neta en 12 meses (cobertura infinita)
-precio_medio_12m,Venta neta / unidades de 12 meses
 stock_disponible,Stock disponible en t (piso en 0)
-stock_en_transito,"Stock en transito en t (definicion no documentada, H6)"
 var_stock_3m,Variacion del stock disponible respecto de t-3
 cobertura,Meses de stock en t: stock / u12_prom
-capital_inmovilizado_pos,Stock x costo unitario (con costo ajustado en los 22 SKUs)
 stock_sku_cadena,Stock del SKU sumado en las 28 tiendas en t
 cobertura_sku_cadena,Cobertura del SKU a nivel cadena en t
 tiendas_con_stock_sku,Tiendas con stock del SKU en t
@@ -30,8 +27,6 @@ liquidacion_activa,1 si la posicion (o el SKU en todas las tiendas) esta en liqu
 liquidaciones_12m,Liquidaciones iniciadas sobre la posicion en los ultimos 12 meses
 promos_activas_categoria,Promociones de la categoria vigentes en t (canal fisico o todos)
 descuento_promo_max,Descuento maximo de esas promociones
-precio_lista,Precio de lista del catalogo
-margen_lista,1 - costo / precio de lista
 antig_sku_meses,Meses desde el alta del SKU en el catalogo
 lead_time_dias,Lead time declarado del proveedor
 pedido_minimo_unidades,Pedido minimo del proveedor
@@ -40,12 +35,10 @@ mes_del_anio,Mes calendario de t (1-12)
 u_lag1,Unidades netas en t-1
 u_lag2,Unidades netas en t-2
 u12_max,Maximo mensual de unidades en 12 meses
-venta3_suma,Venta neta de los ultimos 3 meses
 antig_posicion_meses,Meses con registro de la posicion hasta t
+historia_corta,1 si la posicion tiene menos de 12 meses de historia (ritmo calculado con los meses disponibles)
 cobertura_3m_antes,Cobertura de la posicion en t-3
 var_cobertura_3m,Cambio de cobertura entre t-3 y t
-transito_sobre_stock,Stock en transito / stock disponible (H6: usar con cautela)
-descuento_implicito_12m,1 - precio medio realizado / precio de lista (12 meses)
 peso_posicion_en_tienda,Participacion de la posicion en las unidades de la tienda (12 meses)
 stock_vs_prom_sku,Stock de la posicion / stock promedio del SKU en las tiendas que lo tienen
 tendencia_sku_cadena,Ritmo de 3 vs 12 meses del SKU en toda la cadena

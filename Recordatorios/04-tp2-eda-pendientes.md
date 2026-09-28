@@ -5,7 +5,7 @@
 
 ## Datos
 - Usar `Datasets_Normalizados/` · corte **ago-2026** · 15 fuentes. `Datasets/` queda intacta.
-- Dataset del modelo: `Datasets_Modelo/dataset_entrenamiento_v2*` (lo genera `Entregable 2/Modelo/construir_dataset_modelo.py`).
+- Dataset del modelo: `Datasets_Modelo/dataset_entrenamiento_v3*` (lo genera `Entregable 2/Modelo/construir_dataset_modelo.py`).
 - Criterios de limpieza vigentes: ver `06-bitacora-trabajo-con-claude.md` §1 y `Material/Respuestas-Ronda-2-Calidad-de-Datos.md`.
 
 ## Estado por parte
@@ -19,7 +19,7 @@
 | B | 1.1 Hallazgos y mapa | ✅ |
 | B | 1.2 Plan de mejora | ✅ (incluye supuesto de costo y sugerencias pedidas por el negocio) |
 | B | 1.3 Dashboard antes/después | ✅ 28-09 · `Dashboard-Calidad-Antes-Despues.html` + tabla de 11 métricas |
-| B | 2.1 Dataset de entrenamiento | ✅ 28-09 · **v2: 67 features**, tabla de fuentes, riesgos de sesgo y tabla de variables excluidas |
+| B | 2.1 Dataset de entrenamiento | ✅ 28-09 · **v3: 60 features, universo 3+ meses**, tabla de fuentes, riesgos de sesgo y tabla de variables excluidas |
 | B | 2.2 Transformaciones | ✅ 28-09 |
 | — | Dashboard | ✅ 28-09 · 5 pestañas con insights |
 | — | Presentación | ✅ 28-09 · v1 completa (34) y v2 corta (14), HTML + PDF |
@@ -37,7 +37,7 @@
 - [x] Dashboard ampliado a 5 pestañas (`Modelo/insights_dashboard.py` + `Modelo/armar_dashboard.py`).
 - [ ] Carátulas (legajos, roles, fecha).
 - [ ] Decidir si se excluye del neteo el motivo "sin rotación" (devolución a proveedor, ~21% de las unidades devueltas). Hoy se netea todo (default P23).
-- [ ] Revisar con el grupo el dataset v2 (67 features, partición con embargo). Si se cambia algo: subir a v3, no pisar.
+- [ ] Revisar con el grupo el dataset v3 (60 features, universo con 3+ meses de historia, partición con embargo). Si se cambia algo: subir a v4, no pisar.
 
 **Con el negocio (no bloquean la entrega, se declaran como limitación)**
 - [ ] Nunca preguntado: H3 (ventas antes de la apertura), H6 (qué incluye stock en tránsito), H12 (Devoluciones, Calendario y Catálogo a 2026).
@@ -47,6 +47,6 @@
 **Advertencias para el modelado (TP siguiente)**
 - La prevalencia del target en 2026 (9,0%) es 4,6 veces la de 2023-2025 (~2%). El test (ene-may 2026) mide robustez ante ese cambio; no comparar métricas de validación y test como si fueran el mismo problema.
 - Chequeo de sanidad (28-09): logística y gradient boosting dan AUC ~0,90 en validación y ~0,97 en test; la cobertura actual sola da 0,94 en test. Sin señales de leakage, pero el test de 2026 es "fácil" porque la cola engorda por la caída de venta.
-- Con 420 alertas/mes el modelo de prueba captura 62% de los casos vs 47% ordenando por cobertura actual (validación). Es el argumento central para modelar.
-- 40 de 62 features numéricas no separan solas (AUC < 0,55). El stock en tránsito pierde la señal en 2026 (0,67 → 0,50): candidato a salir.
+- Con 420 alertas/mes el modelo de prueba captura 58% de los casos vs 47% ordenando por cobertura actual; con 700, 73% vs 57% (validación). Con menos de ~100 alertas la regla es igual o mejor: el modelo aporta en el rango de la capacidad declarada.
+- 30 de 55 features numéricas no separan solas (AUC < 0,55). La antigüedad de la posición separa en train (0,61) pero no en 2026 (0,50): no hay productos nuevos en el test porque el catálogo está congelado.
 - 2026 no tiene devoluciones → el neteo es asimétrico entre años. La comparación interanual se hace en bruto.

@@ -9,12 +9,12 @@
 |---|---|
 | **Variable objetivo** | Binaria: la posición SKU–tienda tiene cobertura > 12 meses dentro de 3 meses |
 | **Unidad de análisis** | SKU–tienda–mes |
-| **Universo** | Posiciones con `stock_disponible > 0` en el mes t |
+| **Universo** | Posiciones con `stock_disponible > 0` en el mes t, no discontinuadas, con **3+ meses de historia** |
 | **Horizonte** | 3 meses (etiqueta en t+3, features hasta t) |
 | **Cobertura** | `stock_disponible / promedio de unidades vendidas de los últimos 12 meses`, con las devoluciones neteadas |
 | **Optimización** | Recall por encima de precisión |
 | **Partición** | Temporal, nunca aleatoria |
-| **Prevalencia** | 3,38% (4.428 positivos sobre 131.189 filas) |
+| **Prevalencia** | 3,40% (6.853 positivos sobre 201.306 filas, dataset v3) |
 
 **Semáforo:** Rojo > 12 meses · Amarillo 9 a 12 · Verde < 9.
 **Acciones:** Rojo liquidar o transferir · Amarillo frenar reposición y vigilar · Verde nada.
@@ -41,7 +41,17 @@
 
 ## Por qué se descartaron los otros candidatos
 
-Comparación sobre 131.189 filas, etiqueta a 3 meses. La columna que decide es el recall de la regla trivial "va a seguir igual que hoy": si es alto, el target es pura inercia y el modelo no aporta.
+> **Actualizado 28-09 (v3).** Con el universo ampliado a 3+ meses de historia (201.306 filas) la inercia ya no separa a los candidatos: la regla trivial acierta entre 33,5% y 38,6% en todos. La elección de D se sostiene por negocio (umbral relativo a la rotación, pedido de Comercial; sin discontinuados, que no existen en 2026; evento accionable), no por ser el menos inercial.
+>
+> | Candidato | Positivos | Info nueva | Recall regla trivial |
+> |---|---|---|---|
+> | A · Dead stock binario | 8,32% | 62% | 38,4% |
+> | B · Cobertura > 12 o discontinuado | 3,99% | 67% | 33,5% |
+> | C · Sin ventas en 3 meses | 6,18% | 65% | 35,3% |
+> | **D · Cobertura > 12 sin discontinuados** | **3,40%** | **61%** | **38,6%** |
+> | E · Cobertura > 9 | 9,93% | 62% | 38,5% |
+
+Comparación original, sobre 131.189 filas con 12 meses de historia (se conserva como registro de cómo se eligió):
 
 | Candidato | Positivos | Info nueva | Recall regla trivial | Veredicto |
 |---|---|---|---|---|
@@ -97,10 +107,13 @@ Comparación sobre 131.189 filas, etiqueta a 3 meses. La columna que decide es e
 
 ## Próximo paso
 
-~~Mapa de features y script que construye el dataset de entrenamiento~~ **Hecho el 28-09-2026:** `Entregable/Entregable 2/Modelo/construir_dataset_modelo.py` → `Datasets_Modelo/dataset_entrenamiento_v2*` (131.189 filas × 67 features; la v1 de 39 quedó reemplazada). Documentado en Parte B §2.1 y §2.2.
+~~Mapa de features y script que construye el dataset de entrenamiento~~ **Hecho el 28-09-2026:** `Entregable/Entregable 2/Modelo/construir_dataset_modelo.py` → `Datasets_Modelo/dataset_entrenamiento_v3*` (201.306 filas × 60 features; v1 de 39 y v2 de 67 quedaron reemplazadas). Documentado en Parte B §2.1 y §2.2.
 
 Decisiones tomadas al construirlo (revisar con el grupo):
-- **Universo sin discontinuados en t** (además de excluirlos del target). No cambia el conteo: 131.189 filas, igual que en `candidatos_target.py`.
+- **Universo sin discontinuados en t** (además de excluirlos del target). `candidatos_target.py` usa el mismo universo desde v3.
+- **v3 · historia mínima de 3 meses** (antes 12): con 12 quedaban afuera el 40% de las filas, el 45% de los positivos y todos los productos nuevos, que son los más riesgosos (6,8% de positivos en sus primeros 3 meses vs 3,4%). `historia_corta` marca las posiciones con menos de 12 meses. Las de menos de 3 meses necesitan una regla aparte.
+- **v3 · fuera precio, costo y margen del catálogo** (y capital, venta en pesos y descuento implícito): el catálogo guarda solo el valor actual (P10), así que en meses pasados es anacrónico — el mismo argumento que excluye el estado del catálogo. Queda solo el precio relativo a la subcategoría.
+- **v3 · fuera el stock en tránsito** (H6): sin definición y sin señal en 2026.
 - **Partición con embargo de 3 meses:** train t dic-22→dic-24 · validación abr→sep-25 · test ene→may-26. Se pierden 27.775 filas para evaluar (ene-mar y oct-dic 2025); el modelo final se reentrena con todo.
 - **Features descartadas:** antigüedad de tienda (H3), historial de precios (H8), devoluciones por motivo (H12, se apagarían en 2026), identificadores de tienda y SKU.
 - `costo_imputado` queda como marca de control y no como feature (los 22 SKUs no aparecen en train).
@@ -115,8 +128,9 @@ Las respuestas del negocio a la ronda 2 (P23) fijan como default **netear las de
 
 | | Criterio anterior (a 0) | Criterio actual (neteo) |
 |---|---:|---:|
-| Positivos del target | 3.509 | **4.428** (+26%) |
-| Prevalencia | 2,67% | **3,38%** |
+| Positivos del target (universo 12 m) | 3.509 | **4.428** (+26%) |
+| Positivos del target (universo v3, 3+ m) | 5.260 | **6.853** (+30%) |
+| Prevalencia (12 m → v3) | 2,67% → 2,61% | **3,38% → 3,40%** |
 | Información nueva | 71% | 68% |
 | Recall de la regla trivial | 28,6% | 32,5% |
 
@@ -132,13 +146,13 @@ Medido con un modelo **de prueba** (gradient boosting sin ajustar, entrenado sol
 
 | Prueba | Resultado | Lectura |
 |---|---|---|
-| Casos capturados con 420 alertas/mes (validación) | **62%** modelo vs **47%** regla «ordenar por cobertura actual» | +33% de casos con la misma capacidad |
-| Con 700 alertas/mes | 76% vs 57% | |
-| Casos que hoy NO están en rojo | **65%** de los positivos | Un semáforo sobre el presente no los ve: justifica anticipar |
-| Mapa cobertura × tendencia | 9-12 meses de cobertura: 2,9% si la venta está estable, 10,8% si cae > 50% | La tendencia multiplica el riesgo; ninguna regla de un umbral lo captura |
-| Señal por variable | 40 de 62 numéricas con AUC < 0,55 solas; top 15 = demanda y stock de la posición | Las acciones comerciales pasadas no separan solas |
-| Stock en tránsito | AUC 0,67 en train → 0,50 en test | Pierde la señal en 2026 (H6): candidato a salir |
-| v1 (39) vs v2 (67) | Misma performance | La selección final se hace en el modelado |
+| Casos capturados con 420 alertas/mes (validación) | **58%** modelo vs **47%** regla «ordenar por cobertura actual» | +25% de casos con la misma capacidad |
+| Con 700 alertas/mes | 73% vs 57% | Con menos de ~100 alertas la regla es igual o mejor |
+| Casos que hoy NO están en rojo | **55%** de los positivos | Un semáforo sobre el presente no los ve: justifica anticipar |
+| Mapa cobertura × tendencia | 9-12 meses de cobertura: 4,0% si la venta está estable, 9,4% si cae > 50% | La tendencia multiplica el riesgo; ninguna regla de un umbral lo captura |
+| Señal por variable | 30 de 55 numéricas con AUC < 0,55 solas; top 15 = demanda y stock de la posición | Las acciones comerciales pasadas no separan solas |
+| Stock en tránsito | AUC 0,67 en train → 0,50 en test (v2) | Pierde la señal en 2026 (H6): **sacado en v3** |
+| v1 (39) vs v2 (67) vs v3 (60) | Misma performance (AUC ~0,90 validación, ~0,97 test) | La selección final se hace en el modelado |
 
 **Advertencias nuevas:**
 - **2026 no tiene devoluciones registradas** (H12): el neteo solo afecta 2022-2025. Las ventanas de 12 meses de principios de 2026 todavía incluyen devoluciones de 2025. No explica el salto de prevalencia (iría en sentido contrario), pero hay que declararlo.

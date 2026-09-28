@@ -123,8 +123,8 @@ def cob12(v, s, dic="2025-12-01"):
     return int(((x["u12"] <= 0) | (x["stock_disponible"] / x["u12"].where(x["u12"] > 0) > 12)).sum())
 add("Modelo", "Posiciones con cobertura > 12 meses a dic-25", cob12(v0, s0), cob12(v1, s1), "n",
     "Duplicados sumados y negativos sin tratar cambian el ritmo de venta y el stock de cada posicion.")
-add("Modelo", "Prevalencia del target (cobertura > 12 a 3 meses, %)", 2.67, 3.38, "p",
-    "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): +919 positivos.")
+add("Modelo", "Prevalencia del target (cobertura > 12 a 3 meses, %)", 2.61, 3.40, "p",
+    "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): 5.260 -> 6.853 positivos (+1.593). Fuente: EDA/candidatos_target.py.")
 
 df = pd.DataFrame(filas)
 df["variacion_pct"] = np.where(df["antes"] != 0, (df["despues"] / df["antes"] - 1) * 100, np.nan)

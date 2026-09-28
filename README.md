@@ -18,7 +18,7 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 | **2 · Parte B** · Plan de mejora, dashboard antes/después, dataset de entrenamiento | ✅ Completa | `Entregable/Entregable 2/Entregable 2 - Parte B - COMPLETADO.docx` |
 | **2 · Dashboard** | ✅ 5 pestañas | `Entregable/Entregable 2/Dashboard-Calidad-Antes-Despues.html` |
 | **2 · Presentación** | ✅ Dos versiones para elegir | `Entregable/Entregable 2/Presentacion/Casa-Oga-Entregable-2-v1-completa.{html,pdf}` (34) · `…-v2-corta.{html,pdf}` (14) |
-| **3** · Modelado | Próximo | Parte de `Datasets_Modelo/dataset_entrenamiento_v2.parquet` |
+| **3** · Modelado | Próximo | Parte de `Datasets_Modelo/dataset_entrenamiento_v3.parquet` |
 
 **Falta para entregar el 2:** carátulas de Parte A y B (legajos de Simón y Santiago, roles, fecha) y elegir la versión de la presentación.
 **Pendiente con el negocio (no bloquea):** aprobación del target (María G.), capacidad de 15-25 intervenciones por tienda (Lucía O.), preguntas H3/H6/H12.
@@ -38,9 +38,9 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 | Historial de precios (H8) | No usar | Es una reconstrucción, no un registro (P9-P10) |
 | Comparar años | En unidades o en bruto; **sin deflactar por IPC** | La venta ya está a precio actual; 2026 no trae devoluciones |
 | **Target** | 1 si la posición tiene **cobertura > 12 meses en t+3** (stock / promedio 12 m de unidades netas), sin discontinuados | Menos inercia que las alternativas (68% de casos nuevos); ver `Recordatorios/05-decisiones-modelo.md` |
-| Unidad / universo | SKU–tienda–mes; stock > 0 en t, no discontinuada, 12 m de historia, t+3 observado | Es donde se decide la acción |
-| Partición | Temporal con embargo de 3 meses: train dic-22→dic-24 · val abr→sep-25 · test ene→may-26 | La prevalencia salta de ~2% a 9% en 2026 |
-| Dataset | **v2**: 131.189 filas × 67 features (62 num + 5 cat), 113 tras one-hot | Todas con información ≤ t; exclusiones justificadas en Parte B §2.1 |
+| Unidad / universo | SKU–tienda–mes; stock > 0 en t, no discontinuada, **3+ meses de historia**, t+3 observado | Es donde se decide la acción; con 12 meses quedaban afuera los productos nuevos (40% de las filas) |
+| Partición | Temporal con embargo de 3 meses: train mar-22→dic-24 · val abr→sep-25 · test ene→may-26 | La prevalencia salta de ~2,5% a 9% en 2026 |
+| Dataset | **v3**: 201.306 filas × 60 features (55 num + 5 cat), 106 tras one-hot · 3,40% positivos | Todas con información ≤ t; sin precio/costo del catálogo (son el valor de hoy) ni stock en tránsito (H6); exclusiones en Parte B §2.1 |
 
 ---
 
@@ -52,7 +52,7 @@ Casa-Oga-Data-driven/
 ├── REGISTRO-CAMBIOS-DATASETS.md   ← bitácora de todo lo que se tocó en los datos
 ├── Datasets/                      ← CSV tal como los entrega la cátedra (NO se editan)
 ├── Datasets_Normalizados/         ← mismos datos con representación unificada: USAR ESTOS
-├── Datasets_Modelo/               ← dataset de entrenamiento v2 (parquet + muestra CSV + diccionario)
+├── Datasets_Modelo/               ← dataset de entrenamiento v3 (parquet + muestra CSV + diccionario)
 ├── Entregable/
 │   ├── Entregable 1/              ← TP1 entregado (docx, dashboards HTML, semáforo)
 │   └── Entregable 2/
@@ -82,7 +82,8 @@ Requisitos: Python 3.11+ con `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `p
 | 4. Factor de costo | `python "Entregable/Entregable 2/EDA/factor_costo_oc.py"` | factor 1,2321 y costos de los 22 SKUs |
 | 5. Candidatos a target | `python "Entregable/Entregable 2/EDA/candidatos_target.py"` | comparación de 5 targets |
 | 6. Antes / después | `python "Entregable/Entregable 2/EDA/antes_despues.py"` | métricas de la Parte B §1.3 |
-| 7. Dataset | `python "Entregable/Entregable 2/Modelo/construir_dataset_modelo.py"` | `Datasets_Modelo/dataset_entrenamiento_v2*`, señal univariada |
+| 7. Dataset | `python "Entregable/Entregable 2/Modelo/construir_dataset_modelo.py"` | `Datasets_Modelo/dataset_entrenamiento_v3*`, señal univariada |
+| 7b. Chequeo de señal | `python "Entregable/Entregable 2/Modelo/chequeo_senal.py"` | modelos de prueba, curva de capacidad e importancia (`Modelo/resultados/*_v3.csv`) |
 | 8. Insights | `python "Entregable/Entregable 2/Modelo/insights_dashboard.py"` | `Modelo/resultados/insights.json` |
 | 9. Dashboard | `python "Entregable/Entregable 2/Modelo/armar_dashboard.py"` | `Dashboard-Calidad-Antes-Despues.html` |
 | 10. Presentación | `graficos_presentacion.py` → `generar_deck.py` → `armar_html.py` (en `Presentacion/`) | HTML de las dos versiones; el PDF se imprime con Edge (ver `Presentacion/README.md`) |

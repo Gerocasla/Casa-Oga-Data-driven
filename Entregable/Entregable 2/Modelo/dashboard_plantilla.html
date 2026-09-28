@@ -166,7 +166,7 @@ tr:last-child td{border-bottom:0}
   </div>
   <div class="grid2">
     <div class="card"><h2>Cuántos casos se capturan según la capacidad operativa</h2><p class="q">% de los casos del mes que entran en las N alertas de mayor riesgo (validación, abr-sep 2025). Franja = 420-700 intervenciones/mes declaradas.</p>
-      <div class="leg"><span><i style="background:var(--s1)"></i>Modelo de prueba (67 features)</span><span><i style="background:var(--gris)"></i>Regla: ordenar por cobertura actual</span></div>
+      <div class="leg"><span><i style="background:var(--s1)"></i>Modelo de prueba</span><span><i style="background:var(--gris)"></i>Regla: ordenar por cobertura actual</span></div>
       <div class="chart"><canvas id="cCap"></canvas></div>
       <p class="take" id="tkCap"></p></div>
     <div class="card"><h2>Señal de cada variable por separado</h2><p class="q">AUC de la variable sola (0,5 = no separa). Top 15 en train, comparado con test.</p>
@@ -176,7 +176,7 @@ tr:last-child td{border-bottom:0}
   </div>
   <p class="foot">El modelo de prueba es un gradient boosting entrenado solo con el bloque de train, sin ajuste de hiperparámetros: sirve para verificar que el dataset es usable, no es el modelo final (Entregable 3).</p>
 </section>
-<p class="foot">Fuentes: Datasets_Normalizados (corte ago-2026) y Datasets_Modelo/dataset_entrenamiento_v2. Generado por Modelo/armar_dashboard.py.</p>
+<p class="foot">Fuentes: Datasets_Normalizados (corte ago-2026) y Datasets_Modelo/dataset_entrenamiento_v3. Generado por Modelo/armar_dashboard.py.</p>
 </main>
 <script>
 const D = /*__DATA__*/;
@@ -202,14 +202,14 @@ const rm = I.rojo_mes; const r0 = rm.meses.indexOf('2025-12'), r1 = rm.meses.len
 $('kpisRes').innerHTML =
   kpi('Venta ene-ago 2026 vs 2025', nf(vt.var_v*100)+'%', 'unidades '+nf(vt.var_u*100)+'% · posiciones '+nf(vt.var_pos*100)+'%', true)+
   kpi('Capital en posiciones con > 12 meses de stock', '$'+nf(I.rojo_ago26_cat.total_cap)+' M', nf(I.rojo_ago26_cat.total_pos,0)+' posiciones · '+I.rojo_ago26_sku.skus+' SKUs · ago-26')+
-  kpi('Prevalencia del target', '3,38%', '4.428 de 131.189 filas · 2% hasta 2025, 9% en 2026')+
+  kpi('Prevalencia del target', nf(I.resumen.prevalencia,2)+'%', nf(I.resumen.positivos,0)+' de '+nf(I.resumen.filas,0)+' filas · '+nf(I.resumen.tasa_hasta_2025)+'% hasta 2025, '+nf(I.resumen.tasa_2026)+'% en 2026')+
   kpi('Casos capturados con 420 alertas/mes', nf(cap420.recall_modelo[i420],0)+'%', 'regla de cobertura actual: '+nf(cap420.recall_regla[i420],0)+'%');
 $('insRes').innerHTML =
   ins(nf(noRojo,0)+'%', 'de las posiciones que caen en rojo <b>hoy no lo están</b>.', 'Un semáforo sobre el estado actual no las ve: hace falta anticipar, que es lo que justifica un modelo.')+
   ins('×'+nf(ult.p99[nL]/ult.p99[iD25],1), 'crece el percentil 99 de cobertura entre dic-25 y ago-26 ('+nf(ult.p99[iD25],0)+' → '+nf(ult.p99[nL],0)+' meses).', 'La mediana sigue en ~5 meses: el riesgo está en la cola, no en el promedio.')+
   ins('+'+nf(rel*100,0)+'%', 'más casos capturados que ordenando por cobertura actual, con la misma capacidad operativa (420 alertas/mes).', 'Modelo de prueba sobre validación. Es la evidencia de que el dataset tiene señal más allá de la inercia.')+
   ins(I.senal_sin+' de '+I.n_features_num, 'variables numéricas no separan solas (AUC &lt; 0,55): liquidaciones, promociones, OC y transferencias.', 'La señal está en la demanda de la posición. Las acciones comerciales pasadas aportan, si acaso, en combinación.')+
-  ins('&lt; 2%', 'cambian los totales al corregir la calidad (venta −0,6%, capital −1,4%).', 'Pero la prevalencia del target cambia 26% según cómo se traten las devoluciones: la calidad importa en el detalle, no en el agregado.')+
+  ins('&lt; 2%', 'cambian los totales al corregir la calidad (venta −0,6%, capital −1,4%).', 'Pero la prevalencia del target cambia 30% según cómo se traten las devoluciones: la calidad importa en el detalle, no en el agregado.')+
   ins(I.conc_sku.n50+' SKUs', 'explican la mitad de los casos de riesgo (de '+I.conc_sku.skus_con_positivos+' SKUs con algún caso).', 'El problema se concentra en productos, lo que apunta a decisiones de compra más que de tienda.');
 
 // ---------- CALIDAD
@@ -297,7 +297,7 @@ $('tkCap').innerHTML=`<b>Con 420 alertas por mes el modelo captura el ${nf(cap42
 const sn=I.senal.slice(0,15);
 new Chart($('cSen'),{type:'bar',data:{labels:sn.map(s=>s.feature),datasets:[{label:'Train',data:sn.map(s=>s.auc_train),backgroundColor:css('--s1'),borderRadius:2},{label:'Test',data:sn.map(s=>s.auc_test),backgroundColor:css('--s2'),borderRadius:2}]},
   options:opt({indexAxis:'y',scales:{x:{min:.5,max:1,grid:grid()},y:{grid:{display:false},ticks:{font:{size:10.5}}}}})});
-$('tkSen').innerHTML=`<b>Las 15 variables con más señal son de demanda y stock de la posición.</b> Liquidaciones, promociones, OC y transferencias quedan en AUC ≈ 0,5 solas. El stock en tránsito pierde toda la señal en 2026 (H6: campo sin definición), así que conviene vigilarlo.`;
+$('tkSen').innerHTML=`<b>Las 15 variables con más señal son de demanda y stock de la posición.</b> Liquidaciones, promociones, OC y transferencias quedan en AUC ≈ 0,5 solas. La antigüedad de la posición separa en train pero no en 2026: con el catálogo congelado no hay productos nuevos en el test.`;
 
 // ---------- tabs
 const tabs=[...document.querySelectorAll('#tabs button')];

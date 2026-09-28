@@ -1,0 +1,7 @@
+modelo,split,auc,pr_auc,recall_05,precision_05
+logistica,validacion,0.904,0.235,0.773,0.124
+gradient boosting,validacion,0.907,0.222,0.77,0.128
+regla: cobertura > 12 hoy,validacion,,0.022,0.302,0.246
+logistica,test,0.97,0.793,0.916,0.492
+gradient boosting,test,0.969,0.766,0.914,0.502
+regla: cobertura > 12 hoy,test,,0.09,0.408,0.85

@@ -120,11 +120,11 @@
   {
    "grupo": "Modelo",
    "metrica": "Prevalencia del target (cobertura > 12 a 3 meses, %)",
-   "antes": 2.67,
-   "despues": 3.38,
+   "antes": 2.61,
+   "despues": 3.4,
    "fmt": "p",
-   "impacto": "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): +919 positivos.",
-   "variacion_pct": 26.591760299625467
+   "impacto": "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): 5.260 -> 6.853 positivos (+1.593). Fuente: EDA/candidatos_target.py.",
+   "variacion_pct": 30.268199233716487
   }
  ],
  "anual": {

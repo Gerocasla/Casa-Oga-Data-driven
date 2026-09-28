@@ -5,7 +5,8 @@ Construye el dataset de entrenamiento del modelo de dead stock (Entregable 2 · 
 Definiciones (ver Recordatorios/05-decisiones-modelo.md):
   - Unidad de analisis : SKU-tienda-mes.
   - Universo           : posiciones con stock_disponible > 0 en t, no discontinuadas en t,
-                         con 12 meses de historia y con fila observada en t+3.
+                         con al menos 3 meses de historia y con fila observada en t+3
+                         (con 12 meses quedaban afuera el 40% de las filas y los productos nuevos).
   - Target             : cobertura > 12 meses en t+3 (stock / promedio de 12 meses de unidades
                          netas de devoluciones), sin discontinuados.
   - Features           : solo informacion disponible al cierre del mes t (sin leakage).
@@ -16,10 +17,10 @@ Criterios de limpieza aplicados antes (respuestas del negocio, ronda 2):
   H9 descuentos fuera de rango excluidos · H11 costo de OC x 1,2321 para los 22 SKUs sin costo.
 
 Salidas (carpeta Datasets_Modelo/ en la raiz del repo):
-  dataset_entrenamiento_v2.parquet            -> features sin transformar + target + split
-  dataset_entrenamiento_v1_transformado.parquet -> matriz lista para el modelo (fit solo en train)
-  dataset_entrenamiento_v1_muestra.csv        -> 1.000 filas para inspeccion rapida
-  diccionario_features_v1.csv                 -> descripcion de cada columna
+  dataset_entrenamiento_vN.parquet            -> features sin transformar + target + split
+  dataset_entrenamiento_vN_transformado.parquet -> matriz lista para el modelo (fit solo en train)
+  dataset_entrenamiento_vN_muestra.csv        -> 1.000 filas para inspeccion rapida
+  diccionario_features_vN.csv                 -> descripcion de cada columna
 Log: Entregable/Entregable 2/Modelo/resultados/construir_dataset_log.txt
 """
 import os, sys
@@ -38,7 +39,8 @@ def P(*a):
 
 K = ["fecha_mes", "id_tienda", "id_producto"]
 POS = ["id_tienda", "id_producto"]
-VERSION = "v2"   # v2: +27 features y proveedor como categorica (ver registro)
+VERSION = "v3"   # v3: universo con 3+ meses de historia, sin precio/costo absolutos ni transito (ver registro)
+HIST_MIN = 3     # meses de historia minima de la posicion (v1-v2: 12)
 FACTOR_COSTO_OC = 1.2321   # EDA/factor_costo_oc.py — supuesto declarado
 
 def rd(nombre, **kw):
@@ -111,7 +113,7 @@ d["pos_cob12"] = d["con_stock"] & (d["cobertura"] > 12) & ~d["discontinuado"]
 d["target_cob12_t3"] = g["pos_cob12"].shift(-3)
 d["mes_t3"] = g["fecha_mes"].shift(-3)
 valido = (d["mes_t3"] - d["fecha_mes"]).dt.days.between(85, 95)
-hist12 = g.cumcount() >= 11
+hist12 = g.cumcount() >= HIST_MIN - 1   # (nombre historico: ya no son 12 meses)
 
 # ---------------------------------------------------------------- 4. features de SKU en la cadena (mes t)
 sku_mes = d.groupby(["fecha_mes", "id_producto"]).agg(
@@ -286,6 +288,7 @@ d[["uds_oc_recibidas_12m", "n_oc_recibidas_12m", "uds_transf_recibidas_12m", "li
 # calendario comercial fijo (Hot Sale jun, Black Friday nov, Navidad dic segun Calendario.csv): se conoce de antemano,
 # por eso se puede mirar el horizonte t+1..t+3 sin leakage. No se usa Calendario.csv porque no cubre 2026 (H12).
 EVENTOS = {6, 11, 12}
+d["historia_corta"] = (d["antig_posicion_meses"] < 11).astype(int)   # < 12 meses: ritmo con los meses disponibles
 d["eventos_en_horizonte"] = sum(((d["fecha_mes"].dt.month + k - 1) % 12 + 1).isin(EVENTOS).astype(int) for k in (1, 2, 3))
 
 # ---------------------------------------------------------------- 7. universo y particion
@@ -293,7 +296,7 @@ univ = valido & hist12 & d["con_stock"] & ~d["discontinuado"]
 P(f"Panel SKU-tienda-mes (post dedup y join ventas-stock): {len(d):,} filas")
 P(f"  - con stock en t                         : {int(d['con_stock'].sum()):,}")
 P(f"  - no discontinuadas en t                 : {int((d['con_stock'] & ~d['discontinuado']).sum()):,}")
-P(f"  - con 12 meses de historia               : {int((d['con_stock'] & ~d['discontinuado'] & hist12).sum()):,}")
+P(f"  - con {HIST_MIN}+ meses de historia              : {int((d['con_stock'] & ~d['discontinuado'] & hist12).sum()):,}")
 P(f"  - con etiqueta observable en t+3 (UNIVERSO): {int(univ.sum()):,}")
 
 ds = d[univ].copy()
@@ -306,19 +309,20 @@ def particion(m):
     return "embargo"
 ds["split"] = ds["fecha_mes"].map(particion)
 
+# v3: fuera precio_lista, margen_lista, capital_inmovilizado_pos, precio_medio_12m, venta3_suma y
+# descuento_implicito_12m (precio y costo son la foto ACTUAL del catalogo: aplicados a meses pasados son
+# anacronicos, mismo argumento que excluye el estado del catalogo) y stock_en_transito / transito_sobre_stock
+# (H6: campo sin definicion, pierde la senal en 2026). Entra historia_corta.
 FEATURES_NUM = ["unidades_vendidas", "u3_suma", "u6_suma", "u12_prom", "cv_u12", "tendencia_u3_vs_u12",
-                "meses_con_venta_12", "meses_sin_venta", "sin_venta_12m", "precio_medio_12m",
-                "stock_disponible", "stock_en_transito", "var_stock_3m", "cobertura",
-                "capital_inmovilizado_pos",
+                "meses_con_venta_12", "meses_sin_venta", "sin_venta_12m",
+                "stock_disponible", "var_stock_3m", "cobertura",
                 "stock_sku_cadena", "cobertura_sku_cadena", "tiendas_con_stock_sku", "tiendas_cob12_sku",
                 "stock_deposito_sku", "uds_oc_recibidas_3m", "uds_oc_pendientes",
                 "uds_transf_recibidas_3m", "uds_transf_enviadas_3m",
                 "liquidacion_activa", "liquidaciones_12m", "promos_activas_categoria", "descuento_promo_max",
-                "precio_lista", "margen_lista", "antig_sku_meses",
-                "lead_time_dias", "pedido_minimo_unidades", "m2_venta", "mes_del_anio",
-                # v2
-                "u_lag1", "u_lag2", "u12_max", "venta3_suma", "antig_posicion_meses",
-                "cobertura_3m_antes", "var_cobertura_3m", "transito_sobre_stock", "descuento_implicito_12m",
+                "antig_sku_meses", "lead_time_dias", "pedido_minimo_unidades", "m2_venta", "mes_del_anio",
+                "u_lag1", "u_lag2", "u12_max", "antig_posicion_meses", "historia_corta",
+                "cobertura_3m_antes", "var_cobertura_3m",
                 "peso_posicion_en_tienda", "stock_vs_prom_sku", "tendencia_sku_cadena", "cobertura_deposito_sku",
                 "tendencia_tienda", "skus_en_tienda", "pct_pos_cob12_tienda", "tendencia_categoria_tienda",
                 "precio_rel_subcategoria", "uds_oc_recibidas_12m", "n_oc_recibidas_12m", "meses_desde_ultima_oc",
@@ -364,7 +368,7 @@ P(q.round(2).to_string())
 
 # ---------------------------------------------------------------- 9. transformaciones (fit SOLO en train)
 SESGADAS = [c for c in FEATURES_NUM if sk.get(c, 0) > 1 and fin_num[c].min() >= 0
-            and c not in ("sin_venta_12m", "costo_imputado", "liquidacion_activa")]
+            and c not in ("sin_venta_12m", "costo_imputado", "liquidacion_activa", "historia_corta")]
 X = ds.copy()
 X["cobertura"] = X["cobertura"].replace(np.inf, np.nan)
 # faltantes remanentes: ratios sin denominador (sin venta en 12 m) -> tope + flag ya existente
@@ -373,13 +377,14 @@ X["cobertura"] = X["cobertura"].fillna(TOPE_COB).clip(upper=TOPE_COB)
 X["cobertura_sku_cadena"] = X["cobertura_sku_cadena"].fillna(TOPE_COB).clip(upper=TOPE_COB)
 X["tendencia_u3_vs_u12"] = X["tendencia_u3_vs_u12"].fillna(0)
 X["cv_u12"] = X["cv_u12"].fillna(0)
-X["precio_medio_12m"] = X["precio_medio_12m"].fillna(X["precio_lista"])
 X["var_stock_3m"] = X["var_stock_3m"].fillna(0)
 # v2: mismas reglas para las nuevas (denominador cero o ausencia de evento, no dato perdido)
-X["cobertura_3m_antes"] = X["cobertura_3m_antes"].replace(np.inf, np.nan).fillna(TOPE_COB).clip(upper=TOPE_COB)
+# sin dato en t-3 (posicion con menos de 4 meses): se asume la cobertura actual (sin cambio);
+# infinito (sin venta en ese momento): tope
+X["cobertura_3m_antes"] = X["cobertura_3m_antes"].fillna(X["cobertura"]).replace(np.inf, np.nan).fillna(TOPE_COB).clip(upper=TOPE_COB)
 X["var_cobertura_3m"] = X["var_cobertura_3m"].fillna(0)
 X["meses_desde_ultima_oc"] = X["meses_desde_ultima_oc"].fillna(TOPE_COB)
-for c, v in [("peso_posicion_en_tienda", 0), ("transito_sobre_stock", 0), ("descuento_implicito_12m", 0),
+for c, v in [("peso_posicion_en_tienda", 0),
              ("stock_vs_prom_sku", 1), ("tendencia_sku_cadena", 1), ("tendencia_tienda", 1), ("tendencia_categoria_tienda", 1)]:
     X[c] = X[c].fillna(v)
 for c in ["cobertura_deposito_sku", "cumplimiento_ppto_3m"]:   # sin denominador / sin presupuesto valido -> mediana de train
@@ -388,7 +393,7 @@ for c in ["cobertura_deposito_sku", "cumplimiento_ppto_3m"]:   # sin denominador
 # en conteos de pocos valores (liquidaciones, promos, tiendas) el p99 coincide con el minimo y los anularia
 lim = {}
 for c in FEATURES_NUM:
-    if c in ("mes_del_anio", "sin_venta_12m", "costo_imputado", "liquidacion_activa"): continue
+    if c in ("mes_del_anio", "sin_venta_12m", "costo_imputado", "liquidacion_activa", "historia_corta"): continue
     trc = X.loc[X["split"] == "train", c]
     if trc.nunique() <= 15: continue
     lo, hi = trc.quantile([0.01, 0.99])
@@ -403,7 +408,7 @@ X["mes_sin"] = np.sin(2 * np.pi * X["mes_del_anio"] / 12)
 X["mes_cos"] = np.cos(2 * np.pi * X["mes_del_anio"] / 12)
 X = X.drop(columns="mes_del_anio")
 # escalado estandar (media/desvio de train) sobre las continuas
-BIN = ["sin_venta_12m", "liquidacion_activa"]
+BIN = ["sin_venta_12m", "liquidacion_activa", "historia_corta"]
 CONT = [c for c in FEATURES_NUM if c not in BIN + ["mes_del_anio"]]
 mu = X.loc[X["split"] == "train", CONT].mean(); sd = X.loc[X["split"] == "train", CONT].std().replace(0, 1)
 X[CONT] = (X[CONT] - mu) / sd
@@ -494,6 +499,7 @@ DESC = {
  "cumplimiento_ppto_3m": "Venta / presupuesto de la tienda-categoria en 3 meses (celdas invalidas excluidas)",
  "eventos_en_horizonte": "Meses con evento comercial fijo (Hot Sale, Black Friday, Navidad) entre t+1 y t+3",
  "proveedor": "Proveedor del SKU (10)",
+ "historia_corta": "1 si la posicion tiene menos de 12 meses de historia (ritmo calculado con los meses disponibles)",
  "target_cob12_t3": "TARGET: 1 si en t+3 la posicion tiene cobertura > 12 meses (sin discontinuados)",
  "split": "train / validacion / test / embargo"}
 pd.DataFrame({"columna": cols, "descripcion": [DESC[c] for c in cols]}).to_csv(

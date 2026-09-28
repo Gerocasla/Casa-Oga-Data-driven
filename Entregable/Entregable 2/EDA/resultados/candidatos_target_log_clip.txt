@@ -1,14 +1,14 @@
 Criterio para ventas negativas: clip
-Universo de entrenamiento: 131,189 filas (posicion con stock, 12m de historia y etiqueta a 3 meses)
-Periodo de los cortes: 2022-12-01 a 2026-05-01 | posiciones distintas: 8,587
+Universo de entrenamiento: 201,306 filas (posicion con stock, no discontinuada, 3+ meses de historia y etiqueta a 3 meses)
+Periodo de los cortes: 2022-03-01 a 2026-05-01 | posiciones distintas: 9,818
 
 COMPARACION DE CANDIDATOS (etiqueta = estado de la posicion 3 meses despues)
                                     candidato positivos_t3 n_positivos ya_positivo_en_t SE_VUELVE_positivo (de sanos) n_nuevos SIGUE_positivo (de enfermos) info_nueva_%
-    A · Dead stock binario (3 condiciones OR)        7.41%       9,723            5.80%                         4.58%    5,658                       53.40%        58.2%
-B · Banda roja (cobertura>12 o discontinuado)        3.15%       4,134            1.59%                         2.42%    3,127                       48.18%        75.6%
-                    C · Sin ventas en 3 meses        6.04%       7,924            5.01%                         3.54%    4,410                       53.49%        55.7%
-  D · Cobertura>12 meses (sin discontinuados)        2.67%       3,509            1.59%                         1.94%    2,507                       47.94%        71.4%
-      E · Cobertura>9 meses (rojo + amarillo)        8.52%      11,179            7.37%                         6.23%    7,571                       37.30%        67.7%
+    A · Dead stock binario (3 condiciones OR)        7.07%      14,230            6.10%                         4.69%    8,859                       43.77%        62.3%
+B · Banda roja (cobertura>12 o discontinuado)        3.20%       6,434            2.57%                         2.33%    4,576                       35.91%        71.1%
+                    C · Sin ventas en 3 meses        5.37%      10,820            4.57%                         3.52%    6,754                       44.19%        62.4%
+  D · Cobertura>12 meses (sin discontinuados)        2.61%       5,260            2.57%                         1.75%    3,437                       35.23%        65.3%
+      E · Cobertura>9 meses (rojo + amarillo)        8.57%      17,244            8.71%                         6.11%   11,220                       34.37%        65.1%
 
   positivos_t3     = prevalencia de la clase positiva (cuanto pesa el target)
   ya_positivo_en_t = cuantas posiciones ya estaban en ese estado al momento de predecir
@@ -19,43 +19,43 @@ B · Banda roja (cobertura>12 o discontinuado)        3.15%       4,134         
 ====================================================================================================
 DETALLE DEL CANDIDATO B (banda roja) — el que proponemos
 ====================================================================================================
-  Positivos: 4,134 de 131,189 (3.15%)
+  Positivos: 6,434 de 201,306 (3.20%)
   Matriz de transicion t -> t+3:
-    sano   -> sano   : 125,972   (96.02%)
-    sano   -> EN RIESGO: 3,127   ( 2.38%)   <- casos a predecir
-    riesgo -> sano   :   1,083   ( 0.83%)
-    riesgo -> riesgo :   1,007   ( 0.77%)
+    sano   -> sano   : 191,556   (95.16%)
+    sano   -> EN RIESGO: 4,576   ( 2.27%)   <- casos a predecir
+    riesgo -> sano   :   3,316   ( 1.65%)
+    riesgo -> riesgo :   1,858   ( 0.92%)
 
   Descomposicion de los positivos en t+3:
-    por cobertura > 12 meses : 1,007 (aprox, medido en t)
-    posiciones distintas involucradas: 1,976
-    SKUs distintos: 507 | tiendas: 28
+    por cobertura > 12 meses : 1,858 (aprox, medido en t)
+    posiciones distintas involucradas: 3,065
+    SKUs distintos: 627 | tiendas: 28
 
   Por anio del corte t:
            filas  positivos  tasa
 fecha_mes                        
-2022           7          0  0.00
-2023       12120        236  1.95
-2024       36504        677  1.85
-2025       56670       1073  1.89
-2026       25888       2148  8.30
+2022        7734        263  3.40
+2023       33568        758  2.26
+2024       57347       1288  2.25
+2025       74587       1800  2.41
+2026       28070       2325  8.28
 
   Posiciones por mes de corte (ultimos 6):
 fecha_mes
-2025-12-01    4981
-2026-01-01    4871
-2026-02-01    5014
-2026-03-01    5210
-2026-04-01    5356
-2026-05-01    5437
+2025-12-01    5850
+2026-01-01    5548
+2026-02-01    5583
+2026-03-01    5620
+2026-04-01    5660
+2026-05-01    5659
 
 ====================================================================================================
 CONTROL: cuanto se explica con solo mirar el estado actual (modelo trivial)
 ====================================================================================================
-  A · Dead stock binario (3 condiciones OR)        -> regla 'ya esta en ese estado': precision 53.4% | recall 41.8%
-  B · Banda roja (cobertura>12 o discontinuado)    -> regla 'ya esta en ese estado': precision 48.2% | recall 24.4%
-  C · Sin ventas en 3 meses                        -> regla 'ya esta en ese estado': precision 53.5% | recall 44.3%
-  D · Cobertura>12 meses (sin discontinuados)      -> regla 'ya esta en ese estado': precision 47.9% | recall 28.6%
-  E · Cobertura>9 meses (rojo + amarillo)          -> regla 'ya esta en ese estado': precision 37.3% | recall 32.3%
+  A · Dead stock binario (3 condiciones OR)        -> regla 'ya esta en ese estado': precision 43.8% | recall 37.7%
+  B · Banda roja (cobertura>12 o discontinuado)    -> regla 'ya esta en ese estado': precision 35.9% | recall 28.9%
+  C · Sin ventas en 3 meses                        -> regla 'ya esta en ese estado': precision 44.2% | recall 37.6%
+  D · Cobertura>12 meses (sin discontinuados)      -> regla 'ya esta en ese estado': precision 35.2% | recall 34.7%
+  E · Cobertura>9 meses (rojo + amarillo)          -> regla 'ya esta en ese estado': precision 34.4% | recall 34.9%
 
   Si esa regla trivial ya tiene recall alto, el modelo aporta poco: el target es pura inercia.

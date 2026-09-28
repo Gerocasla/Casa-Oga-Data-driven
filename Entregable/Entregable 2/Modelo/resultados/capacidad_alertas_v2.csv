@@ -1,7 +1,0 @@
-split,alertas_mes,recall_modelo,precision_modelo,recall_regla_cobertura,precision_regla,positivos_mes
-validacion,200,0.461,0.215,0.355,0.166,93
-validacion,420,0.623,0.138,0.466,0.104,93
-validacion,700,0.757,0.101,0.571,0.076,93
-test,200,0.354,0.827,0.355,0.831,468
-test,420,0.617,0.687,0.59,0.657,468
-test,700,0.831,0.555,0.763,0.51,468

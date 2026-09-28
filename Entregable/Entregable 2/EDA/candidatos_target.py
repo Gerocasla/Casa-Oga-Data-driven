@@ -8,7 +8,11 @@ import pandas as pd
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.abspath(os.path.join(BASE, "..", "..", "..", "Datasets_Normalizados"))
-LOG = open(os.path.join(BASE, "resultados", "candidatos_target_log.txt"), "w", encoding="utf-8")
+# Historia minima de la posicion (meses). 12 hasta el 28-09-2026; se bajo a 3 para no excluir productos nuevos
+# (el requisito de 12 dejaba afuera el 40% de las filas y el 45% de los positivos).
+HIST_MIN = int(os.environ.get("HIST_MIN", "3"))
+_suf = "" if os.environ.get("CRITERIO_NEG", "neteo") == "neteo" else "_clip"
+LOG = open(os.path.join(BASE, "resultados", f"candidatos_target_log{_suf}.txt"), "w", encoding="utf-8")
 def P(*a):
     s = " ".join(str(x) for x in a); print(s); LOG.write(s + "\n")
 K = ["fecha_mes", "id_tienda", "id_producto"]
@@ -63,10 +67,10 @@ for c in CAND:
 d["mes_t3"] = g["fecha_mes"].shift(-3)
 # la fila t+3 tiene que ser realmente 3 meses despues
 valido = (d["mes_t3"] - d["fecha_mes"]).dt.days.between(85, 95)
-d["u12_valido"] = g.cumcount() >= 11   # al menos 12 meses de historia
+d["u12_valido"] = g.cumcount() >= HIST_MIN - 1   # al menos HIST_MIN meses de historia
 
-base = d[valido & d["u12_valido"] & d["con_stock"]].copy()
-P(f"Universo de entrenamiento: {len(base):,} filas (posicion con stock, 12m de historia y etiqueta a 3 meses)")
+base = d[valido & d["u12_valido"] & d["con_stock"] & ~d["discontinuado"]].copy()   # mismo universo que el dataset del modelo
+P(f"Universo de entrenamiento: {len(base):,} filas (posicion con stock, no discontinuada, {HIST_MIN}+ meses de historia y etiqueta a 3 meses)")
 P(f"Periodo de los cortes: {base['fecha_mes'].min().date()} a {base['fecha_mes'].max().date()} | "
   f"posiciones distintas: {base.groupby(['id_tienda','id_producto']).ngroups:,}\n")
 

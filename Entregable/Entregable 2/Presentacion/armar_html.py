@@ -19,9 +19,9 @@ CORTA = ["portada", "partida", "cola", "mapa", "criterios", "antesdespues", "pre
 # /_blob/<id> -> archivo local (mismos ids que devolvio la subida de assets)
 BLOBS = {"3c2223f1d1c6339c830ee806884f8f61": "c01_venta_mensual.png", "43c6981580a79beb1efb8097927605a1": "c02_estacionalidad.png",
          "b86da51072ea5789fd601d99c350ca93": "c03_cobertura_def.png", "b58994c3ddc7a35522592cd3d9b3ddac": "c04_venta_2526.png",
-         "d8a92d1eff15dc35bd290d5587c533b5": "c05_cola_cobertura.png", "99fa56d89d9654338a02394f70af0ffc": "c06_prevalencia.png",
-         "709e8973f690358a87077719dd172aa4": "c07_capacidad.png", "c94e74d307e88bc44d3ee3f1fc473151": "c08_senal.png",
-         "5d07ee49514f60e698c0c11b454439f5": "c09_antes_despues.png", "e786bd0172083880f96c23d1f3375cf5": "c10_capital_rojo.png"}
+         "d8a92d1eff15dc35bd290d5587c533b5": "c05_cola_cobertura.png", "7905fa8d85c212d9ad87118976873099": "c06_prevalencia.png",
+         "19331e5df80e782e71bbf913d9c492d9": "c07_capacidad.png", "2d7fd4a01dc83c89b21d974d6364c15d": "c08_senal.png",
+         "bdc99ef4d31e9129611313178b39539e": "c09_antes_despues.png", "e786bd0172083880f96c23d1f3375cf5": "c10_capital_rojo.png"}
 DATA = {k: "data:image/png;base64," + base64.b64encode(open(os.path.join(BASE, "img", v), "rb").read()).decode()
         for k, v in BLOBS.items()}
 

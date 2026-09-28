@@ -12,4 +12,4 @@ Validez,Descuento promedio en promociones (%),20.798319327731093,20.0,p,"2 valor
 Validez,Liquidaciones con fecha de fin legible,585.0,593.0,n,R2: 8 fechas con hora recuperadas; el TP1 las habia descartado.,1.3675213675213627
 Validez,Cumplimiento presupuestario 2022 (%),90.76316461533939,89.45615799594367,p,309 celdas en cero (ene-may 22) y 3 negativas excluidas (P29-P32): antes la venta real sin meta infla el %.,-1.440018783980157
 Modelo,Posiciones con cobertura > 12 meses a dic-25,211.0,213.0,n,Duplicados sumados y negativos sin tratar cambian el ritmo de venta y el stock de cada posicion.,0.9478672985782088
-Modelo,"Prevalencia del target (cobertura > 12 a 3 meses, %)",2.67,3.38,p,Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): +919 positivos.,26.591760299625467
+Modelo,"Prevalencia del target (cobertura > 12 a 3 meses, %)",2.61,3.4,p,Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): 5.260 -> 6.853 positivos (+1.593). Fuente: EDA/candidatos_target.py.,30.268199233716487

@@ -20,7 +20,7 @@
   - Entregable 2 · Parte B — **completa** con corte ago-2026 (1.3, 2.1 y 2.2 agregadas el 28-09).
   - Dashboard de 5 pestañas y presentación en dos versiones (v1 completa 34 / v2 corta 14, HTML + PDF).
   - **Falta:** carátulas (legajos de Simón y Santiago, roles, fecha), elegir versión de la presentación, commit y push.
-- **Target y dataset:** cobertura > 12 meses en t+3, sin discontinuados · `Datasets_Modelo/dataset_entrenamiento_v2` (131.189 × 67). Detalle en `05-decisiones-modelo.md` y en la Parte B §2.
+- **Target y dataset:** cobertura > 12 meses en t+3, sin discontinuados · `Datasets_Modelo/dataset_entrenamiento_v3` (201.306 × 60). Detalle en `05-decisiones-modelo.md` y en la Parte B §2.
 - **Scripts reproducibles:** orden completo en el `README.md` de la raíz («Cómo reproducir todo»). EDA y calidad en `Entregable/Entregable 2/EDA/`; dataset, insights y dashboard en `Entregable/Entregable 2/Modelo/`; presentación en `Entregable/Entregable 2/Presentacion/`.
 - **Git:** cada integrante trabaja en su clon. En el clon de Santiago la identidad es `Santiago Hernandez / sanhernandez@itba.edu.ar`; en el de Gianfranco se trabajó desde el 22-09. Hacer `git pull` antes de empezar: los `.docx` se pisan si dos personas los editan a la vez.
 
@@ -103,10 +103,17 @@
 
 ### 28-09 (tarde) · Parte A al día, dataset v2, dashboard y presentación
 - **Parte A recalculada al corte ago-2026** (`EDA/eda_ago26.py`): tabla 2.3, matriz 3.1 (actualidad en rojo para Devoluciones, Calendario y catálogo), fundamentos y los 12 gráficos (`EDA/graficos_ago26/`). La fila «Desaceleración 2025» pasa a «Caída de 2026».
-- **Dataset v2:** 67 features (62 num + 5 cat) con justificación por grupo y tabla de variables excluidas (leakage / calidad / generalización) en la Parte B. v1 reemplazada.
+- **Dataset v2:** 67 features (62 num + 5 cat) con justificación por grupo y tabla de variables excluidas (leakage / calidad / generalización) en la Parte B. v1 reemplazada. *(Después reemplazado por v3; ver más abajo.)*
 - **Hallazgo:** 2026 no trae devoluciones → comparar años en bruto (−13,2%); neteado daría −12,1% y no es comparable.
 - **Dashboard** con 5 pestañas: resumen, calidad, qué cambió en 2026, dónde está el riesgo, qué anticipa el riesgo.
 - **Presentación** de 34 diapositivas: https://claude.ai/artifact/3ggL4DDAvfEwxBzwtHLVso (privada; compartir desde Share). Gráficos en `Entregable 2/Presentacion/img/`.
+
+### 28-09 (noche) · Dataset v3: revisión de la selección de variables
+- Revisión crítica de la selección: (1) precio, costo y margen del catálogo son el valor **actual** (P10) → anacrónicos para meses pasados, mismo argumento que excluye el estado del catálogo; (2) exigir 12 meses de historia dejaba afuera el 40% de las filas, el 45% de los positivos y los productos nuevos; (3) el stock en tránsito pierde la señal en 2026 (H6).
+- **v3:** universo con 3+ meses de historia + `historia_corta`; fuera `precio_lista`, `margen_lista`, `capital_inmovilizado_pos`, `precio_medio_12m`, `venta3_suma`, `descuento_implicito_12m`, `stock_en_transito`, `transito_sobre_stock`. Queda `precio_rel_subcategoria`. Resultado: 201.306 filas × 60 features, 3,40% positivos.
+- **Consecuencia honesta:** con el universo ampliado la inercia ya no distingue a los candidatos de target (33,5%-38,6%); la elección se sostiene por negocio. Está dicho en la Parte B y en la presentación.
+- Chequeo reproducible nuevo: `Modelo/chequeo_senal.py`. Capacidad con 420 alertas: 58% vs 47%.
+- Se actualizaron Parte B §1.3/§2.1/§2.2, dashboard, presentación (HTML, PDF y online) y todos los `.md`.
 
 ### 28-09 (noche) · Presentación en un solo archivo y versión corta
 - Pedido: la presentación tiene que ser **un archivo**, no una carpeta por diapositiva, y hace falta una versión corta para exponer pocos minutos.
@@ -129,12 +136,12 @@
 | Pareto | 248 de 798 SKUs = 80% de la venta | |
 | Margen teórico de lista | 44,9% | |
 | Costo de mantener stock | 5% mensual (2% almacenaje + 3% oportunidad), rango 4-6% · dataset dice 1,5% de almacenaje | negocio / dataset |
-| Target (cobertura > 12 a 3 meses) | 4.428 / 131.189 = 3,38% · tasa 2,0% (2023-25) vs 9,0% (2026) | neteo |
+| Target (cobertura > 12 a 3 meses) | 6.853 / 201.306 = 3,40% · tasa 2,5% (2022-25) vs 9,0% (2026) | neteo, universo 3+ meses |
 | Dead stock TP1 (panel) | 661 posiciones · $83,9 M · $7,7 M/mes | **no reproducible** |
 | Capacidad operativa | 420-700 intervenciones/mes (15-25 por tienda) | **nunca medida** |
-| Dataset del modelo v2 | 131.189 filas × 67 features · train 48.631 / val 28.895 / test 25.888 / embargo 27.775 | `Datasets_Modelo/` |
+| Dataset del modelo v3 | 201.306 filas × 60 features · train 98.649 / val 38.362 / test 28.070 / embargo 36.225 | `Datasets_Modelo/` |
 | Capital en rojo ago-26 | $184,1 M a costo · 882 posiciones · 363 SKUs · $9,2 M/mes al 5% | `Modelo/resultados/insights.json` |
-| Capacidad (validación) | 420 alertas/mes: 62% de casos (modelo de prueba) vs 47% (regla) | idem |
+| Capacidad (validación) | 420 alertas/mes: 58% de casos (modelo de prueba) vs 47% (regla); 700: 73% vs 57% | `Modelo/resultados/capacidad_alertas_v3.csv` |
 | Antes → después (1.3) | venta $40.314,3 M → $40.083,4 M · capital dic-25 $3.595,1 M → $3.544,9 M | `EDA/resultados/antes_despues.csv` |
 
 ---

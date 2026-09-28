@@ -183,7 +183,7 @@ Tampoco tuvieron respuesta en la ronda 2:
 
 ---
 
-## Cómo entra cada hallazgo al dataset del modelo (v2, 28-09-2026)
+## Cómo entra cada hallazgo al dataset del modelo (v3, 28-09-2026)
 
 | Hallazgo | En `construir_dataset_modelo.py` |
 |---|---|
@@ -191,9 +191,9 @@ Tampoco tuvieron respuesta en la ronda 2:
 | H3 | La antigüedad de tienda **no** es feature; se usa la antigüedad de la posición |
 | H4 | Stock con piso en 0; ventas negativas neteadas |
 | H5 | Sin tratamiento: es la realidad operativa registrada; se declara |
-| H6 | `stock_en_transito` entra como feature, pero pierde la señal en 2026 (AUC 0,67 → 0,50): candidato a salir en el modelado |
+| H6 | `stock_en_transito` **no es feature** (v3): sin definición y su señal cae de AUC 0,67 a 0,50 en 2026 |
 | H7 | Liquidaciones solo como historia hasta t; «Todas» se aplica a todas las tiendas del SKU |
-| H8 | Historial de precios fuera; precio de lista del catálogo |
+| H8 | Historial de precios fuera. El precio de lista del catálogo tampoco entra en valor absoluto (es el de hoy, P10): solo como precio relativo a la subcategoría |
 | H9 | Descuentos fuera de 0-100 excluidos; cumplimiento presupuestario sin celdas ≤ 0 |
 | H10 | Promociones duplicadas o con fechas invertidas excluidas |
 | H11 | Costo de OC × 1,2321 + marca `costo_imputado` (no feature: los 22 SKUs no están en train) |

@@ -110,7 +110,7 @@ Si se cambia cualquier definición (target, features, partición), generar **v2*
 
 ---
 
-### 28-09-2026 (tarde) — Dataset del modelo v2 (reemplaza a v1)
+### 28-09-2026 (tarde) — Dataset del modelo v2 (reemplaza a v1) · *reemplazado por v3*
 
 Mismo script, `VERSION = "v2"`. **v1 no llegó a publicarse y sus archivos se borraron** (quedaron inconsistentes al regenerar); la Parte B describe v2.
 
@@ -122,3 +122,23 @@ Mismo script, `VERSION = "v2"`. **v1 no llegó a publicarse y sus archivos se bo
 
 Agregadas: lags de unidades, máximo de 12 meses, venta de 3 meses, antigüedad de la posición, cobertura de t-3 y su cambio, tránsito/stock, descuento implícito, peso de la posición en la tienda, stock vs promedio del SKU, tendencias del SKU, de la tienda y de la categoría en la tienda, cobertura del depósito, % de posiciones en rojo de la tienda, precio relativo a la subcategoría, OC de 12 meses y recencia, transferencias de 12 meses, liquidaciones del SKU en la cadena, descuento de la liquidación activa, promociones de 12 meses, cumplimiento presupuestario de 3 meses, eventos fijos en el horizonte y proveedor.
 Chequeo (no es el modelo): v2 rinde igual que v1 en un modelo de prueba (`Modelo/resultados/chequeo_sanidad_v2.csv`); la selección se deja para el modelado.
+
+---
+
+### 28-09-2026 (noche) — Dataset del modelo v3 (reemplaza a v2)
+
+Mismo script (`VERSION = "v3"`, `HIST_MIN = 3`). Los archivos de v2 se borraron; quedan en el historial de git (commit `60b4abc`).
+
+| | v2 | v3 |
+|---|---|---|
+| Universo | stock > 0, no discontinuada, **12 meses** de historia | stock > 0, no discontinuada, **3 meses** de historia |
+| Filas | 131.189 | **201.306** |
+| Positivos | 4.428 (3,38%) | **6.853 (3,40%)** |
+| Features | 67 (62 num + 5 cat) | **60 (55 num + 5 cat)**; 106 tras one-hot |
+| Partición | train dic-22→dic-24 | train **mar-22**→dic-24 (98.649 filas) · val 38.362 · test 28.070 · embargo 36.225 |
+
+**Salen:** `precio_lista`, `margen_lista`, `capital_inmovilizado_pos`, `precio_medio_12m`, `venta3_suma`, `descuento_implicito_12m` (precio y costo del catálogo son el valor actual: anacrónicos para meses pasados, P10) y `stock_en_transito`, `transito_sobre_stock` (H6).
+**Entra:** `historia_corta` (posición con menos de 12 meses).
+**Por qué el universo:** con 12 meses quedaban afuera el 40% de las filas, el 45% de los positivos y todos los productos nuevos (tasa de 6,8% en sus primeros 3 meses vs 3,4% de las maduras).
+**Relleno nuevo:** si no hay dato de hace 3 meses, la cobertura de t-3 toma la actual (sin cambio).
+

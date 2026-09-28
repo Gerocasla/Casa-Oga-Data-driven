@@ -25,7 +25,7 @@
 - Venta ene-2022 a ago-2026: **$40.083,4 M** · 925.015 unidades (devoluciones neteadas). 2026 vs 2025 (ene-ago, bruto): **−13,2%**.
 - Cobertura: mediana ~5 meses estable; percentil 99 de **16 a 48 meses** entre dic-25 y ago-26.
 - Posiciones con cobertura > 12 meses a ago-26: **882 · $184,1 M a costo** · 363 SKUs · ~$9,2 M/mes al 5%.
-- Target: **3,38%** de positivos (4.428 / 131.189); ~2% en 2023-25 y 9% en 2026.
+- Target: **3,40%** de positivos (6.853 / 201.306, dataset v3); 2,5% hasta 2025 y 9% en 2026.
 - Costo de mantener stock: 5% mensual (2% almacenaje + 3% oportunidad, negocio); el dataset dice 1,5% de almacenaje.
 
 **Del TP1 (corte dic-2025) — NO reproducibles, no usar sin aclarar:**

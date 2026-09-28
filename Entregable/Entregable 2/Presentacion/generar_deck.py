@@ -6,14 +6,17 @@ OUT = os.path.join(BASE, "deck", "project"); os.makedirs(os.path.join(OUT, "slid
 I = json.load(open(os.path.join(E2, "Modelo", "resultados", "insights.json"), encoding="utf-8"))
 IMG = {"venta": "/_blob/3c2223f1d1c6339c830ee806884f8f61", "estac": "/_blob/43c6981580a79beb1efb8097927605a1",
        "cobdef": "/_blob/b86da51072ea5789fd601d99c350ca93", "v2526": "/_blob/b58994c3ddc7a35522592cd3d9b3ddac",
-       "cola": "/_blob/d8a92d1eff15dc35bd290d5587c533b5", "prev": "/_blob/99fa56d89d9654338a02394f70af0ffc",
-       "cap": "/_blob/709e8973f690358a87077719dd172aa4", "senal": "/_blob/c94e74d307e88bc44d3ee3f1fc473151",
-       "ad": "/_blob/5d07ee49514f60e698c0c11b454439f5", "caprojo": "/_blob/e786bd0172083880f96c23d1f3375cf5"}
+       "cola": "/_blob/d8a92d1eff15dc35bd290d5587c533b5", "prev": "/_blob/7905fa8d85c212d9ad87118976873099",
+       "cap": "/_blob/19331e5df80e782e71bbf913d9c492d9", "senal": "/_blob/2d7fd4a01dc83c89b21d974d6364c15d",
+       "ad": "/_blob/bdc99ef4d31e9129611313178b39539e", "caprojo": "/_blob/e786bd0172083880f96c23d1f3375cf5"}
 
 DARK, LIGHT, ALT, INK, BODY, MUT = "#14213D", "#FBFBF8", "#F1F2F6", "#14213D", "#3D4656", "#5B6475"
 BLUE, ORANGE, GOLD, LINE = "#2F5E96", "#C4470A", "#F5B800", "#D9DDE4"
 HF = "font-family:'DM Sans', Arial, sans-serif"
 BF = "font-family:'IBM Plex Sans', Arial, sans-serif"
+RS = I["resumen"]; SP_ = RS["split"]
+MES = {"Jan": "ene", "Feb": "feb", "Mar": "mar", "Apr": "abr", "May": "may", "Jun": "jun", "Jul": "jul", "Aug": "ago", "Sep": "sep", "Oct": "oct", "Nov": "nov", "Dec": "dic"}
+fm = lambda s: MES[s[:3]] + s[3:]
 n = lambda v, d=1: f"{v:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 slides = []; sections = {}
@@ -78,7 +81,7 @@ page("recorrido", "Recorrido", "Cuatro preguntas, en este orden",
  + card("1 · ¿Qué dicen los datos?", "EDA de las 15 fuentes al corte ago-2026. Qué se confirma del TP1, qué no, y qué cambió en 2026.")
  + card("2 · ¿Se puede confiar en ellos?", "Mapa de calidad, 12 hallazgos, los criterios acordados con el negocio y cuánto cambia el análisis al corregir.")
  + card("3 · ¿Qué vamos a predecir?", "La variable objetivo, por qué esa y no otra, y qué tan sólida es cada decisión detrás.")
- + card("4 · ¿Con qué datos?", "El dataset de entrenamiento: 67 variables sin leakage, las que quedaron afuera y por qué, y si tiene señal.")
+ + card("4 · ¿Con qué datos?", f"El dataset de entrenamiento: {RS['n_num']+RS['n_cat']} variables sin leakage, las que quedaron afuera y por qué, y si tiene señal.")
  + '</div>', "Estructura: diagnóstico, limpieza, target y dataset. Todo lo que mostramos se reproduce con los scripts del repo.")
 
 page("partida", "Punto de partida", "15 fuentes, 56 meses, una segunda entrega de datos",
@@ -141,7 +144,7 @@ H1 = [("H1 · Claves duplicadas", "2.378 en Ventas y en Stock, solo 2022-25.", "
       ("H3 · Venta antes de abrir", "6 tiendas, 11.058 filas, $1.471,7 M.", "Sin respuesta. No usar antigüedad de tienda."),
       ("H4 · Negativos imposibles", "2.317 ventas y 1.209 stocks negativos.", "Stock: piso en 0 (P16). Ventas: netear devoluciones (P23)."),
       ("H5 · Venta sin stock", "1.020 filas con venta y stock 0; 187 en 2026.", "Misma causa que H4: desfase POS–inventario."),
-      ("H6 · Tránsito sin conciliar", "8.771 uds vs 936 de transferencias (9×).", "Campo sin definición: se usa con cautela.")]
+      ("H6 · Tránsito sin conciliar", "8.771 uds vs 936 de transferencias (9×).", "Campo sin definición: queda fuera del modelo.")]
 H2 = [("H7 · Liquidaciones incoherentes", "90 de 108 «Discontinuación» sobre SKUs activos; tienda «Todas».", "Se usan solo como historia hasta t."),
       ("H8 · Precios vs historial", "Precio de venta > 1,5× el histórico en 33% de filas.", "Historial reconstruido (P9-P10): no se usa."),
       ("H9 · Descuentos y presupuesto", "5 descuentos fuera de 0-100%; 309 ceros y 3 negativos.", "Excluir del margen y del desvío (P28, P32)."),
@@ -181,7 +184,7 @@ page("antesdespues", "Calidad · antes y después", "Corregir cambia poco los to
  chart(IMG["ad"], "Cuatro métricas antes y después de corregir: venta total, capital, participación de Decoración y prevalencia del target",
   stat("< 2%", "cambian venta, unidades y capital al corregir")
   + stat("+1,5 pp", "gana Decoración al unificar categorías: es la candidata al piloto")
-  + stat("+26%", "prevalencia del target según cómo se traten las devoluciones: el mayor impacto para el modelo"), 1100, 440),
+  + stat("+30%", "prevalencia del target según cómo se traten las devoluciones: el mayor impacto para el modelo"), 1100, 440),
  "Mensaje: que el total cierre no prueba que los datos estén bien. Los errores se compensan en el agregado (duplicados suman, SKUs sin costo restan) y aparecen al bajar a SKU o categoría.")
 
 # ================================================================= 4 TARGET
@@ -198,21 +201,21 @@ add("pregunta", f'''<section id="pregunta" data-transition="fade" style="backgro
 page("ficha", "Target · definición", "Seis decisiones definen el target",
  '<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; flex:1">'
  + card("Unidad: SKU–tienda–mes", "Es donde se decide: liquidar, transferir o frenar la reposición de un producto en una tienda.")
- + card("Universo", "Posiciones con stock en t, no discontinuadas, con 12 meses de historia y observadas en t+3.")
+ + card("Universo", "Posiciones con stock en t, no discontinuadas, con al menos 3 meses de historia y observadas en t+3. Con 12 meses se perdían los productos nuevos.")
  + card("Horizonte: 3 meses", "Confirmado por el negocio: menos se confunde con ruido; la acción tarda de 2 a 4 semanas.")
  + card("Umbral: 12 meses", "Rotación anual < 1 (non-moving en el análisis FSN) y compatible con 420-700 intervenciones por mes.")
- + card("Prevalencia: 3,38%", "4.428 positivos en 131.189 filas. 2% en 2023-25, 9% en 2026.")
+ + card(f"Prevalencia: {n(RS['prevalencia'],2)}%", f"{n(RS['positivos'],0)} positivos en {n(RS['filas'],0)} filas. {n(RS['tasa_hasta_2025'])}% hasta 2025, {n(RS['tasa_2026'],0)}% en 2026.")
  + card("Métrica: recall", "El negocio declaró más costoso no ver un caso (falso negativo) que revisar uno de más.")
  + '</div>', "Cada decisión tiene un origen: relevamiento con el negocio o medición nuestra. La siguiente diapositiva muestra por qué descartamos las alternativas.", gap=32)
 page("candidatos", "Target · alternativas", "Por qué este target y no otro",
  table(["Candidato", "Positivos", "Casos nuevos", "Recall de «sigue igual»", "Veredicto"], [
-  ["Dead stock binario (3 condiciones OR)", "8,51%", "58%", "41,8%", "Descartado: mucha inercia"],
-  ["Cobertura > 12 o discontinuado", "3,85%", "71%", "28,6%", "Discontinuados cambian en 2026"],
-  ["Sin ventas en 3 meses", "6,75%", "58%", "42,2%", "Descartado: inercial y ruidoso"],
-  ["<b>Cobertura > 12, sin discontinuados</b>", "<b>3,38%</b>", "<b>68%</b>", "<b>32,5%</b>", "<b>Elegido</b>"],
-  ["Cobertura > 9 (rojo + amarillo)", "9,84%", "64%", "35,9%", "Alternativa si falta volumen"]], [34, 13, 15, 19, 19], 26)
- + f'<p style="font-size:26px; line-height:1.45; color:{BODY}; width:1600px"><b>Cómo leerlo:</b> «recall de sigue igual» es cuántos casos acierta una regla que solo dice «la posición va a estar como está hoy». Si es alto, el target es inercia y un modelo no aporta. Con el elegido, el 68% de los positivos son casos nuevos.</p>',
- "Comparamos cinco candidatos sobre las mismas 131.189 filas. El criterio fue la inercia, no la cantidad de positivos. El catálogo está congelado desde junio de 2025: en 2026 no hay discontinuados, por eso no los metemos en el target.", gap=32)
+  ["Dead stock binario (3 condiciones OR)", "8,32%", "62%", "38,4%", "Mezcla criterios; arrastra el ruido de «sin venta»"],
+  ["Cobertura > 12 o discontinuado", "3,99%", "67%", "33,5%", "No hay discontinuados en 2026"],
+  ["Sin ventas en 3 meses", "6,18%", "65%", "35,3%", "Criterio de consumo masivo; 22% por azar"],
+  ["<b>Cobertura > 12, sin discontinuados</b>", "<b>3,40%</b>", "<b>61%</b>", "<b>38,6%</b>", "<b>Elegido</b>"],
+  ["Cobertura > 9 (rojo + amarillo)", "9,93%", "62%", "38,5%", "Alternativa si falta volumen"]], [34, 13, 15, 19, 19], 26)
+ + f'<p style="font-size:26px; line-height:1.45; color:{BODY}; width:1600px"><b>Cómo leerlo:</b> «recall de sigue igual» es cuántos casos acierta una regla que solo dice «la posición va a estar como está hoy». Con el universo de 3+ meses todos quedan entre 34% y 39%: la inercia ya no decide. Elegimos por negocio: umbral relativo a la rotación de cada SKU (lo pidió Comercial), sin discontinuados (en 2026 no hay) y un evento sobre el que se puede actuar.</p>',
+ f"Comparamos cinco candidatos sobre las mismas {n(RS['filas'],0)} filas. Con 12 meses de historia el elegido era además el menos inercial (32,5% contra 42%); al incluir productos nuevos esa ventaja desaparece y lo decimos. El catálogo está congelado desde junio de 2025: en 2026 no hay discontinuados.", gap=32)
 page("solidez", "Target · solidez", "Qué tan firme es cada decisión, dicho con honestidad",
  table(["Decisión", "En qué se apoya", "Solidez"], [
   ["Cobertura como métrica", "El negocio pidió un umbral relativo a la rotación de cada SKU", "Firme"],
@@ -226,23 +229,22 @@ page("solidez", "Target · solidez", "Qué tan firme es cada decisión, dicho co
  "No existe un umbral académico de cobertura para hogar y decoración: cada retailer lo calibra. Lo decimos así en vez de aparentar un estándar. Las débiles se validan con el negocio.", gap=32)
 page("prevalencia", "Target · estabilidad", "La prevalencia salta en 2026: la partición tiene que ser temporal",
  chart(IMG["prev"], "Porcentaje de positivos por mes de corte, coloreado por bloque de la partición",
-  stat("Train", "t de dic-22 a dic-24 · 48.631 filas · 1,78%") + stat("Validación", "t de abr-25 a sep-25 · 28.895 filas · 1,94%")
-  + stat("Test", "t de ene-26 a may-26 · 25.888 filas · 9,03%")
+  "".join(stat(nm, f"t de {fm(SP_[k]['desde'])} a {fm(SP_[k]['hasta'])} · {n(SP_[k]['filas'],0)} filas · {n(SP_[k]['tasa'],2)}%") for nm, k in [("Train", "train"), ("Validación", "validacion"), ("Test", "test")])
   + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Entre bloques, 3 meses de embargo (igual al horizonte): ninguna etiqueta de train cae en el período de validación.</p>', 1100, 466),
  "Una partición aleatoria mezclaría meses y el modelo vería el futuro. El test en 2026 mide si el modelo resiste un cambio de régimen: es la prueba más exigente posible.")
 
 # ================================================================= 5 DATASET
 divider("d-data", "PARTE 4", "El dataset de entrenamiento", "Qué información ve el modelo, qué variables entran, cuáles no y por qué.", "Dataset de entrenamiento: variables, exclusiones, leakage y transformaciones")
-page("ficha-ds", "Dataset · ficha", "dataset_entrenamiento_v2",
- '<div style="display:flex; gap:48px">' + stat("131.189", "filas SKU–tienda–mes") + stat("67", "features: 62 numéricas y 5 categóricas")
- + stat("113", "columnas después del one-hot") + stat("8.587", "posiciones · 682 SKUs · 28 tiendas") + '</div>'
+page("ficha-ds", "Dataset · ficha", f"dataset_entrenamiento_{RS['version']}",
+ '<div style="display:flex; gap:48px">' + stat(n(RS["filas"],0), "filas SKU–tienda–mes") + stat(str(RS["n_num"]+RS["n_cat"]), f"features: {RS['n_num']} numéricas y {RS['n_cat']} categóricas")
+ + stat(n(RS["positivos"],0), f"positivos ({n(RS['prevalencia'],2)}%)") + stat(n(RS["posiciones"],0), f"posiciones · {RS['skus']} SKUs · 28 tiendas") + '</div>'
  + f'<div style="background:{ALT}; border-radius:16px; padding:36px 40px; display:flex; flex-direction:column; gap:14px">'
  f'<h3 style="{HF}; font-size:34px; font-weight:700">11 de las 15 fuentes, unidas en un panel mensual</h3>'
  f'<p style="font-size:26px; line-height:1.5; color:{BODY}">Ventas ⋈ Stock por (mes, tienda, SKU) es la base. Se suman catálogo y proveedores por SKU; tiendas por tienda; depósito y OC por (mes, SKU); '
  'transferencias y liquidaciones por (mes, tienda, SKU); promociones por (mes, categoría); presupuesto por (mes, tienda, categoría). '
  'Ninguna fuente tiene datos personales: no aplica anonimización (Ley 25.326).</p>'
  f'<p style="font-size:24px; color:{MUT}">Se genera con Modelo/construir_dataset_modelo.py desde Datasets_Normalizados: reproducible de punta a punta.</p></div>',
- "La v2 amplió la v1 interna de 39 variables. Agregar variables casi no mejoró el modelo de prueba, pero las dejamos para que la selección se haga en el modelado con evidencia, no a priori.")
+ "v3: el universo pasa de 12 a 3 meses de historia (entran los productos nuevos) y salen precio, costo y margen del catálogo (son el valor de hoy) y el stock en tránsito (H6). La selección fina de variables se hace en el modelado.")
 tl = (f'<div style="position:relative; width:1664px; height:560px">'
       f'<div style="position:absolute; left:0; top:40px; width:1060px; height:300px; background:#E3ECF7; border-radius:16px"></div>'
       f'<p style="position:absolute; left:32px; top:64px; width:1000px; font-size:30px; font-weight:700; color:{INK}">Historia hasta el cierre del mes t: se puede usar</p>'
@@ -256,15 +258,15 @@ tl = (f'<div style="position:relative; width:1664px; height:560px">'
       f'<p style="position:absolute; left:0; top:480px; width:1060px; font-size:26px; line-height:1.4; color:{BODY}">Además: transformaciones ajustadas solo con train, embargo de 3 meses entre bloques y discontinuados fuera del universo.</p></div>')
 page("leakage", "Dataset · data leakage", "Qué información ve el modelo al predecir", tl,
  "La regla central: al predecir en el mes t solo se usa lo que Casa Óga conoce al cierre de t. Los eventos de calendario son la excepción justificada porque son fijos y se conocen con años de anticipación.")
-GR = [("Demanda · 16", "Unidades de t, t-1, t-2, 3, 6 y 12 meses, máximo, variabilidad, tendencia, meses sin venta, precio y descuento realizados.", "Es donde está la señal: la rotación de la posición."),
-      ("Stock · 8", "Disponible, en tránsito, variación a 3 meses, cobertura actual y de hace 3 meses, capital inmovilizado.", "La trayectoria anticipa el cruce del umbral."),
+GR = [("Demanda e historia · 14", "Unidades de t, t-1, t-2, 3, 6 y 12 meses, máximo, variabilidad, tendencia, meses con y sin venta, antigüedad de la posición e indicador de historia corta.", "Es donde está la señal: la rotación de la posición."),
+      ("Stock · 5", "Disponible, variación a 3 meses, cobertura actual y de hace 3 meses, cambio de cobertura.", "La trayectoria anticipa el cruce del umbral."),
       ("SKU en la cadena · 8", "Stock y cobertura del SKU en las 28 tiendas y en depósito, tiendas en rojo, tendencia del SKU.", "El problema es de producto y de compra, no de tienda."),
       ("Contexto de tienda · 6", "Tendencia de la tienda y de la categoría, peso de la posición, % de posiciones en rojo, cumplimiento presupuestario.", "Separa un problema del producto de uno de la tienda."),
-      ("Abastecimiento · 9", "OC recibidas y pendientes, meses desde la última OC, transferencias, lead time y pedido mínimo.", "Lo que entra es lo que genera el sobrestock."),
+      ("Abastecimiento · 10", "OC recibidas y pendientes, meses desde la última OC, transferencias recibidas y enviadas, lead time y pedido mínimo.", "Lo que entra es lo que genera el sobrestock."),
       ("Acciones comerciales · 7", "Liquidación activa y su descuento, liquidaciones de la posición y del SKU, promociones de la categoría.", "Registran lo que ya se hizo sobre la posición."),
-      ("Producto · 7", "Precio, precio relativo a la subcategoría, margen, antigüedad; categoría, subcategoría, proveedor.", "Contexto y palanca de Compras (proveedor)."),
+      ("Producto · 5", "Precio relativo a la subcategoría, antigüedad del SKU; categoría, subcategoría, proveedor.", "Contexto y palanca de Compras (proveedor)."),
       ("Tienda y calendario · 5", "m², región, formato; mes del año y eventos fijos en el horizonte.", "Segmentación y estacionalidad, que el modelo verifica.")]
-page("grupos", "Dataset · variables elegidas", "67 variables en 8 grupos, cada uno con su porqué",
+page("grupos", "Dataset · variables elegidas", f"{RS['n_num']+RS['n_cat']} variables en 8 grupos, cada uno con su porqué",
  '<div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; flex:1">' + "".join(
   f'<div style="display:flex; flex-direction:column; gap:10px; background:#FFFFFF; border:1px solid {LINE}; border-radius:12px; padding:24px">'
   f'<h3 style="{HF}; font-size:28px; font-weight:700; line-height:1.15; color:{BLUE}">{t}</h3><p style="font-size:24px; line-height:1.35; color:{BODY}">{d}</p>'
@@ -279,7 +281,7 @@ page("excluidas", "Dataset · variables excluidas", "Lo que quedó afuera, y por
  + lista("Leakage", ORANGE, [("Venta y stock de t+1 a t+3", "definen el target"), ("Liquidaciones, transferencias y OC posteriores a t", "son reacciones al sobrestock"),
                              ("Estado del catálogo", "es una foto de hoy: revela bajas futuras"), ("Presupuesto futuro", "se reajusta con la venta real (P31)"),
                              ("Promociones futuras", "no hay evidencia de que se planifiquen con anticipación")])
- + lista("Calidad", BLUE, [("Antigüedad de tienda", "6 tiendas venden antes de abrir (H3)"), ("Precio del historial", "reconstrucción retroactiva (H8)"),
+ + lista("Calidad", BLUE, [("Antigüedad de tienda", "6 tiendas venden antes de abrir (H3)"), ("Precio, costo y margen del catálogo", "son el valor de hoy: anacrónicos para meses pasados"), ("Precio del historial", "reconstrucción retroactiva (H8)"), ("Stock en tránsito", "sin definición y sin señal en 2026 (H6)"),
                            ("Devoluciones por motivo", "no hay datos de 2026 (H12)"), ("Temporada y feriados", "el Calendario no cubre 2026 (H12)")])
  + lista("Generalización y otros", "#6B7280", [("Id de tienda y de SKU", "el modelo memorizaría posiciones"), ("Marca de costo imputado", "constante en train; queda como control"),
                                               ("Costo de almacenamiento", "constante por categoría"), ("Cliente o ticket", "no existe en ninguna fuente")])
@@ -328,9 +330,9 @@ page("capacidad", "Señal · capacidad operativa", "Con la misma capacidad, el m
 page("senal", "Señal · por variable", "La señal está en la demanda de la posición",
  chart(IMG["senal"], "AUC de cada una de las 15 variables con más señal, en train y en test",
   stat(f"{I['senal_sin']} de {I['n_features_num']}", "variables numéricas no separan solas (AUC < 0,55): liquidaciones, promociones, OC y transferencias")
-  + stat("0,67 → 0,50", "AUC del stock en tránsito de train a test: pierde toda la señal en 2026 (H6)")
+  + stat("0,61 → 0,50", "AUC de la antigüedad de la posición de train a test: en 2026 no hay productos nuevos (catálogo congelado)")
   + f'<p style="font-size:26px; line-height:1.4; color:{BODY}">Se mantienen todas: pueden aportar en combinación. La selección se hace en el modelado.</p>', 900, 637),
- "AUC 0,5 es azar. Que las acciones comerciales no separen solas es coherente: se aplicaron caso por caso y sin protocolo. El tránsito es candidato a salir si el modelo lo confirma.")
+ "AUC 0,5 es azar. Que las acciones comerciales no separen solas es coherente: se aplicaron caso por caso y sin protocolo. La antigüedad vuelve a importar cuando haya lanzamientos: por eso queda.")
 rc = I["rojo_ago26_cat"]; rs = I["rojo_ago26_sku"]
 page("capital", "Contexto · capital en riesgo hoy", "Cuánto capital está en posiciones con más de 12 meses de stock",
  chart(IMG["caprojo"], "Capital a costo en posiciones con más de 12 meses de cobertura por categoría, agosto 2026",
@@ -342,7 +344,7 @@ page("capital", "Contexto · capital en riesgo hoy", "Cuánto capital está en p
 # ================================================================= 7 CIERRE
 page("limites", "Cierre", "Limitaciones que declaramos y lo que queda pendiente",
  '<div style="display:flex; gap:32px; flex:1">'
- + lista("Limitaciones", ORANGE, [("2026 sin devoluciones", "el neteo es asimétrico entre años (H12)"), ("Stock en tránsito", "sin definición documentada (H6)"),
+ + lista("Limitaciones", ORANGE, [("2026 sin devoluciones", "el neteo es asimétrico entre años (H12)"), ("Precio y costo", "el catálogo guarda solo el valor actual: se usa solo el precio relativo"), ("Posiciones con < 3 meses", "fuera del modelo: requieren una regla aparte"),
                                   ("Venta antes de abrir", "6 tiendas sin explicación (H3)"), ("Capacidad de 15-25 por tienda", "nunca se midió"),
                                   ("Costo de 22 SKUs", "supuesto, no dato")])
  + lista("Pendientes", BLUE, [("María G.", "aprobar target, cortes y acciones por banda"), ("Lucía O.", "confirmar la capacidad operativa"),

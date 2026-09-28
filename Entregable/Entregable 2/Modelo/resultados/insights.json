@@ -507,6 +507,15 @@
  },
  "prevalencia_mes": {
   "meses": [
+   "2022-03",
+   "2022-04",
+   "2022-05",
+   "2022-06",
+   "2022-07",
+   "2022-08",
+   "2022-09",
+   "2022-10",
+   "2022-11",
    "2022-12",
    "2023-01",
    "2023-02",
@@ -552,49 +561,67 @@
   ],
   "tasa": [
    0.0,
-   0.93,
-   2.6,
-   2.06,
-   1.27,
-   0.93,
-   2.46,
-   1.89,
+   4.97,
+   7.01,
+   5.13,
+   4.11,
+   4.76,
+   3.38,
+   4.09,
+   3.62,
+   4.18,
+   3.59,
+   3.2,
+   3.76,
+   3.0,
+   2.8,
+   2.78,
+   2.11,
+   2.1,
+   2.41,
+   2.02,
+   1.96,
    2.39,
-   1.88,
-   1.63,
-   2.0,
-   2.27,
-   1.74,
-   1.47,
-   1.61,
-   1.83,
-   1.79,
-   1.84,
-   1.37,
-   1.59,
-   1.85,
-   1.93,
-   1.71,
-   1.86,
-   1.74,
+   2.43,
+   2.08,
+   2.41,
+   2.1,
+   2.2,
+   2.48,
    2.12,
-   1.57,
-   2.06,
-   1.83,
-   1.79,
-   1.92,
-   1.99,
-   2.03,
+   2.26,
+   2.24,
+   2.39,
+   2.1,
    2.01,
-   2.45,
-   4.2,
-   5.09,
-   7.28,
-   8.73,
-   10.88,
-   12.64
+   2.17,
+   2.44,
+   1.99,
+   2.4,
+   1.99,
+   2.08,
+   2.06,
+   2.37,
+   2.46,
+   2.51,
+   2.84,
+   4.63,
+   5.43,
+   7.47,
+   8.79,
+   10.78,
+   12.6
   ],
   "split": [
+   "train",
+   "train",
+   "train",
+   "train",
+   "train",
+   "train",
+   "train",
+   "train",
+   "train",
    "train",
    "train",
    "train",
@@ -639,131 +666,173 @@
    "test"
   ]
  },
+ "resumen": {
+  "version": "v3",
+  "filas": 201306,
+  "positivos": 6853,
+  "prevalencia": 3.4,
+  "n_num": 55,
+  "n_cat": 5,
+  "posiciones": 9818,
+  "skus": 750,
+  "tasa_hasta_2025": 2.5,
+  "tasa_2026": 9.0,
+  "split": {
+   "embargo": {
+    "desde": "Jan-25",
+    "hasta": "Dec-25",
+    "filas": 36225,
+    "positivos": 998,
+    "tasa": 2.76
+   },
+   "test": {
+    "desde": "Jan-26",
+    "hasta": "May-26",
+    "filas": 28070,
+    "positivos": 2535,
+    "tasa": 9.03
+   },
+   "train": {
+    "desde": "Mar-22",
+    "hasta": "Dec-24",
+    "filas": 98649,
+    "positivos": 2466,
+    "tasa": 2.5
+   },
+   "validacion": {
+    "desde": "Apr-25",
+    "hasta": "Sep-25",
+    "filas": 38362,
+    "positivos": 854,
+    "tasa": 2.23
+   }
+  }
+ },
  "transicion": {
-  "sano_sano": 125160,
-  "sano_rojo": 2990,
-  "rojo_sano": 1601,
-  "rojo_rojo": 1438
+  "sano_sano": 190171,
+  "sano_rojo": 4207,
+  "rojo_sano": 4282,
+  "rojo_rojo": 2646
  },
  "tasa_tienda": {
   "tiendas": [
-   "T07",
    "T04",
-   "T20",
-   "T10",
-   "T21",
    "T18",
-   "T15",
-   "T09",
-   "T22",
-   "T03",
-   "T17",
-   "T28",
-   "T14",
-   "T05",
-   "T23",
-   "T13",
-   "T12",
+   "T07",
    "T02",
+   "T09",
+   "T20",
+   "T22",
+   "T10",
+   "T14",
+   "T03",
+   "T13",
+   "T23",
    "T01",
-   "T24",
-   "T08",
-   "T16",
-   "T27",
-   "T26",
-   "T11",
-   "T25",
+   "T15",
    "T06",
-   "T19"
+   "T24",
+   "T05",
+   "T08",
+   "T21",
+   "T19",
+   "T17",
+   "T16",
+   "T28",
+   "T26",
+   "T12",
+   "T25",
+   "T11",
+   "T27"
   ],
   "tasa": [
-   0.77,
-   1.05,
-   1.3,
-   1.33,
-   1.34,
-   1.37,
-   1.51,
-   1.6,
-   1.7,
-   1.72,
-   1.76,
-   1.77,
-   1.84,
-   1.86,
-   1.87,
-   1.88,
-   1.93,
-   1.94,
-   1.96,
-   2.0,
-   2.05,
-   2.17,
-   2.4,
-   2.41,
-   2.44,
-   2.49,
-   2.5,
-   2.56
+   1.62,
+   1.63,
+   1.98,
+   2.08,
+   2.11,
+   2.16,
+   2.23,
+   2.29,
+   2.29,
+   2.31,
+   2.32,
+   2.36,
+   2.36,
+   2.36,
+   2.38,
+   2.39,
+   2.42,
+   2.48,
+   2.55,
+   2.55,
+   2.55,
+   2.64,
+   2.72,
+   2.91,
+   2.91,
+   3.0,
+   3.1,
+   3.24
   ],
   "ic": [
-   0.33,
-   0.36,
+   0.34,
+   0.35,
+   0.39,
+   0.41,
+   0.4,
+   0.4,
+   0.41,
+   0.43,
+   0.43,
+   0.43,
    0.42,
-   0.45,
    0.42,
+   0.43,
+   0.42,
+   0.43,
+   0.42,
+   0.42,
+   0.44,
+   0.44,
    0.43,
    0.44,
    0.46,
+   0.46,
+   0.46,
+   0.49,
+   0.47,
    0.48,
-   0.5,
-   0.49,
-   0.5,
-   0.52,
-   0.49,
-   0.49,
-   0.51,
-   0.53,
-   0.53,
-   0.52,
-   0.51,
-   0.54,
-   0.56,
-   0.57,
-   0.56,
-   0.57,
-   0.58,
-   0.59,
-   0.58
+   0.5
   ],
-  "media": 1.84,
-  "fuera_ic": 11
+  "media": 2.42,
+  "fuera_ic": 8
  },
  "tasa_categoria": {
   "cat": [
-   "Cocina y mesa",
    "Bano",
-   "Iluminacion",
    "Muebles",
+   "Cocina y mesa",
    "Textil hogar",
    "Organizacion",
+   "Iluminacion",
    "Decoracion"
   ],
   "tasa": [
-   2.36,
-   2.12,
-   2.0,
-   1.89,
-   1.79,
-   1.53,
-   1.34
+   2.78,
+   2.72,
+   2.71,
+   2.61,
+   2.3,
+   2.14,
+   1.85
   ]
  },
  "conc_sku": {
-  "skus_con_positivos": 340,
-  "skus_universo": 555,
-  "n50": 57,
-  "n80": 150
+  "skus_con_positivos": 562,
+  "skus_universo": 747,
+  "n50": 94,
+  "n80": 246
  },
  "mapa_riesgo": {
   "cob": [
@@ -781,66 +850,66 @@
   ],
   "tasa": [
    [
-    1.9,
-    1.1,
-    0.2,
-    0.5
+    1.4,
+    0.9,
+    0.4,
+    0.7
    ],
    [
-    2.2,
+    2.1,
     0.8,
-    0.3,
-    0.5
+    0.5,
+    0.7
    ],
    [
-    5.1,
+    4.6,
     1.9,
-    1.0,
-    1.6
+    1.3,
+    2.3
    ],
    [
-    10.8,
-    4.8,
-    2.9,
-    3.5
+    9.4,
+    4.4,
+    4.0,
+    5.5
    ],
    [
-    30.9,
-    4.1,
-    11.1,
-    16.2
+    35.7,
+    7.1,
+    12.4,
+    20.2
    ]
   ],
   "n": [
    [
-    1005,
-    1890,
-    4089,
-    2526
+    1541,
+    3103,
+    8599,
+    4099
    ],
    [
-    3533,
-    7440,
-    16709,
-    9442
+    5108,
+    11524,
+    32806,
+    14813
    ],
    [
-    2528,
-    4858,
-    9911,
-    6377
+    3725,
+    7260,
+    19024,
+    9860
    ],
    [
-    704,
-    922,
-    1562,
-    1519
+    1218,
+    1510,
+    3736,
+    2614
    ],
    [
-    913,
-    218,
-    406,
-    974
+    2426,
+    425,
+    1537,
+    2083
    ]
   ]
  },
@@ -852,164 +921,164 @@
    ">12 (ya rojo)"
   ],
   "pct": [
-   20.4,
-   29.7,
-   15.3,
-   34.6
+   16.8,
+   23.6,
+   14.2,
+   45.4
   ]
  },
  "senal": [
   {
    "feature": "u6_suma",
-   "auc_train": 0.854,
-   "auc_validacion": 0.844,
-   "auc_test": 0.939
-  },
-  {
-   "feature": "cv_u12",
-   "auc_train": 0.848,
-   "auc_validacion": 0.846,
-   "auc_test": 0.918
+   "auc_train": 0.858,
+   "auc_validacion": 0.843,
+   "auc_test": 0.936
   },
   {
    "feature": "u12_prom",
-   "auc_train": 0.842,
-   "auc_validacion": 0.824,
-   "auc_test": 0.894
-  },
-  {
-   "feature": "peso_posicion_en_tienda",
-   "auc_train": 0.836,
-   "auc_validacion": 0.823,
-   "auc_test": 0.894
-  },
-  {
-   "feature": "meses_con_venta_12",
-   "auc_train": 0.833,
-   "auc_validacion": 0.81,
-   "auc_test": 0.911
+   "auc_train": 0.85,
+   "auc_validacion": 0.827,
+   "auc_test": 0.893
   },
   {
    "feature": "u3_suma",
-   "auc_train": 0.829,
-   "auc_validacion": 0.819,
-   "auc_test": 0.931
+   "auc_train": 0.825,
+   "auc_validacion": 0.817,
+   "auc_test": 0.928
   },
   {
-   "feature": "venta3_suma",
-   "auc_train": 0.788,
-   "auc_validacion": 0.786,
-   "auc_test": 0.915
-  },
-  {
-   "feature": "u12_max",
-   "auc_train": 0.786,
-   "auc_validacion": 0.764,
-   "auc_test": 0.805
-  },
-  {
-   "feature": "cobertura",
-   "auc_train": 0.776,
-   "auc_validacion": 0.779,
-   "auc_test": 0.94
-  },
-  {
-   "feature": "unidades_vendidas",
-   "auc_train": 0.77,
-   "auc_validacion": 0.761,
-   "auc_test": 0.919
-  },
-  {
-   "feature": "u_lag1",
-   "auc_train": 0.765,
-   "auc_validacion": 0.755,
-   "auc_test": 0.91
-  },
-  {
-   "feature": "u_lag2",
-   "auc_train": 0.758,
-   "auc_validacion": 0.744,
+   "feature": "peso_posicion_en_tienda",
+   "auc_train": 0.821,
+   "auc_validacion": 0.826,
    "auc_test": 0.892
   },
   {
-   "feature": "stock_sku_cadena",
-   "auc_train": 0.724,
-   "auc_validacion": 0.695,
-   "auc_test": 0.736
+   "feature": "cobertura",
+   "auc_train": 0.817,
+   "auc_validacion": 0.805,
+   "auc_test": 0.942
   },
   {
-   "feature": "stock_disponible",
-   "auc_train": 0.722,
-   "auc_validacion": 0.696,
-   "auc_test": 0.711
+   "feature": "u12_max",
+   "auc_train": 0.807,
+   "auc_validacion": 0.78,
+   "auc_test": 0.802
   },
   {
-   "feature": "stock_deposito_sku",
-   "auc_train": 0.718,
-   "auc_validacion": 0.703,
-   "auc_test": 0.737
+   "feature": "meses_con_venta_12",
+   "auc_train": 0.806,
+   "auc_validacion": 0.798,
+   "auc_test": 0.906
   },
   {
-   "feature": "meses_sin_venta",
-   "auc_train": 0.707,
-   "auc_validacion": 0.711,
-   "auc_test": 0.899
+   "feature": "cv_u12",
+   "auc_train": 0.782,
+   "auc_validacion": 0.81,
+   "auc_test": 0.918
+  },
+  {
+   "feature": "u_lag1",
+   "auc_train": 0.764,
+   "auc_validacion": 0.754,
+   "auc_test": 0.904
+  },
+  {
+   "feature": "unidades_vendidas",
+   "auc_train": 0.759,
+   "auc_validacion": 0.753,
+   "auc_test": 0.917
+  },
+  {
+   "feature": "u_lag2",
+   "auc_train": 0.752,
+   "auc_validacion": 0.748,
+   "auc_test": 0.886
   },
   {
    "feature": "cobertura_3m_antes",
-   "auc_train": 0.685,
-   "auc_validacion": 0.687,
-   "auc_test": 0.778
+   "auc_train": 0.736,
+   "auc_validacion": 0.72,
+   "auc_test": 0.785
   },
   {
-   "feature": "stock_en_transito",
-   "auc_train": 0.667,
-   "auc_validacion": 0.663,
-   "auc_test": 0.502
+   "feature": "stock_disponible",
+   "auc_train": 0.705,
+   "auc_validacion": 0.689,
+   "auc_test": 0.705
   },
   {
-   "feature": "capital_inmovilizado_pos",
-   "auc_train": 0.664,
-   "auc_validacion": 0.648,
-   "auc_test": 0.656
+   "feature": "meses_sin_venta",
+   "auc_train": 0.702,
+   "auc_validacion": 0.704,
+   "auc_test": 0.895
+  },
+  {
+   "feature": "stock_sku_cadena",
+   "auc_train": 0.702,
+   "auc_validacion": 0.691,
+   "auc_test": 0.732
   },
   {
    "feature": "tiendas_cob12_sku",
-   "auc_train": 0.654,
-   "auc_validacion": 0.623,
-   "auc_test": 0.731
+   "auc_train": 0.7,
+   "auc_validacion": 0.663,
+   "auc_test": 0.728
+  },
+  {
+   "feature": "stock_deposito_sku",
+   "auc_train": 0.698,
+   "auc_validacion": 0.694,
+   "auc_test": 0.733
+  },
+  {
+   "feature": "antig_sku_meses",
+   "auc_train": 0.613,
+   "auc_validacion": 0.574,
+   "auc_test": 0.504
+  },
+  {
+   "feature": "antig_posicion_meses",
+   "auc_train": 0.612,
+   "auc_validacion": 0.575,
+   "auc_test": 0.504
+  },
+  {
+   "feature": "historia_corta",
+   "auc_train": 0.573,
+   "auc_validacion": 0.55,
+   "auc_test": 0.5
   }
  ],
- "senal_sin": 40,
- "n_features_num": 62,
+ "senal_sin": 30,
+ "n_features_num": 55,
  "importancia": {
   "feature": [
-   "cv_u12",
-   "u6_suma",
    "cobertura",
-   "u12_prom",
-   "stock_sku_cadena",
+   "cv_u12",
    "stock_vs_prom_sku",
-   "uds_oc_recibidas_12m",
-   "cobertura_3m_antes",
-   "precio_lista",
-   "u3_suma",
+   "stock_sku_cadena",
+   "peso_posicion_en_tienda",
+   "u12_prom",
+   "subcategoria",
+   "skus_en_tienda",
    "tendencia_u3_vs_u12",
-   "n_oc_recibidas_12m"
+   "meses_sin_venta",
+   "antig_sku_meses",
+   "stock_disponible"
   ],
   "valor": [
-   0.1197,
-   0.0857,
-   0.0156,
-   0.0102,
-   0.0081,
-   0.0027,
-   0.0016,
-   0.0013,
-   0.0006,
+   0.062,
+   0.0444,
+   0.0121,
+   0.0087,
+   0.0032,
+   0.0022,
+   0.002,
+   0.0015,
    0.0006,
    0.0005,
-   0.0005
+   0.0005,
+   0.0003
   ]
  },
  "capacidad": {
@@ -1027,42 +1096,42 @@
     1000
    ],
    "recall_modelo": [
-    20.0,
-    31.2,
-    46.1,
-    53.6,
-    62.3,
-    67.1,
-    72.0,
-    75.7,
-    80.7,
-    84.8
+    11.1,
+    23.2,
+    38.8,
+    47.4,
+    58.3,
+    63.8,
+    69.1,
+    73.3,
+    76.9,
+    78.9
    ],
    "recall_regla": [
-    17.1,
-    23.2,
-    35.5,
-    40.9,
-    46.6,
-    51.1,
-    54.3,
-    57.1,
-    60.7,
-    63.7
+    15.2,
+    24.8,
+    33.6,
+    43.1,
+    46.8,
+    50.0,
+    52.5,
+    56.9,
+    59.8,
+    62.6
    ],
    "precision_modelo": [
-    37.3,
-    29.2,
-    21.5,
-    16.7,
-    13.8,
-    12.5,
-    11.2,
-    10.1,
-    8.9,
-    7.9
+    31.7,
+    33.0,
+    27.6,
+    22.5,
+    19.8,
+    18.2,
+    16.4,
+    14.9,
+    12.9,
+    11.2
    ],
-   "positivos_mes": 93
+   "positivos_mes": 142
   },
   "test": {
    "k": [
@@ -1078,42 +1147,42 @@
     1000
    ],
    "recall_modelo": [
-    9.9,
-    19.4,
-    35.4,
-    48.4,
-    61.7,
-    68.8,
-    77.4,
-    83.1,
+    9.3,
+    17.6,
+    32.3,
+    45.0,
+    59.0,
+    66.3,
+    74.7,
+    81.4,
     88.8,
-    92.4
+    92.6
    ],
    "recall_regla": [
-    10.4,
-    19.5,
-    35.5,
-    48.0,
-    59.0,
-    65.8,
-    71.4,
-    76.3,
-    81.1,
-    85.4
+    9.6,
+    18.4,
+    34.0,
+    46.9,
+    57.6,
+    63.9,
+    69.7,
+    74.4,
+    80.0,
+    83.5
    ],
    "precision_modelo": [
-    92.4,
-    90.8,
-    82.7,
-    75.4,
-    68.7,
-    64.3,
-    60.3,
-    55.5,
-    48.8,
-    43.2
+    94.8,
+    89.4,
+    81.8,
+    76.1,
+    71.2,
+    67.2,
+    63.1,
+    59.0,
+    53.0,
+    47.0
    ],
-   "positivos_mes": 468
+   "positivos_mes": 507
   }
  }
 }

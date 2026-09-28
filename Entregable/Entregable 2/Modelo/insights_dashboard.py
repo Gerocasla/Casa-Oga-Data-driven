@@ -14,6 +14,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(BASE, "..", "..", ".."))
 DATA = os.path.join(ROOT, "Datasets_Normalizados"); RES = os.path.join(BASE, "resultados")
 K = ["fecha_mes", "id_tienda", "id_producto"]; M = 1e6
+V = os.environ.get("VERSION_DATASET", "v3")
 OUT = {}
 
 # ------------------------------------------------------------------ panel limpio (todas las posiciones)
@@ -67,13 +68,22 @@ OUT["rojo_ago26_sku"] = {"skus": int(len(sk)), "top20_pct": round(sk.head(20).su
                          "top10": sk.head(10).index.tolist(), "top10_cap": (sk.head(10) / M).round(1).tolist()}
 
 # ------------------------------------------------------------------ dataset del modelo
-ds = pd.read_parquet(os.path.join(ROOT, "Datasets_Modelo", "dataset_entrenamiento_v2.parquet"))
+ds = pd.read_parquet(os.path.join(ROOT, "Datasets_Modelo", f"dataset_entrenamiento_{V}.parquet"))
 y = "target_cob12_t3"
 pm = ds.groupby("fecha_mes").agg(tasa=(y, "mean"), filas=(y, "size"), split=("split", "first"))
 OUT["prevalencia_mes"] = {"meses": [x.strftime("%Y-%m") for x in pm.index], "tasa": (pm["tasa"] * 100).round(2).tolist(),
                           "split": pm["split"].tolist()}
 # transiciones t -> t+3
 hoy = (ds["cobertura"] > 12)
+NOF_ = ["fecha_mes", "id_tienda", "id_producto", "costo_imputado", y, "split"]
+spl = ds.groupby("split").agg(desde=("fecha_mes", "min"), hasta=("fecha_mes", "max"), filas=(y, "size"), positivos=(y, "sum"), tasa=(y, "mean"))
+OUT["resumen"] = {"version": V, "filas": int(len(ds)), "positivos": int(ds[y].sum()), "prevalencia": round(ds[y].mean() * 100, 2),
+                  "n_num": int(sum(ds[c].dtype != object for c in ds.columns if c not in NOF_)),
+                  "n_cat": int(sum(ds[c].dtype == object for c in ds.columns if c not in NOF_)),
+                  "posiciones": int(ds.groupby(["id_tienda", "id_producto"]).ngroups), "skus": int(ds["id_producto"].nunique()),
+                  "tasa_hasta_2025": round(ds[ds.fecha_mes < "2026-01-01"][y].mean() * 100, 1), "tasa_2026": round(ds[ds.fecha_mes >= "2026-01-01"][y].mean() * 100, 1),
+                  "split": {k: {"desde": r.desde.strftime("%b-%y"), "hasta": r.hasta.strftime("%b-%y"), "filas": int(r.filas), "positivos": int(r.positivos),
+                                "tasa": round(r.tasa * 100, 2)} for k, r in spl.iterrows()}}
 OUT["transicion"] = {"sano_sano": int((~hoy & (ds[y] == 0)).sum()), "sano_rojo": int((~hoy & (ds[y] == 1)).sum()),
                      "rojo_sano": int((hoy & (ds[y] == 0)).sum()), "rojo_rojo": int((hoy & (ds[y] == 1)).sum())}
 # tasa por categoria y por tienda (con intervalo binomial 95%)
@@ -105,10 +115,10 @@ OUT["origen_positivos"] = {"bandas": ["<6", "6-9", "9-12", ">12 (ya rojo)"],
                            "pct": [round(x, 1) for x in (pd.cut(pos_["cobertura"].replace(np.inf, 999), [0, 6, 9, 12, np.inf], right=False)
                                                          .value_counts(normalize=True, sort=False) * 100).tolist()]}
 # senal univariada
-sen = pd.read_csv(os.path.join(RES, "senal_univariada_v2.csv"))
+sen = pd.read_csv(os.path.join(RES, f"senal_univariada_{V}.csv"))
 OUT["senal"] = sen[["feature", "auc_train", "auc_validacion", "auc_test"]].head(20).to_dict("records")
 OUT["senal_sin"] = int((sen["auc_train"] < 0.55).sum()); OUT["n_features_num"] = int(len(sen))
-imp = pd.read_csv(os.path.join(RES, "importancia_permutacion_v2.csv"), index_col=0)["delta_pr_auc"]
+imp = pd.read_csv(os.path.join(RES, f"importancia_permutacion_{V}.csv"), index_col=0)["delta_pr_auc"]
 OUT["importancia"] = {"feature": imp.head(12).index.tolist(), "valor": imp.head(12).round(4).tolist()}
 
 # curva de capacidad (modelo de prueba entrenado en train, medido en validacion)

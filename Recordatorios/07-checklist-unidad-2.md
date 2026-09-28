@@ -46,6 +46,6 @@ La cátedra dice que **para la presentación final estas 10 preguntas tienen que
 ## Qué quedó hecho el 28-09-2026
 
 - Parte B §1.3: dashboard antes/después (`Entregable 2/Dashboard-Calidad-Antes-Despues.html`, script `EDA/antes_despues.py`, figura `EDA/graficos/13_antes_despues.png`) y tabla con 11 métricas.
-- Parte B §2.1 y §2.2 completas. Dataset `Datasets_Modelo/dataset_entrenamiento_v2*` (67 features) generado por `Entregable 2/Modelo/construir_dataset_modelo.py`, con tabla de variables excluidas.
+- Parte B §2.1 y §2.2 completas. Dataset `Datasets_Modelo/dataset_entrenamiento_v3*` (60 features, universo 3+ meses) generado por `Entregable 2/Modelo/construir_dataset_modelo.py`, con tabla de variables excluidas.
 - Parte A recalculada al corte ago-2026. Dashboard de 5 pestañas. Presentación en un solo archivo: v1 completa (34) y v2 corta (14), HTML y PDF, en `Entregable 2/Presentacion/`.
 - Respuestas de la ronda 2 archivadas en `Material/Respuestas-Ronda-2-Calidad-de-Datos.md`, con la tabla de dónde se aplicó cada una.
