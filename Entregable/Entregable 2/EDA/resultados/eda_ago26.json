@@ -1,0 +1,221 @@
+{
+ "filas": {
+  "Calendario": 1461,
+  "Costo_almacenamiento": 7,
+  "Devoluciones_SKU": 2317,
+  "Historial_Precios_SKU": 1498,
+  "Liquidaciones": 593,
+  "Ordenes_Compra": 3000,
+  "Presupuesto_Ventas_Tienda_Categoria": 10976,
+  "Productos_catalogo": 815,
+  "Promociones_Comerciales": 119,
+  "Proveedores": 10,
+  "Stock_Deposito_Central": 23858,
+  "Stock_SKU_tienda_mensual": 299400,
+  "Tiendas": 28,
+  "Transferencias_Stock": 4200,
+  "Ventas_SKU_tienda_mensual": 299400
+ },
+ "stats": {
+  "u": {
+   "count": 92743.0,
+   "mean": 3.09,
+   "std": 3.55,
+   "min": -20.0,
+   "25%": 1.0,
+   "50%": 2.0,
+   "75%": 4.0,
+   "95%": 11.0,
+   "99%": 17.0,
+   "max": 33.0
+  },
+  "v": {
+   "count": 92743.0,
+   "mean": 134386.0,
+   "std": 198591.0,
+   "min": -1278060.0,
+   "25%": 19092.0,
+   "50%": 62363.0,
+   "75%": 162669.0,
+   "95%": 531408.0,
+   "99%": 983521.0,
+   "max": 2373217.0
+  },
+  "s": {
+   "count": 7479.0,
+   "mean": 15.9,
+   "std": 17.3,
+   "min": 1.0,
+   "25%": 4.0,
+   "50%": 10.0,
+   "75%": 20.0,
+   "95%": 53.0,
+   "99%": 85.0,
+   "max": 145.0
+  },
+  "pos_stock": 7479,
+  "skus_stock": 634,
+  "skus_stock_disc": 0,
+  "pct_cero": 18.01
+ },
+ "evol": {
+  "anual": {
+   "2022": 1789.3,
+   "2023": 6243.4,
+   "2024": 10529.9,
+   "2025": 13559.5,
+   "2026": 7961.4
+  },
+  "var_v": -0.13221112987485917,
+  "var_u": -0.12660264778062058,
+  "var_pos": -0.08076093111522631,
+  "total": 40083.394959419995,
+  "uds": 925015,
+  "idx_adj": [
+   98,
+   106
+  ],
+  "idx_naive": [
+   81,
+   117
+  ],
+  "pos_dic25": 8073,
+  "pos_ene26": 7509,
+  "pos_ago26": 7504
+ },
+ "dim": {
+  "cat": [
+   {
+    "categoria": "Decoracion",
+    "venta": 8960414509.8,
+    "pct": 22.4,
+    "pct_sku": 19.6,
+    "margen": 45.3
+   },
+   {
+    "categoria": "Cocina y mesa",
+    "venta": 7790743903.0,
+    "pct": 19.4,
+    "pct_sku": 15.2,
+    "margen": 45.9
+   },
+   {
+    "categoria": "Iluminacion",
+    "venta": 5464628692.1,
+    "pct": 13.6,
+    "pct_sku": 10.8,
+    "margen": 46.0
+   },
+   {
+    "categoria": "Textil hogar",
+    "venta": 5190660763.5,
+    "pct": 12.9,
+    "pct_sku": 15.9,
+    "margen": 44.4
+   },
+   {
+    "categoria": "Muebles",
+    "venta": 4769678162.6,
+    "pct": 11.9,
+    "pct_sku": 14.6,
+    "margen": 44.1
+   },
+   {
+    "categoria": "Organizacion",
+    "venta": 4596278255.2,
+    "pct": 11.5,
+    "pct_sku": 11.8,
+    "margen": 43.8
+   },
+   {
+    "categoria": "Bano",
+    "venta": 3310990673.2,
+    "pct": 8.3,
+    "pct_sku": 12.1,
+    "margen": 44.7
+   }
+  ],
+  "reg": {
+   "AMBA": 39.4,
+   "Centro": 21.8,
+   "NOA": 17.9,
+   "Cuyo": 17.2,
+   "Patagonia": 3.7
+  },
+  "ntie": {
+   "AMBA": 11,
+   "Centro": 6,
+   "Cuyo": 5,
+   "NOA": 5,
+   "Patagonia": 1
+  },
+  "tmin": 3.0,
+  "tmax": 4.1,
+  "tmax_id": "T24",
+  "tmax_v": 1645,
+  "tmin_id": "T14",
+  "tmin_v": 1198,
+  "corr_m2": -0.21,
+  "n80": 250,
+  "nsku": 798,
+  "top10": 48.2,
+  "margen": 44.9
+ },
+ "rel": {
+  "corr_us": 0.76,
+  "cob": {
+   "2023-01": {
+    "mes": 5.38,
+    "m3": 5.87,
+    "m12": 10.69,
+    "med": 5.14,
+    "p90": 9.8,
+    "p99": 18.0
+   },
+   "2025-12": {
+    "mes": 5.31,
+    "m3": 5.28,
+    "m12": 5.23,
+    "med": 5.33,
+    "p90": 9.0,
+    "p99": 16.0
+   },
+   "2026-08": {
+    "mes": 4.71,
+    "m3": 4.77,
+    "m12": 4.97,
+    "med": 5.0,
+    "p90": 12.0,
+    "p99": 48.0
+   }
+  },
+  "cum_y": {
+   "2022": 89.5,
+   "2023": 89.9,
+   "2024": 90.3,
+   "2025": 90.5,
+   "2026": 90.9
+  },
+  "cum_c": [
+   89.6,
+   91.0
+  ],
+  "cum_t": [
+   89.3,
+   91.4
+  ],
+  "dev_n": 2317,
+  "dev_u": 9583,
+  "dev_tasa": 1.28,
+  "dev_m": {
+   "Producto danado en logistica": 2067,
+   "Producto sin rotacion / no vendido": 2013,
+   "Devolucion de cliente (cambio)": 1930,
+   "Error de picking": 1787,
+   "Defecto de fabricacion": 1786
+  },
+  "lt_media": 1.0,
+  "lt_min": -3,
+  "lt_max": 5
+ }
+}

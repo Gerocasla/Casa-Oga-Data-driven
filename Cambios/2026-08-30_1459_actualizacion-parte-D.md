@@ -1,3 +1,5 @@
+> **⚠️ Documento histórico (TP1, corte dic-2025).** Las cifras de acá están desactualizadas o no son reproducibles (ver `Recordatorios/00-contexto-proyecto.md` y `02-correcciones-tp1.md`). Datos y criterios vigentes: `README.md` de la raíz y `Entregable/Entregable 2/`.
+
 # Registro de cambios — 2026-08-30, 14:59
 
 Actualización del Entregable 1 · Parte D (Diseño de Dashboard) para alinearlo con

@@ -1,33 +1,33 @@
 # Contexto del proyecto
 
-- **Materia:** Factibilidad de Proyectos Data Driven (ITBA) — **Grupo 1**.
+> Actualizado 28-09-2026. Estado general y cómo reproducir: `README.md` de la raíz.
+
+- **Materia:** Factibilidad de Proyectos Data Driven (ITBA, 2C 2026) — **Grupo 1**.
+- **Integrantes:** Gerónimo Fasce (64401) · Gianfranco Di Claudio (64505) · Matías Fleischer (65616) · Simón Volpato Escandarani (legajo pendiente) · Santiago Javier Hernández (legajo pendiente; responsable del dashboard).
 - **Caso:** Casa Óga, retail de hogar y decoración (28 tiendas + e-commerce), empresa ficticia.
-- **Frente trabajado:** Mix de productos / dead stock — modelo predictivo SKU-tienda de probabilidad de dead stock a 3 meses. (Frente churn: pendiente de datos de clientes.)
-- **Responsable del dashboard (Parte D):** Santiago Hernández.
+- **Frente trabajado:** mix de productos / dead stock — modelo predictivo SKU–tienda de riesgo a 3 meses. (Frente churn: sin datos de clientes, fuera de alcance.)
+- **Stakeholders del caso:** María G. (Comercial, aprobadora del target y del semáforo) · Carlos F. (Financiera, presupuesto y costo de capital) · Lucía O. (Operaciones, capacidad de intervención) · Diego P. (Compras) · responsables de tienda. IT: el responsable renunció sin dejar documentación (P3-P4).
 
 ## Dónde está cada cosa
-- **Carpeta local de trabajo:** `Desktop\Data-Driven\`
-  - `Datasets\` → 15 CSV (los 6 originales + 9 adicionales que no están en el repo)
-  - `Entregable\Entregable 1\` → documentos entregados del TP1 (`Entregable_1_Consolidado_G1.docx`, `Dashboard Entrega 1.html`, partes B/D, semáforo, etc.)
-  - `Entregable\Entregable 2\` → plantilla/consigna del TP2 (`Entregable 2 - Parte A - Alcance y Evaluacion de Calidad de Datos.docx`)
-  - `Cambios\` → documentos de análisis y sus versiones (metodología de limpieza, mini-análisis KPIs, actualización Parte D, panel dead stock)
-  - `Material\` → respuestas del cliente (xlsx) y README del repo
-  - `Mejoras\` → feedback de la cátedra (`Feedback Grupo 1.xlsx`)
-  - `Recordatorios\` → esta carpeta
-- **Repo GitHub (privado):** https://github.com/Gerocasla/Casa-Oga-Data-driven
-- `Desktop\ITBA\DATADRIVEN\` → carpeta vieja. **No tocar.**
+- **Repo (privado):** https://github.com/Gerocasla/Casa-Oga-Data-driven — es la fuente de verdad; las carpetas locales de cada integrante son clones.
+- `Datasets/` crudos (no se editan) · `Datasets_Normalizados/` **usar estos** · `Datasets_Modelo/` dataset de entrenamiento.
+- `Entregable/Entregable 1/` TP1 entregado · `Entregable/Entregable 2/` TP2 (Word, dashboard, scripts, presentación).
+- `Material/` respuestas del negocio y diapositivas · `Mejoras/` feedback de la cátedra · `Cambios/` análisis del TP1 (históricos) · `Recordatorios/` estas notas.
 
-## Estructura del Entregable 1 (Clases 1-4)
-- **Parte A** — Contexto organizacional
-- **Parte B** — Objetivos, stakeholders y restricciones
-- **Parte C** — Visión, metodología y backlog inicial
-- **Parte D** — Diseño de dashboard
+## Estructura de los entregables
+- **Entregable 1 (Clases 1-4):** A Contexto · B Objetivos, stakeholders y restricciones · C Visión, metodología y backlog · D Dashboard.
+- **Entregable 2 (Clases 6-8):** A Alcance, EDA y evaluación de calidad · B Hallazgos y plan de mejora, dashboard antes/después, dataset de entrenamiento y transformaciones.
+- **Entrega final:** un documento consolidado con todos los TPs y una sección «Cambios» (ver `01-reglas-de-entrega.md`).
 
-## Cifras insignia (deben ser consistentes en TODO el documento)
-- Capital inmovilizado dic-2025: **$83,9 M** (661 posiciones, definición binaria)
-- % posiciones en dead stock: **10,63% (ene-2023) → 8,27%**; cobertura **10,6 → 5,2 meses**
-- Semáforo por cobertura: **345 rojo / 652 amarillo**; 420-700 alertas mensuales
-- Piloto: Cocina y mesa + Decoración — 2.911 posiciones, $49,4 M de $83,9 M (59%)
-- Presupuesto USD 30.000; costo de mantener stock 5% mensual ($7,7 M/mes)
+## Cifras de referencia
 
-> ⚠️ Ver corrección #1 en `02-correcciones-tp1.md`: la tabla de la Sección 5.3 tiene cifras que contradicen estas.
+**Vigentes (Entregable 2, corte ago-2026, datos limpios):**
+- Venta ene-2022 a ago-2026: **$40.083,4 M** · 925.015 unidades (devoluciones neteadas). 2026 vs 2025 (ene-ago, bruto): **−13,2%**.
+- Cobertura: mediana ~5 meses estable; percentil 99 de **16 a 48 meses** entre dic-25 y ago-26.
+- Posiciones con cobertura > 12 meses a ago-26: **882 · $184,1 M a costo** · 363 SKUs · ~$9,2 M/mes al 5%.
+- Target: **3,38%** de positivos (4.428 / 131.189); ~2% en 2023-25 y 9% en 2026.
+- Costo de mantener stock: 5% mensual (2% almacenaje + 3% oportunidad, negocio); el dataset dice 1,5% de almacenaje.
+
+**Del TP1 (corte dic-2025) — NO reproducibles, no usar sin aclarar:**
+- Capital inmovilizado $83,9 M (661 posiciones), 10,63% → 8,27%, cobertura 10,6 → 5,2, semáforo 345 rojo / 652 amarillo. El script `calculo_dead_stock.py` no existe; circulan tres cifras para la misma métrica (431, 620 y 661). La «cobertura 10,6 → 5,2» es un efecto de cálculo (D2) y la «estacionalidad 143/61» es crecimiento (D1).
+- Ver `02-correcciones-tp1.md` antes de usar cualquiera en el consolidado.

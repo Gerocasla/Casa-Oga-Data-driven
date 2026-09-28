@@ -1,0 +1,94 @@
+
+==========================================================================================
+A · PERFIL
+==========================================================================================
+  Calendario                                1,461 filas
+  Costo_almacenamiento                          7 filas
+  Devoluciones_SKU                          2,317 filas
+  Historial_Precios_SKU                     1,498 filas
+  Liquidaciones                               593 filas
+  Ordenes_Compra                            3,000 filas
+  Presupuesto_Ventas_Tienda_Categoria      10,976 filas
+  Productos_catalogo                          815 filas
+  Promociones_Comerciales                     119 filas
+  Proveedores                                  10 filas
+  Stock_Deposito_Central                   23,858 filas
+  Stock_SKU_tienda_mensual                299,400 filas
+  Tiendas                                      28 filas
+  Transferencias_Stock                      4,200 filas
+  Ventas_SKU_tienda_mensual               299,400 filas
+  Ventas/Stock: 2022-01-01 a 2026-08-01 (56 meses)
+  Devoluciones_SKU                       2022-03-04 -> 2025-12-28
+  Calendario                             2022-01-01 -> 2025-12-31
+  Liquidaciones                          2022-03-17 -> 2026-08-26
+  Presupuesto_Ventas_Tienda_Categoria    2022-01-01 -> 2026-08-01
+  Promociones_Comerciales                2022-01-05 -> 2026-08-19
+  Ordenes_Compra                         2022-02-16 -> 2026-07-31
+  Transferencias_Stock                   2022-02-07 -> 2026-08-27
+  Stock_Deposito_Central                 2022-01-01 -> 2026-08-01
+  Historial_Precios_SKU                  2022-01-01 -> 2026-07-31
+  Productos_catalogo                     2022-01-01 -> 2025-06-29
+  SKUs catalogo: 800 | con venta: 798 | categorias 7 | subcategorias 25
+
+==========================================================================================
+B · ESTADISTICAS (ultimos 12 meses: sep-25 a ago-26)
+==========================================================================================
+  unidades: {'count': 92743.0, 'mean': 3.09, 'std': 3.55, 'min': -20.0, '25%': 1.0, '50%': 2.0, '75%': 4.0, '95%': 11.0, '99%': 17.0, 'max': 33.0}
+  venta   : {'count': 92743.0, 'mean': 134386.0, 'std': 198591.0, 'min': -1278060.0, '25%': 19092.0, '50%': 62363.0, '75%': 162669.0, '95%': 531408.0, '99%': 983521.0, 'max': 2373217.0}
+  stock ago-26 (>0): {'count': 7479.0, 'mean': 15.9, 'std': 17.3, 'min': 1.0, '25%': 4.0, '50%': 10.0, '75%': 20.0, '95%': 53.0, '99%': 85.0, 'max': 145.0} | posiciones con stock: 7479
+  SKUs con stock ago-26: 634 (discontinuados: 0)
+  filas con 0 unidades: 18.01% | venta>0 y stock=0: 1,976
+
+==========================================================================================
+C · EVOLUCION
+==========================================================================================
+  Venta por año ($M): {2022: 1789.3, 2023: 6243.4, 2024: 10529.9, 2025: 13559.5, 2026: 7961.4}
+  Total: $40,083.4 M · 925,015 uds · precio medio $43,333
+  (neteado: -12.1% — no comparable, 2026 no tiene devoluciones registradas)
+  ene-ago 26 vs ene-ago 25: venta -13.2% · unidades -12.7% · posiciones con venta -8.1%
+  posiciones con venta: ene-22 17 · dic-25 8073.0 · ene-26 7509.0 · ago-26 7504
+  uds por posicion: min 0.71 max 3.37 · 2026 prom 3.06
+  estacionalidad ingenua (prom anual): 81-117 | ajustada por tendencia: 98-106
+
+==========================================================================================
+D · DIMENSIONES (ene-22 a ago-26)
+==========================================================================================
+                      venta   pct  pct_sku  margen
+categoria                                         
+Decoracion     8.960415e+09  22.4     19.6    45.3
+Cocina y mesa  7.790744e+09  19.4     15.2    45.9
+Iluminacion    5.464629e+09  13.6     10.8    46.0
+Textil hogar   5.190661e+09  12.9     15.9    44.4
+Muebles        4.769678e+09  11.9     14.6    44.1
+Organizacion   4.596278e+09  11.5     11.8    43.8
+Bano           3.310991e+09   8.3     12.1    44.7
+  region: {'AMBA': '39.4% (11)', 'Centro': '21.8% (6)', 'NOA': '17.9% (5)', 'Cuyo': '17.2% (5)', 'Patagonia': '3.7% (1)'}
+  tienda: 3.0%-4.1% · max T24 $1,645 M · min T14 $1,198 M · corr m2 -0.21
+  Pareto: 250 de 798 SKUs = 80% (31.3%) · top 10% = 48.2%
+
+==========================================================================================
+E · RELACIONES
+==========================================================================================
+  corr unidades vs stock: 0.76
+  cobertura 2023-01: mes 5.38 · 3m 5.87 · 12m 10.69 · mediana pos 5.14 · p90 9.8 · p99 18.0
+  cobertura 2025-12: mes 5.31 · 3m 5.28 · 12m 5.23 · mediana pos 5.33 · p90 9.0 · p99 16.0
+  cobertura 2026-08: mes 4.71 · 3m 4.77 · 12m 4.97 · mediana pos 5.00 · p90 12.0 · p99 48.0
+  cumplimiento por año: {2022: 89.5, 2023: 89.9, 2024: 90.3, 2025: 90.5, 2026: 90.9} | cat 89.6-91.0 | tienda 89.3-91.4
+  devoluciones: 2,317 · 9,583 uds · tasa 1.28% · {'Producto danado en logistica': 2067, 'Producto sin rotacion / no vendido': 2013, 'Devolucion de cliente (cambio)': 1930, 'Error de picking': 1787, 'Defecto de fabricacion': 1786}
+  lead time real - declarado: media 1.0 · rango -3 a 5 · bajo minimo 0
+
+==========================================================================================
+GRAFICOS
+==========================================================================================
+  -> G01_venta_mensual.png
+  -> G02_unidades_vs_stock.png
+  -> G03_cobertura.png
+  -> G04_estacionalidad.png
+  -> G05_categorias.png
+  -> G06_region.png
+  -> G07_pareto.png
+  -> G08_tiendas.png
+  -> G09_presupuesto.png
+  -> G10_devoluciones.png
+  -> G11_leadtime.png
+  -> G12_distribuciones.png

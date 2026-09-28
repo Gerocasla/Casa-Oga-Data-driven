@@ -1,3 +1,5 @@
+> **⚠️ Documento histórico (corte dic-2025, datos crudos de `Datasets/`).** Fue el insumo de la primera versión de la Parte A. Reemplazado por `EDA/eda_ago26.py` (log en `resultados/eda_ago26_log.txt`, gráficos en `graficos_ago26/`) y por `../PROBLEMAS-CALIDAD-DATOS.md`. Las discrepancias D1-D13 con el TP1 siguen valiendo y están en `Recordatorios/02-correcciones-tp1.md`.
+
 # EDA y calidad de datos — Resultados recopilados (insumo Entregable 2)
 
 > **Estado:** recopilación. No se modificó el entregable. Todo lo de acá sale de correr `eda.py` y `eda_chequeos_2.py` sobre los 15 CSV de `Data-Driven\Datasets` (sin modificarlos).

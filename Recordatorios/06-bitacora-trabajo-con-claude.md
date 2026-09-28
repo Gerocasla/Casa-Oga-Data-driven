@@ -1,7 +1,7 @@
-# Bitácora del trabajo con Claude (17-08 al 25-09-2026)
+# Bitácora del trabajo con Claude (17-08 al 28-09-2026)
 
 > Resumen estructurado de la conversación de trabajo con Claude Code, para retomar sin perder contexto después de limpiar la sesión. **No es una transcripción literal**: recoge las decisiones, los números verificados, los hallazgos, los archivos generados y lo que quedó pendiente.
-> Leer junto con `00-contexto-proyecto.md`, `04-tp2-eda-pendientes.md` (parcialmente desactualizado, ver §7) y `05-decisiones-modelo.md`.
+> Leer junto con el `README.md` de la raíz, `00-contexto-proyecto.md`, `04-tp2-eda-pendientes.md` y `05-decisiones-modelo.md`.
 
 ---
 
@@ -16,10 +16,13 @@
   - Descuentos fuera de rango (5): **excluir** del margen. Presupuesto en cero (ene-may 2022) y negativo (3): **excluir** del desvío.
   - Historial de precios: **no usarlo** para revaluar ventas; manda `precio_lista` del catálogo.
 - **Estado de los entregables:**
-  - Entregable 2 · Parte A — completo pero con **corte dic-2025** (desactualizado).
-  - Entregable 2 · Parte B — **1.1 y 1.2 completas** con corte ago-2026; **1.3 y Sección 2 sin hacer**.
-- **Scripts reproducibles** en `Entregable/Entregable 2/EDA/`: `eda_2026.py`, `calidad_2026.py`, `factor_costo_oc.py`, `candidatos_target.py` (los logs quedan en `resultados/`).
-- **Identidad de git** configurada solo en este repo: `Santiago Hernandez / sanhernandez@itba.edu.ar`.
+  - Entregable 2 · Parte A — **completa, corte ago-2026** (recalculada el 28-09).
+  - Entregable 2 · Parte B — **completa** con corte ago-2026 (1.3, 2.1 y 2.2 agregadas el 28-09).
+  - Dashboard de 5 pestañas y presentación en dos versiones (v1 completa 34 / v2 corta 14, HTML + PDF).
+  - **Falta:** carátulas (legajos de Simón y Santiago, roles, fecha), elegir versión de la presentación, commit y push.
+- **Target y dataset:** cobertura > 12 meses en t+3, sin discontinuados · `Datasets_Modelo/dataset_entrenamiento_v2` (131.189 × 67). Detalle en `05-decisiones-modelo.md` y en la Parte B §2.
+- **Scripts reproducibles:** orden completo en el `README.md` de la raíz («Cómo reproducir todo»). EDA y calidad en `Entregable/Entregable 2/EDA/`; dataset, insights y dashboard en `Entregable/Entregable 2/Modelo/`; presentación en `Entregable/Entregable 2/Presentacion/`.
+- **Git:** cada integrante trabaja en su clon. En el clon de Santiago la identidad es `Santiago Hernandez / sanhernandez@itba.edu.ar`; en el de Gianfranco se trabajó desde el 22-09. Hacer `git pull` antes de empezar: los `.docx` se pisan si dos personas los editan a la vez.
 
 ---
 
@@ -90,6 +93,28 @@
   - H2 (SKUs duplicados) confirmado como **error del sistema**. Stock negativo confirmado como **error de sincronización**. Los motivos de devolución quedan explicados ("sin rotación" = devolución al proveedor).
 - Documentos actualizados: Parte B (hallazgos, mapa, plan, supuesto declarado y sugerencias pedidas por el negocio), `PROBLEMAS-CALIDAD-DATOS.md` y `05-decisiones-modelo.md`.
 
+### 28-09 · Unidad 2 completa en la Parte B
+- Se revisaron las diapositivas de las clases 6, 7 y 8 (`Material/Unidad 2/`) contra lo hecho: checklist en `07-checklist-unidad-2.md`.
+- Se archivaron las respuestas de la ronda 2 en `Material/Respuestas-Ronda-2-Calidad-de-Datos.md`. Ya estaban aplicadas; la única en la que nos apartamos de la sugerencia es **P13** (no deflactar por IPC), con la justificación escrita en H8.
+- **Parte B 1.3:** `EDA/antes_despues.py` compara 11 métricas crudo vs corregido. Los agregados cambian menos de 2% (venta −0,6%, capital dic-25 −1,4%), pero la prevalencia del target sube 26% según el tratamiento de devoluciones y Decoración gana 1,5 pp al unificar categorías.
+- **Parte B 2.1 y 2.2:** `Modelo/construir_dataset_modelo.py` genera `dataset_entrenamiento_v1`: **131.189 filas × 39 features** (35 numéricas + 4 categóricas; 76 tras one-hot), 4.428 positivos (3,38%). Partición temporal con embargo de 3 meses: train dic-22→dic-24 (1,78%), validación abr→sep-25 (1,94%), test ene→may-26 (9,03%). *(Esa misma tarde se reemplazó por la v2 de 67 features; ver más abajo.)*
+- Se agregó a la Parte B una tabla de selección de fuentes (criterios de la Clase 8) y un párrafo de riesgos de sesgo.
+- `02-correcciones-tp1.md` suma las correcciones #10-#13 que salen del checklist de la Clase 7.
+
+### 28-09 (tarde) · Parte A al día, dataset v2, dashboard y presentación
+- **Parte A recalculada al corte ago-2026** (`EDA/eda_ago26.py`): tabla 2.3, matriz 3.1 (actualidad en rojo para Devoluciones, Calendario y catálogo), fundamentos y los 12 gráficos (`EDA/graficos_ago26/`). La fila «Desaceleración 2025» pasa a «Caída de 2026».
+- **Dataset v2:** 67 features (62 num + 5 cat) con justificación por grupo y tabla de variables excluidas (leakage / calidad / generalización) en la Parte B. v1 reemplazada.
+- **Hallazgo:** 2026 no trae devoluciones → comparar años en bruto (−13,2%); neteado daría −12,1% y no es comparable.
+- **Dashboard** con 5 pestañas: resumen, calidad, qué cambió en 2026, dónde está el riesgo, qué anticipa el riesgo.
+- **Presentación** de 34 diapositivas: https://claude.ai/artifact/3ggL4DDAvfEwxBzwtHLVso (privada; compartir desde Share). Gráficos en `Entregable 2/Presentacion/img/`.
+
+### 28-09 (noche) · Presentación en un solo archivo y versión corta
+- Pedido: la presentación tiene que ser **un archivo**, no una carpeta por diapositiva, y hace falta una versión corta para exponer pocos minutos.
+- `Presentacion/armar_html.py` junta las diapositivas en un HTML autocontenido (imágenes embebidas, flechas para navegar, `N` notas del orador) y Edge sin ventana lo imprime a PDF.
+- **v1 completa** (34) y **v2 corta** (14) — se mantienen las dos para decidir. Qué entra en la corta: `Presentacion/README.md`.
+- Correcciones visuales: el mapa de calidad pisaba el pie de página; el gráfico antes/después decía +1,6 pp y el texto +1,5 pp (quedó 1,5 en todos lados).
+- Se agregó un `README.md` en la raíz y en `Presentacion/`; se actualizaron todos los `.md` del repo y se marcaron como históricos los del TP1 (`Cambios/`, `HALLAZGOS_EDA.md`).
+
 ---
 
 ## 4. Números de referencia vigentes
@@ -107,6 +132,10 @@
 | Target (cobertura > 12 a 3 meses) | 4.428 / 131.189 = 3,38% · tasa 2,0% (2023-25) vs 9,0% (2026) | neteo |
 | Dead stock TP1 (panel) | 661 posiciones · $83,9 M · $7,7 M/mes | **no reproducible** |
 | Capacidad operativa | 420-700 intervenciones/mes (15-25 por tienda) | **nunca medida** |
+| Dataset del modelo v2 | 131.189 filas × 67 features · train 48.631 / val 28.895 / test 25.888 / embargo 27.775 | `Datasets_Modelo/` |
+| Capital en rojo ago-26 | $184,1 M a costo · 882 posiciones · 363 SKUs · $9,2 M/mes al 5% | `Modelo/resultados/insights.json` |
+| Capacidad (validación) | 420 alertas/mes: 62% de casos (modelo de prueba) vs 47% (regla) | idem |
+| Antes → después (1.3) | venta $40.314,3 M → $40.083,4 M · capital dic-25 $3.595,1 M → $3.544,9 M | `EDA/resultados/antes_despues.csv` |
 
 ---
 
@@ -145,11 +174,15 @@
 ## 7. Pendientes
 
 **Entregable 2**
-- [ ] Parte B **1.3**: dashboard antes/después. El "antes" son los datos crudos; el "después", los criterios de la §1.
-- [ ] Parte B **Sección 2**: 2.1 (dataset de entrenamiento: casi todo definido en `05-decisiones-modelo.md`) y 2.2 (transformaciones).
-- [ ] **Actualizar la Parte A al corte ago-2026**, para no entregar dos partes del mismo TP con cortes distintos.
-- [ ] Carátula: legajos de Simón Volpato Escandarani y Santiago Hernández, fecha y roles.
-- [ ] Actualizar `04-tp2-eda-pendientes.md`: varias preguntas ya se respondieron (15 fuentes, respetar plantilla, gráficos en anexo, corte ago-2026, 2026 = segunda entrega).
+- [ ] Carátulas de Parte A y B (legajos de Simón y Santiago, roles, fecha).
+- [ ] Elegir versión de la presentación (v1 completa o v2 corta).
+- [ ] Commit y push de todo lo del 28-09 (no está en el repo todavía).
+- [x] Presentación en un archivo, dos versiones (28-09).
+- [x] Parte B **1.3**: dashboard antes/después (28-09).
+- [x] Parte B **Sección 2**: 2.1 y 2.2 (28-09).
+- [x] Parte A al corte ago-2026 (28-09).
+- [ ] Carátula: legajos de Simón Volpato Escandarani y Santiago Hernández, fecha y roles (en Parte A y Parte B).
+- [x] Actualizar `04-tp2-eda-pendientes.md` (28-09).
 
 **Decisiones del equipo**
 - [ ] ¿Excluir del neteo el motivo "sin rotación" (devolución al proveedor, ~21% de las unidades devueltas)? El negocio reconoce que es un movimiento de inventario y no una venta.
@@ -162,5 +195,5 @@
 
 **TP1 / consolidado**
 - [ ] `calculo_dead_stock.py` no existe: las cifras 661 / $83,9 M / semáforo 345-652 no se pueden reproducir. Hay tres números en circulación para la misma métrica (431, 620 y 661).
-- [ ] Correcciones del feedback del TP1 (`02-correcciones-tp1.md`) sin aplicar al consolidado.
+- [ ] Correcciones del feedback del TP1 (`02-correcciones-tp1.md`, ahora 13 + las del EDA) sin aplicar al consolidado. La Clase 7 dice que tienen que estar resueltas para la presentación final.
 - [ ] En `Cambios/` conviven versiones viejas y nuevas de los MD de análisis (con y sin guiones en el nombre); las viejas tienen cifras desactualizadas.

@@ -1,3 +1,5 @@
+> **⚠️ Documento histórico (TP1, corte dic-2025).** Las cifras de acá están desactualizadas o no son reproducibles (ver `Recordatorios/00-contexto-proyecto.md` y `02-correcciones-tp1.md`). Datos y criterios vigentes: `README.md` de la raíz y `Entregable/Entregable 2/`.
+
 # Casa Óga — CSVs limpios (metodología)
 
 Este paquete contiene los 6 CSV originales del proyecto, con las correcciones de calidad de datos descriptas abajo. Los archivos que no tenían problemas (`Tiendas.csv`, `Calendario.csv`) se incluyen sin cambios. Los que sí se corrigieron llevan el sufijo `_limpio` y **agregan columnas de auditoría** (originales/flags) para que quede trazable qué se tocó — no se borra información silenciosamente.

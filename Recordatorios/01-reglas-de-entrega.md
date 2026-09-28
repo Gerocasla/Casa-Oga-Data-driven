@@ -32,3 +32,14 @@ Tabla por TP, generada a partir de `03-registro-de-cambios.md`:
 - **Plan de fases ≠ backlog:** el backlog priorizado (épicas/historias) alimenta las fases y se refina por sprint.
 - **Aclarar limitaciones donde se declara el alcance** (ej. dashboard = corte histórico con carga manual mensual, no datos en vivo).
 - **Stakeholders:** distinguir influencia de diseño/técnica de influencia política/decisión.
+
+## 6. Checklist de la Clase 7 para el consolidado final
+La cátedra repasó 10 errores frecuentes del TP1 entre todos los grupos y dijo que **para la presentación final tienen que estar resueltos**. Las 10 preguntas y nuestro estado están en `07-checklist-unidad-2.md`; las correcciones concretas, en `02-correcciones-tp1.md` (#1-#13).
+
+## 7. Lecciones del Entregable 2 (aplicar en los próximos)
+- **Respetar la plantilla:** no agregar secciones que la plantilla no trae; lo extra va dentro de la sección que corresponde (así se agregaron las tablas de selección de fuentes y de variables excluidas en la Parte B §2.1).
+- **Un solo corte de datos por entregable:** si llegan datos nuevos, recalcular todas las partes (se pasó la Parte A de dic-2025 a ago-2026 por eso).
+- **Todo número sale de un script versionado** en `Entregable/Entregable N/…`; nada calculado a mano.
+- **Supuestos declarados como supuestos** (p. ej. el factor 1,2321), y cuando nos apartamos de un default del negocio, justificarlo por escrito (P13, deflactar por IPC).
+- **Sin leakage:** toda variable del modelo tiene que poder calcularse al cierre del mes de predicción; cada exclusión se justifica.
+- **Presentación:** entregar un único archivo (HTML o PDF), no una carpeta de diapositivas.

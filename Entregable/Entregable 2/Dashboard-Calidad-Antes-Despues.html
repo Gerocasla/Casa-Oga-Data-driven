@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dead Stock y Calidad</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --brand:#FFC72C;--brand-hover:#F5B800;--accent-glow:rgba(255,199,44,.30);
+  --page:#F2F2F7;--card:#FFFFFF;--border:#E2E8F0;--ink:#1C1C1E;--ink2:#6E6E73;--muted:#9A9AA0;--slate:#0F172A;--grid:#E8EDF3;
+  --s1:#3E6FA8;--s2:#E8590C;--s3:#0CA678;--s4:#9A6DD7;--gris:#A1A1AA;--alert:#DC2626;
+  --heat0:#EEF3FA;--heat1:#1F4E8C;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#0B1120;--card:#141B2D;--border:#243049;--ink:#F1F5F9;--ink2:#A3AEC2;--muted:#7C879C;--grid:#1E293B;--s1:#6C9BD2;--gris:#64748B;--heat0:#1A2336;--heat1:#7FB0EA}}
+:root[data-theme="dark"]{--page:#0B1120;--card:#141B2D;--border:#243049;--ink:#F1F5F9;--ink2:#A3AEC2;--muted:#7C879C;--grid:#1E293B;--s1:#6C9BD2;--gris:#64748B;--heat0:#1A2336;--heat1:#7FB0EA}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);background:var(--page);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+header{position:sticky;top:0;z-index:5;background:var(--slate);color:#fff;border-bottom:3px solid var(--brand)}
+header .in{max-width:1240px;margin:0 auto;padding:12px 16px 0}
+header h1{font-size:18px;margin:0;font-weight:650}
+header .sub{color:#CBD5E1;font-size:12.5px;margin-top:2px}
+nav{display:flex;gap:4px;margin-top:10px;overflow-x:auto;scrollbar-width:none}
+nav button{background:none;border:0;color:#CBD5E1;font:inherit;font-size:13.5px;padding:9px 12px;border-radius:8px 8px 0 0;cursor:pointer;white-space:nowrap}
+nav button[aria-selected="true"]{background:var(--brand);color:#0F172A;font-weight:650}
+nav button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+main{max-width:1240px;margin:0 auto;padding:18px 16px 48px}
+section[hidden]{display:none}
+.lead{color:var(--ink2);font-size:14px;max-width:900px;line-height:1.5;margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(15,23,42,.06);padding:16px;min-width:0}
+.kpi .lbl{font-size:12px;color:var(--ink2)} .kpi .val{font-size:26px;font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .ctx{font-size:12px;color:var(--ink2);margin-top:2px}
+.kpi.hero{border-top:3px solid var(--brand)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:12px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:12px}
+h2{font-size:14.5px;margin:0 0 4px;font-weight:650}
+.q{font-size:12.5px;color:var(--ink2);margin:0 0 10px;line-height:1.45}
+.take{font-size:13px;line-height:1.45;margin:10px 0 0;padding-top:10px;border-top:1px solid var(--border)}
+.take b{font-weight:650}
+.chart{position:relative;height:270px}.chart.tall{height:340px}
+.leg{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--ink2);margin-bottom:6px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-weight:600;color:var(--ink2);font-size:12px;padding:8px 10px;border-bottom:1px solid var(--border)}
+td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.muted{color:var(--muted)} .strong{font-weight:650}
+.imp{color:var(--ink2);font-size:12px}
+.tag{display:inline-block;font-size:10.5px;color:var(--ink2);border:1px solid var(--border);border-radius:999px;padding:1px 7px;margin-right:6px}
+.insight{display:flex;gap:12px;align-items:flex-start}
+.insight .n{font-size:22px;font-weight:700;min-width:84px;font-variant-numeric:tabular-nums}
+.insight p{margin:0;font-size:13px;line-height:1.45;color:var(--ink)}
+.insight small{display:block;color:var(--ink2);margin-top:3px;font-size:12px}
+.heat{border-collapse:separate;border-spacing:3px;width:100%;min-width:420px}
+.heat td,.heat th{text-align:center;border:0;border-radius:6px;padding:10px 6px;font-variant-numeric:tabular-nums}
+.heat th{font-size:11.5px}
+.heat td.rh{text-align:right;color:var(--ink2);font-size:12px;background:none}
+.foot{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5}
+@media (max-width:560px){.grid2,.grid3{grid-template-columns:1fr}.chart{height:240px}.kpi .val{font-size:22px}}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>Casa Óga · Dead stock y calidad de datos</h1>
+  <div class="sub">Entregable 2 · corte ago-2026 · 28 tiendas · 800 SKUs</div>
+  <nav role="tablist" id="tabs">
+    <button role="tab" aria-selected="true" data-t="resumen">Resumen</button>
+    <button role="tab" aria-selected="false" data-t="calidad">Calidad: antes y después</button>
+    <button role="tab" aria-selected="false" data-t="2026">Qué cambió en 2026</button>
+    <button role="tab" aria-selected="false" data-t="donde">Dónde está el riesgo</button>
+    <button role="tab" aria-selected="false" data-t="anticipa">Qué anticipa el riesgo</button>
+  </nav>
+</div></header>
+<main>
+
+<!-- RESUMEN -->
+<section id="resumen">
+  <p class="lead">Seis hallazgos que cambian cómo leer los datos y qué puede hacer el modelo. Cada uno se desarrolla en su pestaña.</p>
+  <div class="kpis" id="kpisRes"></div>
+  <div class="grid2" id="insRes"></div>
+</section>
+
+<!-- CALIDAD -->
+<section id="calidad" hidden>
+  <p class="lead">Cada métrica se calcula dos veces: con los datasets crudos y después del plan de mejora (duplicados, negativos, costos faltantes, categorías, descuentos y presupuesto inválidos). Los totales casi no se mueven, pero los cortes que usa el modelo sí.</p>
+  <div class="kpis" id="kpisCal"></div>
+  <div class="grid2">
+    <div class="card"><h2>Dónde se concentran los errores</h2><p class="q">Registros con problema por mes, en los datos crudos.</p>
+      <div class="leg"><span><i style="background:var(--s1)"></i>Claves de venta duplicadas</span><span><i style="background:var(--s2)"></i>Stock negativo</span></div>
+      <div class="chart"><canvas id="cProb"></canvas></div>
+      <p class="take"><b>Los errores crecen con el negocio hasta dic-2025 y desaparecen en 2026.</b> El tramo nuevo llega limpio: el problema es de proceso (SKUs duplicados en el maestro, sincronización POS-inventario), no aleatorio.</p></div>
+    <div class="card"><h2>Venta por categoría: 11 etiquetas vs 7 categorías reales</h2><p class="q">Venta ene-2022 a ago-2026 ($ M).</p>
+      <div class="leg"><span><i style="background:var(--gris)"></i>Antes (etiqueta tal cual)</span><span><i style="background:var(--s1)"></i>Después (unificada)</span></div>
+      <div class="chart"><canvas id="cCat"></canvas></div>
+      <p class="take"><b>Decoración pierde 1,5 puntos de participación</b> si no se unifican «DECO» y «Decoración». Es la categoría candidata al piloto.</p></div>
+  </div>
+  <div class="card"><h2>Métricas comparadas</h2>
+    <div class="tw"><table style="min-width:760px"><thead><tr><th>Métrica</th><th class="num">Antes</th><th class="num">Después</th><th class="num">Variación</th><th>Impacto</th></tr></thead><tbody id="tAD"></tbody></table></div>
+  </div>
+</section>
+
+<!-- 2026 -->
+<section id="2026" hidden>
+  <p class="lead">2026 es el primer año de caída después de tres de crecimiento. La mediana de cobertura no se mueve, pero la cola sí: aparecen más posiciones con años de stock. Es exactamente lo que el target tiene que capturar.</p>
+  <div class="grid2">
+    <div class="card"><h2>Venta mensual: 2026 contra 2025</h2><p class="q">$ M por mes, en bruto (2026 no trae devoluciones registradas).</p>
+      <div class="leg"><span><i style="background:var(--gris)"></i>2025</span><span><i style="background:var(--s1)"></i>2026</span></div>
+      <div class="chart"><canvas id="cV2526"></canvas></div>
+      <p class="take" id="tkV"></p></div>
+    <div class="card"><h2>La venta cae, el stock no acompaña</h2><p class="q">Índice ene-2025 = 100.</p>
+      <div class="leg"><span><i style="background:var(--s1)"></i>Venta</span><span><i style="background:var(--s2)"></i>Stock en tiendas</span></div>
+      <div class="chart"><canvas id="cIdx"></canvas></div>
+      <p class="take"><b>En ene-2026 la venta cae de golpe y el stock baja más despacio.</b> Esa brecha es la que empuja posiciones por encima de 12 meses de cobertura.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>La cola de cobertura se engorda</h2><p class="q">Meses de stock por posición: mediana, percentil 90 y 99.</p>
+      <div class="leg"><span><i style="background:var(--gris)"></i>Mediana</span><span><i style="background:var(--s1)"></i>P90</span><span><i style="background:var(--s2)"></i>P99</span></div>
+      <div class="chart"><canvas id="cPct"></canvas></div>
+      <p class="take" id="tkPct"></p></div>
+    <div class="card"><h2>Posiciones en rojo y capital inmovilizado</h2><p class="q">Posiciones con cobertura &gt; 12 meses y su stock valuado a costo.</p>
+      <div class="leg"><span><i style="background:var(--s1)"></i>Posiciones</span><span><i style="background:var(--s2)"></i>Capital ($ M)</span></div>
+      <div class="chart"><canvas id="cRojo"></canvas></div>
+      <p class="take" id="tkRojo"></p></div>
+  </div>
+  <div class="card"><h2>Prevalencia del target por mes de corte</h2><p class="q">% de posiciones que 3 meses después superan 12 meses de cobertura. Color = bloque de la partición temporal.</p>
+    <div class="leg"><span><i style="background:var(--s1)"></i>Train</span><span><i style="background:var(--s3)"></i>Validación</span><span><i style="background:var(--s2)"></i>Test</span><span><i style="background:var(--gris)"></i>Embargo (no se evalúa)</span></div>
+    <div class="chart"><canvas id="cPrev"></canvas></div>
+    <p class="take"><b>La tasa pasa de ~2% a ~9% en 2026.</b> Por eso la partición es temporal: el test mide si el modelo resiste un cambio de régimen, no un mes parecido al de entrenamiento.</p></div>
+</section>
+
+<!-- DONDE -->
+<section id="donde" hidden>
+  <p class="lead">Foto a agosto de 2026: cuánto capital está en posiciones con más de 12 meses de stock, en qué categorías y en qué productos.</p>
+  <div class="kpis" id="kpisDonde"></div>
+  <div class="grid2">
+    <div class="card"><h2>Capital en rojo por categoría (ago-2026)</h2><p class="q">$ M a costo · entre paréntesis, % del stock de la categoría.</p>
+      <div class="chart"><canvas id="cCapCat"></canvas></div>
+      <p class="take" id="tkCapCat"></p></div>
+    <div class="card"><h2>Los 10 SKUs con más capital en rojo</h2><p class="q">$ M a costo · cantidad de tiendas donde el SKU está en rojo.</p>
+      <div class="chart"><canvas id="cTopSku"></canvas></div>
+      <p class="take" id="tkTop"></p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>Tasa de riesgo por categoría</h2><p class="q">% de posiciones-mes que caen en rojo a 3 meses (train y validación).</p>
+      <div class="chart"><canvas id="cTasaCat"></canvas></div>
+      <p class="take" id="tkTasaCat"></p></div>
+    <div class="card"><h2>Tasa de riesgo por tienda</h2><p class="q">Mismo cálculo por tienda. Línea = promedio de la cadena.</p>
+      <div class="chart"><canvas id="cTasaT"></canvas></div>
+      <p class="take" id="tkTasaT"></p></div>
+  </div>
+</section>
+
+<!-- ANTICIPA -->
+<section id="anticipa" hidden>
+  <p class="lead">Qué información, disponible hoy, separa a las posiciones que van a caer en rojo en 3 meses. Sirve para validar que el dataset tiene señal antes de modelar, y para mostrar qué agrega un modelo frente a mirar el semáforo actual.</p>
+  <div class="grid2">
+    <div class="card"><h2>Mapa de riesgo: cobertura actual × tendencia de venta</h2><p class="q">% de posiciones que caen en rojo 3 meses después (train y validación).</p>
+      <div class="tw" id="heat"></div>
+      <p class="take" id="tkHeat"></p></div>
+    <div class="card"><h2>De dónde salen los casos a predecir</h2><p class="q">Cobertura actual de las posiciones que 3 meses después están en rojo.</p>
+      <div class="chart"><canvas id="cOrigen"></canvas></div>
+      <p class="take" id="tkOrigen"></p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>Cuántos casos se capturan según la capacidad operativa</h2><p class="q">% de los casos del mes que entran en las N alertas de mayor riesgo (validación, abr-sep 2025). Franja = 420-700 intervenciones/mes declaradas.</p>
+      <div class="leg"><span><i style="background:var(--s1)"></i>Modelo de prueba (67 features)</span><span><i style="background:var(--gris)"></i>Regla: ordenar por cobertura actual</span></div>
+      <div class="chart"><canvas id="cCap"></canvas></div>
+      <p class="take" id="tkCap"></p></div>
+    <div class="card"><h2>Señal de cada variable por separado</h2><p class="q">AUC de la variable sola (0,5 = no separa). Top 15 en train, comparado con test.</p>
+      <div class="leg"><span><i style="background:var(--s1)"></i>Train</span><span><i style="background:var(--s2)"></i>Test (2026)</span></div>
+      <div class="chart tall"><canvas id="cSen"></canvas></div>
+      <p class="take" id="tkSen"></p></div>
+  </div>
+  <p class="foot">El modelo de prueba es un gradient boosting entrenado solo con el bloque de train, sin ajuste de hiperparámetros: sirve para verificar que el dataset es usable, no es el modelo final (Entregable 3).</p>
+</section>
+<p class="foot">Fuentes: Datasets_Normalizados (corte ago-2026) y Datasets_Modelo/dataset_entrenamiento_v2. Generado por Modelo/armar_dashboard.py.</p>
+</main>
+<script>
+const D = {"ad": {"metricas": [{"grupo": "Volumen", "metrica": "Registros de venta (mes-tienda-SKU)", "antes": 299400.0, "despues": 297022.0, "fmt": "n", "impacto": "2.378 claves duplicadas (H1) se reducen a un registro por clave.", "variacion_pct": -0.7942551770207085}, {"grupo": "Volumen", "metrica": "Venta total ene-22 a ago-26 (M$)", "antes": 40314.270922380005, "despues": 40083.394959419995, "fmt": "m", "impacto": "Los duplicados inflan la venta; las devoluciones quedan neteadas, no perdidas.", "variacion_pct": -0.5726904088245388}, {"grupo": "Volumen", "metrica": "Unidades vendidas ene-22 a ago-26", "antes": 930410.0, "despues": 925015.0, "fmt": "n", "impacto": "Mismo efecto en unidades.", "variacion_pct": -0.5798518932513597}, {"grupo": "Stock", "metrica": "Filas con stock negativo (total)", "antes": 1209.0, "despues": 0.0, "fmt": "n", "impacto": "Error de sincronizacion POS-inventario (P14): piso en 0.", "variacion_pct": -100.0}, {"grupo": "Stock", "metrica": "Capital inmovilizado en tiendas a dic-25 (M$ a costo)", "antes": 3595.11008, "despues": 3544.872351753753, "fmt": "m", "impacto": "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.", "variacion_pct": -1.3973905423849242}, {"grupo": "Stock", "metrica": "Capital inmovilizado en tiendas a ago-26 (M$ a costo)", "antes": 3119.56056, "despues": 3097.6338197923496, "fmt": "m", "impacto": "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.", "variacion_pct": -0.702879132683043}, {"grupo": "Consistencia", "metrica": "Valores distintos de categoria (catalogo)", "antes": 11.0, "despues": 7.0, "fmt": "n", "impacto": "R1: 11 variantes de escritura para 7 categorias reales.", "variacion_pct": -36.36363636363637}, {"grupo": "Consistencia", "metrica": "Participacion de Decoracion en la venta (%)", "antes": 20.799968724759864, "despues": 22.35443010468906, "fmt": "p", "impacto": "Filtrar por la etiqueta mayoritaria (Decoracion) pierde los SKUs cargados como DECO o Decoración.", "variacion_pct": 7.473383255998822}, {"grupo": "Validez", "metrica": "Descuento promedio en liquidaciones (%)", "antes": 26.559865092748737, "despues": 26.305084745762713, "fmt": "p", "impacto": "3 valores fuera de rango (120, -10, 120) excluidos como error de carga (P24-P28).", "variacion_pct": -0.9592682270648356}, {"grupo": "Validez", "metrica": "Descuento promedio en promociones (%)", "antes": 20.798319327731093, "despues": 20.0, "fmt": "p", "impacto": "2 valores fuera de rango (150, -15) excluidos.", "variacion_pct": -3.838383838383841}, {"grupo": "Validez", "metrica": "Liquidaciones con fecha de fin legible", "antes": 585.0, "despues": 593.0, "fmt": "n", "impacto": "R2: 8 fechas con hora recuperadas; el TP1 las habia descartado.", "variacion_pct": 1.3675213675213627}, {"grupo": "Validez", "metrica": "Cumplimiento presupuestario 2022 (%)", "antes": 90.76316461533939, "despues": 89.45615799594367, "fmt": "p", "impacto": "309 celdas en cero (ene-may 22) y 3 negativas excluidas (P29-P32): antes la venta real sin meta infla el %.", "variacion_pct": -1.440018783980157}, {"grupo": "Modelo", "metrica": "Posiciones con cobertura > 12 meses a dic-25", "antes": 211.0, "despues": 213.0, "fmt": "n", "impacto": "Duplicados sumados y negativos sin tratar cambian el ritmo de venta y el stock de cada posicion.", "variacion_pct": 0.9478672985782088}, {"grupo": "Modelo", "metrica": "Prevalencia del target (cobertura > 12 a 3 meses, %)", "antes": 2.67, "despues": 3.38, "fmt": "p", "impacto": "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): +919 positivos.", "variacion_pct": 26.591760299625467}], "anual": {"anios": ["2022", "2023", "2024", "2025", "2026"], "antes": [1815.5, 6312.7, 10594.1, 13630.7, 7961.4], "despues": [1789.3, 6243.4, 10529.9, 13559.5, 7961.4]}, "cat_antes": {"labels": ["Decoracion", "Cocina y mesa", "Iluminacion", "Muebles", "Textil hogar", "Organizacion", "Baño", "Decoración", "Textil Hogar", "DECO", "TEXTIL_HOGAR"], "valores": [8385.4, 7876.0, 5464.6, 4831.4, 4755.3, 4603.9, 3365.0, 509.1, 412.0, 68.5, 43.0]}, "cat_despues": {"labels": ["Decoracion", "Cocina y mesa", "Iluminacion", "Textil hogar", "Muebles", "Organizacion", "Bano"], "valores": [8960.4, 7790.7, 5464.6, 5190.7, 4769.7, 4596.3, 3311.0]}, "problemas_mes": {"meses": ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "stock_neg": [0, 1, 3, 2, 2, 6, 7, 5, 6, 7, 15, 13, 14, 12, 25, 20, 18, 21, 22, 20, 25, 24, 29, 25, 28, 22, 20, 20, 32, 38, 43, 30, 37, 38, 41, 45, 37, 44, 30, 38, 49, 39, 46, 45, 42, 51, 38, 34, 0, 0, 0, 0, 0, 0, 0, 0], "dup": [0, 8, 11, 10, 18, 19, 25, 23, 29, 34, 41, 46, 44, 41, 45, 45, 47, 41, 42, 49, 45, 46, 50, 35, 49, 50, 53, 54, 53, 56, 53, 60, 57, 59, 63, 59, 70, 68, 68, 78, 79, 75, 84, 78, 77, 84, 81, 76, 0, 0, 0, 0, 0, 0, 0, 0]}}, "eda": {"filas": {"Calendario": 1461, "Costo_almacenamiento": 7, "Devoluciones_SKU": 2317, "Historial_Precios_SKU": 1498, "Liquidaciones": 593, "Ordenes_Compra": 3000, "Presupuesto_Ventas_Tienda_Categoria": 10976, "Productos_catalogo": 815, "Promociones_Comerciales": 119, "Proveedores": 10, "Stock_Deposito_Central": 23858, "Stock_SKU_tienda_mensual": 299400, "Tiendas": 28, "Transferencias_Stock": 4200, "Ventas_SKU_tienda_mensual": 299400}, "stats": {"u": {"count": 92743.0, "mean": 3.09, "std": 3.55, "min": -20.0, "25%": 1.0, "50%": 2.0, "75%": 4.0, "95%": 11.0, "99%": 17.0, "max": 33.0}, "v": {"count": 92743.0, "mean": 134386.0, "std": 198591.0, "min": -1278060.0, "25%": 19092.0, "50%": 62363.0, "75%": 162669.0, "95%": 531408.0, "99%": 983521.0, "max": 2373217.0}, "s": {"count": 7479.0, "mean": 15.9, "std": 17.3, "min": 1.0, "25%": 4.0, "50%": 10.0, "75%": 20.0, "95%": 53.0, "99%": 85.0, "max": 145.0}, "pos_stock": 7479, "skus_stock": 634, "skus_stock_disc": 0, "pct_cero": 18.01}, "evol": {"anual": {"2022": 1789.3, "2023": 6243.4, "2024": 10529.9, "2025": 13559.5, "2026": 7961.4}, "var_v": -0.13221112987485917, "var_u": -0.12660264778062058, "var_pos": -0.08076093111522631, "total": 40083.394959419995, "uds": 925015, "idx_adj": [98, 106], "idx_naive": [81, 117], "pos_dic25": 8073, "pos_ene26": 7509, "pos_ago26": 7504}, "dim": {"cat": [{"categoria": "Decoracion", "venta": 8960414509.8, "pct": 22.4, "pct_sku": 19.6, "margen": 45.3}, {"categoria": "Cocina y mesa", "venta": 7790743903.0, "pct": 19.4, "pct_sku": 15.2, "margen": 45.9}, {"categoria": "Iluminacion", "venta": 5464628692.1, "pct": 13.6, "pct_sku": 10.8, "margen": 46.0}, {"categoria": "Textil hogar", "venta": 5190660763.5, "pct": 12.9, "pct_sku": 15.9, "margen": 44.4}, {"categoria": "Muebles", "venta": 4769678162.6, "pct": 11.9, "pct_sku": 14.6, "margen": 44.1}, {"categoria": "Organizacion", "venta": 4596278255.2, "pct": 11.5, "pct_sku": 11.8, "margen": 43.8}, {"categoria": "Bano", "venta": 3310990673.2, "pct": 8.3, "pct_sku": 12.1, "margen": 44.7}], "reg": {"AMBA": 39.4, "Centro": 21.8, "NOA": 17.9, "Cuyo": 17.2, "Patagonia": 3.7}, "ntie": {"AMBA": 11, "Centro": 6, "Cuyo": 5, "NOA": 5, "Patagonia": 1}, "tmin": 3.0, "tmax": 4.1, "tmax_id": "T24", "tmax_v": 1645, "tmin_id": "T14", "tmin_v": 1198, "corr_m2": -0.21, "n80": 250, "nsku": 798, "top10": 48.2, "margen": 44.9}, "rel": {"corr_us": 0.76, "cob": {"2023-01": {"mes": 5.38, "m3": 5.87, "m12": 10.69, "med": 5.14, "p90": 9.8, "p99": 18.0}, "2025-12": {"mes": 5.31, "m3": 5.28, "m12": 5.23, "med": 5.33, "p90": 9.0, "p99": 16.0}, "2026-08": {"mes": 4.71, "m3": 4.77, "m12": 4.97, "med": 5.0, "p90": 12.0, "p99": 48.0}}, "cum_y": {"2022": 89.5, "2023": 89.9, "2024": 90.3, "2025": 90.5, "2026": 90.9}, "cum_c": [89.6, 91.0], "cum_t": [89.3, 91.4], "dev_n": 2317, "dev_u": 9583, "dev_tasa": 1.28, "dev_m": {"Producto danado en logistica": 2067, "Producto sin rotacion / no vendido": 2013, "Devolucion de cliente (cambio)": 1930, "Error de picking": 1787, "Defecto de fabricacion": 1786}, "lt_media": 1.0, "lt_min": -3, "lt_max": 5}}, "ins": {"venta_25_26": {"meses": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"], "v2025": [1102.9, 1110.7, 1119.7, 1149.9, 1149.2, 1166.6, 1195.8, 1179.4], "v2026": [884.7, 902.3, 940.3, 986.3, 1016.8, 1042.0, 1099.3, 1089.6]}, "stock_vs_venta_idx": {"meses": ["2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "stock": [100.0, 100.8, 104.0, 105.5, 106.6, 106.3, 109.4, 106.9, 105.3, 103.7, 104.2, 101.9, 90.7, 90.0, 90.7, 90.6, 91.5, 89.8, 90.3, 89.4], "venta": [100.0, 100.7, 101.5, 104.3, 104.2, 105.8, 108.4, 106.9, 105.1, 103.5, 102.7, 102.2, 80.2, 81.8, 85.3, 89.4, 92.2, 94.5, 99.7, 98.8]}, "cobertura_pct": {"meses": ["2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "p50": [5.1, 5.1, 5.2, 5.2, 5.1, 5.2, 5.1, 5.2, 5.2, 5.2, 5.2, 5.2, 5.1, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.2, 5.3, 5.2, 5.3, 5.2, 5.2, 5.3, 5.3, 5.3, 5.1, 5.1, 5.1, 5.1, 5.1, 5.1, 5.1, 5.0], "p90": [9.8, 9.8, 9.6, 9.3, 9.5, 9.5, 9.3, 9.2, 9.2, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.1, 9.0, 9.0, 9.0, 9.1, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.1, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 8.6, 9.0, 9.3, 9.6, 10.5, 12.0, 12.0, 12.0], "p99": [18.0, 20.0, 20.0, 21.0, 22.1, 21.0, 20.0, 20.0, 20.0, 18.0, 18.0, 18.3, 18.0, 17.6, 18.0, 18.5, 18.0, 18.0, 18.3, 18.0, 18.7, 18.0, 18.0, 18.0, 18.0, 17.4, 18.0, 17.0, 18.0, 16.8, 18.0, 18.0, 17.3, 16.8, 16.0, 16.0, 18.0, 18.0, 24.0, 24.0, 31.5, 36.7, 48.0, 48.0]}, "rojo_mes": {"meses": ["2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"], "posiciones": [251, 227, 252, 219, 211, 253, 222, 213, 225, 201, 249, 273, 252, 258, 298, 310, 281, 270, 271, 286, 277, 277, 325, 323, 316, 292, 286, 332, 328, 322, 358, 280, 232, 216, 208, 213, 193, 229, 330, 371, 518, 615, 771, 882], "capital": [55.0, 50.6, 70.6, 47.5, 67.0, 79.6, 65.0, 65.3, 59.5, 48.8, 65.1, 80.1, 66.7, 70.2, 80.3, 94.0, 89.2, 78.1, 78.6, 91.7, 101.9, 91.7, 129.0, 85.0, 99.0, 94.8, 90.8, 87.3, 91.3, 89.3, 98.5, 73.8, 58.3, 54.0, 67.3, 67.1, 43.3, 57.1, 80.4, 78.9, 121.2, 134.3, 165.2, 184.1]}, "rojo_ago26_cat": {"cat": ["Decoracion", "Textil hogar", "Cocina y mesa", "Muebles", "Organizacion", "Iluminacion", "Bano"], "posiciones": [151, 143, 133, 154, 91, 97, 113], "capital": [40.1, 31.1, 29.3, 25.2, 20.5, 20.1, 17.8], "pct_capital_cat": [6.3, 7.0, 4.7, 6.2, 4.9, 6.1, 7.5], "total_pos": 882, "total_cap": 184.1}, "rojo_ago26_sku": {"skus": 363, "top20_pct": 25.4, "tiendas_por_sku_top10": [1, 1, 3, 1, 1, 1, 1, 3, 1, 3], "top10": ["SKU00181", "SKU00296", "SKU00333", "SKU00136", "SKU00405", "SKU00526", "SKU00383", "SKU00453", "SKU00259", "SKU00144"], "top10_cap": [5.7, 3.0, 2.7, 2.6, 2.4, 2.4, 2.3, 2.2, 2.2, 2.2]}, "prevalencia_mes": {"meses": ["2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"], "tasa": [0.0, 0.93, 2.6, 2.06, 1.27, 0.93, 2.46, 1.89, 2.39, 1.88, 1.63, 2.0, 2.27, 1.74, 1.47, 1.61, 1.83, 1.79, 1.84, 1.37, 1.59, 1.85, 1.93, 1.71, 1.86, 1.74, 2.12, 1.57, 2.06, 1.83, 1.79, 1.92, 1.99, 2.03, 2.01, 2.45, 4.2, 5.09, 7.28, 8.73, 10.88, 12.64], "split": ["train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "train", "embargo", "embargo", "embargo", "validacion", "validacion", "validacion", "validacion", "validacion", "validacion", "embargo", "embargo", "embargo", "test", "test", "test", "test", "test"]}, "transicion": {"sano_sano": 125160, "sano_rojo": 2990, "rojo_sano": 1601, "rojo_rojo": 1438}, "tasa_tienda": {"tiendas": ["T07", "T04", "T20", "T10", "T21", "T18", "T15", "T09", "T22", "T03", "T17", "T28", "T14", "T05", "T23", "T13", "T12", "T02", "T01", "T24", "T08", "T16", "T27", "T26", "T11", "T25", "T06", "T19"], "tasa": [0.77, 1.05, 1.3, 1.33, 1.34, 1.37, 1.51, 1.6, 1.7, 1.72, 1.76, 1.77, 1.84, 1.86, 1.87, 1.88, 1.93, 1.94, 1.96, 2.0, 2.05, 2.17, 2.4, 2.41, 2.44, 2.49, 2.5, 2.56], "ic": [0.33, 0.36, 0.42, 0.45, 0.42, 0.43, 0.44, 0.46, 0.48, 0.5, 0.49, 0.5, 0.52, 0.49, 0.49, 0.51, 0.53, 0.53, 0.52, 0.51, 0.54, 0.56, 0.57, 0.56, 0.57, 0.58, 0.59, 0.58], "media": 1.84, "fuera_ic": 11}, "tasa_categoria": {"cat": ["Cocina y mesa", "Bano", "Iluminacion", "Muebles", "Textil hogar", "Organizacion", "Decoracion"], "tasa": [2.36, 2.12, 2.0, 1.89, 1.79, 1.53, 1.34]}, "conc_sku": {"skus_con_positivos": 340, "skus_universo": 555, "n50": 57, "n80": 150}, "mapa_riesgo": {"cob": ["<3", "3-6", "6-9", "9-12", ">12"], "tend": ["cae >50%", "cae 20-50%", "estable", "sube >20%"], "tasa": [[1.9, 1.1, 0.2, 0.5], [2.2, 0.8, 0.3, 0.5], [5.1, 1.9, 1.0, 1.6], [10.8, 4.8, 2.9, 3.5], [30.9, 4.1, 11.1, 16.2]], "n": [[1005, 1890, 4089, 2526], [3533, 7440, 16709, 9442], [2528, 4858, 9911, 6377], [704, 922, 1562, 1519], [913, 218, 406, 974]]}, "origen_positivos": {"bandas": ["<6", "6-9", "9-12", ">12 (ya rojo)"], "pct": [20.4, 29.7, 15.3, 34.6]}, "senal": [{"feature": "u6_suma", "auc_train": 0.854, "auc_validacion": 0.844, "auc_test": 0.939}, {"feature": "cv_u12", "auc_train": 0.848, "auc_validacion": 0.846, "auc_test": 0.918}, {"feature": "u12_prom", "auc_train": 0.842, "auc_validacion": 0.824, "auc_test": 0.894}, {"feature": "peso_posicion_en_tienda", "auc_train": 0.836, "auc_validacion": 0.823, "auc_test": 0.894}, {"feature": "meses_con_venta_12", "auc_train": 0.833, "auc_validacion": 0.81, "auc_test": 0.911}, {"feature": "u3_suma", "auc_train": 0.829, "auc_validacion": 0.819, "auc_test": 0.931}, {"feature": "venta3_suma", "auc_train": 0.788, "auc_validacion": 0.786, "auc_test": 0.915}, {"feature": "u12_max", "auc_train": 0.786, "auc_validacion": 0.764, "auc_test": 0.805}, {"feature": "cobertura", "auc_train": 0.776, "auc_validacion": 0.779, "auc_test": 0.94}, {"feature": "unidades_vendidas", "auc_train": 0.77, "auc_validacion": 0.761, "auc_test": 0.919}, {"feature": "u_lag1", "auc_train": 0.765, "auc_validacion": 0.755, "auc_test": 0.91}, {"feature": "u_lag2", "auc_train": 0.758, "auc_validacion": 0.744, "auc_test": 0.892}, {"feature": "stock_sku_cadena", "auc_train": 0.724, "auc_validacion": 0.695, "auc_test": 0.736}, {"feature": "stock_disponible", "auc_train": 0.722, "auc_validacion": 0.696, "auc_test": 0.711}, {"feature": "stock_deposito_sku", "auc_train": 0.718, "auc_validacion": 0.703, "auc_test": 0.737}, {"feature": "meses_sin_venta", "auc_train": 0.707, "auc_validacion": 0.711, "auc_test": 0.899}, {"feature": "cobertura_3m_antes", "auc_train": 0.685, "auc_validacion": 0.687, "auc_test": 0.778}, {"feature": "stock_en_transito", "auc_train": 0.667, "auc_validacion": 0.663, "auc_test": 0.502}, {"feature": "capital_inmovilizado_pos", "auc_train": 0.664, "auc_validacion": 0.648, "auc_test": 0.656}, {"feature": "tiendas_cob12_sku", "auc_train": 0.654, "auc_validacion": 0.623, "auc_test": 0.731}], "senal_sin": 40, "n_features_num": 62, "importancia": {"feature": ["cv_u12", "u6_suma", "cobertura", "u12_prom", "stock_sku_cadena", "stock_vs_prom_sku", "uds_oc_recibidas_12m", "cobertura_3m_antes", "precio_lista", "u3_suma", "tendencia_u3_vs_u12", "n_oc_recibidas_12m"], "valor": [0.1197, 0.0857, 0.0156, 0.0102, 0.0081, 0.0027, 0.0016, 0.0013, 0.0006, 0.0006, 0.0005, 0.0005]}, "capacidad": {"validacion": {"k": [50, 100, 200, 300, 420, 500, 600, 700, 850, 1000], "recall_modelo": [20.0, 31.2, 46.1, 53.6, 62.3, 67.1, 72.0, 75.7, 80.7, 84.8], "recall_regla": [17.1, 23.2, 35.5, 40.9, 46.6, 51.1, 54.3, 57.1, 60.7, 63.7], "precision_modelo": [37.3, 29.2, 21.5, 16.7, 13.8, 12.5, 11.2, 10.1, 8.9, 7.9], "positivos_mes": 93}, "test": {"k": [50, 100, 200, 300, 420, 500, 600, 700, 850, 1000], "recall_modelo": [9.9, 19.4, 35.4, 48.4, 61.7, 68.8, 77.4, 83.1, 88.8, 92.4], "recall_regla": [10.4, 19.5, 35.5, 48.0, 59.0, 65.8, 71.4, 76.3, 81.1, 85.4], "precision_modelo": [92.4, 90.8, 82.7, 75.4, 68.7, 64.3, 60.3, 55.5, 48.8, 43.2], "positivos_mes": 468}}}};
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const nf = (v,d=1) => Number(v).toLocaleString('es-AR',{minimumFractionDigits:d,maximumFractionDigits:d});
+const F = {n:v=>nf(v,0), m:v=>'$'+nf(v)+' M', p:v=>nf(v,2)+'%'};
+const I = D.ins, A = D.ad, E = D.eda;
+const ACC = {Decoracion:'Decoración',Bano:'Baño',Iluminacion:'Iluminación',Organizacion:'Organización'};
+const acc = s => ACC[s]||s;
+I.rojo_ago26_cat.cat = I.rojo_ago26_cat.cat.map(acc); I.tasa_categoria.cat = I.tasa_categoria.cat.map(acc);
+const $ = id => document.getElementById(id);
+const kpi = (l,v,c,hero)=>`<div class="card kpi${hero?' hero':''}"><div class="lbl">${l}</div><div class="val">${v}</div><div class="ctx">${c}</div></div>`;
+const ins = (n,p,s)=>`<div class="card insight"><div class="n">${n}</div><p>${p}<small>${s}</small></p></div>`;
+const find = m => A.metricas.find(x=>x.metrica===m);
+
+// ---------- textos calculados
+const cap420 = I.capacidad.validacion; const i420 = cap420.k.indexOf(420);
+const rel = cap420.recall_modelo[i420]/cap420.recall_regla[i420]-1;
+const vt = E.evol; const noRojo = I.origen_positivos.pct.slice(0,3).reduce((a,b)=>a+b,0);
+const ult = I.cobertura_pct; const nL = ult.meses.length-1; const iD25 = ult.meses.indexOf('2025-12');
+const rm = I.rojo_mes; const r0 = rm.meses.indexOf('2025-12'), r1 = rm.meses.length-1;
+
+$('kpisRes').innerHTML =
+  kpi('Venta ene-ago 2026 vs 2025', nf(vt.var_v*100)+'%', 'unidades '+nf(vt.var_u*100)+'% · posiciones '+nf(vt.var_pos*100)+'%', true)+
+  kpi('Capital en posiciones con > 12 meses de stock', '$'+nf(I.rojo_ago26_cat.total_cap)+' M', nf(I.rojo_ago26_cat.total_pos,0)+' posiciones · '+I.rojo_ago26_sku.skus+' SKUs · ago-26')+
+  kpi('Prevalencia del target', '3,38%', '4.428 de 131.189 filas · 2% hasta 2025, 9% en 2026')+
+  kpi('Casos capturados con 420 alertas/mes', nf(cap420.recall_modelo[i420],0)+'%', 'regla de cobertura actual: '+nf(cap420.recall_regla[i420],0)+'%');
+$('insRes').innerHTML =
+  ins(nf(noRojo,0)+'%', 'de las posiciones que caen en rojo <b>hoy no lo están</b>.', 'Un semáforo sobre el estado actual no las ve: hace falta anticipar, que es lo que justifica un modelo.')+
+  ins('×'+nf(ult.p99[nL]/ult.p99[iD25],1), 'crece el percentil 99 de cobertura entre dic-25 y ago-26 ('+nf(ult.p99[iD25],0)+' → '+nf(ult.p99[nL],0)+' meses).', 'La mediana sigue en ~5 meses: el riesgo está en la cola, no en el promedio.')+
+  ins('+'+nf(rel*100,0)+'%', 'más casos capturados que ordenando por cobertura actual, con la misma capacidad operativa (420 alertas/mes).', 'Modelo de prueba sobre validación. Es la evidencia de que el dataset tiene señal más allá de la inercia.')+
+  ins(I.senal_sin+' de '+I.n_features_num, 'variables numéricas no separan solas (AUC &lt; 0,55): liquidaciones, promociones, OC y transferencias.', 'La señal está en la demanda de la posición. Las acciones comerciales pasadas aportan, si acaso, en combinación.')+
+  ins('&lt; 2%', 'cambian los totales al corregir la calidad (venta −0,6%, capital −1,4%).', 'Pero la prevalencia del target cambia 26% según cómo se traten las devoluciones: la calidad importa en el detalle, no en el agregado.')+
+  ins(I.conc_sku.n50+' SKUs', 'explican la mitad de los casos de riesgo (de '+I.conc_sku.skus_con_positivos+' SKUs con algún caso).', 'El problema se concentra en productos, lo que apunta a decisiones de compra más que de tienda.');
+
+// ---------- CALIDAD
+const sel = ['Venta total ene-22 a ago-26 (M$)','Capital inmovilizado en tiendas a dic-25 (M$ a costo)','Filas con stock negativo (total)','Prevalencia del target (cobertura > 12 a 3 meses, %)'];
+const lb = ['Venta total 2022 – ago-26','Capital inmovilizado dic-25','Filas con stock negativo','Prevalencia del target'];
+$('kpisCal').innerHTML = sel.map((s,i)=>{const r=find(s); const v=r.antes?(r.despues/r.antes-1)*100:0;
+  return kpi(lb[i], `<span class="muted" style="font-size:15px;text-decoration:line-through">${F[r.fmt](r.antes)}</span> ${F[r.fmt](r.despues)}`, (r.antes? (v>=0?'+':'')+nf(v)+'% por la corrección':''));}).join('');
+$('tAD').innerHTML = A.metricas.map(r=>{const v=r.antes?((r.despues/r.antes-1)*100):null;
+  return `<tr><td><span class="tag">${r.grupo}</span>${r.metrica}</td><td class="num muted">${F[r.fmt](r.antes)}</td><td class="num strong">${F[r.fmt](r.despues)}</td><td class="num">${v===null?'':(v>=0?'+':'')+nf(v)+'%'}</td><td class="imp">${r.impacto}</td></tr>`}).join('');
+
+Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+Chart.defaults.color = css('--ink2');
+const grid = ()=>({color:css('--grid')});
+const opt = (o={})=>Object.assign({responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false}},
+  scales:{x:{grid:{display:false}},y:{grid:grid(),beginAtZero:true}}},o);
+const line = (c,w=2,dash)=>({borderColor:c,backgroundColor:c,pointRadius:0,borderWidth:w,tension:.25,borderDash:dash});
+
+new Chart($('cProb'),{type:'line',data:{labels:A.problemas_mes.meses,datasets:[
+  Object.assign({label:'Claves duplicadas',data:A.problemas_mes.dup},line(css('--s1'))),
+  Object.assign({label:'Stock negativo',data:A.problemas_mes.stock_neg},line(css('--s2')))]},options:opt({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:9}},y:{grid:grid()}}})});
+const cats = A.cat_despues.labels;
+const antesMap = Object.fromEntries(A.cat_antes.labels.map((l,i)=>[l,A.cat_antes.valores[i]]));
+const labs11 = A.cat_antes.labels;
+new Chart($('cCat'),{type:'bar',data:{labels:labs11,datasets:[{label:'Antes',data:A.cat_antes.valores,backgroundColor:css('--gris'),borderRadius:3},
+  {label:'Después',data:labs11.map(l=>{const k=l.normalize('NFD').replace(/[̀-ͯ]/g,'');const j=cats.indexOf(k);return j>=0?A.cat_despues.valores[j]:null}),backgroundColor:css('--s1'),borderRadius:3}]},
+  options:opt({indexAxis:'y',scales:{x:{grid:grid()},y:{grid:{display:false}}}})});
+
+// ---------- 2026
+const vv=I.venta_25_26; const dv = vv.v2026.map((x,i)=>x/vv.v2025[i]-1);
+$('tkV').innerHTML = `<b>Todos los meses de 2026 están por debajo de 2025</b> (entre ${nf(Math.min(...dv)*100)}% y ${nf(Math.max(...dv)*100)}%). La caída no es de un mes puntual: es un cambio de nivel que se va achicando hacia agosto.`;
+new Chart($('cV2526'),{type:'bar',data:{labels:vv.meses,datasets:[{label:'2025',data:vv.v2025,backgroundColor:css('--gris'),borderRadius:3},{label:'2026',data:vv.v2026,backgroundColor:css('--s1'),borderRadius:3}]},options:opt()});
+const ix=I.stock_vs_venta_idx;
+new Chart($('cIdx'),{type:'line',data:{labels:ix.meses,datasets:[Object.assign({label:'Venta',data:ix.venta},line(css('--s1'))),Object.assign({label:'Stock',data:ix.stock},line(css('--s2')))]},
+  options:opt({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10}},y:{grid:grid(),beginAtZero:false}}})});
+$('tkPct').innerHTML = `<b>La mediana queda en ${nf(ult.p50[nL])} meses, pero el P99 pasa de ${nf(ult.p99[iD25],0)} a ${nf(ult.p99[nL],0)}.</b> El promedio esconde el problema: hay que mirar posición por posición.`;
+new Chart($('cPct'),{type:'line',data:{labels:ult.meses,datasets:[Object.assign({label:'Mediana',data:ult.p50},line(css('--gris'))),Object.assign({label:'P90',data:ult.p90},line(css('--s1'))),Object.assign({label:'P99',data:ult.p99},line(css('--s2')))]},
+  options:opt({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10}},y:{grid:grid(),title:{display:true,text:'meses de stock'}}}})});
+$('tkRojo').innerHTML = `<b>De ${nf(rm.posiciones[r0],0)} posiciones en rojo en dic-25 a ${nf(rm.posiciones[r1],0)} en ago-26</b>, con $${nf(rm.capital[r1])} M a costo. El salto coincide con la caída de venta.`;
+new Chart($('cRojo'),{type:'bar',data:{labels:rm.meses,datasets:[{type:'bar',label:'Posiciones',data:rm.posiciones,backgroundColor:css('--s1'),borderRadius:2,yAxisID:'y'},
+  Object.assign({type:'line',label:'Capital ($ M)',data:rm.capital,yAxisID:'y1'},line(css('--s2')))]},
+  options:opt({scales:{x:{grid:{display:false},ticks:{maxTicksLimit:10}},y:{grid:grid(),position:'left'},y1:{grid:{display:false},position:'right',beginAtZero:true}}})});
+const pv=I.prevalencia_mes; const sc={train:css('--s1'),validacion:css('--s3'),test:css('--s2'),embargo:css('--gris')};
+new Chart($('cPrev'),{type:'bar',data:{labels:pv.meses,datasets:[{label:'% positivos',data:pv.tasa,backgroundColor:pv.split.map(s=>sc[s]),borderRadius:2}]},
+  options:opt({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+nf(c.parsed.y,2)+'% · '+pv.split[c.dataIndex]}}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:12}},y:{grid:grid()}}})});
+
+// ---------- DONDE
+const rc=I.rojo_ago26_cat, rs=I.rojo_ago26_sku;
+$('kpisDonde').innerHTML = kpi('Capital en rojo · ago-26','$'+nf(rc.total_cap)+' M','a costo, stock en posiciones con > 12 meses',true)+
+  kpi('Posiciones en rojo',nf(rc.total_pos,0),'de '+nf(E.stats.pos_stock,0)+' posiciones con stock')+
+  kpi('SKUs involucrados',rs.skus,'los 20 primeros suman el '+nf(rs.top20_pct)+'% del capital')+
+  kpi('Costo de sostenerlo','$'+nf(rc.total_cap*0.05)+' M/mes','al 5% mensual declarado por el negocio');
+new Chart($('cCapCat'),{type:'bar',data:{labels:rc.cat.map((c,i)=>c+' ('+nf(rc.pct_capital_cat[i])+'%)'),datasets:[{data:rc.capital,backgroundColor:css('--s1'),borderRadius:3}]},
+  options:opt({indexAxis:'y',scales:{x:{grid:grid()},y:{grid:{display:false}}}})});
+const mx = rc.pct_capital_cat.indexOf(Math.max(...rc.pct_capital_cat));
+$('tkCapCat').innerHTML = `<b>${rc.cat[0]} concentra más capital en rojo ($${nf(rc.capital[0])} M)</b> por su tamaño, pero en proporción de su stock la más expuesta es ${rc.cat[mx]} (${nf(rc.pct_capital_cat[mx])}%). Todas las categorías están entre ${nf(Math.min(...rc.pct_capital_cat))}% y ${nf(Math.max(...rc.pct_capital_cat))}%: el problema no es de una categoría.`;
+new Chart($('cTopSku'),{type:'bar',data:{labels:rs.top10.map((s,i)=>s+' · '+rs.tiendas_por_sku_top10[i]+' t.'),datasets:[{data:rs.top10_cap,backgroundColor:css('--s1'),borderRadius:3}]},
+  options:opt({indexAxis:'y',scales:{x:{grid:grid()},y:{grid:{display:false}}}})});
+$('tkTop').innerHTML = `<b>${rs.top10[0]} solo inmoviliza $${nf(rs.top10_cap[0])} M.</b> La mayoría de estos SKUs está en rojo en 1 a 3 tiendas: en esos casos la acción es transferir, no liquidar.`;
+const tc=I.tasa_categoria;
+new Chart($('cTasaCat'),{type:'bar',data:{labels:tc.cat,datasets:[{data:tc.tasa,backgroundColor:css('--s1'),borderRadius:3}]},options:opt({indexAxis:'y',scales:{x:{grid:grid()},y:{grid:{display:false}}}})});
+$('tkTasaCat').innerHTML = `<b>Rango de ${nf(Math.min(...tc.tasa),2)}% a ${nf(Math.max(...tc.tasa),2)}%.</b> La categoría explica poco: por eso entra como variable de contexto y no como segmentación del modelo.`;
+const tt=I.tasa_tienda;
+new Chart($('cTasaT'),{type:'bar',data:{labels:tt.tiendas,datasets:[{type:'bar',data:tt.tasa,backgroundColor:css('--s1'),borderRadius:2},
+  Object.assign({type:'line',data:tt.tiendas.map(()=>tt.media)},line(css('--s2'),1.5,[5,4]))]},options:opt({scales:{x:{grid:{display:false},ticks:{autoSkip:false,maxRotation:90,font:{size:9}}},y:{grid:grid()}}})});
+$('tkTasaT').innerHTML = `<b>Las tiendas van de ${nf(tt.tasa[0],2)}% a ${nf(tt.tasa[tt.tasa.length-1],2)}%</b> contra ${nf(tt.media,2)}% de promedio. Hay diferencias, pero menores que las que separan a los productos: la palanca principal sigue siendo la compra.`;
+
+// ---------- ANTICIPA
+const H=I.mapa_riesgo; const mxv=Math.max(...H.tasa.flat().filter(x=>x!==null));
+const mix=(t)=>{const a=css('--heat0'),b=css('--heat1');const p=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));const A_=p(a),B=p(b);return 'rgb('+A_.map((x,i)=>Math.round(x+(B[i]-x)*t)).join(',')+')'};
+let h='<table class="heat"><tr><th></th>'+H.tend.map(t=>`<th>${t}</th>`).join('')+'</tr>';
+H.cob.slice().reverse().forEach((c,ri)=>{const i=H.cob.length-1-ri; h+=`<tr><td class="rh">${c} meses</td>`+H.tasa[i].map((v,j)=>{if(v===null)return '<td style="background:var(--heat0)" class="muted">—</td>';const t=Math.sqrt(v/mxv);return `<td style="background:${mix(t)};color:${t>.55?'#fff':'var(--ink)'}" title="${nf(H.n[i][j],0)} filas">${nf(v)}%</td>`}).join('')+'</tr>'});
+h+='</table><div class="q" style="margin-top:6px">Filas: cobertura actual. Columnas: venta de los últimos 3 meses contra el promedio de 12.</div>';
+$('heat').innerHTML=h;
+$('tkHeat').innerHTML=`<b>Con 9 a 12 meses de cobertura, el riesgo va de ${nf(H.tasa[3][2])}% si la venta está estable a ${nf(H.tasa[3][0])}% si cae más de 50%.</b> La cobertura sola no alcanza: la tendencia multiplica el riesgo. Ninguna regla de un solo umbral combina las dos cosas.`;
+const og=I.origen_positivos;
+new Chart($('cOrigen'),{type:'bar',data:{labels:og.bandas.map(b=>b+(b.includes('ya')?'':' meses')),datasets:[{data:og.pct,backgroundColor:[css('--s1'),css('--s1'),css('--s1'),css('--gris')],borderRadius:3}]},
+  options:opt({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+nf(c.parsed.y)+'% de los casos'}}}})});
+$('tkOrigen').innerHTML=`<b>El ${nf(noRojo,0)}% de los casos hoy no está en rojo</b>, y el ${nf(og.pct[0]+og.pct[1],0)}% tiene menos de 9 meses de cobertura. Un semáforo sobre el estado actual los ve recién cuando ya es tarde.`;
+new Chart($('cCap'),{type:'line',data:{labels:cap420.k,datasets:[Object.assign({label:'Modelo',data:cap420.recall_modelo},line(css('--s1'),2.5)),Object.assign({label:'Regla',data:cap420.recall_regla},line(css('--gris'),2,[5,4]))]},
+  options:opt({plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+nf(c.parsed.y,0)+'% de los casos'}}},
+  scales:{x:{type:'linear',min:0,max:1000,grid:grid(),title:{display:true,text:'alertas por mes'}},y:{grid:grid(),min:0,max:100,title:{display:true,text:'% de casos capturados'}}}}),
+  plugins:[{id:'band',beforeDatasetsDraw(c){const {ctx,chartArea:a,scales:{x}}=c;ctx.save();ctx.fillStyle='rgba(255,199,44,.16)';ctx.fillRect(x.getPixelForValue(420),a.top,x.getPixelForValue(700)-x.getPixelForValue(420),a.bottom-a.top);ctx.restore();}}]});
+const i7=cap420.k.indexOf(700);
+$('tkCap').innerHTML=`<b>Con 420 alertas por mes el modelo captura el ${nf(cap420.recall_modelo[i420],0)}% de los casos y la regla el ${nf(cap420.recall_regla[i420],0)}%; con 700, ${nf(cap420.recall_modelo[i7],0)}% contra ${nf(cap420.recall_regla[i7],0)}%.</b> La capacidad de 15-25 intervenciones por tienda nunca se midió: es el número que más cambia el resultado.`;
+const sn=I.senal.slice(0,15);
+new Chart($('cSen'),{type:'bar',data:{labels:sn.map(s=>s.feature),datasets:[{label:'Train',data:sn.map(s=>s.auc_train),backgroundColor:css('--s1'),borderRadius:2},{label:'Test',data:sn.map(s=>s.auc_test),backgroundColor:css('--s2'),borderRadius:2}]},
+  options:opt({indexAxis:'y',scales:{x:{min:.5,max:1,grid:grid()},y:{grid:{display:false},ticks:{font:{size:10.5}}}}})});
+$('tkSen').innerHTML=`<b>Las 15 variables con más señal son de demanda y stock de la posición.</b> Liquidaciones, promociones, OC y transferencias quedan en AUC ≈ 0,5 solas. El stock en tránsito pierde toda la señal en 2026 (H6: campo sin definición), así que conviene vigilarlo.`;
+
+// ---------- tabs
+const tabs=[...document.querySelectorAll('#tabs button')];
+function show(t){tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));document.querySelectorAll('main>section').forEach(s=>s.hidden=s.id!==t);try{localStorage.setItem('tab',t)}catch(e){}}
+tabs.forEach(b=>b.onclick=()=>show(b.dataset.t));
+try{const t=localStorage.getItem('tab'); if(t&&$(t)) show(t)}catch(e){}
+</script>
+</body>
+</html>

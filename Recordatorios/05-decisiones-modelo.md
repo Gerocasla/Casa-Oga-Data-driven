@@ -97,7 +97,15 @@ Comparación sobre 131.189 filas, etiqueta a 3 meses. La columna que decide es e
 
 ## Próximo paso
 
-Mapa de features y script que construye el dataset de entrenamiento (tabla 2.1 y 2.2 del Entregable 2 · Parte B). Ver limitaciones vigentes en `PROBLEMAS-CALIDAD-DATOS.md`: H1 duplicados, H3 ventas antes de apertura, H8 precios, H12 fuentes sin 2026.
+~~Mapa de features y script que construye el dataset de entrenamiento~~ **Hecho el 28-09-2026:** `Entregable/Entregable 2/Modelo/construir_dataset_modelo.py` → `Datasets_Modelo/dataset_entrenamiento_v2*` (131.189 filas × 67 features; la v1 de 39 quedó reemplazada). Documentado en Parte B §2.1 y §2.2.
+
+Decisiones tomadas al construirlo (revisar con el grupo):
+- **Universo sin discontinuados en t** (además de excluirlos del target). No cambia el conteo: 131.189 filas, igual que en `candidatos_target.py`.
+- **Partición con embargo de 3 meses:** train t dic-22→dic-24 · validación abr→sep-25 · test ene→may-26. Se pierden 27.775 filas para evaluar (ene-mar y oct-dic 2025); el modelo final se reentrena con todo.
+- **Features descartadas:** antigüedad de tienda (H3), historial de precios (H8), devoluciones por motivo (H12, se apagarían en 2026), identificadores de tienda y SKU.
+- `costo_imputado` queda como marca de control y no como feature (los 22 SKUs no aparecen en train).
+
+Siguiente: modelado (línea base logística + árboles), elección de umbral en validación priorizando recall.
 
 ---
 
@@ -115,3 +123,24 @@ Las respuestas del negocio a la ronda 2 (P23) fijan como default **netear las de
 - Las devoluciones son ~1% de las unidades, pero el impacto se concentra en posiciones de **muy bajo volumen** (mediana 1 unidad/mes): una sola devolución baja el ritmo de 12 meses y empuja la cobertura por encima de 12. De las 2.442 posiciones-mes que cambian de clase, 339 quedan con venta neta ≤ 0 en 12 meses (cobertura infinita).
 - **La elección del target no cambia:** D sigue teniendo mucha menos inercia que A y C (recall trivial 32,5% contra 41,8% y 42,2%).
 - **Punto a discutir:** el motivo "sin rotación / no vendido" (~21% de las unidades devueltas) es devolución **al proveedor** (P18), que el negocio reconoce como un movimiento de inventario y no como venta (P19). Netearlo baja el ritmo de venta de posiciones que no perdieron demanda. Si se decide excluir ese motivo del neteo hay que justificarlo, porque se aparta del default.
+
+---
+
+## Evidencia de que el dataset tiene señal · 28-09-2026
+
+Medido con un modelo **de prueba** (gradient boosting sin ajustar, entrenado solo en train). No es el modelo final; sirve para saber que vale la pena modelar. Resultados en `Entregable/Entregable 2/Modelo/resultados/`.
+
+| Prueba | Resultado | Lectura |
+|---|---|---|
+| Casos capturados con 420 alertas/mes (validación) | **62%** modelo vs **47%** regla «ordenar por cobertura actual» | +33% de casos con la misma capacidad |
+| Con 700 alertas/mes | 76% vs 57% | |
+| Casos que hoy NO están en rojo | **65%** de los positivos | Un semáforo sobre el presente no los ve: justifica anticipar |
+| Mapa cobertura × tendencia | 9-12 meses de cobertura: 2,9% si la venta está estable, 10,8% si cae > 50% | La tendencia multiplica el riesgo; ninguna regla de un umbral lo captura |
+| Señal por variable | 40 de 62 numéricas con AUC < 0,55 solas; top 15 = demanda y stock de la posición | Las acciones comerciales pasadas no separan solas |
+| Stock en tránsito | AUC 0,67 en train → 0,50 en test | Pierde la señal en 2026 (H6): candidato a salir |
+| v1 (39) vs v2 (67) | Misma performance | La selección final se hace en el modelado |
+
+**Advertencias nuevas:**
+- **2026 no tiene devoluciones registradas** (H12): el neteo solo afecta 2022-2025. Las ventanas de 12 meses de principios de 2026 todavía incluyen devoluciones de 2025. No explica el salto de prevalencia (iría en sentido contrario), pero hay que declararlo.
+- La capacidad de 420-700 intervenciones/mes **decide el umbral** del modelo y nunca se midió: validarla con Lucía O. antes del Entregable 3.
+

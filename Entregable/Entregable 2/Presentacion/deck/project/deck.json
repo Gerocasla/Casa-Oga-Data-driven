@@ -1,0 +1,82 @@
+{
+ "v": 4,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-09-28T15:19:46Z"
+ },
+ "title": "Casa Óga · Entregable 2",
+ "order": [
+  "portada",
+  "recorrido",
+  "partida",
+  "d-eda",
+  "crecimiento",
+  "tp1",
+  "caida",
+  "cola",
+  "d-cal",
+  "mapa",
+  "hallazgos1",
+  "hallazgos2",
+  "criterios",
+  "supuesto",
+  "antesdespues",
+  "d-target",
+  "pregunta",
+  "ficha",
+  "candidatos",
+  "solidez",
+  "prevalencia",
+  "d-data",
+  "ficha-ds",
+  "leakage",
+  "grupos",
+  "excluidas",
+  "transformaciones",
+  "d-senal",
+  "mapariesgo",
+  "capacidad",
+  "senal",
+  "capital",
+  "limites",
+  "proximo"
+ ],
+ "sections": {
+  "sec1": {
+   "description": "Qué hicimos y qué muestra la presentación",
+   "start": "portada"
+  },
+  "sec2": {
+   "description": "EDA: qué se confirma, qué no y qué cambió en 2026",
+   "start": "d-eda"
+  },
+  "sec3": {
+   "description": "Calidad: hallazgos, criterios de limpieza y su impacto",
+   "start": "d-cal"
+  },
+  "sec4": {
+   "description": "Variable objetivo: definición, alternativas y solidez",
+   "start": "d-target"
+  },
+  "sec5": {
+   "description": "Dataset de entrenamiento: variables, exclusiones, leakage y transformaciones",
+   "start": "d-data"
+  },
+  "sec6": {
+   "description": "Señal del dataset y capital en riesgo",
+   "start": "d-senal"
+  }
+ },
+ "cover": "portada",
+ "faces": {
+  "dm-sans": {
+   "family": "DM Sans",
+   "href": "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&display=swap"
+  },
+  "ibm-plex-sans": {
+   "family": "IBM Plex Sans",
+   "href": "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+  }
+ },
+ "designSystems": []
+}

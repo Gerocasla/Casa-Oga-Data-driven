@@ -1,3 +1,5 @@
+> **⚠️ Documento histórico (TP1, corte dic-2025).** Las cifras de acá están desactualizadas o no son reproducibles (ver `Recordatorios/00-contexto-proyecto.md` y `02-correcciones-tp1.md`). Datos y criterios vigentes: `README.md` de la raíz y `Entregable/Entregable 2/`.
+
 # Mini-análisis de datos — Casa Óga (2022-2025)
 
 Análisis exploratorio de los 6 CSV subidos al proyecto (Calendario, Tiendas, Productos_catalogo, Stock_SKU_tienda_mensual, Ventas_SKU_tienda_mensual, Liquidaciones), más las respuestas oficiales del relevamiento a la empresa (Grupo 1) y el documento de contexto "Casa ÓGA_Proyecto Data Driven 2Q 2026 Mix Productos.pdf".

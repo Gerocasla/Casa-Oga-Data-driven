@@ -91,3 +91,34 @@ Generado por `Entregable/Entregable 2/EDA/normalizar_datasets.py`. Origen: `Data
 
 **No se modificó** (pendiente de respuesta del negocio): valores negativos, nulos, duplicados por clave, fechas posteriores al corte ni descuentos fuera de rango.
 
+---
+
+### 28-09-2026 — Dataset de entrenamiento del modelo (v1) · *reemplazado por v2, archivos borrados (ver entrada siguiente)*
+
+Generado por `Entregable/Entregable 2/Modelo/construir_dataset_modelo.py`. Origen: `Datasets_Normalizados/` → salida: `Datasets_Modelo/` (carpeta nueva). **No modifica ningún dataset de origen.**
+
+| Archivo | Contenido |
+|---|---|
+| `dataset_entrenamiento_v1.parquet` | 131.189 filas · 3 ids + 39 features sin transformar + `costo_imputado` + target + split |
+| `dataset_entrenamiento_v1_transformado.parquet` | Mismas filas · 76 features (winsorización, log1p, estandarización y one-hot ajustados solo en train) |
+| `dataset_entrenamiento_v1_muestra.csv` | 1.000 filas para inspección rápida |
+| `diccionario_features_v1.csv` | Descripción de cada columna |
+
+Criterios de corrección aplicados en memoria antes de construirlo (los mismos del plan de mejora): dedup 1ra ocurrencia (H1, H2), stock con piso en 0 y ventas negativas neteadas (H4), costo OC × 1,2321 para los 22 SKUs (H11), descuentos fuera de rango y promociones inválidas excluidos (H9, H10).
+
+Si se cambia cualquier definición (target, features, partición), generar **v2** y no pisar v1.
+
+---
+
+### 28-09-2026 (tarde) — Dataset del modelo v2 (reemplaza a v1)
+
+Mismo script, `VERSION = "v2"`. **v1 no llegó a publicarse y sus archivos se borraron** (quedaron inconsistentes al regenerar); la Parte B describe v2.
+
+| | v1 | v2 |
+|---|---|---|
+| Filas | 131.189 | 131.189 (mismo universo y target) |
+| Features | 39 (35 num + 4 cat) | **67 (62 num + 5 cat)**; 113 tras one-hot |
+| Fuentes | 10 | 11 (se suma Presupuesto: solo cumplimiento pasado) |
+
+Agregadas: lags de unidades, máximo de 12 meses, venta de 3 meses, antigüedad de la posición, cobertura de t-3 y su cambio, tránsito/stock, descuento implícito, peso de la posición en la tienda, stock vs promedio del SKU, tendencias del SKU, de la tienda y de la categoría en la tienda, cobertura del depósito, % de posiciones en rojo de la tienda, precio relativo a la subcategoría, OC de 12 meses y recencia, transferencias de 12 meses, liquidaciones del SKU en la cadena, descuento de la liquidación activa, promociones de 12 meses, cumplimiento presupuestario de 3 meses, eventos fijos en el horizonte y proveedor.
+Chequeo (no es el modelo): v2 rinde igual que v1 en un modelo de prueba (`Modelo/resultados/chequeo_sanidad_v2.csv`); la selección se deja para el modelado.

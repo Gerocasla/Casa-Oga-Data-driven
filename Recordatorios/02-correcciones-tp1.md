@@ -60,6 +60,30 @@ Al aplicar cada una: marcar `[x]` y anotarla en `03-registro-de-cambios.md`.
 
 ---
 
+## Agregadas por la Clase 7 (errores frecuentes del TP1, 28-09-2026)
+No estaban en nuestro feedback, pero la cátedra las pone en el checklist de la **presentación final** (`Material/Unidad 2/Clase 7 - TP1_Errores_Frecuentes.md`, diapositiva 24). Ver `07-checklist-unidad-2.md`.
+
+### [ ] 10. Parte C · 1.1 Visión — la anticipación tiene que estar en el mecanismo
+- Verificar que la Visión no prometa más de lo que hace el modelo. El target actual (cobertura > 12 meses **en t+3**, entrenado con features hasta t) sí anticipa, pero el semáforo del dashboard marca el estado **presente**. Si la Visión habla de "anticipar", aclarar que eso lo da el modelo, no el semáforo.
+
+### [ ] 11. Parte B · 1.2 Objetivos específicos — mínimo aceptable
+- Cada objetivo tiene que tener un **valor mínimo exigible**, no un rango con condicionales. Si depende de algo que todavía no existe (línea base monetaria, capacidad de 15-25 intervenciones nunca medida), marcarlo como "no medible aún".
+
+### [ ] 12. Parte B · 2.1 Stakeholders — faltan Sistemas/IT y proveedores externos
+- El relevamiento de la ronda 2 dice que **el responsable de IT renunció sin dejar documentación** (P3-P4) y que hay un proveedor del POS / del sistema de promociones. Condicionan la parte técnica (H4, H5, H8, H10): tienen que estar en el mapa, en filas separadas si tienen poder de decisión distinto.
+- Revisar además que cada expectativa asignada sea trazable al relevamiento; si no, marcarla como supuesto del equipo.
+
+### [ ] 13. Parte D — lo prometido tiene que estar, y vigente
+- Todo lo que el texto dice "se adjunta" (mockup, PDF de vistas) tiene que estar en la carpeta de entrega.
+- El dashboard del TP1 corta en dic-2025; los datos ya llegan a ago-2026. Aclarar el plan para actualizarlo antes del hito de negocio (cierre de inventario de fin de año).
+- Si hay PPTX, que diga lo mismo que el documento.
+
+### Problem Statement (refuerza #1 y #2)
+- Orden **de afuera hacia adentro**: impacto de negocio → síntoma operativo → causa técnica.
+- Traer la cifra más reciente y directa: **la venta cae 13,2% en ene-ago 2026** contra el mismo período de 2025 (todavía no figura en ningún documento).
+
+---
+
 ## Detectadas en el EDA del TP2 (no vienen del feedback, pero afectan al TP1)
 Fuente: `Entregable\Entregable 2\EDA\HALLAZGOS_EDA.md` §4. **Pendiente de decisión del usuario antes de corregir.**
 

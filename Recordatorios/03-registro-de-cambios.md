@@ -9,5 +9,16 @@ Versión original entregada: `Entregable\Entregable 1\Entregable_1_Consolidado_G
 |---|---|---|---|---|---|---|
 | — | *(sin cambios aplicados todavía)* | | | | | |
 
+Las correcciones a aplicar están en `02-correcciones-tp1.md` (#1-#13 más las discrepancias D1-D13 del EDA). Se aplican recién en el consolidado final.
+
 ## Entregable 2 (TP2)
-*(pendiente de feedback)*
+**Todavía no entregado** (al 28-09-2026). Los cambios hechos hasta ahora son parte de la elaboración, no modificaciones a algo presentado, así que **no van a la sección «Cambios»**. Para referencia interna:
+
+| Fecha | Parte | Cambio | Motivo |
+|---|---|---|---|
+| 22-09 | Datos | Se pasa del corte dic-2025 a ago-2026 | Segunda entrega de datasets |
+| 25-09 | B §1.1-1.2 | Se incorporan las respuestas de la ronda 2 (neteo de devoluciones, factor de costo, historial) | Respuestas del negocio |
+| 28-09 | A | Tabla 2.3, matriz 3.1, fundamentos y 12 gráficos recalculados al corte ago-2026 | Un solo corte en todo el TP |
+| 28-09 | B §1.3, §2.1, §2.2 | Completadas; dataset v1 (39 features) reemplazado por v2 (67) antes de entregar | Consigna + pedido del equipo |
+
+Cuando llegue el feedback del TP2: crear `08-correcciones-tp2.md` con el mismo formato que `02-correcciones-tp1.md` y registrar acá cada corrección aplicada.

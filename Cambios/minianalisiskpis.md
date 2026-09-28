@@ -1,3 +1,5 @@
+> **⚠️ Documento histórico (TP1, corte dic-2025).** Las cifras de acá están desactualizadas o no son reproducibles (ver `Recordatorios/00-contexto-proyecto.md` y `02-correcciones-tp1.md`). Datos y criterios vigentes: `README.md` de la raíz y `Entregable/Entregable 2/`.
+
 # Mini-análisis de datos — Casa Óga (2022-2025)
 
 Análisis exploratorio de los 6 CSV subidos al proyecto (Calendario, Tiendas, Productos_catalogo, Stock_SKU_tienda_mensual, Ventas_SKU_tienda_mensual, Liquidaciones), más las respuestas oficiales del relevamiento a la empresa (Grupo 1). Reporte visual completo: **[Casa Óga en Números](https://claude.ai/code/artifact/e5c495a6-c672-47fe-9d54-795db8806a7e)**. Evolución mensual del % de stock vendido por categoría: **[Histórico % vendido](https://claude.ai/code/artifact/851f10a1-61a4-4156-befb-158561905139)**. Dashboard de diagnóstico de dead stock y propuesta de sistema predictivo (pensado para presentar a dirección): **[Dead Stock — Diagnóstico y Predictivo](https://claude.ai/code/artifact/d360de71-73a6-43a5-80c5-d099da6233b6)**.

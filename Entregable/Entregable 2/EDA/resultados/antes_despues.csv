@@ -1,0 +1,15 @@
+grupo,metrica,antes,despues,fmt,impacto,variacion_pct
+Volumen,Registros de venta (mes-tienda-SKU),299400.0,297022.0,n,2.378 claves duplicadas (H1) se reducen a un registro por clave.,-0.7942551770207085
+Volumen,Venta total ene-22 a ago-26 (M$),40314.270922380005,40083.394959419995,m,"Los duplicados inflan la venta; las devoluciones quedan neteadas, no perdidas.",-0.5726904088245388
+Volumen,Unidades vendidas ene-22 a ago-26,930410.0,925015.0,n,Mismo efecto en unidades.,-0.5798518932513597
+Stock,Filas con stock negativo (total),1209.0,0.0,n,Error de sincronizacion POS-inventario (P14): piso en 0.,-100.0
+Stock,Capital inmovilizado en tiendas a dic-25 (M$ a costo),3595.11008,3544.872351753753,m,"Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.",-1.3973905423849242
+Stock,Capital inmovilizado en tiendas a ago-26 (M$ a costo),3119.56056,3097.6338197923496,m,"Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.",-0.702879132683043
+Consistencia,Valores distintos de categoria (catalogo),11.0,7.0,n,R1: 11 variantes de escritura para 7 categorias reales.,-36.36363636363637
+Consistencia,Participacion de Decoracion en la venta (%),20.799968724759864,22.35443010468906,p,Filtrar por la etiqueta mayoritaria (Decoracion) pierde los SKUs cargados como DECO o Decoración.,7.473383255998822
+Validez,Descuento promedio en liquidaciones (%),26.559865092748737,26.305084745762713,p,"3 valores fuera de rango (120, -10, 120) excluidos como error de carga (P24-P28).",-0.9592682270648356
+Validez,Descuento promedio en promociones (%),20.798319327731093,20.0,p,"2 valores fuera de rango (150, -15) excluidos.",-3.838383838383841
+Validez,Liquidaciones con fecha de fin legible,585.0,593.0,n,R2: 8 fechas con hora recuperadas; el TP1 las habia descartado.,1.3675213675213627
+Validez,Cumplimiento presupuestario 2022 (%),90.76316461533939,89.45615799594367,p,309 celdas en cero (ene-may 22) y 3 negativas excluidas (P29-P32): antes la venta real sin meta infla el %.,-1.440018783980157
+Modelo,Posiciones con cobertura > 12 meses a dic-25,211.0,213.0,n,Duplicados sumados y negativos sin tratar cambian el ritmo de venta y el stock de cada posicion.,0.9478672985782088
+Modelo,"Prevalencia del target (cobertura > 12 a 3 meses, %)",2.67,3.38,p,Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): +919 positivos.,26.591760299625467

@@ -1,7 +1,7 @@
 # Problemas de calidad de datos — Casa Óga
 
 > **Corte:** agosto 2026 · **Fuente de los números:** `Datasets_Normalizados/` (15 fuentes)
-> **Verificado con:** `EDA/calidad_2026.py` · **Actualizado:** 25-09-2026 (incorpora las respuestas del negocio a la ronda 2)
+> **Verificado con:** `EDA/calidad_2026.py` · **Actualizado:** 28-09-2026 (respuestas de la ronda 2 + uso en el dataset del modelo)
 >
 > Este archivo es el insumo de la **Sección 1 del Entregable 2 · Parte B** (Hallazgos y Plan de Mejora de Calidad).
 > Cada vez que se resuelva un hallazgo, marcarlo acá y anotarlo en `REGISTRO-CAMBIOS-DATASETS.md`.
@@ -143,6 +143,8 @@ Ventas y Stock llegan a ago-2026, pero tres fuentes se cortan antes:
 | Calendario | 31-dic-2025 | Sin temporada ni feriados para 8 meses de venta |
 | Productos_catalogo | alta 29-jun-2025 | Ningún SKU dado de alta; el maestro quedó congelado |
 
+**Efecto sobre el neteo de devoluciones:** como 2026 no trae devoluciones (ni en Devoluciones_SKU ni como ventas negativas), el neteo acordado solo corrige 2022-2025. Por eso la comparación 2026 vs 2025 se hace **en bruto** (−13,2%; neteada daría −12,1%, no comparable).
+
 ---
 
 ## Resueltos por la normalización (22-09-2026)
@@ -178,3 +180,24 @@ Tampoco tuvieron respuesta en la ronda 2:
 4. **H7** — Liquidaciones "Discontinuación" sobre SKUs activos y tienda "Todas".
 5. **H10** — Promociones con id repetido y con fecha de fin anterior a la de inicio.
 6. Presupuesto — cumplimiento uniforme de ~91% en todos los niveles.
+
+---
+
+## Cómo entra cada hallazgo al dataset del modelo (v2, 28-09-2026)
+
+| Hallazgo | En `construir_dataset_modelo.py` |
+|---|---|
+| H1, H2 | Dedup por clave (1ra ocurrencia) y catálogo dedup antes de armar el panel |
+| H3 | La antigüedad de tienda **no** es feature; se usa la antigüedad de la posición |
+| H4 | Stock con piso en 0; ventas negativas neteadas |
+| H5 | Sin tratamiento: es la realidad operativa registrada; se declara |
+| H6 | `stock_en_transito` entra como feature, pero pierde la señal en 2026 (AUC 0,67 → 0,50): candidato a salir en el modelado |
+| H7 | Liquidaciones solo como historia hasta t; «Todas» se aplica a todas las tiendas del SKU |
+| H8 | Historial de precios fuera; precio de lista del catálogo |
+| H9 | Descuentos fuera de 0-100 excluidos; cumplimiento presupuestario sin celdas ≤ 0 |
+| H10 | Promociones duplicadas o con fechas invertidas excluidas |
+| H11 | Costo de OC × 1,2321 + marca `costo_imputado` (no feature: los 22 SKUs no están en train) |
+| H12 | Devoluciones y Calendario no son features; eventos comerciales derivados de la fecha |
+
+Detalle y justificación: Parte B §2.1 (tabla «Variables excluidas») y `Recordatorios/05-decisiones-modelo.md`.
+
