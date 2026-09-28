@@ -120,25 +120,34 @@ page("cola", "EDA · cobertura por posición", "El promedio esconde el problema:
  chart(IMG["cola"], "Percentiles 50, 90 y 99 de la cobertura por posición, 2023 a 2026",
   stat(f"{n(cp['p50'][-1])} meses", "mediana de cobertura: no se mueve en todo el período")
   + stat(f"{n(cp['p99'][i0],0)} → {n(cp['p99'][-1],0)}", "meses en el percentil 99 entre dic-25 y ago-26")
-  + stat(f"{n(rm['posiciones'][r0],0)} → {n(rm['posiciones'][-1],0)}", f"posiciones con más de 12 meses de stock; ${n(rm['capital'][-1])} M a costo en ago-26")),
+  + stat(f"{n(rm['posiciones'][r0],0)} → {n(rm['posiciones'][-1],0)}", f"posiciones con más de 12 meses de stock; ${n(rm['capital'][-1])} M a costo en ago-26")
+  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}"><b>Por qué:</b> en 2026 la venta cae 13,2% contra 2025 y el stock no se ajusta. Las posiciones que ya rotaban poco acumulan meses de stock.</p>'),
  "Si miráramos el promedio diríamos que no pasa nada. El riesgo está en pocas posiciones que acumulan años de stock. Eso es lo que el target tiene que capturar.")
 
 # ================================================================= 3 CALIDAD
 divider("d-cal", "PARTE 2", "Calidad y limpieza", "Qué está mal, cómo lo tratamos, por qué, y cuánto cambia el resultado al corregir.", "Calidad: hallazgos, criterios de limpieza y su impacto")
-MAPA = [("Ventas", "V R R V A R A"), ("Stock tiendas", "V R R V R R A"), ("Catálogo", "A V V R V R R"), ("Tiendas", "V R R V V V V"),
+# Criterio: Critico = sin tratarlo cambia un KPI, el target o una feature, deja una variable afuera, o usarlo exige un
+# supuesto o confirmacion del negocio. Menor = existe pero no cambia ningun resultado. OK = sin problemas detectados.
+MAPA = [("Ventas", "V R R V R R A"), ("Stock tiendas", "V R R V R R A"), ("Catálogo", "R A V R V R R"), ("Tiendas", "V R R V V V V"),
         ("Calendario", "V V V R V V V"), ("Liquidaciones", "V R A V A V V"), ("Devoluciones", "V V V R V V V"), ("Historial precios", "A R A V V V R"),
-        ("Órdenes de compra", "V V V V V V V"), ("Presupuesto", "A A A V A V A"), ("Promociones", "A V R V R R A"), ("Proveedores", "V V V V V V V"),
-        ("Stock depósito", "V A V V V V V"), ("Transferencias", "V R V V V V V"), ("Costo almacenam.", "V A V A V V A")]
+        ("Órdenes de compra", "V V V V V V V"), ("Presupuesto", "A R A V A V A"), ("Promociones", "A A A V A A A"), ("Proveedores", "V V V V V V V"),
+        ("Stock depósito", "V A V V V V V"), ("Transferencias", "V A V V V V V"), ("Costo almacenam.", "V A V A V V A")]
 COL = {"V": ("#D8F0DF", "#1E5B32", "OK"), "A": ("#FCEFC7", "#6B4E00", "Menor"), "R": ("#F8D3D3", "#8A1C1C", "Crítico")}
-cells = "".join(f'<p style="font-size:24px; font-weight:700; color:{MUT}; padding:4px 8px">{h}</p>' for h in ["Fuente", "Complet.", "Consist.", "Exactitud", "Actualidad", "Validez", "Unicidad", "Trazab."])
+cells = "".join(f'<p style="font-size:22px; font-weight:700; color:{MUT}; padding:2px 8px">{h}</p>' for h in ["Fuente", "Complet.", "Consist.", "Exactitud", "Actualidad", "Validez", "Unicidad", "Trazab."])
 for f, vals in MAPA:
-    cells += f'<p style="font-size:24px; color:{INK}; padding:1px 8px">{f}</p>'
+    cells += f'<p style="font-size:22px; color:{INK}; padding:0 8px">{f}</p>'
     for v in vals.split():
         bgc, fg, t = COL[v]
-        cells += f'<p style="font-size:24px; font-weight:600; color:{fg}; background:{bgc}; padding:1px 8px; border-radius:6px; text-align:center">{t}</p>'
+        cells += f'<p style="font-size:22px; font-weight:600; color:{fg}; background:{bgc}; padding:0 8px; border-radius:6px; text-align:center">{t}</p>'
+CRIT = [("V", "no se detectó ningún problema (los nulos esperables no cuentan)."),
+        ("A", "el problema existe pero no cambia ningún resultado: pocos registros que se excluyen, un campo que no se usa o una corrección mecánica."),
+        ("R", "sin tratarlo cambia un KPI, el target o una variable del modelo, o usar el dato exige un supuesto o la confirmación del negocio.")]
+leyenda = '<div style="display:flex; gap:24px">' + "".join(
+    f'<p style="flex:1; font-size:21px; line-height:1.35; color:{BODY}"><b style="color:{COL[k][1]}; background:{COL[k][0]}; padding:0 8px; border-radius:6px">{COL[k][2]}</b> {t}</p>'
+    for k, t in CRIT) + '</div>'
 page("mapa", "Calidad · diagnóstico", "Mapa de calidad: 15 fuentes × 7 dimensiones",
- f'<div style="display:grid; grid-template-columns:320px repeat(7, 1fr); gap:4px">{cells}</div>',
- "Críticos en unicidad, consistencia y exactitud de Ventas y Stock, confinados a 2022-2025. Rojo en actualidad: las tres fuentes que no llegan a 2026. Trazabilidad en rojo: historial reconstruido y costo sin definición.", gap=20)
+ f'<div style="display:grid; grid-template-columns:320px repeat(7, 1fr); gap:3px">{cells}</div>' + leyenda,
+ "El criterio es el impacto en el uso, no la cantidad de errores. Crítico: si no se trata cambia un resultado o hay que asumir algo para usar el dato (duplicados, negativos, 22 SKUs sin costo, fuentes sin 2026, historial reconstruido). Menor: existe pero no mueve nada (5 descuentos y 4 promociones inválidas que se excluyen, variantes de categoría que se unifican con una regla). El desvío de stock en tránsito se asigna a Stock, no a Transferencias, cuyas cifras se usan tal cual.", gap=16)
 H1 = [("H1 · Claves duplicadas", "2.378 en Ventas y en Stock, solo 2022-25.", "Conservar la 1ra ocurrencia. Causa raíz: H2."),
       ("H2 · SKUs duplicados", "15 SKUs cargados dos veces, difieren solo en proveedor.", "Error del sistema (P11). Costo único de catálogo."),
       ("H3 · Venta antes de abrir", "6 tiendas, 11.058 filas, $1.471,7 M.", "Sin respuesta. No usar antigüedad de tienda."),
@@ -184,7 +193,7 @@ page("antesdespues", "Calidad · antes y después", "Corregir cambia poco los to
  chart(IMG["ad"], "Cuatro métricas antes y después de corregir: venta total, capital, participación de Decoración y prevalencia del target",
   stat("< 2%", "cambian venta, unidades y capital al corregir")
   + stat("+1,5 pp", "gana Decoración al unificar categorías: es la candidata al piloto")
-  + stat("+30%", "prevalencia del target según cómo se traten las devoluciones: el mayor impacto para el modelo"), 1100, 440),
+  + stat("2,6% → 3,4%", "prevalencia del target al netear las devoluciones en vez de llevarlas a 0 (P23): +30% de positivos, el mayor impacto para el modelo"), 1100, 440),
  "Mensaje: que el total cierre no prueba que los datos estén bien. Los errores se compensan en el agregado (duplicados suman, SKUs sin costo restan) y aparecen al bajar a SKU o categoría.")
 
 # ================================================================= 4 TARGET
@@ -321,12 +330,15 @@ page("mapariesgo", "Señal · cobertura × tendencia", "La tendencia multiplica 
  + stat(f"{n(sum(og['pct'][:3]),0)}%", "de los casos hoy no está en rojo: un semáforo sobre el presente no los ve") + '</div></div>',
  "Ninguna regla de un solo umbral combina cobertura y tendencia. Esto justifica un modelo multivariado y, a la vez, confirma que las variables elegidas tienen señal.")
 cpv = I["capacidad"]["validacion"]; k4, k7 = cpv["k"].index(420), cpv["k"].index(700)
-page("capacidad", "Señal · capacidad operativa", "Con la misma capacidad, el modelo encuentra más casos",
- chart(IMG["cap"], "Porcentaje de casos capturados según alertas por mes, modelo de prueba contra regla de cobertura actual",
-  stat(f"{n(cpv['recall_modelo'][k4],0)}% vs {n(cpv['recall_regla'][k4],0)}%", "casos capturados con 420 alertas por mes: modelo contra ordenar por cobertura actual")
-  + stat(f"{n(cpv['recall_modelo'][k7],0)}% vs {n(cpv['recall_regla'][k7],0)}%", "con 700 alertas por mes")
-  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Modelo de prueba (gradient boosting sin ajustar) entrenado en train y medido en validación. No es el modelo final.</p>'),
- "La franja amarilla es la capacidad declarada de 15 a 25 intervenciones por tienda, que nunca se midió. Es el número que más cambia el resultado: hay que validarlo con Lucía O.")
+import csv
+cpt = {int(r["alertas_mes"]): r for r in csv.DictReader(open(os.path.join(E2, "Modelo", "resultados", "capacidad_alertas_v3.csv"), encoding="utf-8")) if r["split"] == "test"}
+t4, t7 = cpt[420], cpt[700]
+page("capacidad", "Señal · capacidad operativa", "El modelo encuentra más casos en 2025; en 2026 la ventaja se achica",
+ chart(IMG["cap"], "Porcentaje de casos capturados según alertas por mes, modelo de prueba contra regla de cobertura actual, en validación y en test",
+  stat(f"{n(cpv['recall_modelo'][k4],0)}% vs {n(cpv['recall_regla'][k4],0)}%", "casos capturados con 420 alertas por mes en validación (2025): modelo contra ordenar por cobertura actual")
+  + stat(f"{n(float(t4['recall_modelo']),0)}% vs {n(float(t4['recall_regla']),0)}%", f"en test (2026) con 420 alertas: la regla casi lo alcanza. Con 700: {n(float(t7['recall_modelo']),0)}% vs {n(float(t7['recall_regla']),0)}%")
+  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Con 420 alertas acierta 1 de cada 5 en 2025 (precisión {n(cpv["precision_modelo"][k4],0)}%). En 2026 hay {t4["positivos_mes"]} casos por mes: más que la capacidad. Modelo de prueba sin ajustar, no el final.</p>'),
+ "La franja amarilla es la capacidad declarada de 15 a 25 intervenciones por tienda, que nunca se midió. En 2026 la regla simple se acerca: el modelo final tiene que ganar ahí, y los casos superan la capacidad. Hay que validarla con Lucía O.")
 page("senal", "Señal · por variable", "La señal está en la demanda de la posición",
  chart(IMG["senal"], "AUC de cada una de las 15 variables con más señal, en train y en test",
   stat(f"{I['senal_sin']} de {I['n_features_num']}", "variables numéricas no separan solas (AUC < 0,55): liquidaciones, promociones, OC y transferencias")

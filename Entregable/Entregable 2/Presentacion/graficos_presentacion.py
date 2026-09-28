@@ -4,7 +4,7 @@ import numpy as np, pandas as pd
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 sys.stdout.reconfigure(encoding="utf-8")
-E2 = r"C:\onedrive\OneDrive - F 458 S.A\Escritorio\Gian\Data Driven\Casa-Oga-Data-driven\Entregable\Entregable 2"
+E2 = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "img"); os.makedirs(OUT, exist_ok=True)
 L = lambda p: json.load(open(p, encoding="utf-8"))
 I = L(os.path.join(E2, "Modelo", "resultados", "insights.json"))
@@ -21,7 +21,7 @@ def fmt_mes(ax, labels, every=6):
     ax.set_xticks(range(0, len(labels), every)); ax.set_xticklabels([labels[i] for i in range(0, len(labels), every)])
 
 # 1 venta mensual bruta/neta desde las series (eda no guarda la serie: recalculo liviano)
-D = r"C:\onedrive\OneDrive - F 458 S.A\Escritorio\Gian\Data Driven\Casa-Oga-Data-driven\Datasets_Normalizados"
+D = os.path.join(os.path.dirname(os.path.dirname(E2)), "Datasets_Normalizados")
 K = ["fecha_mes", "id_tienda", "id_producto"]
 v = pd.read_csv(os.path.join(D, "Ventas_SKU_tienda_mensual.csv"))
 pos = v[v.unidades_vendidas >= 0].drop_duplicates(K); neg = v[v.unidades_vendidas < 0]
@@ -86,8 +86,14 @@ save(fig, "c06_prevalencia.png")
 # 7 capacidad
 cp = I["capacidad"]["validacion"]; fig, ax = plt.subplots(figsize=(16, 7.4))
 ax.axvspan(420, 700, color=GOLD, alpha=.18, lw=0); ax.text(430, 8, "capacidad declarada\n420–700 / mes", color=MUT, fontsize=18)
-ax.plot(cp["k"], cp["recall_modelo"], color=BLUE, lw=4, marker="o", ms=8, label="Modelo de prueba")
-ax.plot(cp["k"], cp["recall_regla"], color=GREY, lw=3.5, ls="--", marker="o", ms=7, label="Regla: cobertura actual")
+ct = I["capacidad"].get("test")
+if ct is None:   # insights.json guarda solo validacion: el test sale del CSV del chequeo de senal
+    ct = pd.read_csv(os.path.join(E2, "Modelo", "resultados", "capacidad_alertas_v3.csv")).query("split == 'test'")
+    ct = {"k": ct.alertas_mes.tolist(), "recall_modelo": ct.recall_modelo.tolist(), "recall_regla": ct.recall_regla.tolist()}
+ax.plot(cp["k"], cp["recall_modelo"], color=BLUE, lw=4, marker="o", ms=8, label="Modelo · validación 2025")
+ax.plot(cp["k"], cp["recall_regla"], color=BLUE, lw=3, ls="--", marker="o", ms=6, alpha=.55, label="Regla · validación 2025")
+ax.plot(ct["k"], ct["recall_modelo"], color=ORANGE, lw=4, marker="o", ms=8, label="Modelo · test 2026")
+ax.plot(ct["k"], ct["recall_regla"], color=ORANGE, lw=3, ls="--", marker="o", ms=6, alpha=.55, label="Regla · test 2026")
 ax.set_xlabel("alertas por mes"); ax.set_ylabel("% de casos capturados"); ax.set_ylim(0, 100); ax.set_xlim(0, 1020); ax.legend(loc="upper left")
 save(fig, "c07_capacidad.png")
 
@@ -106,8 +112,8 @@ for ax, (lab, k) in zip(axs, pares):
     r = met[k]; ax.bar([0, 1], [r["antes"], r["despues"]], color=[GREY, BLUE], width=.7)
     var = (r["despues"] / r["antes"] - 1) * 100
     import math
-    dpp = math.floor((r['despues'] - r['antes']) * 10) / 10   # mismo redondeo que el texto (22,35 - 20,80 = 1,55 -> 1,5)
-    txt = (f"{dpp:+.1f} pp" if "Decoracion" in k else f"{var:+.1f}%").replace(".", ",").replace("-", "−")
+    dpp = math.floor((r['despues'] - r['antes']) * 10) / 10 if "Decoracion" in k else round(r["despues"], 1) - round(r["antes"], 1)   # igual que el texto: 22,35 - 20,80 -> 1,5; 3,40 - 2,61 -> 3,4 - 2,6 = 0,8
+    txt = (f"{dpp:+.1f} pp" if r["fmt"] == "p" else f"{var:+.1f}%").replace(".", ",").replace("-", "−")
     ax.set_title(lab, fontsize=20, color=INK, loc="center"); ax.set_xticks([0, 1], ["Antes", "Después"]); ax.set_yticks([])
     ax.text(.5, max(r["antes"], r["despues"]) * 1.05, txt, ha="center", fontsize=24, color=INK, fontweight="bold")
     ax.set_ylim(0, max(r["antes"], r["despues"]) * 1.2); ax.spines["left"].set_visible(False); ax.grid(False)

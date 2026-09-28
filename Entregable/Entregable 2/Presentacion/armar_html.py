@@ -4,8 +4,8 @@ Arma la presentacion como UN solo archivo HTML autocontenido (imagenes embebidas
 Lee las diapositivas que genera generar_deck.py (deck/project/slides/*.html).
 
 Salidas en esta carpeta:
-  Casa-Oga-Entregable-2-v1-completa.html  (34 diapositivas)
-  Casa-Oga-Entregable-2-v2-corta.html     (14 diapositivas)
+  Casa-Oga-Entregable-2-v3-completa.html  (34 diapositivas)
+  Casa-Oga-Entregable-2-v3-corta.html     (15 diapositivas)
 Navegacion: flechas / espacio / clic · F pantalla completa · N notas del orador.
 """
 import os, re, json, base64
@@ -14,7 +14,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 SL = os.path.join(BASE, "deck", "project", "slides")
 ORDEN = json.load(open(os.path.join(BASE, "deck", "project", "deck.json"), encoding="utf-8"))["order"]
 CORTA = ["portada", "partida", "cola", "mapa", "criterios", "antesdespues", "pregunta", "candidatos",
-         "prevalencia", "leakage", "grupos", "excluidas", "capacidad", "proximo"]
+         "prevalencia", "leakage", "grupos", "excluidas", "transformaciones", "capacidad", "proximo"]
 
 # /_blob/<id> -> archivo local (mismos ids que devolvio la subida de assets)
 BLOBS = {"3c2223f1d1c6339c830ee806884f8f61": "c01_venta_mensual.png", "43c6981580a79beb1efb8097927605a1": "c02_estacionalidad.png",
@@ -83,5 +83,5 @@ def armar(ids, titulo, archivo):
     open(os.path.join(BASE, archivo), "w", encoding="utf-8").write(out)
     print(f"{archivo}: {len(ids)} diapositivas · {os.path.getsize(os.path.join(BASE, archivo))/1e6:.1f} MB")
 
-armar(ORDEN, "Casa Óga · Entregable 2 · versión completa", "Casa-Oga-Entregable-2-v1-completa.html")
-armar(CORTA, "Casa Óga · Entregable 2 · versión corta", "Casa-Oga-Entregable-2-v2-corta.html")
+armar(ORDEN, "Casa Óga · Entregable 2 · versión completa", "Casa-Oga-Entregable-2-v3-completa.html")
+armar(CORTA, "Casa Óga · Entregable 2 · versión corta", "Casa-Oga-Entregable-2-v3-corta.html")

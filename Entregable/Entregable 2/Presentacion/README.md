@@ -4,13 +4,15 @@ Dos versiones para elegir; el contenido es el mismo, la corta es un subconjunto.
 
 | Versión | Diapositivas | Archivos | Para qué |
 |---|---|---|---|
-| **v1 completa** | 34 | `Casa-Oga-Entregable-2-v1-completa.html` · `.pdf` | Documento de respaldo o presentación larga (~25-30 min) |
-| **v2 corta** | 14 | `Casa-Oga-Entregable-2-v2-corta.html` · `.pdf` | Presentación de pocos minutos (~8-10 min) |
+| **v3 completa** | 34 | `Casa-Oga-Entregable-2-v3-completa.html` · `.pdf` | Documento de respaldo o presentación larga (~25-30 min) |
+| **v3 corta** | 15 | `Casa-Oga-Entregable-2-v3-corta.html` · `.pdf` | Presentación de pocos minutos (~8-10 min) |
+
+**v3 (vigente):** criterio explícito OK / Menor / Crítico en el mapa de calidad, mapa alineado con la Parte A, capacidad operativa medida también en test 2026, prevalencia en valores absolutos y transformaciones en la versión corta. **v1 completa y v2 corta** (14 diapositivas) quedan como versión anterior, sin regenerar.
 
 **Cómo usar el HTML:** abrirlo en el navegador. Flechas, espacio o clic para avanzar · `F` pantalla completa · `N` muestra las notas del orador · `Ctrl+P` imprime a PDF (tamaño 1920×1080). Es un único archivo: las imágenes van embebidas. Las tipografías (DM Sans e IBM Plex Sans) se cargan de Google Fonts; sin internet se usa Arial.
 
-**Qué tiene la v2 corta** (en orden): portada · punto de partida · la cola de cobertura en 2026 · mapa de calidad · por qué tratamos cada problema así · antes y después · la pregunta del target · por qué este target · prevalencia y partición · qué ve el modelo (leakage) · las variables elegidas · las excluidas · capacidad operativa · próximo paso.
-Quedan fuera: divisores de sección, EDA detallado (crecimiento, estacionalidad, caída 2026), detalle de los 12 hallazgos, supuesto de costo, ficha y solidez del target, ficha del dataset, transformaciones, mapa de riesgo, señal por variable, capital en riesgo y limitaciones. Para cambiar la selección: lista `CORTA` en `armar_html.py`.
+**Qué tiene la v3 corta** (en orden): portada · punto de partida · la cola de cobertura en 2026 · mapa de calidad · por qué tratamos cada problema así · antes y después · la pregunta del target · por qué este target · prevalencia y partición · qué ve el modelo (leakage) · las variables elegidas · las excluidas · transformaciones · capacidad operativa · próximo paso.
+Quedan fuera: divisores de sección, EDA detallado (crecimiento, estacionalidad, caída 2026), detalle de los 12 hallazgos, supuesto de costo, ficha y solidez del target, ficha del dataset, mapa de riesgo, señal por variable, capital en riesgo y limitaciones. Para cambiar la selección: lista `CORTA` en `armar_html.py`.
 
 ## Cómo se genera
 
@@ -23,7 +25,7 @@ python armar_html.py              # junta todo en los dos HTML autocontenidos
 PDF (Edge sin ventana), desde esta carpeta:
 
 ```
-python -c "import subprocess,pathlib,tempfile;e=r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe';[subprocess.run([e,'--headless=new','--disable-gpu','--no-first-run','--user-data-dir='+tempfile.mkdtemp(),'--no-pdf-header-footer','--virtual-time-budget=10000','--print-to-pdf='+str(pathlib.Path(f'Casa-Oga-Entregable-2-{v}.pdf').resolve()),pathlib.Path(f'Casa-Oga-Entregable-2-{v}.html').resolve().as_uri()]) for v in ['v1-completa','v2-corta']]"
+python -c "import subprocess,pathlib,tempfile;e=r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe';[subprocess.run([e,'--headless=new','--disable-gpu','--no-first-run','--user-data-dir='+tempfile.mkdtemp(),'--no-pdf-header-footer','--virtual-time-budget=10000','--print-to-pdf='+str(pathlib.Path(f'Casa-Oga-Entregable-2-{v}.pdf').resolve()),pathlib.Path(f'Casa-Oga-Entregable-2-{v}.html').resolve().as_uri()]) for v in ['v3-completa','v3-corta']]"
 ```
 
 Si un PDF no aparece, correr de nuevo (Edge a veces falla la primera vez).
