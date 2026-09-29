@@ -227,8 +227,14 @@ add("pregunta", f'''<section id="pregunta" data-transition="fade" style="backgro
 <p style="font-size:28px; background:#FFFFFF; border:1px solid {LINE}; border-radius:999px; padding:12px 28px">Binaria: 1 = sí</p>
 <p style="font-size:28px; background:#FFFFFF; border:1px solid {LINE}; border-radius:999px; padding:12px 28px">Cobertura = stock / promedio de 12 meses de unidades netas</p>
 <p style="font-size:28px; background:#FFFFFF; border:1px solid {LINE}; border-radius:999px; padding:12px 28px">Sin SKUs discontinuados</p></div>
+<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px">
+''' + "".join(f'<div style="display:flex; flex-direction:column; gap:8px; border-left:6px solid {GOLD}; padding:4px 0 4px 24px">'
+              f'<p style="{HF}; font-size:32px; font-weight:700; line-height:1.15">{t}</p><p style="font-size:24px; line-height:1.4; color:{BODY}">{b}</p></div>'
+              for t, b in [("¿Por qué 3 meses?", "Liquidar o transferir tarda de 2 a 4 semanas. Lo confirmó el negocio."),
+                           ("¿Por qué 12 meses?", "Rota menos de una vez al año y deja 420-700 alertas por mes, lo que Operaciones puede atender."),
+                           ("Métrica: recall", "Para el negocio, no ver un caso cuesta más que revisar uno de más.")]) + f'''</div>
 <p style="position:absolute; left:128px; bottom:64px; width:1664px; font-size:24px; color:{MUT}">Casa Óga · Entregable 2 · Grupo 1 &#160;·&#160; {len(slides)+1}</p>
-<aside>Una pregunta que un responsable de Compras entiende sin fórmulas. Los discontinuados van a una lista aparte con regla fija: ya son una decisión tomada, no algo a predecir.</aside></section>''')
+<aside>Una pregunta que un responsable de Compras entiende sin fórmulas. Los 12 meses salieron primero de la capacidad operativa; que coincida con rotación anual menor a 1 (non-moving en el análisis FSN) se encontró después y sirve de respaldo. Los discontinuados van a una lista aparte con regla fija: ya son una decisión tomada, no algo a predecir.</aside></section>''')
 page("ficha", "Target · definición", "Seis decisiones definen el target",
  '<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; flex:1">'
  + card("Unidad: SKU–tienda–mes", "Es donde se decide: liquidar, transferir o frenar la reposición de un producto en una tienda.")
@@ -245,8 +251,8 @@ page("candidatos", "Target · alternativas", "Por qué este target y no otro",
   ["Sin ventas en 3 meses", "6,18%", "65%", "35,3%", "Criterio de consumo masivo; 22% por azar"],
   ["<b>Cobertura > 12, sin discontinuados</b>", "<b>3,40%</b>", "<b>61%</b>", "<b>38,6%</b>", "<b>Elegido</b>"],
   ["Cobertura > 9 (rojo + amarillo)", "9,93%", "62%", "38,5%", "Alternativa si falta volumen"]], [34, 13, 15, 19, 19], 26)
- + f'<p style="font-size:26px; line-height:1.45; color:{BODY}; width:1600px"><b>Cómo leerlo:</b> «recall de sigue igual» es cuántos casos acierta una regla que solo dice «la posición va a estar como está hoy». Con el universo de 3+ meses todos quedan entre 34% y 39%: la inercia ya no decide. Elegimos por negocio: umbral relativo a la rotación de cada SKU (lo pidió Comercial), sin discontinuados (en 2026 no hay) y un evento sobre el que se puede actuar.</p>',
- f"Comparamos cinco candidatos sobre las mismas {n(RS['filas'],0)} filas. Con 12 meses de historia el elegido era además el menos inercial (32,5% contra 42%); al incluir productos nuevos esa ventaja desaparece y lo decimos. El catálogo está congelado desde junio de 2025: en 2026 no hay discontinuados.", gap=32)
+ + f'<p style="font-size:24px; line-height:1.45; color:{BODY}; width:1664px"><b>Cómo leerlo:</b> «sigue igual» es una regla que dice «la posición va a estar como está hoy»; «casos nuevos» son los que esa regla no ve: 6 de cada 10 positivos hoy todavía no lo son, y ahí aporta el modelo. Como los cinco quedan entre 34% y 39%, elegimos por negocio: umbral relativo a la rotación de cada SKU (lo pidió Comercial), sin discontinuados (en 2026 no hay) y un evento sobre el que se puede actuar.</p>',
+ f"Comparamos cinco candidatos sobre las mismas {n(RS['filas'],0)} filas. Con 12 meses de historia el elegido era además el menos inercial (32,5% contra 42%); al incluir productos nuevos esa ventaja desaparece y lo decimos. El catálogo está congelado desde junio de 2025: en 2026 no hay discontinuados. María G. es la aprobadora formal del target: la cátedra pide validarlo antes de etiquetar.", gap=24)
 page("solidez", "Target · solidez", "Qué tan firme es cada decisión, dicho con honestidad",
  table(["Decisión", "En qué se apoya", "Solidez"], [
   ["Cobertura como métrica", "El negocio pidió un umbral relativo a la rotación de cada SKU", "Firme"],
@@ -260,9 +266,13 @@ page("solidez", "Target · solidez", "Qué tan firme es cada decisión, dicho co
  "No existe un umbral académico de cobertura para hogar y decoración: cada retailer lo calibra. Lo decimos así en vez de aparentar un estándar. Las débiles se validan con el negocio.", gap=32)
 page("prevalencia", "Target · estabilidad", "La prevalencia salta en 2026: la partición tiene que ser temporal",
  chart(IMG["prev"], "Porcentaje de positivos por mes de corte, coloreado por bloque de la partición",
-  "".join(stat(nm, f"t de {fm(SP_[k]['desde'])} a {fm(SP_[k]['hasta'])} · {n(SP_[k]['filas'],0)} filas · {n(SP_[k]['tasa'],2)}%") for nm, k in [("Train", "train"), ("Validación", "validacion"), ("Test", "test")])
-  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Entre bloques, 3 meses de embargo (igual al horizonte): ninguna etiqueta de train cae en el período de validación.</p>', 1100, 466),
- "Una partición aleatoria mezclaría meses y el modelo vería el futuro. El test en 2026 mide si el modelo resiste un cambio de régimen: es la prueba más exigente posible.")
+  "".join(stat(nm, f"{fm(SP_[k]['desde'])} a {fm(SP_[k]['hasta'])} · {n(SP_[k]['positivos'],0)} positivos en {n(SP_[k]['filas'],0)} filas") for nm, k in
+          [(f"Train · {n(SP_['train']['tasa'],2)}%", "train"), (f"Validación · {n(SP_['validacion']['tasa'],2)}%", "validacion"), (f"Test · {n(SP_['test']['tasa'],2)}%", "test")])
+  .replace("font-size:52px", "font-size:40px")
+  + f'<p style="font-size:22px; line-height:1.4; color:{MUT}">Entre bloques, 3 meses de embargo (igual al horizonte): ninguna etiqueta de train cae en el período de validación.</p>'
+  + f'<p style="font-size:22px; line-height:1.4; color:{INK}"><b>Clases desbalanceadas ({n(RS["prevalencia"],1)}% positivos):</b> se prioriza recall y el umbral del modelo se elige en validación según las 420-700 alertas por mes.</p>', 1000, 466).replace("gap:28px", "gap:20px", 1),
+ "Una partición aleatoria mezclaría meses y el modelo vería el futuro. El test en 2026 mide si el modelo resiste un cambio de régimen: es la prueba más exigente posible; sus métricas no se comparan con las de validación como si fueran el mismo problema. "
+ "Con 3,4% de positivos, un modelo que diga siempre «no» acierta el 96,6% y no sirve: por eso no se mira exactitud sino recall dentro de la capacidad de alertas.")
 
 # ================================================================= 5 DATASET
 divider("d-data", "PARTE 4", "El dataset de entrenamiento", "Qué información ve el modelo, qué variables entran, cuáles no y por qué.", "Dataset de entrenamiento: variables, exclusiones, leakage y transformaciones")
