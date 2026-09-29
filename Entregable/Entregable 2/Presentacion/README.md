@@ -11,7 +11,7 @@ Dos versiones para elegir; el contenido es el mismo, la corta es un subconjunto.
 
 **Cómo usar el HTML:** abrirlo en el navegador. Flechas, espacio o clic para avanzar · `F` pantalla completa · `N` muestra las notas del orador · `Ctrl+P` imprime a PDF (tamaño 1920×1080). Es un único archivo: las imágenes van embebidas. Las tipografías (DM Sans e IBM Plex Sans) se cargan de Google Fonts; sin internet se usa Arial.
 
-**Qué tiene la v3 corta** (en orden): portada · punto de partida · de dónde sale la caída de 2026 · posiciones sin venta y liquidaciones · mapa de calidad · por qué tratamos cada problema así · antes y después · la pregunta del target · por qué este target · prevalencia y partición · qué ve el modelo (leakage) · las variables elegidas · las excluidas · transformaciones · capacidad operativa · próximo paso.
+**Qué tiene la v3 corta** (en orden): portada · mapa de calidad · por qué tratamos cada problema así · antes y después · punto de partida · de dónde sale la caída de 2026 · posiciones sin venta y liquidaciones · la pregunta del target · por qué este target · prevalencia y partición · qué ve el modelo (leakage) · las variables elegidas · las excluidas · transformaciones · capacidad operativa · próximo paso.
 Quedan fuera: divisores de sección, EDA detallado (crecimiento, estacionalidad, caída 2026, cola de cobertura), detalle de los 12 hallazgos, supuesto de costo, ficha y solidez del target, ficha del dataset, mapa de riesgo, señal por variable, capital en riesgo y limitaciones. Para cambiar la selección: lista `CORTA` en `armar_html.py`.
 
 ## Cómo se genera

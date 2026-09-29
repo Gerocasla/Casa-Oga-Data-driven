@@ -13,7 +13,7 @@ import os, re, json, base64
 BASE = os.path.dirname(os.path.abspath(__file__))
 SL = os.path.join(BASE, "deck", "project", "slides")
 ORDEN = json.load(open(os.path.join(BASE, "deck", "project", "deck.json"), encoding="utf-8"))["order"]
-CORTA = ["portada", "partida", "catalogo", "sinventa", "mapa", "criterios", "antesdespues", "pregunta", "candidatos",
+CORTA = ["portada", "mapa", "criterios", "antesdespues", "partida", "catalogo", "sinventa", "pregunta", "candidatos",
          "prevalencia", "leakage", "grupos", "excluidas", "transformaciones", "capacidad", "proximo"]
 
 # /_blob/<id> -> archivo local (mismos ids que devolvio la subida de assets)
