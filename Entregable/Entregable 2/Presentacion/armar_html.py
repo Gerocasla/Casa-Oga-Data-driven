@@ -5,7 +5,7 @@ Lee las diapositivas que genera generar_deck.py (deck/project/slides/*.html).
 
 Salidas en esta carpeta:
   Casa-Oga-Entregable-2-v4-completa.html  (36 diapositivas)
-  Casa-Oga-Entregable-2-v4-corta.html     (17 diapositivas)
+  Casa-Oga-Entregable-2-v4-corta.html     (16 diapositivas)
 Navegacion: flechas / espacio / clic · F pantalla completa · N notas del orador.
 """
 import os, re, json, base64
@@ -13,7 +13,7 @@ import os, re, json, base64
 BASE = os.path.dirname(os.path.abspath(__file__))
 SL = os.path.join(BASE, "deck", "project", "slides")
 ORDEN = json.load(open(os.path.join(BASE, "deck", "project", "deck.json"), encoding="utf-8"))["order"]
-CORTA = ["portada", "partida", "catalogo", "cola", "sinventa", "mapa", "criterios", "antesdespues", "pregunta", "candidatos",
+CORTA = ["portada", "partida", "catalogo", "sinventa", "mapa", "criterios", "antesdespues", "pregunta", "candidatos",
          "prevalencia", "leakage", "grupos", "excluidas", "transformaciones", "capacidad", "proximo"]
 
 # /_blob/<id> -> archivo local (mismos ids que devolvio la subida de assets)
