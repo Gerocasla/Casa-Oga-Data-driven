@@ -118,12 +118,11 @@ page("caida", "EDA · 2026", "2026: la venta cae y el stock no acompaña",
   + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Comparación en bruto: 2026 no trae devoluciones registradas, netear solo 2025 la sesgaría.</p>'),
  "Primer año de caída después de tres de crecimiento. Todavía no figura en ningún documento anterior y explica buena parte de lo que pasa con el target.")
 al = C26["altas_por_anio"]
-page("catalogo", "EDA · 2026 · de dónde sale la caída", "Dos tercios de la caída vienen de productos que ya no están",
+page("catalogo", "EDA · 2026 · de dónde sale la caída", "Dos tercios de la caída son productos dados de baja a fin de 2025",
  chart(IMG["catalogo"], "Variación mensual de la venta 2026 contra 2025: total y solo los SKUs que siguen vendiendo",
-  stat("2 de cada 3", f"pesos de la caída ene-ago (${n(C26['baja_M'],0)} M de ${n(C26['gap_M'],0)} M) son los {C26['skus_baja']} SKUs discontinuados a fin de 2025: {n(C26['baja_pp'])} de los {n(-C26['var_total'])} puntos")
-  + stat(f"{n(C26['var_sigue'])}%", f"en los {C26['skus_sigue']} SKUs que siguen: de {n(C26['var_sigue_mes'][0],0)}% en enero a {n(C26['var_sigue_mes'][-1],0)}% en agosto")
-  + stat("0 altas", f"ningún SKU nuevo desde {fm(datetime.date.fromisoformat(C26['ultima_alta']).strftime('%b-%y'))} (entre {min(al.values())} y {max(al.values())} por año hasta 2025)")
-  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">El target excluye los discontinuados: la caída que ve el modelo es la línea azul.</p>'),
+  stat("0 altas", f"ningún SKU nuevo desde {fm(datetime.date.fromisoformat(C26['ultima_alta']).strftime('%b-%y'))} (entre {min(al.values())} y {max(al.values())} por año hasta 2025)")
+  + stat("2 de cada 3", f"pesos de la caída ene-ago (${n(C26['baja_M'],0)} M de ${n(C26['gap_M'],0)} M) son los {C26['skus_baja']} SKUs discontinuados a fin de 2025: {n(C26['baja_pp'])} de los {n(-C26['var_total'])} puntos")
+  + stat(f"{n(C26['var_sigue'])}%", f"en los {C26['skus_sigue']} SKUs que siguen: de {n(C26['var_sigue_mes'][0],0)}% en enero a {n(C26['var_sigue_mes'][-1],0)}% en agosto")),
  "El negocio creció sumando productos. A fin de 2025 dio de baja 96 y en 2026 no sumó ninguno: la caída es de surtido, no de demanda general. "
  "En los productos que siguen, la venta ya volvió casi al nivel de 2025. Esto matiza la diapositiva anterior.")
 rm = I["rojo_mes"]; r0 = rm["meses"].index("2025-12"); cp = I["cobertura_pct"]; i0 = cp["meses"].index("2025-12")
