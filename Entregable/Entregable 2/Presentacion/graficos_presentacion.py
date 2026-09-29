@@ -126,3 +126,63 @@ ax.barh(cats, val, color=BLUE)
 for i, (v_, p_) in enumerate(zip(val, pc)): ax.text(v_ + .6, i, f"${v_:.1f} M · {p_:.1f}% del stock".replace(".", ","), va="center", fontsize=17, color=MUT)
 ax.set_xlim(0, max(val) * 1.55); ax.set_xlabel("$ M a costo, ago-2026")
 save(fig, "c10_capital_rojo.png")
+
+# 11-12 que cambia en 2026 (catalogo y posiciones sin venta). Bruto: 2026 no trae devoluciones.
+b = pos.copy(); b["fecha_mes"] = pd.to_datetime(b.fecha_mes); b["y"] = b.fecha_mes.dt.year; b["m"] = b.fecha_mes.dt.month
+wb = b[(b.m <= 8) & b.y.isin([2025, 2026])]
+act = set(wb[(wb.y == 2026) & (wb.unidades_vendidas > 0)].id_producto)   # SKUs que siguen vendiendo en 2026
+cat = pd.read_csv(os.path.join(D, "Productos_catalogo.csv")).drop_duplicates("id_producto")
+alta = b[b.unidades_vendidas > 0].groupby("id_producto").fecha_mes.min()
+tot = wb.groupby(["m", "y"]).venta_neta.sum().unstack(); sig = wb[wb.id_producto.isin(act)].groupby(["m", "y"]).venta_neta.sum().unstack()
+T = tot.sum(); Sg = sig.sum(); baja = T[2025] - Sg[2025]
+s["fecha_mes"] = pd.to_datetime(s.fecha_mes); costo = cat.set_index("id_producto").costo_unitario
+def sin_venta(fin):   # posiciones de SKUs activos con stock y ninguna unidad vendida en los ultimos 3 meses
+    st_ = s[(s.fecha_mes == fin) & s.id_producto.isin(act) & (s.stock_disponible > 0)].set_index(["id_tienda", "id_producto"]).stock_disponible
+    u3 = b[(b.fecha_mes > fin - pd.DateOffset(months=3)) & (b.fecha_mes <= fin)].groupby(["id_tienda", "id_producto"]).unidades_vendidas.sum()
+    d = st_[u3.reindex(st_.index).fillna(0) <= 0]
+    return d, (d * d.index.get_level_values(1).map(costo)).sum() / 1e6
+meses_sv = pd.date_range("2024-03-01", b.fecha_mes.max(), freq="MS"); nsv = [len(sin_venta(f)[0]) for f in meses_sv]
+d_dic, k_dic = sin_venta(pd.Timestamp("2025-12-01")); d_fin, k_fin = sin_venta(meses_sv[-1])
+lq = pd.read_csv(os.path.join(D, "Liquidaciones.csv")); lq["f"] = pd.to_datetime(lq.fecha_inicio); lq8 = lq[lq.f.dt.month <= 8]
+liq = lq8.groupby(lq8.f.dt.year).size(); liq_sob = lq8[lq8.motivo == "Sobrestock"].groupby(lq8.f.dt.year).size()
+l26 = pd.MultiIndex.from_frame(lq[lq.f.dt.year == 2026][["tienda", "id_producto"]])
+oc = pd.read_csv(os.path.join(D, "Ordenes_Compra.csv")); oc["f"] = pd.to_datetime(oc.fecha_pedido)
+oc7 = oc[(oc.f.dt.month <= 7) & oc.id_producto.isin(act)].groupby(oc.f.dt.year).unidades.sum()
+C26 = {"var_total": (T[2026] / T[2025] - 1) * 100, "var_sigue": (Sg[2026] / Sg[2025] - 1) * 100,
+       "var_sigue_mes": ((sig[2026] / sig[2025] - 1) * 100).tolist(), "var_total_mes": ((tot[2026] / tot[2025] - 1) * 100).tolist(),
+       "gap_M": (T[2025] - T[2026]) / 1e6, "baja_M": baja / 1e6, "baja_pp": baja / T[2025] * 100,
+       "skus_baja": len(set(wb[(wb.y == 2025) & (wb.unidades_vendidas > 0)].id_producto) - act), "skus_sigue": len(act),
+       "baja_discontinuados": int(cat[cat.id_producto.isin(set(wb[wb.y == 2025].id_producto) - act)].estado.eq("Discontinuado").sum()),
+       "altas_por_anio": alta.dt.year.value_counts().sort_index().to_dict(), "ultima_alta": str(alta.max().date()),
+       "sin_venta_dic25": len(d_dic), "sin_venta_fin": len(d_fin), "capital_dic25": k_dic, "capital_fin": k_fin,
+       "sin_venta_mes": dict(zip([str(f.date())[:7] for f in meses_sv], nsv)),
+       "liq": liq.to_dict(), "liq_sobrestock": liq_sob.to_dict(), "sin_venta_liquidadas_2026": int(d_fin.index.isin(l26).sum()),
+       "oc_activos_ene_jul": oc7.to_dict()}
+C26 = json.loads(json.dumps(C26, default=lambda o: o.item() if hasattr(o, "item") else str(o)))
+json.dump(C26, open(os.path.join(E2, "EDA", "resultados", "cambio_2026.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+print({k: v for k, v in C26.items() if not isinstance(v, (list, dict))})
+
+fig, ax = plt.subplots(figsize=(16, 7.4)); x = np.arange(1, 9)
+ax.axhline(0, color=INK, lw=1.2)
+ax.plot(x, C26["var_total_mes"], color=GREY, lw=3.5, marker="o", ms=9, label="Venta total")
+ax.plot(x, C26["var_sigue_mes"], color=BLUE, lw=4, marker="o", ms=9, label=f"Solo los {len(act)} SKUs que siguen")
+ax.fill_between(x, C26["var_total_mes"], C26["var_sigue_mes"], color=GREY, alpha=.15, lw=0)
+ax.text(2.1, (C26["var_total_mes"][1] + C26["var_sigue_mes"][1]) / 2, "SKUs dados de\nbaja a fin de 2025", color=MUT, fontsize=18, va="center")
+for i in (0, 7):
+    for serie, c in (("var_total_mes", GREY), ("var_sigue_mes", BLUE)):
+        ax.text(x[i] + (.12 if i else -.12), C26[serie][i], f"{C26[serie][i]:+.0f}%".replace("-", "−"), color=c, fontsize=19, fontweight="bold",
+                ha="left" if i else "right", va="center")
+ax.set_xticks(x, ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago"]); ax.set_xlim(.4, 8.7)
+ax.set_ylabel("variación contra el mismo mes de 2025 (%)"); ax.set_ylim(-24, 4); ax.legend(loc="lower right")
+save(fig, "c11_caida_catalogo.png")
+
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(16, 7.4), gridspec_kw={"width_ratios": [2.3, 1]})
+a1.plot(meses_sv, nsv, color=ORANGE, lw=4); a1.axvspan(pd.Timestamp("2026-01-01"), meses_sv[-1] + pd.DateOffset(days=30), color=GOLD, alpha=.14, lw=0)
+a1.set_ylim(0, max(nsv) * 1.15); a1.set_title("Posiciones con stock y sin venta en 3 meses", fontsize=20, color=INK, loc="left")
+a1.set_xticks(pd.to_datetime(["2024-07-01", "2025-01-01", "2025-07-01", "2026-01-01", "2026-07-01"]), ["jul-24", "ene-25", "jul-25", "ene-26", "jul-26"])
+yy = [2024, 2025, 2026]; lv = [C26["liq"].get(str(y_), 0) for y_ in yy]
+a2.bar(range(3), lv, color=[GREY, GREY, BLUE], width=.65)
+for i, v_ in enumerate(lv): a2.text(i, v_ + 3, str(v_), ha="center", fontsize=20, color=INK, fontweight="bold")
+a2.set_xticks(range(3), [str(y_) for y_ in yy]); a2.set_yticks([]); a2.spines["left"].set_visible(False); a2.grid(False)
+a2.set_ylim(0, max(lv) * 1.2); a2.set_title("Liquidaciones ene-ago", fontsize=20, color=INK, loc="left")
+save(fig, "c12_sin_venta_liquidaciones.png")

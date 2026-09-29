@@ -2,7 +2,7 @@
  "v": 4,
  "createdOnFiles": {
   "v": 1,
-  "at": "2026-09-28T19:22:01Z"
+  "at": "2026-09-29T03:24:15Z"
  },
  "title": "Casa Óga · Entregable 2",
  "order": [
@@ -13,7 +13,9 @@
   "crecimiento",
   "tp1",
   "caida",
+  "catalogo",
   "cola",
+  "sinventa",
   "d-cal",
   "mapa",
   "hallazgos1",

@@ -4,8 +4,8 @@ Arma la presentacion como UN solo archivo HTML autocontenido (imagenes embebidas
 Lee las diapositivas que genera generar_deck.py (deck/project/slides/*.html).
 
 Salidas en esta carpeta:
-  Casa-Oga-Entregable-2-v3-completa.html  (34 diapositivas)
-  Casa-Oga-Entregable-2-v3-corta.html     (15 diapositivas)
+  Casa-Oga-Entregable-2-v4-completa.html  (36 diapositivas)
+  Casa-Oga-Entregable-2-v4-corta.html     (17 diapositivas)
 Navegacion: flechas / espacio / clic · F pantalla completa · N notas del orador.
 """
 import os, re, json, base64
@@ -13,7 +13,7 @@ import os, re, json, base64
 BASE = os.path.dirname(os.path.abspath(__file__))
 SL = os.path.join(BASE, "deck", "project", "slides")
 ORDEN = json.load(open(os.path.join(BASE, "deck", "project", "deck.json"), encoding="utf-8"))["order"]
-CORTA = ["portada", "partida", "cola", "mapa", "criterios", "antesdespues", "pregunta", "candidatos",
+CORTA = ["portada", "partida", "catalogo", "cola", "sinventa", "mapa", "criterios", "antesdespues", "pregunta", "candidatos",
          "prevalencia", "leakage", "grupos", "excluidas", "transformaciones", "capacidad", "proximo"]
 
 # /_blob/<id> -> archivo local (mismos ids que devolvio la subida de assets)
@@ -21,7 +21,8 @@ BLOBS = {"3c2223f1d1c6339c830ee806884f8f61": "c01_venta_mensual.png", "43c698158
          "b86da51072ea5789fd601d99c350ca93": "c03_cobertura_def.png", "b58994c3ddc7a35522592cd3d9b3ddac": "c04_venta_2526.png",
          "d8a92d1eff15dc35bd290d5587c533b5": "c05_cola_cobertura.png", "7905fa8d85c212d9ad87118976873099": "c06_prevalencia.png",
          "19331e5df80e782e71bbf913d9c492d9": "c07_capacidad.png", "2d7fd4a01dc83c89b21d974d6364c15d": "c08_senal.png",
-         "bdc99ef4d31e9129611313178b39539e": "c09_antes_despues.png", "e786bd0172083880f96c23d1f3375cf5": "c10_capital_rojo.png"}
+         "bdc99ef4d31e9129611313178b39539e": "c09_antes_despues.png", "e786bd0172083880f96c23d1f3375cf5": "c10_capital_rojo.png",
+         "a1c11e0000000000000000000000c011": "c11_caida_catalogo.png", "a1c12e0000000000000000000000c012": "c12_sin_venta_liquidaciones.png"}
 DATA = {k: "data:image/png;base64," + base64.b64encode(open(os.path.join(BASE, "img", v), "rb").read()).decode()
         for k, v in BLOBS.items()}
 
@@ -83,5 +84,5 @@ def armar(ids, titulo, archivo):
     open(os.path.join(BASE, archivo), "w", encoding="utf-8").write(out)
     print(f"{archivo}: {len(ids)} diapositivas · {os.path.getsize(os.path.join(BASE, archivo))/1e6:.1f} MB")
 
-armar(ORDEN, "Casa Óga · Entregable 2 · versión completa", "Casa-Oga-Entregable-2-v3-completa.html")
-armar(CORTA, "Casa Óga · Entregable 2 · versión corta", "Casa-Oga-Entregable-2-v3-corta.html")
+armar(ORDEN, "Casa Óga · Entregable 2 · versión completa", "Casa-Oga-Entregable-2-v4-completa.html")
+armar(CORTA, "Casa Óga · Entregable 2 · versión corta", "Casa-Oga-Entregable-2-v4-corta.html")

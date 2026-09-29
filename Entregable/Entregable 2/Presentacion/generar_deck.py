@@ -4,11 +4,13 @@ import os, json, datetime
 BASE = os.path.dirname(os.path.abspath(__file__)); E2 = os.path.dirname(BASE)
 OUT = os.path.join(BASE, "deck", "project"); os.makedirs(os.path.join(OUT, "slides"), exist_ok=True)
 I = json.load(open(os.path.join(E2, "Modelo", "resultados", "insights.json"), encoding="utf-8"))
+C26 = json.load(open(os.path.join(E2, "EDA", "resultados", "cambio_2026.json"), encoding="utf-8"))   # graficos_presentacion.py
 IMG = {"venta": "/_blob/3c2223f1d1c6339c830ee806884f8f61", "estac": "/_blob/43c6981580a79beb1efb8097927605a1",
        "cobdef": "/_blob/b86da51072ea5789fd601d99c350ca93", "v2526": "/_blob/b58994c3ddc7a35522592cd3d9b3ddac",
        "cola": "/_blob/d8a92d1eff15dc35bd290d5587c533b5", "prev": "/_blob/7905fa8d85c212d9ad87118976873099",
        "cap": "/_blob/19331e5df80e782e71bbf913d9c492d9", "senal": "/_blob/2d7fd4a01dc83c89b21d974d6364c15d",
-       "ad": "/_blob/bdc99ef4d31e9129611313178b39539e", "caprojo": "/_blob/e786bd0172083880f96c23d1f3375cf5"}
+       "ad": "/_blob/bdc99ef4d31e9129611313178b39539e", "caprojo": "/_blob/e786bd0172083880f96c23d1f3375cf5",
+       "catalogo": "/_blob/a1c11e0000000000000000000000c011", "sinventa": "/_blob/a1c12e0000000000000000000000c012"}
 
 DARK, LIGHT, ALT, INK, BODY, MUT = "#14213D", "#FBFBF8", "#F1F2F6", "#14213D", "#3D4656", "#5B6475"
 BLUE, ORANGE, GOLD, LINE = "#2F5E96", "#C4470A", "#F5B800", "#D9DDE4"
@@ -115,14 +117,34 @@ page("caida", "EDA · 2026", "2026: la venta cae y el stock no acompaña",
   + stat(f"{n(min(dv)*100,0)}% → {n(max(dv)*100,0)}%", "la caída es de nivel: arranca fuerte en enero y se achica mes a mes")
   + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Comparación en bruto: 2026 no trae devoluciones registradas, netear solo 2025 la sesgaría.</p>'),
  "Primer año de caída después de tres de crecimiento. Todavía no figura en ningún documento anterior y explica buena parte de lo que pasa con el target.")
+al = C26["altas_por_anio"]
+page("catalogo", "EDA · 2026 · de dónde sale la caída", "Dos tercios de la caída vienen de productos que ya no están",
+ chart(IMG["catalogo"], "Variación mensual de la venta 2026 contra 2025: total y solo los SKUs que siguen vendiendo",
+  stat("2 de cada 3", f"pesos de la caída ene-ago (${n(C26['baja_M'],0)} M de ${n(C26['gap_M'],0)} M) son los {C26['skus_baja']} SKUs discontinuados a fin de 2025: {n(C26['baja_pp'])} de los {n(-C26['var_total'])} puntos")
+  + stat(f"{n(C26['var_sigue'])}%", f"en los {C26['skus_sigue']} SKUs que siguen: de {n(C26['var_sigue_mes'][0],0)}% en enero a {n(C26['var_sigue_mes'][-1],0)}% en agosto")
+  + stat("0 altas", f"ningún SKU nuevo desde {fm(datetime.date.fromisoformat(C26['ultima_alta']).strftime('%b-%y'))} (entre {min(al.values())} y {max(al.values())} por año hasta 2025)")
+  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">El target excluye los discontinuados: la caída que ve el modelo es la línea azul.</p>'),
+ "El negocio creció sumando productos. A fin de 2025 dio de baja 96 y en 2026 no sumó ninguno: la caída es de surtido, no de demanda general. "
+ "En los productos que siguen, la venta ya volvió casi al nivel de 2025. Esto matiza la diapositiva anterior.")
 rm = I["rojo_mes"]; r0 = rm["meses"].index("2025-12"); cp = I["cobertura_pct"]; i0 = cp["meses"].index("2025-12")
 page("cola", "EDA · cobertura por posición", "El promedio esconde el problema: la cola se engorda",
  chart(IMG["cola"], "Percentiles 50, 90 y 99 de la cobertura por posición, 2023 a 2026",
   stat(f"{n(cp['p50'][-1])} meses", "mediana de cobertura: no se mueve en todo el período")
   + stat(f"{n(cp['p99'][i0],0)} → {n(cp['p99'][-1],0)}", "meses en el percentil 99 entre dic-25 y ago-26")
   + stat(f"{n(rm['posiciones'][r0],0)} → {n(rm['posiciones'][-1],0)}", f"posiciones con más de 12 meses de stock; ${n(rm['capital'][-1])} M a costo en ago-26")
-  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}"><b>Por qué:</b> en 2026 la venta cae 13,2% contra 2025 y el stock no se ajusta. Las posiciones que ya rotaban poco acumulan meses de stock.</p>'),
+  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}"><b>Por qué:</b> no es la caída general (dos tercios son SKUs dados de baja, fuera del target). Es un grupo de posiciones que dejó de vender a comienzos de 2026 y no se liquidó.</p>'),
  "Si miráramos el promedio diríamos que no pasa nada. El riesgo está en pocas posiciones que acumulan años de stock. Eso es lo que el target tiene que capturar.")
+
+lq_, ls_, oc_ = C26["liq"], C26["liq_sobrestock"], C26["oc_activos_ene_jul"]
+page("sinventa", "EDA · 2026 · qué cambió en la operación", "Las posiciones sin venta crecen 2,5 veces en un trimestre y casi no se liquidan",
+ chart(IMG["sinventa"], "Posiciones con stock y sin venta en 3 meses por mes, 2024 a 2026, y liquidaciones de enero a agosto por año",
+  stat(f"{C26['sin_venta_dic25']} → {C26['sin_venta_fin']}", f"posiciones activas con stock y sin ninguna venta en 3 meses (dic-25 → ago-26); ${n(C26['capital_dic25'])} M → ${n(C26['capital_fin'])} M a costo")
+  + stat(f"{n((lq_['2026']/lq_['2025']-1)*100,0)}%", f"liquidaciones ene-ago contra 2025 ({lq_['2025']} → {lq_['2026']}); por sobrestock, {ls_['2025']} → {ls_['2026']}")
+  + stat(f"{C26['sin_venta_liquidadas_2026']} de {C26['sin_venta_fin']}", "posiciones sin venta tuvieron alguna liquidación en 2026")
+  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Las compras de estos SKUs no se movieron: {n((oc_["2026"]/oc_["2025"]-1)*100)}% en unidades ene-jul.</p>'),
+ "Es un salto, no una deriva: pasa entre enero y marzo de 2026 y después se estabiliza. Al mismo tiempo, la palanca que vacía estas posiciones se usa la mitad. "
+ "Explica buena parte del 9% de prevalencia de 2026. Para el modelo, el test 2026 viene de una operación distinta: hay que vigilarlo como cambio de régimen. "
+ "Pregunta para el negocio: ¿por qué bajaron las liquidaciones en 2026?")
 
 # ================================================================= 3 CALIDAD
 divider("d-cal", "PARTE 2", "Calidad y limpieza", "Qué está mal, cómo lo tratamos, por qué, y cuánto cambia el resultado al corregir.", "Calidad: hallazgos, criterios de limpieza y su impacto")

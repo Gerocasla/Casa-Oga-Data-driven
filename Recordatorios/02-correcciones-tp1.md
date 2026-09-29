@@ -80,7 +80,7 @@ No estaban en nuestro feedback, pero la cátedra las pone en el checklist de la 
 
 ### Problem Statement (refuerza #1 y #2)
 - Orden **de afuera hacia adentro**: impacto de negocio → síntoma operativo → causa técnica.
-- Traer la cifra más reciente y directa: **la venta cae 13,2% en ene-ago 2026** contra el mismo período de 2025 (todavía no figura en ningún documento).
+- Traer la cifra más reciente y directa: **la venta cae 13,2% en ene-ago 2026** contra el mismo período de 2025 (todavía no figura en ningún documento). Aclarar que 2 de cada 3 pesos de esa caída son SKUs discontinuados a fin de 2025; los que siguen caen 4,8%.
 
 ---
 

@@ -122,6 +122,13 @@
 - Correcciones visuales: el mapa de calidad pisaba el pie de página; el gráfico antes/después decía +1,6 pp y el texto +1,5 pp (quedó 1,5 en todos lados).
 - Se agregó un `README.md` en la raíz y en `Presentacion/`; se actualizaron todos los `.md` del repo y se marcaron como históricos los del TP1 (`Cambios/`, `HALLAZGOS_EDA.md`).
 
+### 29-09 · Qué cambia en 2026: dos diapositivas nuevas (presentación v4)
+- Pedido: sumar al contexto de la presentación solo lo que los datos 2026 agregan o cambian.
+- **La caída es de catálogo, no de demanda general:** 2 de cada 3 pesos de la caída ene-ago ($815 M de $1.213 M, 8,9 de 13,2 pp) son los 96 SKUs discontinuados a fin de 2025. No hay altas desde jul-2025 (antes 138-235 por año). Los 634 SKUs que siguen: −4,8%, de −9% en enero a −1% en agosto.
+- **Posiciones sin venta y liquidaciones:** las posiciones activas con stock y sin venta en 3 meses pasan de 365 (dic-25) a 929 (ago-26), con el salto en ene-mar; $33,3 M → $111,8 M a costo. Liquidaciones ene-ago −51% (175 → 85; sobrestock 37 → 8); solo 4 de las 929 posiciones se liquidaron en 2026. Compras de esos SKUs sin cambio (−1,2% ene-jul).
+- Se corrigió la explicación vieja («la venta cae y el stock no acompaña») en la diapositiva de la cola y en el fundamento G4 de la Parte A.
+- Presentación **v4** (completa 36, **corta 17**; la corta es la que se usa). Script: `graficos_presentacion.py` (c11, c12 y `EDA/resultados/cambio_2026.json`).
+
 ---
 
 ## 4. Números de referencia vigentes
@@ -169,7 +176,7 @@
 
 ## 6. Hallazgos que conviene tener presentes en los próximos entregables
 
-1. **La venta cae 13,2% en 2026** después de tres años de crecimiento. Todavía no figura en ningún documento. Además explica la inestabilidad del target: si cae la venta y el stock no acompaña, la cobertura sube y más posiciones cruzan los 12 meses.
+1. **La venta cae 13,2% en 2026** después de tres años de crecimiento, pero 8,9 pp son los 96 SKUs discontinuados a fin de 2025 (fuera del target). Lo que mueve el target en 2026 es otra cosa: las posiciones sin venta se multiplican por 2,5 en ene-mar y las liquidaciones caen a la mitad.
 2. **El dead stock es un problema de producto y de compra, no de tienda.** Las diferencias entre tiendas no son estadísticamente significativas.
 3. **No hay estacionalidad** una vez descontado el crecimiento, aunque el negocio la percibe.
 4. **La cobertura está estable**, no "mejoró de 10,6 a 5,2" (eso era un efecto de cálculo del TP1).
@@ -182,8 +189,8 @@
 
 **Entregable 2**
 - [ ] Carátulas de Parte A y B (legajos de Simón y Santiago, roles, fecha).
-- [ ] Elegir versión de la presentación (v1 completa o v2 corta).
-- [ ] Commit y push de todo lo del 28-09 (no está en el repo todavía).
+- [x] Versión de la presentación: **la corta** (hoy v4, 17 diapositivas).
+- [x] Commit y push de lo del 28-09.
 - [x] Presentación en un archivo, dos versiones (28-09).
 - [x] Parte B **1.3**: dashboard antes/después (28-09).
 - [x] Parte B **Sección 2**: 2.1 y 2.2 (28-09).
@@ -197,6 +204,7 @@
 
 **Con el negocio**
 - [ ] Nunca preguntado: **H3** ventas antes de la apertura · **H6** qué incluye el stock en tránsito · **H12** extensión a 2026 de Devoluciones, Calendario y Catálogo.
+- [ ] Nueva: ¿por qué bajaron las liquidaciones en 2026 (−51% ene-ago) si las posiciones sin venta se multiplicaron por 2,5?
 - [ ] Sin respuesta: **H7** liquidaciones por discontinuación sobre SKUs activos y tienda "Todas" · **H10** promociones duplicadas y con fechas invertidas · cumplimiento presupuestario uniforme (~91%).
 - [ ] Aprobación del target, los cortes y las acciones por banda (María G.); visto bueno de Carlos F.; confirmación de la capacidad de 15-25 intervenciones por tienda (Lucía O.).
 

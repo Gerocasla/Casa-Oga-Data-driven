@@ -22,7 +22,7 @@
 ## Cifras de referencia
 
 **Vigentes (Entregable 2, corte ago-2026, datos limpios):**
-- Venta ene-2022 a ago-2026: **$40.083,4 M** · 925.015 unidades (devoluciones neteadas). 2026 vs 2025 (ene-ago, bruto): **−13,2%**.
+- Venta ene-2022 a ago-2026: **$40.083,4 M** · 925.015 unidades (devoluciones neteadas). 2026 vs 2025 (ene-ago, bruto): **−13,2%**; 8,9 pp son los 96 SKUs discontinuados a fin de 2025 (sin altas desde jul-2025). Los 634 SKUs que siguen: −4,8%.
 - Cobertura: mediana ~5 meses estable; percentil 99 de **16 a 48 meses** entre dic-25 y ago-26.
 - Posiciones con cobertura > 12 meses a ago-26: **882 · $184,1 M a costo** · 363 SKUs · ~$9,2 M/mes al 5%.
 - Target: **3,40%** de positivos (6.853 / 201.306, dataset v3); 2,5% hasta 2025 y 9% en 2026.

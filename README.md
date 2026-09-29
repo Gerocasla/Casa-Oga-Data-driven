@@ -17,7 +17,7 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 | **2 · Parte A** · EDA y evaluación de calidad | ✅ Completa, corte ago-2026 | `Entregable/Entregable 2/Entregable 2 - Parte A - COMPLETADO.docx` |
 | **2 · Parte B** · Plan de mejora, dashboard antes/después, dataset de entrenamiento | ✅ Completa | `Entregable/Entregable 2/Entregable 2 - Parte B - COMPLETADO.docx` |
 | **2 · Dashboard** | ✅ 5 pestañas | `Entregable/Entregable 2/Dashboard-Calidad-Antes-Despues.html` |
-| **2 · Presentación** | ✅ Dos versiones para elegir | `Entregable/Entregable 2/Presentacion/Casa-Oga-Entregable-2-v1-completa.{html,pdf}` (34) · `…-v2-corta.{html,pdf}` (14) |
+| **2 · Presentación** | ✅ Se usa la **corta** | `Entregable/Entregable 2/Presentacion/Casa-Oga-Entregable-2-v4-corta.{html,pdf}` (17) · respaldo `…-v4-completa.{html,pdf}` (36) |
 | **3** · Modelado | Próximo | Parte de `Datasets_Modelo/dataset_entrenamiento_v3.parquet` |
 
 **Falta para entregar el 2:** carátulas de Parte A y B (legajos de Simón y Santiago, roles, fecha) y elegir la versión de la presentación.
