@@ -86,14 +86,16 @@ page("recorrido", "Recorrido", "Cuatro preguntas, en este orden",
  + card("4 · ¿Con qué datos?", f"El dataset de entrenamiento: {RS['n_num']+RS['n_cat']} variables sin leakage, las que quedaron afuera y por qué, y si tiene señal.")
  + '</div>', "Estructura: diagnóstico, limpieza, target y dataset. Todo lo que mostramos se reproduce con los scripts del repo.")
 
-page("partida", "Punto de partida", "15 fuentes, 56 meses, una segunda entrega de datos",
- '<div style="display:flex; gap:48px">' + stat("15", "fuentes: ventas, stock, catálogo, OC, transferencias, liquidaciones, promociones, presupuesto y más")
- + stat("299.400", "filas en Ventas y en Stock, a nivel mes · tienda · SKU") + stat("56 meses", "de ene-2022 a ago-2026") + stat("800 × 28", "SKUs por tiendas") + '</div>'
- + f'<div style="background:{ALT}; border-radius:16px; padding:36px 40px; display:flex; flex-direction:column; gap:12px">'
- f'<h3 style="{HF}; font-size:34px; font-weight:700">2026 llegó después: verificamos que no rompiera lo anterior</h3>'
- f'<p style="font-size:28px; line-height:1.45; color:{BODY}">Son los mismos archivos con 8 meses más. El tramo 2022-2025 quedó idéntico: mismas filas y mismos totales ($32.538,4 M y 750.538 unidades). '
- 'El diagnóstico histórico sigue vigente y todo se recalculó al nuevo corte. Tres fuentes no acompañan: Devoluciones, Calendario y el catálogo.</p></div>',
- "Antes de analizar, chequeamos que la segunda entrega no cambiara el histórico. No lo cambió. El problema es que tres fuentes quedaron cortadas en 2025.")
+page("partida", "Punto de partida", "15 fuentes y 56 meses de datos",
+ '<div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:48px">'
+ + stat("15", "fuentes: ventas, stock, catálogo, OC, promociones y más")
+ + stat("299.400", "filas mes · tienda · SKU en Ventas y en Stock") + stat("56", 'meses, de <span style="white-space:nowrap">ene-2022</span> a <span style="white-space:nowrap">ago-2026</span>') + stat("800 × 28", "SKUs × tiendas") + '</div>'
+ + f'<div style="background:{ALT}; border-radius:16px; padding:36px 40px; display:flex; gap:48px; align-items:center">'
+ f'<p style="{HF}; font-size:96px; font-weight:700; line-height:1; color:{ORANGE}">−13,2%</p>'
+ f'<div style="display:flex; flex-direction:column; gap:12px"><h3 style="{HF}; font-size:34px; font-weight:700">2026: la venta cae por primera vez</h3>'
+ f'<p style="font-size:28px; line-height:1.45; color:{BODY}">Ene-ago 2026 contra el mismo período de 2025, después de tres años de crecimiento. '
+ 'Los 8 meses nuevos no alteraron el histórico 2022-2025: mismas filas y mismos totales.</p></div></div>',
+ "Los datos de 2026 llegaron después; verificamos que no cambiaran el histórico. El dato nuevo es la caída de la venta: en la próxima diapositiva, de dónde sale.")
 
 # ================================================================= 2 EDA
 divider("d-eda", "PARTE 1", "Qué dicen los datos", "EDA al corte ago-2026: crecimiento, estacionalidad, cobertura y el cambio de 2026.", "EDA: qué se confirma, qué no y qué cambió en 2026")
