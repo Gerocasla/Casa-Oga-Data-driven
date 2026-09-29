@@ -194,14 +194,14 @@ page("hallazgos2", "Calidad · hallazgos 7 a 12", "Doce hallazgos, cada uno con 
 page("criterios", "Calidad · decisiones", "Por qué tratamos cada problema así",
  table(["Problema", "Qué hicimos", "Por qué"], [
   ["Claves duplicadas", "Conservar la 1ra ocurrencia", "Con cualquier otro criterio los totales no cierran"],
-  ["Stock negativo", "Llevar a 0", "Error de sincronización confirmado (P14-P16)"],
-  ["Venta negativa", "Netear con la venta del mes", "Son devoluciones reales, no ritmo de venta (P23)"],
-  ["Descuentos > 100% o < 0%", "Excluir del margen", "Error de carga, sin acción comercial detrás (P24-P28)"],
-  ["Presupuesto en 0 o negativo", "Excluir del desvío", "Proceso inmaduro en 2022 y error de carga (P29-P32)"],
-  ["Historial de precios", "No usarlo", "Es una reconstrucción, no un registro (P9-P10)"],
+  ["Stock negativo", "Llevar a 0", "Error de sincronización confirmado"],
+  ["Venta negativa", "Netear con la venta del mes", "Son devoluciones reales, no ritmo de venta"],
+  ["Descuentos > 100% o < 0%", "Excluir del margen", "Error de carga, sin acción comercial detrás"],
+  ["Presupuesto en 0 o negativo", "Excluir del desvío", "Proceso inmaduro en 2022 y error de carga"],
+  ["Historial de precios", "No usarlo", "Es una reconstrucción, no un registro"],
   ["Comparar entre años", "En unidades, sin deflactar", "La venta ya está a precio actual: IPC corregiría dos veces"],
-  ["22 SKUs sin costo", "Costo de OC × 1,2321", "Supuesto sugerido por el negocio y declarado (P3-P7)"]], [26, 30, 44]),
- "Casi todo sigue el default que propuso el negocio en la ronda 2. La única excepción es P13: sugería deflactar por IPC y no lo hicimos porque la venta ya está valuada al precio actual; lo justificamos por escrito.", gap=32)
+  ["22 SKUs sin costo", "Costo de OC × 1,2321", "Supuesto sugerido por el negocio y declarado"]], [26, 30, 44]),
+ "Casi todo sigue el default que propuso el negocio en la ronda 2. Para comparar entre años nos pidieron un criterio propio: no deflactamos por IPC porque la venta ya está valuada al precio actual; lo justificamos por escrito.", gap=32)
 page("supuesto", "Calidad · supuesto declarado", "El costo de 22 SKUs es un supuesto, y lo decimos",
  '<div style="display:flex; gap:40px; align-items:stretch">'
  + card("0,4471", "costo de OC / precio de lista en los 22 SKUs sin costo → margen de 55,3%, fuera de rango")
@@ -215,7 +215,7 @@ page("antesdespues", "Calidad · antes y después", "Corregir cambia poco los to
  chart(IMG["ad"], "Cuatro métricas antes y después de corregir: venta total, capital, participación de Decoración y prevalencia del target",
   stat("< 2%", "cambian venta, unidades y capital al corregir")
   + stat("+1,5 pp", "gana Decoración al unificar categorías: es la candidata al piloto")
-  + stat("2,6% → 3,4%", "prevalencia del target al netear las devoluciones en vez de llevarlas a 0 (P23): +30% de positivos, el mayor impacto para el modelo"), 1100, 440),
+  + stat("2,6% → 3,4%", "prevalencia del target al netear las devoluciones en vez de llevarlas a 0: +30% de positivos, el mayor impacto para el modelo"), 1100, 440),
  "Mensaje: que el total cierre no prueba que los datos estén bien. Los errores se compensan en el agregado (duplicados suman, SKUs sin costo restan) y aparecen al bajar a SKU o categoría.")
 
 # ================================================================= 4 TARGET
