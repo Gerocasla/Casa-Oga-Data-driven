@@ -154,10 +154,11 @@ MAPA = [("Ventas", "V R R V R R A"), ("Stock tiendas", "V R R V R R A"), ("Catá
         ("Órdenes de compra", "V V V V V V V"), ("Presupuesto", "A R A V A V A"), ("Promociones", "A A A V A A A"), ("Proveedores", "V V V V V V V"),
         ("Stock depósito", "V A V V V V V"), ("Transferencias", "V A V V V V V"), ("Costo almacenam.", "V A V A V V A")]
 COL = {"V": ("#D8F0DF", "#1E5B32", "OK"), "A": ("#FCEFC7", "#6B4E00", "Menor"), "R": ("#F8D3D3", "#8A1C1C", "Crítico")}
-cells = "".join(f'<p style="font-size:22px; font-weight:700; color:{MUT}; padding:2px 8px">{h}</p>' for h in ["Fuente", "Complet.", "Consist.", "Exactitud", "Actualidad", "Validez", "Unicidad", "Trazab."])
+cells = "".join(f'<p style="font-size:22px; font-weight:700; color:{MUT}; padding:2px 8px">{h}</p>' for h in ["Fuente", "Complet.", "Exactitud", "Actualidad", "Validez", "Unicidad", "Trazab."])
 for f, vals in MAPA:
     cells += f'<p style="font-size:22px; color:{INK}; padding:0 8px">{f}</p>'
-    for v in vals.split():
+    for j, v in enumerate(vals.split()):
+        if j == 1: continue   # consistencia: no se muestra en el mapa
         bgc, fg, t = COL[v]
         cells += f'<p style="font-size:22px; font-weight:600; color:{fg}; background:{bgc}; padding:0 8px; border-radius:6px; text-align:center">{t}</p>'
 CRIT = [("V", "no se detectó ningún problema (los nulos esperables no cuentan)."),
@@ -166,8 +167,8 @@ CRIT = [("V", "no se detectó ningún problema (los nulos esperables no cuentan)
 leyenda = '<div style="display:flex; gap:24px">' + "".join(
     f'<p style="flex:1; font-size:21px; line-height:1.35; color:{BODY}"><b style="color:{COL[k][1]}; background:{COL[k][0]}; padding:0 8px; border-radius:6px">{COL[k][2]}</b> {t}</p>'
     for k, t in CRIT) + '</div>'
-page("mapa", "Calidad · diagnóstico", "Mapa de calidad: 15 fuentes × 7 dimensiones",
- f'<div style="display:grid; grid-template-columns:320px repeat(7, 1fr); gap:3px">{cells}</div>' + leyenda,
+page("mapa", "Calidad · diagnóstico", "Mapa de calidad: 15 fuentes × 6 dimensiones",
+ f'<div style="display:grid; grid-template-columns:320px repeat(6, 1fr); gap:3px">{cells}</div>' + leyenda,
  "El criterio es el impacto en el uso, no la cantidad de errores. Crítico: si no se trata cambia un resultado o hay que asumir algo para usar el dato (duplicados, negativos, 22 SKUs sin costo, fuentes sin 2026, historial reconstruido). Menor: existe pero no mueve nada (5 descuentos y 4 promociones inválidas que se excluyen, variantes de categoría que se unifican con una regla). El desvío de stock en tránsito se asigna a Stock, no a Transferencias, cuyas cifras se usan tal cual.", gap=16)
 H1 = [("H1 · Claves duplicadas", "2.378 en Ventas y en Stock, solo 2022-25.", "Conservar la 1ra ocurrencia. Causa raíz: H2."),
       ("H2 · SKUs duplicados", "15 SKUs cargados dos veces, difieren solo en proveedor.", "Error del sistema (P11). Costo único de catálogo."),
