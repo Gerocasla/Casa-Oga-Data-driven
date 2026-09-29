@@ -285,47 +285,70 @@ page("ficha-ds", "Dataset · ficha", f"dataset_entrenamiento_{RS['version']}",
  'Ninguna fuente tiene datos personales: no aplica anonimización (Ley 25.326).</p>'
  f'<p style="font-size:24px; color:{MUT}">Se genera con Modelo/construir_dataset_modelo.py desde Datasets_Normalizados: reproducible de punta a punta.</p></div>',
  "v3: el universo pasa de 12 a 3 meses de historia (entran los productos nuevos) y salen precio, costo y margen del catálogo (son el valor de hoy) y el stock en tránsito (H6). La selección fina de variables se hace en el modelado.")
-tl = (f'<div style="position:relative; width:1664px; height:560px">'
-      f'<div style="position:absolute; left:0; top:40px; width:1060px; height:300px; background:#E3ECF7; border-radius:16px"></div>'
-      f'<p style="position:absolute; left:32px; top:64px; width:1000px; font-size:30px; font-weight:700; color:{INK}">Historia hasta el cierre del mes t: se puede usar</p>'
-      f'<p style="position:absolute; left:32px; top:120px; width:1000px; font-size:26px; line-height:1.45; color:{BODY}">Ventas y stock de los últimos 12 meses · OC recibidas y OC pedidas que siguen pendientes · transferencias y liquidaciones ya ocurridas · promociones vigentes · presupuesto cumplido · catálogo con fecha de baja ≤ t</p>'
-      f'<div style="position:absolute; left:1090px; top:0px; width:8px; height:420px; background:{GOLD}"></div>'
-      f'<p style="position:absolute; left:1000px; top:430px; width:190px; font-size:28px; font-weight:700; text-align:center; color:{INK}">t</p>'
-      f'<div style="position:absolute; left:1130px; top:40px; width:534px; height:300px; background:#FBE3D6; border-radius:16px"></div>'
-      f'<p style="position:absolute; left:1160px; top:64px; width:480px; font-size:30px; font-weight:700; color:{INK}">t+1 a t+3: no se puede</p>'
-      f'<p style="position:absolute; left:1160px; top:120px; width:480px; font-size:26px; line-height:1.45; color:{BODY}">Venta, stock, liquidaciones, transferencias y presupuesto futuros. Solo se mira el calendario comercial fijo (Hot Sale, Black Friday, Navidad).</p>'
-      f'<p style="position:absolute; left:1130px; top:370px; width:534px; font-size:28px; font-weight:700; color:{ORANGE}">t+3: se mide la etiqueta</p>'
-      f'<p style="position:absolute; left:0; top:480px; width:1060px; font-size:26px; line-height:1.4; color:{BODY}">Además: transformaciones ajustadas solo con train, embargo de 3 meses entre bloques y discontinuados fuera del universo.</p></div>')
-page("leakage", "Dataset · data leakage", "Qué información ve el modelo al predecir", tl,
- "La regla central: al predecir en el mes t solo se usa lo que Casa Óga conoce al cierre de t. Los eventos de calendario son la excepción justificada porque son fijos y se conocen con años de anticipación.")
-GR = [("Demanda e historia · 14", "Unidades de t, t-1, t-2, 3, 6 y 12 meses, máximo, variabilidad, tendencia, meses con y sin venta, antigüedad de la posición e indicador de historia corta.", "Es donde está la señal: la rotación de la posición."),
-      ("Stock · 5", "Disponible, variación a 3 meses, cobertura actual y de hace 3 meses, cambio de cobertura.", "La trayectoria anticipa el cruce del umbral."),
-      ("SKU en la cadena · 8", "Stock y cobertura del SKU en las 28 tiendas y en depósito, tiendas en rojo, tendencia del SKU.", "El problema es de producto y de compra, no de tienda."),
-      ("Contexto de tienda · 6", "Tendencia de la tienda y de la categoría, peso de la posición, % de posiciones en rojo, cumplimiento presupuestario.", "Separa un problema del producto de uno de la tienda."),
-      ("Abastecimiento · 10", "OC recibidas y pendientes, meses desde la última OC, transferencias recibidas y enviadas, lead time y pedido mínimo.", "Lo que entra es lo que genera el sobrestock."),
-      ("Acciones comerciales · 7", "Liquidación activa y su descuento, liquidaciones de la posición y del SKU, promociones de la categoría.", "Registran lo que ya se hizo sobre la posición."),
-      ("Producto · 5", "Precio relativo a la subcategoría, antigüedad del SKU; categoría, subcategoría, proveedor.", "Contexto y palanca de Compras (proveedor)."),
-      ("Tienda y calendario · 5", "m², región, formato; mes del año y eventos fijos en el horizonte.", "Segmentación y estacionalidad, que el modelo verifica.")]
-page("grupos", "Dataset · variables elegidas", f"{RS['n_num']+RS['n_cat']} variables en 8 grupos, cada uno con su porqué",
- '<div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; flex:1">' + "".join(
-  f'<div style="display:flex; flex-direction:column; gap:10px; background:#FFFFFF; border:1px solid {LINE}; border-radius:12px; padding:24px">'
-  f'<h3 style="{HF}; font-size:28px; font-weight:700; line-height:1.15; color:{BLUE}">{t}</h3><p style="font-size:24px; line-height:1.35; color:{BODY}">{d}</p>'
-  f'<p style="font-size:24px; line-height:1.35; color:{INK}"><b>{w}</b></p></div>' for t, d, w in GR) + '</div>',
- "El detalle de cada variable está en diccionario_features_v2.csv. Todas tienen fundamento de negocio; ninguna se eligió mirando el test.", gap=28)
+def caja(titulo, items, fondo, color_t, color_b=BODY, flex="1.1"):
+    return (f'<div style="flex:{flex}; display:flex; flex-direction:column; gap:18px; background:{fondo}; border-radius:14px; padding:34px 38px">'
+            f'<p style="{HF}; font-size:38px; font-weight:700; line-height:1.2; color:{color_t}">{titulo}</p>'
+            + "".join(f'<p style="font-size:32px; line-height:1.4; color:{color_b}">{i}</p>' for i in items) + '</div>')
+BUL = "•&#160;&#160;"
+page("leakage", "Dataset · data leakage", "El modelo solo ve lo que se sabía al cierre del mes t",
+ f'<p style="font-size:34px; line-height:1.4; color:{INK}">Al cierre del mes <b>t</b> predecimos si, en <b>t+3</b>, la posición tendrá <b>más de 12 meses de cobertura</b>.</p>'
+ '<div style="display:flex; gap:24px; flex:1">'
+ + caja("Hasta t: se usa", [BUL + "Toda la información disponible hasta ese momento", BUL + "Ventas, stock, compras, transferencias, promociones"], "#E3ECF7", BLUE)
+ + caja("Después de t: no se usa", [BUL + "Nada de t+1 en adelante", BUL + "Ni las variables que hoy están cargadas pero hablan del futuro"], "#FBE3D6", ORANGE)
+ + caja("En t+3", ["Se mide la respuesta"], DARK, "#FFFFFF", "#FFFFFF", "0.8") + '</div>'
+ f'<p style="font-size:34px; line-height:1.4; color:{INK}; background:#FFF6D6; border-left:8px solid {GOLD}; border-radius:8px; padding:20px 30px"><b>Regla:</b> si una variable habla del futuro, no entra al modelo.</p>',
+ "GUION (≈1 min). Una vez definido qué queremos predecir, aparece un problema: qué información puede ver el modelo. Queremos predecir, a partir del cierre del mes t, si dentro de tres meses esa posición va a tener más de 12 meses de cobertura. "
+ "Parado en t, uso toda la información que tengo hasta ese momento: ventas, stock, compras, transferencias, promociones. Lo que pasa de t+1 en adelante no lo puedo usar, y tampoco una variable que hoy esté cargada pero hable del futuro, por ejemplo el presupuesto de los meses siguientes. "
+ "Recién en t+3 miramos qué pasó y medimos la respuesta. La regla es simple: si una variable habla del futuro, no entra al modelo. "
+ "SI PREGUNTAN: ¿Alguna excepción? Los eventos fijos del calendario (Hot Sale, Black Friday, Navidad), porque se conocen de antemano; está como variable, eventos en el horizonte. "
+ "Ejemplo: para entrenar, con t = jun-24 mira hasta jun-24 y su respuesta es sep-24; para usarlo de verdad, con t = ago-26 predice nov-26. "
+ "PUENTE A LA 13: definido qué no podemos mirar, el siguiente paso fue decidir qué de lo que sí tenemos vale la pena darle al modelo.", gap=36)
+GR = [("Demanda e historia · 14", "Ventas", "Unidades de t, t-1, t-2, 3, 6 y 12 meses, máximo, variabilidad, tendencia, meses con y sin venta, antigüedad de la posición, historia corta.", "Mide cuánto rota la posición: si se vende poco, el stock se acumula."),
+      ("Stock · 5", "Stock y ventas", "Disponible, variación a 3 meses, cobertura actual y de hace 3 meses, cambio de cobertura.", "Muestra si la cobertura viene subiendo hacia los 12 meses."),
+      ("SKU en la cadena · 8", "Stock de tiendas y depósito", "Stock y cobertura del SKU en las 28 tiendas y en depósito, tiendas en rojo, tendencia del SKU.", "Muestra si el exceso es del producto en toda la cadena, no de una sola tienda."),
+      ("Contexto de tienda · 6", "Ventas, stock, presupuesto", "Tendencia de la tienda y de la categoría, peso de la posición, % de posiciones en rojo, cumplimiento presupuestario.", "Distingue si el problema es del producto o de la tienda."),
+      ("Abastecimiento · 10", "OC, transferencias, proveedores", "OC recibidas y pendientes, meses desde la última OC, transferencias recibidas y enviadas, lead time y pedido mínimo.", "Muestra cuánto entró y cuánto está por llegar: más compra, más sobrestock."),
+      ("Acciones comerciales · 7", "Liquidaciones, promociones", "Liquidación activa y su descuento, liquidaciones de la posición y del SKU, promociones de la categoría.", "Muestra si ya se intentó vender la posición con liquidaciones o promociones."),
+      ("Producto · 5", "Catálogo", "Precio relativo a la subcategoría, antigüedad del SKU; categoría, subcategoría, proveedor.", "Describe el producto y su proveedor, sobre el que Compras puede actuar."),
+      ("Tienda y calendario · 5", "Tiendas y fecha", "m², región, formato; mes del año y eventos fijos en el horizonte.", "Cuenta el tipo de tienda y la época del año, porque la venta cambia con la estacionalidad.")]
+NV = RS['n_num'] + RS['n_cat']
+page("grupos", "Dataset · variables elegidas", f"{NV} variables en 8 grupos, cada uno con su porqué",
+ '<div style="display:grid; grid-template-columns:repeat(4, 1fr); grid-auto-rows:1fr; gap:16px; flex:1; min-height:0">' + "".join(
+  f'<div style="display:flex; flex-direction:column; gap:10px; background:#FFFFFF; border:1px solid {LINE}; border-radius:12px; padding:16px 20px">'
+  f'<h3 style="{HF}; font-size:28px; font-weight:700; line-height:1.15; color:{BLUE}">{t}</h3>'
+  f'<p style="font-size:17px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; color:{MUT}">Sale de: {f}</p>'
+  f'<p style="font-size:21px; line-height:1.28; color:{BODY}">{d}</p>'
+  f'<p style="font-size:21px; line-height:1.28; color:{INK}; margin-top:auto"><b>{w}</b></p></div>' for t, f, d, w in GR) + '</div>',
+ f"GUION (≈1 min). Con esa regla armamos {NV} variables, en 8 grupos. Cada tarjeta dice de qué archivos sale y, en negrita, para qué sirve. Ninguna es una columna cruda: por ejemplo la cobertura no existe en ningún archivo, es el stock dividido el ritmo de venta. "
+ "Vale la pena detenerse en tres. Demanda e historia, 14 variables, es donde está la señal: mide cuánto rota la posición, y si se vende poco el stock se acumula. Stock muestra si la cobertura viene subiendo hacia los 12 meses. Y SKU en la cadena muestra si el exceso es del producto en toda la cadena y no de una tienda. "
+ "Después abastecimiento, que dice cuánto entró y cuánto está por llegar; acciones comerciales, si ya se intentó liquidar; y contexto de tienda, producto y calendario, para separar el problema del producto del de la tienda. Todas entran al modelo y ninguna se eligió mirando el test. "
+ f"SI PREGUNTAN: ¿Son {NV} columnas? Son {NV} variables; al pasar las categóricas a columnas 0/1 la matriz tiene más. ¿Todas sirven? Eso lo mide el modelo; 30 de 55 numéricas no separan solas pero pueden aportar combinadas. El detalle está en diccionario_features_v3.csv.", gap=24)
 def lista(t, color, items):
     return (f'<div style="flex:1; display:flex; flex-direction:column; gap:14px; background:#FFFFFF; border:1px solid {LINE}; border-top:6px solid {color}; border-radius:12px; padding:28px">'
             f'<h3 style="{HF}; font-size:32px; font-weight:700">{t}</h3>'
             + "".join(f'<p style="font-size:24px; line-height:1.35; color:{BODY}"><b style="color:{INK}">{a if a.endswith(".") else a + "."}</b> {b}</p>' for a, b in items) + '</div>')
+def lista_excl(t, sub, color, items):
+    return (f'<div style="flex:1; display:flex; flex-direction:column; gap:24px; background:#FFFFFF; border:1px solid {LINE}; border-top:6px solid {color}; border-radius:12px; padding:32px 34px">'
+            f'<h3 style="{HF}; font-size:36px; font-weight:700">{t}</h3>'
+            f'<p style="font-size:26px; line-height:1.3; font-weight:600; color:{color}">{sub}</p>'
+            + "".join(f'<div style="display:flex; flex-direction:column; gap:4px"><p style="font-size:29px; line-height:1.25; font-weight:700; color:{INK}">{a}</p>'
+                      f'<p style="font-size:26px; line-height:1.3; color:{BODY}">{b}</p></div>' for a, b in items) + '</div>')
 page("excluidas", "Dataset · variables excluidas", "Lo que quedó afuera, y por qué",
  '<div style="display:flex; gap:24px; flex:1">'
- + lista("Leakage", ORANGE, [("Venta y stock de t+1 a t+3", "definen el target"), ("Liquidaciones, transferencias y OC posteriores a t", "son reacciones al sobrestock"),
-                             ("Estado del catálogo", "es una foto de hoy: revela bajas futuras"), ("Presupuesto futuro", "se reajusta con la venta real (P31)"),
-                             ("Promociones futuras", "no hay evidencia de que se planifiquen con anticipación")])
- + lista("Calidad", BLUE, [("Antigüedad de tienda", "6 tiendas venden antes de abrir (H3)"), ("Precio, costo y margen del catálogo", "son el valor de hoy: anacrónicos para meses pasados"), ("Precio del historial", "reconstrucción retroactiva (H8)"), ("Stock en tránsito", "sin definición y sin señal en 2026 (H6)"),
-                           ("Devoluciones por motivo", "no hay datos de 2026 (H12)"), ("Temporada y feriados", "el Calendario no cubre 2026 (H12)")])
- + lista("Generalización y otros", "#6B7280", [("Id de tienda y de SKU", "el modelo memorizaría posiciones"), ("Marca de costo imputado", "constante en train; queda como control"),
-                                              ("Costo de almacenamiento", "constante por categoría"), ("Cliente o ticket", "no existe en ninguna fuente")])
- + '</div>', "Cada exclusión tiene motivo escrito en la Parte B. Las de leakage son las más importantes: con cualquiera de ellas el modelo daría resultados excelentes en el papel e inútiles en la práctica.", gap=28)
+ + lista_excl("1 · Parecen del presente, pero hablan del futuro", "Engañan porque ya están cargadas:", ORANGE,
+         [("Presupuesto de los meses siguientes", "Es un plan que parece conocido de antemano, pero se actualiza con la venta real"),
+          ("Estado actual del catálogo", "Es el de hoy: marca como discontinuados productos que en ese mes seguían activos")])
+ + lista_excl("2 · Datos no confiables", "Están mal o incompletos:", BLUE,
+         [("Antigüedad de tienda", "6 tiendas venden antes de abrir"), ("Precio y costo del catálogo", "Son los de hoy, no los de ese mes"),
+          ("Devoluciones por motivo y calendario", "No hay datos de 2026")])
+ + lista_excl("3 · No le sirven al modelo", "No describen la posición:", "#6B7280",
+         [("Id de tienda y de SKU", "Identifican, no describen: el modelo memorizaría"), ("Costo de almacenamiento y marca de costo imputado", "Son constantes")])
+ + '</div>',
+ "GUION (≈1 min). Estas son columnas que estaban en los archivos y decidimos no usar, por tres motivos. Primero, variables que parecen del presente pero hablan del futuro: es el leakage que se cuela sin darte cuenta. "
+ "El presupuesto de los meses siguientes es un plan, parece que se conoce de antemano, pero se actualiza con la venta real, entonces me estaría adelantando lo que voy a predecir. O el estado del catálogo, que es el de hoy: si se lo pongo a un mes viejo, le digo al modelo que un producto se discontinuó antes de que pasara. "
+ "Segundo, porque el dato no es confiable: 6 tiendas venden antes de abrir, el precio y el costo del catálogo son los de hoy, y las devoluciones por motivo y el calendario no llegan a 2026. "
+ "Tercero, porque no le sirven al modelo: el id de tienda y de SKU identifican pero no describen la posición, y el modelo memorizaría en lugar de aprender patrones; los ids quedan en la tabla solo para saber de quién es cada predicción. El costo de almacenamiento y la marca de costo imputado son constantes. "
+ "SI PREGUNTAN: ¿Cómo sabe el modelo de qué producto habla? Recibe las variables que describen la posición; el id solo acompaña el resultado. ¿Hay una variable llamada presupuesto t+1? No: es una columna candidata del archivo de presupuesto que evaluamos y descartamos; la única de presupuesto que usamos es el cumplimiento de los últimos 3 meses.", gap=28)
 page("transformaciones", "Dataset · preparación para el modelo", "Transformaciones, todas ajustadas solo con train",
  table(["Transformación", "Qué se hizo", "Por qué"], [
   ["Valores extremos", "Winsorización p1-p99 en 45 continuas", "Colas largas reales, no errores: no se borran filas"],
