@@ -54,6 +54,9 @@ h2{font-size:15px;font-weight:600}
 .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(15,23,42,.05);padding:3px 9px 3px 8px;border-radius:999px;margin-bottom:8px}
 .tag .dot{width:8px;height:8px}
 svg{display:block;width:100%;overflow:visible}
+/* linea */
+.legend{display:flex;gap:16px;font-size:12px;color:var(--ink-2);margin-top:8px}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:3px;margin-right:6px}
 /* tabla de criterios */
 table{border-collapse:collapse;width:100%;font-size:13px;margin-top:12px}
 th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -80,7 +83,7 @@ tbody tr:hover{background:#F8FAFC}
 </div></header>
 <main id="main"></main>
 <div id="tt"></div>
-<script id="data" type="application/json">{"ventas": {"venta": [40314.3, 40083.4], "unidades": [930410, 925015], "claves_dup": 2378, "filas_neg": 2317}, "stock": {"capital": {"dic-25": [3595.1, 3544.9], "ago-26": [3119.6, 3097.6]}, "filas_neg": 1209, "minimo": -152}, "catalogo": {"categorias": [11, 7], "sin_costo": 22, "decoracion_pct": [20.8, 22.35], "cat_antes": [{"label": "Decoracion", "skus": 146, "venta": 8385.4, "canon": "Decoracion"}, {"label": "Cocina y mesa", "skus": 126, "venta": 7876.0, "canon": "Cocina y mesa"}, {"label": "Textil hogar", "skus": 121, "venta": 4755.3, "canon": "Textil hogar"}, {"label": "Muebles", "skus": 120, "venta": 4831.4, "canon": "Muebles"}, {"label": "Baño", "skus": 100, "venta": 3365.0, "canon": "Bano"}, {"label": "Organizacion", "skus": 95, "venta": 4603.9, "canon": "Organizacion"}, {"label": "Iluminacion", "skus": 86, "venta": 5464.6, "canon": "Iluminacion"}, {"label": "Decoración", "skus": 8, "venta": 509.1, "canon": "Decoracion"}, {"label": "Textil Hogar", "skus": 6, "venta": 412.0, "canon": "Textil hogar"}, {"label": "DECO", "skus": 5, "venta": 68.5, "canon": "Decoracion"}, {"label": "TEXTIL_HOGAR", "skus": 2, "venta": 43.0, "canon": "Textil hogar"}], "cat_despues": [{"label": "Decoracion", "skus": 157, "venta": 8960.4}, {"label": "Textil hogar", "skus": 127, "venta": 5190.7}, {"label": "Cocina y mesa", "skus": 122, "venta": 7790.7}, {"label": "Muebles", "skus": 117, "venta": 4769.7}, {"label": "Bano", "skus": 97, "venta": 3311.0}, {"label": "Organizacion", "skus": 94, "venta": 4596.3}, {"label": "Iluminacion", "skus": 86, "venta": 5464.6}]}, "acciones": {"desc_fuera": 5}, "presupuesto": {"invalidas": 312}, "modelo": {"prevalencia": [2.61, 3.4], "positivos": [5260, 6853]}}</script>
+<script id="data" type="application/json">{"ventas": {"venta": [40314.3, 40083.4], "unidades": [930410, 925015], "claves_dup": 2378, "filas_neg": 2317}, "stock": {"capital": {"dic-25": [3595.1, 3544.9], "ago-26": [3119.6, 3097.6]}, "filas_neg": 1209, "minimo": -152}, "catalogo": {"categorias": [11, 7], "sin_costo": 22, "decoracion_pct": [20.8, 22.35], "cat_antes": [{"label": "Decoracion", "skus": 146, "venta": 8385.4, "canon": "Decoracion"}, {"label": "Cocina y mesa", "skus": 126, "venta": 7876.0, "canon": "Cocina y mesa"}, {"label": "Textil hogar", "skus": 121, "venta": 4755.3, "canon": "Textil hogar"}, {"label": "Muebles", "skus": 120, "venta": 4831.4, "canon": "Muebles"}, {"label": "Baño", "skus": 100, "venta": 3365.0, "canon": "Bano"}, {"label": "Organizacion", "skus": 95, "venta": 4603.9, "canon": "Organizacion"}, {"label": "Iluminacion", "skus": 86, "venta": 5464.6, "canon": "Iluminacion"}, {"label": "Decoración", "skus": 8, "venta": 509.1, "canon": "Decoracion"}, {"label": "Textil Hogar", "skus": 6, "venta": 412.0, "canon": "Textil hogar"}, {"label": "DECO", "skus": 5, "venta": 68.5, "canon": "Decoracion"}, {"label": "TEXTIL_HOGAR", "skus": 2, "venta": 43.0, "canon": "Textil hogar"}], "cat_despues": [{"label": "Decoracion", "skus": 157, "venta": 8960.4}, {"label": "Textil hogar", "skus": 127, "venta": 5190.7}, {"label": "Cocina y mesa", "skus": 122, "venta": 7790.7}, {"label": "Muebles", "skus": 117, "venta": 4769.7}, {"label": "Bano", "skus": 97, "venta": 3311.0}, {"label": "Organizacion", "skus": 94, "venta": 4596.3}, {"label": "Iluminacion", "skus": 86, "venta": 5464.6}]}, "acciones": {"desc_fuera": 5}, "presupuesto": {"invalidas": 312}, "modelo": {"prevalencia": [2.61, 3.4], "positivos": [5260, 6853], "prev_mensual": {"meses": ["2022-03", "2022-04", "2022-05", "2022-06", "2022-07", "2022-08", "2022-09", "2022-10", "2022-11", "2022-12", "2023-01", "2023-02", "2023-03", "2023-04", "2023-05", "2023-06", "2023-07", "2023-08", "2023-09", "2023-10", "2023-11", "2023-12", "2024-01", "2024-02", "2024-03", "2024-04", "2024-05", "2024-06", "2024-07", "2024-08", "2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09", "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03", "2026-04", "2026-05"], "antes": [0.0, 4.42, 5.73, 4.02, 2.55, 3.13, 2.41, 2.98, 2.36, 2.67, 2.76, 2.38, 2.62, 2.15, 1.98, 1.89, 1.73, 1.56, 1.71, 1.37, 1.37, 1.51, 1.46, 1.43, 1.64, 1.37, 1.36, 1.6, 1.47, 1.55, 1.4, 1.6, 1.36, 1.34, 1.41, 1.36, 1.3, 1.62, 1.19, 1.38, 1.3, 1.47, 1.67, 1.79, 2.23, 3.57, 4.54, 6.63, 7.95, 10.11, 12.09], "despues": [0.0, 4.97, 7.01, 5.13, 4.11, 4.76, 3.38, 4.09, 3.62, 4.18, 3.59, 3.2, 3.76, 3.0, 2.8, 2.78, 2.11, 2.1, 2.41, 2.02, 1.96, 2.39, 2.43, 2.08, 2.41, 2.1, 2.2, 2.48, 2.12, 2.26, 2.24, 2.39, 2.1, 2.01, 2.17, 2.44, 1.99, 2.4, 1.99, 2.08, 2.06, 2.37, 2.46, 2.51, 2.84, 4.63, 5.43, 7.47, 8.79, 10.78, 12.6], "pos_antes": [0, 8, 18, 18, 18, 27, 25, 35, 32, 44, 50, 49, 58, 51, 51, 51, 50, 49, 56, 46, 48, 55, 56, 57, 70, 60, 61, 76, 72, 78, 73, 86, 75, 75, 81, 80, 79, 101, 75, 88, 83, 96, 111, 116, 138, 209, 252, 370, 447, 572, 684], "pos_despues": [0, 9, 22, 23, 29, 41, 35, 48, 49, 69, 65, 66, 83, 71, 72, 75, 61, 66, 79, 68, 69, 87, 93, 83, 103, 92, 99, 118, 104, 114, 117, 128, 116, 112, 125, 143, 121, 149, 125, 132, 131, 154, 163, 162, 176, 271, 301, 417, 494, 610, 713]}}}</script>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
 const C = {a: '#E8590C', d: '#3E6FA8', ink: '#1C1C1E', ink2: '#6E6E73'};
@@ -136,6 +139,11 @@ document.getElementById('main').innerHTML = `
       <div class="pair"><span>Positivos <b>${nf(M.positivos[0])} → ${nf(M.positivos[1])}</b></span><span><b>${sg(pct(M.positivos[0], M.positivos[1]), 0)}%</b></span></div></div>
   </div>
 
+  <div class="grid"><div class="card"><h2>De dónde sale el ${nf(M.prevalencia[0], 1)}% → ${nf(M.prevalencia[1], 1)}%: prevalencia del target por mes de corte</h2>
+    <div class="sub">Mismo target y mismo universo; solo cambia el tratamiento de las devoluciones. Netearlas suma positivos en todos los meses de 2022-2025; en 2026 la brecha se achica porque ese año no trae devoluciones.</div>
+    <div class="legend"><span><i style="background:${C.a}"></i>Antes · devoluciones llevadas a 0</span><span><i style="background:${C.d}"></i>Después · devoluciones neteadas</span></div>
+    <div id="prev" style="margin-top:6px"></div></div></div>
+
   <div class="grid g2">
     <div class="card"><h2>Los totales casi no se mueven</h2><div class="sub">Antes y después de corregir; a la derecha, la variación.</div>
       <div class="tot" id="tot"></div></div>
@@ -178,11 +186,37 @@ function hbar(el, items, max, color, marca) {
   el.querySelectorAll('.h').forEach(h => { const x = items[+h.dataset.i];
     tip(h, `<b>${esc(x.label)}</b>${row(color, 'Venta', nf(x.venta, 1) + ' M$')}${row(null, 'SKUs', nf(x.skus))}${x.canon && x.canon !== x.label ? row(null, 'Pasa a', esc(x.canon)) : ''}`); });
 }
+const MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const mlab = m => MES[+m.slice(5, 7) - 1] + ' ' + m.slice(0, 4);
+function linea(el, P) {
+  const W = el.clientWidth || 800, H = 260, m = {t: 10, r: 12, b: 26, l: 40}, iw = W - m.l - m.r, ih = H - m.t - m.b, n = P.meses.length;
+  const hi = Math.ceil(Math.max(...P.antes, ...P.despues) / 2) * 2, X = i => m.l + i * iw / (n - 1), Y = v => m.t + ih - v / hi * ih;
+  let g = '';
+  for (let v = 0; v <= hi; v += 2) g += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v ? '#E8EDF3' : '#E2E8F0'}"/><text x="${m.l - 6}" y="${Y(v) + 3}" text-anchor="end" font-size="10" fill="#9A9AA0">${v}%</text>`;
+  P.meses.forEach((x, i) => { if (x.endsWith('-01')) g += `<text x="${X(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="#9A9AA0">${mlab(x)}</text>`; });
+  const path = (arr, c) => `<path d="${arr.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(v).toFixed(1)).join('')}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/>`;
+  g += path(P.antes, C.a) + path(P.despues, C.d);
+  g += `<line class="xh" y1="${m.t}" y2="${m.t + ih}" stroke="#9A9AA0" stroke-dasharray="3 3" opacity="0"/><circle class="pa" r="4.5" fill="${C.a}" stroke="#fff" stroke-width="2" opacity="0"/><circle class="pd" r="4.5" fill="${C.d}" stroke="#fff" stroke-width="2" opacity="0"/>`;
+  g += `<rect class="hit" x="${m.l}" y="${m.t}" width="${iw}" height="${ih}" fill="transparent"/>`;
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="Prevalencia del target por mes, antes y después">${g}</svg>`;
+  const svg = el.querySelector('svg'), hit = svg.querySelector('.hit'), xh = svg.querySelector('.xh'), ca = svg.querySelector('.pa'), cd = svg.querySelector('.pd');
+  hit.addEventListener('mousemove', e => {
+    const r = svg.getBoundingClientRect(), i = Math.max(0, Math.min(n - 1, Math.round(((e.clientX - r.left) * W / r.width - m.l) / iw * (n - 1))));
+    xh.setAttribute('x1', X(i)); xh.setAttribute('x2', X(i)); xh.setAttribute('opacity', 1);
+    ca.setAttribute('cx', X(i)); ca.setAttribute('cy', Y(P.antes[i])); ca.setAttribute('opacity', 1);
+    cd.setAttribute('cx', X(i)); cd.setAttribute('cy', Y(P.despues[i])); cd.setAttribute('opacity', 1);
+    tt.innerHTML = `<b>${mlab(P.meses[i])}</b>${row(C.a, 'Antes', nf(P.antes[i], 2) + '% · ' + nf(P.pos_antes[i]) + ' pos.')}${row(C.d, 'Después', nf(P.despues[i], 2) + '% · ' + nf(P.pos_despues[i]) + ' pos.')}${row(null, 'Diferencia', sg(P.despues[i] - P.antes[i], 2) + ' pp')}`;
+    tt.style.opacity = 1; let x = e.clientX + 14; if (x + tt.offsetWidth > innerWidth - 8) x = e.clientX - tt.offsetWidth - 14;
+    tt.style.left = x + 'px'; tt.style.top = (e.clientY + 14) + 'px';
+  });
+  hit.addEventListener('mouseleave', () => { tt.style.opacity = 0; [xh, ca, cd].forEach(z => z.setAttribute('opacity', 0)); });
+}
 function dibujar() {
   const A = [...CA.cat_antes].sort((x, y) => y.venta - x.venta), B = [...CA.cat_despues].sort((x, y) => y.venta - x.venta);
   const max = Math.max(...A.map(x => x.venta), ...B.map(x => x.venta));
   hbar(document.getElementById('ca'), A, max, C.a, x => x.canon !== x.label);
   hbar(document.getElementById('cd'), B, max, C.d);
+  linea(document.getElementById('prev'), M.prev_mensual);
 }
 dibujar();
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(dibujar, 120); });

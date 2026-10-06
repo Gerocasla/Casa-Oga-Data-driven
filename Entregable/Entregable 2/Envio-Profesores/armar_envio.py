@@ -38,7 +38,8 @@ d = {"ventas": {"venta": v["venta"], "unidades": v["unidades"], "claves_dup": v[
                   "cat_antes": ca["cat_antes"], "cat_despues": ca["cat_despues"]},
      "acciones": {"desc_fuera": ac["liq_fuera"][0] + ac["promo_fuera"][0]},
      "presupuesto": {"invalidas": pr["ceros"][0] + pr["negativas"][0]},
-     "modelo": {"prevalencia": c["modelo"]["prevalencia"], "positivos": c["modelo"]["positivos"]}}
+     "modelo": {"prevalencia": c["modelo"]["prevalencia"], "positivos": c["modelo"]["positivos"],
+                "prev_mensual": c["modelo"]["prev_mensual"]}}
 html = open(os.path.join(BASE, "dashboard_comparativo_plantilla.html"), encoding="utf-8").read()
 datos = json.dumps(d, ensure_ascii=False, allow_nan=False).replace("</", r"<\/")
 html = html.replace("/*__DATA__*/", datos)

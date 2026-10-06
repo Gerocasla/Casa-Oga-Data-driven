@@ -54,6 +54,9 @@ h2{font-size:15px;font-weight:600}
 .tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(15,23,42,.05);padding:3px 9px 3px 8px;border-radius:999px;margin-bottom:8px}
 .tag .dot{width:8px;height:8px}
 svg{display:block;width:100%;overflow:visible}
+/* linea */
+.legend{display:flex;gap:16px;font-size:12px;color:var(--ink-2);margin-top:8px}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:3px;margin-right:6px}
 /* tabla de criterios */
 table{border-collapse:collapse;width:100%;font-size:13px;margin-top:12px}
 th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -136,6 +139,11 @@ document.getElementById('main').innerHTML = `
       <div class="pair"><span>Positivos <b>${nf(M.positivos[0])} → ${nf(M.positivos[1])}</b></span><span><b>${sg(pct(M.positivos[0], M.positivos[1]), 0)}%</b></span></div></div>
   </div>
 
+  <div class="grid"><div class="card"><h2>De dónde sale el ${nf(M.prevalencia[0], 1)}% → ${nf(M.prevalencia[1], 1)}%: prevalencia del target por mes de corte</h2>
+    <div class="sub">Mismo target y mismo universo; solo cambia el tratamiento de las devoluciones. Netearlas suma positivos en todos los meses de 2022-2025; en 2026 la brecha se achica porque ese año no trae devoluciones.</div>
+    <div class="legend"><span><i style="background:${C.a}"></i>Antes · devoluciones llevadas a 0</span><span><i style="background:${C.d}"></i>Después · devoluciones neteadas</span></div>
+    <div id="prev" style="margin-top:6px"></div></div></div>
+
   <div class="grid g2">
     <div class="card"><h2>Los totales casi no se mueven</h2><div class="sub">Antes y después de corregir; a la derecha, la variación.</div>
       <div class="tot" id="tot"></div></div>
@@ -178,11 +186,37 @@ function hbar(el, items, max, color, marca) {
   el.querySelectorAll('.h').forEach(h => { const x = items[+h.dataset.i];
     tip(h, `<b>${esc(x.label)}</b>${row(color, 'Venta', nf(x.venta, 1) + ' M$')}${row(null, 'SKUs', nf(x.skus))}${x.canon && x.canon !== x.label ? row(null, 'Pasa a', esc(x.canon)) : ''}`); });
 }
+const MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const mlab = m => MES[+m.slice(5, 7) - 1] + ' ' + m.slice(0, 4);
+function linea(el, P) {
+  const W = el.clientWidth || 800, H = 260, m = {t: 10, r: 12, b: 26, l: 40}, iw = W - m.l - m.r, ih = H - m.t - m.b, n = P.meses.length;
+  const hi = Math.ceil(Math.max(...P.antes, ...P.despues) / 2) * 2, X = i => m.l + i * iw / (n - 1), Y = v => m.t + ih - v / hi * ih;
+  let g = '';
+  for (let v = 0; v <= hi; v += 2) g += `<line x1="${m.l}" x2="${W - m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v ? '#E8EDF3' : '#E2E8F0'}"/><text x="${m.l - 6}" y="${Y(v) + 3}" text-anchor="end" font-size="10" fill="#9A9AA0">${v}%</text>`;
+  P.meses.forEach((x, i) => { if (x.endsWith('-01')) g += `<text x="${X(i)}" y="${H - 8}" text-anchor="middle" font-size="10" fill="#9A9AA0">${mlab(x)}</text>`; });
+  const path = (arr, c) => `<path d="${arr.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(v).toFixed(1)).join('')}" fill="none" stroke="${c}" stroke-width="2" stroke-linejoin="round"/>`;
+  g += path(P.antes, C.a) + path(P.despues, C.d);
+  g += `<line class="xh" y1="${m.t}" y2="${m.t + ih}" stroke="#9A9AA0" stroke-dasharray="3 3" opacity="0"/><circle class="pa" r="4.5" fill="${C.a}" stroke="#fff" stroke-width="2" opacity="0"/><circle class="pd" r="4.5" fill="${C.d}" stroke="#fff" stroke-width="2" opacity="0"/>`;
+  g += `<rect class="hit" x="${m.l}" y="${m.t}" width="${iw}" height="${ih}" fill="transparent"/>`;
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" height="${H}" role="img" aria-label="Prevalencia del target por mes, antes y después">${g}</svg>`;
+  const svg = el.querySelector('svg'), hit = svg.querySelector('.hit'), xh = svg.querySelector('.xh'), ca = svg.querySelector('.pa'), cd = svg.querySelector('.pd');
+  hit.addEventListener('mousemove', e => {
+    const r = svg.getBoundingClientRect(), i = Math.max(0, Math.min(n - 1, Math.round(((e.clientX - r.left) * W / r.width - m.l) / iw * (n - 1))));
+    xh.setAttribute('x1', X(i)); xh.setAttribute('x2', X(i)); xh.setAttribute('opacity', 1);
+    ca.setAttribute('cx', X(i)); ca.setAttribute('cy', Y(P.antes[i])); ca.setAttribute('opacity', 1);
+    cd.setAttribute('cx', X(i)); cd.setAttribute('cy', Y(P.despues[i])); cd.setAttribute('opacity', 1);
+    tt.innerHTML = `<b>${mlab(P.meses[i])}</b>${row(C.a, 'Antes', nf(P.antes[i], 2) + '% · ' + nf(P.pos_antes[i]) + ' pos.')}${row(C.d, 'Después', nf(P.despues[i], 2) + '% · ' + nf(P.pos_despues[i]) + ' pos.')}${row(null, 'Diferencia', sg(P.despues[i] - P.antes[i], 2) + ' pp')}`;
+    tt.style.opacity = 1; let x = e.clientX + 14; if (x + tt.offsetWidth > innerWidth - 8) x = e.clientX - tt.offsetWidth - 14;
+    tt.style.left = x + 'px'; tt.style.top = (e.clientY + 14) + 'px';
+  });
+  hit.addEventListener('mouseleave', () => { tt.style.opacity = 0; [xh, ca, cd].forEach(z => z.setAttribute('opacity', 0)); });
+}
 function dibujar() {
   const A = [...CA.cat_antes].sort((x, y) => y.venta - x.venta), B = [...CA.cat_despues].sort((x, y) => y.venta - x.venta);
   const max = Math.max(...A.map(x => x.venta), ...B.map(x => x.venta));
   hbar(document.getElementById('ca'), A, max, C.a, x => x.canon !== x.label);
   hbar(document.getElementById('cd'), B, max, C.d);
+  linea(document.getElementById('prev'), M.prev_mensual);
 }
 dibujar();
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(dibujar, 120); });

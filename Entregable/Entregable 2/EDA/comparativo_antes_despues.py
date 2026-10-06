@@ -268,6 +268,32 @@ out["modelo"] = dict(
     features=60, features_num=55, features_cat=5, onehot=106)
 assert "201,306" in log
 
+# prevalencia mensual del target segun el tratamiento de las devoluciones (mismo calculo que candidatos_target.py):
+# antes = devoluciones llevadas a 0 (criterio previo) · despues = neteadas (P23). Universo: el del dataset del modelo.
+def prevalencia_mensual(neteo, hist_min=3):
+    if neteo: vv = v1.copy()
+    else:
+        vv = v1r.drop_duplicates(K).copy()
+        vv[["unidades_vendidas", "venta_neta"]] = vv[["unidades_vendidas", "venta_neta"]].clip(lower=0)
+    x = s1.merge(vv, on=K); x["fecha_mes"] = pd.to_datetime(x["fecha_mes"])
+    x = x.sort_values(["id_tienda", "id_producto", "fecha_mes"]); gx = x.groupby(["id_tienda", "id_producto"], sort=False)
+    u12 = gx["unidades_vendidas"].transform(lambda z: z.rolling(12, min_periods=1).mean())
+    cob = np.where(u12 > 0, x["stock_disponible"] / u12.replace(0, np.nan), np.inf)
+    baja = pd.to_datetime(x["id_producto"].map(c1.set_index("id_producto")["fecha_baja_catalogo"]))
+    disc = baja.notna() & (baja <= x["fecha_mes"] + pd.offsets.MonthEnd(0))
+    con = x["stock_disponible"] > 0
+    x["pos"] = con & (cob > 12) & ~disc
+    y3, m3 = gx["pos"].shift(-3), gx["fecha_mes"].shift(-3)
+    base = (m3 - x["fecha_mes"]).dt.days.between(85, 95) & (gx.cumcount() >= hist_min - 1) & con & ~disc
+    b = x[base].assign(y=y3[base].astype(bool))
+    return b.groupby("fecha_mes")["y"].agg(["mean", "sum", "size"])
+pa, pdp = prevalencia_mensual(False), prevalencia_mensual(True)
+assert int(pa["sum"].sum()) == 5260 and int(pdp["sum"].sum()) == 6853, (pa["sum"].sum(), pdp["sum"].sum())
+idx_m = pdp.index
+out["modelo"]["prev_mensual"] = dict(meses=[m.strftime("%Y-%m") for m in idx_m],
+    antes=[r(v * 100, 2) for v in pa["mean"].reindex(idx_m)], despues=[r(v * 100, 2) for v in pdp["mean"]],
+    pos_antes=[int(v) for v in pa["sum"].reindex(idx_m).fillna(0)], pos_despues=[int(v) for v in pdp["sum"]])
+
 json.dump(out, open(os.path.join(RES, "comparativo_antes_despues.json"), "w", encoding="utf-8"),
           ensure_ascii=False, default=lambda o: o.item() if hasattr(o, "item") else str(o))
 print("OK: resultados/comparativo_antes_despues.json")
