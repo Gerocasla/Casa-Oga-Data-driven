@@ -6,6 +6,7 @@ Dos versiones para elegir; el contenido es el mismo, la corta es un subconjunto.
 |---|---|---|---|
 | **v4 completa** | 36 | `Casa-Oga-Entregable-2-v4-completa.html` · `.pdf` | Documento de respaldo o presentación larga (~25-30 min) |
 | **v4 corta** | 16 | `Casa-Oga-Entregable-2-v4-corta.html` · `.pdf` | Presentación de pocos minutos (~8-10 min) |
+| **v4 corta · modelo (final)** | — | `Casa-Oga-Entregable-2-v4-corta-modelo.html` | **Presentación final** del Entregable 2 |
 
 **v4 (vigente):** dos diapositivas nuevas en el EDA sobre qué cambió en 2026: de dónde sale la caída (catálogo) y el salto de posiciones sin venta con menos liquidaciones (`catalogo`, `sinventa`; números en `EDA/resultados/cambio_2026.json`). **v3:** criterio explícito OK / Menor / Crítico en el mapa de calidad, mapa alineado con la Parte A, capacidad operativa medida también en test 2026, prevalencia en valores absolutos y transformaciones en la versión corta. **v3, v1 completa y v2 corta** quedan como versión anterior, sin regenerar.
 
