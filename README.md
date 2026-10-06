@@ -9,7 +9,7 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 
 ---
 
-## Estado (actualizado 28-09-2026)
+## Estado (actualizado 06-10-2026)
 
 | Entregable | Estado | Archivos |
 |---|---|---|
@@ -17,10 +17,11 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 | **2 · Parte A** · EDA y evaluación de calidad | ✅ Completa, corte ago-2026 | `Entregable/Entregable 2/Entregable 2 - Parte A - COMPLETADO.docx` |
 | **2 · Parte B** · Plan de mejora, dashboard antes/después, dataset de entrenamiento | ✅ Completa | `Entregable/Entregable 2/Entregable 2 - Parte B - COMPLETADO.docx` |
 | **2 · Dashboard** | ✅ 5 pestañas | `Entregable/Entregable 2/Dashboard-Calidad-Antes-Despues.html` |
-| **2 · Presentación** | ✅ Se usa la **corta** | `Entregable/Entregable 2/Presentacion/Casa-Oga-Entregable-2-v4-corta.{html,pdf}` (17) · respaldo `…-v4-completa.{html,pdf}` (36) |
+| **2 · Presentación** | ✅ Final: **v4 corta modelo** (16) | `Entregable/Entregable 2/Presentacion/Casa-Oga-Entregable-2-v4-corta-modelo.html` |
+| **2 · Envío a la cátedra** | ✅ Consolidado A+B, presentación, dataset v3 (CSV), diccionario y dashboard antes/después | `Entregable/Entregable 2/Envio-Profesores/` (se regenera con los `armar_*.py` de esa carpeta) |
 | **3** · Modelado | Próximo | Parte de `Datasets_Modelo/dataset_entrenamiento_v3.parquet` |
 
-**Falta para entregar el 2:** carátulas de Parte A y B (legajos de Simón y Santiago, roles, fecha) y elegir la versión de la presentación.
+**Falta para entregar el 2:** legajo de Santiago en la carátula del consolidado.
 **Pendiente con el negocio (no bloquea):** aprobación del target (María G.), capacidad de 15-25 intervenciones por tienda (Lucía O.), preguntas H3/H6/H12.
 
 ---

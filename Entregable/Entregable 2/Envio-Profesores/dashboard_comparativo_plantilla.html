@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datos antes y después</title>
+<style>
+:root{
+  --brand:#FFC72C; --antes:#E8590C; --despues:#3E6FA8;
+  --ink:#1C1C1E; --ink-2:#6E6E73; --ink-3:#9A9AA0; --line:#E2E8F0; --grid:#E8EDF3;
+}
+*{box-sizing:border-box;margin:0}
+body{color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+  background:radial-gradient(ellipse 70% 50% at 15% 0%,rgba(120,160,255,.14) 0%,transparent 55%),
+             radial-gradient(ellipse 60% 45% at 85% 10%,rgba(255,199,44,.12) 0%,transparent 55%),
+             linear-gradient(160deg,#f2f2f7 0%,#e9e9f0 50%,#edebf5 100%);
+  background-color:#F2F2F7;-webkit-font-smoothing:antialiased;min-height:100vh}
+header{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hw{max-width:1200px;margin:0 auto;padding:0 24px;min-height:56px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;white-space:nowrap}
+.logo i{width:22px;height:22px;border-radius:6px;background:var(--brand)}
+.sep{width:1px;height:24px;background:var(--line)}
+.hw .t{color:var(--ink-2);font-size:13px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.key{display:flex;gap:14px;font-size:12px;color:var(--ink-2);white-space:nowrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.dot.a{background:var(--antes)}.dot.d{background:var(--despues)}
+main{max-width:1200px;margin:0 auto;padding:28px 24px 56px}
+.label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-size:26px;letter-spacing:-.02em;line-height:1.2;margin-top:4px}
+.lead{color:var(--ink-2);max-width:820px;margin-top:6px}
+h2{font-size:15px;font-weight:600}
+.sub{font-size:12px;color:var(--ink-2);margin-top:2px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 2px rgba(15,23,42,.06),0 6px 20px rgba(15,23,42,.05);padding:18px 20px}
+.grid{display:grid;gap:16px;margin-top:16px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+/* cifras de la presentacion */
+.stat{border-left:4px solid var(--brand)}
+.stat .big{font-size:30px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat p{color:var(--ink-2);font-size:13px;margin-top:6px}
+.pair{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-2)}
+.pair b{color:var(--ink);font-variant-numeric:tabular-nums}
+/* totales */
+.tot{display:grid;grid-template-columns:minmax(120px,1.1fr) 2.4fr auto;gap:12px 14px;align-items:center;margin-top:14px}
+.tot .m{font-size:13px}
+.bars{display:flex;flex-direction:column;gap:3px}
+.bar{height:12px;border-radius:0 4px 4px 0;position:relative}
+.bar span{position:absolute;left:calc(100% + 6px);top:-2px;font-size:11px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tot .dl{font-size:13px;font-weight:600;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* comparativo lado a lado */
+.vs{display:grid;grid-template-columns:1fr 1fr;margin-top:12px}
+.vs>div{min-width:0;padding-right:14px}
+.vs>div+div{border-left:1px dashed var(--line);padding:0 0 0 14px}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(15,23,42,.05);padding:3px 9px 3px 8px;border-radius:999px;margin-bottom:8px}
+.tag .dot{width:8px;height:8px}
+svg{display:block;width:100%;overflow:visible}
+/* tabla de criterios */
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:12px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:11px;font-weight:600;color:var(--ink-2);letter-spacing:.04em}
+td.a,td.d{font-variant-numeric:tabular-nums}
+td.d{font-weight:600}
+tbody tr:hover{background:#F8FAFC}
+.foot{margin-top:22px;font-size:12px;color:var(--ink-2)}
+#tt{position:fixed;pointer-events:none;z-index:50;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;color:#0F172A;box-shadow:0 8px 24px rgba(15,23,42,.14);opacity:0;transition:opacity .12s}
+#tt .r{display:flex;justify-content:space-between;gap:14px;font-variant-numeric:tabular-nums}
+@media (max-width:860px){.g3,.g2{grid-template-columns:1fr}.key{display:none}}
+@media (max-width:600px){
+  .hw,main{padding-left:16px;padding-right:16px}.hw .t{display:none}
+  .vs{grid-template-columns:1fr}.vs>div+div{border-left:0;border-top:1px dashed var(--line);padding:12px 0 0;margin-top:12px}
+  .tw{overflow-x:auto}table{min-width:620px}
+}
+</style>
+</head>
+<body>
+<header><div class="hw">
+  <div class="logo"><i></i>Casa Óga</div><div class="sep"></div>
+  <div class="t">Entregable 2 · Datos antes y después de la limpieza</div>
+  <div class="key"><span><span class="dot a"></span>Antes · crudo</span><span><span class="dot d"></span>Después · procesado</span></div>
+</div></header>
+<main id="main"></main>
+<div id="tt"></div>
+<script id="data" type="application/json">/*__DATA__*/</script>
+<script>
+const D = JSON.parse(document.getElementById('data').textContent);
+const C = {a: '#E8590C', d: '#3E6FA8', ink: '#1C1C1E', ink2: '#6E6E73'};
+const nf = (x, d = 0) => x == null ? '—' : x.toLocaleString('es-AR', {minimumFractionDigits: d, maximumFractionDigits: d});
+const sg = (x, d = 1) => (x > 0 ? '+' : x < 0 ? '−' : '±') + nf(Math.abs(x), d);
+const pct = (a, b) => (b / a - 1) * 100;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const tt = document.getElementById('tt');
+const row = (c, k, v) => `<div class="r"><span>${c ? `<span class="dot" style="background:${c};width:8px;height:8px"></span>` : ''}${k}</span><b>${v}</b></div>`;
+function tip(el, html) {
+  el.addEventListener('mousemove', e => {
+    tt.innerHTML = html; tt.style.opacity = 1;
+    let x = e.clientX + 14;
+    if (x + tt.offsetWidth > innerWidth - 8) x = e.clientX - tt.offsetWidth - 14;
+    tt.style.left = x + 'px'; tt.style.top = (e.clientY + 14) + 'px';
+  });
+  el.addEventListener('mouseleave', () => tt.style.opacity = 0);
+}
+
+const V = D.ventas, S = D.stock, CA = D.catalogo, AC = D.acciones, PR = D.presupuesto, M = D.modelo;
+
+/* totales: cambian menos de 2% */
+const TOT = [
+  ['Venta ene-22 a ago-26 (M$)', V.venta, 1],
+  ['Unidades vendidas', V.unidades, 0],
+  ['Capital a costo dic-25 (M$)', S.capital['dic-25'], 1],
+  ['Capital a costo ago-26 (M$)', S.capital['ago-26'], 1]];
+
+/* que corregimos y por que: los mismos criterios de la presentacion (diapositiva 3) */
+const CRIT = [
+  ['Claves duplicadas', `${nf(V.claves_dup)} en Ventas y en Stock`, '0', 'Conservar la 1ra ocurrencia', 'Con cualquier otro criterio los totales no cierran'],
+  ['Stock negativo', `${nf(S.filas_neg)} filas (mín. ${nf(S.minimo)})`, '0', 'Llevar a 0', 'Error de sincronización confirmado'],
+  ['Venta negativa', `${nf(V.filas_neg)} filas sueltas`, 'Neteadas', 'Netear con la venta del mes', 'Son devoluciones reales, no ritmo de venta'],
+  ['Descuentos > 100% o negativos', nf(AC.desc_fuera), '0', 'Excluir del margen', 'Error de carga, sin acción comercial detrás'],
+  ['Presupuesto en 0 o negativo', `${nf(PR.invalidas)} celdas`, '0', 'Excluir del desvío', 'Proceso inmaduro en 2022 y error de carga'],
+  ['Categorías mal escritas', `${CA.categorias[0]} etiquetas`, `${CA.categorias[1]} categorías`, 'Unificar la escritura', 'Filtrar por una etiqueta pierde venta: Decoración gana 1,5 pp'],
+  ['Historial de precios', 'Disponible', 'No se usa', 'No usarlo', 'Es una reconstrucción, no un registro'],
+  ['Comparar entre años', 'En pesos', 'En unidades', 'En unidades, sin deflactar', 'La venta ya está a precio actual: IPC corregiría dos veces'],
+  ['SKUs sin costo', `${CA.sin_costo} (su stock valía $0)`, '0', 'Costo de OC × 1,2321', 'Supuesto sugerido por el negocio y declarado']];
+
+const dec = CA.decoracion_pct;
+document.getElementById('main').innerHTML = `
+  <div class="label">Casa Óga · Entregable 2 · Grupo 1</div>
+  <h1>Corregir cambia poco los totales y mucho el detalle</h1>
+  <p class="lead">El dato <b>tal como lo entregó la cátedra</b> frente al dato <b>procesado</b> con los criterios de la presentación. Que el total cierre no prueba que los datos estén bien: los errores se compensan en el agregado (los duplicados suman, los SKUs sin costo restan) y aparecen al bajar a categoría o al target.</p>
+
+  <div class="grid g3">
+    <div class="card stat"><div class="big">&lt; 2%</div><p>cambian venta, unidades y capital al corregir</p>
+      <div class="pair"><span>Venta <b>${sg(pct(V.venta[0], V.venta[1]))}%</b></span><span>Unidades <b>${sg(pct(V.unidades[0], V.unidades[1]))}%</b></span><span>Capital dic-25 <b>${sg(pct(S.capital['dic-25'][0], S.capital['dic-25'][1]))}%</b></span></div></div>
+    <div class="card stat"><div class="big">+${nf(Math.floor((dec[1] - dec[0]) * 10) / 10, 1)} pp</div><p>gana Decoración al unificar categorías: es la candidata al piloto</p>
+      <div class="pair"><span><span class="dot a"></span><b>${nf(dec[0], 2)}%</b> de la venta</span><span>→</span><span><span class="dot d"></span><b>${nf(dec[1], 2)}%</b></span></div></div>
+    <div class="card stat"><div class="big">${nf(M.prevalencia[0], 1)}% → ${nf(M.prevalencia[1], 1)}%</div><p>prevalencia del target al netear las devoluciones en vez de llevarlas a 0: el mayor impacto para el modelo</p>
+      <div class="pair"><span>Positivos <b>${nf(M.positivos[0])} → ${nf(M.positivos[1])}</b></span><span><b>${sg(pct(M.positivos[0], M.positivos[1]), 0)}%</b></span></div></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card"><h2>Los totales casi no se mueven</h2><div class="sub">Antes y después de corregir; a la derecha, la variación.</div>
+      <div class="tot" id="tot"></div></div>
+    <div class="card"><h2>El detalle sí: venta por categoría (M$)</h2><div class="sub">Misma escala. Antes, lo cargado como «DECO» o «Decoración» queda fuera de Decoracion.</div>
+      <div class="vs"><div><span class="tag"><span class="dot a"></span>Antes · ${CA.categorias[0]} etiquetas</span><div id="ca"></div></div>
+      <div><span class="tag"><span class="dot d"></span>Después · ${CA.categorias[1]} categorías</span><div id="cd"></div></div></div></div>
+  </div>
+
+  <div class="grid"><div class="card"><h2>Qué corregimos y por qué</h2><div class="sub">Los criterios de la presentación, con lo que había antes y lo que queda después.</div>
+    <div class="tw"><table><thead><tr><th>Problema</th><th><span class="dot a"></span>Antes</th><th><span class="dot d"></span>Después</th><th>Qué hicimos</th><th>Por qué</th></tr></thead>
+    <tbody>${CRIT.map(r => `<tr><td><b>${esc(r[0])}</b></td><td class="a">${esc(r[1])}</td><td class="d">${esc(r[2])}</td><td>${esc(r[3])}</td><td style="color:#6E6E73">${esc(r[4])}</td></tr>`).join('')}</tbody></table></div></div></div>
+
+  <p class="foot">Los demás hallazgos (ventas antes de la apertura de 6 tiendas, venta sin stock, stock en tránsito sin definición, liquidaciones incoherentes y fuentes sin datos de 2026) no se corrigen: se declaran y quedan fuera del modelo. Detalle en el documento consolidado, Parte B §1. Fuente: Datasets/ (crudo) y Datasets_Normalizados/ con el plan de mejora (procesado).</p>`;
+
+/* totales: dos barras por metrica */
+const tot = document.getElementById('tot');
+TOT.forEach(([nombre, [a, b], d]) => {
+  const p = pct(a, b), m = Math.max(a, b);
+  const fila = document.createElement('div'); fila.style.display = 'contents';
+  fila.innerHTML = `<div class="m">${nombre}</div>
+    <div class="bars"><div class="bar" style="width:${74 * a / m}%;background:${C.a}"><span>${nf(a, d)}</span></div>
+    <div class="bar" style="width:${74 * b / m}%;background:${C.d}"><span>${nf(b, d)}</span></div></div>
+    <div class="dl">${sg(p)}%</div>`;
+  tot.appendChild(fila);
+  tip(fila.querySelector('.bars'), `<b>${nombre}</b>${row(C.a, 'Antes', nf(a, d))}${row(C.d, 'Después', nf(b, d))}${row(null, 'Variación', sg(p) + '%')}`);
+});
+
+/* categorias lado a lado */
+function hbar(el, items, max, color, marca) {
+  const W = el.clientWidth || 300, rh = 24, lw = 104, vw = 46, iw = Math.max(40, W - lw - vw);
+  let g = '';
+  items.forEach((x, i) => {
+    const y = i * rh + 2, w = Math.max(2, x.venta / max * iw), bh = rh - 8, r = Math.min(4, w);
+    g += `<text x="${lw - 8}" y="${y + bh / 2 + 4}" text-anchor="end" font-size="11" fill="${C.ink}" font-weight="${marca && marca(x) ? 700 : 400}">${esc(x.label)}</text>`;
+    g += `<path d="M${lw},${y}H${lw + w - r}Q${lw + w},${y} ${lw + w},${y + r}V${y + bh - r}Q${lw + w},${y + bh} ${lw + w - r},${y + bh}H${lw}Z" fill="${color}"/>`;
+    g += `<text x="${lw + w + 6}" y="${y + bh / 2 + 4}" font-size="11" fill="${C.ink2}">${nf(x.venta, 0)}</text>`;
+    g += `<rect class="h" data-i="${i}" x="0" y="${y - 2}" width="${W}" height="${rh}" fill="transparent"/>`;
+  });
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${items.length * rh + 4}" height="${items.length * rh + 4}" role="img" aria-label="Venta por categoría">${g}</svg>`;
+  el.querySelectorAll('.h').forEach(h => { const x = items[+h.dataset.i];
+    tip(h, `<b>${esc(x.label)}</b>${row(color, 'Venta', nf(x.venta, 1) + ' M$')}${row(null, 'SKUs', nf(x.skus))}${x.canon && x.canon !== x.label ? row(null, 'Pasa a', esc(x.canon)) : ''}`); });
+}
+function dibujar() {
+  const A = [...CA.cat_antes].sort((x, y) => y.venta - x.venta), B = [...CA.cat_despues].sort((x, y) => y.venta - x.venta);
+  const max = Math.max(...A.map(x => x.venta), ...B.map(x => x.venta));
+  hbar(document.getElementById('ca'), A, max, C.a, x => x.canon !== x.label);
+  hbar(document.getElementById('cd'), B, max, C.d);
+}
+dibujar();
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(dibujar, 120); });
+</script>
+</body>
+</html>

@@ -17,6 +17,12 @@ BLUE, ORANGE, GOLD, LINE = "#2F5E96", "#C4470A", "#F5B800", "#D9DDE4"
 HF = "font-family:'DM Sans', Arial, sans-serif"
 BF = "font-family:'IBM Plex Sans', Arial, sans-serif"
 RS = I["resumen"]; SP_ = RS["split"]
+# transformaciones: se leen del log del constructor del dataset (antes estaban escritas a mano y quedaron de la v2)
+_LOG = open(os.path.join(E2, "Modelo", "resultados", "construir_dataset_log.txt"), encoding="utf-8").read()
+def _lista(et): return [x for x in _LOG.split(et, 1)[1].split(chr(10), 1)[0].split(",") if x.strip()]
+TR = {"wins": len(_lista("winsorizadas p1-p99:")), "log": len(_lista("log1p aplicado a:")),
+      "skew_cob": float(_LOG.split("ASIMETRIA", 1)[1].split(chr(10) + "cobertura ", 1)[1].split()[0]),
+      "peso": float(_LOG.split("class_weight positivo =", 1)[1].split()[0])}
 MES = {"Jan": "ene", "Feb": "feb", "Mar": "mar", "Apr": "abr", "May": "may", "Jun": "jun", "Jul": "jul", "Aug": "ago", "Sep": "sep", "Oct": "oct", "Nov": "nov", "Dec": "dic"}
 fm = lambda s: MES[s[:3]] + s[3:]
 n = lambda v, d=1: f"{v:,.{d}f}".replace(",", "X").replace(".", ",").replace("X", ".")
@@ -352,13 +358,13 @@ page("excluidas", "Dataset · variables excluidas", "Lo que quedó afuera, y por
  "SI PREGUNTAN: ¿Cómo sabe el modelo de qué producto habla? Recibe las variables que describen la posición; el id solo acompaña el resultado. ¿Hay una variable llamada presupuesto t+1? No: es una columna candidata del archivo de presupuesto que evaluamos y descartamos; la única de presupuesto que usamos es el cumplimiento de los últimos 3 meses.", gap=28)
 page("transformaciones", "Dataset · preparación para el modelo", "Transformaciones, todas ajustadas solo con train",
  table(["Transformación", "Qué se hizo", "Por qué"], [
-  ["Valores extremos", "Winsorización p1-p99 en 45 continuas", "Colas largas reales, no errores: no se borran filas"],
-  ["Distribuciones sesgadas", "log(1+x) en 25 variables", "Reduce el peso de los extremos (cobertura: asimetría 3,98)"],
+  ["Valores extremos", f"Winsorización p1-p99 en {TR['wins']} continuas", "Colas largas reales, no errores: no se borran filas"],
+  ["Distribuciones sesgadas", f"log(1+x) en {TR['log']} variables", f"Reduce el peso de los extremos (cobertura: asimetría {n(TR['skew_cob'],2)})"],
   ["Escalado", "Estandarización con media y desvío de train", "Escalas muy distintas; lo necesita la regresión logística"],
   ["Categóricas", "One-hot de categoría, subcategoría, región, formato, proveedor", "Son nominales: label encoding inventaría un orden"],
   ["Temporales", "Mes como seno y coseno, ventanas de 3/6/12 meses, antigüedad", "Diciembre queda junto a enero; la trayectoria anticipa"],
   ["Faltantes", "Topes, indicadores y medianas de train", "Son denominadores cero o eventos ausentes, no datos perdidos"],
-  ["Balanceo", "Ponderación de clases (≈55), sin SMOTE", "SMOTE mezclaría meses y rompería la estructura temporal"]], [22, 38, 40], 25)
+  ["Balanceo", f"Ponderación de clases (≈{n(TR['peso'],0)}), sin SMOTE", "SMOTE mezclaría meses y rompería la estructura temporal"]], [22, 38, 40], 25)
  + f'<p style="font-size:24px; color:{MUT}">Dos versiones: sin transformar para árboles y transformada para una regresión logística, que es la línea base explicable que exige el negocio.</p>',
  "Ningún parámetro de transformación se calcula con validación o test: sería otra forma de leakage.", gap=32)
 
@@ -392,7 +398,7 @@ page("capacidad", "Señal · capacidad operativa", "El modelo encuentra más cas
  chart(IMG["cap"], "Porcentaje de casos capturados según alertas por mes, modelo de prueba contra regla de cobertura actual, en validación y en test",
   stat(f"{n(cpv['recall_modelo'][k4],0)}% vs {n(cpv['recall_regla'][k4],0)}%", "casos capturados con 420 alertas por mes en validación (2025): modelo contra ordenar por cobertura actual")
   + stat(f"{n(float(t4['recall_modelo']),0)}% vs {n(float(t4['recall_regla']),0)}%", f"en test (2026) con 420 alertas: la regla casi lo alcanza. Con 700: {n(float(t7['recall_modelo']),0)}% vs {n(float(t7['recall_regla']),0)}%")
-  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Con 420 alertas acierta 1 de cada 5 en 2025 (precisión {n(cpv["precision_modelo"][k4],0)}%). En 2026 hay {t4["positivos_mes"]} casos por mes: más que la capacidad. Modelo de prueba sin ajustar, no el final.</p>'),
+  + f'<p style="font-size:22px; line-height:1.4; color:{MUT}"><b style="color:{INK}">Modelo de prueba: Gradient Boosting (HistGradientBoosting).</b> Entrenado solo con train (2022–2024) y aplicado sin reentrenar a validación 2025 y test 2026. Con 420 alertas acierta 1 de cada 5 en 2025 (precisión {n(cpv["precision_modelo"][k4],0)}%). En 2026 hay {t4["positivos_mes"]} casos por mes: más que la capacidad. No es el modelo final.</p>'),
  "La franja amarilla es la capacidad declarada de 15 a 25 intervenciones por tienda, que nunca se midió. En 2026 la regla simple se acerca: el modelo final tiene que ganar ahí, y los casos superan la capacidad. Hay que validarla con Lucía O.")
 page("senal", "Señal · por variable", "La señal está en la demanda de la posición",
  chart(IMG["senal"], "AUC de cada una de las 15 variables con más señal, en train y en test",
