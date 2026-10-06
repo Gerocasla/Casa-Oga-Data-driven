@@ -1,0 +1,38 @@
+=== CALIDAD (datos crudos) ===
+Ventas.unidades_vendidas: nulos 0 de 299,400 (0.00%)
+Ventas.venta_neta: nulos 0 de 299,400 (0.00%)
+Stock.stock_disponible: nulos 0 de 299,400 (0.00%)
+Catalogo.costo_unitario: nulos 22 de 815 (2.70%)
+Catalogo.categoria: nulos 0 de 815 (0.00%)
+Catalogo.proveedor: nulos 0 de 815 (0.00%)
+Claves (mes, tienda, SKU) unicas: ventas 297,022 · stock 297,022
+Join ventas-stock: {'both': 297022, 'left_only': 0, 'right_only': 0} -> no matchea 0.00%
+SKUs de ventas fuera del catalogo: 0
+Filas con clave duplicada en ventas: 4,756 (1.59%)
+
+=== FICHA DEL EXPERIMENTO ===
+Filas: 201,306 · periodos (meses de corte): 51 (2022-03 a 2026-05)
+Positivos: 6,853 · prevalencia 3.40%
+
+=== PARTICION TEMPORAL ===
+              desde    hasta  meses  filas  positivos  prevalencia
+split                                                             
+train       2022-03  2024-12     34  98649       2466         2.50
+validacion  2025-04  2025-09      6  38362        854         2.23
+test        2026-01  2026-05      5  28070       2535         9.03
+embargo     2025-01  2025-12      6  36225        998         2.76
+
+=== BASELINES (validacion) ===
+
+Baseline 1: clase mayoritaria
+  VP=0 FN=854 FP=0 VN=37,508
+  PR-AUC (regla binaria) = 0.022
+  precision=0.000 recall=0.000 f1=0.000
+  alertas por mes (promedio): 0
+
+Baseline 2: cobertura actual > 12 meses
+  VP=258 FN=596 FP=792 VN=36,716
+  PR-AUC (regla binaria) = 0.090
+  PR-AUC (cobertura como puntaje continuo) = 0.204
+  precision=0.246 recall=0.302 f1=0.271
+  alertas por mes (promedio): 175
