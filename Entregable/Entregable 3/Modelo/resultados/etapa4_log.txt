@@ -1,0 +1,111 @@
+=== INSUMOS ===
+Dataset: dataset_entrenamiento_v3.csv · sha256 796ba1a483aaeed9... · coincide con Parte C: True
+Modelo: ensamble_modelos_arboles.joblib (ensamble fijado en la Etapa 3, sin reentrenar)
+
+=== CATEGORIAS NO VISTAS EN TRAIN (test) ===
+categoria: 0 niveles nuevos en test
+subcategoria: 0 niveles nuevos en test
+region: 0 niveles nuevos en test
+formato: 0 niveles nuevos en test
+proveedor: 0 niveles nuevos en test
+
+=== VALIDACION ABR-SEP 2025 ===
+Filas 38,362 · positivos 854 (142.3/mes) · prevalencia 2.23% · meses 6
+
+Regla fija: cobertura actual > 12 meses
+  alertas 1,050 (175.0/mes) · VP=258 FN=596 FP=792 VN=36,716
+  precision=0.246 recall=0.302 f1=0.271 AUC-ROC=0.805 PR-AUC=0.206
+  valor neto USD 848 en 6 meses (141/mes · 1,696/anio)
+
+Regla ordenada por cobertura, Top-600/mes
+  alertas 3,600 (600.0/mes) · VP=448 FN=406 FP=3,152 VN=34,356
+  precision=0.124 recall=0.525 f1=0.201 AUC-ROC=0.805 PR-AUC=0.206
+  valor neto USD -2,436 en 6 meses (-406/mes · -4,873/anio)
+
+HistGradientBoosting original (3B), Top-600/mes
+  alertas 3,600 (600.0/mes) · VP=585 FN=269 FP=3,015 VN=34,493
+  precision=0.163 recall=0.685 f1=0.263 AUC-ROC=0.907 PR-AUC=0.228
+  valor neto USD -760 en 6 meses (-127/mes · -1,519/anio)
+
+Ensamble final (3C), Top-600/mes  <- MODELO FIJADO
+  alertas 3,600 (600.0/mes) · VP=606 FN=248 FP=2,994 VN=34,514
+  precision=0.168 recall=0.710 f1=0.272 AUC-ROC=0.910 PR-AUC=0.265
+  valor neto USD -503 en 6 meses (-84/mes · -1,005/anio)
+
+Ensamble con el mismo cupo mensual que la regla fija
+  alertas 1,050 (175.0/mes) · VP=324 FN=530 FP=726 VN=36,782
+  precision=0.309 recall=0.379 f1=0.340 AUC-ROC=0.910 PR-AUC=0.265
+  valor neto USD 1,656 en 6 meses (276/mes · 3,312/anio)
+
+  Mensual (positivos · VP ensamble Top-600 · alertas y VP de la regla fija):
+   2025-04-01: 149 · 111 · 173 / 52
+   2025-05-01: 125 · 93 · 173 / 37
+   2025-06-01: 132 · 90 · 156 / 35
+   2025-07-01: 131 · 100 · 192 / 41
+   2025-08-01: 154 · 105 · 179 / 46
+   2025-09-01: 163 · 107 · 177 / 47
+  Recall del ensamble por categoria:
+   Cocina y mesa: 81/131 = 61.8%
+   Decoracion: 91/140 = 65.0%
+   Organizacion: 47/71 = 66.2%
+   Muebles: 96/136 = 70.6%
+   Iluminacion: 66/88 = 75.0%
+   Bano: 103/132 = 78.0%
+   Textil hogar: 122/156 = 78.2%
+
+=== TEST ENE-MAY 2026 ===
+Filas 28,070 · positivos 2,535 (507.0/mes) · prevalencia 9.03% · meses 5
+
+Regla fija: cobertura actual > 12 meses
+  alertas 1,216 (243.2/mes) · VP=1,034 FN=1,501 FP=182 VN=25,353
+  precision=0.850 recall=0.408 f1=0.551 AUC-ROC=0.942 PR-AUC=0.731
+  valor neto USD 9,981 en 5 meses (1,996/mes · 23,954/anio)
+
+Regla ordenada por cobertura, Top-600/mes
+  alertas 3,000 (600.0/mes) · VP=1,773 FN=762 FP=1,227 VN=24,308
+  precision=0.591 recall=0.699 f1=0.641 AUC-ROC=0.942 PR-AUC=0.731
+  valor neto USD 15,102 en 5 meses (3,020/mes · 36,244/anio)
+
+HistGradientBoosting original (3B), Top-600/mes
+  alertas 3,000 (600.0/mes) · VP=1,912 FN=623 FP=1,088 VN=24,447
+  precision=0.637 recall=0.754 f1=0.691 AUC-ROC=0.970 PR-AUC=0.778
+  valor neto USD 16,803 en 5 meses (3,361/mes · 40,327/anio)
+
+Ensamble final (3C), Top-600/mes  <- MODELO FIJADO
+  alertas 3,000 (600.0/mes) · VP=1,950 FN=585 FP=1,050 VN=24,485
+  precision=0.650 recall=0.769 f1=0.705 AUC-ROC=0.970 PR-AUC=0.762
+  valor neto USD 17,268 en 5 meses (3,454/mes · 41,443/anio)
+
+Ensamble con el mismo cupo mensual que la regla fija
+  alertas 1,216 (243.2/mes) · VP=1,067 FN=1,468 FP=149 VN=25,386
+  precision=0.877 recall=0.421 f1=0.569 AUC-ROC=0.970 PR-AUC=0.762
+  valor neto USD 10,385 en 5 meses (2,077/mes · 24,924/anio)
+
+  Mensual (positivos · VP ensamble Top-600 · alertas y VP de la regla fija):
+   2026-01-01: 301 · 247 · 136 / 100
+   2026-02-01: 417 · 325 · 154 / 133
+   2026-03-01: 494 · 395 · 244 / 202
+   2026-04-01: 610 · 460 · 286 / 251
+   2026-05-01: 713 · 523 · 396 / 348
+  Recall del ensamble por categoria:
+   Organizacion: 183/255 = 71.8%
+   Decoracion: 332/458 = 72.5%
+   Bano: 232/314 = 73.9%
+   Cocina y mesa: 271/365 = 74.2%
+   Textil hogar: 340/420 = 81.0%
+   Iluminacion: 215/265 = 81.1%
+   Muebles: 377/458 = 82.3%
+
+=== GENERALIZACION (validacion -> test) ===
+Regla fija: cobertura actual > 12 meses  precision 0.246 -> 0.850 (+60.5 pp)
+Regla fija: cobertura actual > 12 meses  recall    0.302 -> 0.408 (+10.6 pp)
+Regla fija: cobertura actual > 12 meses  f1        0.271 -> 0.551 (+28.0 pp)
+Regla fija: cobertura actual > 12 meses  auc_roc   0.805 -> 0.942 (+13.7 pp)
+Ensamble final (3C), Top-600/mes  <- MOD precision 0.168 -> 0.650 (+48.2 pp)
+Ensamble final (3C), Top-600/mes  <- MOD recall    0.710 -> 0.769 (+6.0 pp)
+Ensamble final (3C), Top-600/mes  <- MOD f1        0.272 -> 0.705 (+43.2 pp)
+Ensamble final (3C), Top-600/mes  <- MOD auc_roc   0.910 -> 0.970 (+5.9 pp)
+
+=== ROI ESCENARIO ESPERADO (Parte B 3.4) CON ACIERTOS INCREMENTALES OBSERVADOS ===
+Validacion abr-sep 2025: +158 aciertos vs regla Top-600 (316/anio) -> beneficio predictivo USD 3,867 + horas USD 4,032 = USD 7,899/anio · ROI anio 1 -49.1% · ROI 3 anios -13.7% · recupero 59 meses
+Test ene-may 2026: +177 aciertos vs regla Top-600 (425/anio) -> beneficio predictivo USD 5,198 + horas USD 4,032 = USD 9,230/anio · ROI anio 1 -40.6% · ROI 3 anios 0.9% · recupero 35 meses

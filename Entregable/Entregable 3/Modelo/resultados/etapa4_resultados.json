@@ -1,0 +1,384 @@
+{
+  "insumos": {
+    "dataset_sha256": "796ba1a483aaeed934cf0e6cd93442af2e5c0e2eb53b9d7d97330bd0d5212a80",
+    "coincide_parte_c": true,
+    "umbral": "Top-600 por mes sobre score_ensamble (promedio de percentiles mensuales)",
+    "valor_vp_usd": 10.04,
+    "costo_fp_usd": 2.2
+  },
+  "periodos": {
+    "validacion": {
+      "filas": 38362,
+      "positivos": 854,
+      "prevalencia": 0.022261613054585266,
+      "meses": 6,
+      "positivos_mes": 142.3,
+      "regla_cobertura_12": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 258,
+        "fp": 792,
+        "fn": 596,
+        "vn": 36716,
+        "precision": 0.24571428571428572,
+        "recall": 0.30210772833723654,
+        "f1": 0.2710084033613446,
+        "auc_roc": 0.8048338290485539,
+        "pr_auc": 0.205536749554363,
+        "valor_neto_usd": 847.92,
+        "valor_neto_mensual_usd": 141.32,
+        "valor_neto_anualizado_usd": 1695.84,
+        "meses": 6
+      },
+      "regla_cobertura_top600": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 448,
+        "fp": 3152,
+        "fn": 406,
+        "vn": 34356,
+        "precision": 0.12444444444444444,
+        "recall": 0.5245901639344263,
+        "f1": 0.20116748989672203,
+        "auc_roc": 0.8048338290485539,
+        "pr_auc": 0.205536749554363,
+        "valor_neto_usd": -2436.48,
+        "valor_neto_mensual_usd": -406.08,
+        "valor_neto_anualizado_usd": -4872.96,
+        "meses": 6
+      },
+      "hgb_original_top600": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 585,
+        "fp": 3015,
+        "fn": 269,
+        "vn": 34493,
+        "precision": 0.1625,
+        "recall": 0.6850117096018735,
+        "f1": 0.26268522676246076,
+        "auc_roc": 0.9067400359742147,
+        "pr_auc": 0.22810185779257944,
+        "valor_neto_usd": -759.6,
+        "valor_neto_mensual_usd": -126.6,
+        "valor_neto_anualizado_usd": -1519.2,
+        "meses": 6
+      },
+      "ensamble_top600": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 606,
+        "fp": 2994,
+        "fn": 248,
+        "vn": 34514,
+        "precision": 0.16833333333333333,
+        "recall": 0.7096018735362998,
+        "f1": 0.27211495285136955,
+        "auc_roc": 0.910242270876046,
+        "pr_auc": 0.2645266164711868,
+        "valor_neto_usd": -502.56,
+        "valor_neto_mensual_usd": -83.76,
+        "valor_neto_anualizado_usd": -1005.12,
+        "meses": 6
+      },
+      "ensamble_mismo_cupo_regla": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 324,
+        "fp": 726,
+        "fn": 530,
+        "vn": 36782,
+        "precision": 0.30857142857142855,
+        "recall": 0.3793911007025761,
+        "f1": 0.3403361344537815,
+        "auc_roc": 0.910242270876046,
+        "pr_auc": 0.2645266164711868,
+        "valor_neto_usd": 1655.76,
+        "valor_neto_mensual_usd": 275.96,
+        "valor_neto_anualizado_usd": 3311.52,
+        "meses": 6
+      },
+      "mensual": [
+        {
+          "mes": "2025-04-01",
+          "positivos": 149,
+          "vp_ensamble": 111,
+          "alertas_regla12": 173,
+          "vp_regla12": 52
+        },
+        {
+          "mes": "2025-05-01",
+          "positivos": 125,
+          "vp_ensamble": 93,
+          "alertas_regla12": 173,
+          "vp_regla12": 37
+        },
+        {
+          "mes": "2025-06-01",
+          "positivos": 132,
+          "vp_ensamble": 90,
+          "alertas_regla12": 156,
+          "vp_regla12": 35
+        },
+        {
+          "mes": "2025-07-01",
+          "positivos": 131,
+          "vp_ensamble": 100,
+          "alertas_regla12": 192,
+          "vp_regla12": 41
+        },
+        {
+          "mes": "2025-08-01",
+          "positivos": 154,
+          "vp_ensamble": 105,
+          "alertas_regla12": 179,
+          "vp_regla12": 46
+        },
+        {
+          "mes": "2025-09-01",
+          "positivos": 163,
+          "vp_ensamble": 107,
+          "alertas_regla12": 177,
+          "vp_regla12": 47
+        }
+      ],
+      "segmentos_categoria": [
+        {
+          "categoria": "Cocina y mesa",
+          "positivos": 131,
+          "vp": 81,
+          "recall": 0.6183206106870229
+        },
+        {
+          "categoria": "Decoracion",
+          "positivos": 140,
+          "vp": 91,
+          "recall": 0.65
+        },
+        {
+          "categoria": "Organizacion",
+          "positivos": 71,
+          "vp": 47,
+          "recall": 0.6619718309859155
+        },
+        {
+          "categoria": "Muebles",
+          "positivos": 136,
+          "vp": 96,
+          "recall": 0.7058823529411765
+        },
+        {
+          "categoria": "Iluminacion",
+          "positivos": 88,
+          "vp": 66,
+          "recall": 0.75
+        },
+        {
+          "categoria": "Bano",
+          "positivos": 132,
+          "vp": 103,
+          "recall": 0.7803030303030303
+        },
+        {
+          "categoria": "Textil hogar",
+          "positivos": 156,
+          "vp": 122,
+          "recall": 0.782051282051282
+        }
+      ]
+    },
+    "test": {
+      "filas": 28070,
+      "positivos": 2535,
+      "prevalencia": 0.09030993943712148,
+      "meses": 5,
+      "positivos_mes": 507.0,
+      "regla_cobertura_12": {
+        "alertas": 1216,
+        "alertas_mes": 243.2,
+        "vp": 1034,
+        "fp": 182,
+        "fn": 1501,
+        "vn": 25353,
+        "precision": 0.850328947368421,
+        "recall": 0.4078895463510848,
+        "f1": 0.5513196480938417,
+        "auc_roc": 0.9416708783125918,
+        "pr_auc": 0.7311060514641884,
+        "valor_neto_usd": 9980.96,
+        "valor_neto_mensual_usd": 1996.19,
+        "valor_neto_anualizado_usd": 23954.3,
+        "meses": 5
+      },
+      "regla_cobertura_top600": {
+        "alertas": 3000,
+        "alertas_mes": 600.0,
+        "vp": 1773,
+        "fp": 1227,
+        "fn": 762,
+        "vn": 24308,
+        "precision": 0.591,
+        "recall": 0.6994082840236686,
+        "f1": 0.640650406504065,
+        "auc_roc": 0.9416708783125918,
+        "pr_auc": 0.7311060514641884,
+        "valor_neto_usd": 15101.52,
+        "valor_neto_mensual_usd": 3020.3,
+        "valor_neto_anualizado_usd": 36243.65,
+        "meses": 5
+      },
+      "hgb_original_top600": {
+        "alertas": 3000,
+        "alertas_mes": 600.0,
+        "vp": 1912,
+        "fp": 1088,
+        "fn": 623,
+        "vn": 24447,
+        "precision": 0.6373333333333333,
+        "recall": 0.7542406311637081,
+        "f1": 0.6908762420957543,
+        "auc_roc": 0.9703924728753394,
+        "pr_auc": 0.7780090519870582,
+        "valor_neto_usd": 16802.88,
+        "valor_neto_mensual_usd": 3360.58,
+        "valor_neto_anualizado_usd": 40326.91,
+        "meses": 5
+      },
+      "ensamble_top600": {
+        "alertas": 3000,
+        "alertas_mes": 600.0,
+        "vp": 1950,
+        "fp": 1050,
+        "fn": 585,
+        "vn": 24485,
+        "precision": 0.65,
+        "recall": 0.7692307692307693,
+        "f1": 0.7046070460704607,
+        "auc_roc": 0.9696298038543223,
+        "pr_auc": 0.761622429033895,
+        "valor_neto_usd": 17268.0,
+        "valor_neto_mensual_usd": 3453.6,
+        "valor_neto_anualizado_usd": 41443.2,
+        "meses": 5
+      },
+      "ensamble_mismo_cupo_regla": {
+        "alertas": 1216,
+        "alertas_mes": 243.2,
+        "vp": 1067,
+        "fp": 149,
+        "fn": 1468,
+        "vn": 25386,
+        "precision": 0.8774671052631579,
+        "recall": 0.4209072978303747,
+        "f1": 0.5689149560117301,
+        "auc_roc": 0.9696298038543223,
+        "pr_auc": 0.761622429033895,
+        "valor_neto_usd": 10384.88,
+        "valor_neto_mensual_usd": 2076.98,
+        "valor_neto_anualizado_usd": 24923.71,
+        "meses": 5
+      },
+      "mensual": [
+        {
+          "mes": "2026-01-01",
+          "positivos": 301,
+          "vp_ensamble": 247,
+          "alertas_regla12": 136,
+          "vp_regla12": 100
+        },
+        {
+          "mes": "2026-02-01",
+          "positivos": 417,
+          "vp_ensamble": 325,
+          "alertas_regla12": 154,
+          "vp_regla12": 133
+        },
+        {
+          "mes": "2026-03-01",
+          "positivos": 494,
+          "vp_ensamble": 395,
+          "alertas_regla12": 244,
+          "vp_regla12": 202
+        },
+        {
+          "mes": "2026-04-01",
+          "positivos": 610,
+          "vp_ensamble": 460,
+          "alertas_regla12": 286,
+          "vp_regla12": 251
+        },
+        {
+          "mes": "2026-05-01",
+          "positivos": 713,
+          "vp_ensamble": 523,
+          "alertas_regla12": 396,
+          "vp_regla12": 348
+        }
+      ],
+      "segmentos_categoria": [
+        {
+          "categoria": "Organizacion",
+          "positivos": 255,
+          "vp": 183,
+          "recall": 0.7176470588235294
+        },
+        {
+          "categoria": "Decoracion",
+          "positivos": 458,
+          "vp": 332,
+          "recall": 0.7248908296943232
+        },
+        {
+          "categoria": "Bano",
+          "positivos": 314,
+          "vp": 232,
+          "recall": 0.7388535031847133
+        },
+        {
+          "categoria": "Cocina y mesa",
+          "positivos": 365,
+          "vp": 271,
+          "recall": 0.7424657534246575
+        },
+        {
+          "categoria": "Textil hogar",
+          "positivos": 420,
+          "vp": 340,
+          "recall": 0.8095238095238095
+        },
+        {
+          "categoria": "Iluminacion",
+          "positivos": 265,
+          "vp": 215,
+          "recall": 0.8113207547169812
+        },
+        {
+          "categoria": "Muebles",
+          "positivos": 458,
+          "vp": 377,
+          "recall": 0.8231441048034934
+        }
+      ]
+    }
+  },
+  "roi_escenario_esperado": {
+    "validacion": {
+      "vp_extra_vs_regla_top600": 158,
+      "vp_extra_anual": 316.0,
+      "beneficio_predictivo_anual": 3867.0,
+      "beneficio_anual_total": 7899.0,
+      "roi_anio1": -0.49137676503686667,
+      "roi_3anios": -0.13673018153251795,
+      "recupero_con_mantenimiento_meses": 59.2
+    },
+    "test": {
+      "vp_extra_vs_regla_top600": 177,
+      "vp_extra_anual": 424.8,
+      "beneficio_predictivo_anual": 5198.0,
+      "beneficio_anual_total": 9230.0,
+      "roi_anio1": -0.40564625371929686,
+      "roi_3anios": 0.008777451337630592,
+      "recupero_con_mantenimiento_meses": 35.1
+    }
+  }
+}
