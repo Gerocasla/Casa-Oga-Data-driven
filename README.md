@@ -21,7 +21,7 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 | **2 · Envío a la cátedra** | ✅ Consolidado A+B (v3.0, revisado), presentación, dataset **v4** (CSV), diccionario v4 y dashboard antes/después. Los archivos `*-v3` de la carpeta quedan del envío anterior: no mandarlos | `Entregable/Entregable 2/Envio-Profesores/` (se regenera con los `armar_*.py` de esa carpeta) |
 | **3** · Modelado | En curso sobre la **v3** (que se conserva sin cambios) | Pendiente: decidir si se reentrena con la v4; reportar validación 2025 y test 2026 por separado con la regla «cobertura > 12» como línea base |
 
-**Falta para reentregar el 2:** legajo de Santiago (marcador `[legajo]`) y fecha de reentrega en la carátula del consolidado.
+**Falta para reentregar el 2:** fecha de reentrega en la carátula del consolidado.
 **Pendiente con el negocio (no bloquea):** aprobación del target (María G.), capacidad de 15-25 intervenciones por tienda (Lucía O.), preguntas H3/H6/H12.
 
 ---
