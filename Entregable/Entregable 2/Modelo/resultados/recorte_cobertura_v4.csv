@@ -1,0 +1,5 @@
+variante,split,valores_distintos_cob_train,auc_cobertura_sola,auc_logistica,pr_auc_logistica,coef_cobertura
+p99,validacion,6778,0.8093,0.9075,0.2411,0.987
+p99,test,6778,0.9409,0.9698,0.7881,0.987
+log,validacion,7047,0.8093,0.9072,0.2409,0.983
+log,test,7047,0.9409,0.9697,0.7913,0.983

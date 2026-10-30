@@ -5,14 +5,17 @@ Datos del dashboard comparativo ANTES vs DESPUES del procesamiento y la limpieza
 ANTES   = Datasets/ tal como los entrega la catedra (sin tocar).
 DESPUES = Datasets_Normalizados/ + criterios del plan de mejora, los mismos que usa
           Modelo/construir_dataset_modelo.py:
-          R1-R4 normalizacion de texto, categorias y fechas · H1/H2 dedup 1ra ocurrencia ·
-          H4 stock piso 0 y ventas negativas neteadas · H9 descuentos y presupuesto invalidos excluidos ·
+          R1-R4 normalizacion de texto, categorias y fechas · H1/H2 dedup "mayor venta" (P4; v4) ·
+          H4 stock piso 0 y ventas negativas neteadas salvo "sin rotacion" (v4) · H9 descuentos y presupuesto
+          invalidos excluidos ·
           H10 promociones duplicadas o con fechas invertidas excluidas · H11 costo OC x 1,2321.
 
 Salida: resultados/comparativo_antes_despues.json (lo consume Envio-Profesores/armar_envio.py)
 """
 import os, sys, json
 import numpy as np, pandas as pd
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from criterios_limpieza import limpiar_ventas_stock
 
 sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -33,11 +36,9 @@ c0, l0 = rd(RAW, "Productos_catalogo.csv"), rd(RAW, "Liquidaciones.csv")
 p0, b0 = rd(RAW, "Promociones_Comerciales.csv"), rd(RAW, "Presupuesto_Ventas_Tienda_Categoria.csv")
 
 v1r = rd(NRM, "Ventas_SKU_tienda_mensual.csv")
-pos = v1r[v1r["unidades_vendidas"] >= 0].drop_duplicates(K)
-neg = v1r[v1r["unidades_vendidas"] < 0]
-v1 = pd.concat([pos, neg]).groupby(K, as_index=False)[["unidades_vendidas", "venta_neta"]].sum()
-s1 = rd(NRM, "Stock_SKU_tienda_mensual.csv").drop_duplicates(K)
-s1["stock_disponible"] = s1["stock_disponible"].clip(lower=0)
+s1r = rd(NRM, "Stock_SKU_tienda_mensual.csv")
+dev1 = rd(NRM, "Devoluciones_SKU.csv")
+v1, s1 = limpiar_ventas_stock(v1r, s1r, dev1)          # mismas reglas que el dataset del modelo (v4)
 c1 = rd(NRM, "Productos_catalogo.csv").drop_duplicates("id_producto")
 oc = rd(NRM, "Ordenes_Compra.csv"); oc["m"] = oc["unidades"] * oc["costo_unitario_ars"]
 c_oc = oc.groupby("id_producto")["m"].sum() / oc.groupby("id_producto")["unidades"].sum()
@@ -129,7 +130,7 @@ negk = _n.iloc[0][K].tolist()
 sel2 = lambda df: df[(df["fecha_mes"] == negk[0]) & (df["id_tienda"] == negk[1]) & (df["id_producto"] == negk[2])]
 rec = lambda df: df[K + ["unidades_vendidas", "venta_neta"]].to_dict("records")
 out["ventas"]["ejemplos"] = [
-    dict(titulo="Clave duplicada (H1)", nota="Dos filas para la misma clave mes-tienda-SKU con valores distintos: se conserva la 1ra ocurrencia.",
+    dict(titulo="Clave duplicada (H1)", nota="Dos filas para la misma clave mes-tienda-SKU con valores distintos: se conserva la de mayor venta (regla de Casa Óga, P4).",
          antes=rec(sel(v0)), despues=rec(sel(v1))),
     dict(titulo="Venta negativa = devolución (H4)", nota="La devolución se netea contra la venta del mismo SKU-tienda-mes: no se pierde ni se lleva a 0.",
          antes=rec(sel2(v0)), despues=rec(sel2(v1)))]
@@ -154,6 +155,40 @@ out["stock"]["kpi"] = dict(
     minimo=[int(s0["stock_disponible"].min()), int(s1["stock_disponible"].min())],
     unidades_neg=[int(s0.loc[s0["stock_disponible"] < 0, "stock_disponible"].sum()), 0],
     capital=cap)
+# capital inmovilizado por categoria (la metrica que mira Finanzas): stock a costo total y en posiciones con
+# cobertura > 12 meses (incluye sin venta en 12 m). Las dos fotos se agrupan por la categoria corregida (7) para
+# aislar el efecto de duplicados, negativos y costos faltantes. Antes = calculo sin control (claves duplicadas
+# sumadas, negativos sin tratar, 22 SKUs sin costo = $0, catalogo con SKUs repetidos).
+cat_canon = c1.set_index("id_producto")["categoria"]
+costo0 = c0.drop_duplicates("id_producto").set_index("id_producto")["costo_unitario"].fillna(0)
+costo1 = c1.set_index("id_producto")["costo_unitario"]
+def rojo(v, s, costo, crudo):
+    if crudo:
+        s = s.groupby(K, as_index=False)["stock_disponible"].sum(); v = v.groupby(K, as_index=False)["unidades_vendidas"].sum()
+    x = s.merge(v[K + ["unidades_vendidas"]], on=K).sort_values(["id_tienda", "id_producto", "fecha_mes"])
+    x["u12"] = x.groupby(["id_tienda", "id_producto"])["unidades_vendidas"].transform(lambda z: z.rolling(12, min_periods=1).mean())
+    x["rojo"] = (x["stock_disponible"] > 0) & ((x["u12"] <= 0) | (x["stock_disponible"] / x["u12"].where(x["u12"] > 0) > 12))
+    x["cap"] = x["stock_disponible"].clip(lower=0) * x["id_producto"].map(costo)
+    return x
+r0, r1 = rojo(v0, s0, costo0, True), rojo(v1, s1, costo1, False)
+cap_cat = {}
+for corte, et in [("2025-12-01", "dic-25"), ("2026-08-01", "ago-26")]:
+    a = s0[s0["fecha_mes"] == corte].merge(c0[["id_producto", "costo_unitario"]], on="id_producto")   # mismo calculo que el total
+    b = s1[s1["fecha_mes"] == corte].merge(c1[["id_producto", "costo_unitario"]], on="id_producto")
+    ta = (a["stock_disponible"] * a["costo_unitario"]).groupby(a["id_producto"].map(cat_canon)).sum() / M
+    tb = (b["stock_disponible"] * b["costo_unitario"]).groupby(b["id_producto"].map(cat_canon)).sum() / M
+    ra, rb = r0[(r0["fecha_mes"] == corte) & r0["rojo"]], r1[(r1["fecha_mes"] == corte) & r1["rojo"]]
+    rja = ra.groupby(ra["id_producto"].map(cat_canon))["cap"].sum() / M
+    rjb = rb.groupby(rb["id_producto"].map(cat_canon))["cap"].sum() / M
+    pa_ = ra.groupby(ra["id_producto"].map(cat_canon)).size(); pb_ = rb.groupby(rb["id_producto"].map(cat_canon)).size()
+    cats = tb.sort_values(ascending=False).index
+    cap_cat[et] = [dict(categoria=k, total=[r(ta.get(k, 0), 1), r(tb.get(k, 0), 1)], rojo=[r(rja.get(k, 0), 1), r(rjb.get(k, 0), 1)],
+                        pos_rojo=[int(pa_.get(k, 0)), int(pb_.get(k, 0))]) for k in cats]
+    cap_cat[et].append(dict(categoria="Total", total=[r(ta.sum(), 1), r(tb.sum(), 1)], rojo=[r(rja.sum(), 1), r(rjb.sum(), 1)],
+                            pos_rojo=[int(pa_.sum()), int(pb_.sum())]))
+    assert abs(ta.sum() - cap[et][0]) < 0.1 and abs(tb.sum() - cap[et][1]) < 0.1
+    print(et); print(pd.DataFrame(cap_cat[et]).to_string())
+out["stock"]["capital_categoria"] = cap_cat
 nk = s0[s0["stock_disponible"] < 0].sort_values("stock_disponible").iloc[0][K].tolist()
 sel3 = lambda df: df[(df["fecha_mes"] == nk[0]) & (df["id_tienda"] == nk[1]) & (df["id_producto"] == nk[2])]
 out["stock"]["ejemplos"] = [dict(titulo="Stock negativo (H4)", nota="Error de sincronización POS-inventario (P14): piso en 0.",
@@ -249,7 +284,11 @@ out["texto"] = cambios.to_dict("records")
 
 # ------------------------------------------------------------------ 8. del panel al dataset del modelo
 log = open(os.path.join(MOD, "construir_dataset_log.txt"), encoding="utf-8").read()
-ds = pd.read_parquet(os.path.join(ROOT, "Datasets_Modelo", "dataset_entrenamiento_v3.parquet"))
+VERSION = "v4"
+assert f"DATASET DE ENTRENAMIENTO {VERSION}" in log
+ds = pd.read_parquet(os.path.join(ROOT, "Datasets_Modelo", f"dataset_entrenamiento_{VERSION}.parquet"))
+def del_log(et): return int(log.split(et, 1)[1].split(chr(10), 1)[0].strip(" :").replace(",", ""))
+reglas = pd.read_csv(os.path.join(MOD, "comparar_reglas_v4.csv"), index_col=0)
 sp = ds.groupby("split").agg(desde=("fecha_mes", "min"), hasta=("fecha_mes", "max"), filas=("target_cob12_t3", "size"),
                              positivos=("target_cob12_t3", "sum"))
 sp["prev"] = sp["positivos"] / sp["filas"] * 100
@@ -257,25 +296,30 @@ prev_mes = ds.groupby("fecha_mes")["target_cob12_t3"].mean() * 100
 split_mes = ds.groupby("fecha_mes")["split"].first()
 out["modelo"] = dict(
     embudo=[["Ventas crudas (mes-tienda-SKU)", len(v0)], ["Sin claves duplicadas, devoluciones neteadas", len(v1)],
-            ["Panel ventas × stock", 297022], ["Con stock en t", 294301], ["No discontinuadas en t", 292241],
-            ["Con 3+ meses de historia", 271722], ["Con etiqueta observable en t+3 (universo)", len(ds)]],
+            ["Panel ventas × stock", int(log.split("(post dedup y join ventas-stock): ", 1)[1].split(" ", 1)[0].replace(",", ""))],
+            ["Con stock en t", del_log("- con stock en t")], ["No discontinuadas en t", del_log("- no discontinuadas en t")],
+            ["Con 3+ meses de historia", del_log("- con 3+ meses de historia")], ["Con etiqueta observable en t+3 (universo)", len(ds)]],
     split=[dict(split=s, desde=sp.loc[s, "desde"].strftime("%Y-%m"), hasta=sp.loc[s, "hasta"].strftime("%Y-%m"),
                 filas=int(sp.loc[s, "filas"]), positivos=int(sp.loc[s, "positivos"]), prev=r(sp.loc[s, "prev"], 2))
            for s in ["train", "validacion", "embargo", "test"]],
     prev_meses=[d.strftime("%Y-%m") for d in prev_mes.index], prev=[r(x, 2) for x in prev_mes], prev_split=split_mes.tolist(),
-    prevalencia=[2.61, 3.40], positivos=[5260, int(ds["target_cob12_t3"].sum())],
+    prevalencia=[2.61, r(ds["target_cob12_t3"].mean() * 100, 2)], positivos=[5260, int(ds["target_cob12_t3"].sum())],
+    prevalencia_v3=r(reglas.loc["v3", "prevalencia"], 2), positivos_v3=int(reglas.loc["v3", "positivos"]),
+    peso_clase=[r(reglas.loc["v3", "peso_clase"], 1), r(reglas.loc["v4", "peso_clase"], 1)],
     filas=len(ds), posiciones=int(ds.groupby(["id_tienda", "id_producto"]).ngroups), skus=int(ds["id_producto"].nunique()),
     features=60, features_num=55, features_cat=5, onehot=106)
-assert "201,306" in log
+assert f"{len(ds):,}" in log and int(reglas.loc["v4", "positivos"]) == int(ds["target_cob12_t3"].sum())
 
 # prevalencia mensual del target segun el tratamiento de las devoluciones (mismo calculo que candidatos_target.py):
-# antes = devoluciones llevadas a 0 (criterio previo) · despues = neteadas (P23). Universo: el del dataset del modelo.
+# antes = criterio previo (1ra ocurrencia, devoluciones llevadas a 0) · despues = reglas v4 (mayor venta, devoluciones
+# neteadas salvo "sin rotacion"). Universo: el del dataset del modelo.
 def prevalencia_mensual(neteo, hist_min=3):
-    if neteo: vv = v1.copy()
+    if neteo: vv, ss = v1.copy(), s1
     else:
         vv = v1r.drop_duplicates(K).copy()
         vv[["unidades_vendidas", "venta_neta"]] = vv[["unidades_vendidas", "venta_neta"]].clip(lower=0)
-    x = s1.merge(vv, on=K); x["fecha_mes"] = pd.to_datetime(x["fecha_mes"])
+        ss = s1r.drop_duplicates(K).copy(); ss["stock_disponible"] = ss["stock_disponible"].clip(lower=0)
+    x = ss.merge(vv, on=K); x["fecha_mes"] = pd.to_datetime(x["fecha_mes"])
     x = x.sort_values(["id_tienda", "id_producto", "fecha_mes"]); gx = x.groupby(["id_tienda", "id_producto"], sort=False)
     u12 = gx["unidades_vendidas"].transform(lambda z: z.rolling(12, min_periods=1).mean())
     cob = np.where(u12 > 0, x["stock_disponible"] / u12.replace(0, np.nan), np.inf)
@@ -288,7 +332,7 @@ def prevalencia_mensual(neteo, hist_min=3):
     b = x[base].assign(y=y3[base].astype(bool))
     return b.groupby("fecha_mes")["y"].agg(["mean", "sum", "size"])
 pa, pdp = prevalencia_mensual(False), prevalencia_mensual(True)
-assert int(pa["sum"].sum()) == 5260 and int(pdp["sum"].sum()) == 6853, (pa["sum"].sum(), pdp["sum"].sum())
+assert int(pa["sum"].sum()) == 5260 and int(pdp["sum"].sum()) == int(ds["target_cob12_t3"].sum()), (pa["sum"].sum(), pdp["sum"].sum())
 idx_m = pdp.index
 out["modelo"]["prev_mensual"] = dict(meses=[m.strftime("%Y-%m") for m in idx_m],
     antes=[r(v * 100, 2) for v in pa["mean"].reindex(idx_m)], despues=[r(v * 100, 2) for v in pdp["mean"]],

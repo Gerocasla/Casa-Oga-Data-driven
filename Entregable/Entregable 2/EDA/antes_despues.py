@@ -8,7 +8,7 @@ ANTES   = Datasets/ tal como los entrega la catedra, con el calculo que haria un
           faltantes, usa las categorias como vienen. Si una clave esta duplicada, se suman
           sus filas (lo que hace un groupby sin control).
 DESPUES = Datasets_Normalizados/ + criterios del plan de mejora (seccion 1.2):
-          H1 dedup 1ra ocurrencia · H4 stock piso 0 y ventas neteadas · H9 descuentos y
+          H1 dedup "mayor venta" (P4) · H4 stock piso 0 y ventas neteadas salvo "sin rotacion" · H9 descuentos y
           presupuesto invalidos excluidos · H11 costo OC x 1,2321 · R1 categorias · R2 fechas.
 
 Salidas: resultados/antes_despues.csv · resultados/antes_despues.json ·
@@ -19,6 +19,8 @@ import os, sys, json
 import numpy as np, pandas as pd
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from criterios_limpieza import limpiar_ventas_stock
 
 sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -41,11 +43,7 @@ b0 = rd(RAW, "Presupuesto_Ventas_Tienda_Categoria.csv")
 
 # ------------------------------------------------------------------ DESPUES
 v1r = rd(NRM, "Ventas_SKU_tienda_mensual.csv")
-pos = v1r[v1r["unidades_vendidas"] >= 0].drop_duplicates(K)
-neg = v1r[v1r["unidades_vendidas"] < 0]
-v1 = pd.concat([pos, neg]).groupby(K, as_index=False)[["unidades_vendidas", "venta_neta"]].sum()
-s1 = rd(NRM, "Stock_SKU_tienda_mensual.csv").drop_duplicates(K)
-s1["stock_disponible"] = s1["stock_disponible"].clip(lower=0)
+v1, s1 = limpiar_ventas_stock(v1r, rd(NRM, "Stock_SKU_tienda_mensual.csv"), rd(NRM, "Devoluciones_SKU.csv"))   # reglas v4
 c1 = rd(NRM, "Productos_catalogo.csv").drop_duplicates("id_producto")
 oc = rd(NRM, "Ordenes_Compra.csv"); oc["m"] = oc["unidades"] * oc["costo_unitario_ars"]
 c_oc = oc.groupby("id_producto")["m"].sum() / oc.groupby("id_producto")["unidades"].sum()
@@ -62,7 +60,7 @@ def add(grupo, metrica, antes, despues, fmt, impacto):
 add("Volumen", "Registros de venta (mes-tienda-SKU)", len(v0), len(v1), "n",
     "2.378 claves duplicadas (H1) se reducen a un registro por clave.")
 add("Volumen", "Venta total ene-22 a ago-26 (M$)", v0["venta_neta"].sum() / M, v1["venta_neta"].sum() / M, "m",
-    "Los duplicados inflan la venta; las devoluciones quedan neteadas, no perdidas.")
+    "Los duplicados inflan la venta; las devoluciones a clientes quedan neteadas (no las de proveedor por sin rotacion).")
 add("Volumen", "Unidades vendidas ene-22 a ago-26", v0["unidades_vendidas"].sum(), v1["unidades_vendidas"].sum(), "n",
     "Mismo efecto en unidades.")
 
@@ -77,7 +75,7 @@ for corte, et in [("2025-12-01", "dic-25"), ("2026-08-01", "ago-26")]:
     cap1 = b.merge(c1[["id_producto", "costo_unitario"]], on="id_producto")
     cap1 = (cap1["stock_disponible"] * cap1["costo_unitario"]).sum() / M
     add("Stock", f"Capital inmovilizado en tiendas a {et} (M$ a costo)", cap0, cap1, "m",
-        "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.")
+        "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup (mayor venta) + costo OC x 1,2321.")
 
 # 3. categorias
 add("Consistencia", "Valores distintos de categoria (catalogo)", c0["categoria"].nunique(), c1["categoria"].nunique(), "n",
@@ -123,8 +121,11 @@ def cob12(v, s, dic="2025-12-01"):
     return int(((x["u12"] <= 0) | (x["stock_disponible"] / x["u12"].where(x["u12"] > 0) > 12)).sum())
 add("Modelo", "Posiciones con cobertura > 12 meses a dic-25", cob12(v0, s0), cob12(v1, s1), "n",
     "Duplicados sumados y negativos sin tratar cambian el ritmo de venta y el stock de cada posicion.")
-add("Modelo", "Prevalencia del target (cobertura > 12 a 3 meses, %)", 2.61, 3.40, "p",
-    "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): 5.260 -> 6.853 positivos (+1.593). Fuente: EDA/candidatos_target.py.")
+_reg = pd.read_csv(os.path.join(BASE, "..", "Modelo", "resultados", "comparar_reglas_v4.csv"), index_col=0)
+add("Modelo", "Prevalencia del target (cobertura > 12 a 3 meses, %)", 2.61, round(_reg.loc["v4", "prevalencia"], 2), "p",
+    f"Criterio previo (1ra ocurrencia, devoluciones a 0): 5.260 positivos. v3 (todas neteadas): {int(_reg.loc['v3', 'positivos']):,} "
+    f"({_reg.loc['v3', 'prevalencia']:.2f}%). v4 (mayor venta, sin netear 'sin rotacion'): {int(_reg.loc['v4', 'positivos']):,}. "
+    "Fuente: Modelo/comparar_reglas_v4.py.".replace(",", "."))
 
 df = pd.DataFrame(filas)
 df["variacion_pct"] = np.where(df["antes"] != 0, (df["despues"] / df["antes"] - 1) * 100, np.nan)
@@ -140,7 +141,8 @@ neg_mes = pd.DataFrame({
     "stock_neg": s0[s0["stock_disponible"] < 0].groupby("fecha_mes").size(),
     "dup": v0[v0.duplicated(K, keep="first")].groupby("fecha_mes").size()}).fillna(0).astype(int)
 neg_mes = neg_mes.reindex(sorted(s0["fecha_mes"].unique()), fill_value=0)
-out = {"metricas": df.to_dict("records"),
+_comp = json.load(open(os.path.join(RES, "comparativo_antes_despues.json"), encoding="utf-8"))   # correr antes comparativo_antes_despues.py
+out = {"metricas": df.to_dict("records"), "capital_categoria": _comp["stock"]["capital_categoria"],
        "anual": {"anios": list(anual.index), "antes": list(anual["antes"]), "despues": list(anual["despues"])},
        "cat_antes": {"labels": list(cats0.index), "valores": list(cats0.values)},
        "cat_despues": {"labels": list(cats1.index), "valores": list(cats1.values)},

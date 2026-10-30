@@ -46,10 +46,10 @@ REVISION = [
  (A, "Entregable Nro 2", "Entregable Nro 2 — Documento consolidado (Partes A y B)", "Carátula del consolidado"),
  (A, "Entregable 2 · Parte A: Alcance, Analítica Descriptiva y Evaluación de Calidad de Datos",
      "Parte A: Alcance, Analítica Descriptiva y Evaluación de Calidad de Datos · Parte B: Corrección de Datos y Preparación de Datos para el Modelo", "Carátula"),
- (A, "Simón Volpato Escandarani — [legajo]", "Simón Volpato Escandarani — 64784", "Legajo (Entregable 1 consolidado)"),
- (A, "Dashboard y visualización", "", "Roles: se dejan vacíos"),
- (A, "__/__/2026", "06/10/2026", "Fecha de entrega"),
- (A, "v1.0", "v2.0 — consolidado", "Versión"),
+ # legajo de Simón (64784) y roles por integrante: cargados en la carátula de cada parte (ya no se blanquea la
+ # columna de roles); el legajo de Santiago queda como marcador visible [legajo] hasta que el grupo lo complete
+ (A, "__/__/2026", "[completar fecha de reentrega]", "Fecha de entrega (reentrega con correcciones)"),
+ (A, "v1.0", "v3.0 — consolidado, revisado con el feedback", "Versión"),
  # Parte A
  (A, "(a dic-2025 era de 20 veces)", "(a dic-2025 era de 27 veces: 23.528 contra 868)",
      "Reconciliado con §3.1, que da 23.528 contra 868 (EDA/resultados/eda_chequeos_2_log.txt)"),
@@ -66,18 +66,14 @@ REVISION = [
      "condicionan la confiabilidad de las métricas centrales del proyecto: para construir el dataset de entrenamiento se aplicaron las remediaciones del pipeline descritas en cada fila, y la corrección en origen debería completarse antes de poner el modelo en producción.",
      "El dataset ya está construido con las remediaciones del pipeline (§2)"),
  (B, "El dashboard (Dashboard-Calidad-Antes-Despues.html, generado por EDA/antes_despues.py) calcula cada métrica dos veces.",
-     "Cada métrica se calcula dos veces (EDA/antes_despues.py); el dashboard que acompaña esta entrega (5-Dashboard-Antes-vs-Despues.html) resume el resultado con las mismas cifras y criterios de la presentación.",
+     "Cada métrica se calcula dos veces (EDA/antes_despues.py y EDA/comparativo_antes_despues.py); el dashboard que acompaña esta entrega (5-Dashboard-Antes-vs-Despues.html) resume el resultado e incluye el efecto por categoría sobre el capital inmovilizado, la métrica que sigue Finanzas.",
      "Referencia al archivo que efectivamente se entrega"),
  (B, "• Tienda (1 + 2 categóricas): m² de venta; región y formato.  • Temporal (2): mes del año y meses con evento comercial fijo entre t+1 y t+3.",
      "• Tienda y calendario (3 + 2 categóricas): m² de venta, mes del año y meses con evento comercial fijo entre t+1 y t+3; región y formato.",
      "Mismos 8 grupos que la presentación y el diccionario"),
  (B, "Generado por Modelo/construir_dataset_modelo.py, reproducible desde Datasets_Normalizados.",
-     "Generado por Modelo/construir_dataset_modelo.py, reproducible desde Datasets_Normalizados. Se entrega en CSV (3-Dataset-Modelo-v3.zip) junto con el diccionario de datos completo (4-Diccionario-de-Datos-v3.xlsx).",
+     "Generado por Modelo/construir_dataset_modelo.py, reproducible desde Datasets_Normalizados. Se entrega en CSV (3-Dataset-Modelo-v4.zip) junto con el diccionario de datos completo (4-Diccionario-de-Datos-v4.xlsx).",
      "Archivos entregados"),
- (B, "Colas largas: la cobertura tiene percentil 99 de 15 meses y máximo de 84.",
-     "Colas largas: en train, la cobertura tiene percentil 99 de 18 meses y máximo de 128.",
-     "Valores de la v3 (Modelo/resultados/construir_dataset_log.txt)"),
- (B, "(la cobertura tenía asimetría 3,98)", "(la cobertura tenía asimetría 5,09 en train)", "Valor de la v3 (mismo log)"),
  (B, "Las escalas son muy distintas (precios en decenas de miles, conteos de 0 a 12).",
      "Las escalas son muy distintas (stock de la cadena en miles de unidades, proporciones entre 0 y 1, conteos de 0 a 12).",
      "En la v3 el precio absoluto ya no es variable"),
@@ -148,6 +144,11 @@ nota = [titulo_seccion("Sobre este documento"),
           "La Parte A construye el panorama descriptivo de las 15 fuentes y evalúa su calidad en siete dimensiones. "
           "La Parte B define el tratamiento de cada hallazgo, mide su efecto comparando los datos antes y después de la corrección, "
           "y prepara el dataset de entrenamiento del modelo: target, universo, 60 variables, partición temporal y transformaciones.")]),
+ par([run("Esta versión incorpora la revisión de Casa Óga y de la cátedra: el ritmo de venta como definición, las fuentes de cada paso del análisis "
+          "descriptivo, la caída de 2026 en tres mensajes, los criterios de calidad antes del mapa y el fundamento de los amarillos, 2026 como un "
+          "tramo con otra fuente de reporte (H13), la regla de deduplicación sugerida por Casa Óga, las devoluciones al proveedor fuera del neteo, "
+          "plazos en el plan de mejora, el capital inmovilizado por categoría y el perfil de las filas que excluye la condición t+3. "
+          "El dataset pasa a la v4; la v3 se conserva porque es la base del modelo del Entregable 3.")]),
  par([run("Respecto de las versiones de cada parte, el consolidado unifica la carátula y los anexos, reconcilia cifras que diferían entre secciones "
           "(relación entre stock en tránsito y transferencias a dic-2025, rango del cumplimiento presupuestario, percentiles y asimetría de la cobertura en train), "
           "agrupa las variables en los mismos 8 grupos que la presentación y el diccionario, y referencia los archivos que efectivamente acompañan la entrega.")]),
@@ -155,16 +156,16 @@ nota = [titulo_seccion("Sobre este documento"),
  tabla(plant3, [("Parte / sección", "Contenido", "Resultado principal"),
   ("Parte A · 1 · Introducción y alcance", "Propósito, alcance y definiciones", "15 fuentes, corte ago-2026; unidad de análisis: posición SKU–tienda–mes"),
   ("Parte A · 2 · Analítica descriptiva", "Perfil, estadísticas, evolución, distribución y relaciones (24 métricas)", "La caída de 2026 es sobre todo de surtido; la cola de cobertura se engorda"),
-  ("Parte A · 3 · Evaluación de calidad", "Mapa fuente × dimensión y fundamento de cada calificación crítica", "Problemas concentrados en 2022-2025 y en el maestro de producto"),
-  ("Parte B · 1 · Hallazgos y plan de mejora", "H1-H12, R1-R2, gaps, mapa actualizado, plan por hallazgo y dashboard antes/después", "Mueven poco los agregados y mucho el target: prevalencia de 2,61% a 3,40%"),
-  ("Parte B · 2 · Preparación para el modelo", "Target, universo, fuentes, variables excluidas, partición y transformaciones", "201.306 filas × 60 variables; test 2026 con 9,03% de positivos"),
+  ("Parte A · 3 · Evaluación de calidad", "Criterios, mapa fuente × dimensión y fundamento de las calificaciones críticas y amarillas", "Problemas concentrados en 2022-2025 y en el maestro de producto"),
+  ("Parte B · 1 · Hallazgos y plan de mejora", "H1-H13, R1-R2, gaps, mapa actualizado, plan por hallazgo con plazos y dashboard antes/después", "Mueven poco los agregados y mucho el detalle: prevalencia de 2,61% a 3,22% y capital por categoría entre −12% y +9%"),
+  ("Parte B · 2 · Preparación para el modelo", "Target, universo, fuentes, variables excluidas, partición y transformaciones", "201.310 filas × 60 variables (v4); el test 2026 (8,84% de positivos) no es el desempeño esperable"),
   ("Anexo A", "Gráficos G1 a G12 del análisis descriptivo", "Referenciados en la Parte A §2.3")]),
  subtitulo("Archivos que acompañan esta entrega"),
  tabla(plant3, [("Archivo", "Contenido", "Dónde se usa"),
   ("2-Presentacion-Final-Entregable-2.html", "Presentación del Entregable 2 en un solo archivo (se abre en el navegador; N muestra las notas)", "Exposición"),
-  ("3-Dataset-Modelo-v3.zip", "dataset_entrenamiento_v3.csv: 201.306 filas con el target, las 60 variables, los identificadores, la marca de costo imputado y la partición", "Parte B §2.1"),
-  ("4-Diccionario-de-Datos-v3.xlsx", "Diccionario de las 66 columnas (fuente, ventana, unidad, nulos, rango, transformación y señal), grupos, partición, categóricas y variables excluidas", "Parte B §2.1 y §2.2"),
-  ("5-Dashboard-Antes-vs-Despues.html", "Resumen de una página: qué corregimos, por qué y cuánto cambian los totales, el detalle por categoría y el target", "Parte B §1.3")])]
+  ("3-Dataset-Modelo-v4.zip", "dataset_entrenamiento_v4.csv: 201.310 filas con el target, las 60 variables, los identificadores, la marca de costo imputado y la partición", "Parte B §2.1"),
+  ("4-Diccionario-de-Datos-v4.xlsx", "Diccionario de las 66 columnas (fuente, ventana, unidad, nulos, rango, transformación y señal), grupos, partición, categóricas y variables excluidas", "Parte B §2.1 y §2.2"),
+  ("5-Dashboard-Antes-vs-Despues.html", "Resumen de una página: qué corregimos, por qué y cuánto cambian los totales, la venta y el capital inmovilizado por categoría y el target", "Parte B §1.3")])]
 
 # ------------------------------------------------------------------ armado
 i_anexo = idx(A, "Anexo A · Gráficos")

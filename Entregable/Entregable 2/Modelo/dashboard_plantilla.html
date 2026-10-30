@@ -97,6 +97,9 @@ tr:last-child td{border-bottom:0}
       <div class="chart"><canvas id="cCat"></canvas></div>
       <p class="take"><b>Decoración pierde 1,5 puntos de participación</b> si no se unifican «DECO» y «Decoración». Es la categoría candidata al piloto.</p></div>
   </div>
+  <div class="card" id="capCat"><h2>Capital inmovilizado por categoría, antes y después</h2><p class="q">$ M a costo · total del stock en tiendas y la parte en posiciones con más de 12 meses de cobertura · agrupado por la categoría corregida.</p>
+    <div class="tw"><table style="min-width:760px"><thead><tr><th>Categoría</th><th class="num">Total antes</th><th class="num">Total después</th><th class="num">Variación</th><th class="num">En rojo antes</th><th class="num">En rojo después</th><th class="num">Variación</th></tr></thead><tbody id="tCapCat"></tbody></table></div>
+    <p class="take" id="tkCapCatAD"></p></div>
   <div class="card"><h2>Métricas comparadas</h2>
     <div class="tw"><table style="min-width:760px"><thead><tr><th>Métrica</th><th class="num">Antes</th><th class="num">Después</th><th class="num">Variación</th><th>Impacto</th></tr></thead><tbody id="tAD"></tbody></table></div>
   </div>
@@ -209,7 +212,7 @@ $('insRes').innerHTML =
   ins('×'+nf(ult.p99[nL]/ult.p99[iD25],1), 'crece el percentil 99 de cobertura entre dic-25 y ago-26 ('+nf(ult.p99[iD25],0)+' → '+nf(ult.p99[nL],0)+' meses).', 'La mediana sigue en ~5 meses: el riesgo está en la cola, no en el promedio.')+
   ins('+'+nf(rel*100,0)+'%', 'más casos capturados que ordenando por cobertura actual, con la misma capacidad operativa (420 alertas/mes).', 'Modelo de prueba sobre validación. Es la evidencia de que el dataset tiene señal más allá de la inercia.')+
   ins(I.senal_sin+' de '+I.n_features_num, 'variables numéricas no separan solas (AUC &lt; 0,55): liquidaciones, promociones, OC y transferencias.', 'La señal está en la demanda de la posición. Las acciones comerciales pasadas aportan, si acaso, en combinación.')+
-  ins('&lt; 2%', 'cambian los totales al corregir la calidad (venta −0,6%, capital −1,4%).', 'Pero la prevalencia del target cambia 30% según cómo se traten las devoluciones: la calidad importa en el detalle, no en el agregado.')+
+  ins('&lt; 2%', 'cambian los totales al corregir la calidad (venta '+nf((find('Venta total ene-22 a ago-26 (M$)').despues/find('Venta total ene-22 a ago-26 (M$)').antes-1)*100)+'%, capital '+nf((find('Capital inmovilizado en tiendas a dic-25 (M$ a costo)').despues/find('Capital inmovilizado en tiendas a dic-25 (M$ a costo)').antes-1)*100)+'%).', 'Pero el capital por categoría se mueve mucho más y la prevalencia del target cambia según cómo se traten las devoluciones: la calidad importa en el detalle, no en el agregado.')+
   ins(I.conc_sku.n50+' SKUs', 'explican la mitad de los casos de riesgo (de '+I.conc_sku.skus_con_positivos+' SKUs con algún caso).', 'El problema se concentra en productos, lo que apunta a decisiones de compra más que de tienda.');
 
 // ---------- CALIDAD
@@ -236,6 +239,15 @@ const labs11 = A.cat_antes.labels;
 new Chart($('cCat'),{type:'bar',data:{labels:labs11,datasets:[{label:'Antes',data:A.cat_antes.valores,backgroundColor:css('--gris'),borderRadius:3},
   {label:'Después',data:labs11.map(l=>{const k=l.normalize('NFD').replace(/[̀-ͯ]/g,'');const j=cats.indexOf(k);return j>=0?A.cat_despues.valores[j]:null}),backgroundColor:css('--s1'),borderRadius:3}]},
   options:opt({indexAxis:'y',scales:{x:{grid:grid()},y:{grid:{display:false}}}})});
+
+// capital por categoria (metrica de Finanzas)
+const cc = A.capital_categoria['dic-25'];
+const vp = (a,b)=> a ? (b/a-1)*100 : null;
+const fv = v => v===null?'':(v>=0?'+':'')+nf(v)+'%';
+$('tCapCat').innerHTML = cc.map(r=>`<tr${r.categoria==='Total'?' style="font-weight:600"':''}><td>${acc(r.categoria)}</td><td class="num muted">${nf(r.total[0])}</td><td class="num strong">${nf(r.total[1])}</td><td class="num">${fv(vp(r.total[0],r.total[1]))}</td><td class="num muted">${nf(r.rojo[0])}</td><td class="num strong">${nf(r.rojo[1])}</td><td class="num">${fv(vp(r.rojo[0],r.rojo[1]))}</td></tr>`).join('');
+const ccv = cc.filter(r=>r.categoria!=='Total').map(r=>[acc(r.categoria),vp(r.total[0],r.total[1])]).sort((a,b)=>a[1]-b[1]);
+const ccT = cc.find(r=>r.categoria==='Total');
+$('tkCapCatAD').innerHTML = `<b>A dic-2025 el total cambia ${fv(vp(ccT.total[0],ccT.total[1]))}, pero por categoría va de ${fv(ccv[0][1])} (${ccv[0][0]}) a ${fv(ccv[ccv.length-1][1])} (${ccv[ccv.length-1][0]}).</b> Los SKUs duplicados restan donde se contaban dos veces y los 22 SKUs sin costo suman donde valían $0. Finanzas no debería leer el capital por categoría sin corregir.`;
 
 // ---------- 2026
 const vv=I.venta_25_26; const dv = vv.v2026.map((x,i)=>x/vv.v2025[i]-1);

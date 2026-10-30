@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Diccionario de datos del dataset de entrenamiento v3 (envio a la catedra).
+Diccionario de datos del dataset de entrenamiento v4 (envio a la catedra; v4 = feedback del Entregable 2).
 
-Entrada : Datasets_Modelo/dataset_entrenamiento_v3.parquet · Modelo/resultados/senal_univariada_v3.csv
-Salida  : Envio-Profesores/3-Diccionario-de-Datos-v3.xlsx
+Entrada : Datasets_Modelo/dataset_entrenamiento_v4.parquet · Modelo/resultados/senal_univariada_v4.csv
+Salida  : Envio-Profesores/4-Diccionario-de-Datos-v4.xlsx
 Las reglas de nulos y transformaciones replican Modelo/construir_dataset_modelo.py (pasos 8 y 9).
 """
 import os, sys
@@ -16,10 +16,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(BASE, "..", "..", ".."))
 MOD = os.path.join(BASE, "..", "Modelo", "resultados")
-ds = pd.read_parquet(os.path.join(ROOT, "Datasets_Modelo", "dataset_entrenamiento_v3.parquet"))
-desc = pd.read_csv(os.path.join(ROOT, "Datasets_Modelo", "diccionario_features_v3.csv")).set_index("columna")["descripcion"]
-sen = pd.read_csv(os.path.join(MOD, "senal_univariada_v3.csv")).set_index("feature")
-imp = pd.read_csv(os.path.join(MOD, "importancia_permutacion_v3.csv"), index_col=0)["delta_pr_auc"]
+ds = pd.read_parquet(os.path.join(ROOT, "Datasets_Modelo", "dataset_entrenamiento_v4.parquet"))
+desc = pd.read_csv(os.path.join(ROOT, "Datasets_Modelo", "diccionario_features_v4.csv")).set_index("columna")["descripcion"]
+sen = pd.read_csv(os.path.join(MOD, "senal_univariada_v4.csv")).set_index("feature")
+imp = pd.read_csv(os.path.join(MOD, "importancia_permutacion_v4.csv"), index_col=0)["delta_pr_auc"]
 
 IDS = ["fecha_mes", "id_tienda", "id_producto"]
 CAT = ["categoria", "subcategoria", "region", "formato", "proveedor"]
@@ -101,8 +101,8 @@ NULO = {
  "cv_u12": "Vacío si no hubo venta en 12 meses (división por 0). Transformado: 0.",
  "tendencia_u3_vs_u12": "Vacío si no hubo venta en 12 meses (división por 0). Transformado: 0.",
  "var_stock_3m": "Vacío si la posición no tiene dato en t-3 (menos de 4 meses). Transformado: 0 (sin cambio).",
- "cobertura": "inf = stock > 0 sin venta en 12 meses (marcado también en sin_venta_12m). Transformado: tope 60.",
- "cobertura_3m_antes": "Vacío sin dato en t-3: toma la cobertura actual. inf = sin venta en t-3. Transformado: tope 60.",
+ "cobertura": "inf = stock > 0 sin venta neta en 12 meses (marcado también en sin_venta_12m). Transformado: tope 60 y log(1+x), sin recorte al p99.",
+ "cobertura_3m_antes": "Vacío sin dato en t-3: toma la cobertura actual. inf = sin venta en t-3. Transformado: tope 60 y log(1+x), sin recorte al p99.",
  "var_cobertura_3m": "Vacío sin dato en t-3 o con cobertura infinita en t o t-3. Transformado: 0.",
  "cobertura_sku_cadena": "inf = el SKU no vendió en la cadena en 12 meses. Transformado: tope 60.",
  "cobertura_deposito_sku": "inf = stock en depósito sin venta del SKU en la cadena. Transformado: mediana de train.",
@@ -118,7 +118,7 @@ fin_num = tr[NUM].replace([np.inf, -np.inf], np.nan)
 sk = fin_num.skew()
 BIN = ["sin_venta_12m", "liquidacion_activa", "historia_corta"]
 SESG = [c for c in NUM if sk.get(c, 0) > 1 and fin_num[c].min() >= 0 and c not in BIN]
-WINS = [c for c in NUM if c not in BIN + ["mes_del_anio"] and tr[c].nunique() > 15]
+WINS = [c for c in NUM if c not in BIN + ["mes_del_anio", "cobertura", "cobertura_3m_antes"] and tr[c].nunique() > 15]   # v4: cobertura sin p99
 # control: las listas tienen que coincidir con las que registro el constructor en su log
 _log = open(os.path.join(MOD, "construir_dataset_log.txt"), encoding="utf-8").read()
 _lista = lambda et: [x.strip() for x in _log.split(et, 1)[1].split(chr(10), 1)[0].split(",")]
@@ -215,7 +215,7 @@ ws.column_dimensions["A"].width = 30; ws.column_dimensions["B"].width = 110
 pos_ = int(ds["target_cob12_t3"].sum())
 _ptr = ds.loc[ds["split"] == "train", "target_cob12_t3"].mean(); peso_pos = (1 - _ptr) / _ptr
 lineas = [
- ("Casa Óga · Dataset de entrenamiento v3 · Diccionario de datos", None),
+ ("Casa Óga · Dataset de entrenamiento v4 · Diccionario de datos", None),
  ("Grupo 1 · Factibilidad de Proyectos Data Driven (ITBA, 2C 2026)", None), ("", None),
  ("Qué se predice", "Al cierre de cada mes t, si una posición SKU-tienda va a quedar con stock inmovilizado: más de 12 meses de cobertura en t+3."),
  ("Target", "target_cob12_t3 = 1 si en t+3 la posición tiene stock > 0, no está discontinuada y stock / promedio mensual de 12 meses de unidades netas > 12."),
@@ -228,7 +228,7 @@ lineas = [
  ("Otras columnas", "3 de identificación (fecha_mes, id_tienda, id_producto), 1 marca de control (costo_imputado), el target y la partición (split). Total 66 columnas."),
  ("Partición", "Temporal con embargo de 3 meses (= horizonte): train mar-22→dic-24 · validación abr→sep-25 · test ene→may-26. Las filas 'embargo' no se usan."),
  ("Nulos e infinitos", "Son intencionales (ratios sin denominador, posición sin historia en t-3, SKU sin OC). En el CSV el infinito aparece como 'inf'. Ver la columna 'Nulos / infinitos: qué significan'."),
- ("Datos de origen", "Datasets_Normalizados/ + criterios de limpieza del plan de mejora: dedup de claves (H1-H2), stock con piso 0 y devoluciones neteadas (H4), descuentos y presupuesto inválidos excluidos (H9), promociones inválidas excluidas (H10), costo OC × 1,2321 para 22 SKUs (H11)."),
+ ("Datos de origen", "Datasets_Normalizados/ + criterios de limpieza del plan de mejora: dedup de claves conservando el registro de mayor venta (H1-H2, regla de Casa Óga), stock con piso 0 y devoluciones neteadas salvo las devoluciones al proveedor por «sin rotación / no vendido», que son movimiento de inventario (H4), descuentos y presupuesto inválidos excluidos (H9), promociones inválidas excluidas (H10), costo OC × 1,2321 para 22 SKUs (H11)."),
  ("Señal y dirección", "Las columnas AUC miden cuánto separa cada variable sola al target (0,5 = nada). Son descriptivas: ninguna variable se eligió mirando el test."),
  ("", None), ("Hojas", None),
  ("Diccionario", "Las 66 columnas: rol, grupo, descripción, fuente, ventana, unidad, tipo, nulos, rango, valores, transformación y señal."),
@@ -249,8 +249,8 @@ hoja(wb.create_sheet("Diccionario"), dic,
      {"Nulos %": "0.0%", "Mín": "#,##0.##", "Mediana": "#,##0.##", "Media": "#,##0.##", "Máx": "#,##0.##", "Nulos": "#,##0",
       "Infinitos": "#,##0", "Valores distintos": "#,##0", "Señal sola (AUC train)": "0.000", "AUC validación": "0.000", "AUC test": "0.000",
       "Importancia (Δ PR-AUC)": "0.0000"},
-     "Diccionario de datos · dataset_entrenamiento_v3.csv",
-     "Estadísticas sobre las 201.306 filas (sin infinitos). AUC = señal univariada (Modelo/chequeo de señal); importancia = permutación en un modelo de prueba, no es el modelo final.")
+     "Diccionario de datos · dataset_entrenamiento_v4.csv",
+     f"Estadísticas sobre las {len(ds):,} filas (sin infinitos).".replace(",", ".") + " AUC = señal univariada (Modelo/chequeo de señal); importancia = permutación en un modelo de prueba, no es el modelo final.")
 
 gr = pd.DataFrame([{"Grupo": g, "Variables": len(cs), "Sale de": PARA_QUE[g][0], "Para qué sirve": PARA_QUE[g][1], "Columnas": ", ".join(cs)}
                    for g, cs in GRUPOS.items()])
@@ -286,6 +286,6 @@ exc = pd.DataFrame([
 hoja(wb.create_sheet("Excluidas"), exc, {"Columna(s) candidata(s)": 46, "Fuente": 32, "Motivo": 22, "Detalle": 90})
 
 wb["Diccionario"].sheet_properties.tabColor = GOLD
-out = os.path.join(BASE, "4-Diccionario-de-Datos-v3.xlsx")
+out = os.path.join(BASE, "4-Diccionario-de-Datos-v4.xlsx")
 wb.save(out)
 print("OK:", out, dic.shape, "| log1p:", len(SESG), "| winsor:", len(WINS))

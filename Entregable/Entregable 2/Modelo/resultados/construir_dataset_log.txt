@@ -1,63 +1,110 @@
 ==========================================================================================
-DATASET DE ENTRENAMIENTO v3 — dead stock SKU-tienda-mes
+DATASET DE ENTRENAMIENTO v4 — dead stock SKU-tienda-mes
 ==========================================================================================
+Reglas: dedup = mayor_venta · neteo sin 'sin rotacion' = True · cobertura = log
+  devoluciones 'sin rotacion' no neteadas: 471 filas · 2,013 unidades
 Panel SKU-tienda-mes (post dedup y join ventas-stock): 297,022 filas
-  - con stock en t                         : 294,301
-  - no discontinuadas en t                 : 292,241
-  - con 3+ meses de historia              : 271,722
-  - con etiqueta observable en t+3 (UNIVERSO): 201,306
+  - con stock en t                         : 294,304
+  - no discontinuadas en t                 : 292,244
+  - con 3+ meses de historia              : 271,726
+  - con etiqueta observable en t+3 (UNIVERSO): 201,310
+  recuperables etiquetando por fecha: 26,542 filas · tasa de positivos en t+3 3.19% (en el universo 3.22%)
+
+EXCLUIDAS POR LA CONDICION t+3: 70,416 filas (25.9% de las que cumplen el resto) · 10,181 posiciones · 3,907 ya en rojo en t (5.5% vs 3.2% en el universo)
+  por motivo_t3:
+    hueco en la serie, con fila en t+3 (recuperable)         26,542 ( 37.7%)
+    fin del periodo (t+3 despues de ago-26)                  22,436 ( 31.9%)
+    hueco en la serie (la fila 3 posiciones despues no es t+3)  15,264 ( 21.7%)
+    SKU discontinuado antes de t+3                            3,436 (  4.9%)
+    la posicion deja de registrarse antes de t+3              2,738 (  3.9%)
+  por anio:
+    2026                                                     31,774 ( 45.1%) · universo  13.9%
+    2025                                                     17,662 ( 25.1%) · universo  37.1%
+    2024                                                     12,375 ( 17.6%) · universo  28.5%
+    2023                                                      6,964 (  9.9%) · universo  16.7%
+    2022                                                      1,641 (  2.3%) · universo   3.8%
+  por categoria:
+    Decoracion                                               13,905 ( 19.7%) · universo  19.9%
+    Cocina y mesa                                            11,505 ( 16.3%) · universo  16.0%
+    Textil hogar                                             11,088 ( 15.7%) · universo  15.4%
+    Muebles                                                  10,143 ( 14.4%) · universo  14.9%
+    Bano                                                      8,169 ( 11.6%) · universo  11.6%
+    Organizacion                                              7,907 ( 11.2%) · universo  11.3%
+    Iluminacion                                               7,699 ( 10.9%) · universo  11.0%
+  por banda_stock:
+    1-5                                                      20,281 ( 28.8%) · universo  28.5%
+    11-20                                                    17,038 ( 24.2%) · universo  24.3%
+    6-10                                                     15,741 ( 22.4%) · universo  21.3%
+    21-50                                                    13,310 ( 18.9%) · universo  19.9%
+    >50                                                       4,046 (  5.7%) · universo   6.0%
+  por banda_cobertura:
+    <6                                                       42,318 ( 60.1%) · universo  60.4%
+    6-9                                                      18,578 ( 26.4%) · universo  28.6%
+    >12 (ya en rojo)                                          5,209 (  7.4%) · universo   4.6%
+    9-12                                                      4,311 (  6.1%) · universo   6.4%
+  por id_tienda:
+    T04                                                       2,749 (  3.9%)
+    T11                                                       2,701 (  3.8%)
+    T22                                                       2,700 (  3.8%)
+    T26                                                       2,666 (  3.8%)
+    T24                                                       2,619 (  3.7%)
+    T20                                                       2,591 (  3.7%)
+    T19                                                       2,587 (  3.7%)
+    T09                                                       2,578 (  3.7%)
+  por tienda: rango 2,315 a 2,749 filas
+  stock mediano 10 (universo 11) · cobertura mediana 5.1 (universo 5.2)
 
 Periodo de los cortes t: 2022-03-01 a 2026-05-01 (etiquetas hasta 2026-08-01)
 Posiciones distintas: 9,818 · SKUs: 750 · tiendas: 28
 Features: 55 numericas + 5 categoricas = 60
-Prevalencia total: 3.40% (6,853 positivos)
+Prevalencia total: 3.22% (6,490 positivos)
 
 PARTICION TEMPORAL (embargo de 3 meses = horizonte, para que ninguna etiqueta de un bloque caiga en el siguiente)
               desde    hasta  filas  positivos  prevalencia
 split                                                      
-train       2022-03  2024-12  98649       2466         2.50
-validacion  2025-04  2025-09  38362        854         2.23
-test        2026-01  2026-05  28070       2535         9.03
-embargo     2025-01  2025-12  36225        998         2.76
+train       2022-03  2024-12  98653       2289         2.32
+validacion  2025-04  2025-09  38360        799         2.08
+test        2026-01  2026-05  28070       2481         8.84
+embargo     2025-01  2025-12  36227        921         2.54
 
 NULOS REMANENTES (antes de transformar)
-cv_u12                         1063
-tendencia_u3_vs_u12            1063
+cv_u12                          964
+tendencia_u3_vs_u12             964
 var_stock_3m                   8176
 cobertura_3m_antes             8176
-var_cobertura_3m              11642
+var_cobertura_3m              11481
 tendencia_categoria_tienda        1
-meses_desde_ultima_oc         50103
+meses_desde_ultima_oc         50105
 cumplimiento_ppto_3m             21
-  cobertura infinita (stock > 0 sin venta en 12 m): 1,063
+  cobertura infinita (stock > 0 sin venta en 12 m): 964
 
 ASIMETRIA (skew, train) — > 1 se considera sesgada
 descuento_liquidacion_activa    33.35
 liquidacion_activa              19.95
 liquidaciones_12m               13.09
-sin_venta_12m                   11.56
+sin_venta_12m                   12.16
 uds_transf_enviadas_3m           9.44
-cv_u12                           8.30
+cv_u12                           7.82
 uds_transf_recibidas_3m          7.59
-cobertura                        5.09
 uds_oc_pendientes                4.90
+cobertura                        4.75
 uds_transf_recibidas_12m         4.30
-cobertura_3m_antes               4.12
-peso_posicion_en_tienda          4.10
+peso_posicion_en_tienda          4.07
+cobertura_3m_antes               3.94
 meses_sin_venta                  3.80
 uds_oc_recibidas_3m              3.41
-stock_disponible                 2.45
-pct_pos_cob12_tienda             2.36
+stock_disponible                 2.44
+tiendas_cob12_sku                2.39
+pct_pos_cob12_tienda             2.37
 stock_deposito_sku               2.33
-tiendas_cob12_sku                2.29
-stock_sku_cadena                 2.27
+stock_sku_cadena                 2.25
 uds_oc_recibidas_12m             2.12
-u6_suma                          2.07
-u12_prom                         1.99
-u3_suma                          1.99
-unidades_vendidas                1.77
-u_lag1                           1.75
-u_lag2                           1.74
+u6_suma                          2.05
+u3_suma                          1.98
+u12_prom                         1.97
+unidades_vendidas                1.81
+u_lag2                           1.79
+u_lag1                           1.79
 descuento_promo_max              1.72
 u12_max                          1.70
 liquidaciones_sku_cadena_12m     1.64
@@ -65,45 +112,45 @@ promos_activas_categoria         1.57
 meses_desde_ultima_oc            1.49
 n_oc_recibidas_12m               1.20
 promos_categoria_12m             1.01
-cobertura_deposito_sku           0.66
 antig_posicion_meses             0.62
 antig_sku_meses                  0.60
+cobertura_deposito_sku           0.57
 m2_venta                         0.52
-stock_vs_prom_sku                0.48
-cobertura_sku_cadena             0.40
+cobertura_sku_cadena             0.38
 eventos_en_horizonte             0.34
-tendencia_sku_cadena             0.16
+cumplimiento_ppto_3m             0.27
+stock_vs_prom_sku                0.18
+tendencia_sku_cadena             0.17
 precio_rel_subcategoria          0.10
-var_stock_3m                     0.08
+var_stock_3m                     0.07
 historia_corta                  -0.03
 lead_time_dias                  -0.05
 meses_con_venta_12              -0.17
 tiendas_con_stock_sku           -0.22
 mes_del_anio                    -0.25
 pedido_minimo_unidades          -0.31
-tendencia_u3_vs_u12             -0.51
+tendencia_u3_vs_u12             -0.31
 skus_en_tienda                  -0.56
 var_cobertura_3m                -0.67
-tendencia_categoria_tienda      -1.01
-cumplimiento_ppto_3m            -1.68
-tendencia_tienda                -2.77
+tendencia_categoria_tienda      -1.05
+tendencia_tienda                -2.82
 
 MEDIANA / P99 / MAX (train)
                                  p50      p99      max
 unidades_vendidas               2.00    17.00    27.00
 u3_suma                         6.00    46.00    62.00
 u6_suma                        12.00    86.00   111.00
-u12_prom                        2.09    14.29    19.67
-cv_u12                          0.68     2.95    26.32
-tendencia_u3_vs_u12             1.00     2.31    12.00
+u12_prom                        2.11    14.33    19.67
+cv_u12                          0.68     2.68    26.32
+tendencia_u3_vs_u12             1.00     2.29    12.00
 meses_con_venta_12              8.00    12.00    12.00
 meses_sin_venta                 0.00     4.00    11.00
 sin_venta_12m                   0.00     0.00     1.00
 stock_disponible               11.00    94.00   159.00
 var_stock_3m                    0.00    37.00   117.00
-cobertura                       5.25    18.00   128.00
+cobertura                       5.23    18.00   128.00
 stock_sku_cadena              151.00  1285.00  1584.00
-cobertura_sku_cadena            5.22     7.22    11.77
+cobertura_sku_cadena            5.19     7.18    11.77
 tiendas_con_stock_sku          15.00    22.00    26.00
 tiendas_cob12_sku               0.00     4.00     8.00
 stock_deposito_sku             53.00   455.00   643.00
@@ -125,12 +172,12 @@ u_lag2                          2.00    17.00    27.00
 u12_max                         5.00    21.00    27.00
 antig_posicion_meses           10.00    30.00    35.00
 historia_corta                  1.00     1.00     1.00
-cobertura_3m_antes              5.14    19.88    90.00
+cobertura_3m_antes              5.14    19.00    90.00
 var_cobertura_3m                0.00     9.00   121.50
 peso_posicion_en_tienda         0.00     0.04     0.18
-stock_vs_prom_sku               1.00     1.86     6.89
+stock_vs_prom_sku               1.00     1.87     3.11
 tendencia_sku_cadena            1.00     1.33     1.93
-cobertura_deposito_sku          1.83     3.87     8.18
+cobertura_deposito_sku          1.82     3.78     8.18
 tendencia_tienda                0.95     1.01     1.03
 skus_en_tienda                199.00   281.00   287.00
 pct_pos_cob12_tienda            0.05     0.15     0.37
@@ -143,73 +190,84 @@ uds_transf_recibidas_12m        0.00    55.00   151.00
 liquidaciones_sku_cadena_12m    0.00     1.00     2.00
 descuento_liquidacion_activa    0.00     0.00    50.00
 promos_categoria_12m            2.00     4.00     7.00
-cumplimiento_ppto_3m            0.90     0.97     1.01
+cumplimiento_ppto_3m            0.91     0.98     1.35
 eventos_en_horizonte            1.00     2.00     2.00
 
-TRANSFORMADO: 201,306 filas x 106 features (+ ids, marca de costo imputado, target y split)
-  winsorizadas p1-p99: unidades_vendidas, u3_suma, u6_suma, u12_prom, cv_u12, tendencia_u3_vs_u12, stock_disponible, var_stock_3m, cobertura, stock_sku_cadena, cobertura_sku_cadena, tiendas_con_stock_sku, stock_deposito_sku, uds_oc_recibidas_3m, uds_oc_pendientes, uds_transf_recibidas_3m, uds_transf_enviadas_3m, antig_sku_meses, u_lag1, u_lag2, u12_max, antig_posicion_meses, cobertura_3m_antes, var_cobertura_3m, peso_posicion_en_tienda, stock_vs_prom_sku, tendencia_sku_cadena, cobertura_deposito_sku, tendencia_tienda, skus_en_tienda, pct_pos_cob12_tienda, tendencia_categoria_tienda, precio_rel_subcategoria, uds_oc_recibidas_12m, meses_desde_ultima_oc, uds_transf_recibidas_12m, cumplimiento_ppto_3m
+RECORTE DE LA COBERTURA (p99 de train = 18.0 meses)
+  train     : filas > p99 1.51% · positivos que caen ahi 26.5% · tasa de positivos ahi 40.7% · infinitas 654 (tasa 50.5%)
+  validacion: filas > p99 0.96% · positivos que caen ahi 18.9% · tasa de positivos ahi 41.1% · infinitas 116 (tasa 54.3%)
+  test      : filas > p99 1.76% · positivos que caen ahi 19.3% · tasa de positivos ahi 97.0% · infinitas 93 (tasa 98.9%)
+  finitas por encima del tope de 60 meses: 23 filas
+variante      split  valores_distintos_cob_train  auc_cobertura_sola  auc_logistica  pr_auc_logistica  coef_cobertura
+     p99 validacion                         6778              0.8093         0.9075            0.2411           0.987
+     p99       test                         6778              0.9409         0.9698            0.7881           0.987
+     log validacion                         7047              0.8093         0.9072            0.2409           0.983
+     log       test                         7047              0.9409         0.9697            0.7913           0.983
+
+TRANSFORMADO: 201,310 filas x 106 features (+ ids, marca de costo imputado, target y split)
+  winsorizadas p1-p99: unidades_vendidas, u3_suma, u6_suma, u12_prom, cv_u12, tendencia_u3_vs_u12, stock_disponible, var_stock_3m, stock_sku_cadena, cobertura_sku_cadena, tiendas_con_stock_sku, stock_deposito_sku, uds_oc_recibidas_3m, uds_oc_pendientes, uds_transf_recibidas_3m, uds_transf_enviadas_3m, antig_sku_meses, u_lag1, u_lag2, u12_max, antig_posicion_meses, var_cobertura_3m, peso_posicion_en_tienda, stock_vs_prom_sku, tendencia_sku_cadena, cobertura_deposito_sku, tendencia_tienda, skus_en_tienda, pct_pos_cob12_tienda, tendencia_categoria_tienda, precio_rel_subcategoria, uds_oc_recibidas_12m, meses_desde_ultima_oc, uds_transf_recibidas_12m, cumplimiento_ppto_3m
   log1p aplicado a: cv_u12, meses_sin_venta, stock_disponible, cobertura, stock_sku_cadena, tiendas_cob12_sku, stock_deposito_sku, uds_oc_recibidas_3m, uds_oc_pendientes, uds_transf_recibidas_3m, uds_transf_enviadas_3m, liquidaciones_12m, promos_activas_categoria, descuento_promo_max, u12_max, cobertura_3m_antes, pct_pos_cob12_tienda, uds_oc_recibidas_12m, n_oc_recibidas_12m, meses_desde_ultima_oc, uds_transf_recibidas_12m, liquidaciones_sku_cadena_12m, descuento_liquidacion_activa, promos_categoria_12m
   columnas constantes en train: ninguna
   filas con costo imputado (22 SKUs): 1,641
   one-hot: categoria (7), subcategoria (25), region (5), formato (3), proveedor (10)
-  balanceo sugerido: class_weight positivo = 39.0 (calculado en train, sin sobremuestreo)
+  balanceo sugerido: class_weight positivo = 42.1 (calculado en train, sin sobremuestreo)
 
-Guardado en C:\onedrive\OneDrive - F 458 S.A\Escritorio\Gian\Data Driven\Casa-Oga-Data-driven\Datasets_Modelo
+Guardado en C:\Users\fasce\projects\Casa-Oga-Data-driven\Datasets_Modelo
 
 SENAL UNIVARIADA (AUC de cada feature sola; + = mas valor, mas riesgo)
                      feature  auc_train dir_train  auc_validacion dir_validacion  auc_test dir_test
-                     u6_suma      0.858         -           0.843              -     0.936        -
-                    u12_prom      0.850         -           0.827              -     0.893        -
-                     u3_suma      0.825         -           0.817              -     0.928        -
-     peso_posicion_en_tienda      0.821         -           0.826              -     0.892        -
-                   cobertura      0.817         +           0.805              +     0.942        +
-                     u12_max      0.807         -           0.780              -     0.802        -
-          meses_con_venta_12      0.806         -           0.798              -     0.906        -
-                      cv_u12      0.782         +           0.810              +     0.918        +
-                      u_lag1      0.764         -           0.754              -     0.904        -
-           unidades_vendidas      0.759         -           0.753              -     0.917        -
-                      u_lag2      0.752         -           0.748              -     0.886        -
-          cobertura_3m_antes      0.736         +           0.720              +     0.785        +
-            stock_disponible      0.705         -           0.689              -     0.705        -
-             meses_sin_venta      0.702         +           0.704              +     0.895        +
-            stock_sku_cadena      0.702         -           0.691              -     0.732        -
-           tiendas_cob12_sku      0.700         +           0.663              +     0.728        +
-          stock_deposito_sku      0.698         -           0.694              -     0.733        -
-             antig_sku_meses      0.613         -           0.574              -     0.504        -
-        antig_posicion_meses      0.612         -           0.575              -     0.504        -
-              historia_corta      0.573         +           0.550              +     0.500        -
-               sin_venta_12m      0.573         +           0.540              +     0.521        +
-        pct_pos_cob12_tienda      0.562         +           0.524              +     0.583        +
-            var_cobertura_3m      0.561         +           0.580              +     0.797        +
-          n_oc_recibidas_12m      0.551         -           0.521              -     0.504        -
-              skus_en_tienda      0.550         -           0.501              +     0.526        +
-        uds_oc_recibidas_12m      0.547         -           0.516              -     0.502        -
-            tendencia_tienda      0.541         -           0.510              -     0.515        +
-  tendencia_categoria_tienda      0.535         -           0.503              -     0.504        +
-       meses_desde_ultima_oc      0.533         -           0.517              -     0.522        -
-      pedido_minimo_unidades      0.528         +           0.523              +     0.513        +
-        promos_categoria_12m      0.528         -           0.501              +     0.504        -
-       tiendas_con_stock_sku      0.523         -           0.514              +     0.516        +
-         tendencia_u3_vs_u12      0.521         -           0.586              -     0.875        -
-        cobertura_sku_cadena      0.518         +           0.518              +     0.548        +
-           stock_vs_prom_sku      0.517         -           0.516              +     0.636        +
-        tendencia_sku_cadena      0.514         -           0.526              -     0.576        -
-                mes_del_anio      0.513         -           0.510              +     0.586        +
-     precio_rel_subcategoria      0.512         +           0.505              -     0.514        +
-              lead_time_dias      0.510         +           0.536              +     0.515        +
+                     u6_suma      0.864         -           0.848              -     0.938        -
+                    u12_prom      0.857         -           0.832              -     0.895        -
+                     u3_suma      0.833         -           0.822              -     0.929        -
+     peso_posicion_en_tienda      0.826         -           0.831              -     0.894        -
+                   cobertura      0.817         +           0.809              +     0.941        +
+                     u12_max      0.817         -           0.788              -     0.806        -
+          meses_con_venta_12      0.811         -           0.804              -     0.908        -
+                      cv_u12      0.786         +           0.811              +     0.918        +
+                      u_lag1      0.770         -           0.760              -     0.906        -
+           unidades_vendidas      0.768         -           0.758              -     0.918        -
+                      u_lag2      0.761         -           0.754              -     0.888        -
+          cobertura_3m_antes      0.736         +           0.719              +     0.783        +
+            stock_disponible      0.714         -           0.691              -     0.708        -
+            stock_sku_cadena      0.711         -           0.698              -     0.735        -
+             meses_sin_venta      0.708         +           0.710              +     0.897        +
+          stock_deposito_sku      0.707         -           0.700              -     0.736        -
+           tiendas_cob12_sku      0.699         +           0.668              +     0.728        +
+             antig_sku_meses      0.616         -           0.576              -     0.501        -
+        antig_posicion_meses      0.615         -           0.576              -     0.501        -
+              historia_corta      0.576         +           0.552              +     0.500        -
+               sin_venta_12m      0.570         +           0.539              +     0.519        +
+            var_cobertura_3m      0.563         +           0.586              +     0.802        +
+        pct_pos_cob12_tienda      0.561         +           0.521              +     0.583        +
+          n_oc_recibidas_12m      0.552         -           0.519              -     0.505        -
+              skus_en_tienda      0.552         -           0.502              -     0.527        +
+        uds_oc_recibidas_12m      0.549         -           0.512              -     0.502        -
+            tendencia_tienda      0.545         -           0.516              -     0.513        +
+  tendencia_categoria_tienda      0.537         -           0.508              -     0.505        +
+       meses_desde_ultima_oc      0.533         -           0.515              -     0.521        -
+        promos_categoria_12m      0.530         -           0.502              -     0.503        -
+      pedido_minimo_unidades      0.528         +           0.522              +     0.514        +
+         tendencia_u3_vs_u12      0.525         -           0.588              -     0.878        -
+       tiendas_con_stock_sku      0.524         -           0.510              +     0.516        +
+           stock_vs_prom_sku      0.517         -           0.520              +     0.638        +
+                mes_del_anio      0.513         -           0.504              +     0.586        +
+        tendencia_sku_cadena      0.513         -           0.527              -     0.581        -
+        cobertura_sku_cadena      0.513         +           0.512              +     0.542        +
+     precio_rel_subcategoria      0.511         +           0.507              -     0.515        +
+                    m2_venta      0.510         +           0.548              +     0.506        -
+              lead_time_dias      0.508         +           0.535              +     0.514        +
          descuento_promo_max      0.508         -           0.500              +     0.502        -
     promos_activas_categoria      0.507         -           0.501              +     0.502        -
-liquidaciones_sku_cadena_12m      0.506         -           0.513              +     0.520        -
-                    m2_venta      0.506         +           0.545              +     0.508        -
-         uds_oc_recibidas_3m      0.504         -           0.506              -     0.513        +
-      cobertura_deposito_sku      0.504         -           0.520              -     0.511        -
+liquidaciones_sku_cadena_12m      0.506         -           0.510              +     0.522        -
+         uds_oc_recibidas_3m      0.506         -           0.508              -     0.513        +
+      cobertura_deposito_sku      0.505         -           0.520              -     0.514        -
+        cumplimiento_ppto_3m      0.503         +           0.522              -     0.501        +
         eventos_en_horizonte      0.503         -           0.516              +     0.562        +
-                var_stock_3m      0.503         -           0.508              -     0.537        +
-           uds_oc_pendientes      0.502         +           0.504              +     0.503        +
-      uds_transf_enviadas_3m      0.502         +           0.501              -     0.501        +
-     uds_transf_recibidas_3m      0.501         -           0.502              -     0.502        +
-           liquidaciones_12m      0.501         -           0.505              +     0.503        -
-        cumplimiento_ppto_3m      0.501         +           0.524              -     0.503        +
-    uds_transf_recibidas_12m      0.501         +           0.503              -     0.505        +
+                var_stock_3m      0.502         -           0.507              -     0.539        +
+           uds_oc_pendientes      0.502         +           0.506              +     0.503        +
+     uds_transf_recibidas_3m      0.501         -           0.502              -     0.503        +
+    uds_transf_recibidas_12m      0.501         -           0.500              -     0.505        +
+      uds_transf_enviadas_3m      0.501         +           0.501              -     0.501        +
+           liquidaciones_12m      0.501         -           0.502              +     0.503        -
+descuento_liquidacion_activa      0.500         +           0.500              +     0.500        -
           liquidacion_activa      0.500         -           0.500              -     0.500        -
-descuento_liquidacion_activa      0.500         +           0.500              -     0.500        -

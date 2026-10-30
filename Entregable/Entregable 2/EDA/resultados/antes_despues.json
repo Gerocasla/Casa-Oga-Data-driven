@@ -12,20 +12,20 @@
   {
    "grupo": "Volumen",
    "metrica": "Venta total ene-22 a ago-26 (M$)",
-   "antes": 40314.270922380005,
-   "despues": 40083.394959419995,
+   "antes": 40314.27092238,
+   "despues": 40254.73205127999,
    "fmt": "m",
-   "impacto": "Los duplicados inflan la venta; las devoluciones quedan neteadas, no perdidas.",
-   "variacion_pct": -0.5726904088245388
+   "impacto": "Los duplicados inflan la venta; las devoluciones a clientes quedan neteadas (no las de proveedor por sin rotacion).",
+   "variacion_pct": -0.14768683579727826
   },
   {
    "grupo": "Volumen",
    "metrica": "Unidades vendidas ene-22 a ago-26",
    "antes": 930410.0,
-   "despues": 925015.0,
+   "despues": 929431.0,
    "fmt": "n",
    "impacto": "Mismo efecto en unidades.",
-   "variacion_pct": -0.5798518932513597
+   "variacion_pct": -0.10522242882170518
   },
   {
    "grupo": "Stock",
@@ -40,10 +40,10 @@
    "grupo": "Stock",
    "metrica": "Capital inmovilizado en tiendas a dic-25 (M$ a costo)",
    "antes": 3595.11008,
-   "despues": 3544.872351753753,
+   "despues": 3546.5887517537526,
    "fmt": "m",
-   "impacto": "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.",
-   "variacion_pct": -1.3973905423849242
+   "impacto": "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup (mayor venta) + costo OC x 1,2321.",
+   "variacion_pct": -1.349647915266261
   },
   {
    "grupo": "Stock",
@@ -51,7 +51,7 @@
    "antes": 3119.56056,
    "despues": 3097.6338197923496,
    "fmt": "m",
-   "impacto": "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup + costo OC x 1,2321.",
+   "impacto": "Antes: SKUs duplicados cuentan doble, 22 SKUs sin costo valen 0. Despues: dedup (mayor venta) + costo OC x 1,2321.",
    "variacion_pct": -0.702879132683043
   },
   {
@@ -66,11 +66,11 @@
   {
    "grupo": "Consistencia",
    "metrica": "Participacion de Decoracion en la venta (%)",
-   "antes": 20.799968724759864,
-   "despues": 22.35443010468906,
+   "antes": 20.79996872475986,
+   "despues": 22.313554169874024,
    "fmt": "p",
    "impacto": "Filtrar por la etiqueta mayoritaria (Decoracion) pierde los SKUs cargados como DECO o Decoración.",
-   "variacion_pct": 7.473383255998822
+   "variacion_pct": 7.276864043129172
   },
   {
    "grupo": "Validez",
@@ -103,30 +103,276 @@
    "grupo": "Validez",
    "metrica": "Cumplimiento presupuestario 2022 (%)",
    "antes": 90.76316461533939,
-   "despues": 89.45615799594367,
+   "despues": 90.24454700814985,
    "fmt": "p",
    "impacto": "309 celdas en cero (ene-may 22) y 3 negativas excluidas (P29-P32): antes la venta real sin meta infla el %.",
-   "variacion_pct": -1.440018783980157
+   "variacion_pct": -0.5713965675254729
   },
   {
    "grupo": "Modelo",
    "metrica": "Posiciones con cobertura > 12 meses a dic-25",
    "antes": 211.0,
-   "despues": 213.0,
+   "despues": 200.0,
    "fmt": "n",
    "impacto": "Duplicados sumados y negativos sin tratar cambian el ritmo de venta y el stock de cada posicion.",
-   "variacion_pct": 0.9478672985782088
+   "variacion_pct": -5.213270142180093
   },
   {
    "grupo": "Modelo",
    "metrica": "Prevalencia del target (cobertura > 12 a 3 meses, %)",
    "antes": 2.61,
-   "despues": 3.4,
+   "despues": 3.22,
    "fmt": "p",
-   "impacto": "Devoluciones llevadas a 0 (criterio previo) vs neteadas (default P23): 5.260 -> 6.853 positivos (+1.593). Fuente: EDA/candidatos_target.py.",
-   "variacion_pct": 30.268199233716487
+   "impacto": "Criterio previo (1ra ocurrencia. devoluciones a 0): 5.260 positivos. v3 (todas neteadas): 6.853 (3.40%). v4 (mayor venta. sin netear 'sin rotacion'): 6.490. Fuente: Modelo/comparar_reglas_v4.py.",
+   "variacion_pct": 23.371647509578565
   }
  ],
+ "capital_categoria": {
+  "dic-25": [
+   {
+    "categoria": "Decoracion",
+    "total": [
+     727.8,
+     750.4
+    ],
+    "rojo": [
+     10.2,
+     11.0
+    ],
+    "pos_rojo": [
+     37,
+     37
+    ]
+   },
+   {
+    "categoria": "Cocina y mesa",
+    "total": [
+     785.3,
+     735.3
+    ],
+    "rojo": [
+     16.7,
+     16.0
+    ],
+    "pos_rojo": [
+     36,
+     33
+    ]
+   },
+   {
+    "categoria": "Textil hogar",
+    "total": [
+     496.9,
+     490.7
+    ],
+    "rojo": [
+     8.0,
+     8.7
+    ],
+    "pos_rojo": [
+     39,
+     37
+    ]
+   },
+   {
+    "categoria": "Organizacion",
+    "total": [
+     419.9,
+     456.9
+    ],
+    "rojo": [
+     6.4,
+     7.9
+    ],
+    "pos_rojo": [
+     22,
+     21
+    ]
+   },
+   {
+    "categoria": "Muebles",
+    "total": [
+     460.1,
+     446.9
+    ],
+    "rojo": [
+     9.6,
+     10.8
+    ],
+    "pos_rojo": [
+     33,
+     33
+    ]
+   },
+   {
+    "categoria": "Iluminacion",
+    "total": [
+     388.1,
+     388.5
+    ],
+    "rojo": [
+     5.2,
+     5.0
+    ],
+    "pos_rojo": [
+     17,
+     14
+    ]
+   },
+   {
+    "categoria": "Bano",
+    "total": [
+     317.0,
+     277.8
+    ],
+    "rojo": [
+     5.7,
+     5.3
+    ],
+    "pos_rojo": [
+     27,
+     25
+    ]
+   },
+   {
+    "categoria": "Total",
+    "total": [
+     3595.1,
+     3546.6
+    ],
+    "rojo": [
+     61.8,
+     64.8
+    ],
+    "pos_rojo": [
+     211,
+     200
+    ]
+   }
+  ],
+  "ago-26": [
+   {
+    "categoria": "Decoracion",
+    "total": [
+     627.1,
+     641.4
+    ],
+    "rojo": [
+     39.6,
+     39.5
+    ],
+    "pos_rojo": [
+     151,
+     148
+    ]
+   },
+   {
+    "categoria": "Cocina y mesa",
+    "total": [
+     654.2,
+     618.0
+    ],
+    "rojo": [
+     29.3,
+     27.7
+    ],
+    "pos_rojo": [
+     133,
+     131
+    ]
+   },
+   {
+    "categoria": "Textil hogar",
+    "total": [
+     447.3,
+     445.2
+    ],
+    "rojo": [
+     30.6,
+     30.9
+    ],
+    "pos_rojo": [
+     142,
+     141
+    ]
+   },
+   {
+    "categoria": "Organizacion",
+    "total": [
+     393.2,
+     419.5
+    ],
+    "rojo": [
+     19.2,
+     17.6
+    ],
+    "pos_rojo": [
+     90,
+     86
+    ]
+   },
+   {
+    "categoria": "Muebles",
+    "total": [
+     415.6,
+     408.9
+    ],
+    "rojo": [
+     23.4,
+     25.2
+    ],
+    "pos_rojo": [
+     154,
+     153
+    ]
+   },
+   {
+    "categoria": "Iluminacion",
+    "total": [
+     329.0,
+     329.0
+    ],
+    "rojo": [
+     20.1,
+     20.0
+    ],
+    "pos_rojo": [
+     97,
+     96
+    ]
+   },
+   {
+    "categoria": "Bano",
+    "total": [
+     253.1,
+     235.6
+    ],
+    "rojo": [
+     17.7,
+     17.7
+    ],
+    "pos_rojo": [
+     113,
+     111
+    ]
+   },
+   {
+    "categoria": "Total",
+    "total": [
+     3119.6,
+     3097.6
+    ],
+    "rojo": [
+     180.0,
+     178.6
+    ],
+    "pos_rojo": [
+     880,
+     866
+    ]
+   }
+  ]
+ },
  "anual": {
   "anios": [
    "2022",
@@ -143,10 +389,10 @@
    7961.4
   ],
   "despues": [
-   1789.3,
-   6243.4,
-   10529.9,
-   13559.5,
+   1806.3,
+   6291.7,
+   10578.4,
+   13616.9,
    7961.4
   ]
  },
@@ -189,13 +435,13 @@
    "Bano"
   ],
   "valores": [
-   8960.4,
-   7790.7,
-   5464.6,
-   5190.7,
-   4769.7,
-   4596.3,
-   3311.0
+   8982.3,
+   7835.1,
+   5476.2,
+   5214.5,
+   4809.9,
+   4606.3,
+   3330.6
   ]
  },
  "problemas_mes": {

@@ -1,0 +1,53 @@
+====================================================================================================
+TARGET Y PESO DE CLASE SEGUN LA REGLA (universo y target de construir_dataset_modelo.py)
+====================================================================================================
+escenario                 v3       dedup  sin_rotacion          v4
+venta_M            40083.395   40164.909     40173.218   40254.732
+unidades          925015.000  927418.000    927028.000  929431.000
+filas             201306.000  201310.000    201306.000  201310.000
+positivos           6853.000    6819.000      6523.000    6490.000
+prevalencia            3.404       3.387         3.240       3.224
+peso_clase            39.004      39.250        41.816      42.099
+filas_train        98649.000   98653.000     98649.000   98653.000
+pos_train           2466.000    2451.000      2304.000    2289.000
+prev_train             2.500       2.484         2.336       2.320
+filas_validacion   38362.000   38360.000     38362.000   38360.000
+pos_validacion       854.000     846.000       806.000     799.000
+prev_validacion        2.226       2.205         2.101       2.083
+filas_test         28070.000   28070.000     28070.000   28070.000
+pos_test            2535.000    2529.000      2487.000    2481.000
+prev_test              9.031       9.010         8.860       8.839
+filas_embargo      36225.000   36227.000     36225.000   36227.000
+pos_embargo          998.000     993.000       926.000     921.000
+prev_embargo           2.755       2.741         2.556       2.542
+
+====================================================================================================
+H1 · 1RA OCURRENCIA vs MAYOR VENTA (P4)
+====================================================================================================
+Claves con dos registros de venta no negativos: 2,330
+Claves donde la regla elige otro registro: 600 (en las demas, la 1ra ya es la de mayor venta o son iguales)
+  1ra ocurrencia en cero y la otra con venta: 115
+  unidades: 1,095 -> 3,498 (+2,403)
+  venta: $50.2 M -> $131.7 M
+Venta total ene-22 a ago-26: $40,083.4 M -> $40,164.9 M (+0.20%) · unidades 925,015 -> 927,418
+Stock: claves con otro valor de stock disponible: 595 · unidades totales 4,927,638 -> 4,936,174
+  capital a costo 2025-12: $3,544.9 M -> $3,546.6 M
+  capital a costo 2026-08: $3,097.6 M -> $3,097.6 M
+Filas del universo: solo en v3 4 · solo con la regla nueva 8 · cambian de clase 34 (0->1: 0 · 1->0: 34)
+  todas las filas que cambian son de los 15 SKUs duplicados: True
+
+====================================================================================================
+H4 · NETEO SIN EL MOTIVO «SIN ROTACION / NO VENDIDO» (P18-P19)
+====================================================================================================
+Filas de devolucion con ese motivo: 471 de 2.317 · 2,013 unidades · $89.8 M (dejan de restarse de la venta)
+Venta total: $40,083.4 M -> $40,173.2 M · unidades 925,015 -> 927,028
+Filas que cambian de clase: 330 (1->0: 330 · 0->1: 0)
+
+RESUMEN v3 -> v4
+  filas             201,306.000 ->  201,310.000
+  positivos           6,853.000 ->    6,490.000
+  prevalencia             3.404 ->        3.224
+  peso_clase             39.004 ->       42.099
+  prev_train              2.500 ->        2.320
+  prev_validacion         2.226 ->        2.083
+  prev_test               9.031 ->        8.839

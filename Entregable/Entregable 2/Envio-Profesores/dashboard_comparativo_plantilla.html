@@ -114,9 +114,9 @@ const TOT = [
 
 /* que corregimos y por que: los mismos criterios de la presentacion (diapositiva 3) */
 const CRIT = [
-  ['Claves duplicadas', `${nf(V.claves_dup)} en Ventas y en Stock`, '0', 'Conservar la 1ra ocurrencia', 'Con cualquier otro criterio los totales no cierran'],
+  ['Claves duplicadas', `${nf(V.claves_dup)} en Ventas y en Stock`, '0', 'Conservar el registro de mayor venta', 'Regla sugerida por Casa Óga: el otro registro suele estar en cero (superposición de sistemas)'],
   ['Stock negativo', `${nf(S.filas_neg)} filas (mín. ${nf(S.minimo)})`, '0', 'Llevar a 0', 'Error de sincronización confirmado'],
-  ['Venta negativa', `${nf(V.filas_neg)} filas sueltas`, 'Neteadas', 'Netear con la venta del mes', 'Son devoluciones reales, no ritmo de venta'],
+  ['Venta negativa', `${nf(V.filas_neg)} filas sueltas`, 'Neteadas', 'Netear con la venta del mes, salvo la devolución al proveedor por «sin rotación»', 'Las de clientes son devoluciones reales; la de proveedor es movimiento de inventario'],
   ['Descuentos > 100% o negativos', nf(AC.desc_fuera), '0', 'Excluir del margen', 'Error de carga, sin acción comercial detrás'],
   ['Presupuesto en 0 o negativo', `${nf(PR.invalidas)} celdas`, '0', 'Excluir del desvío', 'Proceso inmaduro en 2022 y error de carga'],
   ['Categorías mal escritas', `${CA.categorias[0]} etiquetas`, `${CA.categorias[1]} categorías`, 'Unificar la escritura', 'Filtrar por una etiqueta pierde venta: Decoración gana 1,5 pp'],
@@ -135,13 +135,13 @@ document.getElementById('main').innerHTML = `
       <div class="pair"><span>Venta <b>${sg(pct(V.venta[0], V.venta[1]))}%</b></span><span>Unidades <b>${sg(pct(V.unidades[0], V.unidades[1]))}%</b></span><span>Capital dic-25 <b>${sg(pct(S.capital['dic-25'][0], S.capital['dic-25'][1]))}%</b></span></div></div>
     <div class="card stat"><div class="big">+${nf(Math.floor((dec[1] - dec[0]) * 10) / 10, 1)} pp</div><p>gana Decoración al unificar categorías: es la candidata al piloto</p>
       <div class="pair"><span><span class="dot a"></span><b>${nf(dec[0], 2)}%</b> de la venta</span><span>→</span><span><span class="dot d"></span><b>${nf(dec[1], 2)}%</b></span></div></div>
-    <div class="card stat"><div class="big">${nf(M.prevalencia[0], 1)}% → ${nf(M.prevalencia[1], 1)}%</div><p>prevalencia del target al netear las devoluciones en vez de llevarlas a 0: el mayor impacto para el modelo</p>
-      <div class="pair"><span>Positivos <b>${nf(M.positivos[0])} → ${nf(M.positivos[1])}</b></span><span><b>${sg(pct(M.positivos[0], M.positivos[1]), 0)}%</b></span></div></div>
+    <div class="card stat"><div class="big">${nf(M.prevalencia[0], 1)}% → ${nf(M.prevalencia[1], 1)}%</div><p>prevalencia del target con los criterios corregidos frente al criterio previo (devoluciones llevadas a 0): el mayor impacto para el modelo</p>
+      <div class="pair"><span>Positivos <b>${nf(M.positivos[0])} → ${nf(M.positivos[1])}</b></span><span><b>${sg(pct(M.positivos[0], M.positivos[1]), 0)}%</b></span><span>Peso de clase <b>${nf(M.peso_clase[1], 1)}</b></span></div></div>
   </div>
 
   <div class="grid"><div class="card"><h2>De dónde sale el ${nf(M.prevalencia[0], 1)}% → ${nf(M.prevalencia[1], 1)}%: prevalencia del target por mes de corte</h2>
-    <div class="sub">Mismo target y mismo universo; solo cambia el tratamiento de las devoluciones. Netearlas suma positivos en todos los meses de 2022-2025; en 2026 la brecha se achica porque ese año no trae devoluciones.</div>
-    <div class="legend"><span><i style="background:${C.a}"></i>Antes · devoluciones llevadas a 0</span><span><i style="background:${C.d}"></i>Después · devoluciones neteadas</span></div>
+    <div class="sub">Mismo target y mismo universo; cambia el tratamiento de devoluciones y duplicados. Netear las devoluciones de clientes suma positivos en 2022-2025; no netear las devoluciones al proveedor por «sin rotación» y conservar el registro de mayor venta los reduce (con todas neteadas, la v3 daba ${nf(M.prevalencia_v3, 2)}%). En 2026 la brecha se achica porque ese año no trae devoluciones.</div>
+    <div class="legend"><span><i style="background:${C.a}"></i>Antes · 1ra ocurrencia, devoluciones llevadas a 0</span><span><i style="background:${C.d}"></i>Después · mayor venta, devoluciones de clientes neteadas</span></div>
     <div id="prev" style="margin-top:6px"></div></div></div>
 
   <div class="grid g2">
@@ -152,11 +152,28 @@ document.getElementById('main').innerHTML = `
       <div><span class="tag"><span class="dot d"></span>Después · ${CA.categorias[1]} categorías</span><div id="cd"></div></div></div></div>
   </div>
 
+  <div class="grid"><div class="card" id="capcat"><h2>Capital inmovilizado por categoría: el total casi no cambia, las categorías sí</h2>
+    <div class="sub">Stock en tiendas valuado a costo ($ M) a dic-2025 (último cierre con duplicados) y variación del total a ago-2026. «En rojo» = posiciones con más de 12 meses de cobertura. Agrupado por la categoría corregida para aislar el efecto de duplicados, negativos y costos faltantes.</div>
+    <div class="tw"><table><thead><tr><th>Categoría</th><th><span class="dot a"></span>Total dic-25</th><th><span class="dot d"></span>Después</th><th>Var.</th><th><span class="dot a"></span>En rojo dic-25</th><th><span class="dot d"></span>Después</th><th>Var.</th><th>Total ago-26: var.</th></tr></thead>
+    <tbody id="tcap"></tbody></table></div>
+    <p class="sub" id="capnota" style="margin-top:10px"></p></div></div>
+
   <div class="grid"><div class="card"><h2>Qué corregimos y por qué</h2><div class="sub">Los criterios de la presentación, con lo que había antes y lo que queda después.</div>
     <div class="tw"><table><thead><tr><th>Problema</th><th><span class="dot a"></span>Antes</th><th><span class="dot d"></span>Después</th><th>Qué hicimos</th><th>Por qué</th></tr></thead>
     <tbody>${CRIT.map(r => `<tr><td><b>${esc(r[0])}</b></td><td class="a">${esc(r[1])}</td><td class="d">${esc(r[2])}</td><td>${esc(r[3])}</td><td style="color:#6E6E73">${esc(r[4])}</td></tr>`).join('')}</tbody></table></div></div></div>
 
   <p class="foot">Los demás hallazgos (ventas antes de la apertura de 6 tiendas, venta sin stock, stock en tránsito sin definición, liquidaciones incoherentes y fuentes sin datos de 2026) no se corrigen: se declaran y quedan fuera del modelo. Detalle en el documento consolidado, Parte B §1. Fuente: Datasets/ (crudo) y Datasets_Normalizados/ con el plan de mejora (procesado).</p>`;
+
+/* capital por categoria (Finanzas) */
+const CC = S.capital_categoria['dic-25'], CA26 = Object.fromEntries(S.capital_categoria['ago-26'].map(r => [r.categoria, r]));
+const ACC = {Decoracion: 'Decoración', Bano: 'Baño', Iluminacion: 'Iluminación', Organizacion: 'Organización'};
+const vv = (a, b) => a ? sg(pct(a, b)) + '%' : '—';
+document.getElementById('tcap').innerHTML = CC.map(r => { const t = r.categoria === 'Total', g = CA26[r.categoria];
+  return `<tr${t ? ' style="font-weight:600"' : ''}><td>${esc(ACC[r.categoria] || r.categoria)}</td><td class="a">${nf(r.total[0], 1)}</td><td class="d">${nf(r.total[1], 1)}</td><td>${vv(r.total[0], r.total[1])}</td>`
+    + `<td class="a">${nf(r.rojo[0], 1)}</td><td class="d">${nf(r.rojo[1], 1)}</td><td>${vv(r.rojo[0], r.rojo[1])}</td><td>${g ? vv(g.total[0], g.total[1]) : '—'}</td></tr>`; }).join('');
+const ccs = CC.filter(r => r.categoria !== 'Total').map(r => [ACC[r.categoria] || r.categoria, pct(r.total[0], r.total[1])]).sort((a, b) => a[1] - b[1]);
+const cct = CC.find(r => r.categoria === 'Total');
+document.getElementById('capnota').innerHTML = `A dic-2025 el total cambia <b>${vv(cct.total[0], cct.total[1])}</b>, pero por categoría va de <b>${sg(ccs[0][1])}%</b> (${ccs[0][0]}) a <b>${sg(ccs[ccs.length - 1][1])}%</b> (${ccs[ccs.length - 1][0]}): los SKUs duplicados se contaban dos veces y los 22 SKUs sin costo valían $0. En ago-2026 ya no hay claves duplicadas en Stock, pero el catálogo repetido sigue contando dos veces el stock de 15 SKUs y los 22 SKUs sin costo siguen valiendo $0.`;
 
 /* totales: dos barras por metrica */
 const tot = document.getElementById('tot');

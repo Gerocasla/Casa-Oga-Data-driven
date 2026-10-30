@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Datos de insight para el dashboard del Entregable 2 y la presentacion.
-Lee Datasets_Normalizados (serie mensual) y Datasets_Modelo/dataset_entrenamiento_v2.parquet.
+Lee Datasets_Normalizados (serie mensual) y Datasets_Modelo/dataset_entrenamiento_v4.parquet
+(criterios de limpieza compartidos: EDA/criterios_limpieza.py).
 Salida: resultados/insights.json (lo consume EDA/antes_despues.py para armar el HTML).
 Todo lo que usa el modelo de prueba se entrena SOLO en train; las curvas se miden en validacion.
 """
@@ -14,16 +15,16 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(BASE, "..", "..", ".."))
 DATA = os.path.join(ROOT, "Datasets_Normalizados"); RES = os.path.join(BASE, "resultados")
 K = ["fecha_mes", "id_tienda", "id_producto"]; M = 1e6
-V = os.environ.get("VERSION_DATASET", "v3")
+V = os.environ.get("VERSION_DATASET", "v4")
+sys.path.insert(0, os.path.join(BASE, "..", "EDA"))
+from criterios_limpieza import limpiar_ventas_stock, ventas_brutas
 OUT = {}
 
 # ------------------------------------------------------------------ panel limpio (todas las posiciones)
 v = pd.read_csv(os.path.join(DATA, "Ventas_SKU_tienda_mensual.csv"))
-pos = v[v["unidades_vendidas"] >= 0].drop_duplicates(K)
-neg = v[v["unidades_vendidas"] < 0]
-vn = pd.concat([pos, neg]).groupby(K, as_index=False)[["unidades_vendidas", "venta_neta"]].sum()
-s = pd.read_csv(os.path.join(DATA, "Stock_SKU_tienda_mensual.csv")).drop_duplicates(K)
-s["stock_disponible"] = s["stock_disponible"].clip(lower=0)
+vn, s = limpiar_ventas_stock(v, pd.read_csv(os.path.join(DATA, "Stock_SKU_tienda_mensual.csv")),
+                             pd.read_csv(os.path.join(DATA, "Devoluciones_SKU.csv")))
+pos = ventas_brutas(v).copy()
 cat = pd.read_csv(os.path.join(DATA, "Productos_catalogo.csv")).drop_duplicates("id_producto")
 oc = pd.read_csv(os.path.join(DATA, "Ordenes_Compra.csv")); oc["m"] = oc.unidades * oc.costo_unitario_ars
 c_oc = oc.groupby("id_producto")["m"].sum() / oc.groupby("id_producto")["unidades"].sum() * 1.2321

@@ -12,9 +12,15 @@ Definiciones (ver Recordatorios/05-decisiones-modelo.md):
   - Features           : solo informacion disponible al cierre del mes t (sin leakage).
   - Particion          : temporal con embargo de 3 meses (= horizonte) entre bloques.
 
-Criterios de limpieza aplicados antes (respuestas del negocio, ronda 2):
-  H1 dedup por clave, 1ra ocurrencia · H4 stock negativo -> 0, ventas negativas neteadas ·
-  H9 descuentos fuera de rango excluidos · H11 costo de OC x 1,2321 para los 22 SKUs sin costo.
+Criterios de limpieza aplicados antes (respuestas del negocio; reglas de H1 y H4 en EDA/criterios_limpieza.py):
+  H1 dedup por clave: v4 conserva el registro de mayor venta (P4 del relevamiento; v1-v3: 1ra ocurrencia) ·
+  H4 stock negativo -> 0, ventas negativas neteadas salvo el motivo "sin rotacion / no vendido" (v4: es
+  devolucion al proveedor, movimiento de inventario, P18-P19) · H9 descuentos fuera de rango excluidos ·
+  H11 costo de OC x 1,2321 para los 22 SKUs sin costo.
+v4 (feedback del Entregable 2): ademas, la cobertura ya no se recorta al p99 de train (18 meses): solo tope de
+  60 meses para el infinito (stock > 0 sin venta en 12 m, marcado con sin_venta_12m) y log1p. La comparacion
+  contra el recorte de la v3 queda en el log. Se perfila lo que excluye la condicion t+3 (exclusion_t3_v4.csv).
+  La v3 queda intacta en Datasets_Modelo/ porque el Entregable 3 se entreno sobre ella.
 
 Salidas (carpeta Datasets_Modelo/ en la raiz del repo):
   dataset_entrenamiento_vN.parquet            -> features sin transformar + target + split
@@ -28,6 +34,8 @@ import numpy as np, pandas as pd
 
 sys.stdout.reconfigure(encoding="utf-8")
 BASE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(BASE, "..", "EDA"))
+from criterios_limpieza import limpiar_ventas_stock
 ROOT = os.path.abspath(os.path.join(BASE, "..", "..", ".."))
 DATA = os.path.join(ROOT, "Datasets_Normalizados")
 OUTD = os.path.join(ROOT, "Datasets_Modelo")
@@ -39,7 +47,12 @@ def P(*a):
 
 K = ["fecha_mes", "id_tienda", "id_producto"]
 POS = ["id_tienda", "id_producto"]
-VERSION = "v3"   # v3: universo con 3+ meses de historia, sin precio/costo absolutos ni transito (ver registro)
+VERSION = os.environ.get("VERSION_DATASET", "v4")
+# v3: universo con 3+ meses de historia, sin precio/costo absolutos ni transito (ver registro)
+# v4: dedup "mayor venta" (P4), sin neteo de "sin rotacion" (P18-P19), cobertura sin recorte p99 (solo log)
+REGLA_DEDUP = "primera" if VERSION == "v3" else "mayor_venta"
+EXCLUIR_SIN_ROTACION = VERSION != "v3"
+RECORTE_COB = "p99" if VERSION == "v3" else "log"
 HIST_MIN = 3     # meses de historia minima de la posicion (v1-v2: 12)
 FACTOR_COSTO_OC = 1.2321   # EDA/factor_costo_oc.py — supuesto declarado
 
@@ -48,7 +61,8 @@ def rd(nombre, **kw):
 
 # ---------------------------------------------------------------- 1. carga y correccion
 v_raw = rd("Ventas_SKU_tienda_mensual.csv")
-s = rd("Stock_SKU_tienda_mensual.csv").drop_duplicates(K)                        # H1
+s_raw = rd("Stock_SKU_tienda_mensual.csv")
+dev = rd("Devoluciones_SKU.csv")
 cat = rd("Productos_catalogo.csv").drop_duplicates("id_producto")                # H2
 tie = rd("Tiendas.csv")
 prov = rd("Proveedores.csv")
@@ -58,10 +72,9 @@ liq = rd("Liquidaciones.csv", parse_dates=["fecha_inicio", "fecha_fin"])
 pro = rd("Promociones_Comerciales.csv", parse_dates=["fecha_inicio", "fecha_fin"])
 dep = rd("Stock_Deposito_Central.csv", parse_dates=["fecha_mes"])
 
-pos_v = v_raw[v_raw["unidades_vendidas"] >= 0].drop_duplicates(K)               # H1
-neg_v = v_raw[v_raw["unidades_vendidas"] < 0]                                    # H4 neteo (P23)
-v = pd.concat([pos_v, neg_v]).groupby(K, as_index=False)[["unidades_vendidas", "venta_neta"]].sum()
-s["stock_disponible"] = s["stock_disponible"].clip(lower=0)                      # H4 piso 0 (P16)
+INFO_LIMPIEZA = {}
+v, s = limpiar_ventas_stock(v_raw, s_raw, dev, regla=REGLA_DEDUP, excluir_sin_rotacion=EXCLUIR_SIN_ROTACION,
+                            info=INFO_LIMPIEZA)                                  # H1 dedup · H4 neteo y piso 0
 
 # H11: costo de los 22 SKUs sin costo = costo OC ponderado x factor
 oc["monto"] = oc["unidades"] * oc["costo_unitario_ars"]
@@ -75,6 +88,10 @@ pro = pro[pro["descuento_pct"].between(0, 100)]                                 
 pro = pro[pro["fecha_fin"] >= pro["fecha_inicio"]].drop_duplicates()            # H10
 
 P("=" * 90); P(f"DATASET DE ENTRENAMIENTO {VERSION} — dead stock SKU-tienda-mes"); P("=" * 90)
+P(f"Reglas: dedup = {REGLA_DEDUP} · neteo sin 'sin rotacion' = {EXCLUIR_SIN_ROTACION} · cobertura = {RECORTE_COB}")
+if INFO_LIMPIEZA.get("sin_rotacion_filas"):
+    P(f"  devoluciones 'sin rotacion' no neteadas: {INFO_LIMPIEZA['sin_rotacion_filas']:,} filas · "
+      f"{INFO_LIMPIEZA['sin_rotacion_unidades']:,} unidades")
 
 # ---------------------------------------------------------------- 2. panel y features de demanda/stock
 d = s.merge(v, on=K)
@@ -299,6 +316,53 @@ P(f"  - no discontinuadas en t                 : {int((d['con_stock'] & ~d['disc
 P(f"  - con {HIST_MIN}+ meses de historia              : {int((d['con_stock'] & ~d['discontinuado'] & hist12).sum()):,}")
 P(f"  - con etiqueta observable en t+3 (UNIVERSO): {int(univ.sum()):,}")
 
+# ---------------------------------------------------------------- 7b. perfil de lo que excluye la condicion t+3
+# Filas que cumplen todo lo demas (stock > 0, no discontinuadas, 3+ meses) pero no tienen etiqueta en t+3.
+excl = hist12 & d["con_stock"] & ~d["discontinuado"] & ~valido
+ex = d[excl].copy()
+ult_mes = d["fecha_mes"].max()
+baja_sku = pd.to_datetime(ex["id_producto"].map(cat.set_index("id_producto")["fecha_baja_catalogo"]))
+ex["motivo_t3"] = np.select(
+    [ex["fecha_mes"] > ult_mes - pd.DateOffset(months=3),
+     ex["mes_t3"].isna() & baja_sku.notna() & (baja_sku <= ex["fecha_mes"] + pd.DateOffset(months=3) + pd.offsets.MonthEnd(0)),
+     ex["mes_t3"].isna()],
+    ["fin del periodo (t+3 despues de ago-26)", "SKU discontinuado antes de t+3",
+     "la posicion deja de registrarse antes de t+3"], "hueco en la serie (la fila 3 posiciones despues no es t+3)")
+# la etiqueta se toma 3 FILAS despues (shift): si falta un mes intermedio, se pierde aunque exista la fila de t+3
+_claves = set(zip(d["id_tienda"], d["id_producto"], d["fecha_mes"]))
+_t3_existe = np.array([k in _claves for k in zip(ex["id_tienda"], ex["id_producto"], ex["fecha_mes"] + pd.DateOffset(months=3))])
+ex.loc[(ex["motivo_t3"].str.startswith("hueco")) & _t3_existe, "motivo_t3"] = "hueco en la serie, con fila en t+3 (recuperable)"
+_y_fecha = d.set_index(["id_tienda", "id_producto", "fecha_mes"])["pos_cob12"]
+_rec = ex[ex["motivo_t3"].str.contains("recuperable")]
+_y_rec = _y_fecha.reindex(list(zip(_rec["id_tienda"], _rec["id_producto"], _rec["fecha_mes"] + pd.DateOffset(months=3)))).to_numpy()
+P(f"  recuperables etiquetando por fecha: {len(_rec):,} filas · tasa de positivos en t+3 {np.nanmean(_y_rec.astype(float)):.2%} "
+  f"(en el universo {univ.sum() and d.loc[univ, 'target_cob12_t3'].astype(float).mean():.2%})")
+ex["banda_stock"] = pd.cut(ex["stock_disponible"], [0, 5, 10, 20, 50, np.inf], labels=["1-5", "6-10", "11-20", "21-50", ">50"])
+ex["banda_cobertura"] = pd.cut(ex["cobertura"].replace(np.inf, 1e9), [0, 6, 9, 12, np.inf], right=False,
+                               labels=["<6", "6-9", "9-12", ">12 (ya en rojo)"])
+ex["anio"] = ex["fecha_mes"].dt.year.astype(str)
+base_u = d[univ]
+bu = {"anio": base_u["fecha_mes"].dt.year.astype(str), "categoria": base_u["categoria"],
+      "banda_stock": pd.cut(base_u["stock_disponible"], [0, 5, 10, 20, 50, np.inf], labels=["1-5", "6-10", "11-20", "21-50", ">50"]),
+      "banda_cobertura": pd.cut(base_u["cobertura"].replace(np.inf, 1e9), [0, 6, 9, 12, np.inf], right=False,
+                                labels=["<6", "6-9", "9-12", ">12 (ya en rojo)"])}
+perfil = []
+P(f"\nEXCLUIDAS POR LA CONDICION t+3: {len(ex):,} filas ({len(ex) / (len(ex) + univ.sum()):.1%} de las que cumplen el resto) · "
+  f"{ex.groupby(POS).ngroups:,} posiciones · {int(ex['pos_cob12'].sum()):,} ya en rojo en t ({ex['pos_cob12'].mean():.1%} vs "
+  f"{base_u['pos_cob12'].mean():.1%} en el universo)")
+for dim in ["motivo_t3", "anio", "categoria", "banda_stock", "banda_cobertura", "id_tienda"]:
+    t = ex[dim].astype(str).value_counts()
+    ref = bu[dim].astype(str).value_counts(normalize=True) * 100 if dim in bu else pd.Series(dtype=float)
+    P(f"  por {dim}:")
+    for k, n in (t.head(8) if dim == "id_tienda" else t).items():
+        perfil.append(dict(dimension=dim, valor=k, filas=int(n), pct_excluidas=round(n / len(ex) * 100, 2),
+                           pct_universo=round(ref.get(k, np.nan), 2), pct_en_rojo_t=round(ex.loc[ex[dim].astype(str) == k, "pos_cob12"].mean() * 100, 2)))
+        P(f"    {k:55s} {n:>7,} ({n / len(ex):6.1%})" + (f" · universo {ref.get(k, 0):5.1f}%" if dim in bu else ""))
+pd.DataFrame(perfil).to_csv(os.path.join(RES, f"exclusion_t3_{VERSION}.csv"), index=False)
+P(f"  por tienda: rango {ex['id_tienda'].value_counts().min():,} a {ex['id_tienda'].value_counts().max():,} filas")
+P(f"  stock mediano {ex['stock_disponible'].median():.0f} (universo {base_u['stock_disponible'].median():.0f}) · "
+  f"cobertura mediana {ex['cobertura'].replace(np.inf, np.nan).median():.1f} (universo {base_u['cobertura'].replace(np.inf, np.nan).median():.1f})")
+
 ds = d[univ].copy()
 ds["target_cob12_t3"] = ds["target_cob12_t3"].astype(int)
 
@@ -369,52 +433,96 @@ P(q.round(2).to_string())
 # ---------------------------------------------------------------- 9. transformaciones (fit SOLO en train)
 SESGADAS = [c for c in FEATURES_NUM if sk.get(c, 0) > 1 and fin_num[c].min() >= 0
             and c not in ("sin_venta_12m", "costo_imputado", "liquidacion_activa", "historia_corta")]
-X = ds.copy()
-X["cobertura"] = X["cobertura"].replace(np.inf, np.nan)
-# faltantes remanentes: ratios sin denominador (sin venta en 12 m) -> tope + flag ya existente
+# cobertura (y cobertura de t-3): infinito = stock > 0 sin venta neta en 12 meses (1.063 filas en la v3). En el
+# dataset sin transformar queda como inf (en el CSV se lee "inf") y lo marca sin_venta_12m = 1; los modelos de
+# arboles lo reciben tal cual o como un valor muy alto. En el transformado: inf -> tope de 60 meses (5 anios, por
+# encima del 99,9% de los valores finitos) y log1p. v3: ademas winsorizacion p1-p99 (techo 18 meses en train).
 TOPE_COB = 60
-X["cobertura"] = X["cobertura"].fillna(TOPE_COB).clip(upper=TOPE_COB)
-X["cobertura_sku_cadena"] = X["cobertura_sku_cadena"].fillna(TOPE_COB).clip(upper=TOPE_COB)
-X["tendencia_u3_vs_u12"] = X["tendencia_u3_vs_u12"].fillna(0)
-X["cv_u12"] = X["cv_u12"].fillna(0)
-X["var_stock_3m"] = X["var_stock_3m"].fillna(0)
-# v2: mismas reglas para las nuevas (denominador cero o ausencia de evento, no dato perdido)
-# sin dato en t-3 (posicion con menos de 4 meses): se asume la cobertura actual (sin cambio);
-# infinito (sin venta en ese momento): tope
-X["cobertura_3m_antes"] = X["cobertura_3m_antes"].fillna(X["cobertura"]).replace(np.inf, np.nan).fillna(TOPE_COB).clip(upper=TOPE_COB)
-X["var_cobertura_3m"] = X["var_cobertura_3m"].fillna(0)
-X["meses_desde_ultima_oc"] = X["meses_desde_ultima_oc"].fillna(TOPE_COB)
-for c, v in [("peso_posicion_en_tienda", 0),
-             ("stock_vs_prom_sku", 1), ("tendencia_sku_cadena", 1), ("tendencia_tienda", 1), ("tendencia_categoria_tienda", 1)]:
-    X[c] = X[c].fillna(v)
-for c in ["cobertura_deposito_sku", "cumplimiento_ppto_3m"]:   # sin denominador / sin presupuesto valido -> mediana de train
-    X[c] = X[c].replace(np.inf, np.nan).fillna(X.loc[X["split"] == "train", c].replace(np.inf, np.nan).median())
-# outliers: winsorizacion p1-p99 con limites de train, solo en continuas (> 15 valores distintos);
-# en conteos de pocos valores (liquidaciones, promos, tiendas) el p99 coincide con el minimo y los anularia
-lim = {}
-for c in FEATURES_NUM:
-    if c in ("mes_del_anio", "sin_venta_12m", "costo_imputado", "liquidacion_activa", "historia_corta"): continue
-    trc = X.loc[X["split"] == "train", c]
-    if trc.nunique() <= 15: continue
-    lo, hi = trc.quantile([0.01, 0.99])
-    lim[c] = (lo, hi); X[c] = X[c].clip(lo, hi)
-# distribuciones sesgadas: log1p (var_stock_3m puede ser negativa -> signed log)
-for c in SESGADAS:
-    X[c] = np.log1p(X[c])
-X["var_stock_3m"] = np.sign(X["var_stock_3m"]) * np.log1p(X["var_stock_3m"].abs())
-X["var_cobertura_3m"] = np.sign(X["var_cobertura_3m"]) * np.log1p(X["var_cobertura_3m"].abs())
-# temporal ciclica
-X["mes_sin"] = np.sin(2 * np.pi * X["mes_del_anio"] / 12)
-X["mes_cos"] = np.cos(2 * np.pi * X["mes_del_anio"] / 12)
-X = X.drop(columns="mes_del_anio")
-# escalado estandar (media/desvio de train) sobre las continuas
-BIN = ["sin_venta_12m", "liquidacion_activa", "historia_corta"]
-CONT = [c for c in FEATURES_NUM if c not in BIN + ["mes_del_anio"]]
-mu = X.loc[X["split"] == "train", CONT].mean(); sd = X.loc[X["split"] == "train", CONT].std().replace(0, 1)
-X[CONT] = (X[CONT] - mu) / sd
-# one-hot de categoricas nominales (categorias vistas en train)
-X = pd.get_dummies(X, columns=FEATURES_CAT, prefix=FEATURES_CAT, dtype=int)
-feat_final = [c for c in X.columns if c not in IDS + AUDIT + ["target_cob12_t3", "split"]]
+COB_LOG = ["cobertura", "cobertura_3m_antes"]
+
+def transformar(ds, recorte_cob):
+    """recorte_cob: 'p99' (v3: tope 60 + winsorizacion p1-p99 + log) o 'log' (v4: tope 60 + log, sin p99)."""
+    X = ds.copy()
+    X["cobertura"] = X["cobertura"].replace(np.inf, np.nan)
+    # faltantes remanentes: ratios sin denominador (sin venta en 12 m) -> tope + flag ya existente
+    X["cobertura"] = X["cobertura"].fillna(TOPE_COB).clip(upper=TOPE_COB)
+    X["cobertura_sku_cadena"] = X["cobertura_sku_cadena"].fillna(TOPE_COB).clip(upper=TOPE_COB)
+    X["tendencia_u3_vs_u12"] = X["tendencia_u3_vs_u12"].fillna(0)
+    X["cv_u12"] = X["cv_u12"].fillna(0)
+    X["var_stock_3m"] = X["var_stock_3m"].fillna(0)
+    # v2: mismas reglas para las nuevas (denominador cero o ausencia de evento, no dato perdido)
+    # sin dato en t-3 (posicion con menos de 4 meses): se asume la cobertura actual (sin cambio);
+    # infinito (sin venta en ese momento): tope
+    X["cobertura_3m_antes"] = X["cobertura_3m_antes"].fillna(X["cobertura"]).replace(np.inf, np.nan).fillna(TOPE_COB).clip(upper=TOPE_COB)
+    X["var_cobertura_3m"] = X["var_cobertura_3m"].fillna(0)
+    X["meses_desde_ultima_oc"] = X["meses_desde_ultima_oc"].fillna(TOPE_COB)
+    for c, v in [("peso_posicion_en_tienda", 0),
+                 ("stock_vs_prom_sku", 1), ("tendencia_sku_cadena", 1), ("tendencia_tienda", 1), ("tendencia_categoria_tienda", 1)]:
+        X[c] = X[c].fillna(v)
+    for c in ["cobertura_deposito_sku", "cumplimiento_ppto_3m"]:   # sin denominador / sin presupuesto valido -> mediana de train
+        X[c] = X[c].replace(np.inf, np.nan).fillna(X.loc[X["split"] == "train", c].replace(np.inf, np.nan).median())
+    # outliers: winsorizacion p1-p99 con limites de train, solo en continuas (> 15 valores distintos);
+    # en conteos de pocos valores (liquidaciones, promos, tiendas) el p99 coincide con el minimo y los anularia.
+    # v4: la cobertura queda afuera (el p99 = 18 meses igualaba al 1,6% de las filas de train y al 27,5% de los
+    # positivos en un solo valor; el log ya acerca la cola: ver comparacion en el log)
+    lim = {}
+    for c in FEATURES_NUM:
+        if c in ("mes_del_anio", "sin_venta_12m", "costo_imputado", "liquidacion_activa", "historia_corta"): continue
+        if recorte_cob == "log" and c in COB_LOG: continue
+        trc = X.loc[X["split"] == "train", c]
+        if trc.nunique() <= 15: continue
+        lo, hi = trc.quantile([0.01, 0.99])
+        lim[c] = (lo, hi); X[c] = X[c].clip(lo, hi)
+    # distribuciones sesgadas: log1p (var_stock_3m puede ser negativa -> signed log)
+    for c in SESGADAS:
+        X[c] = np.log1p(X[c])
+    X["var_stock_3m"] = np.sign(X["var_stock_3m"]) * np.log1p(X["var_stock_3m"].abs())
+    X["var_cobertura_3m"] = np.sign(X["var_cobertura_3m"]) * np.log1p(X["var_cobertura_3m"].abs())
+    # temporal ciclica
+    X["mes_sin"] = np.sin(2 * np.pi * X["mes_del_anio"] / 12)
+    X["mes_cos"] = np.cos(2 * np.pi * X["mes_del_anio"] / 12)
+    X = X.drop(columns="mes_del_anio")
+    # escalado estandar (media/desvio de train) sobre las continuas
+    BIN = ["sin_venta_12m", "liquidacion_activa", "historia_corta"]
+    CONT = [c for c in FEATURES_NUM if c not in BIN + ["mes_del_anio"]]
+    mu = X.loc[X["split"] == "train", CONT].mean(); sd = X.loc[X["split"] == "train", CONT].std().replace(0, 1)
+    X[CONT] = (X[CONT] - mu) / sd
+    # one-hot de categoricas nominales (categorias vistas en train)
+    X = pd.get_dummies(X, columns=FEATURES_CAT, prefix=FEATURES_CAT, dtype=int)
+    feat_final = [c for c in X.columns if c not in IDS + AUDIT + ["target_cob12_t3", "split"]]
+    return X, lim, feat_final
+
+assert "cobertura" in SESGADAS and "cobertura_3m_antes" in SESGADAS
+X, lim, feat_final = transformar(ds, RECORTE_COB)
+
+# ---------------------------------------------------------------- 9b. recorte de la cobertura: p99 + log (v3) vs solo log (v4)
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_auc_score as _auc, average_precision_score as _ap
+cob = ds["cobertura"]; yy = ds["target_cob12_t3"]; trm = ds["split"] == "train"
+p99 = cob[trm].replace(np.inf, np.nan).quantile(0.99)
+P(f"\nRECORTE DE LA COBERTURA (p99 de train = {p99:.1f} meses)")
+for sp in ["train", "validacion", "test"]:
+    msk = ds["split"] == sp
+    P(f"  {sp:10s}: filas > p99 {(cob[msk] > p99).mean():.2%} · positivos que caen ahi {yy[msk & (cob > p99)].sum() / yy[msk].sum():.1%} · "
+      f"tasa de positivos ahi {yy[msk & (cob > p99)].mean():.1%} · infinitas {int(np.isinf(cob[msk]).sum()):,} "
+      f"(tasa {yy[msk & np.isinf(cob)].mean():.1%})")
+P(f"  finitas por encima del tope de {TOPE_COB} meses: {int(((cob > TOPE_COB) & np.isfinite(cob)).sum()):,} filas")
+alt = {"p99": X if RECORTE_COB == "p99" else None, "log": X if RECORTE_COB == "log" else None}
+for k in alt:
+    if alt[k] is None: alt[k] = transformar(ds, k)[0]
+comp = []
+for k, Xk in alt.items():
+    xtr = Xk[Xk["split"] == "train"]
+    lr = LogisticRegression(max_iter=5000, class_weight="balanced", C=0.5).fit(xtr[feat_final], xtr["target_cob12_t3"])
+    for sp in ["validacion", "test"]:
+        xs = Xk[Xk["split"] == sp]; pr = lr.predict_proba(xs[feat_final])[:, 1]
+        comp.append(dict(variante=k, split=sp, valores_distintos_cob_train=int(xtr["cobertura"].nunique()),
+                         auc_cobertura_sola=round(_auc(xs["target_cob12_t3"], xs["cobertura"]), 4),
+                         auc_logistica=round(_auc(xs["target_cob12_t3"], pr), 4), pr_auc_logistica=round(_ap(xs["target_cob12_t3"], pr), 4),
+                         coef_cobertura=round(lr.coef_[0][feat_final.index("cobertura")], 3)))
+comp = pd.DataFrame(comp)
+comp.to_csv(os.path.join(RES, f"recorte_cobertura_{VERSION}.csv"), index=False)
+P(comp.to_string(index=False))
 
 P(f"\nTRANSFORMADO: {len(X):,} filas x {len(feat_final)} features (+ ids, marca de costo imputado, target y split)")
 P(f"  winsorizadas p1-p99: {', '.join(lim)}")
@@ -436,7 +544,7 @@ DESC = {
  "fecha_mes": "Mes de corte t (la prediccion se hace al cierre de este mes)",
  "id_tienda": "Tienda (identificador, no se usa como feature)",
  "id_producto": "SKU (identificador, no se usa como feature)",
- "unidades_vendidas": "Unidades netas de devoluciones vendidas en t",
+ "unidades_vendidas": "Unidades vendidas en t netas de devoluciones (desde v4 sin restar las devoluciones al proveedor por 'sin rotacion')",
  "u3_suma": "Unidades netas de los ultimos 3 meses",
  "u6_suma": "Unidades netas de los ultimos 6 meses",
  "u12_prom": "Promedio mensual de unidades netas de los ultimos 12 meses (ritmo de venta)",
@@ -449,7 +557,7 @@ DESC = {
  "stock_disponible": "Stock disponible en t (piso en 0)",
  "stock_en_transito": "Stock en transito en t (definicion no documentada, H6)",
  "var_stock_3m": "Variacion del stock disponible respecto de t-3",
- "cobertura": "Meses de stock en t: stock / u12_prom",
+ "cobertura": "Meses de stock en t: stock / u12_prom. Infinita (inf) si hay stock y no hubo venta neta en 12 meses (sin_venta_12m = 1); en el transformado, tope de 60 meses y log1p",
  "capital_inmovilizado_pos": "Stock x costo unitario (con costo ajustado en los 22 SKUs)",
  "stock_sku_cadena": "Stock del SKU sumado en las 28 tiendas en t",
  "cobertura_sku_cadena": "Cobertura del SKU a nivel cadena en t",

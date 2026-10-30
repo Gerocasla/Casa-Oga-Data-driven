@@ -1,0 +1,35 @@
+dimension,valor,filas,pct_excluidas,pct_universo,pct_en_rojo_t
+motivo_t3,"hueco en la serie, con fila en t+3 (recuperable)",26542,37.69,,3.16
+motivo_t3,fin del periodo (t+3 despues de ago-26),22436,31.86,,9.88
+motivo_t3,hueco en la serie (la fila 3 posiciones despues no es t+3),15264,21.68,,3.39
+motivo_t3,SKU discontinuado antes de t+3,3436,4.88,,4.66
+motivo_t3,la posicion deja de registrarse antes de t+3,2738,3.89,,6.39
+anio,2026,31774,45.12,13.94,8.28
+anio,2025,17662,25.08,37.05,2.86
+anio,2024,12375,17.57,28.49,2.86
+anio,2023,6964,9.89,16.68,4.25
+anio,2022,1641,2.33,3.84,7.37
+categoria,Decoracion,13905,19.75,19.9,4.59
+categoria,Cocina y mesa,11505,16.34,15.99,5.5
+categoria,Textil hogar,11088,15.75,15.39,5.74
+categoria,Muebles,10143,14.4,14.86,6.38
+categoria,Bano,8169,11.6,11.56,6.3
+categoria,Organizacion,7907,11.23,11.31,4.86
+categoria,Iluminacion,7699,10.93,10.98,5.9
+banda_stock,1-5,20281,28.8,28.49,11.53
+banda_stock,11-20,17038,24.2,24.32,3.49
+banda_stock,6-10,15741,22.35,21.31,3.67
+banda_stock,21-50,13310,18.9,19.89,2.47
+banda_stock,>50,4046,5.75,5.99,1.71
+banda_cobertura,<6,42318,60.1,60.38,0.0
+banda_cobertura,6-9,18578,26.38,28.65,0.0
+banda_cobertura,>12 (ya en rojo),5209,7.4,4.59,75.0
+banda_cobertura,9-12,4311,6.12,6.39,0.0
+id_tienda,T04,2749,3.9,,5.38
+id_tienda,T11,2701,3.84,,5.48
+id_tienda,T22,2700,3.83,,5.22
+id_tienda,T26,2666,3.79,,4.65
+id_tienda,T24,2619,3.72,,6.3
+id_tienda,T20,2591,3.68,,6.37
+id_tienda,T19,2587,3.67,,4.72
+id_tienda,T09,2578,3.66,,6.59
