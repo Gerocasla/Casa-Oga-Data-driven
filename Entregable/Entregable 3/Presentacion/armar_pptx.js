@@ -607,7 +607,7 @@ async function build() {
     text(s, "criterios cumplidos hoy", { x: 9.6, y: 2.8, w: 2.9, h: 0.4, fontSize: 14, color: WHITE });
     text(s, [
       { text: "El modelo ya cumple: ", options: { bold: true, color: WHITE } },
-      { text: "76,9% en test y 1.067 contra 1.034 aciertos de la regla.", options: { color: LINE, breakLine: true } },
+      { text: "Recall@600 de 76,9% en test (piso: 60%). Con el mismo cupo que la regla, 1.067 aciertos contra 1.034.", options: { color: LINE, breakLine: true } },
       { text: " ", options: { breakLine: true } },
       { text: "Los otros cuatro dependen de Casa Óga, ", options: { bold: true, color: WHITE } },
       { text: "no del equipo: son las precondiciones del plan.", options: { color: LINE } },
