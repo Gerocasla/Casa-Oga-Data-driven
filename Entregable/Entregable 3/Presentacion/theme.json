@@ -1,0 +1,19 @@
+{
+  "name": "Casa Oga E3",
+  "headFontFace": "Calibri",
+  "bodyFontFace": "Calibri",
+  "colors": {
+    "dk1": "1B2540",
+    "lt1": "FFFFFF",
+    "dk2": "0F1A33",
+    "lt2": "EEF1F6",
+    "accent1": "F2B705",
+    "accent2": "2A9D8F",
+    "accent3": "D9534F",
+    "accent4": "3D5A80",
+    "accent5": "5E6B85",
+    "accent6": "C9D1DE",
+    "hlink": "3D5A80",
+    "folHlink": "5E6B85"
+  }
+}
