@@ -1,0 +1,14 @@
+=== VALIDACION ABR-SEP 2025 === positivos 854 · meses 6 · max bloque A/mes 192
+  bloque_a           alertas  1050 (175.0/mes) VP   258 prec 0.246 recall 0.302 valor USD 848
+  bloque_b           alertas  2550 (425.0/mes) VP   337 prec 0.132 recall 0.395 valor USD -1,485
+  flujo_combinado    alertas  3600 (600.0/mes) VP   595 prec 0.165 recall 0.697 valor USD -637
+  cobertura_top600   alertas  3600 (600.0/mes) VP   448 prec 0.124 recall 0.525 valor USD -2,436
+  ensamble_top600    alertas  3600 (600.0/mes) VP   606 prec 0.168 recall 0.710 valor USD -503
+  +147 VP vs cobertura Top-600 · beneficio USD 7,630/anio · ROI 1 -50.9% · ROI 3 -16.6% · recupero 68.8 meses
+=== TEST ENE-MAY 2026 === positivos 2535 · meses 5 · max bloque A/mes 396
+  bloque_a           alertas  1216 (243.2/mes) VP  1034 prec 0.850 recall 0.408 valor USD 9,981
+  bloque_b           alertas  1784 (356.8/mes) VP   908 prec 0.509 recall 0.358 valor USD 7,189
+  flujo_combinado    alertas  3000 (600.0/mes) VP  1942 prec 0.647 recall 0.766 valor USD 17,170
+  cobertura_top600   alertas  3000 (600.0/mes) VP  1773 prec 0.591 recall 0.699 valor USD 15,102
+  ensamble_top600    alertas  3000 (600.0/mes) VP  1950 prec 0.650 recall 0.769 valor USD 17,268
+  +169 VP vs cobertura Top-600 · beneficio USD 8,995/anio · ROI 1 -42.1% · ROI 3 -1.7% · recupero 37.8 meses
