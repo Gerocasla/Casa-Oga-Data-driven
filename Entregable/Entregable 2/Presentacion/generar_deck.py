@@ -10,7 +10,11 @@ IMG = {"venta": "/_blob/3c2223f1d1c6339c830ee806884f8f61", "estac": "/_blob/43c6
        "cola": "/_blob/d8a92d1eff15dc35bd290d5587c533b5", "prev": "/_blob/7905fa8d85c212d9ad87118976873099",
        "cap": "/_blob/19331e5df80e782e71bbf913d9c492d9", "senal": "/_blob/2d7fd4a01dc83c89b21d974d6364c15d",
        "ad": "/_blob/bdc99ef4d31e9129611313178b39539e", "caprojo": "/_blob/e786bd0172083880f96c23d1f3375cf5",
-       "catalogo": "/_blob/a1c11e0000000000000000000000c011", "sinventa": "/_blob/a1c12e0000000000000000000000c012"}
+       "catalogo": "/_blob/a1c11e0000000000000000000000c011", "sinventa": "/_blob/a1c12e0000000000000000000000c012",
+       "capcat": "/_blob/a1c13e0000000000000000000000c013"}
+CMP = json.load(open(os.path.join(E2, "EDA", "resultados", "comparativo_antes_despues.json"), encoding="utf-8"))
+PREV = "Prevalencia del target (cobertura > 12 a 3 meses, %)"
+AD = {r["metrica"]: r for r in json.load(open(os.path.join(E2, "EDA", "resultados", "antes_despues.json"), encoding="utf-8"))["metricas"]}
 
 DARK, LIGHT, ALT, INK, BODY, MUT = "#14213D", "#FBFBF8", "#F1F2F6", "#14213D", "#3D4656", "#5B6475"
 BLUE, ORANGE, GOLD, LINE = "#2F5E96", "#C4470A", "#F5B800", "#D9DDE4"
@@ -87,7 +91,7 @@ add("portada", f'''<section id="portada" style="background:{DARK}; color:{LIGHT}
 page("recorrido", "Recorrido", "Cuatro preguntas, en este orden",
  '<div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:28px; flex:1">'
  + card("1 · ¿Qué dicen los datos?", "EDA de las 15 fuentes al corte ago-2026. Qué se confirma del TP1, qué no, y qué cambió en 2026.")
- + card("2 · ¿Se puede confiar en ellos?", "Mapa de calidad, 12 hallazgos, los criterios acordados con el negocio y cuánto cambia el análisis al corregir.")
+ + card("2 · ¿Se puede confiar en ellos?", "Mapa de calidad, 13 hallazgos, los criterios acordados con el negocio y cuánto cambia el análisis al corregir.")
  + card("3 · ¿Qué vamos a predecir?", "La variable objetivo, por qué esa y no otra, y qué tan sólida es cada decisión detrás.")
  + card("4 · ¿Con qué datos?", f"El dataset de entrenamiento: {RS['n_num']+RS['n_cat']} variables sin leakage, las que quedaron afuera y por qué, y si tiene señal.")
  + '</div>', "Estructura: diagnóstico, limpieza, target y dataset. Todo lo que mostramos se reproduce con los scripts del repo.")
@@ -156,7 +160,7 @@ divider("d-cal", "PARTE 2", "Calidad y limpieza", "Qué está mal, cómo lo trat
 # Criterio: Critico = sin tratarlo cambia un KPI, el target o una feature, deja una variable afuera, o usarlo exige un
 # supuesto o confirmacion del negocio. Menor = existe pero no cambia ningun resultado. OK = sin problemas detectados.
 MAPA = [("Ventas", "V R R V R R A"), ("Stock tiendas", "V R R V R R A"), ("Catálogo", "R A V R V R R"), ("Tiendas", "V R R V V V V"),
-        ("Calendario", "V V V R V V V"), ("Liquidaciones", "V R A V A V V"), ("Devoluciones", "V V V R V V V"), ("Historial precios", "A R A V V V R"),
+        ("Calendario", "V V V A V V V"), ("Liquidaciones", "V R A V A V V"), ("Devoluciones", "V V V R V V V"), ("Historial precios", "A R A V V V R"),
         ("Órdenes de compra", "V V V V V V V"), ("Presupuesto", "A R A V A V A"), ("Promociones", "A A A V A A A"), ("Proveedores", "V V V V V V V"),
         ("Stock depósito", "V A V V V V V"), ("Transferencias", "V A V V V V V"), ("Costo almacenam.", "V A V A V V A")]
 COL = {"V": ("#D8F0DF", "#1E5B32", "OK"), "A": ("#FCEFC7", "#6B4E00", "Menor"), "R": ("#F8D3D3", "#8A1C1C", "Crítico")}
@@ -175,39 +179,41 @@ leyenda = '<div style="display:flex; gap:24px">' + "".join(
     for k, t in CRIT) + '</div>'
 page("mapa", "Calidad · diagnóstico", "Mapa de calidad: 15 fuentes × 6 dimensiones",
  f'<div style="display:grid; grid-template-columns:320px repeat(6, 1fr); gap:3px">{cells}</div>' + leyenda,
- "El criterio es el impacto en el uso, no la cantidad de errores. Crítico: si no se trata cambia un resultado o hay que asumir algo para usar el dato (duplicados, negativos, 22 SKUs sin costo, fuentes sin 2026, historial reconstruido). Menor: existe pero no mueve nada (5 descuentos y 4 promociones inválidas que se excluyen, variantes de categoría que se unifican con una regla). El desvío de stock en tránsito se asigna a Stock, no a Transferencias, cuyas cifras se usan tal cual.", gap=16)
-H1 = [("H1 · Claves duplicadas", "2.378 en Ventas y en Stock, solo 2022-25.", "Conservar la 1ra ocurrencia. Causa raíz: H2."),
+ "El criterio es el impacto en el uso, no la cantidad de errores. Crítico: si no se trata cambia un resultado o hay que asumir algo para usar el dato (duplicados, negativos, 22 SKUs sin costo, fuentes sin 2026, historial reconstruido). El Calendario es Menor en actualidad: es un dato maestro público y Casa Óga envió la versión hasta ago-26. Menor: existe pero no mueve nada (5 descuentos y 4 promociones inválidas que se excluyen, variantes de categoría que se unifican con una regla). El desvío de stock en tránsito se asigna a Stock, no a Transferencias, cuyas cifras se usan tal cual.", gap=16)
+H1 = [("H1 · Claves duplicadas", "2.378 en Ventas y en Stock, solo 2022-25.", "Conservar el registro con venta real o de mayor venta (regla de Casa Óga). Causa raíz: H2."),
       ("H2 · SKUs duplicados", "15 SKUs cargados dos veces, difieren solo en proveedor.", "Error del sistema (P11). Costo único de catálogo."),
       ("H3 · Venta antes de abrir", "6 tiendas, 11.058 filas, $1.471,7 M.", "Sin respuesta. No usar antigüedad de tienda."),
       ("H4 · Negativos imposibles", "2.317 ventas y 1.209 stocks negativos.", "Stock: piso en 0 (P16). Ventas: netear devoluciones (P23)."),
       ("H5 · Venta sin stock", "1.020 filas con venta y stock 0; 187 en 2026.", "Misma causa que H4: desfase POS–inventario."),
       ("H6 · Tránsito sin conciliar", "8.771 uds vs 936 de transferencias (9×).", "Campo sin definición: queda fuera del modelo.")]
-H2 = [("H7 · Liquidaciones incoherentes", "90 de 108 «Discontinuación» sobre SKUs activos; tienda «Todas».", "Se usan solo como historia hasta t."),
+H2 = [("H7 · Liquidaciones incoherentes", "90 de 108 «Discontinuación» sobre SKUs activos. «Todas» es válido: aplica a las 28 tiendas.", "Se usan solo como historia hasta t."),
       ("H8 · Precios vs historial", "Precio de venta > 1,5× el histórico en 33% de filas.", "Historial reconstruido (P9-P10): no se usa."),
       ("H9 · Descuentos y presupuesto", "5 descuentos fuera de 0-100%; 309 ceros y 3 negativos.", "Excluir del margen y del desvío (P28, P32)."),
       ("H10 · Promociones inválidas", "Ids repetidos y 2 con fin antes del inicio.", "Se excluyen del cálculo de promociones."),
       ("H11 · 22 SKUs sin costo", "No se puede valuar su stock ni su margen.", "Costo de OC × 1,2321, supuesto declarado."),
-      ("H12 · Fuentes sin 2026", "Devoluciones, Calendario y catálogo cortan en 2025.", "Se declara; no se usan como features.")]
-def hcards(items):
-    return ('<div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; flex:1">' + "".join(
-        f'<div style="display:flex; flex-direction:column; gap:10px; background:#FFFFFF; border:1px solid {LINE}; border-top:6px solid {BLUE}; border-radius:12px; padding:28px">'
-        f'<h3 style="{HF}; font-size:30px; font-weight:700; line-height:1.15">{t}</h3><p style="font-size:24px; line-height:1.4; color:{BODY}">{m}</p>'
-        f'<p style="font-size:24px; line-height:1.4; color:{INK}"><b>Tratamiento:</b> {tr}</p></div>' for t, m, tr in items) + '</div>')
-page("hallazgos1", "Calidad · hallazgos 1 a 6", "Doce hallazgos, cada uno con su tratamiento", hcards(H1),
- "Los problemas de unicidad, exactitud y validez están en 2022-2025. Las 60.064 filas de 2026 no tienen duplicados, negativos ni nulos. Solo H5 persiste en 2026.")
-page("hallazgos2", "Calidad · hallazgos 7 a 12", "Doce hallazgos, cada uno con su tratamiento (cont.)", hcards(H2),
+      ("H12 · Fuentes sin 2026", "Devoluciones y catálogo cortan en 2025.", "Se declara; no se usan como features."),
+      ("H13 · Reporte nuevo de 2026", "60.064 filas de 2026 de un reporte consolidado con reglas no documentadas.", "No damos H1 y H4 por resueltos en 2026. Documentar las reglas y mantener un extracto de control.")]
+def hcards(items, cols=3, fs=24, pad=28):
+    return (f'<div style="display:grid; grid-template-columns:repeat({cols}, 1fr); gap:20px; flex:1">' + "".join(
+        f'<div style="display:flex; flex-direction:column; gap:8px; background:#FFFFFF; border:1px solid {LINE}; border-top:6px solid {BLUE}; border-radius:12px; padding:{pad}px">'
+        f'<h3 style="{HF}; font-size:{fs+6}px; font-weight:700; line-height:1.15">{t}</h3><p style="font-size:{fs}px; line-height:1.35; color:{BODY}">{m}</p>'
+        f'<p style="font-size:{fs}px; line-height:1.35; color:{INK}"><b>Tratamiento:</b> {tr}</p></div>' for t, m, tr in items) + '</div>')
+page("hallazgos1", "Calidad · hallazgos 1 a 6", "Trece hallazgos, cada uno con su tratamiento", hcards(H1),
+ "Los problemas de unicidad, exactitud y validez están en 2022-2025. Las 60.064 filas de 2026 no muestran duplicados ni negativos, pero vienen de otro reporte con reglas no documentadas (H13): no damos H1 y H4 por resueltos. H5 persiste en 2026.")
+page("hallazgos2", "Calidad · hallazgos 7 a 13", "Trece hallazgos, cada uno con su tratamiento (cont.)", hcards(H2, 4, 21, 22),
  "Además, dos problemas ya se resolvieron al normalizar: 11 variantes de categoría para 7 reales, y 8 fechas con hora que el TP1 había descartado.")
 page("criterios", "Calidad · decisiones", "Por qué tratamos cada problema así",
  table(["Problema", "Qué hicimos", "Por qué"], [
-  ["Claves duplicadas", "Conservar la 1ra ocurrencia", "Con cualquier otro criterio los totales no cierran"],
+  ["Claves duplicadas", "Conservar el registro con venta real o de mayor venta", "Regla de Casa Óga; cambia el registro elegido en 600 de 2.330 claves"],
   ["Stock negativo", "Llevar a 0", "Error de sincronización confirmado"],
-  ["Venta negativa", "Netear con la venta del mes", "Son devoluciones reales, no ritmo de venta"],
+  ["Venta negativa", "Netear con la venta del mes", "Son devoluciones reales de clientes, no ritmo de venta"],
+  ["Devolución «sin rotación»", "No netearla", "Es una devolución al proveedor: movimiento de inventario, no venta"],
   ["Descuentos > 100% o < 0%", "Excluir del margen", "Error de carga, sin acción comercial detrás"],
   ["Presupuesto en 0 o negativo", "Excluir del desvío", "Proceso inmaduro en 2022 y error de carga"],
   ["Historial de precios", "No usarlo", "Es una reconstrucción, no un registro"],
   ["Comparar entre años", "En unidades, sin deflactar", "La venta ya está a precio actual: IPC corregiría dos veces"],
-  ["22 SKUs sin costo", "Costo de OC × 1,2321", "Supuesto sugerido por el negocio y declarado"]], [26, 30, 44]),
- "Casi todo sigue el default que propuso el negocio en la ronda 2. Para comparar entre años nos pidieron un criterio propio: no deflactamos por IPC porque la venta ya está valuada al precio actual; lo justificamos por escrito.", gap=32)
+  ["22 SKUs sin costo", "Costo de OC × 1,2321", "Supuesto sugerido por el negocio y declarado"]], [26, 30, 44], 22),
+ "Casi todo sigue el default que propuso el negocio en la ronda 2. Con la devolución del Entregable 2 cambiaron dos reglas: los duplicados se resuelven con la regla de Casa Óga y el motivo «sin rotación» no se netea. Con las dos, los positivos pasan de 6.853 a 6.490. Para comparar entre años nos pidieron un criterio propio: no deflactamos por IPC porque la venta ya está valuada al precio actual; lo justificamos por escrito.", gap=32)
 page("supuesto", "Calidad · supuesto declarado", "El costo de 22 SKUs es un supuesto, y lo decimos",
  '<div style="display:flex; gap:40px; align-items:stretch">'
  + card("0,4471", "costo de OC / precio de lista en los 22 SKUs sin costo → margen de 55,3%, fuera de rango")
@@ -221,8 +227,18 @@ page("antesdespues", "Calidad · antes y después", "Corregir cambia poco los to
  chart(IMG["ad"], "Cuatro métricas antes y después de corregir: venta total, capital, participación de Decoración y prevalencia del target",
   stat("< 2%", "cambian venta, unidades y capital al corregir")
   + stat("+1,5 pp", "gana Decoración al unificar categorías: es la candidata al piloto")
-  + stat("2,6% → 3,4%", "prevalencia del target al netear las devoluciones en vez de llevarlas a 0: +30% de positivos, el mayor impacto para el modelo"), 1100, 440),
- "Mensaje: que el total cierre no prueba que los datos estén bien. Los errores se compensan en el agregado (duplicados suman, SKUs sin costo restan) y aparecen al bajar a SKU o categoría.")
+  + stat(f"{n(AD[PREV]['antes'])}% → {n(AD[PREV]['despues'])}%", f"prevalencia del target al netear las devoluciones de clientes en vez de llevarlas a 0: {n(AD[PREV]['variacion_pct'],0)}% más positivos, el mayor impacto para el modelo"), 1100, 440),
+ "Mensaje: que el total cierre no prueba que los datos estén bien. Los errores se compensan en el agregado (duplicados suman, SKUs sin costo restan) y aparecen al bajar a SKU o categoría. La próxima diapositiva lo muestra con el capital por categoría.")
+cc = {c["categoria"]: c for c in CMP["stock"]["capital_categoria"]["dic-25"]}; ct_ = cc["Total"]
+vc = lambda k: (cc[k]["total"][1] / cc[k]["total"][0] - 1) * 100
+page("capcat", "Calidad · capital por categoría", "El capital total casi no cambia; por categoría se mueve hasta 12%",
+ chart(IMG["capcat"], "Capital inmovilizado a costo por categoría a dic-25, antes y después de corregir",
+  stat(f"{n(vc('Total'))}%", f"capital total a dic-25: ${n(ct_['total'][0])} M → ${n(ct_['total'][1])} M")
+  + stat(f"{n(vc('Bano'))}% · {n(vc('Cocina y mesa'))}%", "Baño y Cocina y mesa bajan")
+  + stat(f"+{n(vc('Organizacion'))}% · +{n(vc('Decoracion'))}%", "Organización y Decoración suben")
+  + f'<p style="font-size:24px; line-height:1.4; color:{BODY}">Tres efectos que en el total se compensan: claves duplicadas que sumaban dos veces, stock negativo que restaba y 22 SKUs sin costo que valían $0.</p>'
+  + f'<p style="font-size:24px; line-height:1.4; color:{MUT}">Capital en posiciones con más de 12 meses de cobertura: ${n(ct_["rojo"][0])} M → ${n(ct_["rojo"][1])} M (+{n((ct_["rojo"][1]/ct_["rojo"][0]-1)*100)}%).</p>', 1040, 560),
+ "Lo pidió la cátedra en la devolución del Entregable 2. Sin corregir, Compras sobrestimaría el capital de Baño y Cocina y mesa y subestimaría el de Organización y Decoración. El capital en rojo sube aunque haya menos posiciones en rojo (211 → 200): las que quedan valen más con el costo corregido.")
 
 # ================================================================= 4 TARGET
 divider("d-target", "PARTE 3", "La variable objetivo", "Qué predecimos, por qué esa definición y qué tan firme es cada decisión detrás.", "Variable objetivo: definición, alternativas y solidez")
@@ -255,9 +271,10 @@ page("candidatos", "Target · alternativas", "Por qué este target y no otro",
   ["Dead stock binario (3 condiciones OR)", "8,32%", "62%", "38,4%", "Mezcla criterios; arrastra el ruido de «sin venta»"],
   ["Cobertura > 12 o discontinuado", "3,99%", "67%", "33,5%", "No hay discontinuados en 2026"],
   ["Sin ventas en 3 meses", "6,18%", "65%", "35,3%", "Criterio de consumo masivo; 22% por azar"],
-  ["<b>Cobertura > 12, sin discontinuados</b>", "<b>3,40%</b>", "<b>61%</b>", "<b>38,6%</b>", "<b>Elegido</b>"],
+  ["<b>Cobertura > 12, sin discontinuados</b>", f"<b>3,40%*</b>", "<b>61%</b>", "<b>38,6%</b>", "<b>Elegido</b>"],
   ["Cobertura > 9 (rojo + amarillo)", "9,93%", "62%", "38,5%", "Alternativa si falta volumen"]], [34, 13, 15, 19, 19], 26)
- + f'<p style="font-size:24px; line-height:1.45; color:{BODY}; width:1664px"><b>Cómo leerlo:</b> «sigue igual» es una regla que dice «la posición va a estar como está hoy»; «casos nuevos» son los que esa regla no ve: 6 de cada 10 positivos hoy todavía no lo son, y ahí aporta el modelo. Como los cinco quedan entre 34% y 39%, elegimos por negocio: umbral relativo a la rotación de cada SKU (lo pidió Comercial), sin discontinuados (en 2026 no hay) y un evento sobre el que se puede actuar.</p>',
+ + f'<p style="font-size:24px; line-height:1.45; color:{BODY}; width:1664px"><b>Cómo leerlo:</b> «sigue igual» es una regla que dice «la posición va a estar como está hoy»; «casos nuevos» son los que esa regla no ve: 6 de cada 10 positivos hoy todavía no lo son, y ahí aporta el modelo. Como los cinco quedan entre 34% y 39%, elegimos por negocio: umbral relativo a la rotación de cada SKU (lo pidió Comercial), sin discontinuados (en 2026 no hay) y un evento sobre el que se puede actuar.</p>'
+ + f'<p style="font-size:21px; line-height:1.4; color:{MUT}; width:1664px">* Comparación hecha con las reglas de limpieza anteriores a la devolución. Con las reglas finales (duplicados con la regla de Casa Óga y «sin rotación» sin netear), el elegido queda en {n(RS["prevalencia"],2)}%.</p>',
  f"Comparamos cinco candidatos sobre las mismas {n(RS['filas'],0)} filas. Con 12 meses de historia el elegido era además el menos inercial (32,5% contra 42%); al incluir productos nuevos esa ventaja desaparece y lo decimos. El catálogo está congelado desde junio de 2025: en 2026 no hay discontinuados. María G. es la aprobadora formal del target: la cátedra pide validarlo antes de etiquetar.", gap=24)
 page("solidez", "Target · solidez", "Qué tan firme es cada decisión, dicho con honestidad",
  table(["Decisión", "En qué se apoya", "Solidez"], [
@@ -278,7 +295,7 @@ page("prevalencia", "Target · estabilidad", "La prevalencia salta en 2026: la p
   + f'<p style="font-size:22px; line-height:1.4; color:{MUT}">Entre bloques, 3 meses de embargo (igual al horizonte): ninguna etiqueta de train cae en el período de validación.</p>'
   + f'<p style="font-size:22px; line-height:1.4; color:{INK}"><b>Clases desbalanceadas ({n(RS["prevalencia"],1)}% positivos):</b> se prioriza recall y el umbral del modelo se elige en validación según las 420-700 alertas por mes.</p>', 1000, 466).replace("gap:28px", "gap:20px", 1),
  "Una partición aleatoria mezclaría meses y el modelo vería el futuro. El test en 2026 mide si el modelo resiste un cambio de régimen: es la prueba más exigente posible; sus métricas no se comparan con las de validación como si fueran el mismo problema. "
- "Con 3,4% de positivos, un modelo que diga siempre «no» acierta el 96,6% y no sirve: por eso no se mira exactitud sino recall dentro de la capacidad de alertas.")
+ f"Con {n(RS['prevalencia'],1)}% de positivos, un modelo que diga siempre «no» acierta el {n(100-RS['prevalencia'],1)}% y no sirve: por eso no se mira exactitud sino recall dentro de la capacidad de alertas.")
 
 # ================================================================= 5 DATASET
 divider("d-data", "PARTE 4", "El dataset de entrenamiento", "Qué información ve el modelo, qué variables entran, cuáles no y por qué.", "Dataset de entrenamiento: variables, exclusiones, leakage y transformaciones")
@@ -291,7 +308,7 @@ page("ficha-ds", "Dataset · ficha", f"dataset_entrenamiento_{RS['version']}",
  'transferencias y liquidaciones por (mes, tienda, SKU); promociones por (mes, categoría); presupuesto por (mes, tienda, categoría). '
  'Ninguna fuente tiene datos personales: no aplica anonimización (Ley 25.326).</p>'
  f'<p style="font-size:24px; color:{MUT}">Se genera con Modelo/construir_dataset_modelo.py desde Datasets_Normalizados: reproducible de punta a punta.</p></div>',
- "v3: el universo pasa de 12 a 3 meses de historia (entran los productos nuevos) y salen precio, costo y margen del catálogo (son el valor de hoy) y el stock en tránsito (H6). La selección fina de variables se hace en el modelado.")
+ "v4: duplicados resueltos con la regla de Casa Óga (registro con venta real o de mayor venta), el motivo «sin rotación» no se netea y la cobertura ya no se winsoriza (tope de 60 meses y log). v3: el universo pasa de 12 a 3 meses de historia (entran los productos nuevos) y salen precio, costo y margen del catálogo (son el valor de hoy) y el stock en tránsito (H6). La selección fina de variables se hace en el modelado.")
 def caja(titulo, items, fondo, color_t, color_b=BODY, flex="1.1"):
     return (f'<div style="flex:{flex}; display:flex; flex-direction:column; gap:18px; background:{fondo}; border-radius:14px; padding:34px 38px">'
             f'<p style="{HF}; font-size:38px; font-weight:700; line-height:1.2; color:{color_t}">{titulo}</p>'
@@ -329,7 +346,7 @@ page("grupos", "Dataset · variables elegidas", f"{NV} variables en 8 grupos, ca
  f"GUION (≈1 min). Con esa regla armamos {NV} variables, en 8 grupos. Cada tarjeta dice de qué archivos sale y, en negrita, para qué sirve. Ninguna es una columna cruda: por ejemplo la cobertura no existe en ningún archivo, es el stock dividido el ritmo de venta. "
  "Vale la pena detenerse en tres. Demanda e historia, 14 variables, es donde está la señal: mide cuánto rota la posición, y si se vende poco el stock se acumula. Stock muestra si la cobertura viene subiendo hacia los 12 meses. Y SKU en la cadena muestra si el exceso es del producto en toda la cadena y no de una tienda. "
  "Después abastecimiento, que dice cuánto entró y cuánto está por llegar; acciones comerciales, si ya se intentó liquidar; y contexto de tienda, producto y calendario, para separar el problema del producto del de la tienda. Todas entran al modelo y ninguna se eligió mirando el test. "
- f"SI PREGUNTAN: ¿Son {NV} columnas? Son {NV} variables; al pasar las categóricas a columnas 0/1 la matriz tiene más. ¿Todas sirven? Eso lo mide el modelo; 30 de 55 numéricas no separan solas pero pueden aportar combinadas. El detalle está en diccionario_features_v3.csv.", gap=24)
+ f"SI PREGUNTAN: ¿Son {NV} columnas? Son {NV} variables; al pasar las categóricas a columnas 0/1 la matriz tiene más. ¿Todas sirven? Eso lo mide el modelo; 30 de 55 numéricas no separan solas pero pueden aportar combinadas. El detalle está en el diccionario de datos v4.", gap=24)
 def lista(t, color, items):
     return (f'<div style="flex:1; display:flex; flex-direction:column; gap:14px; background:#FFFFFF; border:1px solid {LINE}; border-top:6px solid {color}; border-radius:12px; padding:28px">'
             f'<h3 style="{HF}; font-size:32px; font-weight:700">{t}</h3>'
@@ -358,7 +375,7 @@ page("excluidas", "Dataset · variables excluidas", "Lo que quedó afuera, y por
  "SI PREGUNTAN: ¿Cómo sabe el modelo de qué producto habla? Recibe las variables que describen la posición; el id solo acompaña el resultado. ¿Hay una variable llamada presupuesto t+1? No: es una columna candidata del archivo de presupuesto que evaluamos y descartamos; la única de presupuesto que usamos es el cumplimiento de los últimos 3 meses.", gap=28)
 page("transformaciones", "Dataset · preparación para el modelo", "Transformaciones, todas ajustadas solo con train",
  table(["Transformación", "Qué se hizo", "Por qué"], [
-  ["Valores extremos", f"Winsorización p1-p99 en {TR['wins']} continuas", "Colas largas reales, no errores: no se borran filas"],
+  ["Valores extremos", f"Winsorización p1-p99 en {TR['wins']} continuas; la cobertura no (tope de 60 meses)", "Colas largas reales, no errores. Recortar la cobertura borraba la cola donde está un cuarto de los positivos"],
   ["Distribuciones sesgadas", f"log(1+x) en {TR['log']} variables", f"Reduce el peso de los extremos (cobertura: asimetría {n(TR['skew_cob'],2)})"],
   ["Escalado", "Estandarización con media y desvío de train", "Escalas muy distintas; lo necesita la regresión logística"],
   ["Categóricas", "One-hot de categoría, subcategoría, región, formato, proveedor", "Son nominales: label encoding inventaría un orden"],
@@ -392,7 +409,7 @@ page("mapariesgo", "Señal · cobertura × tendencia", "La tendencia multiplica 
  "Ninguna regla de un solo umbral combina cobertura y tendencia. Esto justifica un modelo multivariado y, a la vez, confirma que las variables elegidas tienen señal.")
 cpv = I["capacidad"]["validacion"]; k4, k7 = cpv["k"].index(420), cpv["k"].index(700)
 import csv
-cpt = {int(r["alertas_mes"]): r for r in csv.DictReader(open(os.path.join(E2, "Modelo", "resultados", "capacidad_alertas_v3.csv"), encoding="utf-8")) if r["split"] == "test"}
+cpt = {int(r["alertas_mes"]): r for r in csv.DictReader(open(os.path.join(E2, "Modelo", "resultados", "capacidad_alertas_v4.csv"), encoding="utf-8")) if r["split"] == "test"}
 t4, t7 = cpt[420], cpt[700]
 page("capacidad", "Señal · capacidad operativa", "El modelo encuentra más casos en 2025; en 2026 la ventaja se achica",
  chart(IMG["cap"], "Porcentaje de casos capturados según alertas por mes, modelo de prueba contra regla de cobertura actual, en validación y en test",
@@ -421,8 +438,8 @@ page("limites", "Cierre", "Limitaciones que declaramos y lo que queda pendiente"
                                   ("Venta antes de abrir", "6 tiendas sin explicación (H3)"), ("Capacidad de 15-25 por tienda", "nunca se midió"),
                                   ("Costo de 22 SKUs", "supuesto, no dato")])
  + lista("Pendientes", BLUE, [("María G.", "aprobar target, cortes y acciones por banda"), ("Lucía O.", "confirmar la capacidad operativa"),
-                              ("Negocio", "responder H3, H6 y H12; extender Devoluciones, Calendario y catálogo a 2026"),
-                              ("Equipo", "decidir si el motivo «sin rotación» (devolución a proveedor) se netea")])
+                              ("Negocio", "responder H3 y H6; extender Devoluciones y catálogo a 2026; documentar las reglas del reporte de 2026 (H13)"),
+                              ("Equipo", "en el Entregable 3: regla y modelo en validación 2025 y test 2026 por separado, y el desempeño como rango")])
  + '</div>', "Ninguna de estas limitaciones bloquea el modelado, pero todas se declaran en el entregable.", gap=32)
 add("proximo", f'''<section id="proximo" style="background:{DARK}; color:{LIGHT}; {BF}; padding:128px; display:flex; flex-direction:column; justify-content:center; gap:36px">
 <div style="width:120px; height:8px; background:{GOLD}"></div>

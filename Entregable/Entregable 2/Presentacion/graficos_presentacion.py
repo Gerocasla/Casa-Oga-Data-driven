@@ -88,7 +88,7 @@ cp = I["capacidad"]["validacion"]; fig, ax = plt.subplots(figsize=(16, 7.4))
 ax.axvspan(420, 700, color=GOLD, alpha=.18, lw=0); ax.text(430, 8, "capacidad declarada\n420–700 / mes", color=MUT, fontsize=18)
 ct = I["capacidad"].get("test")
 if ct is None:   # insights.json guarda solo validacion: el test sale del CSV del chequeo de senal
-    ct = pd.read_csv(os.path.join(E2, "Modelo", "resultados", "capacidad_alertas_v3.csv")).query("split == 'test'")
+    ct = pd.read_csv(os.path.join(E2, "Modelo", "resultados", "capacidad_alertas_v4.csv")).query("split == 'test'")
     ct = {"k": ct.alertas_mes.tolist(), "recall_modelo": ct.recall_modelo.tolist(), "recall_regla": ct.recall_regla.tolist()}
 ax.plot(cp["k"], cp["recall_modelo"], color=BLUE, lw=4, marker="o", ms=8, label="Modelo · validación 2025")
 ax.plot(cp["k"], cp["recall_regla"], color=BLUE, lw=3, ls="--", marker="o", ms=6, alpha=.55, label="Regla · validación 2025")
@@ -118,6 +118,20 @@ for ax, (lab, k) in zip(axs, pares):
     ax.text(.5, max(r["antes"], r["despues"]) * 1.05, txt, ha="center", fontsize=24, color=INK, fontweight="bold")
     ax.set_ylim(0, max(r["antes"], r["despues"]) * 1.2); ax.spines["left"].set_visible(False); ax.grid(False)
 save(fig, "c09_antes_despues.png")
+
+# 13 capital a costo por categoria, antes/despues de corregir (dic-25)
+CC = [c for c in L(os.path.join(E2, "EDA", "resultados", "comparativo_antes_despues.json"))["stock"]["capital_categoria"]["dic-25"] if c["categoria"] != "Total"]
+acc_ = {"Decoracion": "Decoración", "Bano": "Baño", "Iluminacion": "Iluminación", "Organizacion": "Organización"}
+fig, ax = plt.subplots(figsize=(14, 7.6)); y = np.arange(len(CC))[::-1]; h = .38
+ax.barh(y + h / 2, [c["total"][0] for c in CC], h, color=GREY, label="Antes de corregir")
+ax.barh(y - h / 2, [c["total"][1] for c in CC], h, color=BLUE, label="Después")
+for yi, c in zip(y, CC):
+    var = (c["total"][1] / c["total"][0] - 1) * 100
+    ax.text(max(c["total"]) + 12, yi, f"{var:+.1f}%".replace(".", ",").replace("-", "−"), va="center", fontsize=19,
+            color=ORANGE if abs(var) >= 3 else MUT, fontweight="bold")
+ax.set_yticks(y, [acc_.get(c["categoria"], c["categoria"]) for c in CC]); ax.set_xlabel("$ M a costo, dic-2025")
+ax.set_xlim(0, max(max(c["total"]) for c in CC) * 1.18); ax.legend(loc="lower right")
+save(fig, "c13_capital_categoria.png")
 
 # 10 capital en rojo por categoria
 rc = I["rojo_ago26_cat"]; acc = {"Decoracion": "Decoración", "Bano": "Baño", "Iluminacion": "Iluminación", "Organizacion": "Organización"}

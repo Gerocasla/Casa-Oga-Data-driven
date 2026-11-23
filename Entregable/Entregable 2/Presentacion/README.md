@@ -4,16 +4,16 @@ Dos versiones para elegir; el contenido es el mismo, la corta es un subconjunto.
 
 | Versión | Diapositivas | Archivos | Para qué |
 |---|---|---|---|
-| **v4 completa** | 36 | `Casa-Oga-Entregable-2-v4-completa.html` · `.pdf` | Documento de respaldo o presentación larga (~25-30 min) |
-| **v4 corta** | 16 | `Casa-Oga-Entregable-2-v4-corta.html` · `.pdf` | Presentación de pocos minutos (~8-10 min) |
-| **v4 corta · modelo (final)** | — | `Casa-Oga-Entregable-2-v4-corta-modelo.html` | **Presentación final** del Entregable 2 |
+| **v4 completa** | 37 | `Casa-Oga-Entregable-2-v4-completa.html` · `.pdf` | Documento de respaldo o presentación larga (~25-30 min) |
+| **v4 corta** | 17 | `Casa-Oga-Entregable-2-v4-corta.html` · `.pdf` | Presentación de pocos minutos (~8-10 min) |
+| **v4 corta · modelo (final)** | 17 | `Casa-Oga-Entregable-2-v4-corta-modelo.html` | **Presentación final** del Entregable 2 (copia de la v4 corta; la genera `armar_html.py`) |
 
-**v4 (vigente):** dos diapositivas nuevas en el EDA sobre qué cambió en 2026: de dónde sale la caída (catálogo) y el salto de posiciones sin venta con menos liquidaciones (`catalogo`, `sinventa`; números en `EDA/resultados/cambio_2026.json`). **v3:** criterio explícito OK / Menor / Crítico en el mapa de calidad, mapa alineado con la Parte A, capacidad operativa medida también en test 2026, prevalencia en valores absolutos y transformaciones en la versión corta. **v3, v1 completa y v2 corta** quedan como versión anterior, sin regenerar.
+**v4 · reentrega (23-11-2026):** cifras y textos con el dataset v4 y las reglas de la devolución (duplicados con la regla de Casa Óga, «sin rotación» sin netear, cobertura sin winsorizar), 13 hallazgos (H13), Calendario en Menor, y una diapositiva nueva de capital por categoría (`capcat`, gráfico `c13`). **v4 (vigente):** dos diapositivas nuevas en el EDA sobre qué cambió en 2026: de dónde sale la caída (catálogo) y el salto de posiciones sin venta con menos liquidaciones (`catalogo`, `sinventa`; números en `EDA/resultados/cambio_2026.json`). **v3:** criterio explícito OK / Menor / Crítico en el mapa de calidad, mapa alineado con la Parte A, capacidad operativa medida también en test 2026, prevalencia en valores absolutos y transformaciones en la versión corta. **v3, v1 completa y v2 corta** quedan como versión anterior, sin regenerar.
 
 **Cómo usar el HTML:** abrirlo en el navegador. Flechas, espacio o clic para avanzar · `F` pantalla completa · `N` muestra las notas del orador · `Ctrl+P` imprime a PDF (tamaño 1920×1080). Es un único archivo: las imágenes van embebidas. Las tipografías (DM Sans e IBM Plex Sans) se cargan de Google Fonts; sin internet se usa Arial.
 
-**Qué tiene la v3 corta** (en orden): portada · mapa de calidad · por qué tratamos cada problema así · antes y después · punto de partida · de dónde sale la caída de 2026 · posiciones sin venta y liquidaciones · la pregunta del target · por qué este target · prevalencia y partición · qué ve el modelo (leakage) · las variables elegidas · las excluidas · transformaciones · capacidad operativa · próximo paso.
-Quedan fuera: divisores de sección, EDA detallado (crecimiento, estacionalidad, caída 2026, cola de cobertura), detalle de los 12 hallazgos, supuesto de costo, ficha y solidez del target, ficha del dataset, mapa de riesgo, señal por variable, capital en riesgo y limitaciones. Para cambiar la selección: lista `CORTA` en `armar_html.py`.
+**Qué tiene la v3 corta** (en orden): portada · mapa de calidad · por qué tratamos cada problema así · antes y después · capital por categoría · punto de partida · de dónde sale la caída de 2026 · posiciones sin venta y liquidaciones · la pregunta del target · por qué este target · prevalencia y partición · qué ve el modelo (leakage) · las variables elegidas · las excluidas · transformaciones · capacidad operativa · próximo paso.
+Quedan fuera: divisores de sección, EDA detallado (crecimiento, estacionalidad, caída 2026, cola de cobertura), detalle de los 13 hallazgos, supuesto de costo, ficha y solidez del target, ficha del dataset, mapa de riesgo, señal por variable, capital en riesgo y limitaciones. Para cambiar la selección: lista `CORTA` en `armar_html.py`.
 
 ## Cómo se genera
 

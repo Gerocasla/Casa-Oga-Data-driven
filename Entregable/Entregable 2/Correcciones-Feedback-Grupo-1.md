@@ -8,7 +8,7 @@
 
 | # | Sección | Qué se cambió | Dónde | Cifras clave (antes → después) | Pendiente |
 |---|---|---|---|---|---|
-| 0 | Carátula y archivos | Roles por integrante: Fasce, Visualización · Di Claudio, Coordinación · Fleischer, Datos (calidad y preparación) · Volpato, Datos (modelado y evaluación) · Hernández, Comunicación. Legajo de Simón (64784) en las dos partes. Versión v3.0. Los archivos citados pasan a `3-Dataset-Modelo-v4.zip` y `4-Diccionario-de-Datos-v4.xlsx`, que son los generados | Carátulas A y B, `armar_consolidado.py` (se quitó la entrada que vaciaba los roles) | — | **Fecha de reentrega** (`[completar fecha de reentrega]`). Borrar a mano `3-Dataset-Modelo-v3.zip` y `4-Diccionario-de-Datos-v3.xlsx` de `Envio-Profesores/` antes de enviar |
+| 0 | Carátula y archivos | Roles por integrante: Fasce, Visualización · Di Claudio, Coordinación · Fleischer, Datos (calidad y preparación) · Volpato, Datos (modelado y evaluación) · Hernández, Comunicación. Legajo de Simón (64784) en las dos partes. Versión v3.0. Los archivos citados pasan a `3-Dataset-Modelo-v4.zip` y `4-Diccionario-de-Datos-v4.xlsx`, que son los generados | Carátulas A y B, `armar_consolidado.py` (se quitó la entrada que vaciaba los roles) | — | Hecho (23-11-2026): fecha de reentrega 24/11/2026; archivos v3 borrados de `Envio-Profesores/` |
 | 1 | A · 1.3 | Nueva definición «Ritmo de venta» (promedio mensual de 12 meses, neto de devoluciones de clientes, sin descontar las devoluciones al proveedor); la cobertura la referencia | Parte A §1.3 | — | — |
 | 2 | A · 2.1-2.2 | Columna nueva «Fuentes sobre las que se realizó» en la tabla 2.2. En 2.1, párrafo que explica que las cifras descriptivas conservan el criterio original y cuánto moverían los criterios nuevos | Parte A §2.1 y §2.2 | Venta del período $40.083,4 M → $40.254,7 M (+0,4%); caída 2026 −13,2% → −13,4%; cumplimiento 2022 89,5% → 90,2% | — |
 | 3 | A · 2.3 | «Caída de 2026» partida en tres filas: magnitud, origen (surtido, no demanda) y riesgo de baja rotación. Referencia cruzada con «Cobertura de inventario» (sección E) aclarando que es el mismo fenómeno | Parte A §2.3 | Sin cambios de cifras | — |
@@ -32,7 +32,7 @@
 
 ## Pendientes y lo que no se hizo
 
-- **Presentación** (`Presentacion/`, `Envio-Profesores/2-Presentacion-Final-Entregable-2.html`): no se regeneró. Cifras desactualizadas: prevalencia 3,40% (v4: 3,22%), 201.306 filas (201.310), test 9,03% (8,84%), peso de clase ≈39 (≈42), dedup «1ra ocurrencia» (`generar_deck.py` L179 y L202), sin la diapositiva de capital por categoría.
+- **Presentación**: regenerada el 23-11-2026 con la v4 (prevalencia 3,22%, 201.310 filas, test 8,84%, peso ≈42, regla de duplicados de Casa Óga, «sin rotación» sin netear, 13 hallazgos, Calendario en Menor) y con la diapositiva nueva de capital por categoría (`capcat`). La tabla de candidatos del target conserva la comparación con las reglas anteriores, con nota al pie.
 - **Parte A §2.3**: las cifras descriptivas conservan el criterio original (1ra ocurrencia, todas las devoluciones neteadas). Está declarado en §2.1 con el efecto de los criterios nuevos.
 - `EDA/candidatos_target.py` y `EDA/eda_ago26.py` siguen con las reglas anteriores (comparación histórica de candidatos y EDA de la Parte A).
 - Entregable 3: decidir si se reentrena con la v4; etiquetar por fecha; reportar validación 2025 y test 2026 por separado con la regla como línea base; desempeño esperado como rango; separar el efecto del cambio de fuente de 2026.

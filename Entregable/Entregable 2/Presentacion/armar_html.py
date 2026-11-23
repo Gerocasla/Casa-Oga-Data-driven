@@ -8,12 +8,12 @@ Salidas en esta carpeta:
   Casa-Oga-Entregable-2-v4-corta.html     (16 diapositivas)
 Navegacion: flechas / espacio / clic · F pantalla completa · N notas del orador.
 """
-import os, re, json, base64
+import os, re, json, base64, shutil
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 SL = os.path.join(BASE, "deck", "project", "slides")
 ORDEN = json.load(open(os.path.join(BASE, "deck", "project", "deck.json"), encoding="utf-8"))["order"]
-CORTA = ["portada", "mapa", "criterios", "antesdespues", "partida", "catalogo", "sinventa", "pregunta", "candidatos",
+CORTA = ["portada", "mapa", "criterios", "antesdespues", "capcat", "partida", "catalogo", "sinventa", "pregunta", "candidatos",
          "prevalencia", "leakage", "grupos", "excluidas", "transformaciones", "capacidad", "proximo"]
 
 # /_blob/<id> -> archivo local (mismos ids que devolvio la subida de assets)
@@ -22,7 +22,8 @@ BLOBS = {"3c2223f1d1c6339c830ee806884f8f61": "c01_venta_mensual.png", "43c698158
          "d8a92d1eff15dc35bd290d5587c533b5": "c05_cola_cobertura.png", "7905fa8d85c212d9ad87118976873099": "c06_prevalencia.png",
          "19331e5df80e782e71bbf913d9c492d9": "c07_capacidad.png", "2d7fd4a01dc83c89b21d974d6364c15d": "c08_senal.png",
          "bdc99ef4d31e9129611313178b39539e": "c09_antes_despues.png", "e786bd0172083880f96c23d1f3375cf5": "c10_capital_rojo.png",
-         "a1c11e0000000000000000000000c011": "c11_caida_catalogo.png", "a1c12e0000000000000000000000c012": "c12_sin_venta_liquidaciones.png"}
+         "a1c11e0000000000000000000000c011": "c11_caida_catalogo.png", "a1c12e0000000000000000000000c012": "c12_sin_venta_liquidaciones.png",
+         "a1c13e0000000000000000000000c013": "c13_capital_categoria.png"}
 DATA = {k: "data:image/png;base64," + base64.b64encode(open(os.path.join(BASE, "img", v), "rb").read()).decode()
         for k, v in BLOBS.items()}
 
@@ -86,3 +87,5 @@ def armar(ids, titulo, archivo):
 
 armar(ORDEN, "Casa Óga · Entregable 2 · versión completa", "Casa-Oga-Entregable-2-v4-completa.html")
 armar(CORTA, "Casa Óga · Entregable 2 · versión corta", "Casa-Oga-Entregable-2-v4-corta.html")
+# la presentacion final del E2 es la version corta (Envio-Profesores/armar_envio.py la copia desde aca)
+shutil.copyfile(os.path.join(BASE, "Casa-Oga-Entregable-2-v4-corta.html"), os.path.join(BASE, "Casa-Oga-Entregable-2-v4-corta-modelo.html"))

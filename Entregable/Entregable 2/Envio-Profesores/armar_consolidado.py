@@ -48,7 +48,7 @@ REVISION = [
      "Parte A: Alcance, Analítica Descriptiva y Evaluación de Calidad de Datos · Parte B: Corrección de Datos y Preparación de Datos para el Modelo", "Carátula"),
  # legajo de Simón (64784) y roles por integrante: cargados en la carátula de cada parte (ya no se blanquea la
  # columna de roles); legajo de Santiago: 64449
- (A, "__/__/2026", "[completar fecha de reentrega]", "Fecha de entrega (reentrega con correcciones)"),
+ (A, "__/__/2026", "24/11/2026", "Fecha de entrega (reentrega con correcciones)"),
  (A, "v1.0", "v3.0 — consolidado, revisado con el feedback", "Versión"),
  # Parte A
  (A, "(a dic-2025 era de 20 veces)", "(a dic-2025 era de 27 veces: 23.528 contra 868)",
