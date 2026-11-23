@@ -214,7 +214,7 @@ T(["Integrante", "Legajo", "Rol en el proyecto", "Entregable clave a cargo"], [
     ["Santiago Javier Hernández", "64449", "Comunicación", "Narrativa y presentación final"],
 ], widths=[4.2, 1.6, 4.4, 6.4])
 T(["Versión", "Fecha", "Repositorio con datos, código y evidencias"], [
-    ["v4.0 · final", "Noviembre de 2026", "github.com/Gerocasla/Casa-Oga-Data-driven · carpeta «Entregable/Entregable 4»"]],
+    ["v4.0 · final", "24 de noviembre de 2026","github.com/Gerocasla/Casa-Oga-Data-driven · carpeta «Entregable/Entregable 4»"]],
     widths=[2.4, 3.2, 11.0])
 
 BOX("Sobre este documento", [
@@ -227,7 +227,7 @@ BOX("Sobre este documento", [
     "qué decía, qué dice ahora y por qué.",
     "**Pendiente fuera de nuestro alcance:** las correcciones de maestros de la Ronda 3 (22 costos, 11 duplicados, 4 SKU con dos "
     "proveedores y 6 fechas de apertura) no están incorporadas al dataset. Se declaran como condición previa al piloto, con "
-    "responsable y fecha (Secciones 6.4 y 10.3)."])
+    "responsable y fecha (Secciones 9.2 y 10.3)."])
 BREAK()
 
 # ================================================================== EXECUTIVE SUMMARY
@@ -331,7 +331,7 @@ P("**Corrección del E1:** cada objetivo tiene un mínimo verificable. Los que d
 T(["Objetivo", "Indicador", "Mínimo exigible", "Estado"], [
     ["OE1 · Target aprobado", "Definición «cobertura > 12 meses en t+3» aprobada por escrito", "Aprobación de María G. con visto bueno de Carlos F.", "Pendiente de firma"],
     ["OE2 · Datos consolidados", "Dataset reproducible con reglas acordadas", "100% de claves sin duplicar y 0 filas con stock negativo en el lote mensual", "Cumplido en v4; Ronda 3 pendiente"],
-    ["OE3 · Modelo útil", "Casos detectados a igual cupo contra la regla, validación 2025 y test 2026", "Superar a la regla en los dos períodos", f"Cumplido: {fv['flujo']['vp']} vs {fv['regla_mismo_cupo']['vp']} y {ft['flujo']['vp']} vs {ft['regla_mismo_cupo']['vp']}"],
+    ["OE3 · Modelo útil", "Casos detectados a igual cupo contra la regla, validación 2025 y test 2026", "Superar a la regla en los dos períodos", f"Cumplido: {num(fv['flujo']['vp'])} vs {num(fv['regla_mismo_cupo']['vp'])} y {num(ft['flujo']['vp'])} vs {num(ft['regla_mismo_cupo']['vp'])}"],
     ["OE4 · Impacto económico", "Valor neto recuperado por las alertas trabajadas", "Beneficio anual ≥ USD 9.150 (ROI a 3 años ≥ 0)", "No medible aún: requiere registro de acciones del piloto"],
     ["OE5 · Accionable", "Alertas por tienda por mes", "Entre 10 y 25 por tienda; nunca más de 700 en la cadena", f"Cumplido: ~{num(fv['flujo']['alertas_mes'] / 28)} por tienda en 2025"],
 ], widths=[3.2, 4.4, 4.6, 4.4])
@@ -839,7 +839,7 @@ T(["#", "Sección", "Qué decía", "Qué dice ahora", "Motivo"], [
     ["3", "Parte C · fases", "Sin backlog", "Backlog inicial con épicas, historias y prioridad MoSCoW (3.3)", "Cátedra: el título prometía backlog"],
     ["4", "1.3 Proceso", "Describía el objetivo del proyecto", "Proceso vigente de gestión de rotación y liquidación (1.3)", "Cátedra: proceso ≠ objetivo"],
     ["5", "1.2 Mercado", "Sin fuente externa; estacionalidad 143/61", "INDEC y CAME citados; sin estacionalidad tras ajustar tendencia (1.2)", "Cátedra; hallazgo del EDA (D1)"],
-    ["6", "2.4 Stakeholders", "Una columna de influencia; tiendas con influencia baja", "Influencia técnica y de decisión separadas (2.3)", "Cátedra"],
+    ["6", "B 2.1 Stakeholders", "Una columna de influencia; tiendas con influencia baja", "Influencia técnica y de decisión separadas (2.3)", "Cátedra"],
     ["7-8", "3.1-3.2 Restricciones", "Calidad de datos, alcance e IT como tecnológicas; disponibilidad como temporal", "Reclasificadas: organizacional, RRHH, alcance y hallazgo (2.4)", "Cátedra"],
     ["9", "Alcance", "Dashboard leíble como herramienta en vivo", "Corte mensual que se regenera en cada cierre (3.2)", "Cátedra"],
     ["10", "Visión", "Anticipación atribuida al semáforo", "La anticipa el modelo; el semáforo es el presente (3.1)", "Clase 7"],
@@ -860,7 +860,7 @@ T(["Sección", "Cambio", "Motivo"], [
 ], widths=[3.0, 8.6, 5.0])
 H("12.3 Entregable 3", 2)
 T(["Sección E3", "Qué decía", "Qué dice ahora", "Motivo (devolución)"], [
-    ["Entrega", "Sólo el PDF", "Informe, scripts, resultados, planilla y gráficos en la carpeta «Entregable 4» del repositorio", "Cátedra · 0"],
+    ["Entrega", "Sólo el PDF", "Informe, scripts, resultados y gráficos en la carpeta «Entregable 4» del repositorio", "Cátedra · 0"],
     ["1.4-1.5", "Calendario hasta dic-25; pedía Calendario y 22 costos", "Calendario a ago-26; pedidos quitados; ×1,2321 sólo para v4 (4.1)", "Casa Óga y cátedra · 1.4"],
     ["1.5 / 6.4", "Ronda 3 como limitación, sin fecha", "Precondición con responsable y fecha; criterio de go-live (3.4, 9.2, 10.3)", "Cátedra · 1.1 y 6"],
     ["1.6", "PC de USD 1.000 como nota", "PC de oficina existente, confirmada (6)", "Cátedra · 1.6"],
