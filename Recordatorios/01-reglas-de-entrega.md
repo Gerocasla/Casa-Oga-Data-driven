@@ -13,7 +13,7 @@ Al final hay que entregar **un único documento consolidado con TODOS los TPs**,
 | **Cualquier consolidado** (parcial o final) | **Sí**, todas las correcciones aplicadas | **Sí, siempre** |
 
 ## 3. Proceso cada vez que llega un feedback
-1. Leer el feedback (queda en `Data-Driven\Mejoras\`).
+1. Leer el feedback (queda en `Mejoras/`, un archivo por TP; ver `Mejoras/README.md`).
 2. Crear `0X-correcciones-tpN.md` en esta carpeta con cada observación como checklist.
 3. Aplicar las correcciones sobre la versión consolidada (guardar como **versión nueva**, nunca pisar el original entregado).
 4. Por cada corrección aplicada: marcar `[x]` y registrar el cambio en `03-registro-de-cambios.md`.
