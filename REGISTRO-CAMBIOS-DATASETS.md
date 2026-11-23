@@ -142,3 +142,18 @@ Mismo script (`VERSION = "v3"`, `HIST_MIN = 3`). Los archivos de v2 se borraron;
 **Por qué el universo:** con 12 meses quedaban afuera el 40% de las filas, el 45% de los positivos y todos los productos nuevos (tasa de 6,8% en sus primeros 3 meses vs 3,4% de las maduras).
 **Relleno nuevo:** si no hay dato de hace 3 meses, la cobertura de t-3 toma la actual (sin cambio).
 
+
+---
+
+### 23-11-2026 — Calendario extendido a ago-2026 (carpeta «Datasets v2 Mix Surtido y Catalogo» de la cátedra)
+
+| Dataset | Antes | Ahora | Qué cambió |
+|---|---|---|---|
+| Calendario | 1.461 filas, ene-22 a dic-25 | **1.704 filas, ene-22 a ago-26** | +243 filas de 2026. Las 1.461 anteriores quedaron idénticas. |
+
+La versión anterior quedó en `Datasets/_originales_reemplazados/Calendario.csv.2026-11-23`. Se volvió a correr `normalizar_datasets.py`: solo cambió `Datasets_Normalizados/Calendario.csv` (R1 `Otoño` → `Otono` pasa de 368 a 460 filas); el resto de las fuentes quedó byte a byte igual.
+
+**Efectos a tener en cuenta:**
+- 2026 trae 6 feriados (1-ene, 24-mar, 1-may, 25-may, 20-jun, 9-jul) y el Hot Sale en junio (3 días); no hay Black Friday ni Navidad porque el corte es agosto.
+- El modelo no lee este archivo: `eventos_en_horizonte` usa los meses fijos 6, 11 y 12, y el Hot Sale 2026 cae en junio, así que el dataset v4 y todas las métricas no cambian.
+- Cierra el pendiente de H12 sobre el Calendario; siguen sin 2026 Devoluciones y el catálogo.
