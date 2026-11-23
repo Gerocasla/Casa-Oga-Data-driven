@@ -71,7 +71,6 @@ Los filtros de arriba (región, tienda, categoría, proveedor, origen, acción, 
 
 **Fuera de alcance / pendiente:**
 - Respuestas de Casa Óga a la **Ronda 3** (`Entregable 3/Preguntas-Factibilidad-Ronda-3.xlsx`): no están en el repo. El informe las deja como condición previa al piloto.
-- **Fecha de entrega** en la carátula del informe.
 - La presentación es un pitch de negocio a Casa Óga, no una exposición técnica. Muestra el dashboard (capturas) y el hallazgo de capacidad; el detalle técnico y la sección «Cambios» quedan en el informe.
 
 ---

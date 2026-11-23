@@ -150,10 +150,8 @@
   - Seis vistas: Dirección, Tiendas, Lista, Compras, Finanzas y Modelo.
   - Para generar las filas a puntuar se agregó `EXPORTAR_SCORING=1` a `construir_dataset_modelo.py`.
 - **Hallazgo:** en 2026 la regla sola (866 posiciones) supera la capacidad de las tiendas (700). Se prioriza por capital y queda una decisión para la Dirección (§10.4).
-- **Pendiente:**
-  - Respuestas de la Ronda 3 (no están en el repo).
-  - Fecha de entrega en la carátula.
-  - Sumar a la presentación el dashboard y el hallazgo de capacidad.
+- Gerónimo rehizo la presentación como pitch a Casa Óga, con capturas del dashboard y el hallazgo de capacidad, y agregó `Preguntas-Jurado.md`. Fecha de entrega en la carátula: 24-11-2026.
+- **Pendiente:** respuestas de la Ronda 3 (no están en el repo).
 
 ---
 
