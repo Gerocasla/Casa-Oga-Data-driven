@@ -63,7 +63,7 @@ GIANFRANCO. Vamos a los números. La inversión inicial es de 9.570 dólares, un
 
 ## 13 · Lo que puede salir mal, y cómo lo vemos a tiempo
 
-GIANFRANCO. Tres cosas pueden salir mal, y para cada una definimos una señal que la detecta y una respuesta. Que el beneficio no alcance: si dos trimestres quedan por debajo de lo esperado, seguimos sólo con la lista automatizada, que se paga sola. Que los datos lleguen incompletos: esas filas no se publican hasta corregirlas. Y que el modelo no le gane a la regla: se apaga y se reentrena, sin costo extra. El supuesto que más mueve el número es el costo de desarrollo: si fueran tres meses de un especialista, el retorno a tres años queda en cero, y aun así está dentro del presupuesto. Del lado legal no hay datos personales, y las tiendas no ven costos.
+GIANFRANCO. Tres cosas pueden salir mal, y para cada una definimos una señal que la detecta y una respuesta. Que el beneficio no alcance: si dos trimestres quedan por debajo de lo esperado, seguimos sólo con la lista automatizada, que se paga sola. Que los datos lleguen incompletos: esas filas no se publican hasta corregirlas. Y que el modelo no le gane a la regla: se apaga y se reentrena, sin costo extra. El supuesto que más mueve el número es el costo de desarrollo: si fueran tres meses de un especialista, el retorno a tres años queda apenas negativo, en -3,3%, y aun así está dentro del presupuesto. Del lado legal no hay datos personales, y las tiendas no ven costos.
 
 ## 14 · Preparación, piloto de tres cierres y decisión en el mes 6
 
