@@ -75,7 +75,7 @@ Casa-Oga-Data-driven/
 │   ├── Entregable 3/              ← TP3 entregado: Compilado/ (docx, pdf, xlsx ROI), Modelo/ (etapas 1-4, v3), Presentacion/
 │   └── Entregable 4/              ← ★ ENTREGA FINAL: informe, presentación, dashboard y sus generadores (ver su README.md)
 ├── Material/                      ← respuestas del negocio y diapositivas de la Unidad 2
-├── Mejoras/                       ← feedback de la cátedra
+├── Mejoras/                       ← feedback de la cátedra y de Casa Óga por TP (TP1, TP2, TP3; ver su README.md)
 ├── Cambios/                       ← documentos de análisis del TP1 (históricos)
 └── Recordatorios/                 ← notas de trabajo: contexto, reglas, correcciones, decisiones, bitácora
 ```

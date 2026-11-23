@@ -1,6 +1,6 @@
 # Correcciones del Entregable 2 · feedback de Casa Óga y de la cátedra
 
-> Fuente del feedback: `Comentarios Grupo 1.xlsx` (Carlos, Casa Óga, y sugerencias de la cátedra). Aplicado el 30-10-2026.
+> Fuente del feedback: `Mejoras/TP2 - Comentarios Grupo 1.xlsx` (Carlos, Casa Óga, y sugerencias de la cátedra). Aplicado el 30-10-2026.
 > Documentos: `Entregable 2 - Parte A - COMPLETADO.docx`, `Entregable 2 - Parte B - COMPLETADO.docx` → `armar_consolidado.py` → `Entregable 2 - Consolidado - Grupo 1.docx` y `Envio-Profesores/1-Entregable-2-Consolidado.docx`.
 > Cifras verificadas contra `Modelo/resultados/construir_dataset_log.txt`, `Modelo/resultados/comparar_reglas_v4_log.txt`, `Modelo/resultados/recorte_cobertura_v4.csv`, `Modelo/resultados/exclusion_t3_v4.csv`, `Modelo/resultados/chequeo_sanidad_v4.csv` y `EDA/resultados/antes_despues.csv` / `comparativo_antes_despues.json`.
 
