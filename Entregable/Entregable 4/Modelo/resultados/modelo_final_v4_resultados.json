@@ -1,0 +1,3661 @@
+{
+  "insumos": {
+    "dataset": "dataset_entrenamiento_v4",
+    "filas": 201310,
+    "valor_unitario": {
+      "base_e2": {
+        "capital_por_posicion_ars": 208730.15873015873,
+        "capital_por_posicion_usd": 133.8013838013838,
+        "beneficio_accion_usd": 23.582493894993892,
+        "valor_vp_usd": 16.507745726495724,
+        "costo_fp_usd": 2.198717948717949,
+        "precision_equilibrio": 0.11753787283864246
+      },
+      "sensibilidad_e1": {
+        "capital_por_posicion_ars": 126928.89561270802,
+        "capital_por_posicion_usd": 81.36467667481283,
+        "beneficio_accion_usd": 14.340524263935757,
+        "valor_vp_usd": 10.03836698475503,
+        "costo_fp_usd": 2.198717948717949,
+        "precision_equilibrio": 0.17967661094707593
+      }
+    },
+    "capacidad_techo_alertas_mes": 600,
+    "tramo": 50
+  },
+  "validacion_interna": {
+    "top_175": {
+      "Regla": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 240,
+        "fp": 810,
+        "fn": 396,
+        "precision": 0.22857142857142856,
+        "recall": 0.37735849056603776,
+        "valor_neto_usd": 2180.9,
+        "valor_neto_mes_usd": 363.5
+      },
+      "Logistica": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 274,
+        "fp": 776,
+        "fn": 362,
+        "precision": 0.26095238095238094,
+        "recall": 0.4308176100628931,
+        "valor_neto_usd": 2816.9,
+        "valor_neto_mes_usd": 469.5
+      },
+      "HistGradientBoosting": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 288,
+        "fp": 762,
+        "fn": 348,
+        "precision": 0.2742857142857143,
+        "recall": 0.4528301886792453,
+        "valor_neto_usd": 3078.8,
+        "valor_neto_mes_usd": 513.1
+      },
+      "Ensamble": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 295,
+        "fp": 755,
+        "fn": 341,
+        "precision": 0.28095238095238095,
+        "recall": 0.4638364779874214,
+        "valor_neto_usd": 3209.8,
+        "valor_neto_mes_usd": 535.0
+      }
+    },
+    "top_300": {
+      "Regla": {
+        "alertas": 1800,
+        "alertas_mes": 300.0,
+        "vp": 296,
+        "fp": 1504,
+        "fn": 340,
+        "precision": 0.16444444444444445,
+        "recall": 0.46540880503144655,
+        "valor_neto_usd": 1579.4,
+        "valor_neto_mes_usd": 263.2
+      },
+      "Logistica": {
+        "alertas": 1800,
+        "alertas_mes": 300.0,
+        "vp": 357,
+        "fp": 1443,
+        "fn": 279,
+        "precision": 0.19833333333333333,
+        "recall": 0.5613207547169812,
+        "valor_neto_usd": 2720.5,
+        "valor_neto_mes_usd": 453.4
+      },
+      "HistGradientBoosting": {
+        "alertas": 1800,
+        "alertas_mes": 300.0,
+        "vp": 374,
+        "fp": 1426,
+        "fn": 262,
+        "precision": 0.20777777777777778,
+        "recall": 0.5880503144654088,
+        "valor_neto_usd": 3038.5,
+        "valor_neto_mes_usd": 506.4
+      },
+      "Ensamble": {
+        "alertas": 1800,
+        "alertas_mes": 300.0,
+        "vp": 367,
+        "fp": 1433,
+        "fn": 269,
+        "precision": 0.2038888888888889,
+        "recall": 0.5770440251572327,
+        "valor_neto_usd": 2907.6,
+        "valor_neto_mes_usd": 484.6
+      }
+    },
+    "top_420": {
+      "Regla": {
+        "alertas": 2520,
+        "alertas_mes": 420.0,
+        "vp": 331,
+        "fp": 2189,
+        "fn": 305,
+        "precision": 0.13134920634920635,
+        "recall": 0.5204402515723271,
+        "valor_neto_usd": 651.1,
+        "valor_neto_mes_usd": 108.5
+      },
+      "Logistica": {
+        "alertas": 2520,
+        "alertas_mes": 420.0,
+        "vp": 402,
+        "fp": 2118,
+        "fn": 234,
+        "precision": 0.1595238095238095,
+        "recall": 0.6320754716981132,
+        "valor_neto_usd": 1979.2,
+        "valor_neto_mes_usd": 329.9
+      },
+      "HistGradientBoosting": {
+        "alertas": 2520,
+        "alertas_mes": 420.0,
+        "vp": 417,
+        "fp": 2103,
+        "fn": 219,
+        "precision": 0.16547619047619047,
+        "recall": 0.6556603773584906,
+        "valor_neto_usd": 2259.8,
+        "valor_neto_mes_usd": 376.6
+      },
+      "Ensamble": {
+        "alertas": 2520,
+        "alertas_mes": 420.0,
+        "vp": 414,
+        "fp": 2106,
+        "fn": 222,
+        "precision": 0.16428571428571428,
+        "recall": 0.6509433962264151,
+        "valor_neto_usd": 2203.7,
+        "valor_neto_mes_usd": 367.3
+      }
+    },
+    "top_600": {
+      "Regla": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 365,
+        "fp": 3235,
+        "fn": 271,
+        "precision": 0.10138888888888889,
+        "recall": 0.5738993710691824,
+        "valor_neto_usd": -1087.5,
+        "valor_neto_mes_usd": -181.3
+      },
+      "Logistica": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 454,
+        "fp": 3146,
+        "fn": 182,
+        "precision": 0.12611111111111112,
+        "recall": 0.7138364779874213,
+        "valor_neto_usd": 577.3,
+        "valor_neto_mes_usd": 96.2
+      },
+      "HistGradientBoosting": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 471,
+        "fp": 3129,
+        "fn": 165,
+        "precision": 0.13083333333333333,
+        "recall": 0.7405660377358491,
+        "valor_neto_usd": 895.4,
+        "valor_neto_mes_usd": 149.2
+      },
+      "Ensamble": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 481,
+        "fp": 3119,
+        "fn": 155,
+        "precision": 0.13361111111111112,
+        "recall": 0.7562893081761006,
+        "valor_neto_usd": 1082.4,
+        "valor_neto_mes_usd": 180.4
+      }
+    },
+    "positivos": 636,
+    "pr_auc": {
+      "Regla": 0.2062399945028651,
+      "Logistica": 0.2658052851795045,
+      "HistGradientBoosting": 0.2600164498525213,
+      "Ensamble": 0.2715212339802574
+    }
+  },
+  "periodos": {
+    "train": {
+      "meses": 34,
+      "filas": 98653,
+      "positivos": 2289,
+      "prevalencia": 0.02320253818941137,
+      "regla_fija": {
+        "alertas": 3458,
+        "alertas_mes": 101.7,
+        "vp": 898,
+        "fp": 2560,
+        "fn": 1391,
+        "precision": 0.25968768074031234,
+        "recall": 0.3923110528615116,
+        "valor_neto_usd": 9195.2,
+        "valor_neto_mes_usd": 270.4
+      },
+      "auc": {
+        "Regla": 0.8171144876644456,
+        "Logistica": 0.9179834573651938,
+        "HistGradientBoosting": 0.9554040822062133,
+        "Ensamble": 0.9834587229951006
+      },
+      "pr_auc": {
+        "Regla": 0.23261854313271932,
+        "Logistica": 0.2750997346627434,
+        "HistGradientBoosting": 0.333063894884393,
+        "Ensamble": 0.6009986353921914
+      },
+      "curva": {
+        "50": {
+          "Regla": {
+            "alertas": 1660,
+            "alertas_mes": 48.8,
+            "vp": 616,
+            "fp": 1044,
+            "fn": 1673,
+            "precision": 0.3710843373493976,
+            "recall": 0.2691131498470948,
+            "valor_neto_usd": 7873.3,
+            "valor_neto_mes_usd": 231.6
+          },
+          "Logistica": {
+            "alertas": 1660,
+            "alertas_mes": 48.8,
+            "vp": 609,
+            "fp": 1051,
+            "fn": 1680,
+            "precision": 0.36686746987951807,
+            "recall": 0.26605504587155965,
+            "valor_neto_usd": 7742.4,
+            "valor_neto_mes_usd": 227.7
+          },
+          "HistGradientBoosting": {
+            "alertas": 1660,
+            "alertas_mes": 48.8,
+            "vp": 684,
+            "fp": 976,
+            "fn": 1605,
+            "precision": 0.41204819277108434,
+            "recall": 0.29882044560943644,
+            "valor_neto_usd": 9145.3,
+            "valor_neto_mes_usd": 269.0
+          },
+          "Ensamble": {
+            "alertas": 1660,
+            "alertas_mes": 48.8,
+            "vp": 1009,
+            "fp": 651,
+            "fn": 1280,
+            "precision": 0.6078313253012049,
+            "recall": 0.44080384447356924,
+            "valor_neto_usd": 15225.0,
+            "valor_neto_mes_usd": 447.8
+          }
+        },
+        "100": {
+          "Regla": {
+            "alertas": 3310,
+            "alertas_mes": 97.4,
+            "vp": 882,
+            "fp": 2428,
+            "fn": 1407,
+            "precision": 0.2664652567975831,
+            "recall": 0.3853211009174312,
+            "valor_neto_usd": 9221.3,
+            "valor_neto_mes_usd": 271.2
+          },
+          "Logistica": {
+            "alertas": 3310,
+            "alertas_mes": 97.4,
+            "vp": 965,
+            "fp": 2345,
+            "fn": 1324,
+            "precision": 0.29154078549848944,
+            "recall": 0.4215814766273482,
+            "valor_neto_usd": 10774.0,
+            "valor_neto_mes_usd": 316.9
+          },
+          "HistGradientBoosting": {
+            "alertas": 3310,
+            "alertas_mes": 97.4,
+            "vp": 1062,
+            "fp": 2248,
+            "fn": 1227,
+            "precision": 0.32084592145015106,
+            "recall": 0.4639580602883355,
+            "valor_neto_usd": 12588.5,
+            "valor_neto_mes_usd": 370.3
+          },
+          "Ensamble": {
+            "alertas": 3310,
+            "alertas_mes": 97.4,
+            "vp": 1536,
+            "fp": 1774,
+            "fn": 753,
+            "precision": 0.46404833836858006,
+            "recall": 0.6710353866317169,
+            "valor_neto_usd": 21455.4,
+            "valor_neto_mes_usd": 631.0
+          }
+        },
+        "150": {
+          "Regla": {
+            "alertas": 4960,
+            "alertas_mes": 145.9,
+            "vp": 1038,
+            "fp": 3922,
+            "fn": 1251,
+            "precision": 0.20927419354838708,
+            "recall": 0.4534731323722149,
+            "valor_neto_usd": 8511.7,
+            "valor_neto_mes_usd": 250.3
+          },
+          "Logistica": {
+            "alertas": 4960,
+            "alertas_mes": 145.9,
+            "vp": 1187,
+            "fp": 3773,
+            "fn": 1102,
+            "precision": 0.23931451612903226,
+            "recall": 0.5185670598514636,
+            "valor_neto_usd": 11298.9,
+            "valor_neto_mes_usd": 332.3
+          },
+          "HistGradientBoosting": {
+            "alertas": 4960,
+            "alertas_mes": 145.9,
+            "vp": 1326,
+            "fp": 3634,
+            "fn": 963,
+            "precision": 0.26733870967741935,
+            "recall": 0.5792922673656619,
+            "valor_neto_usd": 13899.1,
+            "valor_neto_mes_usd": 408.8
+          },
+          "Ensamble": {
+            "alertas": 4960,
+            "alertas_mes": 145.9,
+            "vp": 1825,
+            "fp": 3135,
+            "fn": 464,
+            "precision": 0.36794354838709675,
+            "recall": 0.7972913936216689,
+            "valor_neto_usd": 23233.7,
+            "valor_neto_mes_usd": 683.3
+          }
+        },
+        "200": {
+          "Regla": {
+            "alertas": 6591,
+            "alertas_mes": 193.9,
+            "vp": 1168,
+            "fp": 5423,
+            "fn": 1121,
+            "precision": 0.17721134880898196,
+            "recall": 0.5102664919178681,
+            "valor_neto_usd": 7357.4,
+            "valor_neto_mes_usd": 216.4
+          },
+          "Logistica": {
+            "alertas": 6591,
+            "alertas_mes": 193.9,
+            "vp": 1370,
+            "fp": 5221,
+            "fn": 919,
+            "precision": 0.2078592019420422,
+            "recall": 0.598514635211883,
+            "valor_neto_usd": 11136.1,
+            "valor_neto_mes_usd": 327.5
+          },
+          "HistGradientBoosting": {
+            "alertas": 6591,
+            "alertas_mes": 193.9,
+            "vp": 1529,
+            "fp": 5062,
+            "fn": 760,
+            "precision": 0.23198300713093611,
+            "recall": 0.6679772826561817,
+            "valor_neto_usd": 14110.4,
+            "valor_neto_mes_usd": 415.0
+          },
+          "Ensamble": {
+            "alertas": 6591,
+            "alertas_mes": 193.9,
+            "vp": 2029,
+            "fp": 4562,
+            "fn": 260,
+            "precision": 0.30784402973752084,
+            "recall": 0.8864132809086938,
+            "valor_neto_usd": 23463.7,
+            "valor_neto_mes_usd": 690.1
+          }
+        },
+        "250": {
+          "Regla": {
+            "alertas": 8191,
+            "alertas_mes": 240.9,
+            "vp": 1245,
+            "fp": 6946,
+            "fn": 1044,
+            "precision": 0.15199609327310462,
+            "recall": 0.5439056356487549,
+            "valor_neto_usd": 5279.8,
+            "valor_neto_mes_usd": 155.3
+          },
+          "Logistica": {
+            "alertas": 8191,
+            "alertas_mes": 240.9,
+            "vp": 1500,
+            "fp": 6691,
+            "fn": 789,
+            "precision": 0.18312782322060797,
+            "recall": 0.6553079947575361,
+            "valor_neto_usd": 10050.0,
+            "valor_neto_mes_usd": 295.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 8191,
+            "alertas_mes": 240.9,
+            "vp": 1659,
+            "fp": 6532,
+            "fn": 630,
+            "precision": 0.20253937248199244,
+            "recall": 0.7247706422018348,
+            "valor_neto_usd": 13024.3,
+            "valor_neto_mes_usd": 383.1
+          },
+          "Ensamble": {
+            "alertas": 8191,
+            "alertas_mes": 240.9,
+            "vp": 2140,
+            "fp": 6051,
+            "fn": 149,
+            "precision": 0.2612623611280674,
+            "recall": 0.9349060725207514,
+            "valor_neto_usd": 22022.1,
+            "valor_neto_mes_usd": 647.7
+          }
+        },
+        "300": {
+          "Regla": {
+            "alertas": 9791,
+            "alertas_mes": 288.0,
+            "vp": 1302,
+            "fp": 8489,
+            "fn": 987,
+            "precision": 0.13297926667347565,
+            "recall": 0.5688073394495413,
+            "valor_neto_usd": 2828.2,
+            "valor_neto_mes_usd": 83.2
+          },
+          "Logistica": {
+            "alertas": 9791,
+            "alertas_mes": 288.0,
+            "vp": 1597,
+            "fp": 8194,
+            "fn": 692,
+            "precision": 0.16310897763251966,
+            "recall": 0.6976845784185234,
+            "valor_neto_usd": 8346.6,
+            "valor_neto_mes_usd": 245.5
+          },
+          "HistGradientBoosting": {
+            "alertas": 9791,
+            "alertas_mes": 288.0,
+            "vp": 1781,
+            "fp": 8010,
+            "fn": 508,
+            "precision": 0.18190174650188948,
+            "recall": 0.7780690257754478,
+            "valor_neto_usd": 11788.6,
+            "valor_neto_mes_usd": 346.7
+          },
+          "Ensamble": {
+            "alertas": 9791,
+            "alertas_mes": 288.0,
+            "vp": 2204,
+            "fp": 7587,
+            "fn": 85,
+            "precision": 0.225104687978756,
+            "recall": 0.962865880297073,
+            "valor_neto_usd": 19701.4,
+            "valor_neto_mes_usd": 579.5
+          }
+        },
+        "350": {
+          "Regla": {
+            "alertas": 11355,
+            "alertas_mes": 334.0,
+            "vp": 1367,
+            "fp": 9988,
+            "fn": 922,
+            "precision": 0.12038749449581682,
+            "recall": 0.5972040192223679,
+            "valor_neto_usd": 605.3,
+            "valor_neto_mes_usd": 17.8
+          },
+          "Logistica": {
+            "alertas": 11355,
+            "alertas_mes": 334.0,
+            "vp": 1672,
+            "fp": 9683,
+            "fn": 617,
+            "precision": 0.1472479084103919,
+            "recall": 0.7304499781564002,
+            "valor_neto_usd": 6310.8,
+            "valor_neto_mes_usd": 185.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 11355,
+            "alertas_mes": 334.0,
+            "vp": 1880,
+            "fp": 9475,
+            "fn": 409,
+            "precision": 0.16556583003082342,
+            "recall": 0.8213193534294452,
+            "valor_neto_usd": 10201.7,
+            "valor_neto_mes_usd": 300.1
+          },
+          "Ensamble": {
+            "alertas": 11355,
+            "alertas_mes": 334.0,
+            "vp": 2242,
+            "fp": 9113,
+            "fn": 47,
+            "precision": 0.1974460590048437,
+            "recall": 0.9794670161642639,
+            "valor_neto_usd": 16973.4,
+            "valor_neto_mes_usd": 499.2
+          }
+        },
+        "400": {
+          "Regla": {
+            "alertas": 12905,
+            "alertas_mes": 379.6,
+            "vp": 1419,
+            "fp": 11486,
+            "fn": 870,
+            "precision": 0.10995738086013174,
+            "recall": 0.6199213630406291,
+            "valor_neto_usd": -1830.0,
+            "valor_neto_mes_usd": -53.8
+          },
+          "Logistica": {
+            "alertas": 12905,
+            "alertas_mes": 379.6,
+            "vp": 1726,
+            "fp": 11179,
+            "fn": 563,
+            "precision": 0.13374660984114684,
+            "recall": 0.7540410659676715,
+            "valor_neto_usd": 3912.9,
+            "valor_neto_mes_usd": 115.1
+          },
+          "HistGradientBoosting": {
+            "alertas": 12905,
+            "alertas_mes": 379.6,
+            "vp": 1977,
+            "fp": 10928,
+            "fn": 312,
+            "precision": 0.1531964354901201,
+            "recall": 0.8636959370904325,
+            "valor_neto_usd": 8608.2,
+            "valor_neto_mes_usd": 253.2
+          },
+          "Ensamble": {
+            "alertas": 12905,
+            "alertas_mes": 379.6,
+            "vp": 2260,
+            "fp": 10645,
+            "fn": 29,
+            "precision": 0.17512592018597442,
+            "recall": 0.9873307121013543,
+            "valor_neto_usd": 13902.2,
+            "valor_neto_mes_usd": 408.9
+          }
+        },
+        "450": {
+          "Regla": {
+            "alertas": 14453,
+            "alertas_mes": 425.1,
+            "vp": 1456,
+            "fp": 12997,
+            "fn": 833,
+            "precision": 0.10074033072718466,
+            "recall": 0.636085626911315,
+            "valor_neto_usd": -4541.5,
+            "valor_neto_mes_usd": -133.6
+          },
+          "Logistica": {
+            "alertas": 14453,
+            "alertas_mes": 425.1,
+            "vp": 1792,
+            "fp": 12661,
+            "fn": 497,
+            "precision": 0.12398809935653497,
+            "recall": 0.7828746177370031,
+            "valor_neto_usd": 1743.9,
+            "valor_neto_mes_usd": 51.3
+          },
+          "HistGradientBoosting": {
+            "alertas": 14453,
+            "alertas_mes": 425.1,
+            "vp": 2036,
+            "fp": 12417,
+            "fn": 253,
+            "precision": 0.14087040752784888,
+            "recall": 0.8894713848842289,
+            "valor_neto_usd": 6308.3,
+            "valor_neto_mes_usd": 185.5
+          },
+          "Ensamble": {
+            "alertas": 14453,
+            "alertas_mes": 425.1,
+            "vp": 2269,
+            "fp": 12184,
+            "fn": 20,
+            "precision": 0.15699162803570194,
+            "recall": 0.9912625600698995,
+            "valor_neto_usd": 10666.9,
+            "valor_neto_mes_usd": 313.7
+          }
+        },
+        "500": {
+          "Regla": {
+            "alertas": 15953,
+            "alertas_mes": 469.2,
+            "vp": 1491,
+            "fp": 14462,
+            "fn": 798,
+            "precision": 0.09346204475647214,
+            "recall": 0.6513761467889908,
+            "valor_neto_usd": -7184.8,
+            "valor_neto_mes_usd": -211.3
+          },
+          "Logistica": {
+            "alertas": 15953,
+            "alertas_mes": 469.2,
+            "vp": 1845,
+            "fp": 14108,
+            "fn": 444,
+            "precision": 0.11565222842098664,
+            "recall": 0.8060288335517694,
+            "valor_neto_usd": -562.7,
+            "valor_neto_mes_usd": -16.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 15953,
+            "alertas_mes": 469.2,
+            "vp": 2087,
+            "fp": 13866,
+            "fn": 202,
+            "precision": 0.13082178900520278,
+            "recall": 0.9117518567059851,
+            "valor_neto_usd": 3964.2,
+            "valor_neto_mes_usd": 116.6
+          },
+          "Ensamble": {
+            "alertas": 15953,
+            "alertas_mes": 469.2,
+            "vp": 2275,
+            "fp": 13678,
+            "fn": 14,
+            "precision": 0.14260640631856078,
+            "recall": 0.9938837920489296,
+            "valor_neto_usd": 7481.1,
+            "valor_neto_mes_usd": 220.0
+          }
+        },
+        "550": {
+          "Regla": {
+            "alertas": 17453,
+            "alertas_mes": 513.3,
+            "vp": 1521,
+            "fp": 15932,
+            "fn": 768,
+            "precision": 0.08714834125938234,
+            "recall": 0.6644823066841415,
+            "valor_neto_usd": -9921.7,
+            "valor_neto_mes_usd": -291.8
+          },
+          "Logistica": {
+            "alertas": 17453,
+            "alertas_mes": 513.3,
+            "vp": 1880,
+            "fp": 15573,
+            "fn": 409,
+            "precision": 0.10771787085314846,
+            "recall": 0.8213193534294452,
+            "valor_neto_usd": -3206.1,
+            "valor_neto_mes_usd": -94.3
+          },
+          "HistGradientBoosting": {
+            "alertas": 17453,
+            "alertas_mes": 513.3,
+            "vp": 2123,
+            "fp": 15330,
+            "fn": 166,
+            "precision": 0.12164097862831605,
+            "recall": 0.9274792485801661,
+            "valor_neto_usd": 1339.6,
+            "valor_neto_mes_usd": 39.4
+          },
+          "Ensamble": {
+            "alertas": 17453,
+            "alertas_mes": 513.3,
+            "vp": 2279,
+            "fp": 15174,
+            "fn": 10,
+            "precision": 0.13057927003953476,
+            "recall": 0.9956312800349497,
+            "valor_neto_usd": 4257.8,
+            "valor_neto_mes_usd": 125.2
+          }
+        },
+        "600": {
+          "Regla": {
+            "alertas": 18953,
+            "alertas_mes": 557.4,
+            "vp": 1560,
+            "fp": 17393,
+            "fn": 729,
+            "precision": 0.08230886930828893,
+            "recall": 0.6815203145478375,
+            "valor_neto_usd": -12490.2,
+            "valor_neto_mes_usd": -367.4
+          },
+          "Logistica": {
+            "alertas": 18953,
+            "alertas_mes": 557.4,
+            "vp": 1910,
+            "fp": 17043,
+            "fn": 379,
+            "precision": 0.10077560280694349,
+            "recall": 0.8344255133245959,
+            "valor_neto_usd": -5943.0,
+            "valor_neto_mes_usd": -174.8
+          },
+          "HistGradientBoosting": {
+            "alertas": 18953,
+            "alertas_mes": 557.4,
+            "vp": 2157,
+            "fp": 16796,
+            "fn": 132,
+            "precision": 0.11380784044742258,
+            "recall": 0.9423328964613368,
+            "valor_neto_usd": -1322.5,
+            "valor_neto_mes_usd": -38.9
+          },
+          "Ensamble": {
+            "alertas": 18953,
+            "alertas_mes": 557.4,
+            "vp": 2283,
+            "fp": 16670,
+            "fn": 6,
+            "precision": 0.12045586450693821,
+            "recall": 0.9973787680209698,
+            "valor_neto_usd": 1034.6,
+            "valor_neto_mes_usd": 30.4
+          }
+        },
+        "650": {
+          "Regla": {
+            "alertas": 20453,
+            "alertas_mes": 601.6,
+            "vp": 1593,
+            "fp": 18860,
+            "fn": 696,
+            "precision": 0.0778858847112893,
+            "recall": 0.6959370904325033,
+            "valor_neto_usd": -15171.0,
+            "valor_neto_mes_usd": -446.2
+          },
+          "Logistica": {
+            "alertas": 20453,
+            "alertas_mes": 601.6,
+            "vp": 1956,
+            "fp": 18497,
+            "fn": 333,
+            "precision": 0.09563389233853224,
+            "recall": 0.854521625163827,
+            "valor_neto_usd": -8380.5,
+            "valor_neto_mes_usd": -246.5
+          },
+          "HistGradientBoosting": {
+            "alertas": 20453,
+            "alertas_mes": 601.6,
+            "vp": 2185,
+            "fp": 18268,
+            "fn": 104,
+            "precision": 0.1068302938444238,
+            "recall": 0.9545653123634775,
+            "valor_neto_usd": -4096.8,
+            "valor_neto_mes_usd": -120.5
+          },
+          "Ensamble": {
+            "alertas": 20453,
+            "alertas_mes": 601.6,
+            "vp": 2285,
+            "fp": 18168,
+            "fn": 4,
+            "precision": 0.11171955214393976,
+            "recall": 0.9982525120139799,
+            "valor_neto_usd": -2226.1,
+            "valor_neto_mes_usd": -65.5
+          }
+        },
+        "700": {
+          "Regla": {
+            "alertas": 21953,
+            "alertas_mes": 645.7,
+            "vp": 1614,
+            "fp": 20339,
+            "fn": 675,
+            "precision": 0.07352070332073066,
+            "recall": 0.7051114023591087,
+            "valor_neto_usd": -18076.2,
+            "valor_neto_mes_usd": -531.7
+          },
+          "Logistica": {
+            "alertas": 21953,
+            "alertas_mes": 645.7,
+            "vp": 1990,
+            "fp": 19963,
+            "fn": 299,
+            "precision": 0.0906482029790917,
+            "recall": 0.8693752730449978,
+            "valor_neto_usd": -11042.6,
+            "valor_neto_mes_usd": -324.8
+          },
+          "HistGradientBoosting": {
+            "alertas": 21953,
+            "alertas_mes": 645.7,
+            "vp": 2211,
+            "fp": 19742,
+            "fn": 78,
+            "precision": 0.10071516421445816,
+            "recall": 0.9659239842726082,
+            "valor_neto_usd": -6908.5,
+            "valor_neto_mes_usd": -203.2
+          },
+          "Ensamble": {
+            "alertas": 21953,
+            "alertas_mes": 645.7,
+            "vp": 2286,
+            "fp": 19667,
+            "fn": 3,
+            "precision": 0.10413155377397167,
+            "recall": 0.9986893840104849,
+            "valor_neto_usd": -5505.5,
+            "valor_neto_mes_usd": -161.9
+          }
+        },
+        "175": {
+          "Regla": {
+            "alertas": 5785,
+            "alertas_mes": 170.1,
+            "vp": 1113,
+            "fp": 4672,
+            "fn": 1176,
+            "precision": 0.19239412273120138,
+            "recall": 0.48623853211009177,
+            "valor_neto_usd": 8100.7,
+            "valor_neto_mes_usd": 238.3
+          },
+          "Logistica": {
+            "alertas": 5785,
+            "alertas_mes": 170.1,
+            "vp": 1286,
+            "fp": 4499,
+            "fn": 1003,
+            "precision": 0.2222990492653414,
+            "recall": 0.561817387505461,
+            "valor_neto_usd": 11336.9,
+            "valor_neto_mes_usd": 333.4
+          },
+          "HistGradientBoosting": {
+            "alertas": 5785,
+            "alertas_mes": 170.1,
+            "vp": 1433,
+            "fp": 4352,
+            "fn": 856,
+            "precision": 0.24770959377700952,
+            "recall": 0.6260375709916994,
+            "valor_neto_usd": 14086.8,
+            "valor_neto_mes_usd": 414.3
+          },
+          "Ensamble": {
+            "alertas": 5785,
+            "alertas_mes": 170.1,
+            "vp": 1936,
+            "fp": 3849,
+            "fn": 353,
+            "precision": 0.33465859982713914,
+            "recall": 0.8457841852337266,
+            "valor_neto_usd": 23496.1,
+            "valor_neto_mes_usd": 691.1
+          }
+        }
+      }
+    },
+    "validacion": {
+      "meses": 6,
+      "filas": 38360,
+      "positivos": 799,
+      "prevalencia": 0.020828988529718456,
+      "regla_fija": {
+        "alertas": 987,
+        "alertas_mes": 164.5,
+        "vp": 244,
+        "fp": 743,
+        "fn": 555,
+        "precision": 0.24721377912867273,
+        "recall": 0.3053817271589487,
+        "valor_neto_usd": 2394.2,
+        "valor_neto_mes_usd": 399.0
+      },
+      "auc": {
+        "Regla": 0.8093124379170085,
+        "Logistica": 0.9070351610608279,
+        "HistGradientBoosting": 0.9084369858905191,
+        "Ensamble": 0.910757083371333
+      },
+      "pr_auc": {
+        "Regla": 0.2034695663668957,
+        "Logistica": 0.24162219584528793,
+        "HistGradientBoosting": 0.2531080292873346,
+        "Ensamble": 0.27215027367953637
+      },
+      "curva": {
+        "50": {
+          "Regla": {
+            "alertas": 300,
+            "alertas_mes": 50.0,
+            "vp": 129,
+            "fp": 171,
+            "fn": 670,
+            "precision": 0.43,
+            "recall": 0.16145181476846057,
+            "valor_neto_usd": 1753.5,
+            "valor_neto_mes_usd": 292.3
+          },
+          "Logistica": {
+            "alertas": 300,
+            "alertas_mes": 50.0,
+            "vp": 122,
+            "fp": 178,
+            "fn": 677,
+            "precision": 0.4066666666666667,
+            "recall": 0.15269086357947434,
+            "valor_neto_usd": 1622.6,
+            "valor_neto_mes_usd": 270.4
+          },
+          "HistGradientBoosting": {
+            "alertas": 300,
+            "alertas_mes": 50.0,
+            "vp": 129,
+            "fp": 171,
+            "fn": 670,
+            "precision": 0.43,
+            "recall": 0.16145181476846057,
+            "valor_neto_usd": 1753.5,
+            "valor_neto_mes_usd": 292.3
+          },
+          "Ensamble": {
+            "alertas": 300,
+            "alertas_mes": 50.0,
+            "vp": 141,
+            "fp": 159,
+            "fn": 658,
+            "precision": 0.47,
+            "recall": 0.17647058823529413,
+            "valor_neto_usd": 1978.0,
+            "valor_neto_mes_usd": 329.7
+          }
+        },
+        "100": {
+          "Regla": {
+            "alertas": 600,
+            "alertas_mes": 100.0,
+            "vp": 199,
+            "fp": 401,
+            "fn": 600,
+            "precision": 0.33166666666666667,
+            "recall": 0.2490613266583229,
+            "valor_neto_usd": 2403.4,
+            "valor_neto_mes_usd": 400.6
+          },
+          "Logistica": {
+            "alertas": 600,
+            "alertas_mes": 100.0,
+            "vp": 209,
+            "fp": 391,
+            "fn": 590,
+            "precision": 0.34833333333333333,
+            "recall": 0.2615769712140175,
+            "valor_neto_usd": 2590.4,
+            "valor_neto_mes_usd": 431.7
+          },
+          "HistGradientBoosting": {
+            "alertas": 600,
+            "alertas_mes": 100.0,
+            "vp": 227,
+            "fp": 373,
+            "fn": 572,
+            "precision": 0.37833333333333335,
+            "recall": 0.28410513141426785,
+            "valor_neto_usd": 2927.1,
+            "valor_neto_mes_usd": 487.9
+          },
+          "Ensamble": {
+            "alertas": 600,
+            "alertas_mes": 100.0,
+            "vp": 235,
+            "fp": 365,
+            "fn": 564,
+            "precision": 0.39166666666666666,
+            "recall": 0.29411764705882354,
+            "valor_neto_usd": 3076.8,
+            "valor_neto_mes_usd": 512.8
+          }
+        },
+        "150": {
+          "Regla": {
+            "alertas": 900,
+            "alertas_mes": 150.0,
+            "vp": 237,
+            "fp": 663,
+            "fn": 562,
+            "precision": 0.2633333333333333,
+            "recall": 0.29662077596996245,
+            "valor_neto_usd": 2454.6,
+            "valor_neto_mes_usd": 409.1
+          },
+          "Logistica": {
+            "alertas": 900,
+            "alertas_mes": 150.0,
+            "vp": 270,
+            "fp": 630,
+            "fn": 529,
+            "precision": 0.3,
+            "recall": 0.3379224030037547,
+            "valor_neto_usd": 3071.9,
+            "valor_neto_mes_usd": 512.0
+          },
+          "HistGradientBoosting": {
+            "alertas": 900,
+            "alertas_mes": 150.0,
+            "vp": 283,
+            "fp": 617,
+            "fn": 516,
+            "precision": 0.31444444444444447,
+            "recall": 0.3541927409261577,
+            "valor_neto_usd": 3315.1,
+            "valor_neto_mes_usd": 552.5
+          },
+          "Ensamble": {
+            "alertas": 900,
+            "alertas_mes": 150.0,
+            "vp": 285,
+            "fp": 615,
+            "fn": 514,
+            "precision": 0.31666666666666665,
+            "recall": 0.3566958698372966,
+            "valor_neto_usd": 3352.5,
+            "valor_neto_mes_usd": 558.7
+          }
+        },
+        "200": {
+          "Regla": {
+            "alertas": 1200,
+            "alertas_mes": 200.0,
+            "vp": 275,
+            "fp": 925,
+            "fn": 524,
+            "precision": 0.22916666666666666,
+            "recall": 0.344180225281602,
+            "valor_neto_usd": 2505.8,
+            "valor_neto_mes_usd": 417.6
+          },
+          "Logistica": {
+            "alertas": 1200,
+            "alertas_mes": 200.0,
+            "vp": 323,
+            "fp": 877,
+            "fn": 476,
+            "precision": 0.26916666666666667,
+            "recall": 0.40425531914893614,
+            "valor_neto_usd": 3403.7,
+            "valor_neto_mes_usd": 567.3
+          },
+          "HistGradientBoosting": {
+            "alertas": 1200,
+            "alertas_mes": 200.0,
+            "vp": 326,
+            "fp": 874,
+            "fn": 473,
+            "precision": 0.27166666666666667,
+            "recall": 0.40801001251564456,
+            "valor_neto_usd": 3459.8,
+            "valor_neto_mes_usd": 576.6
+          },
+          "Ensamble": {
+            "alertas": 1200,
+            "alertas_mes": 200.0,
+            "vp": 330,
+            "fp": 870,
+            "fn": 469,
+            "precision": 0.275,
+            "recall": 0.4130162703379224,
+            "valor_neto_usd": 3534.7,
+            "valor_neto_mes_usd": 589.1
+          }
+        },
+        "250": {
+          "Regla": {
+            "alertas": 1500,
+            "alertas_mes": 250.0,
+            "vp": 325,
+            "fp": 1175,
+            "fn": 474,
+            "precision": 0.21666666666666667,
+            "recall": 0.4067584480600751,
+            "valor_neto_usd": 2781.5,
+            "valor_neto_mes_usd": 463.6
+          },
+          "Logistica": {
+            "alertas": 1500,
+            "alertas_mes": 250.0,
+            "vp": 372,
+            "fp": 1128,
+            "fn": 427,
+            "precision": 0.248,
+            "recall": 0.4655819774718398,
+            "valor_neto_usd": 3660.7,
+            "valor_neto_mes_usd": 610.1
+          },
+          "HistGradientBoosting": {
+            "alertas": 1500,
+            "alertas_mes": 250.0,
+            "vp": 361,
+            "fp": 1139,
+            "fn": 438,
+            "precision": 0.24066666666666667,
+            "recall": 0.4518147684605757,
+            "valor_neto_usd": 3455.0,
+            "valor_neto_mes_usd": 575.8
+          },
+          "Ensamble": {
+            "alertas": 1500,
+            "alertas_mes": 250.0,
+            "vp": 368,
+            "fp": 1132,
+            "fn": 431,
+            "precision": 0.24533333333333332,
+            "recall": 0.46057571964956195,
+            "valor_neto_usd": 3585.9,
+            "valor_neto_mes_usd": 597.7
+          }
+        },
+        "300": {
+          "Regla": {
+            "alertas": 1800,
+            "alertas_mes": 300.0,
+            "vp": 352,
+            "fp": 1448,
+            "fn": 447,
+            "precision": 0.19555555555555557,
+            "recall": 0.4405506883604506,
+            "valor_neto_usd": 2627.0,
+            "valor_neto_mes_usd": 437.8
+          },
+          "Logistica": {
+            "alertas": 1800,
+            "alertas_mes": 300.0,
+            "vp": 401,
+            "fp": 1399,
+            "fn": 398,
+            "precision": 0.22277777777777777,
+            "recall": 0.5018773466833542,
+            "valor_neto_usd": 3543.6,
+            "valor_neto_mes_usd": 590.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 1800,
+            "alertas_mes": 300.0,
+            "vp": 404,
+            "fp": 1396,
+            "fn": 395,
+            "precision": 0.22444444444444445,
+            "recall": 0.5056320400500626,
+            "valor_neto_usd": 3599.7,
+            "valor_neto_mes_usd": 600.0
+          },
+          "Ensamble": {
+            "alertas": 1800,
+            "alertas_mes": 300.0,
+            "vp": 403,
+            "fp": 1397,
+            "fn": 396,
+            "precision": 0.2238888888888889,
+            "recall": 0.5043804755944932,
+            "valor_neto_usd": 3581.0,
+            "valor_neto_mes_usd": 596.8
+          }
+        },
+        "350": {
+          "Regla": {
+            "alertas": 2100,
+            "alertas_mes": 350.0,
+            "vp": 362,
+            "fp": 1738,
+            "fn": 437,
+            "precision": 0.17238095238095238,
+            "recall": 0.4530663329161452,
+            "valor_neto_usd": 2154.4,
+            "valor_neto_mes_usd": 359.1
+          },
+          "Logistica": {
+            "alertas": 2100,
+            "alertas_mes": 350.0,
+            "vp": 434,
+            "fp": 1666,
+            "fn": 365,
+            "precision": 0.20666666666666667,
+            "recall": 0.5431789737171464,
+            "valor_neto_usd": 3501.3,
+            "valor_neto_mes_usd": 583.5
+          },
+          "HistGradientBoosting": {
+            "alertas": 2100,
+            "alertas_mes": 350.0,
+            "vp": 432,
+            "fp": 1668,
+            "fn": 367,
+            "precision": 0.2057142857142857,
+            "recall": 0.5406758448060075,
+            "valor_neto_usd": 3463.9,
+            "valor_neto_mes_usd": 577.3
+          },
+          "Ensamble": {
+            "alertas": 2100,
+            "alertas_mes": 350.0,
+            "vp": 444,
+            "fp": 1656,
+            "fn": 355,
+            "precision": 0.21142857142857144,
+            "recall": 0.5556946182728411,
+            "valor_neto_usd": 3688.4,
+            "valor_neto_mes_usd": 614.7
+          }
+        },
+        "400": {
+          "Regla": {
+            "alertas": 2400,
+            "alertas_mes": 400.0,
+            "vp": 375,
+            "fp": 2025,
+            "fn": 424,
+            "precision": 0.15625,
+            "recall": 0.4693366708385482,
+            "valor_neto_usd": 1738.0,
+            "valor_neto_mes_usd": 289.7
+          },
+          "Logistica": {
+            "alertas": 2400,
+            "alertas_mes": 400.0,
+            "vp": 459,
+            "fp": 1941,
+            "fn": 340,
+            "precision": 0.19125,
+            "recall": 0.574468085106383,
+            "valor_neto_usd": 3309.3,
+            "valor_neto_mes_usd": 551.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 2400,
+            "alertas_mes": 400.0,
+            "vp": 463,
+            "fp": 1937,
+            "fn": 336,
+            "precision": 0.19291666666666665,
+            "recall": 0.5794743429286608,
+            "valor_neto_usd": 3384.2,
+            "valor_neto_mes_usd": 564.0
+          },
+          "Ensamble": {
+            "alertas": 2400,
+            "alertas_mes": 400.0,
+            "vp": 471,
+            "fp": 1929,
+            "fn": 328,
+            "precision": 0.19625,
+            "recall": 0.5894868585732165,
+            "valor_neto_usd": 3533.8,
+            "valor_neto_mes_usd": 589.0
+          }
+        },
+        "450": {
+          "Regla": {
+            "alertas": 2700,
+            "alertas_mes": 450.0,
+            "vp": 389,
+            "fp": 2311,
+            "fn": 410,
+            "precision": 0.14407407407407408,
+            "recall": 0.48685857321652065,
+            "valor_neto_usd": 1340.3,
+            "valor_neto_mes_usd": 223.4
+          },
+          "Logistica": {
+            "alertas": 2700,
+            "alertas_mes": 450.0,
+            "vp": 481,
+            "fp": 2219,
+            "fn": 318,
+            "precision": 0.17814814814814814,
+            "recall": 0.6020025031289111,
+            "valor_neto_usd": 3061.3,
+            "valor_neto_mes_usd": 510.2
+          },
+          "HistGradientBoosting": {
+            "alertas": 2700,
+            "alertas_mes": 450.0,
+            "vp": 496,
+            "fp": 2204,
+            "fn": 303,
+            "precision": 0.1837037037037037,
+            "recall": 0.6207759699624531,
+            "valor_neto_usd": 3341.9,
+            "valor_neto_mes_usd": 557.0
+          },
+          "Ensamble": {
+            "alertas": 2700,
+            "alertas_mes": 450.0,
+            "vp": 500,
+            "fp": 2200,
+            "fn": 299,
+            "precision": 0.18518518518518517,
+            "recall": 0.6257822277847309,
+            "valor_neto_usd": 3416.7,
+            "valor_neto_mes_usd": 569.4
+          }
+        },
+        "500": {
+          "Regla": {
+            "alertas": 3000,
+            "alertas_mes": 500.0,
+            "vp": 403,
+            "fp": 2597,
+            "fn": 396,
+            "precision": 0.13433333333333333,
+            "recall": 0.5043804755944932,
+            "valor_neto_usd": 942.6,
+            "valor_neto_mes_usd": 157.1
+          },
+          "Logistica": {
+            "alertas": 3000,
+            "alertas_mes": 500.0,
+            "vp": 502,
+            "fp": 2498,
+            "fn": 297,
+            "precision": 0.16733333333333333,
+            "recall": 0.6282853566958698,
+            "valor_neto_usd": 2794.5,
+            "valor_neto_mes_usd": 465.7
+          },
+          "HistGradientBoosting": {
+            "alertas": 3000,
+            "alertas_mes": 500.0,
+            "vp": 517,
+            "fp": 2483,
+            "fn": 282,
+            "precision": 0.17233333333333334,
+            "recall": 0.6470588235294118,
+            "valor_neto_usd": 3075.1,
+            "valor_neto_mes_usd": 512.5
+          },
+          "Ensamble": {
+            "alertas": 3000,
+            "alertas_mes": 500.0,
+            "vp": 515,
+            "fp": 2485,
+            "fn": 284,
+            "precision": 0.17166666666666666,
+            "recall": 0.6445556946182729,
+            "valor_neto_usd": 3037.7,
+            "valor_neto_mes_usd": 506.3
+          }
+        },
+        "550": {
+          "Regla": {
+            "alertas": 3300,
+            "alertas_mes": 550.0,
+            "vp": 415,
+            "fp": 2885,
+            "fn": 384,
+            "precision": 0.12575757575757576,
+            "recall": 0.5193992490613266,
+            "valor_neto_usd": 507.4,
+            "valor_neto_mes_usd": 84.6
+          },
+          "Logistica": {
+            "alertas": 3300,
+            "alertas_mes": 550.0,
+            "vp": 526,
+            "fp": 2774,
+            "fn": 273,
+            "precision": 0.1593939393939394,
+            "recall": 0.6583229036295369,
+            "valor_neto_usd": 2583.8,
+            "valor_neto_mes_usd": 430.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 3300,
+            "alertas_mes": 550.0,
+            "vp": 535,
+            "fp": 2765,
+            "fn": 264,
+            "precision": 0.1621212121212121,
+            "recall": 0.6695869837296621,
+            "valor_neto_usd": 2752.2,
+            "valor_neto_mes_usd": 458.7
+          },
+          "Ensamble": {
+            "alertas": 3300,
+            "alertas_mes": 550.0,
+            "vp": 542,
+            "fp": 2758,
+            "fn": 257,
+            "precision": 0.16424242424242425,
+            "recall": 0.6783479349186483,
+            "valor_neto_usd": 2883.1,
+            "valor_neto_mes_usd": 480.5
+          }
+        },
+        "600": {
+          "Regla": {
+            "alertas": 3600,
+            "alertas_mes": 600.0,
+            "vp": 430,
+            "fp": 3170,
+            "fn": 369,
+            "precision": 0.11944444444444445,
+            "recall": 0.5381727158948686,
+            "valor_neto_usd": 128.4,
+            "valor_neto_mes_usd": 21.4
+          },
+          "Logistica": {
+            "alertas": 3600,
+            "alertas_mes": 600.0,
+            "vp": 546,
+            "fp": 3054,
+            "fn": 253,
+            "precision": 0.15166666666666667,
+            "recall": 0.6833541927409261,
+            "valor_neto_usd": 2298.3,
+            "valor_neto_mes_usd": 383.1
+          },
+          "HistGradientBoosting": {
+            "alertas": 3600,
+            "alertas_mes": 600.0,
+            "vp": 552,
+            "fp": 3048,
+            "fn": 247,
+            "precision": 0.15333333333333332,
+            "recall": 0.690863579474343,
+            "valor_neto_usd": 2410.6,
+            "valor_neto_mes_usd": 401.8
+          },
+          "Ensamble": {
+            "alertas": 3600,
+            "alertas_mes": 600.0,
+            "vp": 571,
+            "fp": 3029,
+            "fn": 228,
+            "precision": 0.15861111111111112,
+            "recall": 0.7146433041301627,
+            "valor_neto_usd": 2766.0,
+            "valor_neto_mes_usd": 461.0
+          }
+        },
+        "650": {
+          "Regla": {
+            "alertas": 3900,
+            "alertas_mes": 650.0,
+            "vp": 453,
+            "fp": 3447,
+            "fn": 346,
+            "precision": 0.11615384615384615,
+            "recall": 0.5669586983729662,
+            "valor_neto_usd": -101.0,
+            "valor_neto_mes_usd": -16.8
+          },
+          "Logistica": {
+            "alertas": 3900,
+            "alertas_mes": 650.0,
+            "vp": 561,
+            "fp": 3339,
+            "fn": 238,
+            "precision": 0.14384615384615385,
+            "recall": 0.7021276595744681,
+            "valor_neto_usd": 1919.3,
+            "valor_neto_mes_usd": 319.9
+          },
+          "HistGradientBoosting": {
+            "alertas": 3900,
+            "alertas_mes": 650.0,
+            "vp": 573,
+            "fp": 3327,
+            "fn": 226,
+            "precision": 0.14692307692307693,
+            "recall": 0.7171464330413017,
+            "valor_neto_usd": 2143.8,
+            "valor_neto_mes_usd": 357.3
+          },
+          "Ensamble": {
+            "alertas": 3900,
+            "alertas_mes": 650.0,
+            "vp": 583,
+            "fp": 3317,
+            "fn": 216,
+            "precision": 0.1494871794871795,
+            "recall": 0.7296620775969962,
+            "valor_neto_usd": 2330.9,
+            "valor_neto_mes_usd": 388.5
+          }
+        },
+        "700": {
+          "Regla": {
+            "alertas": 4200,
+            "alertas_mes": 700.0,
+            "vp": 461,
+            "fp": 3739,
+            "fn": 338,
+            "precision": 0.10976190476190475,
+            "recall": 0.5769712140175219,
+            "valor_neto_usd": -610.9,
+            "valor_neto_mes_usd": -101.8
+          },
+          "Logistica": {
+            "alertas": 4200,
+            "alertas_mes": 700.0,
+            "vp": 577,
+            "fp": 3623,
+            "fn": 222,
+            "precision": 0.13738095238095238,
+            "recall": 0.7221526908635795,
+            "valor_neto_usd": 1559.0,
+            "valor_neto_mes_usd": 259.8
+          },
+          "HistGradientBoosting": {
+            "alertas": 4200,
+            "alertas_mes": 700.0,
+            "vp": 586,
+            "fp": 3614,
+            "fn": 213,
+            "precision": 0.13952380952380952,
+            "recall": 0.7334167709637046,
+            "valor_neto_usd": 1727.4,
+            "valor_neto_mes_usd": 287.9
+          },
+          "Ensamble": {
+            "alertas": 4200,
+            "alertas_mes": 700.0,
+            "vp": 598,
+            "fp": 3602,
+            "fn": 201,
+            "precision": 0.14238095238095239,
+            "recall": 0.7484355444305382,
+            "valor_neto_usd": 1951.8,
+            "valor_neto_mes_usd": 325.3
+          }
+        },
+        "175": {
+          "Regla": {
+            "alertas": 1050,
+            "alertas_mes": 175.0,
+            "vp": 256,
+            "fp": 794,
+            "fn": 543,
+            "precision": 0.2438095238095238,
+            "recall": 0.32040050062578224,
+            "valor_neto_usd": 2480.2,
+            "valor_neto_mes_usd": 413.4
+          },
+          "Logistica": {
+            "alertas": 1050,
+            "alertas_mes": 175.0,
+            "vp": 295,
+            "fp": 755,
+            "fn": 504,
+            "precision": 0.28095238095238095,
+            "recall": 0.3692115143929912,
+            "valor_neto_usd": 3209.8,
+            "valor_neto_mes_usd": 535.0
+          },
+          "HistGradientBoosting": {
+            "alertas": 1050,
+            "alertas_mes": 175.0,
+            "vp": 305,
+            "fp": 745,
+            "fn": 494,
+            "precision": 0.2904761904761905,
+            "recall": 0.38172715894868586,
+            "valor_neto_usd": 3396.8,
+            "valor_neto_mes_usd": 566.1
+          },
+          "Ensamble": {
+            "alertas": 1050,
+            "alertas_mes": 175.0,
+            "vp": 312,
+            "fp": 738,
+            "fn": 487,
+            "precision": 0.29714285714285715,
+            "recall": 0.3904881101376721,
+            "valor_neto_usd": 3527.8,
+            "valor_neto_mes_usd": 588.0
+          }
+        }
+      }
+    },
+    "test": {
+      "meses": 5,
+      "filas": 28070,
+      "positivos": 2481,
+      "prevalencia": 0.08838617741360884,
+      "regla_fija": {
+        "alertas": 1157,
+        "alertas_mes": 231.4,
+        "vp": 987,
+        "fp": 170,
+        "fn": 1494,
+        "precision": 0.8530682800345721,
+        "recall": 0.3978234582829504,
+        "valor_neto_usd": 15919.4,
+        "valor_neto_mes_usd": 3183.9
+      },
+      "auc": {
+        "Regla": 0.9408237451637014,
+        "Logistica": 0.9695280914818972,
+        "HistGradientBoosting": 0.9695988547704042,
+        "Ensamble": 0.9684631374616534
+      },
+      "pr_auc": {
+        "Regla": 0.7248784937445051,
+        "Logistica": 0.7906296820221198,
+        "HistGradientBoosting": 0.7830471112151911,
+        "Ensamble": 0.758485093066674
+      },
+      "curva": {
+        "50": {
+          "Regla": {
+            "alertas": 250,
+            "alertas_mes": 50.0,
+            "vp": 244,
+            "fp": 6,
+            "fn": 2237,
+            "precision": 0.976,
+            "recall": 0.09834744054816606,
+            "valor_neto_usd": 4014.7,
+            "valor_neto_mes_usd": 802.9
+          },
+          "Logistica": {
+            "alertas": 250,
+            "alertas_mes": 50.0,
+            "vp": 235,
+            "fp": 15,
+            "fn": 2246,
+            "precision": 0.94,
+            "recall": 0.0947198710197501,
+            "valor_neto_usd": 3846.3,
+            "valor_neto_mes_usd": 769.3
+          },
+          "HistGradientBoosting": {
+            "alertas": 250,
+            "alertas_mes": 50.0,
+            "vp": 238,
+            "fp": 12,
+            "fn": 2243,
+            "precision": 0.952,
+            "recall": 0.09592906086255543,
+            "valor_neto_usd": 3902.5,
+            "valor_neto_mes_usd": 780.5
+          },
+          "Ensamble": {
+            "alertas": 250,
+            "alertas_mes": 50.0,
+            "vp": 244,
+            "fp": 6,
+            "fn": 2237,
+            "precision": 0.976,
+            "recall": 0.09834744054816606,
+            "valor_neto_usd": 4014.7,
+            "valor_neto_mes_usd": 802.9
+          }
+        },
+        "100": {
+          "Regla": {
+            "alertas": 500,
+            "alertas_mes": 100.0,
+            "vp": 462,
+            "fp": 38,
+            "fn": 2019,
+            "precision": 0.924,
+            "recall": 0.18621523579201935,
+            "valor_neto_usd": 7543.0,
+            "valor_neto_mes_usd": 1508.6
+          },
+          "Logistica": {
+            "alertas": 500,
+            "alertas_mes": 100.0,
+            "vp": 457,
+            "fp": 43,
+            "fn": 2024,
+            "precision": 0.914,
+            "recall": 0.1841999193873438,
+            "valor_neto_usd": 7449.5,
+            "valor_neto_mes_usd": 1489.9
+          },
+          "HistGradientBoosting": {
+            "alertas": 500,
+            "alertas_mes": 100.0,
+            "vp": 459,
+            "fp": 41,
+            "fn": 2022,
+            "precision": 0.918,
+            "recall": 0.18500604594921402,
+            "valor_neto_usd": 7486.9,
+            "valor_neto_mes_usd": 1497.4
+          },
+          "Ensamble": {
+            "alertas": 500,
+            "alertas_mes": 100.0,
+            "vp": 463,
+            "fp": 37,
+            "fn": 2018,
+            "precision": 0.926,
+            "recall": 0.18661829907295446,
+            "valor_neto_usd": 7561.7,
+            "valor_neto_mes_usd": 1512.3
+          }
+        },
+        "150": {
+          "Regla": {
+            "alertas": 750,
+            "alertas_mes": 150.0,
+            "vp": 664,
+            "fp": 86,
+            "fn": 1817,
+            "precision": 0.8853333333333333,
+            "recall": 0.2676340185409109,
+            "valor_neto_usd": 10772.1,
+            "valor_neto_mes_usd": 2154.4
+          },
+          "Logistica": {
+            "alertas": 750,
+            "alertas_mes": 150.0,
+            "vp": 669,
+            "fp": 81,
+            "fn": 1812,
+            "precision": 0.892,
+            "recall": 0.26964933494558646,
+            "valor_neto_usd": 10865.6,
+            "valor_neto_mes_usd": 2173.1
+          },
+          "HistGradientBoosting": {
+            "alertas": 750,
+            "alertas_mes": 150.0,
+            "vp": 661,
+            "fp": 89,
+            "fn": 1820,
+            "precision": 0.8813333333333333,
+            "recall": 0.2664248286981056,
+            "valor_neto_usd": 10715.9,
+            "valor_neto_mes_usd": 2143.2
+          },
+          "Ensamble": {
+            "alertas": 750,
+            "alertas_mes": 150.0,
+            "vp": 673,
+            "fp": 77,
+            "fn": 1808,
+            "precision": 0.8973333333333333,
+            "recall": 0.2712615880693269,
+            "valor_neto_usd": 10940.4,
+            "valor_neto_mes_usd": 2188.1
+          }
+        },
+        "200": {
+          "Regla": {
+            "alertas": 1000,
+            "alertas_mes": 200.0,
+            "vp": 855,
+            "fp": 145,
+            "fn": 1626,
+            "precision": 0.855,
+            "recall": 0.34461910519951633,
+            "valor_neto_usd": 13795.3,
+            "valor_neto_mes_usd": 2759.1
+          },
+          "Logistica": {
+            "alertas": 1000,
+            "alertas_mes": 200.0,
+            "vp": 864,
+            "fp": 136,
+            "fn": 1617,
+            "precision": 0.864,
+            "recall": 0.3482466747279323,
+            "valor_neto_usd": 13963.7,
+            "valor_neto_mes_usd": 2792.7
+          },
+          "HistGradientBoosting": {
+            "alertas": 1000,
+            "alertas_mes": 200.0,
+            "vp": 847,
+            "fp": 153,
+            "fn": 1634,
+            "precision": 0.847,
+            "recall": 0.34139459895203544,
+            "valor_neto_usd": 13645.7,
+            "valor_neto_mes_usd": 2729.1
+          },
+          "Ensamble": {
+            "alertas": 1000,
+            "alertas_mes": 200.0,
+            "vp": 853,
+            "fp": 147,
+            "fn": 1628,
+            "precision": 0.853,
+            "recall": 0.3438129786376461,
+            "valor_neto_usd": 13757.9,
+            "valor_neto_mes_usd": 2751.6
+          }
+        },
+        "250": {
+          "Regla": {
+            "alertas": 1250,
+            "alertas_mes": 250.0,
+            "vp": 1025,
+            "fp": 225,
+            "fn": 1456,
+            "precision": 0.82,
+            "recall": 0.4131398629584845,
+            "valor_neto_usd": 16425.7,
+            "valor_neto_mes_usd": 3285.1
+          },
+          "Logistica": {
+            "alertas": 1250,
+            "alertas_mes": 250.0,
+            "vp": 1035,
+            "fp": 215,
+            "fn": 1446,
+            "precision": 0.828,
+            "recall": 0.41717049576783555,
+            "valor_neto_usd": 16612.8,
+            "valor_neto_mes_usd": 3322.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 1250,
+            "alertas_mes": 250.0,
+            "vp": 1006,
+            "fp": 244,
+            "fn": 1475,
+            "precision": 0.8048,
+            "recall": 0.40548166062071744,
+            "valor_neto_usd": 16070.3,
+            "valor_neto_mes_usd": 3214.1
+          },
+          "Ensamble": {
+            "alertas": 1250,
+            "alertas_mes": 250.0,
+            "vp": 1016,
+            "fp": 234,
+            "fn": 1465,
+            "precision": 0.8128,
+            "recall": 0.4095122934300685,
+            "valor_neto_usd": 16257.4,
+            "valor_neto_mes_usd": 3251.5
+          }
+        },
+        "300": {
+          "Regla": {
+            "alertas": 1500,
+            "alertas_mes": 300.0,
+            "vp": 1167,
+            "fp": 333,
+            "fn": 1314,
+            "precision": 0.778,
+            "recall": 0.4703748488512696,
+            "valor_neto_usd": 18532.4,
+            "valor_neto_mes_usd": 3706.5
+          },
+          "Logistica": {
+            "alertas": 1500,
+            "alertas_mes": 300.0,
+            "vp": 1187,
+            "fp": 313,
+            "fn": 1294,
+            "precision": 0.7913333333333333,
+            "recall": 0.4784361144699718,
+            "valor_neto_usd": 18906.5,
+            "valor_neto_mes_usd": 3781.3
+          },
+          "HistGradientBoosting": {
+            "alertas": 1500,
+            "alertas_mes": 300.0,
+            "vp": 1157,
+            "fp": 343,
+            "fn": 1324,
+            "precision": 0.7713333333333333,
+            "recall": 0.46634421604191856,
+            "valor_neto_usd": 18345.3,
+            "valor_neto_mes_usd": 3669.1
+          },
+          "Ensamble": {
+            "alertas": 1500,
+            "alertas_mes": 300.0,
+            "vp": 1166,
+            "fp": 334,
+            "fn": 1315,
+            "precision": 0.7773333333333333,
+            "recall": 0.46997178557033453,
+            "valor_neto_usd": 18513.7,
+            "valor_neto_mes_usd": 3702.7
+          }
+        },
+        "350": {
+          "Regla": {
+            "alertas": 1750,
+            "alertas_mes": 350.0,
+            "vp": 1298,
+            "fp": 452,
+            "fn": 1183,
+            "precision": 0.7417142857142857,
+            "recall": 0.5231761386537687,
+            "valor_neto_usd": 20433.2,
+            "valor_neto_mes_usd": 4086.6
+          },
+          "Logistica": {
+            "alertas": 1750,
+            "alertas_mes": 350.0,
+            "vp": 1331,
+            "fp": 419,
+            "fn": 1150,
+            "precision": 0.7605714285714286,
+            "recall": 0.5364772269246272,
+            "valor_neto_usd": 21050.5,
+            "valor_neto_mes_usd": 4210.1
+          },
+          "HistGradientBoosting": {
+            "alertas": 1750,
+            "alertas_mes": 350.0,
+            "vp": 1314,
+            "fp": 436,
+            "fn": 1167,
+            "precision": 0.7508571428571429,
+            "recall": 0.5296251511487303,
+            "valor_neto_usd": 20732.5,
+            "valor_neto_mes_usd": 4146.5
+          },
+          "Ensamble": {
+            "alertas": 1750,
+            "alertas_mes": 350.0,
+            "vp": 1314,
+            "fp": 436,
+            "fn": 1167,
+            "precision": 0.7508571428571429,
+            "recall": 0.5296251511487303,
+            "valor_neto_usd": 20732.5,
+            "valor_neto_mes_usd": 4146.5
+          }
+        },
+        "400": {
+          "Regla": {
+            "alertas": 2000,
+            "alertas_mes": 400.0,
+            "vp": 1401,
+            "fp": 599,
+            "fn": 1080,
+            "precision": 0.7005,
+            "recall": 0.5646916565900847,
+            "valor_neto_usd": 21810.3,
+            "valor_neto_mes_usd": 4362.1
+          },
+          "Logistica": {
+            "alertas": 2000,
+            "alertas_mes": 400.0,
+            "vp": 1470,
+            "fp": 530,
+            "fn": 1011,
+            "precision": 0.735,
+            "recall": 0.592503022974607,
+            "valor_neto_usd": 23101.1,
+            "valor_neto_mes_usd": 4620.2
+          },
+          "HistGradientBoosting": {
+            "alertas": 2000,
+            "alertas_mes": 400.0,
+            "vp": 1455,
+            "fp": 545,
+            "fn": 1026,
+            "precision": 0.7275,
+            "recall": 0.5864570737605804,
+            "valor_neto_usd": 22820.5,
+            "valor_neto_mes_usd": 4564.1
+          },
+          "Ensamble": {
+            "alertas": 2000,
+            "alertas_mes": 400.0,
+            "vp": 1463,
+            "fp": 537,
+            "fn": 1018,
+            "precision": 0.7315,
+            "recall": 0.5896815800080613,
+            "valor_neto_usd": 22970.1,
+            "valor_neto_mes_usd": 4594.0
+          }
+        },
+        "450": {
+          "Regla": {
+            "alertas": 2250,
+            "alertas_mes": 450.0,
+            "vp": 1491,
+            "fp": 759,
+            "fn": 990,
+            "precision": 0.6626666666666666,
+            "recall": 0.6009673518742442,
+            "valor_neto_usd": 22944.2,
+            "valor_neto_mes_usd": 4588.8
+          },
+          "Logistica": {
+            "alertas": 2250,
+            "alertas_mes": 450.0,
+            "vp": 1585,
+            "fp": 665,
+            "fn": 896,
+            "precision": 0.7044444444444444,
+            "recall": 0.6388553002821443,
+            "valor_neto_usd": 24702.6,
+            "valor_neto_mes_usd": 4940.5
+          },
+          "HistGradientBoosting": {
+            "alertas": 2250,
+            "alertas_mes": 450.0,
+            "vp": 1575,
+            "fp": 675,
+            "fn": 906,
+            "precision": 0.7,
+            "recall": 0.6348246674727932,
+            "valor_neto_usd": 24515.6,
+            "valor_neto_mes_usd": 4903.1
+          },
+          "Ensamble": {
+            "alertas": 2250,
+            "alertas_mes": 450.0,
+            "vp": 1579,
+            "fp": 671,
+            "fn": 902,
+            "precision": 0.7017777777777777,
+            "recall": 0.6364369205965337,
+            "valor_neto_usd": 24590.4,
+            "valor_neto_mes_usd": 4918.1
+          }
+        },
+        "500": {
+          "Regla": {
+            "alertas": 2500,
+            "alertas_mes": 500.0,
+            "vp": 1595,
+            "fp": 905,
+            "fn": 886,
+            "precision": 0.638,
+            "recall": 0.6428859330914953,
+            "valor_neto_usd": 24340.0,
+            "valor_neto_mes_usd": 4868.0
+          },
+          "Logistica": {
+            "alertas": 2500,
+            "alertas_mes": 500.0,
+            "vp": 1712,
+            "fp": 788,
+            "fn": 769,
+            "precision": 0.6848,
+            "recall": 0.6900443369609028,
+            "valor_neto_usd": 26528.7,
+            "valor_neto_mes_usd": 5305.7
+          },
+          "HistGradientBoosting": {
+            "alertas": 2500,
+            "alertas_mes": 500.0,
+            "vp": 1681,
+            "fp": 819,
+            "fn": 800,
+            "precision": 0.6724,
+            "recall": 0.6775493752519145,
+            "valor_neto_usd": 25948.8,
+            "valor_neto_mes_usd": 5189.8
+          },
+          "Ensamble": {
+            "alertas": 2500,
+            "alertas_mes": 500.0,
+            "vp": 1699,
+            "fp": 801,
+            "fn": 782,
+            "precision": 0.6796,
+            "recall": 0.6848045143087464,
+            "valor_neto_usd": 26285.5,
+            "valor_neto_mes_usd": 5257.1
+          }
+        },
+        "550": {
+          "Regla": {
+            "alertas": 2750,
+            "alertas_mes": 550.0,
+            "vp": 1673,
+            "fp": 1077,
+            "fn": 808,
+            "precision": 0.6083636363636363,
+            "recall": 0.6743248690044337,
+            "valor_neto_usd": 25249.4,
+            "valor_neto_mes_usd": 5049.9
+          },
+          "Logistica": {
+            "alertas": 2750,
+            "alertas_mes": 550.0,
+            "vp": 1817,
+            "fp": 933,
+            "fn": 664,
+            "precision": 0.6607272727272727,
+            "recall": 0.732365981459089,
+            "valor_neto_usd": 27943.2,
+            "valor_neto_mes_usd": 5588.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 2750,
+            "alertas_mes": 550.0,
+            "vp": 1789,
+            "fp": 961,
+            "fn": 692,
+            "precision": 0.6505454545454545,
+            "recall": 0.7210802095929061,
+            "valor_neto_usd": 27419.4,
+            "valor_neto_mes_usd": 5483.9
+          },
+          "Ensamble": {
+            "alertas": 2750,
+            "alertas_mes": 550.0,
+            "vp": 1812,
+            "fp": 938,
+            "fn": 669,
+            "precision": 0.6589090909090909,
+            "recall": 0.7303506650544136,
+            "valor_neto_usd": 27849.6,
+            "valor_neto_mes_usd": 5569.9
+          }
+        },
+        "600": {
+          "Regla": {
+            "alertas": 3000,
+            "alertas_mes": 600.0,
+            "vp": 1740,
+            "fp": 1260,
+            "fn": 741,
+            "precision": 0.58,
+            "recall": 0.7013301088270859,
+            "valor_neto_usd": 25953.1,
+            "valor_neto_mes_usd": 5190.6
+          },
+          "Logistica": {
+            "alertas": 3000,
+            "alertas_mes": 600.0,
+            "vp": 1904,
+            "fp": 1096,
+            "fn": 577,
+            "precision": 0.6346666666666667,
+            "recall": 0.7674324869004434,
+            "valor_neto_usd": 29021.0,
+            "valor_neto_mes_usd": 5804.2
+          },
+          "HistGradientBoosting": {
+            "alertas": 3000,
+            "alertas_mes": 600.0,
+            "vp": 1888,
+            "fp": 1112,
+            "fn": 593,
+            "precision": 0.6293333333333333,
+            "recall": 0.7609834744054816,
+            "valor_neto_usd": 28721.6,
+            "valor_neto_mes_usd": 5744.3
+          },
+          "Ensamble": {
+            "alertas": 3000,
+            "alertas_mes": 600.0,
+            "vp": 1905,
+            "fp": 1095,
+            "fn": 576,
+            "precision": 0.635,
+            "recall": 0.7678355501813785,
+            "valor_neto_usd": 29039.7,
+            "valor_neto_mes_usd": 5807.9
+          }
+        },
+        "650": {
+          "Regla": {
+            "alertas": 3250,
+            "alertas_mes": 650.0,
+            "vp": 1791,
+            "fp": 1459,
+            "fn": 690,
+            "precision": 0.5510769230769231,
+            "recall": 0.7218863361547763,
+            "valor_neto_usd": 26357.4,
+            "valor_neto_mes_usd": 5271.5
+          },
+          "Logistica": {
+            "alertas": 3250,
+            "alertas_mes": 650.0,
+            "vp": 1979,
+            "fp": 1271,
+            "fn": 502,
+            "precision": 0.6089230769230769,
+            "recall": 0.7976622329705764,
+            "valor_neto_usd": 29874.3,
+            "valor_neto_mes_usd": 5974.9
+          },
+          "HistGradientBoosting": {
+            "alertas": 3250,
+            "alertas_mes": 650.0,
+            "vp": 1965,
+            "fp": 1285,
+            "fn": 516,
+            "precision": 0.6046153846153847,
+            "recall": 0.7920193470374849,
+            "valor_neto_usd": 29612.4,
+            "valor_neto_mes_usd": 5922.5
+          },
+          "Ensamble": {
+            "alertas": 3250,
+            "alertas_mes": 650.0,
+            "vp": 1995,
+            "fp": 1255,
+            "fn": 486,
+            "precision": 0.6138461538461538,
+            "recall": 0.8041112454655381,
+            "valor_neto_usd": 30173.6,
+            "valor_neto_mes_usd": 6034.7
+          }
+        },
+        "700": {
+          "Regla": {
+            "alertas": 3500,
+            "alertas_mes": 700.0,
+            "vp": 1851,
+            "fp": 1649,
+            "fn": 630,
+            "precision": 0.5288571428571428,
+            "recall": 0.7460701330108828,
+            "valor_neto_usd": 26930.2,
+            "valor_neto_mes_usd": 5386.0
+          },
+          "Logistica": {
+            "alertas": 3500,
+            "alertas_mes": 700.0,
+            "vp": 2042,
+            "fp": 1458,
+            "fn": 439,
+            "precision": 0.5834285714285714,
+            "recall": 0.8230552196694881,
+            "valor_neto_usd": 30503.1,
+            "valor_neto_mes_usd": 6100.6
+          },
+          "HistGradientBoosting": {
+            "alertas": 3500,
+            "alertas_mes": 700.0,
+            "vp": 2039,
+            "fp": 1461,
+            "fn": 442,
+            "precision": 0.5825714285714285,
+            "recall": 0.8218460298266828,
+            "valor_neto_usd": 30447.0,
+            "valor_neto_mes_usd": 6089.4
+          },
+          "Ensamble": {
+            "alertas": 3500,
+            "alertas_mes": 700.0,
+            "vp": 2065,
+            "fp": 1435,
+            "fn": 416,
+            "precision": 0.59,
+            "recall": 0.8323256751309955,
+            "valor_neto_usd": 30933.3,
+            "valor_neto_mes_usd": 6186.7
+          }
+        },
+        "175": {
+          "Regla": {
+            "alertas": 875,
+            "alertas_mes": 175.0,
+            "vp": 755,
+            "fp": 120,
+            "fn": 1726,
+            "precision": 0.8628571428571429,
+            "recall": 0.3043127771060056,
+            "valor_neto_usd": 12199.5,
+            "valor_neto_mes_usd": 2439.9
+          },
+          "Logistica": {
+            "alertas": 875,
+            "alertas_mes": 175.0,
+            "vp": 766,
+            "fp": 109,
+            "fn": 1715,
+            "precision": 0.8754285714285714,
+            "recall": 0.30874647319629184,
+            "valor_neto_usd": 12405.3,
+            "valor_neto_mes_usd": 2481.1
+          },
+          "HistGradientBoosting": {
+            "alertas": 875,
+            "alertas_mes": 175.0,
+            "vp": 755,
+            "fp": 120,
+            "fn": 1726,
+            "precision": 0.8628571428571429,
+            "recall": 0.3043127771060056,
+            "valor_neto_usd": 12199.5,
+            "valor_neto_mes_usd": 2439.9
+          },
+          "Ensamble": {
+            "alertas": 875,
+            "alertas_mes": 175.0,
+            "vp": 762,
+            "fp": 113,
+            "fn": 1719,
+            "precision": 0.8708571428571429,
+            "recall": 0.30713422007255137,
+            "valor_neto_usd": 12330.4,
+            "valor_neto_mes_usd": 2466.1
+          }
+        }
+      }
+    }
+  },
+  "modelo_elegido": {
+    "modelo": "HistGradientBoosting",
+    "ensamble_supera_hgb_en_validacion_interna": false
+  },
+  "punto_operacion": {
+    "tramos_modelo_validacion": [
+      {
+        "hasta": 50,
+        "alertas_tramo": 300,
+        "vp_tramo": 129,
+        "precision_tramo": 0.43
+      },
+      {
+        "hasta": 100,
+        "alertas_tramo": 300,
+        "vp_tramo": 98,
+        "precision_tramo": 0.32666666666666666
+      },
+      {
+        "hasta": 150,
+        "alertas_tramo": 300,
+        "vp_tramo": 56,
+        "precision_tramo": 0.18666666666666668
+      },
+      {
+        "hasta": 200,
+        "alertas_tramo": 300,
+        "vp_tramo": 43,
+        "precision_tramo": 0.14333333333333334
+      },
+      {
+        "hasta": 250,
+        "alertas_tramo": 300,
+        "vp_tramo": 35,
+        "precision_tramo": 0.11666666666666667
+      },
+      {
+        "hasta": 300,
+        "alertas_tramo": 300,
+        "vp_tramo": 43,
+        "precision_tramo": 0.14333333333333334
+      },
+      {
+        "hasta": 350,
+        "alertas_tramo": 300,
+        "vp_tramo": 28,
+        "precision_tramo": 0.09333333333333334
+      },
+      {
+        "hasta": 400,
+        "alertas_tramo": 300,
+        "vp_tramo": 31,
+        "precision_tramo": 0.10333333333333333
+      },
+      {
+        "hasta": 450,
+        "alertas_tramo": 300,
+        "vp_tramo": 33,
+        "precision_tramo": 0.11
+      },
+      {
+        "hasta": 500,
+        "alertas_tramo": 300,
+        "vp_tramo": 21,
+        "precision_tramo": 0.07
+      },
+      {
+        "hasta": 550,
+        "alertas_tramo": 300,
+        "vp_tramo": 18,
+        "precision_tramo": 0.06
+      },
+      {
+        "hasta": 600,
+        "alertas_tramo": 300,
+        "vp_tramo": 17,
+        "precision_tramo": 0.056666666666666664
+      }
+    ],
+    "tramos_bloque_b_validacion": [
+      {
+        "hasta": 50,
+        "alertas_tramo": 300,
+        "vp_tramo": 81,
+        "precision_tramo": 0.27
+      },
+      {
+        "hasta": 100,
+        "alertas_tramo": 300,
+        "vp_tramo": 42,
+        "precision_tramo": 0.14
+      },
+      {
+        "hasta": 150,
+        "alertas_tramo": 300,
+        "vp_tramo": 37,
+        "precision_tramo": 0.12333333333333334
+      },
+      {
+        "hasta": 200,
+        "alertas_tramo": 300,
+        "vp_tramo": 32,
+        "precision_tramo": 0.10666666666666667
+      },
+      {
+        "hasta": 250,
+        "alertas_tramo": 300,
+        "vp_tramo": 27,
+        "precision_tramo": 0.09
+      },
+      {
+        "hasta": 300,
+        "alertas_tramo": 300,
+        "vp_tramo": 32,
+        "precision_tramo": 0.10666666666666667
+      },
+      {
+        "hasta": 350,
+        "alertas_tramo": 300,
+        "vp_tramo": 25,
+        "precision_tramo": 0.08333333333333333
+      },
+      {
+        "hasta": 400,
+        "alertas_tramo": 300,
+        "vp_tramo": 18,
+        "precision_tramo": 0.06
+      },
+      {
+        "hasta": 450,
+        "alertas_tramo": 300,
+        "vp_tramo": 17,
+        "precision_tramo": 0.056666666666666664
+      },
+      {
+        "hasta": 500,
+        "alertas_tramo": 300,
+        "vp_tramo": 19,
+        "precision_tramo": 0.06333333333333334
+      },
+      {
+        "hasta": 550,
+        "alertas_tramo": 300,
+        "vp_tramo": 15,
+        "precision_tramo": 0.05
+      },
+      {
+        "hasta": 600,
+        "alertas_tramo": 300,
+        "vp_tramo": 16,
+        "precision_tramo": 0.05333333333333334
+      }
+    ],
+    "k_modelo_solo": 200,
+    "k_bloque_b": 150,
+    "precision_equilibrio": 0.11753787283864246
+  },
+  "flujo": {
+    "validacion": {
+      "bloque_a": {
+        "alertas": 987,
+        "alertas_mes": 164.5,
+        "vp": 244,
+        "fp": 743,
+        "fn": 555,
+        "precision": 0.24721377912867273,
+        "recall": 0.3053817271589487,
+        "valor_neto_usd": 2394.2,
+        "valor_neto_mes_usd": 399.0
+      },
+      "bloque_b": {
+        "alertas": 900,
+        "alertas_mes": 150.0,
+        "vp": 160,
+        "fp": 740,
+        "fn": 639,
+        "precision": 0.17777777777777778,
+        "recall": 0.2002503128911139,
+        "valor_neto_usd": 1014.2,
+        "valor_neto_mes_usd": 169.0
+      },
+      "flujo": {
+        "alertas": 1887,
+        "alertas_mes": 314.5,
+        "vp": 404,
+        "fp": 1483,
+        "fn": 395,
+        "precision": 0.21409644939056705,
+        "recall": 0.5056320400500626,
+        "valor_neto_usd": 3408.4,
+        "valor_neto_mes_usd": 568.1
+      },
+      "regla_mismo_cupo": {
+        "alertas": 1887,
+        "alertas_mes": 314.5,
+        "vp": 354,
+        "fp": 1533,
+        "fn": 445,
+        "precision": 0.1875993640699523,
+        "recall": 0.4430538172715895,
+        "valor_neto_usd": 2473.1,
+        "valor_neto_mes_usd": 412.2
+      },
+      "modelo_mismo_cupo": {
+        "alertas": 1887,
+        "alertas_mes": 314.5,
+        "vp": 414,
+        "fp": 1473,
+        "fn": 385,
+        "precision": 0.21939586645468998,
+        "recall": 0.5181476846057572,
+        "valor_neto_usd": 3595.5,
+        "valor_neto_mes_usd": 599.2
+      },
+      "modelo_top600": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 552,
+        "fp": 3048,
+        "fn": 247,
+        "precision": 0.15333333333333332,
+        "recall": 0.690863579474343,
+        "valor_neto_usd": 2410.6,
+        "valor_neto_mes_usd": 401.8
+      },
+      "regla_top600": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 430,
+        "fp": 3170,
+        "fn": 369,
+        "precision": 0.11944444444444445,
+        "recall": 0.5381727158948686,
+        "valor_neto_usd": 128.4,
+        "valor_neto_mes_usd": 21.4
+      },
+      "flujo_600": {
+        "alertas": 3600,
+        "alertas_mes": 600.0,
+        "vp": 546,
+        "fp": 3054,
+        "fn": 253,
+        "precision": 0.15166666666666667,
+        "recall": 0.6833541927409261,
+        "valor_neto_usd": 2298.3,
+        "valor_neto_mes_usd": 383.1
+      },
+      "modelo_top175": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 305,
+        "fp": 745,
+        "fn": 494,
+        "precision": 0.2904761904761905,
+        "recall": 0.38172715894868586,
+        "valor_neto_usd": 3396.8,
+        "valor_neto_mes_usd": 566.1
+      },
+      "regla_top175": {
+        "alertas": 1050,
+        "alertas_mes": 175.0,
+        "vp": 256,
+        "fp": 794,
+        "fn": 543,
+        "precision": 0.2438095238095238,
+        "recall": 0.32040050062578224,
+        "valor_neto_usd": 2480.2,
+        "valor_neto_mes_usd": 413.4
+      },
+      "sensibilidad_valor_e1": {
+        "flujo": {
+          "alertas": 1887,
+          "alertas_mes": 314.5,
+          "vp": 404,
+          "fp": 1483,
+          "fn": 395,
+          "precision": 0.21409644939056705,
+          "recall": 0.5056320400500626,
+          "valor_neto_usd": 794.8,
+          "valor_neto_mes_usd": 132.5
+        },
+        "bloque_a": {
+          "alertas": 987,
+          "alertas_mes": 164.5,
+          "vp": 244,
+          "fp": 743,
+          "fn": 555,
+          "precision": 0.24721377912867273,
+          "recall": 0.3053817271589487,
+          "valor_neto_usd": 815.7,
+          "valor_neto_mes_usd": 136.0
+        }
+      }
+    },
+    "test": {
+      "bloque_a": {
+        "alertas": 1157,
+        "alertas_mes": 231.4,
+        "vp": 987,
+        "fp": 170,
+        "fn": 1494,
+        "precision": 0.8530682800345721,
+        "recall": 0.3978234582829504,
+        "valor_neto_usd": 15919.4,
+        "valor_neto_mes_usd": 3183.9
+      },
+      "bloque_b": {
+        "alertas": 750,
+        "alertas_mes": 150.0,
+        "vp": 488,
+        "fp": 262,
+        "fn": 1993,
+        "precision": 0.6506666666666666,
+        "recall": 0.19669488109633212,
+        "valor_neto_usd": 7479.7,
+        "valor_neto_mes_usd": 1495.9
+      },
+      "flujo": {
+        "alertas": 1907,
+        "alertas_mes": 381.4,
+        "vp": 1475,
+        "fp": 432,
+        "fn": 1006,
+        "precision": 0.7734661772417409,
+        "recall": 0.5945183393792826,
+        "valor_neto_usd": 23399.1,
+        "valor_neto_mes_usd": 4679.8
+      },
+      "regla_mismo_cupo": {
+        "alertas": 1907,
+        "alertas_mes": 381.4,
+        "vp": 1452,
+        "fp": 455,
+        "fn": 1029,
+        "precision": 0.7614053487152596,
+        "recall": 0.585247883917775,
+        "valor_neto_usd": 22968.8,
+        "valor_neto_mes_usd": 4593.8
+      },
+      "modelo_mismo_cupo": {
+        "alertas": 1907,
+        "alertas_mes": 381.4,
+        "vp": 1465,
+        "fp": 442,
+        "fn": 1016,
+        "precision": 0.7682223387519664,
+        "recall": 0.5904877065699314,
+        "valor_neto_usd": 23212.0,
+        "valor_neto_mes_usd": 4642.4
+      },
+      "modelo_top600": {
+        "alertas": 3000,
+        "alertas_mes": 600.0,
+        "vp": 1888,
+        "fp": 1112,
+        "fn": 593,
+        "precision": 0.6293333333333333,
+        "recall": 0.7609834744054816,
+        "valor_neto_usd": 28721.6,
+        "valor_neto_mes_usd": 5744.3
+      },
+      "regla_top600": {
+        "alertas": 3000,
+        "alertas_mes": 600.0,
+        "vp": 1740,
+        "fp": 1260,
+        "fn": 741,
+        "precision": 0.58,
+        "recall": 0.7013301088270859,
+        "valor_neto_usd": 25953.1,
+        "valor_neto_mes_usd": 5190.6
+      },
+      "flujo_600": {
+        "alertas": 3000,
+        "alertas_mes": 600.0,
+        "vp": 1901,
+        "fp": 1099,
+        "fn": 580,
+        "precision": 0.6336666666666667,
+        "recall": 0.766223297057638,
+        "valor_neto_usd": 28964.8,
+        "valor_neto_mes_usd": 5793.0
+      },
+      "modelo_top175": {
+        "alertas": 875,
+        "alertas_mes": 175.0,
+        "vp": 755,
+        "fp": 120,
+        "fn": 1726,
+        "precision": 0.8628571428571429,
+        "recall": 0.3043127771060056,
+        "valor_neto_usd": 12199.5,
+        "valor_neto_mes_usd": 2439.9
+      },
+      "regla_top175": {
+        "alertas": 875,
+        "alertas_mes": 175.0,
+        "vp": 755,
+        "fp": 120,
+        "fn": 1726,
+        "precision": 0.8628571428571429,
+        "recall": 0.3043127771060056,
+        "valor_neto_usd": 12199.5,
+        "valor_neto_mes_usd": 2439.9
+      },
+      "sensibilidad_valor_e1": {
+        "flujo": {
+          "alertas": 1907,
+          "alertas_mes": 381.4,
+          "vp": 1475,
+          "fp": 432,
+          "fn": 1006,
+          "precision": 0.7734661772417409,
+          "recall": 0.5945183393792826,
+          "valor_neto_usd": 13856.7,
+          "valor_neto_mes_usd": 2771.3
+        },
+        "bloque_a": {
+          "alertas": 1157,
+          "alertas_mes": 231.4,
+          "vp": 987,
+          "fp": 170,
+          "fn": 1494,
+          "precision": 0.8530682800345721,
+          "recall": 0.3978234582829504,
+          "valor_neto_usd": 9534.1,
+          "valor_neto_mes_usd": 1906.8
+        }
+      }
+    }
+  },
+  "roi": {
+    "validacion": {
+      "valor_regla_anual": 4788.0,
+      "valor_incremental_modelo_anual": 2029.0,
+      "horas_anual": 4031.9999999999995,
+      "automatizacion_sin_modelo": {
+        "beneficio_anual": 8820.0,
+        "inversion": 6270.0,
+        "recurrente": 5160.0,
+        "roi_anio1": -0.2283464566929134,
+        "roi_3anios": 0.21655172413793103,
+        "recupero_meses": 20.6
+      },
+      "automatizacion_sin_modelo_solo_caja": {
+        "beneficio_anual": 8820.0,
+        "inversion": 6270.0,
+        "recurrente": 2040.0,
+        "roi_anio1": 0.061371841155234655,
+        "roi_3anios": 1.1355932203389831,
+        "recupero_meses": 11.1
+      },
+      "incremental_modelo": {
+        "beneficio_anual": 2029.0,
+        "inversion": 3300.0000000000005,
+        "recurrente": 800.0,
+        "roi_anio1": -0.5050731707317073,
+        "roi_3anios": 0.06800000000000006,
+        "recupero_meses": 32.2
+      },
+      "total": {
+        "beneficio_anual": 10849.0,
+        "inversion": 9570.0,
+        "recurrente": 5960.0,
+        "roi_anio1": -0.30140373470701864,
+        "roi_3anios": 0.18570491803278696,
+        "recupero_meses": 23.5
+      },
+      "total_solo_caja": {
+        "beneficio_anual": 10849.0,
+        "inversion": 9570.0,
+        "recurrente": 2840.0,
+        "roi_anio1": -0.12576954069298946,
+        "roi_3anios": 0.7992039800995026,
+        "recupero_meses": 14.3
+      },
+      "incremental_modelo_desarrollo_3a4_meses": [
+        {
+          "beneficio_anual": 2029.0,
+          "inversion": 9504.0,
+          "recurrente": 800.0,
+          "roi_anio1": -0.8030667701863353,
+          "roi_3anios": -0.4886088709677419,
+          "recupero_meses": 92.8
+        },
+        {
+          "beneficio_anual": 2029.0,
+          "inversion": 12672.000000000002,
+          "recurrente": 800.0,
+          "roi_anio1": -0.84937648456057,
+          "roi_3anios": -0.5960987261146498,
+          "recupero_meses": 123.7
+        }
+      ],
+      "total_desarrollo_3a4_meses": [
+        {
+          "beneficio_anual": 10849.0,
+          "inversion": 15774.0,
+          "recurrente": 5960.0,
+          "roi_anio1": -0.5008189932824146,
+          "roi_3anios": -0.03287573542520942,
+          "recupero_meses": 38.7
+        },
+        {
+          "beneficio_anual": 10849.0,
+          "inversion": 18942.0,
+          "recurrente": 5960.0,
+          "roi_anio1": -0.5643241506706288,
+          "roi_3anios": -0.11608277660094503,
+          "recupero_meses": 46.5
+        }
+      ],
+      "costo_desarrollo_3a4_meses": [
+        9504.0,
+        12672.000000000002
+      ],
+      "total_valor_posicion_e1": {
+        "beneficio_anual": 5622.0,
+        "inversion": 9570.0,
+        "recurrente": 5960.0,
+        "roi_anio1": -0.6379909851899549,
+        "roi_3anios": -0.3855737704918033,
+        "recupero_meses": null
+      }
+    },
+    "test": {
+      "valor_regla_anual": 38207.0,
+      "valor_incremental_modelo_anual": 17951.0,
+      "horas_anual": 4031.9999999999995,
+      "automatizacion_sin_modelo": {
+        "beneficio_anual": 42239.0,
+        "inversion": 6270.0,
+        "recurrente": 5160.0,
+        "roi_anio1": 2.695433070866142,
+        "roi_3anios": 4.826041379310345,
+        "recupero_meses": 2.0
+      },
+      "automatizacion_sin_modelo_solo_caja": {
+        "beneficio_anual": 42239.0,
+        "inversion": 6270.0,
+        "recurrente": 2040.0,
+        "roi_anio1": 4.082888086642599,
+        "roi_3anios": 9.227312348668281,
+        "recupero_meses": 1.9
+      },
+      "incremental_modelo": {
+        "beneficio_anual": 17951.0,
+        "inversion": 3300.0000000000005,
+        "recurrente": 800.0,
+        "roi_anio1": 3.378243902439025,
+        "roi_3anios": 8.447789473684212,
+        "recupero_meses": 2.3
+      },
+      "total": {
+        "beneficio_anual": 60190.0,
+        "inversion": 9570.0,
+        "recurrente": 5960.0,
+        "roi_anio1": 2.875698647778494,
+        "roi_3anios": 5.578098360655738,
+        "recupero_meses": 2.1
+      },
+      "total_solo_caja": {
+        "beneficio_anual": 60190.0,
+        "inversion": 9570.0,
+        "recurrente": 2840.0,
+        "roi_anio1": 3.8500886381950044,
+        "roi_3anios": 8.981691542288559,
+        "recupero_meses": 2.0
+      },
+      "incremental_modelo_desarrollo_3a4_meses": [
+        {
+          "beneficio_anual": 17951.0,
+          "inversion": 9504.0,
+          "recurrente": 800.0,
+          "roi_anio1": 0.7421195652173916,
+          "roi_3anios": 3.523891129032259,
+          "recupero_meses": 6.6
+        },
+        {
+          "beneficio_anual": 17951.0,
+          "inversion": 12672.000000000002,
+          "recurrente": 800.0,
+          "roi_anio1": 0.33245249406175775,
+          "roi_3anios": 2.5730095541401274,
+          "recupero_meses": 8.9
+        }
+      ],
+      "total_desarrollo_3a4_meses": [
+        {
+          "beneficio_anual": 60190.0,
+          "inversion": 15774.0,
+          "recurrente": 5960.0,
+          "roi_anio1": 1.7693751725407199,
+          "roi_3anios": 4.3654483865216624,
+          "recupero_meses": 3.5
+        },
+        {
+          "beneficio_anual": 60190.0,
+          "inversion": 18942.0,
+          "recurrente": 5960.0,
+          "roi_anio1": 1.4170588707734322,
+          "roi_3anios": 3.903829232524035,
+          "recupero_meses": 4.2
+        }
+      ],
+      "costo_desarrollo_3a4_meses": [
+        9504.0,
+        12672.000000000002
+      ],
+      "total_valor_posicion_e1": {
+        "beneficio_anual": 37288.0,
+        "inversion": 9570.0,
+        "recurrente": 5960.0,
+        "roi_anio1": 1.4010045074050228,
+        "roi_3anios": 3.075147540983607,
+        "recupero_meses": 3.7
+      }
+    }
+  },
+  "importancia_permutacion": {
+    "k": 300,
+    "vp_base": 404,
+    "variables": [
+      {
+        "variable": "u6_suma",
+        "vp_permutado": 351,
+        "caida_vp": 53,
+        "caida_recall_pp": 6.633291614518147
+      },
+      {
+        "variable": "cobertura",
+        "vp_permutado": 366,
+        "caida_vp": 38,
+        "caida_recall_pp": 4.755944931163955
+      },
+      {
+        "variable": "cv_u12",
+        "vp_permutado": 377,
+        "caida_vp": 27,
+        "caida_recall_pp": 3.379224030037547
+      },
+      {
+        "variable": "stock_sku_cadena",
+        "vp_permutado": 397,
+        "caida_vp": 7,
+        "caida_recall_pp": 0.8760951188986232
+      },
+      {
+        "variable": "peso_posicion_en_tienda",
+        "vp_permutado": 397,
+        "caida_vp": 7,
+        "caida_recall_pp": 0.8760951188986232
+      },
+      {
+        "variable": "u12_prom",
+        "vp_permutado": 399,
+        "caida_vp": 5,
+        "caida_recall_pp": 0.6257822277847309
+      },
+      {
+        "variable": "unidades_vendidas",
+        "vp_permutado": 400,
+        "caida_vp": 4,
+        "caida_recall_pp": 0.5006257822277848
+      },
+      {
+        "variable": "u_lag1",
+        "vp_permutado": 400,
+        "caida_vp": 4,
+        "caida_recall_pp": 0.5006257822277848
+      },
+      {
+        "variable": "subcategoria",
+        "vp_permutado": 400,
+        "caida_vp": 4,
+        "caida_recall_pp": 0.5006257822277848
+      },
+      {
+        "variable": "u3_suma",
+        "vp_permutado": 401,
+        "caida_vp": 3,
+        "caida_recall_pp": 0.37546933667083854
+      },
+      {
+        "variable": "stock_disponible",
+        "vp_permutado": 401,
+        "caida_vp": 3,
+        "caida_recall_pp": 0.37546933667083854
+      },
+      {
+        "variable": "antig_sku_meses",
+        "vp_permutado": 401,
+        "caida_vp": 3,
+        "caida_recall_pp": 0.37546933667083854
+      },
+      {
+        "variable": "cobertura_3m_antes",
+        "vp_permutado": 401,
+        "caida_vp": 3,
+        "caida_recall_pp": 0.37546933667083854
+      },
+      {
+        "variable": "meses_con_venta_12",
+        "vp_permutado": 402,
+        "caida_vp": 2,
+        "caida_recall_pp": 0.2503128911138924
+      },
+      {
+        "variable": "stock_vs_prom_sku",
+        "vp_permutado": 402,
+        "caida_vp": 2,
+        "caida_recall_pp": 0.2503128911138924
+      },
+      {
+        "variable": "precio_rel_subcategoria",
+        "vp_permutado": 402,
+        "caida_vp": 2,
+        "caida_recall_pp": 0.2503128911138924
+      },
+      {
+        "variable": "promos_categoria_12m",
+        "vp_permutado": 402,
+        "caida_vp": 2,
+        "caida_recall_pp": 0.2503128911138924
+      },
+      {
+        "variable": "var_stock_3m",
+        "vp_permutado": 403,
+        "caida_vp": 1,
+        "caida_recall_pp": 0.1251564455569462
+      },
+      {
+        "variable": "cobertura_sku_cadena",
+        "vp_permutado": 403,
+        "caida_vp": 1,
+        "caida_recall_pp": 0.1251564455569462
+      },
+      {
+        "variable": "tiendas_cob12_sku",
+        "vp_permutado": 403,
+        "caida_vp": 1,
+        "caida_recall_pp": 0.1251564455569462
+      },
+      {
+        "variable": "uds_transf_enviadas_3m",
+        "vp_permutado": 403,
+        "caida_vp": 1,
+        "caida_recall_pp": 0.1251564455569462
+      },
+      {
+        "variable": "u12_max",
+        "vp_permutado": 403,
+        "caida_vp": 1,
+        "caida_recall_pp": 0.1251564455569462
+      },
+      {
+        "variable": "var_cobertura_3m",
+        "vp_permutado": 403,
+        "caida_vp": 1,
+        "caida_recall_pp": 0.1251564455569462
+      },
+      {
+        "variable": "tendencia_u3_vs_u12",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "sin_venta_12m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "tiendas_con_stock_sku",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "uds_oc_recibidas_3m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "uds_oc_pendientes",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "uds_transf_recibidas_3m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "liquidacion_activa",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "liquidaciones_12m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "promos_activas_categoria",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "descuento_promo_max",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "lead_time_dias",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "pedido_minimo_unidades",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "mes_del_anio",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "u_lag2",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "historia_corta",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "cobertura_deposito_sku",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "tendencia_tienda",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "pct_pos_cob12_tienda",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "uds_oc_recibidas_12m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "n_oc_recibidas_12m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "meses_desde_ultima_oc",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "uds_transf_recibidas_12m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "liquidaciones_sku_cadena_12m",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "descuento_liquidacion_activa",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "eventos_en_horizonte",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "categoria",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "region",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "formato",
+        "vp_permutado": 404,
+        "caida_vp": 0,
+        "caida_recall_pp": 0.0
+      },
+      {
+        "variable": "meses_sin_venta",
+        "vp_permutado": 405,
+        "caida_vp": -1,
+        "caida_recall_pp": -0.1251564455569462
+      },
+      {
+        "variable": "stock_deposito_sku",
+        "vp_permutado": 405,
+        "caida_vp": -1,
+        "caida_recall_pp": -0.1251564455569462
+      },
+      {
+        "variable": "m2_venta",
+        "vp_permutado": 405,
+        "caida_vp": -1,
+        "caida_recall_pp": -0.1251564455569462
+      },
+      {
+        "variable": "tendencia_sku_cadena",
+        "vp_permutado": 405,
+        "caida_vp": -1,
+        "caida_recall_pp": -0.1251564455569462
+      },
+      {
+        "variable": "tendencia_categoria_tienda",
+        "vp_permutado": 405,
+        "caida_vp": -1,
+        "caida_recall_pp": -0.1251564455569462
+      },
+      {
+        "variable": "cumplimiento_ppto_3m",
+        "vp_permutado": 405,
+        "caida_vp": -1,
+        "caida_recall_pp": -0.1251564455569462
+      },
+      {
+        "variable": "antig_posicion_meses",
+        "vp_permutado": 406,
+        "caida_vp": -2,
+        "caida_recall_pp": -0.2503128911138924
+      },
+      {
+        "variable": "skus_en_tienda",
+        "vp_permutado": 406,
+        "caida_vp": -2,
+        "caida_recall_pp": -0.2503128911138924
+      },
+      {
+        "variable": "proveedor",
+        "vp_permutado": 406,
+        "caida_vp": -2,
+        "caida_recall_pp": -0.2503128911138924
+      }
+    ]
+  },
+  "segmentos": {
+    "validacion": {
+      "recall_global": 0.5056320400500626,
+      "region": [
+        {
+          "segmento": "Patagonia",
+          "positivos": 18,
+          "vp": 7,
+          "recall": 0.3888888888888889,
+          "ic95": [
+            0.20304991926931162,
+            0.6138133141934384
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "NOA",
+          "positivos": 126,
+          "vp": 55,
+          "recall": 0.4365079365079365,
+          "ic95": [
+            0.3530579106505297,
+            0.523715018826618
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Centro",
+          "positivos": 177,
+          "vp": 80,
+          "recall": 0.4519774011299435,
+          "ic95": [
+            0.38045254806266726,
+            0.5255425327152068
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "AMBA",
+          "positivos": 327,
+          "vp": 156,
+          "recall": 0.47706422018348627,
+          "ic95": [
+            0.42350803294482775,
+            0.5311530495792565
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Cuyo",
+          "positivos": 151,
+          "vp": 106,
+          "recall": 0.7019867549668874,
+          "ic95": [
+            0.6247579632379588,
+            0.7691930163437556
+          ],
+          "global_dentro_ic": false
+        }
+      ],
+      "categoria": [
+        {
+          "segmento": "Cocina y mesa",
+          "positivos": 122,
+          "vp": 51,
+          "recall": 0.4180327868852459,
+          "ic95": [
+            0.33432031040117327,
+            0.5067497332092068
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Iluminacion",
+          "positivos": 76,
+          "vp": 35,
+          "recall": 0.4605263157894737,
+          "ic95": [
+            0.3530754655326989,
+            0.5717757398539667
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Organizacion",
+          "positivos": 67,
+          "vp": 31,
+          "recall": 0.4626865671641791,
+          "ic95": [
+            0.34858248875358616,
+            0.5808375130532616
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Decoracion",
+          "positivos": 136,
+          "vp": 67,
+          "recall": 0.49264705882352944,
+          "ic95": [
+            0.4099857553192898,
+            0.5757123488213951
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Muebles",
+          "positivos": 131,
+          "vp": 67,
+          "recall": 0.5114503816793893,
+          "ic95": [
+            0.4267511692343854,
+            0.5954971576914297
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Bano",
+          "positivos": 126,
+          "vp": 71,
+          "recall": 0.5634920634920635,
+          "ic95": [
+            0.47628498117338214,
+            0.6469420893494703
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Textil hogar",
+          "positivos": 141,
+          "vp": 82,
+          "recall": 0.5815602836879432,
+          "ic95": [
+            0.49902955087404866,
+            0.6597646077102254
+          ],
+          "global_dentro_ic": true
+        }
+      ]
+    },
+    "test": {
+      "recall_global": 0.5945183393792826,
+      "region": [
+        {
+          "segmento": "NOA",
+          "positivos": 490,
+          "vp": 279,
+          "recall": 0.5693877551020409,
+          "ic95": [
+            0.5251720074421398,
+            0.6125239663275872
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Patagonia",
+          "positivos": 72,
+          "vp": 42,
+          "recall": 0.5833333333333334,
+          "ic95": [
+            0.4680748922563983,
+            0.6901496177750356
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Cuyo",
+          "positivos": 425,
+          "vp": 252,
+          "recall": 0.5929411764705882,
+          "ic95": [
+            0.545602319957218,
+            0.6386148828514646
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "AMBA",
+          "positivos": 973,
+          "vp": 583,
+          "recall": 0.5991778006166495,
+          "ic95": [
+            0.5680528024205627,
+            0.6295227308081612
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Centro",
+          "positivos": 521,
+          "vp": 319,
+          "recall": 0.6122840690978887,
+          "ic95": [
+            0.5697695372167962,
+            0.6531548651171651
+          ],
+          "global_dentro_ic": true
+        }
+      ],
+      "categoria": [
+        {
+          "segmento": "Cocina y mesa",
+          "positivos": 359,
+          "vp": 195,
+          "recall": 0.5431754874651811,
+          "ic95": [
+            0.49146060956732457,
+            0.5939761209508961
+          ],
+          "global_dentro_ic": false
+        },
+        {
+          "segmento": "Decoracion",
+          "positivos": 453,
+          "vp": 251,
+          "recall": 0.5540838852097131,
+          "ic95": [
+            0.5080454298062057,
+            0.5992127533364854
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Organizacion",
+          "positivos": 244,
+          "vp": 144,
+          "recall": 0.5901639344262295,
+          "ic95": [
+            0.5275209714649197,
+            0.6500117752571802
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Bano",
+          "positivos": 307,
+          "vp": 182,
+          "recall": 0.5928338762214984,
+          "ic95": [
+            0.5370561391255564,
+            0.6463170001196412
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Iluminacion",
+          "positivos": 261,
+          "vp": 157,
+          "recall": 0.6015325670498084,
+          "ic95": [
+            0.5410771452053085,
+            0.6590424734648701
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Textil hogar",
+          "positivos": 406,
+          "vp": 257,
+          "recall": 0.6330049261083743,
+          "ic95": [
+            0.5850775965556354,
+            0.678438844918339
+          ],
+          "global_dentro_ic": true
+        },
+        {
+          "segmento": "Muebles",
+          "positivos": 451,
+          "vp": 289,
+          "recall": 0.6407982261640798,
+          "ic95": [
+            0.5955014072115082,
+            0.6837166766225121
+          ],
+          "global_dentro_ic": false
+        }
+      ]
+    }
+  },
+  "persistencia_sin_venta": {
+    "2025": {
+      "posiciones_mes": 4596,
+      "siguen_sin_vender": 451,
+      "proporcion": 0.09812880765883376
+    },
+    "2026": {
+      "posiciones_mes": 1340,
+      "siguen_sin_vender": 1104,
+      "proporcion": 0.8238805970149253
+    }
+  }
+}

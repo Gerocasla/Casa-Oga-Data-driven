@@ -5,11 +5,19 @@ Frente trabajado: **mix de productos / dead stock** — predecir qué posiciones
 
 Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Simón Volpato Escandarani · Santiago Hernández.
 
-> **Para retomar el trabajo:** leé este README y después `Recordatorios/06-bitacora-trabajo-con-claude.md` (§1 «Cómo retomar»).
+> ### 📦 Entrega final → [`Entregable/Entregable 4/`](Entregable/Entregable%204/README.md)
+> Todo lo de la entrega final está en esa carpeta, y su `README.md` explica qué contiene, el alcance, las decisiones, cómo regenerar cada archivo y qué editar para cambiar algo. Incluye:
+> - **Informe final** consolidado (E1+E2+E3 corregidos, 21 págs., docx y pdf).
+> - **Presentación** (17 diapositivas con speech).
+> - **Dashboard HTML por área** con la lista de alertas de ago-26.
+>
+> Las carpetas `Entregable 1` a `3` quedan como historial de lo entregado: **no se tocan**.
+
+> **Para retomar el trabajo:** leé este README, después `Entregable/Entregable 4/README.md` y `Recordatorios/06-bitacora-trabajo-con-claude.md` (§1 «Cómo retomar»).
 
 ---
 
-## Estado (actualizado 30-10-2026)
+## Estado (actualizado 23-11-2026)
 
 | Entregable | Estado | Archivos |
 |---|---|---|
@@ -19,10 +27,10 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 | **2 · Dashboard** | ✅ 5 pestañas · suma capital inmovilizado por categoría | `Entregable/Entregable 2/Dashboard-Calidad-Antes-Despues.html` |
 | **2 · Presentación** | ⚠️ Final: **v4 corta modelo** (16) · cifras de v3, sin regenerar tras el feedback (ver Correcciones) | `Entregable/Entregable 2/Presentacion/Casa-Oga-Entregable-2-v4-corta-modelo.html` |
 | **2 · Envío a la cátedra** | ✅ Consolidado A+B (v3.0, revisado), presentación, dataset **v4** (CSV), diccionario v4 y dashboard antes/después. Los archivos `*-v3` de la carpeta quedan del envío anterior: no mandarlos | `Entregable/Entregable 2/Envio-Profesores/` (se regenera con los `armar_*.py` de esa carpeta) |
-| **3** · Modelado | En curso sobre la **v3** (que se conserva sin cambios) | Pendiente: decidir si se reentrena con la v4; reportar validación 2025 y test 2026 por separado con la regla «cobertura > 12» como línea base |
+| **3** · Factibilidad técnica, económica y legal, modelado, diseño de la solución | Entregado sobre la **v3** (compilado v1.1 y presentación). Feedback recibido: aplicado en el Entregable 4 | `Entregable/Entregable 3/` (`Compilado/`, `Modelo/`, `Presentacion/`) |
+| **4 · ENTREGA FINAL** · Informe final, presentación y dashboard | ✅ Armado el 22/23-11-2026. Informe con E1+E2+E3 y las correcciones de la cátedra y de Casa Óga: modelo reentrenado sobre la **v4** (gradient boosting, cupo por valor), dos ROI, metodología, analítica descriptiva, lista de ago-26 y sección «Cambios» (21 págs.). Presentación de 17 diapositivas. Dashboard HTML con una vista por área. **Pendiente:** Ronda 3 (no está en el repo), fecha de entrega en la carátula, sumar el dashboard y el hallazgo de capacidad a la presentación | **`Entregable/Entregable 4/`** · ver su `README.md` |
 
-**Falta para reentregar el 2:** fecha de reentrega en la carátula del consolidado.
-**Pendiente con el negocio (no bloquea):** aprobación del target (María G.), capacidad de 15-25 intervenciones por tienda (Lucía O.), preguntas H3/H6/H12.
+**Pendiente con el negocio (no bloquea la entrega):** respuestas de la Ronda 3, capacidad real de intervenciones por tienda (Lucía O.) y qué hacer con las 866 posiciones de ago-26, que superan esa capacidad (§10.4 del informe final).
 
 ---
 
@@ -54,16 +62,18 @@ Casa-Oga-Data-driven/
 ├── REGISTRO-CAMBIOS-DATASETS.md   ← bitácora de todo lo que se tocó en los datos
 ├── Datasets/                      ← CSV tal como los entrega la cátedra (NO se editan)
 ├── Datasets_Normalizados/         ← mismos datos con representación unificada: USAR ESTOS
-├── Datasets_Modelo/               ← dataset de entrenamiento v3 (parquet + muestra CSV + diccionario)
+├── Datasets_Modelo/               ← datasets de entrenamiento v3 y v4 (parquet + muestra CSV + diccionario) y dataset_scoring_v4 (ago-26)
 ├── Entregable/
 │   ├── Entregable 1/              ← TP1 entregado (docx, dashboards HTML, semáforo)
-│   └── Entregable 2/
-│       ├── Entregable 2 - Parte A/B - *.docx   ← consignas y versiones completadas
-│       ├── PROBLEMAS-CALIDAD-DATOS.md          ← hallazgos H1-H12, R1-R2 y su tratamiento
-│       ├── Dashboard-Calidad-Antes-Despues.html
-│       ├── EDA/          ← scripts de EDA y calidad, resultados/ (logs, csv, json), graficos/ y graficos_ago26/
-│       ├── Modelo/       ← construcción del dataset, insights, armado del dashboard, resultados/
-│       └── Presentacion/ ← generador del deck, gráficos, HTML y PDF finales
+│   ├── Entregable 2/
+│   │   ├── Entregable 2 - Parte A/B - *.docx   ← consignas y versiones completadas
+│   │   ├── PROBLEMAS-CALIDAD-DATOS.md          ← hallazgos H1-H12, R1-R2 y su tratamiento
+│   │   ├── Dashboard-Calidad-Antes-Despues.html
+│   │   ├── EDA/          ← scripts de EDA y calidad, resultados/ (logs, csv, json), graficos/ y graficos_ago26/
+│   │   ├── Modelo/       ← construcción del dataset, insights, armado del dashboard, resultados/
+│   │   └── Presentacion/ ← generador del deck, gráficos, HTML y PDF finales
+│   ├── Entregable 3/              ← TP3 entregado: Compilado/ (docx, pdf, xlsx ROI), Modelo/ (etapas 1-4, v3), Presentacion/
+│   └── Entregable 4/              ← ★ ENTREGA FINAL: informe, presentación, dashboard y sus generadores (ver su README.md)
 ├── Material/                      ← respuestas del negocio y diapositivas de la Unidad 2
 ├── Mejoras/                       ← feedback de la cátedra
 ├── Cambios/                       ← documentos de análisis del TP1 (históricos)
@@ -91,7 +101,9 @@ Requisitos: Python 3.11+ con `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `p
 | 9. Dashboard | `python "Entregable/Entregable 2/Modelo/armar_dashboard.py"` | `Dashboard-Calidad-Antes-Despues.html` |
 | 10. Presentación | `graficos_presentacion.py` → `generar_deck.py` → `armar_html.py` (en `Presentacion/`) | HTML de las dos versiones; el PDF se imprime con Edge (ver `Presentacion/README.md`) |
 
-Los `.docx` se editaron con scripts puntuales de python-docx; si se regeneran los números, actualizar el Word a mano o pedirle a Claude que lo haga.
+**Entrega final (Entregable 4):** modelo, gráficos, scoring, dashboard, informe y presentación se regeneran en ese orden. Los comandos y qué editar para cada cambio están en [`Entregable/Entregable 4/README.md`](Entregable/Entregable%204/README.md#cómo-regenerar-desde-la-raíz-del-repo). Ahí el informe y la presentación **sí** se generan por script: no se editan a mano.
+
+Los `.docx` del Entregable 2 se editaron con scripts puntuales de python-docx; si se regeneran los números, actualizar el Word a mano o pedirle a Claude que lo haga.
 
 ---
 

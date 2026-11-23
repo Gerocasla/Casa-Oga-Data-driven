@@ -2,6 +2,8 @@
 
 Anotar acá **cada modificación** hecha sobre un entregable ya presentado. Al armar un consolidado, esta tabla se vuelca en la sección "Cambios" del documento.
 
+> **23-11-2026:** la sección «Cambios» del informe final (§12, con 12.1 E1, 12.2 E2 y 12.3 E3) ya consolida todas las correcciones aplicadas y es la versión vigente. Las tablas de abajo quedan como historial; si se cambia algo más, hay que editar `Entregable 4/Informe/armar_informe_final.py` (lista de cambios de la §12) y regenerar.
+
 ## Entregable 1 (TP1)
 Versión original entregada: `Entregable\Entregable 1\Entregable_1_Consolidado_G1.docx`
 

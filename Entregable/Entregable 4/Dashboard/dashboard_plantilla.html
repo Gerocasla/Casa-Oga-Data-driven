@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa Óga · Alertas de stock</title>
+<style>
+:root{
+  --bg:#f6f5f2; --surface:#ffffff; --surface2:#efeee9; --ink:#0b0b0b; --ink2:#52514e; --ink3:#8a8984; --grid:#e4e3df; --line:#d6d5cf;
+  --blue:#2a78d6; --blue-soft:#dce9f9; --orange:#eb6834; --orange-soft:#fbe3d9; --gray:#8a8984; --green:#2f8f5b; --red:#c8412b;
+  --shadow:0 1px 2px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121211; --surface:#1c1c1a; --surface2:#262624; --ink:#f2f1ec; --ink2:#b9b8b2; --ink3:#86857f; --grid:#33332f; --line:#3d3d39;
+    --blue:#5b9bea; --blue-soft:#1f3350; --orange:#f08458; --orange-soft:#4a2a1d; --gray:#8f8e88; --green:#4fb07c; --red:#e06a52;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121211; --surface:#1c1c1a; --surface2:#262624; --ink:#f2f1ec; --ink2:#b9b8b2; --ink3:#86857f; --grid:#33332f; --line:#3d3d39;
+  --blue:#5b9bea; --blue-soft:#1f3350; --orange:#f08458; --orange-soft:#4a2a1d; --gray:#8f8e88; --green:#4fb07c; --red:#e06a52;
+  --shadow:none;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 "Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+header{background:var(--surface);border-bottom:1px solid var(--line);padding:14px 24px 0;position:sticky;top:0;z-index:20}
+.top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+h1{font-size:18px;margin:0;font-weight:700;letter-spacing:-.01em}
+.sub{color:var(--ink2);font-size:13px}
+.theme{margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink2);border-radius:6px;padding:3px 9px;cursor:pointer;font:inherit;font-size:12px}
+nav{display:flex;gap:2px;margin-top:10px;overflow-x:auto}
+nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink2);padding:8px 12px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+nav button small{display:block;font-weight:400;font-size:11px;color:var(--ink3)}
+nav button.on{color:var(--ink);border-bottom-color:var(--blue)}
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:end;padding:12px 24px;background:var(--surface2);border-bottom:1px solid var(--line)}
+.filters label{display:flex;flex-direction:column;font-size:11px;color:var(--ink2);gap:3px;font-weight:600}
+select,input[type=search]{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:130px}
+.btn{font:inherit;font-size:13px;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.fnote{font-size:12px;color:var(--ink2);margin-left:auto;align-self:center}
+main{padding:20px 24px 48px;max-width:1440px;margin:0 auto}
+section.view{display:none}
+section.view.on{display:block}
+.lead{font-size:15px;color:var(--ink2);max-width:980px;margin:0 0 16px}
+.lead b{color:var(--ink)}
+.grid{display:grid;gap:14px}
+.k5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.c32{grid-template-columns:3fr 2fr}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);min-width:0}
+.card h3{margin:0 0 2px;font-size:14px}
+.card .hint{margin:0 0 10px;color:var(--ink2);font-size:12px}
+.kpi .v{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.1;margin-top:4px}
+.kpi .l{font-size:12px;color:var(--ink2);font-weight:600}
+.kpi .d{font-size:12px;color:var(--ink2);margin-top:4px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:999px;white-space:nowrap}
+.pA{background:var(--orange-soft);color:var(--orange)}
+.pB{background:var(--blue-soft);color:var(--blue)}
+.act{font-weight:600}
+.tw{overflow:auto;max-height:620px;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--grid);text-align:left;vertical-align:top}
+th{position:sticky;top:0;background:var(--surface2);font-size:11.5px;color:var(--ink2);cursor:pointer;user-select:none;white-space:nowrap;z-index:1}
+th.sorted::after{content:" ▾"}
+th.sorted.asc::after{content:" ▴"}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover td{background:var(--surface2)}
+tr.out td{color:var(--ink3)}
+ul.mot{margin:0;padding-left:15px;min-width:250px}
+table.al{min-width:1180px}
+td .act + .muted{min-width:180px}
+ul.mot li{margin:0}
+.muted{color:var(--ink3)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--ink2);margin:0 0 6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+svg text{fill:var(--ink2);font-size:11px;font-family:"Segoe UI",Arial,sans-serif}
+svg .ax{stroke:var(--grid)}
+svg .lbl{fill:var(--ink);font-size:11px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 9px;border-radius:6px;z-index:50;max-width:280px;display:none;line-height:1.35}
+.note{font-size:12px;color:var(--ink2);border-left:3px solid var(--line);padding:4px 10px;margin:10px 0 0}
+.warn{border-left-color:var(--orange)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg button{background:var(--surface);border:0;padding:5px 11px;font:inherit;font-size:12px;color:var(--ink2);cursor:pointer}
+.seg button.on{background:var(--blue);color:#fff}
+footer{color:var(--ink3);font-size:12px;padding:0 24px 30px;max-width:1440px;margin:0 auto}
+@media (max-width:1100px){.k5{grid-template-columns:repeat(3,minmax(0,1fr))}.c32,.c2{grid-template-columns:1fr}}
+@media (max-width:640px){header,main,.filters,footer{padding-left:16px;padding-right:16px}.k5,.k4{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi .v{font-size:22px}.fnote{margin-left:0}}
+@media print{header{position:static}.filters,.theme{display:none}section.view{display:block;page-break-after:always}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>Casa Óga · Alertas de stock inmovilizado</h1>
+    <span class="sub" id="subtitulo"></span>
+    <button class="theme" id="theme" title="Cambiar tema claro / oscuro">◐ Tema</button>
+  </div>
+  <nav id="tabs">
+    <button data-v="resumen" class="on">Resumen<small>Dirección</small></button>
+    <button data-v="tiendas">Tiendas<small>Operaciones y tiendas</small></button>
+    <button data-v="lista">Lista de alertas<small>Todas las áreas</small></button>
+    <button data-v="compras">Compras y categorías<small>Compras</small></button>
+    <button data-v="finanzas">Economía<small>Finanzas</small></button>
+    <button data-v="modelo">Modelo<small>Datos y mantenedor</small></button>
+  </nav>
+</header>
+<div class="filters" id="filtros">
+  <label>Región<select id="fRegion"></select></label>
+  <label>Tienda<select id="fTienda"></select></label>
+  <label>Categoría<select id="fCategoria"></select></label>
+  <label>Proveedor<select id="fProveedor"></select></label>
+  <label>Origen de la alerta<select id="fBloque"><option value="">Todas</option><option value="A">A · Regla (cobertura &gt; 12)</option><option value="B">B · Modelo (anticipa a 3 meses)</option></select></label>
+  <label>Acción sugerida<select id="fAccion"></select></label>
+  <label>Capacidad<select id="fCap"><option value="">Todas</option><option value="1">Dentro del cupo de la tienda</option><option value="0">Fuera del cupo</option></select></label>
+  <button class="btn" id="limpiar">Limpiar filtros</button>
+  <span class="fnote" id="fnote"></span>
+</div>
+<main>
+  <!-- RESUMEN -->
+  <section class="view on" id="v-resumen">
+    <p class="lead" id="leadResumen"></p>
+    <div class="grid k5" id="kpisResumen"></div>
+    <div class="grid c32" style="margin-top:14px">
+      <div class="card"><h3>Casos detectados por mes: flujo propuesto contra la regla con el mismo cupo</h3>
+        <p class="hint">Meses ya cerrados, en los que sabemos qué pasó 3 meses después (validación abr–sep 2025 y test ene–may 2026). El modelo gana por poco, en 9 de 11 meses. En 2026 los casos reales crecen más rápido que el cupo.</p>
+        <div class="legend"><span><i style="background:var(--blue)"></i>Flujo propuesto (regla + modelo)</span><span><i style="background:var(--orange)"></i>Solo regla, mismo cupo</span><span><i style="background:var(--gray)"></i>Casos reales</span></div>
+        <div id="chMensual"></div></div>
+      <div class="card"><h3>Alertas del mes por región</h3><p class="hint">Según los filtros aplicados. Naranja: regla. Azul: modelo.</p><div id="chRegion"></div></div>
+    </div>
+    <div class="grid c2" style="margin-top:14px">
+      <div class="card"><h3>Qué hacer con cada alerta</h3><p class="hint">Acción sugerida. La decide la tienda con Comercial y Compras.</p><div id="chAccion"></div></div>
+      <div class="card"><h3>Cómo se arma la lista del mes</h3><div id="comoSeArma"></div></div>
+    </div>
+  </section>
+
+  <!-- TIENDAS -->
+  <section class="view" id="v-tiendas">
+    <p class="lead">Cada tienda ve sus alertas ordenadas por capital inmovilizado. El cupo de <b id="capT"></b> alertas por tienda y por mes es el máximo declarado por Operaciones; las que quedan fuera se trabajan el mes siguiente si siguen en la lista.</p>
+    <div class="card"><h3>Alertas por tienda contra el cupo</h3><p class="hint">Clic en una barra para ver esa tienda. La línea punteada marca el cupo por tienda.</p>
+      <div class="legend"><span><i style="background:var(--orange)"></i>Regla</span><span><i style="background:var(--blue)"></i>Modelo</span></div>
+      <div id="chTiendas"></div></div>
+    <div class="card" style="margin-top:14px">
+      <div class="row"><h3 style="margin:0">Lista de la tienda</h3><select id="selTienda"></select><button class="btn" id="dlTienda">Descargar CSV de la tienda</button></div>
+      <div class="grid k4" id="kpisTienda" style="margin-bottom:12px"></div>
+      <div class="tw" id="tblTienda"></div>
+    </div>
+  </section>
+
+  <!-- LISTA -->
+  <section class="view" id="v-lista">
+    <div class="row"><input type="search" id="buscar" placeholder="Buscar SKU, subcategoría o tienda…" style="min-width:280px"><button class="btn primary" id="dlLista">Descargar CSV (filtrado)</button><span class="muted" id="cuentaLista"></span></div>
+    <div class="tw" id="tblLista"></div>
+    <p class="note">Las filas grises quedan fuera del cupo de su tienda este mes. «Señales» son los tres datos de la posición que más se apartan del resto de la cadena; ayudan a entender la alerta, no son una relación causal.</p>
+  </section>
+
+  <!-- COMPRAS -->
+  <section class="view" id="v-compras">
+    <p class="lead">Para Compras, la pregunta es <b>qué no volver a comprar</b>. Un SKU en alerta en varias tiendas indica un problema de surtido o de compra, no de ubicación.</p>
+    <div class="grid c2">
+      <div class="card"><h3>Capital en alerta por categoría (ARS millones)</h3><p class="hint">Según los filtros aplicados.</p><div id="chCategoria"></div></div>
+      <div class="card"><h3>Por proveedor</h3><div class="tw" id="tblProveedor" style="max-height:340px"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3>SKUs en alerta en más de una tienda</h3><p class="hint">Candidatos a frenar la recompra o revisar el surtido. Ordenados por la cantidad de tiendas en alerta.</p><div class="tw" id="tblSku" style="max-height:460px"></div></div>
+  </section>
+
+  <!-- FINANZAS -->
+  <section class="view" id="v-finanzas">
+    <p class="lead" id="leadFin"></p>
+    <div class="grid k4" id="kpisFin"></div>
+    <div class="grid c2" style="margin-top:14px">
+      <div class="card"><h3>Retorno de la inversión</h3><p class="hint">A 3 años, en el escenario esperado. Hay dos ROI: automatizar la lista con la regla, sin modelo, y lo que agrega el modelo.</p>
+        <div class="row"><div class="seg" id="segFinPer"><button data-p="validacion" class="on">Año como 2025</button><button data-p="test">Año como 2026</button></div></div>
+        <div class="tw" id="tblRoi"></div></div>
+      <div class="card"><h3>Valor neto por mes según la cantidad de alertas</h3><p class="hint">Validación 2025. Cada acierto vale USD <span id="vVP"></span> y cada falsa alarma cuesta USD <span id="vFP"></span>. Más alertas suman valor solo mientras aciertan más del <span id="vEq"></span>.</p>
+        <div class="legend"><span><i style="background:var(--blue)"></i>Modelo</span><span><i style="background:var(--orange)"></i>Regla ordenada por cobertura</span></div>
+        <div id="chValor"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3>Sensibilidad: qué supuestos mueven el resultado</h3><div class="tw" id="tblSens"></div></div>
+  </section>
+
+  <!-- MODELO -->
+  <section class="view" id="v-modelo">
+    <p class="lead" id="leadMod"></p>
+    <div class="row"><div class="seg" id="segModPer"><button data-p="validacion" class="on">Validación abr–sep 2025</button><button data-p="test">Test ene–may 2026</button></div></div>
+    <div class="grid c2">
+      <div class="card"><h3>Recall según la cantidad de alertas por mes</h3><p class="hint">Porcentaje de los casos reales detectados. La línea punteada es el cupo propuesto.</p>
+        <div class="legend" id="legCurva"></div><div id="chCurva"></div></div>
+      <div class="card"><h3>Por qué el cupo del modelo es de <span id="kb"></span> alertas</h3><p class="hint">Precisión de cada tanda de 50 alertas que el modelo agrega a la regla (validación 2025). Se agrega una tanda mientras su precisión supera la de equilibrio (línea punteada).</p><div id="chTramos"></div></div>
+    </div>
+    <div class="grid c2" style="margin-top:14px">
+      <div class="card"><h3>Qué variables usa el modelo</h3><p class="hint">Importancia por permutación: puntos de recall que se pierden al mezclar la variable al azar.</p><div id="chImp"></div></div>
+      <div class="card"><h3>Recall por segmento, con intervalo de confianza del 95%</h3><p class="hint">Flujo propuesto. Si el recall global queda dentro del intervalo, el segmento no es distinto del resto.</p>
+        <div class="row"><div class="seg" id="segGrp"><button data-g="region" class="on">Región</button><button data-g="categoria">Categoría</button></div></div><div id="chSeg"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><h3>Comparación de modelos</h3><p class="hint">Casos detectados (VP) y recall a cupos fijos, y PR-AUC. La regla ordena por cobertura actual.</p><div class="tw" id="tblMod"></div></div>
+    <div class="card" style="margin-top:14px"><h3>Ficha del modelo</h3><div id="ficha"></div></div>
+  </section>
+</main>
+<footer id="pie"></footer>
+<div class="tip" id="tip"></div>
+
+<script id="datos" type="application/json">__DATOS__</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById("datos").textContent);
+const R = D.resultados_modelo;
+const $ = s => document.querySelector(s);
+const NF = new Intl.NumberFormat("es-AR");
+const n0 = v => v == null ? "–" : NF.format(Math.round(v));
+const n1 = v => v == null ? "–" : new Intl.NumberFormat("es-AR", {minimumFractionDigits: 1, maximumFractionDigits: 1}).format(v);
+const n2 = v => new Intl.NumberFormat("es-AR", {minimumFractionDigits: 2, maximumFractionDigits: 2}).format(v);
+const pc = (v, d = 1) => v == null ? "–" : new Intl.NumberFormat("es-AR", {minimumFractionDigits: d, maximumFractionDigits: d}).format(v * 100) + "%";
+const ars = v => "ARS " + n1(v / 1e6) + " M";
+const usd = v => "USD " + n0(v);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+const mesTxt = m => MESES[+m.slice(5, 7) - 1] + "-" + m.slice(2, 4);
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const CAT = {Bano: "Baño", Decoracion: "Decoración", Iluminacion: "Iluminación", Organizacion: "Organización"};
+const cn = c => CAT[c] || c;
+const NOMBRE_MOD = {Regla: "Regla (cobertura)", Logistica: "Regresión logística", HistGradientBoosting: "Gradient boosting (elegido)", Ensamble: "Ensamble de 3 árboles"};
+const VARS = {u6_suma: "Unidades vendidas en 6 meses", cobertura: "Cobertura actual", cv_u12: "Variabilidad de la venta (12 m)",
+  stock_sku_cadena: "Stock del SKU en la cadena", peso_posicion_en_tienda: "Peso de la posición en la tienda", u12_prom: "Venta promedio 12 meses",
+  unidades_vendidas: "Unidades vendidas en el mes", u_lag1: "Venta del mes anterior", subcategoria: "Subcategoría", u3_suma: "Unidades vendidas en 3 meses",
+  stock_disponible: "Stock disponible", antig_sku_meses: "Antigüedad del SKU", meses_sin_venta: "Meses seguidos sin venta",
+  stock_vs_prom_sku: "Stock vs promedio del SKU", tendencia_u3_vs_u12: "Tendencia 3 vs 12 meses", cobertura_sku_cadena: "Cobertura del SKU en la cadena",
+  u12_max: "Venta máxima mensual (12 m)", var_stock_3m: "Variación del stock (3 m)", cobertura_3m_antes: "Cobertura hace 3 meses",
+  var_cobertura_3m: "Variación de la cobertura (3 m)", tiendas_cob12_sku: "Tiendas con el SKU en > 12 meses", meses_con_venta_12: "Meses con venta (12 m)",
+  proveedor: "Proveedor", categoria: "Categoría", region: "Región", formato: "Formato de tienda", mes_del_anio: "Mes del año",
+  tiendas_con_stock_sku: "Tiendas con stock del SKU", antig_posicion_meses: "Antigüedad de la posición", pct_pos_cob12_tienda: "% de posiciones en rojo de la tienda"};
+
+/* ---------------- tooltip ---------------- */
+const tip = $("#tip");
+document.addEventListener("mousemove", e => {
+  const t = e.target.closest("[data-tip]");
+  if (!t) { tip.style.display = "none"; return; }
+  tip.innerHTML = t.getAttribute("data-tip");
+  tip.style.display = "block";
+  const x = Math.min(e.clientX + 14, innerWidth - tip.offsetWidth - 8), y = Math.min(e.clientY + 14, innerHeight - tip.offsetHeight - 8);
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+});
+
+/* ---------------- svg helpers ---------------- */
+function svgEl(w, h, body) { return `<svg viewBox="0 0 ${w} ${h}" width="100%" role="img" style="display:block;max-height:${h + 20}px">${body}</svg>`; }
+function niceMax(v) { if (v <= 0) return 1; const p = Math.pow(10, Math.floor(Math.log10(v))); const m = v / p; return (m <= 1 ? 1 : m <= 1.5 ? 1.5 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 3 ? 3 : m <= 4 ? 4 : m <= 5 ? 5 : m <= 6 ? 6 : m <= 8 ? 8 : 10) * p; }
+const nTicks = (span) => { const p = Math.pow(10, Math.floor(Math.log10(span))); const m = Math.round(span / p * 10) / 10; return ({1: 4, 1.5: 3, 2: 4, 2.5: 5, 3: 3, 4: 4, 5: 5, 6: 3, 8: 4, 10: 5})[m] || 4; };
+function yAxis(x0, x1, y0, y1, max, fmt, ticks) {
+  ticks = ticks || nTicks(max);
+  let s = "";
+  for (let i = 0; i <= ticks; i++) {
+    const v = max * i / ticks, y = y1 - (y1 - y0) * i / ticks;
+    s += `<line class="ax" x1="${x0}" x2="${x1}" y1="${y}" y2="${y}"/><text x="${x0 - 6}" y="${y + 4}" text-anchor="end">${fmt(v)}</text>`;
+  }
+  return s;
+}
+/* horizontal bars; rows: [{label, parts:[{v,color,tip}], total}] */
+function hbars(rows, opt = {}) {
+  const w = 560, lw = opt.labelW || 170, rowH = opt.rowH || 24, h = rows.length * rowH + 24, rp = opt.rightPad || 60;
+  const max = opt.max || niceMax(Math.max(...rows.map(r => r.parts.reduce((a, p) => a + p.v, 0)), 1));
+  const x = v => lw + (w - lw - rp) * v / max;
+  let s = "";
+  rows.forEach((r, i) => {
+    const y = 6 + i * rowH; let acc = 0;
+    s += `<text x="${lw - 8}" y="${y + rowH / 2 + 3}" text-anchor="end" class="lbl">${esc(r.label)}</text>`;
+    r.parts.forEach((p, j) => {
+      const xa = x(acc), xb = x(acc + p.v), wd = Math.max(0, xb - xa - (j < r.parts.length - 1 && p.v > 0 ? 2 : 0));
+      if (p.v > 0) s += `<rect x="${xa}" y="${y + 4}" width="${wd}" height="${rowH - 9}" rx="3" fill="${p.color}" data-tip="${esc(p.tip || "")}" ${r.click ? `style="cursor:pointer" data-click="${esc(r.click)}"` : ""}/>`;
+      acc += p.v;
+    });
+    if (r.ci) {
+      const [a, b] = r.ci;
+      s += `<line x1="${x(a)}" x2="${x(b)}" y1="${y + rowH / 2}" y2="${y + rowH / 2}" stroke="${css("--ink")}" stroke-width="1.5"/>`;
+      s += `<line x1="${x(a)}" x2="${x(a)}" y1="${y + 7}" y2="${y + rowH - 7}" stroke="${css("--ink")}"/><line x1="${x(b)}" x2="${x(b)}" y1="${y + 7}" y2="${y + rowH - 7}" stroke="${css("--ink")}"/>`;
+    }
+    s += `<text x="${r.ci ? w - rp + 8 : x(acc) + 6}" y="${y + rowH / 2 + 3}" class="lbl">${esc(r.total != null ? r.total : n0(acc))}</text>`;
+  });
+  if (opt.ref != null) s += `<line x1="${x(opt.ref)}" x2="${x(opt.ref)}" y1="2" y2="${h - 18}" stroke="${css("--ink2")}" stroke-dasharray="4 3"/><text x="${x(opt.ref)}" y="${h - 4}" text-anchor="middle">${esc(opt.refLabel || "")}</text>`;
+  return svgEl(w, h, s);
+}
+/* vertical bars (single or stacked) with x labels */
+function vbars(cats, series, opt = {}) {
+  const w = opt.w || 980, h = opt.h || 240, l = 44, r = opt.ref != null ? 86 : 10, t = 14, b = opt.rot ? 64 : 34;
+  const tot = cats.map((_, i) => series.reduce((a, s) => a + s.v[i], 0));
+  const max = opt.max || niceMax(Math.max(...tot, opt.ref || 0));
+  const bw = (w - l - r) / cats.length, y = v => h - b - (h - b - t) * v / max;
+  let s = yAxis(l, w - r, t, h - b, max, opt.fmt || n0);
+  cats.forEach((c, i) => {
+    let acc = 0; const x = l + i * bw + bw * .15, wd = bw * .7;
+    series.forEach((se, j) => {
+      const v = se.v[i]; if (v <= 0) { return; }
+      const ya = y(acc + v), hh = y(acc) - y(acc + v) - (acc > 0 ? 2 : 0);
+      s += `<rect x="${x}" y="${ya}" width="${wd}" height="${Math.max(hh, 0)}" rx="3" fill="${se.color}" data-tip="${esc(opt.tip ? opt.tip(i, j) : se.name + ": " + n0(v))}" ${opt.click ? `style="cursor:pointer" data-click="${esc(opt.click(i))}"` : ""}/>`;
+      acc += v;
+    });
+    const tx = l + i * bw + bw / 2;
+    s += opt.rot ? `<text transform="translate(${tx},${h - b + 10}) rotate(-50)" text-anchor="end">${esc(c)}</text>` : `<text x="${tx}" y="${h - b + 16}" text-anchor="middle">${esc(c)}</text>`;
+    if (opt.top) s += `<text x="${tx}" y="${y(tot[i]) - 4}" text-anchor="middle" class="lbl">${esc(opt.top(i))}</text>`;
+  });
+  if (opt.ref != null) s += `<line x1="${l}" x2="${w - r}" y1="${y(opt.ref)}" y2="${y(opt.ref)}" stroke="${css("--ink2")}" stroke-dasharray="5 4"/><text x="${w - r + 6}" y="${y(opt.ref) + 4}">${esc(opt.refLabel || "")}</text>`;
+  return svgEl(w, h, s);
+}
+/* line chart; xs numeric or categorical index */
+function lines(xs, series, opt = {}) {
+  const w = opt.w || 980, h = opt.h || 250, l = 48, r = 26, t = 14, b = 34;
+  const xmin = Math.min(...xs), xmax = Math.max(...xs);
+  const allv = series.flatMap(s => s.v).filter(v => v != null);
+  const rawMin = Math.min(0, ...allv), ymaxRaw = opt.ymax || niceMax(Math.max(...allv));
+  const nt0 = nTicks(ymaxRaw), st = ymaxRaw / nt0, below = opt.ymin != null ? 0 : Math.ceil(-rawMin / st);
+  const ymin = opt.ymin != null ? opt.ymin : -below * st;
+  const X = v => l + (w - l - r) * (v - xmin) / (xmax - xmin || 1), Y = v => h - b - (h - b - t) * (v - ymin) / (ymaxRaw - ymin);
+  let s = "";
+  const nt = opt.ymin != null ? nTicks(ymaxRaw - ymin) : nt0 + below; for (let i = 0; i <= nt; i++) { const v = ymin + (ymaxRaw - ymin) * i / nt; s += `<line class="ax" x1="${l}" x2="${w - r}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${l - 6}" y="${Y(v) + 4}" text-anchor="end">${(opt.fmt || n0)(v)}</text>`; }
+  if (ymin < 0) s += `<line x1="${l}" x2="${w - r}" y1="${Y(0)}" y2="${Y(0)}" stroke="${css("--ink2")}"/>`;
+  (opt.xticks || xs).forEach((v, i) => { const lab = opt.xlab ? opt.xlab(v, i) : v; if (lab !== "") s += `<text x="${X(v)}" y="${h - b + 16}" text-anchor="middle">${esc(lab)}</text>`; });
+  if (opt.vline != null) s += `<line x1="${X(opt.vline)}" x2="${X(opt.vline)}" y1="${t}" y2="${h - b}" stroke="${css("--ink2")}" stroke-dasharray="5 4"/><text x="${X(opt.vline) + 5}" y="${h - b - 6}">${esc(opt.vlineLabel || "")}</text>`;
+  if (opt.band) s += `<rect x="${X(opt.band[0])}" y="${t}" width="${X(opt.band[1]) - X(opt.band[0])}" height="${h - b - t}" fill="${css("--ink3")}" opacity=".08"/><text x="${(X(opt.band[0]) + X(opt.band[1])) / 2}" y="${t + 10}" text-anchor="middle">${esc(opt.bandLabel || "")}</text>`;
+  series.forEach(se => {
+    let d = "", gap = true;
+    se.v.forEach((v, i) => { if (v == null) { gap = true; return; } d += (gap ? "M" : "L") + X(xs[i]) + "," + Y(v); gap = false; });
+    s += `<path d="${d}" fill="none" stroke="${se.color}" stroke-width="2" ${se.dash ? 'stroke-dasharray="5 4"' : ""}/>`;
+    se.v.forEach((v, i) => { if (v != null) s += `<circle cx="${X(xs[i])}" cy="${Y(v)}" r="4" fill="${se.color}" stroke="${css("--surface")}" stroke-width="2"/><circle cx="${X(xs[i])}" cy="${Y(v)}" r="11" fill="transparent" data-tip="${esc((opt.tip ? opt.tip(i, se) : se.name + ": " + n0(v)))}"/>`; });
+  });
+  return svgEl(w, h, s);
+}
+
+/* ---------------- filters ---------------- */
+const A = D.alertas;
+const F = {region: "", tienda: "", categoria: "", proveedor: "", bloque: "", accion: "", cap: ""};
+const uniq = k => [...new Set(A.map(a => a[k]))].sort((a, b) => String(a).localeCompare(String(b), "es", {numeric: true}));
+function fillSel(id, vals, all = "Todas", lab = v => v) { $(id).innerHTML = `<option value="">${all}</option>` + vals.map(v => `<option value="${esc(v)}">${esc(lab(v))}</option>`).join(""); }
+const TN = Object.fromEntries(D.tiendas.map(t => [t.tienda_id, t.tienda]));
+function refreshTiendaSel() {
+  const ts = D.tiendas.filter(t => !F.region || t.region === F.region).map(t => t.tienda_id).sort();
+  fillSel("#fTienda", ts, "Todas", v => TN[v].replace("Casa Oga ", ""));
+  $("#fTienda").value = ts.includes(F.tienda) ? F.tienda : "";
+  if (!ts.includes(F.tienda)) F.tienda = "";
+}
+fillSel("#fRegion", uniq("region")); fillSel("#fCategoria", uniq("categoria"), "Todas", cn); fillSel("#fProveedor", uniq("proveedor")); fillSel("#fAccion", uniq("accion"));
+refreshTiendaSel();
+function filtered(ignoreTienda = false) {
+  return A.filter(a => (!F.region || a.region === F.region) && (ignoreTienda || !F.tienda || a.tienda_id === F.tienda) &&
+    (!F.categoria || a.categoria === F.categoria) && (!F.proveedor || a.proveedor === F.proveedor) && (!F.bloque || a.bloque === F.bloque) &&
+    (!F.accion || a.accion === F.accion) && (F.cap === "" || String(+a.dentro_capacidad) === F.cap));
+}
+const fmap = {fRegion: "region", fTienda: "tienda", fCategoria: "categoria", fProveedor: "proveedor", fBloque: "bloque", fAccion: "accion", fCap: "cap"};
+Object.entries(fmap).forEach(([id, k]) => $("#" + id).addEventListener("change", e => {
+  F[k] = e.target.value; if (k === "region") refreshTiendaSel();
+  if (k === "tienda" && F.tienda) $("#selTienda").value = F.tienda;
+  render();
+}));
+$("#limpiar").onclick = () => { Object.keys(F).forEach(k => F[k] = ""); Object.keys(fmap).forEach(id => $("#" + id).value = ""); refreshTiendaSel(); render(); };
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-click]"); if (!c) return;
+  const v = c.getAttribute("data-click");
+  if (v.startsWith("T")) { $("#selTienda").value = v; renderTienda(); $("#selTienda").scrollIntoView({behavior: "smooth", block: "center"}); }
+});
+
+/* ---------------- tabs ---------------- */
+let vista = "resumen";
+document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#tabs button").forEach(x => x.classList.toggle("on", x === b));
+  vista = b.dataset.v;
+  document.querySelectorAll("section.view").forEach(s => s.classList.toggle("on", s.id === "v-" + vista));
+  $("#filtros").style.display = ["finanzas", "modelo"].includes(vista) ? "none" : "flex";
+  render();
+});
+$("#theme").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme");
+  const dark = cur ? cur === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  document.documentElement.setAttribute("data-theme", dark ? "light" : "dark");
+  try { localStorage.setItem("casaoga-tema", dark ? "light" : "dark"); } catch (e) {}
+  render();
+};
+try { const t = localStorage.getItem("casaoga-tema"); if (t) document.documentElement.setAttribute("data-theme", t); } catch (e) {}
+
+/* ---------------- tables ---------------- */
+function table(el, cols, rows, opt = {}) {
+  const st = el._sort || opt.sort || null;
+  if (st) { const c = cols.find(c => c.k === st.k); rows = rows.slice().sort((a, b) => { const x = c.s ? c.s(a) : a[c.k], y = c.s ? c.s(b) : b[c.k]; return (x > y ? 1 : x < y ? -1 : 0) * (st.asc ? 1 : -1); }); }
+  const lim = opt.limit || 1500, shown = rows.slice(0, lim);
+  el.innerHTML = `<table class="${opt.cls || ""}"><thead><tr>${cols.map(c => `<th data-k="${c.k}" class="${c.n ? "n " : ""}${st && st.k === c.k ? "sorted" + (st.asc ? " asc" : "") : ""}">${c.t}</th>`).join("")}</tr></thead><tbody>` +
+    shown.map(r => `<tr class="${opt.rowClass ? opt.rowClass(r) : ""}">${cols.map(c => `<td class="${c.n ? "n" : ""}">${c.f ? c.f(r) : esc(r[c.k] ?? "")}</td>`).join("")}</tr>`).join("") +
+    `</tbody></table>` + (rows.length > lim ? `<p class="note">Se muestran ${n0(lim)} de ${n0(rows.length)} filas. Usá los filtros o descargá el CSV.</p>` : "");
+  el.querySelectorAll("th").forEach(th => th.onclick = () => { const k = th.dataset.k; const cur = el._sort || opt.sort; el._sort = {k, asc: cur && cur.k === k ? !cur.asc : false}; table(el, cols, rows, opt); });
+}
+const pill = b => `<span class="pill p${b}" data-tip="${b === "A" ? "Regla: la posición ya tiene más de 12 meses de cobertura" : "Modelo: todavía no llega a 12 meses, pero el modelo anticipa que los va a superar en 3 meses"}">${b === "A" ? "A · Regla" : "B · Modelo"}</span>`;
+const COLS_ALERTA = [
+  {k: "prioridad_tienda", t: "Prioridad", n: 1},
+  {k: "tienda", t: "Tienda", f: r => esc(r.tienda.replace("Casa Oga ", ""))},
+  {k: "sku", t: "SKU"},
+  {k: "subcategoria", t: "Subcategoría", f: r => `${esc(r.subcategoria)}<div class="muted">${esc(cn(r.categoria))} · ${esc(r.proveedor)}</div>`},
+  {k: "bloque", t: "Origen", f: r => pill(r.bloque)},
+  {k: "stock", t: "Stock", n: 1, f: r => n0(r.stock)},
+  {k: "venta_12m_prom", t: "Venta/mes", n: 1, f: r => n1(r.venta_12m_prom)},
+  {k: "cobertura", t: "Cobertura (meses)", n: 1, s: r => r.cobertura == null ? 1e9 : r.cobertura, f: r => r.cobertura == null ? "sin venta 12 m" : n1(r.cobertura)},
+  {k: "capital_ars", t: "Capital ARS", n: 1, f: r => n0(r.capital_ars) + (r.costo_imputado ? ' <span class="muted" data-tip="Costo estimado desde órdenes de compra (SKU sin costo en el catálogo)">*</span>' : "")},
+  {k: "percentil", t: "Riesgo modelo", n: 1, f: r => `<span data-tip="Probabilidad estimada ${n1(r.score * 100)}%. Percentil ${n1(r.percentil)} entre las ${n0(D.universo_mes.posiciones)} posiciones del mes">${n0(r.percentil)}</span>`},
+  {k: "accion", t: "Acción sugerida", f: r => `<span class="act">${esc(r.accion)}</span><div class="muted">${esc(r.detalle_accion)}</div>`},
+  {k: "motivos", t: "Señales", s: r => r.motivos[0], f: r => `<ul class="mot">${r.motivos.map(m => `<li>${esc(m)}</li>`).join("")}</ul>`},
+];
+function csv(rows, name) {
+  const cols = ["tienda_id", "tienda", "region", "prioridad_tienda", "dentro_capacidad", "sku", "categoria", "subcategoria", "proveedor", "bloque", "stock", "venta_12m_prom", "venta_6m", "cobertura", "meses_sin_venta", "capital_ars", "score", "percentil", "accion", "detalle_accion", "motivos"];
+  const q = v => { v = Array.isArray(v) ? v.join(" | ") : v == null ? "" : String(v); return /[";\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  const txt = "﻿" + cols.join(";") + "\n" + rows.map(r => cols.map(c => q(r[c])).join(";")).join("\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], {type: "text/csv;charset=utf-8"})); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/* ---------------- views ---------------- */
+const M = D.mes_lista, FL = R.flujo, ROI = R.roi, VU = R.insumos.valor_unitario.base_e2;
+$("#subtitulo").textContent = `Lista de ${mesTxt(M)} · ${n0(D.universo_mes.posiciones)} posiciones SKU–tienda evaluadas · Grupo 1, ITBA`;
+$("#capT").textContent = D.capacidad_tienda;
+
+function kpi(l, v, d, tipTxt) { return `<div class="card kpi" ${tipTxt ? `data-tip="${esc(tipTxt)}"` : ""}><div class="l">${l}</div><div class="v">${v}</div><div class="d">${d || ""}</div></div>`; }
+
+function renderResumen(rows) {
+  const a = rows.filter(r => r.bloque === "A").length, b = rows.length - a;
+  const cap = rows.reduce((s, r) => s + r.capital_ars, 0), capIn = rows.filter(r => r.dentro_capacidad).reduce((s, r) => s + r.capital_ars, 0);
+  const inCap = rows.filter(r => r.dentro_capacidad).length;
+  const fv = FL.validacion, ft = FL.test;
+  $("#leadResumen").innerHTML = `En ${mesTxt(M)} hay <b>${n0(D.universo_mes.posiciones_cob12)} posiciones con más de 12 meses de cobertura</b> (${ars(D.universo_mes.capital_cob12_ars)} a costo). La regla las marca a todas y el modelo suma <b>${D.k_bloque_b} que todavía no llegan a 12 meses, pero van a llegar en 3</b>. La lista completa supera el cupo de las tiendas, así que cada tienda empieza por las de más capital.`;
+  $("#kpisResumen").innerHTML =
+    kpi("Alertas del mes", n0(rows.length), `${n0(a)} por regla · ${n0(b)} por modelo`) +
+    kpi("Capital en alerta", ars(cap), `${ars(capIn)} dentro del cupo`) +
+    kpi("Dentro del cupo de las tiendas", n0(inCap), `máximo ${D.capacidad_tienda} por tienda; ${n0(rows.length - inCap)} quedan para el mes siguiente`) +
+    kpi("Casos extra contra la regla", "+" + pc(fv.flujo.vp / fv.regla_mismo_cupo.vp - 1, 0), `2025: ${n0(fv.flujo.vp)} vs ${n0(fv.regla_mismo_cupo.vp)} · 2026: ${n0(ft.flujo.vp)} vs ${n0(ft.regla_mismo_cupo.vp)}`, "Casos detectados con el mismo número de alertas por mes, en meses ya cerrados") +
+    kpi("ROI a 3 años", (ROI.validacion.total.roi_3anios >= 0 ? "+" : "") + pc(ROI.validacion.total.roi_3anios), `año como 2025 · recupero en ${n0(ROI.validacion.total.recupero_meses)} meses`);
+  const ms = D.mensual;
+  $("#chMensual").innerHTML = lines(ms.map((_, i) => i), [
+    {name: "Flujo propuesto", color: css("--blue"), v: ms.map(m => m.vp_flujo)},
+    {name: "Solo regla", color: css("--orange"), v: ms.map(m => m.vp_regla_mismo_cupo)},
+    {name: "Casos reales", color: css("--gray"), dash: true, v: ms.map(m => m.positivos)}],
+    {h: 240, xlab: (v, i) => mesTxt(ms[i].mes), tip: (i) => `<b>${mesTxt(ms[i].mes)}</b> · ${n0(ms[i].alertas)} alertas<br>Flujo: ${n0(ms[i].vp_flujo)} casos (${n0(ms[i].vp_bloque_b)} del modelo)<br>Regla, mismo cupo: ${n0(ms[i].vp_regla_mismo_cupo)} · diferencia ${ms[i].vp_flujo - ms[i].vp_regla_mismo_cupo >= 0 ? "+" : ""}${ms[i].vp_flujo - ms[i].vp_regla_mismo_cupo}<br>Casos reales en el mes: ${n0(ms[i].positivos)}`});
+  const regs = [...new Set(A.map(r => r.region))].sort();
+  $("#chRegion").innerHTML = hbars(regs.map(g => { const x = rows.filter(r => r.region === g); const na = x.filter(r => r.bloque === "A").length; return {label: g, parts: [{v: na, color: css("--orange"), tip: `${g}: ${na} por regla`}, {v: x.length - na, color: css("--blue"), tip: `${g}: ${x.length - na} por modelo`}]}; }), {labelW: 90});
+  const accs = [...new Set(A.map(r => r.accion))];
+  $("#chAccion").innerHTML = hbars(accs.map(ac => { const x = rows.filter(r => r.accion === ac); return {label: ac, total: `${n0(x.length)} · ${ars(x.reduce((s, r) => s + r.capital_ars, 0))}`, parts: [{v: x.length, color: css("--blue"), tip: `${ac}: ${n0(x.length)} alertas`}]}; }), {labelW: 130});
+  $("#comoSeArma").innerHTML = `<table><tbody>
+   <tr><td>${pill("A")}</td><td><b>Bloque A · regla.</b> Entran todas las posiciones con más de 12 meses de cobertura (stock dividido por la venta promedio de 12 meses). Se explican solas.</td></tr>
+   <tr><td>${pill("B")}</td><td><b>Bloque B · modelo.</b> Las ${D.k_bloque_b} posiciones con mayor riesgo según el modelo entre las que todavía no llegan a 12 meses. El cupo se fijó en tandas de 50, mientras cada tanda acertara más del ${pc(VU.precision_equilibrio)} (validación 2025).</td></tr>
+   <tr><td><b>Orden</b></td><td>Dentro de cada tienda, por capital a costo. Las primeras ${D.capacidad_tienda} entran en el cupo del mes.</td></tr>
+   <tr><td><b>Acción</b></td><td><b>Transferir</b> si el SKU no sobra en la cadena y otra tienda lo vende rápido. <b>Frenar compra</b> si hay órdenes pendientes. <b>Frenar reposición</b> si es del modelo y todavía vende. Si no, <b>liquidar</b>. Siempre decide una persona.</td></tr></tbody></table>`;
+}
+
+function renderTiendas(rowsAll) {
+  const ts = D.tiendas.filter(t => !F.region || t.region === F.region);
+  const rows = rowsAll;
+  const data = ts.map(t => { const x = rows.filter(r => r.tienda_id === t.tienda_id); return {t, a: x.filter(r => r.bloque === "A").length, b: x.filter(r => r.bloque === "B").length}; });
+  $("#chTiendas").innerHTML = vbars(data.map(d => d.t.tienda.replace("Casa Oga ", "")), [
+    {name: "Regla", color: css("--orange"), v: data.map(d => d.a)}, {name: "Modelo", color: css("--blue"), v: data.map(d => d.b)}],
+    {h: 270, rot: true, ref: D.capacidad_tienda, refLabel: `cupo ${D.capacidad_tienda}`, click: i => data[i].t.tienda_id,
+     tip: (i) => `<b>${esc(data[i].t.tienda)}</b><br>${data[i].a} por regla · ${data[i].b} por modelo<br>${data[i].t.region} · formato ${data[i].t.formato}`});
+  const sel = $("#selTienda");
+  const opts = ts.map(t => t.tienda_id);
+  const prev = sel.value;
+  sel.innerHTML = opts.map(id => `<option value="${id}">${esc(TN[id])}</option>`).join("");
+  sel.value = F.tienda || (opts.includes(prev) ? prev : opts[0]);
+  renderTienda();
+}
+function tiendaRows() {
+  const id = $("#selTienda").value;
+  return filtered(true).filter(r => r.tienda_id === id).sort((a, b) => a.prioridad_tienda - b.prioridad_tienda);
+}
+function renderTienda() {
+  const id = $("#selTienda").value, t = D.tiendas.find(x => x.tienda_id === id); if (!t) return;
+  const rows = tiendaRows();
+  const cap = rows.reduce((s, r) => s + r.capital_ars, 0);
+  $("#kpisTienda").innerHTML = kpi("Alertas", n0(rows.length), `${rows.filter(r => r.bloque === "A").length} regla · ${rows.filter(r => r.bloque === "B").length} modelo`) +
+    kpi("Dentro del cupo", n0(rows.filter(r => r.dentro_capacidad).length), `de ${D.capacidad_tienda} posibles`) +
+    kpi("Capital en alerta", ars(cap), `${pc(cap / t.capital_total_ars)} del stock de la tienda`) +
+    kpi("Posiciones evaluadas", n0(t.posiciones), `${t.region} · formato ${t.formato}`);
+  table($("#tblTienda"), COLS_ALERTA.filter(c => c.k !== "tienda"), rows, {cls: "al", sort: {k: "prioridad_tienda", asc: true}, rowClass: r => r.dentro_capacidad ? "" : "out"});
+}
+$("#selTienda").onchange = renderTienda;
+$("#dlTienda").onclick = () => csv(tiendaRows(), `alertas_${$("#selTienda").value}_${M}.csv`);
+
+function renderLista(rows) {
+  const q = $("#buscar").value.trim().toLowerCase();
+  const x = q ? rows.filter(r => (r.sku + " " + r.subcategoria + " " + r.tienda + " " + r.categoria).toLowerCase().includes(q)) : rows;
+  $("#cuentaLista").textContent = `${n0(x.length)} alertas · ${ars(x.reduce((s, r) => s + r.capital_ars, 0))}`;
+  table($("#tblLista"), COLS_ALERTA, x, {cls: "al", sort: {k: "capital_ars", asc: false}, rowClass: r => r.dentro_capacidad ? "" : "out"});
+  $("#tblLista")._rows = x;
+}
+$("#buscar").oninput = () => renderLista(filtered());
+$("#dlLista").onclick = () => csv($("#tblLista")._rows || filtered(), `alertas_${M}_filtrado.csv`);
+
+function renderCompras(rows) {
+  const cats = [...new Set(A.map(r => r.categoria))];
+  const cd = cats.map(c => { const x = rows.filter(r => r.categoria === c); const a = x.filter(r => r.bloque === "A").reduce((s, r) => s + r.capital_ars, 0), b = x.filter(r => r.bloque === "B").reduce((s, r) => s + r.capital_ars, 0); return {c, a, b, n: x.length}; }).sort((p, q) => (q.a + q.b) - (p.a + p.b));
+  $("#chCategoria").innerHTML = hbars(cd.map(d => ({label: cn(d.c), total: `${n1((d.a + d.b) / 1e6)} · ${n0(d.n)} alertas`, parts: [{v: d.a / 1e6, color: css("--orange"), tip: `${d.c}, regla: ${ars(d.a)}`}, {v: d.b / 1e6, color: css("--blue"), tip: `${d.c}, modelo: ${ars(d.b)}`}]})), {labelW: 120});
+  const pv = [...new Set(rows.map(r => r.proveedor))].map(p => { const x = rows.filter(r => r.proveedor === p); return {proveedor: p, alertas: x.length, skus: new Set(x.map(r => r.sku)).size, capital: x.reduce((s, r) => s + r.capital_ars, 0), liquidar: x.filter(r => r.accion === "Liquidar").length}; });
+  table($("#tblProveedor"), [{k: "proveedor", t: "Proveedor"}, {k: "alertas", t: "Alertas", n: 1}, {k: "skus", t: "SKUs", n: 1}, {k: "liquidar", t: "A liquidar", n: 1}, {k: "capital", t: "Capital ARS M", n: 1, f: r => n1(r.capital / 1e6)}], pv, {sort: {k: "capital", asc: false}});
+  const by = {};
+  rows.forEach(r => { (by[r.sku] = by[r.sku] || {sku: r.sku, subcategoria: r.subcategoria, categoria: r.categoria, proveedor: r.proveedor, tiendas: 0, stock: 0, capital: 0, liquidar: 0, transferir: 0}); const o = by[r.sku]; o.tiendas++; o.stock += r.stock; o.capital += r.capital_ars; if (r.accion === "Liquidar") o.liquidar++; if (r.accion === "Transferir") o.transferir++; });
+  const sk = Object.values(by).filter(o => o.tiendas > 1);
+  table($("#tblSku"), [{k: "sku", t: "SKU"}, {k: "subcategoria", t: "Subcategoría", f: r => `${esc(r.subcategoria)}<div class="muted">${esc(cn(r.categoria))}</div>`}, {k: "proveedor", t: "Proveedor"},
+    {k: "tiendas", t: "Tiendas en alerta", n: 1}, {k: "stock", t: "Stock en alerta", n: 1, f: r => n0(r.stock)}, {k: "capital", t: "Capital ARS", n: 1, f: r => n0(r.capital)},
+    {k: "transferir", t: "A transferir", n: 1}, {k: "liquidar", t: "A liquidar", n: 1}], sk, {sort: {k: "tiendas", asc: false}});
+}
+
+let perFin = "validacion";
+function renderFinanzas() {
+  const r = ROI[perFin], f = FL[perFin];
+  $("#leadFin").innerHTML = `Cada acierto vale <b>USD ${n2(VU.valor_vp_usd)}</b> (capital por posición ARS ${n0(VU.capital_por_posicion_ars)} del E2, con 70% de adopción) y cada falsa alarma cuesta <b>USD ${n2(VU.costo_fp_usd)}</b>. Una alerta conviene si acierta más del <b>${pc(VU.precision_equilibrio)}</b>. La mayor parte del valor viene de <b>automatizar la lista</b>; el modelo agrega USD ${n0(ROI.validacion.valor_incremental_modelo_anual)} por año en un año como 2025.`;
+  $("#kpisFin").innerHTML = kpi("Inversión inicial", usd(r.total.inversion), "desarrollo, datos y piloto") + kpi("Costo recurrente anual", usd(r.total.recurrente), "mantenedor, soporte y reentrenamiento") +
+    kpi("Beneficio anual", usd(r.total.beneficio_anual), `${usd(r.horas_anual)} horas · ${usd(r.valor_regla_anual)} regla · ${usd(r.valor_incremental_modelo_anual)} modelo`) +
+    kpi("ROI a 3 años", (r.total.roi_3anios >= 0 ? "+" : "") + pc(r.total.roi_3anios), r.total.recupero_meses ? `recupero en ${n0(r.total.recupero_meses)} meses` : "no se recupera");
+  const rowR = (lab, q, nota) => ({lab, ben: q.beneficio_anual, inv: q.inversion, rec: q.recurrente, r1: q.roi_anio1, r3: q.roi_3anios, pay: q.recupero_meses, nota});
+  const rows = [rowR("Automatizar la lista con la regla (sin modelo)", r.automatizacion_sin_modelo, "horas ahorradas + valor de la regla"),
+    rowR("Incremental del modelo", r.incremental_modelo, "solo lo que agrega el bloque B"),
+    rowR("<b>Total del proyecto</b>", r.total, "escenario esperado"),
+    rowR("Total, solo salidas de caja", r.total_solo_caja, "sin el tiempo del mantenedor, que ya está en nómina")];
+  table($("#tblRoi"), [{k: "lab", t: "Concepto", f: x => x.lab + `<div class="muted">${x.nota}</div>`}, {k: "ben", t: "Beneficio/año", n: 1, f: x => usd(x.ben)}, {k: "inv", t: "Inversión", n: 1, f: x => usd(x.inv)}, {k: "rec", t: "Recurrente", n: 1, f: x => usd(x.rec)}, {k: "r3", t: "ROI 3 años", n: 1, f: x => pc(x.r3)}, {k: "pay", t: "Recupero (meses)", n: 1, f: x => x.pay == null ? "no recupera" : n0(x.pay)}], rows);
+  $("#vVP").textContent = n2(VU.valor_vp_usd); $("#vFP").textContent = n2(VU.costo_fp_usd); $("#vEq").textContent = pc(VU.precision_equilibrio);
+  const cv = D.curvas.validacion, ks = Object.keys(cv).map(Number).filter(k => k % 50 === 0).sort((a, b) => a - b);
+  $("#chValor").innerHTML = lines(ks, [{name: "Modelo", color: css("--blue"), v: ks.map(k => cv[k].HistGradientBoosting.valor_neto_mes_usd)}, {name: "Regla", color: css("--orange"), v: ks.map(k => cv[k].Regla.valor_neto_mes_usd)}],
+    {w: 560, h: 260, xticks: ks.filter(k => k % 100 === 0), vline: FL.validacion.flujo.alertas_mes, vlineLabel: `cupo ≈ ${n0(FL.validacion.flujo.alertas_mes)}`, band: [420, 700], bandLabel: "capacidad 420–700",
+     tip: (i, se) => `<b>${ks[i]} alertas/mes</b><br>${se.name}: USD ${n0(se.v[i])} por mes`});
+  const s = [];
+  ["validacion", "test"].forEach(p => {
+    const q = ROI[p], lab = p === "validacion" ? "2025" : "2026";
+    s.push({sup: "Escenario esperado", per: lab, r3: q.total.roi_3anios, pay: q.total.recupero_meses});
+    s.push({sup: "Valor por posición del E1 (ARS 126.929 en lugar de 208.730)", per: lab, r3: q.total_valor_posicion_e1.roi_3anios, pay: q.total_valor_posicion_e1.recupero_meses});
+    q.total_desarrollo_3a4_meses.forEach((x, i) => s.push({sup: `Desarrollo del modelo: ${3 + i} meses de un científico de datos (USD ${n0(q.costo_desarrollo_3a4_meses[i])})`, per: lab, r3: x.roi_3anios, pay: x.recupero_meses}));
+  });
+  table($("#tblSens"), [{k: "sup", t: "Supuesto"}, {k: "per", t: "Año de referencia"}, {k: "r3", t: "ROI 3 años", n: 1, f: x => `<span style="color:${x.r3 < 0 ? "var(--red)" : "inherit"}">${pc(x.r3)}</span>`}, {k: "pay", t: "Recupero (meses)", n: 1, f: x => x.pay == null ? "no recupera" : n0(x.pay)}], s);
+}
+document.querySelectorAll("#segFinPer button").forEach(b => b.onclick = () => { perFin = b.dataset.p; document.querySelectorAll("#segFinPer button").forEach(x => x.classList.toggle("on", x === b)); renderFinanzas(); });
+
+let perMod = "validacion", grp = "region";
+function renderModelo() {
+  const p = perMod, cv = D.curvas[p], pos = D.positivos[p];
+  const ks = Object.keys(cv).map(Number).filter(k => k % 50 === 0).sort((a, b) => a - b);
+  const colors = {Regla: css("--orange"), Logistica: css("--gray"), HistGradientBoosting: css("--blue"), Ensamble: css("--ink2")};
+  const mods = ["Regla", "Logistica", "HistGradientBoosting", "Ensamble"];
+  $("#leadMod").innerHTML = `Modelo elegido: <b>gradient boosting</b>. El ensamble de tres árboles no le ganó en la validación interna de 2024 (Top-175/300/420), así que no se justifica su complejidad. Entrenado hasta dic-24 para evaluar, y reentrenado con todo hasta may-26 para generar la lista de ${mesTxt(M)}. El test 2026 no se usó para elegir nada.`;
+  $("#legCurva").innerHTML = mods.map(m => `<span><i style="background:${colors[m]}"></i>${NOMBRE_MOD[m]}</span>`).join("");
+  $("#chCurva").innerHTML = lines(ks, mods.map(m => ({name: NOMBRE_MOD[m], color: colors[m], dash: m === "Ensamble", v: ks.map(k => cv[k][m].recall * 100)})),
+    {w: 560, h: 260, ymin: 0, ymax: 100, fmt: v => n0(v) + "%", xticks: ks.filter(k => k % 100 === 0), vline: FL[p].flujo.alertas_mes, vlineLabel: `cupo ≈ ${n0(FL[p].flujo.alertas_mes)}`,
+     tip: (i, se) => `<b>${ks[i]} alertas/mes</b><br>${se.name}: recall ${n1(se.v[i])}%`});
+  $("#kb").textContent = D.k_bloque_b;
+  const tr = R.punto_operacion.tramos_bloque_b_validacion, eq = R.punto_operacion.precision_equilibrio;
+  $("#chTramos").innerHTML = vbars(tr.map(t => `${t.hasta - 49}–${t.hasta}`), [{name: "Precisión", color: css("--blue"), v: tr.map(t => t.precision_tramo * 100)}],
+    {w: 560, h: 260, rot: true, fmt: v => n0(v) + "%", ref: eq * 100, refLabel: `equilibrio ${pc(eq)}`, top: i => n0(tr[i].precision_tramo * 100) + "%",
+     tip: i => `<b>Tanda ${tr[i].hasta - 49}–${tr[i].hasta}</b><br>${n0(tr[i].vp_tramo)} aciertos en ${n0(tr[i].alertas_tramo)} alertas<br>${tr[i].hasta <= D.k_bloque_b ? "Entra en el cupo" : "Queda afuera: no paga lo que cuesta"}`});
+  const imp = R.importancia_permutacion.variables.slice(0, 12);
+  $("#chImp").innerHTML = hbars(imp.map(v => ({label: VARS[v.variable] || v.variable, total: n1(v.caida_recall_pp), parts: [{v: Math.max(v.caida_recall_pp, 0), color: css("--blue"), tip: `${VARS[v.variable] || v.variable}: −${v.caida_vp} aciertos al mezclarla`}]})), {labelW: 220, rowH: 22});
+  const sg = R.segmentos[p], g = sg.recall_global;
+  const segs = sg[grp].filter(s => s.positivos > 0).map(s => ({...s, segmento: cn(s.segmento)})).sort((a, b) => b.recall - a.recall);
+  $("#chSeg").innerHTML = hbars(segs.map(s => ({label: s.segmento, total: `${pc(s.recall, 0)} (${s.vp}/${s.positivos})`, ci: [s.ic95[0] * 100, s.ic95[1] * 100],
+    parts: [{v: s.recall * 100, color: s.global_dentro_ic ? css("--blue") : css("--orange"), tip: `${s.segmento}: recall ${pc(s.recall)}<br>IC 95%: ${pc(s.ic95[0], 0)}–${pc(s.ic95[1], 0)}<br>${s.global_dentro_ic ? "No difiere del global" : "Difiere del global"}`}]})),
+    {labelW: 90, max: 100, rightPad: 110, ref: g * 100, refLabel: `global ${pc(g, 0)}`});
+  const fr = (k, m) => cv[k][m];
+  table($("#tblMod"), [{k: "m", t: "Modelo", f: r => NOMBRE_MOD[r.m]}, ...[175, 300, 600].map(k => ({k: "k" + k, t: `Top-${k} VP (recall)`, n: 1, f: r => `${n0(fr(k, r.m).vp)} (${pc(fr(k, r.m).recall, 0)})`})), {k: "pr", t: "PR-AUC", n: 1, f: r => n2(D.pr_auc[p][r.m]).replace(/^0/, "0")}],
+    mods.map(m => ({m})));
+  const ins = R.insumos;
+  $("#ficha").innerHTML = `<table><tbody>
+   <tr><td><b>Objetivo</b></td><td>Anticipar qué posiciones SKU–tienda van a tener más de 12 meses de cobertura dentro de 3 meses.</td></tr>
+   <tr><td><b>Datos</b></td><td>Dataset v4 del Entregable 2: ${n0(ins.filas)} filas SKU–tienda–mes (mar-22 a may-26), 60 variables, todas calculadas con información disponible al cierre del mes. ${pc(D.positivos.validacion / 38360)} de casos positivos en validación.</td></tr>
+   <tr><td><b>Partición</b></td><td>Train mar-22 a dic-24 · embargo de 3 meses · validación abr–sep 25 · test ene–may 26.</td></tr>
+   <tr><td><b>Algoritmo</b></td><td>HistGradientBoosting (300 iteraciones, tasa 0,05, clases balanceadas). La probabilidad no está calibrada: se usa solo para ordenar dentro del mes.</td></tr>
+   <tr><td><b>Resultado</b></td><td>Con el flujo propuesto (~${n0(FL.validacion.flujo.alertas_mes)} alertas/mes): recall ${pc(FL.validacion.flujo.recall, 0)} en 2025 y ${pc(FL.test.flujo.recall, 0)} en 2026; supera a la regla con el mismo cupo en ambos períodos.</td></tr>
+   <tr><td><b>Límites</b></td><td>No decide la acción ni estima el precio de liquidación. Hay que reentrenarlo cada trimestre y vigilar el recall por región y categoría.</td></tr>
+   <tr><td><b>Reproducir</b></td><td><code>Entregable 4/Modelo/modelo_final_v4.py</code> (evaluación) y <code>Entregable 4/Dashboard/preparar_datos_dashboard.py</code> (lista del mes).</td></tr></tbody></table>`;
+}
+document.querySelectorAll("#segModPer button").forEach(b => b.onclick = () => { perMod = b.dataset.p; document.querySelectorAll("#segModPer button").forEach(x => x.classList.toggle("on", x === b)); renderModelo(); });
+document.querySelectorAll("#segGrp button").forEach(b => b.onclick = () => { grp = b.dataset.g; document.querySelectorAll("#segGrp button").forEach(x => x.classList.toggle("on", x === b)); renderModelo(); });
+
+function render() {
+  const rows = filtered();
+  const filtrosActivos = Object.values(F).filter(Boolean).length;
+  $("#fnote").textContent = filtrosActivos ? `${n0(rows.length)} de ${n0(A.length)} alertas con los filtros aplicados` : `${n0(A.length)} alertas en ${mesTxt(M)}`;
+  if (vista === "resumen") renderResumen(rows);
+  if (vista === "tiendas") renderTiendas(rows);
+  if (vista === "lista") renderLista(rows);
+  if (vista === "compras") renderCompras(rows);
+  if (vista === "finanzas") renderFinanzas();
+  if (vista === "modelo") renderModelo();
+}
+$("#pie").innerHTML = `Casa Óga · Factibilidad de Proyectos Data Driven (ITBA) · Grupo 1. Datos al cierre de ${mesTxt(M)}. Modelo: ${esc(D.modelo)}. El capital es stock por costo unitario; * costo estimado desde órdenes de compra. Las acciones son sugerencias: la decisión es de la tienda, Comercial y Compras.`;
+render();
+</script>
+</body>
+</html>

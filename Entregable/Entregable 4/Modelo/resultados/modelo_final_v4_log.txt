@@ -1,0 +1,123 @@
+Dataset v4: 201,310 filas · features 60 (5 cat) · lineal 106
+Valor base_e2: capital/posicion USD 133.80 · VP USD 16.51 · FP USD 2.20 · precision de equilibrio 11.8%
+Valor sensibilidad_e1: capital/posicion USD 81.36 · VP USD 10.04 · FP USD 2.20 · precision de equilibrio 18.0%
+
+=== 1. VALIDACION INTERNA (train <= mar-24 · embargo abr-jun 24 · eval jul-dic 24) ===
+  fit HistGradientBoosting      1.4s
+  fit ExtraTrees               21.9s
+  fit LightGBM                  5.7s
+  fit Logistica                 1.2s
+ Top-175: Regla VP 240 rec 37.7% · Logistica VP 274 rec 43.1% · HistGradientBoosting VP 288 rec 45.3% · Ensamble VP 295 rec 46.4%
+ Top-300: Regla VP 296 rec 46.5% · Logistica VP 357 rec 56.1% · HistGradientBoosting VP 374 rec 58.8% · Ensamble VP 367 rec 57.7%
+ Top-420: Regla VP 331 rec 52.0% · Logistica VP 402 rec 63.2% · HistGradientBoosting VP 417 rec 65.6% · Ensamble VP 414 rec 65.1%
+ Top-600: Regla VP 365 rec 57.4% · Logistica VP 454 rec 71.4% · HistGradientBoosting VP 471 rec 74.1% · Ensamble VP 481 rec 75.6%
+
+=== 2. MODELO FINAL (train <= dic-24) ===
+  fit HistGradientBoosting      3.1s
+  fit ExtraTrees               64.5s
+  fit LightGBM                 10.4s
+  fit Logistica                 1.8s
+
+[train] filas 98,653 · positivos 2,289 (2.32%) · meses 34
+  regla fija cob>12: 101.7/mes VP 898 prec 26.0% rec 39.2% valor USD 270.4/mes
+  PR-AUC Regla 0.233 · Logistica 0.275 · HistGradientBoosting 0.333 · Ensamble 0.601
+  Top-175: Regla VP 1113 rec 48.6% prec 19.2% val 238 · Logistica VP 1286 rec 56.2% prec 22.2% val 333 · HistGradientBoosting VP 1433 rec 62.6% prec 24.8% val 414 · Ensamble VP 1936 rec 84.6% prec 33.5% val 691
+  Top-300: Regla VP 1302 rec 56.9% prec 13.3% val 83 · Logistica VP 1597 rec 69.8% prec 16.3% val 246 · HistGradientBoosting VP 1781 rec 77.8% prec 18.2% val 347 · Ensamble VP 2204 rec 96.3% prec 22.5% val 580
+  Top-600: Regla VP 1560 rec 68.2% prec 8.2% val -367 · Logistica VP 1910 rec 83.4% prec 10.1% val -175 · HistGradientBoosting VP 2157 rec 94.2% prec 11.4% val -39 · Ensamble VP 2283 rec 99.7% prec 12.0% val 30
+
+[validacion] filas 38,360 · positivos 799 (2.08%) · meses 6
+  regla fija cob>12: 164.5/mes VP 244 prec 24.7% rec 30.5% valor USD 399.0/mes
+  PR-AUC Regla 0.203 · Logistica 0.242 · HistGradientBoosting 0.253 · Ensamble 0.272
+  Top-175: Regla VP 256 rec 32.0% prec 24.4% val 413 · Logistica VP 295 rec 36.9% prec 28.1% val 535 · HistGradientBoosting VP 305 rec 38.2% prec 29.0% val 566 · Ensamble VP 312 rec 39.0% prec 29.7% val 588
+  Top-300: Regla VP 352 rec 44.1% prec 19.6% val 438 · Logistica VP 401 rec 50.2% prec 22.3% val 591 · HistGradientBoosting VP 404 rec 50.6% prec 22.4% val 600 · Ensamble VP 403 rec 50.4% prec 22.4% val 597
+  Top-600: Regla VP 430 rec 53.8% prec 11.9% val 21 · Logistica VP 546 rec 68.3% prec 15.2% val 383 · HistGradientBoosting VP 552 rec 69.1% prec 15.3% val 402 · Ensamble VP 571 rec 71.5% prec 15.9% val 461
+
+[test] filas 28,070 · positivos 2,481 (8.84%) · meses 5
+  regla fija cob>12: 231.4/mes VP 987 prec 85.3% rec 39.8% valor USD 3183.9/mes
+  PR-AUC Regla 0.725 · Logistica 0.791 · HistGradientBoosting 0.783 · Ensamble 0.758
+  Top-175: Regla VP 755 rec 30.4% prec 86.3% val 2440 · Logistica VP 766 rec 30.9% prec 87.5% val 2481 · HistGradientBoosting VP 755 rec 30.4% prec 86.3% val 2440 · Ensamble VP 762 rec 30.7% prec 87.1% val 2466
+  Top-300: Regla VP 1167 rec 47.0% prec 77.8% val 3706 · Logistica VP 1187 rec 47.8% prec 79.1% val 3781 · HistGradientBoosting VP 1157 rec 46.6% prec 77.1% val 3669 · Ensamble VP 1166 rec 47.0% prec 77.7% val 3703
+  Top-600: Regla VP 1740 rec 70.1% prec 58.0% val 5191 · Logistica VP 1904 rec 76.7% prec 63.5% val 5804 · HistGradientBoosting VP 1888 rec 76.1% prec 62.9% val 5744 · Ensamble VP 1905 rec 76.8% prec 63.5% val 5808
+
+Modelo elegido: HistGradientBoosting (ensamble supera a HGB en validacion interna Top-175/300/420: False)
+
+=== 3. PUNTO DE OPERACION (precision de equilibrio 11.8%) ===
+  HistGradientBoosting solo: tramos con precision > equilibrio hasta Top-200
+  tramos bloque B (val 2025): 50:27%, 100:14%, 150:12%, 200:11%, 250:9%, 300:11%, 350:8%, 400:6%, 450:6%, 500:6%, 550:5%, 600:5%
+  bloque B: 150 alertas/mes ademas de la regla (bloque A max 182/mes en val)
+
+[validacion] bloque A 164.5/mes VP 244 prec 24.7% · bloque B 150.0/mes VP 160 prec 17.8%
+  flujo 314.5/mes VP 404 rec 50.6% prec 21.4% valor USD 568.1/mes · regla mismo cupo VP 354 · modelo mismo cupo VP 414
+  a 600: flujo VP 546 val 383.1/mes · modelo VP 552 val 401.8 · regla VP 430 val 21.4
+  a 175: modelo VP 305 val 566.1 · regla VP 256 val 413.4
+
+[test] bloque A 231.4/mes VP 987 prec 85.3% · bloque B 150.0/mes VP 488 prec 65.1%
+  flujo 381.4/mes VP 1475 rec 59.5% prec 77.3% valor USD 4679.8/mes · regla mismo cupo VP 1452 · modelo mismo cupo VP 1465
+  a 600: flujo VP 1901 val 5793.0/mes · modelo VP 1888 val 5744.3 · regla VP 1740 val 5190.6
+  a 175: modelo VP 755 val 2439.9 · regla VP 755 val 2439.9
+
+=== 4. ROI (escenario esperado) ===
+[validacion] valor regla USD 4,788/anio · incremental modelo USD 2,029/anio · horas USD 4,032
+  automatizacion (sin modelo)        benef    8,820 inv   6,270 rec  5,160 · ROI1  -22.8% · ROI3   21.7% · recupero 20.6
+    idem solo caja                   benef    8,820 inv   6,270 rec  2,040 · ROI1    6.1% · ROI3  113.6% · recupero 11.1
+  incremental del modelo             benef    2,029 inv   3,300 rec    800 · ROI1  -50.5% · ROI3    6.8% · recupero 32.2
+  total                              benef   10,849 inv   9,570 rec  5,960 · ROI1  -30.1% · ROI3   18.6% · recupero 23.5
+    total solo caja                  benef   10,849 inv   9,570 rec  2,840 · ROI1  -12.6% · ROI3   79.9% · recupero 14.3
+  total con desarrollo 3 meses DS    benef   10,849 inv  15,774 rec  5,960 · ROI1  -50.1% · ROI3   -3.3% · recupero 38.7
+  total con desarrollo 4 meses DS    benef   10,849 inv  18,942 rec  5,960 · ROI1  -56.4% · ROI3  -11.6% · recupero 46.5
+  total valor posicion E1            benef    5,622 inv   9,570 rec  5,960 · ROI1  -63.8% · ROI3  -38.6% · recupero None
+[test] valor regla USD 38,207/anio · incremental modelo USD 17,951/anio · horas USD 4,032
+  automatizacion (sin modelo)        benef   42,239 inv   6,270 rec  5,160 · ROI1  269.5% · ROI3  482.6% · recupero 2.0
+    idem solo caja                   benef   42,239 inv   6,270 rec  2,040 · ROI1  408.3% · ROI3  922.7% · recupero 1.9
+  incremental del modelo             benef   17,951 inv   3,300 rec    800 · ROI1  337.8% · ROI3  844.8% · recupero 2.3
+  total                              benef   60,190 inv   9,570 rec  5,960 · ROI1  287.6% · ROI3  557.8% · recupero 2.1
+    total solo caja                  benef   60,190 inv   9,570 rec  2,840 · ROI1  385.0% · ROI3  898.2% · recupero 2.0
+  total con desarrollo 3 meses DS    benef   60,190 inv  15,774 rec  5,960 · ROI1  176.9% · ROI3  436.5% · recupero 3.5
+  total con desarrollo 4 meses DS    benef   60,190 inv  18,942 rec  5,960 · ROI1  141.7% · ROI3  390.4% · recupero 4.2
+  total valor posicion E1            benef   37,288 inv   9,570 rec  5,960 · ROI1  140.1% · ROI3  307.5% · recupero 3.7
+
+=== 5. IMPORTANCIA POR PERMUTACION (validacion 2025, metrica: VP del flujo / Top-K del modelo) ===
+  u6_suma                        -  53 VP (6.6 pp de recall@300)
+  cobertura                      -  38 VP (4.8 pp de recall@300)
+  cv_u12                         -  27 VP (3.4 pp de recall@300)
+  stock_sku_cadena               -   7 VP (0.9 pp de recall@300)
+  peso_posicion_en_tienda        -   7 VP (0.9 pp de recall@300)
+  u12_prom                       -   5 VP (0.6 pp de recall@300)
+  unidades_vendidas              -   4 VP (0.5 pp de recall@300)
+  u_lag1                         -   4 VP (0.5 pp de recall@300)
+  subcategoria                   -   4 VP (0.5 pp de recall@300)
+  u3_suma                        -   3 VP (0.4 pp de recall@300)
+  stock_disponible               -   3 VP (0.4 pp de recall@300)
+  antig_sku_meses                -   3 VP (0.4 pp de recall@300)
+
+=== 6. SEGMENTOS (flujo propuesto, IC 95% Wilson) ===
+[validacion] recall global 50.6%
+  region    Patagonia                 7/18   38.9% IC [20%-61%] 
+  region    NOA                      55/126  43.7% IC [35%-52%] 
+  region    Centro                   80/177  45.2% IC [38%-53%] 
+  region    AMBA                    156/327  47.7% IC [42%-53%] 
+  region    Cuyo                    106/151  70.2% IC [62%-77%] <- fuera
+  categoria Cocina y mesa            51/122  41.8% IC [33%-51%] 
+  categoria Iluminacion              35/76   46.1% IC [35%-57%] 
+  categoria Organizacion             31/67   46.3% IC [35%-58%] 
+  categoria Decoracion               67/136  49.3% IC [41%-58%] 
+  categoria Muebles                  67/131  51.1% IC [43%-60%] 
+  categoria Bano                     71/126  56.3% IC [48%-65%] 
+  categoria Textil hogar             82/141  58.2% IC [50%-66%] 
+[test] recall global 59.5%
+  region    NOA                     279/490  56.9% IC [53%-61%] 
+  region    Patagonia                42/72   58.3% IC [47%-69%] 
+  region    Cuyo                    252/425  59.3% IC [55%-64%] 
+  region    AMBA                    583/973  59.9% IC [57%-63%] 
+  region    Centro                  319/521  61.2% IC [57%-65%] 
+  categoria Cocina y mesa           195/359  54.3% IC [49%-59%] <- fuera
+  categoria Decoracion              251/453  55.4% IC [51%-60%] 
+  categoria Organizacion            144/244  59.0% IC [53%-65%] 
+  categoria Bano                    182/307  59.3% IC [54%-65%] 
+  categoria Iluminacion             157/261  60.2% IC [54%-66%] 
+  categoria Textil hogar            257/406  63.3% IC [59%-68%] 
+  categoria Muebles                 289/451  64.1% IC [60%-68%] <- fuera
+
+=== 7. PERSISTENCIA SIN VENTA (posiciones con stock y sin venta en t: sigue sin vender t+1..t+3) ===
+  ene-may 2025: 451 de 4,596 = 9.8%
+  ene-may 2026: 1,104 de 1,340 = 82.4%

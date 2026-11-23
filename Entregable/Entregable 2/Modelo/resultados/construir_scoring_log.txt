@@ -1,0 +1,56 @@
+==========================================================================================
+DATASET DE ENTRENAMIENTO v4 — dead stock SKU-tienda-mes
+==========================================================================================
+Reglas: dedup = mayor_venta · neteo sin 'sin rotacion' = True · cobertura = log
+  devoluciones 'sin rotacion' no neteadas: 471 filas · 2,013 unidades
+Panel SKU-tienda-mes (post dedup y join ventas-stock): 297,022 filas
+  - con stock en t                         : 294,304
+  - no discontinuadas en t                 : 292,244
+  - con 3+ meses de historia              : 271,726
+  - con etiqueta observable en t+3 (UNIVERSO): 201,310
+  recuperables etiquetando por fecha: 26,542 filas · tasa de positivos en t+3 3.19% (en el universo 3.22%)
+
+EXCLUIDAS POR LA CONDICION t+3: 70,416 filas (25.9% de las que cumplen el resto) · 10,181 posiciones · 3,907 ya en rojo en t (5.5% vs 3.2% en el universo)
+  por motivo_t3:
+    hueco en la serie, con fila en t+3 (recuperable)         26,542 ( 37.7%)
+    fin del periodo (t+3 despues de ago-26)                  22,436 ( 31.9%)
+    hueco en la serie (la fila 3 posiciones despues no es t+3)  15,264 ( 21.7%)
+    SKU discontinuado antes de t+3                            3,436 (  4.9%)
+    la posicion deja de registrarse antes de t+3              2,738 (  3.9%)
+  por anio:
+    2026                                                     31,774 ( 45.1%) · universo  13.9%
+    2025                                                     17,662 ( 25.1%) · universo  37.1%
+    2024                                                     12,375 ( 17.6%) · universo  28.5%
+    2023                                                      6,964 (  9.9%) · universo  16.7%
+    2022                                                      1,641 (  2.3%) · universo   3.8%
+  por categoria:
+    Decoracion                                               13,905 ( 19.7%) · universo  19.9%
+    Cocina y mesa                                            11,505 ( 16.3%) · universo  16.0%
+    Textil hogar                                             11,088 ( 15.7%) · universo  15.4%
+    Muebles                                                  10,143 ( 14.4%) · universo  14.9%
+    Bano                                                      8,169 ( 11.6%) · universo  11.6%
+    Organizacion                                              7,907 ( 11.2%) · universo  11.3%
+    Iluminacion                                               7,699 ( 10.9%) · universo  11.0%
+  por banda_stock:
+    1-5                                                      20,281 ( 28.8%) · universo  28.5%
+    11-20                                                    17,038 ( 24.2%) · universo  24.3%
+    6-10                                                     15,741 ( 22.4%) · universo  21.3%
+    21-50                                                    13,310 ( 18.9%) · universo  19.9%
+    >50                                                       4,046 (  5.7%) · universo   6.0%
+  por banda_cobertura:
+    <6                                                       42,318 ( 60.1%) · universo  60.4%
+    6-9                                                      18,578 ( 26.4%) · universo  28.6%
+    >12 (ya en rojo)                                          5,209 (  7.4%) · universo   4.6%
+    9-12                                                      4,311 (  6.1%) · universo   6.4%
+  por id_tienda:
+    T04                                                       2,749 (  3.9%)
+    T11                                                       2,701 (  3.8%)
+    T22                                                       2,700 (  3.8%)
+    T26                                                       2,666 (  3.8%)
+    T24                                                       2,619 (  3.7%)
+    T20                                                       2,591 (  3.7%)
+    T19                                                       2,587 (  3.7%)
+    T09                                                       2,578 (  3.7%)
+  por tienda: rango 2,315 a 2,749 filas
+  stock mediano 10 (universo 11) · cobertura mediana 5.1 (universo 5.2)
+SCORING: 7,479 posiciones del mes 2026-08-01 -> dataset_scoring_v4.parquet

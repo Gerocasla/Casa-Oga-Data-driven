@@ -3,6 +3,8 @@
 ## 1. Entrega final de la materia
 Al final hay que entregar **un único documento consolidado con TODOS los TPs**, y **dentro de ese mismo documento** una **sección "Cambios"** donde la cátedra pueda ver qué partes fuimos modificando respecto de lo que se entregó originalmente.
 
+✅ **Hecho:** `Entregable/Entregable 4/Casa_Oga_Informe_Final_Grupo_1.docx`, con la sección 12 «Cambios». Se genera con `Entregable 4/Informe/armar_informe_final.py`: los cambios se hacen en el script, no en el Word.
+
 ## 2. Qué incluir según el tipo de entrega
 
 | Tipo de entrega | ¿Aplicar correcciones de TPs anteriores? | ¿Incluir sección "Cambios"? |

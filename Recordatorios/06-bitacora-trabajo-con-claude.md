@@ -7,6 +7,8 @@
 
 ## 1. Cómo retomar (lo primero que hay que saber)
 
+> **Actualización 23-11-2026 · entrega final.** Todo lo de la entrega final (informe consolidado, presentación y dashboard por área) está en `Entregable/Entregable 4/`. Su `README.md` explica qué contiene, el alcance, las decisiones y cómo regenerar. Lo que sigue en esta sección es de ago-sep 2026 (dataset v3): sirve como historia, pero las cifras y decisiones vigentes son las de esa carpeta (dataset v4). Ver §3, entrada 22/23-11.
+
 - **Datos a usar:** `Datasets_Normalizados/` · corte de análisis **agosto 2026** · 15 fuentes.
 - **Criterios de limpieza vigentes** (definidos por el negocio en la ronda 2):
   - Duplicados por clave (mes, tienda, SKU): **conservar la primera ocurrencia**. Con cualquier otro criterio (p. ej. "mayor venta") los totales no cierran: da $32.621,2 M en vez de $32.538,4 M.
@@ -129,9 +131,33 @@
 - Se corrigió la explicación vieja («la venta cae y el stock no acompaña») en la diapositiva de la cola y en el fundamento G4 de la Parte A.
 - Presentación **v4** (completa 36, **corta 17**; la corta es la que se usa). Script: `graficos_presentacion.py` (c11, c12 y `EDA/resultados/cambio_2026.json`).
 
+### oct-nov · Entregable 3 (resumen)
+- Factibilidad técnica, económica y legal, modelado en 4 etapas sobre la **v3**, diseño de la solución y veredicto. Compilado v1.1, presentación y planilla de ROI en `Entregable/Entregable 3/`. Llegó feedback de la cátedra (TP3), que se aplicó en la entrega final.
+
+### 22/23-11 · Entrega final (Entregable 4)
+- **Modelo rehecho sobre la v4** (`Entregable 4/Modelo/modelo_final_v4.py`):
+  - Se elige en una validación interna 2024; ganó gradient boosting solo.
+  - Cupo por valor: regla + 150 alertas del modelo, en tramos de 50 con precisión > 11,8%.
+  - Valor por posición tomado del E2. Dos ROI: automatización e incremental del modelo.
+  - Resultado: 404 vs 354 casos en 2025 y 1.475 vs 1.452 en 2026; ROI 3 años del total +18,6%.
+- **Informe final consolidado** (`armar_informe_final.py`, 21 págs.):
+  - E1+E2+E3 con todas las correcciones.
+  - Secciones nuevas: 3.5 Metodología, 3.6 Tablero por área, 4.4 Analítica descriptiva y 10.4 Lista de ago-26.
+  - §12 «Cambios».
+- **Presentación** de 17 diapositivas con speech por integrante (`armar_presentacion_final.js`).
+- **Dashboard HTML por área** (`Casa-Oga-Dashboard.html`):
+  - Lista de ago-26 puntuada con el modelo reentrenado hasta may-26: 1.016 alertas, 826 transferir / 190 liquidar.
+  - Seis vistas: Dirección, Tiendas, Lista, Compras, Finanzas y Modelo.
+  - Para generar las filas a puntuar se agregó `EXPORTAR_SCORING=1` a `construir_dataset_modelo.py`.
+- **Hallazgo:** en 2026 la regla sola (866 posiciones) supera la capacidad de las tiendas (700). Se prioriza por capital y queda una decisión para la Dirección (§10.4).
+- **Pendiente:**
+  - Respuestas de la Ronda 3 (no están en el repo).
+  - Fecha de entrega en la carátula.
+  - Sumar a la presentación el dashboard y el hallazgo de capacidad.
+
 ---
 
-## 4. Números de referencia vigentes
+## 4. Números de referencia (corte E2, dataset v3 — para la entrega final ver `Entregable 4/README.md`)
 
 | Métrica | Valor | Base |
 |---|---|---|

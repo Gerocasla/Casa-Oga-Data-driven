@@ -41,7 +41,8 @@ DATA = os.path.join(ROOT, "Datasets_Normalizados")
 OUTD = os.path.join(ROOT, "Datasets_Modelo")
 RES = os.path.join(BASE, "resultados")
 os.makedirs(OUTD, exist_ok=True); os.makedirs(RES, exist_ok=True)
-LOG = open(os.path.join(RES, "construir_dataset_log.txt"), "w", encoding="utf-8")
+SCORING = os.environ.get("EXPORTAR_SCORING") == "1"
+LOG = open(os.path.join(RES, "construir_scoring_log.txt" if SCORING else "construir_dataset_log.txt"), "w", encoding="utf-8")
 def P(*a):
     t = " ".join(str(x) for x in a); print(t); LOG.write(t + "\n")
 
@@ -399,6 +400,16 @@ IDS = ["fecha_mes", "id_tienda", "id_producto"]
 AUDIT = ["costo_imputado"]
 cols = IDS + FEATURES_NUM + FEATURES_CAT + AUDIT + ["target_cob12_t3", "split"]
 ds = ds[cols].reset_index(drop=True)
+
+# Entregable 4 (dashboard): with EXPORTAR_SCORING=1 only the last month (no label yet: t+3 falls after the data cut)
+# is exported with the same features and universe minus the t+3 condition, and the script stops here.
+if SCORING:
+    sc_rows = d[(d["fecha_mes"] == d["fecha_mes"].max()) & hist12 & d["con_stock"] & ~d["discontinuado"]]
+    sc_rows = sc_rows[IDS + FEATURES_NUM + FEATURES_CAT + AUDIT].reset_index(drop=True)
+    sc_rows.to_parquet(os.path.join(OUTD, f"dataset_scoring_{VERSION}.parquet"), index=False)
+    P(f"SCORING: {len(sc_rows):,} posiciones del mes {sc_rows['fecha_mes'].max().date()} -> dataset_scoring_{VERSION}.parquet")
+    LOG.close()
+    sys.exit(0)
 
 P(f"\nPeriodo de los cortes t: {ds['fecha_mes'].min().date()} a {ds['fecha_mes'].max().date()} "
   f"(etiquetas hasta {(ds['fecha_mes'].max() + pd.DateOffset(months=3)).date()})")

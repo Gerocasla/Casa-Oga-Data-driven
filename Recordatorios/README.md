@@ -2,6 +2,8 @@
 
 Carpeta de notas de trabajo para no perder contexto entre entregables. **Leer antes de empezar cualquier entregable o consolidado nuevo.** Para el estado general y cómo reproducir todo, ver primero el `README.md` de la raíz.
 
+> **Entrega final:** todo está en `Entregable/Entregable 4/` y su `README.md` explica contenido, alcance, decisiones y cómo regenerar. Las cifras vigentes del proyecto son las de esa carpeta (dataset v4); varias notas de acá son de ago-sep 2026 y tienen cifras de la v3.
+
 | Archivo | Para qué sirve |
 |---|---|
 | [00-contexto-proyecto.md](00-contexto-proyecto.md) | Qué es el proyecto, integrantes, stakeholders, dónde está cada cosa y cifras vigentes vs cifras del TP1 |
