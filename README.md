@@ -8,7 +8,7 @@ Integrantes: Gerónimo Fasce · Gianfranco Di Claudio · Matías Fleischer · Si
 > ### 📦 Entrega final → [`Entregable/Entregable 4/`](Entregable/Entregable%204/README.md)
 > Todo lo de la entrega final está en esa carpeta, y su `README.md` explica qué contiene, el alcance, las decisiones, cómo regenerar cada archivo y qué editar para cambiar algo. Incluye:
 > - **Informe final** consolidado (E1+E2+E3 corregidos, 21 págs., docx y pdf).
-> - **Presentación** (17 diapositivas con speech).
+> - **Presentación** (15 diapositivas con speech).
 > - **Dashboard HTML por área** con la lista de alertas de ago-26.
 >
 > Las carpetas `Entregable 1` a `3` quedan como historial de lo entregado: **no se tocan**.
