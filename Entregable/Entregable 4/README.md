@@ -12,8 +12,9 @@ Todo lo que se entrega al cierre de la materia está en esta carpeta. Integra lo
 | Archivo | Qué es | Generado por |
 |---|---|---|
 | `Casa_Oga_Informe_Final_Grupo_1.docx` / `.pdf` | **Informe final consolidado** (21 págs.): E1 + E2 + E3 corregidos, más la sección 12 «Cambios respecto de lo entregado» | `Informe/armar_informe_final.py` (+ `Informe/graficos_informe.py` para los 4 gráficos) |
-| `Presentacion/Casa-Oga-Presentacion-Final.pptx` | Presentación oral, 17 diapositivas (~17 min), con notas del orador por integrante | `Presentacion/armar_presentacion_final.js` |
+| `Presentacion/Casa-Oga-Presentacion-Final.pptx` | Presentación oral de negocio para Casa Óga: 15 diapositivas (~15 min) con demo del dashboard y notas del orador por integrante | `Presentacion/armar_presentacion_final.js` (usa las capturas de `Presentacion/capturas/`) |
 | `Presentacion/Speech-Presentacion-Final.md` | Guion: quién habla en cada diapositiva y qué dice | copiado de las notas del pptx |
+| `Presentacion/Preguntas-Jurado.md` | Preparación de la ronda de preguntas: 21 preguntas probables, quién responde cada una, cifras con su sección del informe y frases para temas fuera de alcance | a mano, desde el informe final |
 | `Casa-Oga-Dashboard.html` | **Dashboard por área** con la lista de alertas de **agosto de 2026**: filtros, gráficos, tablas y descarga en CSV | `Dashboard/preparar_datos_dashboard.py` → `Dashboard/armar_dashboard.py` |
 
 ### Contenido del informe
@@ -71,7 +72,7 @@ Los filtros de arriba (región, tienda, categoría, proveedor, origen, acción, 
 **Fuera de alcance / pendiente:**
 - Respuestas de Casa Óga a la **Ronda 3** (`Entregable 3/Preguntas-Factibilidad-Ronda-3.xlsx`): no están en el repo. El informe las deja como condición previa al piloto.
 - **Fecha de entrega** en la carátula del informe.
-- La presentación **no** incluye todavía el dashboard ni el hallazgo de capacidad (el informe sí).
+- La presentación es un pitch de negocio a Casa Óga, no una exposición técnica. Muestra el dashboard (capturas) y el hallazgo de capacidad; el detalle técnico y la sección «Cambios» quedan en el informe.
 
 ---
 
@@ -96,9 +97,11 @@ Entregable 4/
 │   ├── dashboard_plantilla.html           ← HTML/JS/CSS del dashboard (placeholder __DATOS__)
 │   └── armar_dashboard.py                 ← inyecta el JSON en la plantilla
 └── Presentacion/
-    ├── armar_presentacion_final.js        ← genera el .pptx (pptxgenjs)
+    ├── armar_presentacion_final.js        ← genera el .pptx y el speech (pptxgenjs)
+    ├── capturas/                          ← capturas del dashboard (tema claro, Edge headless) usadas en la demo
     ├── Casa-Oga-Presentacion-Final.pptx
-    └── Speech-Presentacion-Final.md
+    ├── Speech-Presentacion-Final.md
+    └── Preguntas-Jurado.md                ← preparación de la ronda de preguntas
 ```
 
 ---
